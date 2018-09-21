@@ -1,0 +1,13 @@
+{
+  "presets": [
+    "env",
+    "stage-2"
+  ],
+  "ignore": [
+    "node_modules",
+    "dist"
+  ],
+  "comments": false,
+  "plugins": [
+  ]
+}

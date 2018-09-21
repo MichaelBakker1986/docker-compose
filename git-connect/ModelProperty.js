@@ -14,7 +14,7 @@ exports.orm = Promise.all([
             },
             persist: true
         });
-        var ModelProperty = db.define("model_property", {
+        const ModelProperty = db.define("model_property", {
             uuid: String,
             create_time: {type: "date", time: true},
             model_name: String,
@@ -75,7 +75,7 @@ exports.orm = Promise.all([
                 model_property: ['uuid', 'create_time', 'model_path', 'model_name', 'var', 'col', 'val']
             }
             //create indexes on psql databases
-            if (db.driver.dialect != 'mysql') {
+            if (db.driver.dialect !== 'mysql') {
                 for (var table in dbSchema) {
                     for (var i = 0; i < dbSchema[table].length; i++) {
                         var column = dbSchema[table][i];

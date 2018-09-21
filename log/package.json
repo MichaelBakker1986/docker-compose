@@ -1,10 +1,12 @@
 {
   "name": "log6",
-  "version": "1.0.26",
-  "description": "logger",
-  "main": "log.js",
+  "version": "2.0.10",
+  "description": "The lme logger",
+  "main": "dist/log",
   "scripts": {
-    "test": "node log-test.js"
+    "build": "babel . --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build",
+    "test": "node -r babel-register log-test.js"
   },
   "repository": {
     "type": "git",
@@ -13,10 +15,14 @@
   "keywords": [
     "log"
   ],
-  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://log6-example.com)",
-  "license": "ISC",
-  "devDependencies": {},
+  "author": "michael.bakker <npm.michael.bakker1986@gmail.com> (http://log6-example.com)",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
   "dependencies": {
-    "tracer": "^0.8.11"
-  }
+    "tracer": "^0.8.12"
+  },
+  "license": "ISC"
 }

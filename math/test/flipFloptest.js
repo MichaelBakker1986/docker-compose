@@ -1,29 +1,24 @@
-require('../')
-const log = require('log6')
+import { Equation, Expression, parse } from 'algebra.js'
+import { info }                        from 'log6'
+import '../'
 
-let algebra = require("algebra.js");
-var Equation = algebra.Equation;
-var Expression = algebra.Expression;
-var expr = new Expression("x");
-log.info(expr.toString());
-expr = expr.subtract(3);
-var eq = new Equation(expr, 4);
-log.info(eq.toString());
-var x = eq.solveFor("x").toString();
+let expr = new Expression('x')
+info(expr.toString())
+expr = expr.subtract(3)
+const eq1 = new Equation(expr, 4)
+info(eq1.toString())
+eq1.solveFor('x').toString()
 
+const eq = new Equation(parse('a'), parse('b+c'))
+info(eq.toString())
+info('b = ' + eq.solveFor('b').toString())
+info('c = ' + eq.solveFor('c').toString())
 
-var eq = new Equation(algebra.parse("a"), algebra.parse("b+c"));
-log.info(eq.toString());
-log.info("b = " + eq.solveFor("b").toString());
-log.info("c = " + eq.solveFor("c").toString());
-
-
-
-var mySolver = SOLVER({
-    a: 'b+c',
-    b: 'a-test(c)',
-    c: 'a-b'
+const mySolver = SOLVER({
+	a: 'b+c',
+	b: 'a-test(c)',
+	c: 'a-b'
 })
-test = function(c) {
-    return c;
+const test = function(c) {
+	return c
 }

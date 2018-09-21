@@ -5,9 +5,9 @@ import FinanMath.*;
 import BaseModel.*;
 
 model TESTMODEL uses BaseModel
-{
+{                               ,
   version: "1.14";
-  root
+  variable TESTMODEL
   {
     variable TotalConfusedMore
     {

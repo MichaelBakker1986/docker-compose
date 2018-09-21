@@ -4,10 +4,10 @@
   "description": "",
   "license": "ISC",
   "private": true,
-  "main": "lme-model-app.js",
+  "main": "index.js",
   "author": "Michael Bakker",
   "scripts": {
-    "test": "node test/TESTMODEL.js"
+    "test": "node -r babel-register test/TESTMODEL.js"
   },
   "dependencies": {
     "angular": "^1.6.7",
@@ -26,11 +26,13 @@
     "express-favicon": "^2.0.0",
     "express-fileupload": "^0.3.0",
     "express-static-gzip": "^0.3.1",
+    "ffl-math": "^1.0.17",
     "fs-writefile-promise": "^2.0.0",
     "http-proxy": "^1.16.2",
     "http-ssh-agent": "^1.0.4",
     "ip": "^1.1.5",
-    "log6": "^1.0.26",
+    "jquery": "^3.3.1",
+    "log6": "^2.0.10",
     "node-fs-writefile-promise": "^1.0.0",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",

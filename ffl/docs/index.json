@@ -1,0 +1,4585 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "ffl/.external-ecmascript.js",
+    "static": true,
+    "longname": "ffl/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "ffl/AuditTrail.js",
+    "content": "/**\r\n * Audit-trail\r\n *  - key - value store\r\n *  - easy lookup\r\n *\r\n * extends Register.js and add functionality\r\n * @type {Register}\r\n */\r\nconst Register = require('./Register').Register\r\nconst AuditTrail = function() {\r\n    const register = new Register(['category', 'level', 'name', 'property', 'yax', 'xas', 'value', 'message', 'formula', 'refId', 'parsed']);\r\n    register.auditcols = [10, 10, 30, 10, 10, 10, 20, 20, 100, 10, 860];\r\n    return register\r\n}\r\nRegister.prototype.doAudit = function() {\r\n    this.clean();\r\n}\r\nRegister.prototype.getErrors = function() {\r\n    return this.distinctArr(this.find('level', 'ERROR', this.mark), ['name', 'property'])\r\n}\r\nRegister.prototype.printErrors = function() {\r\n    const errors = this.getErrors()\r\n    if (errors.length > 0) console.info(this.printArr(errors, this.auditcols).join('\\n'))\r\n}\r\nRegister.prototype.printAuditTrailDelta = function() {\r\n    const result = this.print(this.auditcols, this.mark).join('\\n');\r\n    this.markNow()\r\n    return result\r\n}\r\nRegister.prototype.printAuditTrail = function() {\r\n    return this.print(this.auditcols).join('\\n')\r\n}\r\nmodule.exports = AuditTrail;",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/AuditTrail.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "Register",
+    "memberof": "ffl/AuditTrail.js",
+    "static": true,
+    "longname": "ffl/AuditTrail.js~Register",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": "Audit-trail\n - key - value store\n - easy lookup\n\nextends Register.js and add functionality",
+    "lineNumber": 9,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Register"
+      ],
+      "spread": false,
+      "description": null
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "function",
+    "name": "AuditTrail",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~AuditTrail",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "doAudit",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~doAudit",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "getErrors",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~getErrors",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "printErrors",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~printErrors",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "function",
+    "name": "printAuditTrailDelta",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~printAuditTrailDelta",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "function",
+    "name": "printAuditTrail",
+    "memberof": "ffl/AuditTrail.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/AuditTrail.js~printAuditTrail",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/AuditTrail.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "file",
+    "name": "ffl/ChangeManager.js",
+    "content": "/**\r\n * Track movement in edited file\r\n * Record changes made by editor\r\n * Syntactical checking\r\n */\r\nconst Formatter = require('./FFLToRegister').FFLToRegister\r\nconst RegisterToFFL = require('./RegisterToFFL').RegisterToFFL\r\n\r\nfunction ChangeManager(register) {\r\n\tthis.register = register\r\n\tthis.currentVariable = []\r\n\tthis.currentVariableName = null\r\n\tthis.error = null\r\n\tthis.warnings = []\r\n\tthis.changed = true\r\n\tthis.lines = []\r\n}\r\n\r\nChangeManager.prototype.setModelChanged = function() {\r\n\tthis.changed = true\r\n}\r\n\r\n/**\r\n * Extract:\r\n * tuple =+test Implies\r\n * tuple -test\r\n * variable =test refers to\r\n * =test refers to\r\n * To: test\r\n */\r\nChangeManager.prototype.extractName = function(line) {\r\n\treturn line.replace(/(?:variable |tuple |function )?\\s*(?:\\+?-?=?)+(\\w+).*/i, '$1')\r\n}\r\nChangeManager.prototype.isVariableLine = function(line) {\r\n\treturn /^(?:variable |tuple |function )?\\s*(?:\\+?-?=?)+(\\w+)\\s*(?:Refers to \\w+|Implies \\w+)?\\s*\\n\\s*{/igm.test(line)\r\n}\r\nChangeManager.prototype.syntaxCheck = function(ffl) {\r\n\ttry {\r\n\t\tthis.register.clean()\r\n\t\tconst formatter = new Formatter(this.register, ffl)\r\n\t\tformatter.parseProperties()\r\n\t\tthis.error = null\r\n\t} catch (err) {\r\n\t\tthis.error = err.toString()\r\n\t\tconsole.error('Error while checking syntax', err)\r\n\t}\r\n}\r\n\r\nChangeManager.prototype.validCurrentLine = function(line, nextline) {\r\n\tconst trimmed = String(line).replace(/\\s+/gmi, ' ').trim()\r\n\tconst trimmedNextLine = String(nextline).replace(/\\s+/gmi, ' ').trim()\r\n\treturn trimmed.endsWith(';') || this.isVariableLine(trimmed + '\\n' + trimmedNextLine)\r\n}\r\n/**\r\n * When cursor is changed in file, adept state. Set active variable\r\n */\r\nChangeManager.prototype.updateCursor = function(ffl, cursor) {\r\n\tthis.warnings.length = 0\r\n\t//will also update the register\r\n\tif (this.changed) {\r\n\t\tthis.syntaxCheck(ffl, cursor)\r\n\t\tthis.lines = ffl.split('\\n')\r\n\t\tthis.namedIndex = this.register.getIndex('name')\r\n\t\tconst idIndex = this.register.getIndex('i')\r\n\t\tconst names = this.register.getAll('name')\r\n\t\tconst doubles = {}\r\n\t\tfor (let i = 0; i < names.length; i++) {\r\n\t\t\tif (doubles[names[i]]) {\r\n\t\t\t\tthis.warnings.push({\r\n\t\t\t\t\tpos    : doubles[names[i]],\r\n\t\t\t\t\tmessage: 'duplicate variablename' + names[i]\r\n\t\t\t\t})\r\n\t\t\t\tdoubles[names[i]].push(i)\r\n\t\t\t}\r\n\t\t\tdoubles[names[i]] = [i]\r\n\t\t}\r\n\t}\r\n\r\n\tlet currentVariable\r\n\tfor (let i = cursor.row; i > 0; i--) {\r\n\t\tif ((this.lines[i] || '').match(/(variable |tuple |root|model )/)) {\r\n\t\t\tcurrentVariable = this.extractName(this.lines[i].trim())\r\n\t\t\tbreak\r\n\t\t}\r\n\t}\r\n\tconst changedCurrentVariable = this.currentVariableName !== currentVariable\r\n\tif ((this.changed || changedCurrentVariable) && currentVariable && this.namedIndex[currentVariable]) {\r\n\t\tthis.currentVariableName = currentVariable\r\n\t\tconst variable = this.register.createInformationObject(this.currentVariableName, new RegisterToFFL(this.register).hiddenProperties)\r\n\t\tthis.currentVariable = variable\r\n\t}\r\n\tthis.changed = false\r\n}\r\nexports.ChangeManager = ChangeManager",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/ChangeManager.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 57,
+    "kind": "variable",
+    "name": "Formatter",
+    "memberof": "ffl/ChangeManager.js",
+    "static": true,
+    "longname": "ffl/ChangeManager.js~Formatter",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": "Track movement in edited file\nRecord changes made by editor\nSyntactical checking",
+    "lineNumber": 6,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "variable",
+    "name": "RegisterToFFL",
+    "memberof": "ffl/ChangeManager.js",
+    "static": true,
+    "longname": "ffl/ChangeManager.js~RegisterToFFL",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "function",
+    "name": "ChangeManager",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~ChangeManager",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [
+      {
+        "name": "register",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "function",
+    "name": "setModelChanged",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~setModelChanged",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "function",
+    "name": "extractName",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~extractName",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": "Extract:\ntuple =+test Implies\ntuple -test\nvariable =test refers to\n=test refers to\nTo: test",
+    "lineNumber": 31,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "function",
+    "name": "isVariableLine",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~isVariableLine",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "function",
+    "name": "syntaxCheck",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~syntaxCheck",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [
+      {
+        "name": "ffl",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "function",
+    "name": "validCurrentLine",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~validCurrentLine",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "nextline",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "function",
+    "name": "updateCursor",
+    "memberof": "ffl/ChangeManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ChangeManager.js~updateCursor",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ChangeManager.js",
+    "importStyle": null,
+    "description": "When cursor is changed in file, adept state. Set active variable",
+    "lineNumber": 57,
+    "params": [
+      {
+        "name": "ffl",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "cursor",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "file",
+    "name": "ffl/DebugManager.js",
+    "content": "/**\r\n * features breakpoints from FFL file, let them be replayed\r\n */\r\n\r\nconst SolutionFacade = require('../../src/SolutionFacade')\r\nconst WorkBook = require('../../src/JSWorkBook')\r\nconst Context = require('../../src/Context')\r\nconst log = require('log6')\r\n\r\nfunction DebugManager(register, audittrail) {\r\n\tthis.stack = []\r\n\tthis.audittrail = audittrail\r\n\tthis.register = register\r\n\tthis.steps = []\r\n\tthis.active = false\r\n\tthis.stepIndex = 0\r\n\tthis.vars = {}\r\n}\r\n\r\nDebugManager.prototype.splitName = function(name) {\r\n\tconst split = name.split('_')\r\n\treturn { row: split.slice(1, -1).join('_'), col: split[split.length - 1] }\r\n}\r\n\r\nDebugManager.prototype.addStep = function(name) {\r\n\tthis.active = true\r\n\tthis.steps.push(this.splitName(name))\r\n}\r\nDebugManager.prototype.initVariables = function(fflModel) {\r\n\tconst lines = fflModel.split('\\n')\r\n\tfor (var i = 0; i < lines.length; i++) {\r\n\t\tvar line = lines[i]\r\n\t\tconst trim = line.trim()\r\n\t\tif (trim.indexOf('variable') >= 0) {\r\n\t\t\tvar name = trim.substring(9).trim().split(' ')[0]\r\n\t\t\tthis.vars[name] = i\r\n\t\t}\r\n\t}\r\n}\r\n\r\nDebugManager.prototype.fixForReferenceError = function(variableName, wb, error, e, formula_id) {\r\n\tconst self = this\r\n\treturn function() {\r\n\t\ttry {\r\n\t\t\tlog.info(variableName + ' : ' + 'Fix for [' + variableName + '] in solution: ' + wb.getSolutionName() + ' : ' + error)\r\n\t\t\t//So we fix the ReferenceError\r\n\t\t\twb.createFormula('1', variableName, 'value', false, 'document')\r\n\t\t\t//re-init the formula\r\n\t\t\tSolutionFacade.initFormulaBootstrap([formula_id], true, wb.context.ma, wb.context.audittrail)\r\n\t\t\tconst formula = SolutionFacade.fetchFormulaByIndex(formula_id)\r\n\t\t\t//All dependencies should be updated\r\n\t\t\tfor (var i = 0; i < formula.formulaDependencys.length; i++) {\r\n\t\t\t\tvar dependency = formula.formulaDependencys[i]\r\n\t\t\t\tif (log.DEBUG) log.info(dependency)\r\n\t\t\t}\r\n\t\t} catch (err) {\r\n\t\t\tlog.error('Fatal error in variable [' + variableName + ']', err)\r\n\t\t}\r\n\t}\r\n}\r\nDebugManager.prototype.validateImportedSolution = function(modelName) {\r\n\t//var feedback = model.lme.fixProblemsInImportedSolution();\r\n\t//  const audittrail = model.lme.context.audittrail;\r\n\tconst start = this.audittrail.i.length\r\n\tconst names = this.register.getNames()\r\n\tconst context = new Context()\r\n\tconst wb = new WorkBook(context, null, null, { modelName: modelName })\r\n\twb.updateValues()\r\n\tconst validateResponse = {\r\n\t\tsucces: [],\r\n\t\terror : []\r\n\t}\r\n\r\n\tfor (var name in names) {\r\n\t\ttry {\r\n\t\t\t//iterate all formula-sets to test 100% Trend,NoTrend\r\n\t\t\tfor (var property in context.propertyDefaults) {\r\n\t\t\t\twb.get(name, property, 0, wb.resolveY(0))\r\n\t\t\t\tvalidateResponse.succes.push(name)\r\n\t\t\t}\r\n\t\t} catch (err) {\r\n\t\t\tlog.error('Error while trying:' + name + '.' + property + ' in model ' + modelName, err)\r\n\t\t}\r\n\t}\r\n\tconst errors = this.audittrail.distinctArr(this.audittrail.find('level', 'ERROR', start), ['name', 'property'])\r\n\tif (errors.length > 0) {\r\n\t\tlog.info('Trying to fix : \\n' + this.audittrail.printArr(errors, [6, 30, 10, 10, 10, 10, 40, 140, 8]).join('\\n'))\r\n\t}\r\n\tfor (var i = 0; i < errors.length; i++) {\r\n\t\tconst error = errors[i]\r\n\t\tconst message = error[this.audittrail.schemaIndexes.message]\r\n\t\tconst error_type = error[this.audittrail.schemaIndexes.message].split(':')[0]\r\n\t\tconst formula_id = error[this.audittrail.schemaIndexes.refId]\r\n\t\tvar fix = {}\r\n\t\tif (error_type === 'ReferenceError') {\r\n\t\t\tconst referenceName = message.split(' ')[1]\r\n\t\t\tfix = {\r\n\t\t\t\tcanFix      : true,\r\n\t\t\t\tvariableName: referenceName,\r\n\t\t\t\tfixMessage  : 'Add',\r\n\t\t\t\tfix         : this.fixForReferenceError(referenceName, wb, error, error, formula_id)\r\n\t\t\t}\r\n\t\t}\r\n\t\tfix.formulaName = name\r\n\t\tfix.reason = message\r\n\t\tvalidateResponse.error.push(fix)\r\n\t}\r\n\t//if (!feedback.valid) succes = false\r\n\tvalidateResponse.valid = validateResponse.error.length === 0\r\n\treturn validateResponse\r\n}\r\n/**\r\n * Try to do: Monte-Carlos simulation\r\n * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie\r\n * if it is possible to fix missing functions\r\n * TRY fix infinite loops in the solution, breaking down chains.\r\n */\r\nDebugManager.prototype.monteCarlo = function(modelName) {\r\n\tvar attempt = 0\r\n\tconst debugmanager = this\r\n\tvar feedback = this.validateImportedSolution(modelName)\r\n\t//four time retry, so one formula, can have a max of 4 errors.\r\n\twhile (!feedback.valid && attempt < 4) {\r\n\t\tfeedback.error.forEach(function(item) {\r\n\t\t\tif (item.canFix) item.fix()\r\n\t\t})\r\n\t\tfeedback = debugmanager.validateImportedSolution(modelName)\r\n\t\tattempt++\r\n\t}\r\n\treturn feedback\r\n}\r\nDebugManager.prototype.nextStep = function() {\r\n\tthis.stepIndex++\r\n\tif (this.steps.length <= this.stepIndex) {\r\n\t\tthis.active = false\r\n\t}\r\n}\r\nexports.DebugManager = DebugManager",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/DebugManager.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "SolutionFacade",
+    "memberof": "ffl/DebugManager.js",
+    "static": true,
+    "longname": "ffl/DebugManager.js~SolutionFacade",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": "features breakpoints from FFL file, let them be replayed",
+    "lineNumber": 5,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "variable",
+    "name": "WorkBook",
+    "memberof": "ffl/DebugManager.js",
+    "static": true,
+    "longname": "ffl/DebugManager.js~WorkBook",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "variable",
+    "name": "Context",
+    "memberof": "ffl/DebugManager.js",
+    "static": true,
+    "longname": "ffl/DebugManager.js~Context",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "variable",
+    "name": "log",
+    "memberof": "ffl/DebugManager.js",
+    "static": true,
+    "longname": "ffl/DebugManager.js~log",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "function",
+    "name": "DebugManager",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~DebugManager",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "register",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "audittrail",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "function",
+    "name": "splitName",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~splitName",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"row\": *, \"col\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "function",
+    "name": "addStep",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~addStep",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "function",
+    "name": "initVariables",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~initVariables",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "params": [
+      {
+        "name": "fflModel",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "function",
+    "name": "fixForReferenceError",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~fixForReferenceError",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "params": [
+      {
+        "name": "variableName",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "wb",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "error",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "e",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "formula_id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "function",
+    "name": "validateImportedSolution",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~validateImportedSolution",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 61,
+    "undocument": true,
+    "params": [
+      {
+        "name": "modelName",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 77,
+    "kind": "function",
+    "name": "monteCarlo",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~monteCarlo",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": "Try to do: Monte-Carlos simulation\nhttps://nl.wikipedia.org/wiki/Monte-Carlosimulatie\nif it is possible to fix missing functions\nTRY fix infinite loops in the solution, breaking down chains.",
+    "lineNumber": 118,
+    "params": [
+      {
+        "name": "modelName",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 78,
+    "kind": "function",
+    "name": "nextStep",
+    "memberof": "ffl/DebugManager.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/DebugManager.js~nextStep",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/DebugManager.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 132,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 79,
+    "kind": "file",
+    "name": "ffl/DeltaCompareRegister.js",
+    "content": "/**\r\n * We only want to store delta's from models in the database\r\n * Therefore we require a comparator between two models\r\n * returns an action list for current state to update into other state.\r\n *\r\n * A compare has three categories.\r\n 1) UPDATES\r\n 2) INSERTS\r\n 3) REMOVES\r\n */\r\nimport 'array.equals'\r\n\r\nexport default class DeltaCompareRegister {\r\n\r\n\t_source_to_target_property_map = []\r\n\t_target_to_source_property_map = []\r\n\t_updates = []\r\n\t_inserts = []\r\n\t_deletes = []\r\n\t_changes = 0\r\n\r\n\tconstructor(source_register, target_register) {\r\n\t\tthis.source_register = source_register\r\n\t\tthis.target_register = target_register\r\n\t}\r\n\r\n\taddChange(changeType, property_name, var_name, value) {\r\n\t\tthis['_' + changeType].push([changeType, var_name, property_name, value])\r\n\t\tthis._changes++\r\n\t}\r\n\r\n\tcompare() {\r\n\t\tthis.buildSchema()\r\n\t\tthis.checkInserts()\r\n\t\tthis.checkDeletes()\r\n\t\treturn this\r\n\t}\r\n\r\n\tbuildSchema() {\r\n\t\tthis.source_schema = this.source_register.schema.slice()\r\n\t\tthis.target_schema = this.target_register.schema.slice()\r\n\t\tconst max_schema_length = Math.max(this.source_schema.length, this.target_schema.length)\r\n\t\tconst source_schema = this.source_register.schemaIndexes, target_schema = this.target_register.schemaIndexes\r\n\t\tthis.source_schema.length = max_schema_length\r\n\t\tthis.target_schema.length = max_schema_length\r\n\r\n\t\tfor (let i = 0; i < max_schema_length; i++) {\r\n\t\t\tthis._source_to_target_property_map[source_schema[this.source_schema[i]]] = target_schema[this.source_schema[i]]\r\n\t\t\tthis._target_to_source_property_map[target_schema[this.target_schema[i]]] = source_schema[this.target_schema[i]]\r\n\t\t}\r\n\t}\r\n\r\n\tcheckInserts() {\r\n\t\tconst indexes = this.target_register.schemaIndexes\r\n\t\tconst hidden_keys = new Set([indexes.parentId, indexes.index, indexes.children])\r\n\t\tconst source_variables = this.source_register.getIndex('name')\r\n\t\tconst target_variables = this.target_register.getIndex('name')\r\n\t\t//check inserts and updates\r\n\t\tconst target_variable_names = Object.keys(target_variables)\r\n\t\tfor (let variable_name of target_variable_names) {\r\n\t\t\tconst source_variable = source_variables[variable_name], target_variable = target_variables[variable_name]\r\n\t\t\tif (!source_variable) {\r\n\t\t\t\t//INSERT every property for the variable\r\n\t\t\t\tfor (let target_property_index = 3; target_property_index < target_variable.length; target_property_index++) {\r\n\t\t\t\t\tconst target_property = target_variable[target_property_index]\r\n\t\t\t\t\tif (hidden_keys.has(target_property_index) || target_property == null) continue\r\n\t\t\t\t\tthis.addChange('inserts', this.target_schema[target_property_index], variable_name, target_property)\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\tfor (let target_property_index = 3; target_property_index < target_variable.length; target_property_index++) {\r\n\t\t\t\t\tif (hidden_keys.has(target_property_index)) continue\r\n\t\t\t\t\tconst sourceProperty = source_variable[this._target_to_source_property_map[target_property_index]]\r\n\t\t\t\t\tconst targetProperty = target_variable[target_property_index]\r\n\t\t\t\t\tif (sourceProperty == null && targetProperty != null) {\r\n\t\t\t\t\t\tthis.addChange('inserts', this.target_schema[target_property_index], variable_name, targetProperty)\r\n\t\t\t\t\t} else if (sourceProperty !== targetProperty && targetProperty != null && !Array.isArray(sourceProperty)) {\r\n\t\t\t\t\t\tthis.addChange('updates', this.target_schema[target_property_index], variable_name, targetProperty)\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tcheckDeletes() {\r\n\t\tconst source_variables = this.source_register.getIndex('name')\r\n\t\tconst target_variables = this.target_register.getIndex('name')\r\n\t\t//check deletes\r\n\t\tconst source_variable_names = Object.keys(source_variables)\r\n\t\tconst indexes = this.source_register.schemaIndexes\r\n\t\tconst props = this.source_schema.filter((val, i) => i > 3 &&\r\n\t\t\ti !== indexes.parentId &&\r\n\t\t\ti !== indexes.index &&\r\n\t\t\ti !== indexes.children).map(property_name => [indexes[property_name], property_name])\r\n\r\n\t\tfor (let variable_name of source_variable_names) {\r\n\t\t\tconst source_variable = source_variables[variable_name]\r\n\t\t\tconst target_variable = target_variables[variable_name]\r\n\t\t\tprops.forEach(([source_variable_property_index, source_variable_property_name]) => {\r\n\t\t\t\tconst source_property = source_variable[source_variable_property_index]\r\n\t\t\t\tif (!target_variable) {\r\n\t\t\t\t\tif (source_property != null) this.addChange('deletes', source_variable_property_name, variable_name, null)\r\n\t\t\t\t} else {\r\n\t\t\t\t\tconst target_property = target_variable[this._source_to_target_property_map[source_variable_property_index]]\r\n\t\t\t\t\tif (target_property == null && source_property != null) {\r\n\t\t\t\t\t\tthis.addChange('deletes', source_variable_property_name, variable_name, null)\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t})\r\n\t\t}\r\n\t}\r\n\r\n\tcollect = () => [... this._updates, ... this._inserts, ... this._deletes]\r\n\tmap = (stream) => this.collect().map(stream)\r\n\tforEach = (stream) => this.collect().forEach(stream)\r\n\r\n\ttoString() {\r\n\t\tconst diff = this.map(change_set => change_set.map(change => change.filter(Boolean).join(';')).join('\\n'))\r\n\t\treturn ['Changes:' + this._changes, JSON.stringify(this.target_register.schemaIndexes), diff.filter(Boolean).join('\\n')].join('\\n')\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/DeltaCompareRegister.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 80,
+    "kind": "class",
+    "name": "DeltaCompareRegister",
+    "memberof": "ffl/DeltaCompareRegister.js",
+    "static": true,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "access": "public",
+    "export": true,
+    "importPath": "ffl-pack/ffl/DeltaCompareRegister.js",
+    "importStyle": "DeltaCompareRegister",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 81,
+    "kind": "member",
+    "name": "_source_to_target_property_map",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_source_to_target_property_map",
+    "access": "private",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "member",
+    "name": "_target_to_source_property_map",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_target_to_source_property_map",
+    "access": "private",
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "member",
+    "name": "_updates",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_updates",
+    "access": "private",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "member",
+    "name": "_inserts",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_inserts",
+    "access": "private",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 85,
+    "kind": "member",
+    "name": "_deletes",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_deletes",
+    "access": "private",
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "name": "_changes",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#_changes",
+    "access": "private",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true
+  },
+  {
+    "__docId__": 88,
+    "kind": "member",
+    "name": "source_register",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#source_register",
+    "access": "public",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "member",
+    "name": "target_register",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#target_register",
+    "access": "public",
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "name": "addChange",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#addChange",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "params": [
+      {
+        "name": "changeType",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "property_name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "var_name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "name": "compare",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#compare",
+    "access": "public",
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "name": "buildSchema",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#buildSchema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 39,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 93,
+    "kind": "member",
+    "name": "source_schema",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#source_schema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "member",
+    "name": "target_schema",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#target_schema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 95,
+    "kind": "method",
+    "name": "checkInserts",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#checkInserts",
+    "access": "public",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 96,
+    "kind": "method",
+    "name": "checkDeletes",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#checkDeletes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 84,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
+    "name": "collect",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#collect",
+    "access": "public",
+    "description": null,
+    "lineNumber": 112,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "map",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#map",
+    "access": "public",
+    "description": null,
+    "lineNumber": 113,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 99,
+    "kind": "member",
+    "name": "forEach",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#forEach",
+    "access": "public",
+    "description": null,
+    "lineNumber": 114,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 100,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "ffl/DeltaCompareRegister.js~DeltaCompareRegister",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/DeltaCompareRegister.js~DeltaCompareRegister#toString",
+    "access": "public",
+    "description": null,
+    "lineNumber": 116,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "file",
+    "name": "ffl/FFLToRegister.js",
+    "content": "/**\r\n * Is a FFL quick-formatter (V05 '3.1m chars' 90ms) and is FFL to indexed formatter\r\n */\r\nfunction FFLToRegister(register, data, resolve_parent_name = false) {\r\n\tthis.resolve_parent_name = resolve_parent_name\r\n\tthis.register = register\r\n\tregister.addColumns(['desc', 'parent_name'])\r\n\tthis.vars = register.getIndex('i')\r\n\tthis.original = data\r\n\tthis.data = data\r\n\tthis.reassembled = ''\r\n\tthis.constants = []\r\n\tregister.constants = this.constants\r\n\tthis.comments = []\r\n\tthis.header = ''\r\n\tthis.indents = []\r\n\tfor (let i = 0; i < 30; i++) this.indents[i] = new Array(i).join(' ')\r\n}\r\n\r\n/**\r\n * Extract imports, model name,comments in header\r\n */\r\nFFLToRegister.prototype.extractHeader = function() {\r\n\tthis.header = this.original.substring(0, this.original.indexOf('{'))\r\n\t//INFO: the header is not indexed.\r\n\tthis.register.header = this.header\r\n\tconst headerLines = this.header.split('\\n')\r\n\tfor (let i = 0; i < headerLines.length; i++) {\r\n\t\tconst headerLine = headerLines[i].trim()\r\n\t\tlet modelName\r\n\t\tif (modelName = headerLine.match(/^\\s*model (\\w+)/i)) {\r\n\t\t\tthis.name = modelName[1]\r\n\t\t\tbreak\r\n\t\t}\r\n\t}\r\n}\r\nFFLToRegister.prototype.extractConstants = function() {\r\n\tvar index = 0\r\n\tconst constants = this.constants\r\n\tthis.data = this.data.replace(/\"(.*?)\"/gm, function($0) {\r\n\t\tconstants[++index] = $0\r\n\t\treturn '__' + index\r\n\t})\r\n}\r\nFFLToRegister.prototype.insertConstants = function() {\r\n\tvar constants = this.constants\r\n\tthis.reassembled = this.reassembled.replace(/__(\\d+)/gm, function($1, $2) {\r\n\t\treturn constants[parseInt($2)]\r\n\t})\r\n}\r\nFFLToRegister.prototype.extractComments = function() {\r\n\tvar comments = {}\r\n\tvar index = 0\r\n\tthis.data = this.data.replace(/\\/\\/.*/gm, function($0) {\r\n\t\tcomments[++index] = $0\r\n\t\treturn '____' + index\r\n\t})\r\n\tthis.comments = comments\r\n}\r\n\r\nFFLToRegister.prototype.removeWhite = function() {\r\n\tthis.data = this.data.replace(/\\s\\s+/g, ' ')\r\n\t//TODO: parse by properties, not by semicolons\r\n\t.replace(/;\\s+/g, ';')//7ms of 100ms..(V05) (expensive, but it is removing trailing whitespaces of properties)\r\n}\r\nFFLToRegister.prototype.extractVars = function() {\r\n\tvar noneexit = true\r\n\tvar data = this.data\r\n\tvar index = 0\r\n\tconst register = this.register\r\n\twhile (noneexit) {\r\n\t\tnoneexit = false\r\n\t\tdata = data.replace(/{([^}{]*?)}/gm, function($0, $1, $2) {\r\n\t\t\t//this happens to many times...\r\n\t\t\tnoneexit = true\r\n\t\t\tconst index = register.addRow([$1, $2, $0.length + $2])\r\n\t\t\treturn '___' + index\r\n\t\t})\r\n\t}\r\n}\r\nFFLToRegister.prototype.findRootVariable = function() {\r\n\treturn this.register.lastRowIndex()\r\n\r\n}\r\nFFLToRegister.prototype.buildTree = function() {\r\n\tthis.extractHeader()\r\n\tthis.extractConstants()\r\n\tthis.extractComments()\r\n\tthis.removeWhite()\r\n\tthis.extractVars()\r\n\tvar firstVar = this.findRootVariable()\r\n\tthis.reassembled = this.prettyFormatFFL(2, firstVar)\r\n\tthis.insertConstants()\r\n}\r\nFFLToRegister.prototype.walk = function(visit) {\r\n\tthis.extractHeader()\r\n\tthis.extractConstants()\r\n\tthis.extractComments()\r\n\tthis.removeWhite()\r\n\tthis.extractVars()\r\n\tconst firstVar = this.register.lastRowIndex()\r\n\tconst firstRow = this.vars[firstVar]\r\n\tfirstRow[0] = firstRow[0].replace(/^\\s*root\\s*/gi, 'variable root ').trim()\r\n\r\n\t//this is a trick, not wrong!. parent and child index are the same to start with root.\r\n\tfirstRow.push('root', firstVar, null, null, null, null, 0, [], null, this.name, 'm')\r\n\tthis.walkTree(visit, firstVar, 1)\r\n}\r\nFFLToRegister.prototype.walkTree = function(visit, parentId, depth) {\r\n\tconst self = this\r\n\tconst parts = this.vars[parentId][0].trim().split(';')\r\n\tconst child_index = this.register.schemaIndexes.children\r\n\tlet children = 0\r\n\tif (parts[parts.length - 1] === '') {\r\n\t\tparts.length--\r\n\t} else {\r\n\t\tlet temp = parts[parts.length - 1]\r\n\t\tparts.length--\r\n\t\ttemp.replace(/((?!( variable | tuple )).)+/gm, function($1) {\r\n\t\t\t//here should go tuple/modifier/refer-to extraction.\r\n\t\t\tconst refIdStartIndex = $1.indexOf('___')\r\n\t\t\tconst varDesc = $1.substring(0, refIdStartIndex - 1)\r\n\t\t\tconst tuple = varDesc.startsWith('tuple')\r\n\t\t\tconst referIdx = varDesc.toLowerCase().indexOf('refers to')\r\n\t\t\tconst referstoVariableName = referIdx !== -1 ? varDesc.substring(referIdx + 10) : null\r\n\t\t\tconst varname = tuple ? referIdx === -1 ? varDesc.substring(6) : varDesc.substring(6, referIdx) : referIdx === -1 ? varDesc.substring(9) : varDesc.substring(9, referIdx)\r\n\t\t\tconst modifier = varname.startsWith('+=') ? '+=' : varname.startsWith('+') ? '+' : varname.startsWith('=') ? '=' : varname.startsWith('-') ? '-' : null\r\n\t\t\tconst name = varname.substring(modifier ? modifier.length : 0).trim()//it might be a double space in the end. its too easy to trim.\r\n\t\t\tconst varRefIndex = parseInt($1.substring(refIdStartIndex + 3))\r\n\r\n\t\t\tconst variable = self.vars[varRefIndex]\r\n\t\t\tvariable.push(name, varRefIndex, modifier, parentId, tuple, referstoVariableName, children++, [], null, null, tuple ? 't' : 'v')\r\n\r\n\t\t\tself.vars[parentId][child_index].push(variable)\r\n\t\t\tself.walkTree(visit, varRefIndex, depth + 1)\r\n\t\t\treturn ''\r\n\t\t})\r\n\t}\r\n\tvisit(parentId, parts)\r\n}\r\n//test if this is quicker than indexing, and recreate FFL\r\n//scorecardTool is using this, internally\r\nFFLToRegister.prototype.prettyFormatFFL = function(depth, index) {\r\n\tconst self = this\r\n\tconst indent = this.indents[depth]\r\n\tconst variable = this.vars[index][0].trim()\r\n\tconst parts = variable.split(';')\r\n\tconst varparts = []\r\n\tif (parts[parts.length - 1] === '') {\r\n\t\tparts.length--\r\n\t} else {\r\n\t\tvar temp = parts[parts.length - 1]\r\n\t\tparts.length--\r\n\t\ttemp.replace(/((?!( variable | tuple )).)+/gm, function($1) {\r\n\t\t\tconst refId = $1.indexOf('___')\r\n\t\t\tvarparts.push(indent + $1.substring(0, refId - 1) + '\\n' + indent + '{\\n' + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + '\\n' + indent + '}')\r\n\t\t\treturn ''\r\n\t\t})\r\n\t}\r\n\tvar lb = ';\\n'\r\n\tvar r\r\n\tif (parts.length === 0) {\r\n\t\tif (varparts.length === 0) {\r\n\t\t\tr = ''\r\n\t\t} else {\r\n\t\t\tr = varparts.join('\\n')\r\n\t\t}\r\n\t} else {\r\n\t\tif (varparts.length === 0) {\r\n\t\t\tr = indent + parts.join(lb + indent) + ';'\r\n\t\t} else {\r\n\t\t\tr = indent + parts.join(lb + indent) + ';\\n' + (varparts.length > 0 ? varparts.join('\\n') : ';')\r\n\t\t}\r\n\t}\r\n\treturn r\r\n}\r\nFFLToRegister.prototype.lookupConstant = (index, constants) => {\r\n\treturn constants[parseInt(index.substring(2))].replace(/'/g, '\\\\\\'').replace(/(?:\\\\r\\\\n|\\\\r|\\\\n)/g, '[br]')\r\n}\r\nFFLToRegister.prototype.parseProperties = function(resolve_parent_name = this.resolve_parent_name) {\r\n\tconst { lookupConstant, constants, register } = this\r\n\tconst formulaMapping = { inputRequired: 'required' }\r\n\tthis.walk((v, raw_properties) => {\r\n\t\t\tfor (let i = 0; i < raw_properties.length; i++) {\r\n\t\t\t\tconst p = raw_properties[i]\r\n\t\t\t\tconst p_seperator_index = p.indexOf(':')//can't use split. some properties use multiple :\r\n\t\t\t\tlet key = p.substring(0, p_seperator_index).trim()\r\n\t\t\t\tkey = formulaMapping[key] || key\r\n\t\t\t\tregister.addColumn(key)\r\n\t\t\t\tlet value = p.substring(p_seperator_index + 1).trim()\r\n\t\t\t\t/**\r\n\t\t\t\t *  (!! doesn't work with multiple translations in a value) e.g. entirely string\r\n\t\t\t\t * ffl.replace(/__(\\d+)/gm, ($1) => constants[parseInt($1.substring(2))])\r\n\t\t\t\t * ... this does cover too little... title=\"Hoi\" + VAR01 + \"Bye\" is nog covered.\r\n\t\t\t\t */\r\n\t\t\t\tif (value.startsWith('__')) value = lookupConstant(value, constants)\r\n\t\t\t\tregister.value(v, key, value)\r\n\t\t\t}\r\n\t\t\tif (resolve_parent_name) {\r\n\t\t\t\tconst parent = register.i[v][register.schemaIndexes.parentId]\r\n\t\t\t\tif (parent != null) register.value(v, 'parent_name', register.i[parent][register.schemaIndexes.name])\r\n\t\t\t}\r\n\t\t}\r\n\t)\r\n\treturn register\r\n}\r\nFFLToRegister.prototype.toString = function() {\r\n\tthis.buildTree()\r\n\treturn `${this.header}{\\n${this.reassembled}\\n}`\r\n}\r\nexports.FFLToRegister = FFLToRegister",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/FFLToRegister.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 102,
+    "kind": "function",
+    "name": "FFLToRegister",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~FFLToRegister",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": "Is a FFL quick-formatter (V05 '3.1m chars' 90ms) and is FFL to indexed formatter",
+    "lineNumber": 4,
+    "params": [
+      {
+        "name": "register",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "resolve_parent_name",
+        "optional": true,
+        "types": [
+          "boolean"
+        ],
+        "defaultRaw": false,
+        "defaultValue": "false"
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 103,
+    "kind": "function",
+    "name": "extractHeader",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~extractHeader",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": "Extract imports, model name,comments in header",
+    "lineNumber": 23,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 104,
+    "kind": "function",
+    "name": "extractConstants",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~extractConstants",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 105,
+    "kind": "function",
+    "name": "insertConstants",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~insertConstants",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "function",
+    "name": "extractComments",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~extractComments",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 51,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "function",
+    "name": "removeWhite",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~removeWhite",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 61,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "function",
+    "name": "extractVars",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~extractVars",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 66,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "function",
+    "name": "findRootVariable",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~findRootVariable",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 110,
+    "kind": "function",
+    "name": "buildTree",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~buildTree",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 111,
+    "kind": "function",
+    "name": "walk",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~walk",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 95,
+    "undocument": true,
+    "params": [
+      {
+        "name": "visit",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 112,
+    "kind": "function",
+    "name": "walkTree",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~walkTree",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 109,
+    "undocument": true,
+    "params": [
+      {
+        "name": "visit",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "parentId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 113,
+    "kind": "function",
+    "name": "prettyFormatFFL",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~prettyFormatFFL",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 143,
+    "undocument": true,
+    "params": [
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "index",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 114,
+    "kind": "function",
+    "name": "parseProperties",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~parseProperties",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 180,
+    "undocument": true,
+    "params": [
+      {
+        "name": "resolve_parent_name",
+        "optional": true,
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 115,
+    "kind": "function",
+    "name": "toString",
+    "memberof": "ffl/FFLToRegister.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FFLToRegister.js~toString",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FFLToRegister.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 207,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 116,
+    "kind": "file",
+    "name": "ffl/FinFormula.js",
+    "content": "//http://excelformulabeautifier.com/\r\nfunction finFormulaGeneric(buf) {\r\n\t/**\r\n\t * Choices fix, this is a problem for titles and hints containing \":\" chars.\r\n\t * TODO: move to choice specific logic.\r\n\t */\r\n\tvar buf = buf.replace(/:/gm, ', ')\r\n\tbuf = buf.replace(/(\\$p|@|#|%|\\.\\.)/gmi, '')\r\n\r\n\t//temp case fix, <= lt,gt,lte,gte from Cases,\r\n\tbuf = buf.replace(/\\[\\<\\=/gm, '[Infinity<=')\r\n\tbuf = buf.replace(/\\[\\</gm, '[Infinity<')\r\n\tbuf = buf.replace(/\\|\\</gm, '<')\r\n\tbuf = buf.replace(/\\[\\=/gm, '[')\r\n\tbuf = buf.replace(/\\|\\<\\=/gm, '<=')\r\n\tbuf = buf.replace(/\\|\\=/gm, '=')\r\n\tbuf = buf.replace(/\\|\\>\\=/gm, '>=')\r\n\tbuf = buf.replace(/\\|\\>/gm, '>')\r\n\t//end temp case fix\r\n\r\n\t/**\r\n\t * Here are all time references\r\n\t the same as hasAnyValue? HasValue(var) ?\r\n\t */\r\n\tbuf = buf.replace(/\\(FirstValueT\\((\\w+),1,MaxT\\)>0\\)/gi, 'AnyDataAvailable($1)')//regular test for any data entered\r\n\tbuf = buf.replace(/FormulaSetInT\\(GetT\\(T\\,-1\\)\\)<>NoTrend/gi, '!x.isprevnotrend')\r\n\r\n\tbuf = buf.replace(/LastTinYear\\(FirstTinFormulaSet\\(Trend,\\s*(\\w+|\\d+)\\)\\)/gi, 'x.firsttrend.lastbkyr')\r\n\tbuf = buf.replace(/FirstTInFormulaset\\(NoTrend\\)/gi, 'x.firstnotrend')\r\n\tbuf = buf.replace(/FirstTInFormulaset\\(Trend\\)/gi, 'x.firsttrend')\r\n\tbuf = buf.replace(/FirstTinFormulaSet\\(NoTrend,\\s*(\\w+|\\d+)\\)/gi, 'x.firstnotrend')\r\n\tbuf = buf.replace(/FirstTinFormulaSet\\(Trend,\\s*(\\w+|\\d+)\\)/gi, 'x.firsttrend')\r\n\r\n\tbuf = buf.replace(/LastTinFormulaSet\\(NoTrend\\)/gi, 'x.lastnotrend')\r\n\tbuf = buf.replace(/LastTinFormulaSet\\(Trend\\)/gi, 'x.lasttrend')\r\n\tbuf = buf.replace(/LastTinFormulaSet\\(NoTrend,\\s*(\\w+|\\d+)\\)/gi, 'x.lastnotrend')\r\n\tbuf = buf.replace(/LastTinFormulaSet\\(Trend,\\s*(\\w+|\\d+)\\)/gi, 'x.lasttrend')\r\n\t// buf = buf.replace(/LastTinFormulaSet\\(NoTrend,PeriodInT\\)/gi, 'x.lastnotrend');\r\n\r\n\tbuf = buf.replace(/FormulaSetInT\\(LastTinPeriod\\)/gi, 'x.lastinperiod')\r\n\tbuf = buf.replace(/FormulaSetInT\\(FirstTinPeriod\\)/gi, 'x.firstinperiod')\r\n\r\n\tbuf = buf.replace(/\\[LastTinPeriod\\(PeriodInT\\)]/gi, '[lastinperiod]')\r\n\tbuf = buf.replace(/\\LastTinPeriod\\(PeriodInT\\)/gi, 'x.lastinperiod')\r\n\tbuf = buf.replace(/LastTinYear\\(T-TsY\\)/gi, 'x.prevbkyear')\r\n\r\n\tbuf = buf.replace(/\\[1]/g, '[doc]')\r\n\tbuf = buf.replace(/\\[T]/g, '') //Variable[T] is the same as Variable, its always in default to the corresponding time.\r\n\tbuf = buf.replace(/\\[GetT\\(T,-1\\)]/gi, '[prev]') //Variable[T] is the same as Variable, its always in default to the corresponding time.\r\n\tbuf = buf.replace(/\\[LastT\\]/gi, '[lastinperiod]')\r\n\t//(FormulaSetInT(GetT(T,-1))<>NoTrend) ==>  !x.prev.isnotrend\r\n\tbuf = buf.replace(/ValueT\\(1\\)/gi, 'x.firstdetail')\r\n\tbuf = buf.replace(/GetT\\(T,-TsY,0,TsY\\)/gi, 'x.prevbkyr')\r\n\tbuf = buf.replace(/GetT\\(T,-1\\)/gi, 'x.prev')\r\n\tbuf = buf.replace(/GetT(T,-1,1,1)/gi, 'x.prev')\r\n\tbuf = buf.replace(/\\(MaxT\\)/g, '(x.last)')//only replace Function(MaxT) into  Function(x.last)\r\n\r\n\t//TODO: same as TSY?\r\n\tbuf = buf.replace(/TsY\\(LastTinPeriod\\)/gi, 'TsY')\r\n\tbuf = buf.replace(/TsY\\(T\\)/gi, 'x.tsy')\r\n\tbuf = buf.replace(/\\[0\\]/g, '.title ')\r\n\t/*buf = buf.replace(/Visible\\((\\w+)\\)/gi, '$1.visible')  ; Is done in ASTPreparser.js*/\r\n\r\n\t//(& types\r\n\tbuf = buf.replace(/(=|,|\\()\\s{0,4}\\&/gm, ' $1 ')// replace all '=   &' and '(  &'   with = or ( respectively\r\n\tbuf = buf.replace(/\\(\\s*not /gim, '(!')//this of course only tackles the half of it\r\n\tbuf = buf.replace(/^\\s*&/gm, '')\r\n\r\n\t//AND &\r\n\tbuf = buf.replace(/&/gmi, '+')// convert & to &&\r\n\tbuf = buf.replace(/ And /gmi, '&&')// convert & to &&\r\n\tbuf = buf.replace(/\\)\\s*and\\s*\\(/gmi, ')&&(')// convert )  and ( => &&\r\n\r\n\tbuf = buf.replace(/\\s*&&not\\s*/gmi, '&& !')// convert )  and ( => &&\r\n\r\n\t//OR |\r\n\tbuf = buf.replace(/\\||\\s+or /gmi, ' || ')// convert | to ||\r\n\tbuf = buf.replace(/ Or /gmi, ' || ')// convert OR to ||\r\n\tbuf = buf.replace(/\\)\\s*or\\s*\\(/gim, ')||(')\r\n\r\n\t//fix = to == when <=\r\n\tbuf = buf.replace(/=/gm, '==')// convert = to ==\r\n\tbuf = buf.replace(/<==/gm, '<=')\r\n\tbuf = buf.replace(/>==/gm, '>=')\r\n\tbuf = buf.replace(/<>/gm, '!=')\r\n\tbuf = buf.replace(/<->/gm, '!=')\r\n\tbuf = buf.replace(/ Implies /g, '&&')\r\n\tbuf = buf.replace(/ mod /g, ' % ')\r\n\r\n\treturn buf\r\n}\r\n\r\n//finFormulaGeneric('[(VATPaymentFraction[GetT(T,-1)]>0)*(Round(VATPaymentFraction[GetT(T,-1)],0)=VATPaymentFraction[GetT(T,-1)])]'))\r\nfunction javaScriptToFinGeneric(buf) {\r\n\tvar buf = buf.replace(/!=/gm, '<>')\r\n\t//buf = buf.replace(/<=/gm, '<==');\r\n\t//buf = buf.replace(/>=/gm, '>==');\r\n\tbuf = buf.replace(/==/gm, '=')// convert = to ==\r\n\tbuf = buf.replace(/\\|\\|/gmi, ' | ')// convert | to ||\r\n\tbuf = buf.replace(/&&/gmi, ' & ')// convert )  and ( => &&\r\n\treturn buf\r\n}\r\n\r\n//if it ends up being impossible to resolve generic\r\n//we will have to do it in the formula-bootstrap.js\r\n//there we know what is a Variable name\r\nfunction finChoice(formula) {\r\n\t/**\r\n\t * Sometimes FFL is converted incorrectly with a trailing '\\''\r\n\t * This is bugfixing the problem\r\n\t */\r\n\tformula = formula.replace(/\\\\''$/g, '\\'')\r\n\r\n\t//looks like a variable reference\r\n\tif (/^[a-z0-9_ ]+$/i.test(formula)) {\r\n\t\treturn formula + '.choices'\r\n\t}\r\n\t//tricky one is just\r\n\t//three options\r\n\t//Directly with mm/dd/yy\r\n\telse if (formula.indexOf('|') < 0 && formula.indexOf(':') < 0) {\r\n\t\tconst cleanslice = formula.slice(1, -1)\r\n\t\treturn '[{ \"name\": \"' + cleanslice + '\", \"value\": \"' + cleanslice + '\" }]'\r\n\t}\r\n\t//NL|USA|BEL|GER\r\n\telse if (formula.indexOf(':') < 0) {\r\n\t\tvar split = formula.split('|')\r\n\t\t//remove a trailing and leading \" character.\r\n\t\tsplit[0] = split[0].slice(1)\r\n\t\tsplit[split.length - 1] = split[split.length - 1].slice(0, -1)\r\n\r\n\t\tsplit = split.map(function(e, idx) {\r\n\t\t\treturn '{ \"name\": \"' + idx + '\" ,\"value\":' + (e ? '\"' + e + '\"' : null) + '}'\r\n\t\t})\r\n\t\treturn '[' + split.join(',') + ']'\r\n\t}\r\n\t//HIGH:1|LOW:2|UNKNOWN:3\r\n\telse {\r\n\t\tformula = formula.trim().slice(1, -1)\r\n\t\tvar choices = formula.replace(/'/gmi, '')\r\n\t\tchoices = choices.replace(/: /g, ':')\r\n\t\tchoices = choices.replace(/:/gmi, '\\\" , \\\"value\\\" : \\\"')\r\n\t\tchoices = choices.replace(/\\|/gmi, '\\\"} , { \\\"name\\\" :\\\"')\r\n\t\treturn '[{ \"name\" : \"' + choices + '\" }]'\r\n\t}\r\n}\r\n\r\nfunction FinFormula() {\r\n}\r\n\r\nFinFormula.prototype.toJavascriptChoice = function(choiceObjectString) {\r\n\tvar choiceObject = JSON.parse(choiceObjectString.replace(/'/gmi, '\"'))\r\n\tvar response = ''\r\n\tfor (var i = 0; i < choiceObject.length; i++) {\r\n\t\tvar choiceItem = choiceObject[i]\r\n\t\tif (i !== 0) {\r\n\t\t\tresponse += '|'\r\n\t\t}\r\n\t\tresponse += choiceItem.name + '|' + choiceItem.value\r\n\t}\r\n\treturn response\r\n}\r\n\r\nFinFormula.prototype.finFormulaGeneric = finFormulaGeneric\r\nFinFormula.prototype.javaScriptToFinGeneric = javaScriptToFinGeneric\r\nFinFormula.prototype.parseFormula = finFormulaGeneric\r\nFinFormula.prototype.finChoice = finChoice\r\n\r\n//something more usefull came to mind, catches this large chunk of possibilities.\r\n//>> old version would look like : buf = buf.replace(/Q_Map([0-9]{2})/gi, 'Q_MAP$1')9;\r\nFinFormula.prototype.fixCasing = function(buf) {\r\n\treturn buf.replace(/[^\\w]{1}(Q_\\w*)/gmi, function($1) {\r\n\t\treturn $1.toUpperCase()\r\n\t})\r\n}\r\nexport { FinFormula }",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/FinFormula.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 117,
+    "kind": "function",
+    "name": "finFormulaGeneric",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~finFormulaGeneric",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "params": [
+      {
+        "name": "buf",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 118,
+    "kind": "function",
+    "name": "javaScriptToFinGeneric",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~javaScriptToFinGeneric",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 94,
+    "undocument": true,
+    "params": [
+      {
+        "name": "buf",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 119,
+    "kind": "function",
+    "name": "finChoice",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~finChoice",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 107,
+    "undocument": true,
+    "params": [
+      {
+        "name": "formula",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 120,
+    "kind": "function",
+    "name": "toJavascriptChoice",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~toJavascriptChoice",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 151,
+    "undocument": true,
+    "params": [
+      {
+        "name": "choiceObjectString",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 121,
+    "kind": "function",
+    "name": "fixCasing",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~fixCasing",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 171,
+    "undocument": true,
+    "params": [
+      {
+        "name": "buf",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 122,
+    "kind": "function",
+    "name": "FinFormula",
+    "memberof": "ffl/FinFormula.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/FinFormula.js~FinFormula",
+    "access": "public",
+    "export": true,
+    "importPath": "ffl-pack/ffl/FinFormula.js",
+    "importStyle": "{FinFormula}",
+    "description": null,
+    "lineNumber": 148,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 123,
+    "kind": "file",
+    "name": "ffl/index.js",
+    "content": "import { FFLToRegister }    from './FFLToRegister'\r\nimport DeltaCompareRegister from './DeltaCompareRegister'\r\nimport { RegisterToJSON }   from './RegisterToJSON'\r\nimport { RegisterToFFL }    from './RegisterToFFL'\r\nimport { Register }         from './Register'\r\n\r\nexport {\r\n\tFFLToRegister,\r\n\tRegister,\r\n\tRegisterToFFL,\r\n\tDeltaCompareRegister,\r\n\tRegisterToJSON\r\n}",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 124,
+    "kind": "file",
+    "name": "ffl/Register.js",
+    "content": "/**\r\n * All indexed will be linked to a array of values, like a DB structure\r\n * Creating a simple-typed DB is easy. When this functionality in growing exponentially introduce in memory-db..\r\n * For now this is a easy data-structure for many problems. very close to JS/NodeJS\r\n * @constructor\r\n */\r\nexport class Register {\r\n\r\n\theader = ''\r\n\tschema = []\r\n\tcreatedIndexes = []\r\n\tschema_defaults = []\r\n\tchanges = []\r\n\r\n\tconstructor(schema_defaults = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'tree_index', 'children', 'valid', 'title', 'type', 'parent_name']) {//expect 'valid' to exist) {\r\n\t\tthis.schema_defaults = schema_defaults\r\n\t\tthis.clean()\r\n\t}\r\n\r\n\tclean() {\r\n\t\tthis.header = null\r\n\t\tthis.constants = []\r\n\t\tthis.formatters = []\r\n\t\tfor (let j = 0; j < this.createdIndexes.length; j++) delete this[this.createdIndexes[j]]\r\n\t\tthis.createdIndexes = []\r\n\t\tthis.schema.length = 0\r\n\t\tthis.i = []\r\n\t\tthis.schemaIndexes = {}\r\n\t\t//somehow 'valid' is a real important property\r\n\t\t//{{MODEL_VARIABLENAME_undefined}} will exist when 'valid' is not added to the list here. (since valid is created on demand in RegisterToLMEParser\r\n\t\t//Something alike if (VARIABLENAME.pattern) VARIABLENAME.valid = if(VARIABLENAME.test(VARIABLENAME),'','Invalid Input')\r\n\t\t//therefore adding the property 'valid 'too late while parsing.\r\n\t\tfor (let j = 0; j < this.schema_defaults.length; j++) this.addColumn(this.schema_defaults[j])\r\n\t}\r\n\r\n\tsetFormatters(formatters) {\r\n\t\tfor (let i = 0; i < formatters.length; i++) this.formatters[i] = formatters[i]\r\n\t}\r\n\r\n\tfindByName(n) {\r\n\t\treturn this.getNames()[n]\r\n\t}\r\n\r\n\tgetNames() {\r\n\t\treturn this.getIndex('name')\r\n\t}\r\n\r\n\tgetIndex(name) {\r\n\t\tif (!this[name]) this.createIndex(name)\r\n\t\treturn this[name]\r\n\t}\r\n\r\n\tlastRowIndex() {\r\n\t\treturn this.i.length - 1\r\n\t}\r\n\r\n\taddColumns(names) {\r\n\t\tnames.forEach(name => this.addColumn(name))\r\n\t}\r\n\r\n\taddColumn(name) {\r\n\t\tif (this.schemaIndexes[name] == null) {\r\n\t\t\tthis.schemaIndexes[name] = this.schema.length\r\n\t\t\tthis.schema.push(name)\r\n\t\t}\r\n\t}\r\n\r\n\tremoveColumn(name) {\r\n\t\tconst schemaIds = this.schemaIndexes\r\n\t\tif (schemaIds[name] != null) {\r\n\t\t\tconst index = schemaIds[name]\r\n\t\t\tfor (let i = 0; i < this.i.length; i++) {\r\n\t\t\t\tthis.i[i].splice(index, 1)\r\n\t\t\t}\r\n\t\t\tdelete schemaIds[name]\r\n\t\t\tthis.schema.splice(index, 1)\r\n\t\t\tthis.schema.forEach((el, i) => schemaIds[el] = i)\r\n\t\t}\r\n\t}\r\n\r\n\tflush() {\r\n\t\tfor (let i = 0; i < this.i.length; i++) this.i[i].length = this.schema.length\r\n\t}\r\n\r\n\tvalue(idx, key, value) {\r\n\t\tthis.i[idx][this.schemaIndexes[key]] = value\r\n\t}\r\n\r\n\tfindStream(key, value, start) {\r\n\t\treturn this.find(key, value, this.mark)\r\n\t}\r\n\r\n\tfind(key, value, start) {\r\n\t\tconst result = []\r\n\t\tfor (let i = (start || 0); i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])\r\n\t\treturn result\r\n\t}\r\n\r\n\tdistinct(schema, start) {\r\n\t\treturn this.distinctArr(this.i, schema, start || this.mark)\r\n\t}\r\n\r\n\tdistinctArr(arr, schema, start) {\r\n\t\tconst result = []\r\n\t\tconst combi = {}\r\n\t\tconst schemaIndexes = this.schemaIndexes\r\n\t\tconst distinctIndex = schema.map((el) => schemaIndexes[el])\r\n\t\tfor (let i = (start || 0); i < arr.length; i++) {\r\n\t\t\tconst row = arr[i]\r\n\t\t\tlet key = ''\r\n\t\t\tfor (let j = 0; j < distinctIndex.length; j++) key += '_' + row[distinctIndex[j]]\r\n\t\t\tif (!combi[key]) {\r\n\t\t\t\tresult.push(row)\r\n\t\t\t\tcombi[key] = true\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn result\r\n\t}\r\n\r\n//can only be unique indexes, string based.\r\n\taddIndex(name) {\r\n\t\tthis.createIndex(name)\r\n\t\treturn this[name]\r\n\t}\r\n\r\n//can only be unique indexes, string based.\r\n\tcreateIndex(name) {\r\n\t\tif (!this[name]) {\r\n\t\t\tthis.createdIndexes.push(name)\r\n\t\t\tconst index = {}, i = this.i, ni = this.schemaIndexes[name]\r\n\t\t\tfor (let c = 0; c < i.length; c++) index[i[c][ni]] = i[c]\r\n\t\t\tthis[name] = index\r\n\t\t}\r\n\t}\r\n\r\n//this will also update indexes...\r\n\taddRowSave(row) {\r\n\t\tthis.i.push(row)\r\n\t\tfor (let i = 0; i < this.createdIndexes.length; i++) {\r\n\t\t\tconst index = this.createdIndexes[i]\r\n\t\t\tthis[index][row[this.schemaIndexes[index]]] = row\r\n\t\t}\r\n\t\treturn this.i.length - 1\r\n\t}\r\n\r\n//insert (quick)\r\n\taddRows(rows) {\r\n\t\treturn rows.map(row => this.addRow(row))\r\n\t}\r\n\r\n\tinitRows(rows) {\r\n\t\treturn rows.map(([row, extra]) => this.initRow(row, extra))\r\n\t}\r\n\r\n\tinitRow(row, extra) {\r\n\t\tconst indexes = this.schemaIndexes\r\n\t\treturn this.addRow(extra.reduce((init, { col, val }) => {\r\n\t\t\tinit[indexes[col]] = val\r\n\t\t\treturn init\r\n\t\t}, row))\r\n\t}\r\n\r\n\taddRow(row) {\r\n\t\tthis.i.push(row)\r\n\t\treturn this.i.length - 1\r\n\t}\r\n\r\n\t/*Inheritance belongs to the Register! this data-structure supports it. DB+Inheritance data-model */\r\n\tinheritProperty(name, paramIndex) {\r\n\t\tconst variable = this.getIndex('name')[name]\r\n\t\tif (variable[paramIndex]) return variable[paramIndex]\r\n\t\tif (variable[this.schemaIndexes.refersto]) return this.inheritProperty(variable[this.schemaIndexes.refersto], paramIndex)\r\n\t\treturn ''\r\n\t}\r\n\r\n\tdoProx(name, metaData, param) {\r\n\t\tconst register = this\r\n\t\tconst variable = this.getIndex('name')[name]\r\n\t\tObject.defineProperty(metaData, 'value', {\r\n\t\t\tset: (value) => {\r\n\t\t\t\tvariable[param] = value\r\n\t\t\t\tregister.changes.push({ name, param })\r\n\t\t\t},\r\n\t\t\tget: () => register.inheritProperty(name, param)\r\n\t\t})\r\n\t}\r\n\r\n\tcreateInformationObject(name, hidden) {\r\n\t\tconst variable = []\r\n\t\tfor (let paramIndex = 0; paramIndex < this.schema.length; paramIndex++) {\r\n\t\t\tlet propertyName = this.schema[paramIndex]\r\n\r\n\t\t\tif (hidden.indexOf(paramIndex) !== -1) continue\r\n\t\t\tconst metaData = { name: propertyName }\r\n\t\t\tthis.doProx(name, metaData, paramIndex)\r\n\t\t\tvariable.push(metaData)\r\n\t\t}\r\n\t\treturn variable\r\n\t}\r\n\r\n\tgetAll(name) {\r\n\t\tconst r = [], index = this.i, indexpos = this.schemaIndexes[name]\r\n\t\tfor (let i = 0; i < index.length; i++) r[i] = index[i][indexpos]\r\n\t\treturn r\r\n\t}\r\n\r\n\twalk(node, depth, visitor) {\r\n\t\tvisitor(node, depth)\r\n\t\tconst children = node[this.schemaIndexes.children]\r\n\t\tfor (let i = 0; i < children.length; i++) this.walk(children[i], depth + 1, visitor)\r\n\t}\r\n\r\n\tprint = (idxMap, start, filter) => this.printArr(this.i, idxMap, this.mark || start, filter)\r\n\r\n\tprintArr(arr, idxMap, start, filter) {\r\n\t\tfilter = filter || []\r\n\t\tconst tout = []\r\n\t\tconst self = this\r\n\t\tconst filtermap = []\r\n\t\tfor (let i = 0; i < filter.length; i++) filtermap[this.schemaIndexes[filter[i]]] = true\r\n\t\tconst f = function(el, idx) {\r\n\t\t\treturn filtermap[idx]\r\n\t\t}\r\n\t\tfor (let i = (start || 0); i < arr.length; i++) {\r\n\t\t\tconst el = arr[i]\r\n\t\t\ttout.push((filter.length > 0 ? el.filter(f) : el).map(function(innerEl, idx) {\r\n\t\t\t\tconst v = self.formatters[idx] ? self.formatters[idx](innerEl) : innerEl\r\n\t\t\t\tconst prefix = []\r\n\t\t\t\tprefix.length = Math.max(idxMap[idx] - String(v).length, 0)\r\n\t\t\t\treturn String(v).slice(0, idxMap[idx] - 1) + prefix.join(' ')\r\n\t\t\t}).join('|'))\r\n\t\t}\r\n\t\treturn tout\r\n\t}\r\n\r\n\ttranslateKeys(formula) {\r\n\t\tconst constants = this.constants\r\n\t\treturn formula.replace(/__(\\d+)/gm, ($1, $2) => constants[parseInt($2)]) || ''\r\n\t}\r\n\r\n\titerateRows(addition_property, stream) {\r\n\t\tconst names = this.getNames(), parent_name_index = this.schemaIndexes.parent_name,\r\n\t\t      extra                                      = this.schemaIndexes[addition_property],\r\n\t\t      root                                       = names.root\r\n\t\tthis.i.filter(row => row[this.schemaIndexes.name] !== 'root').forEach((row, index) => stream(index, row, names[row[parent_name_index]] || root, row[extra]))\r\n\t}\r\n\r\n\t/** * mark current moment as last checkpoint */\r\n\tmarkNow() {\r\n\t\tthis.mark = this.i.length\r\n\t}\r\n\r\n\ttoString() {\r\n\t\treturn `variables:[${this.i.length}]\\nSchema:[${this.schema.map((el, i) => el + ':' + i).join(',')}]\\n${this.i.join('\\n')}`\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/Register.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 125,
+    "kind": "class",
+    "name": "Register",
+    "memberof": "ffl/Register.js",
+    "static": true,
+    "longname": "ffl/Register.js~Register",
+    "access": "public",
+    "export": true,
+    "importPath": "ffl-pack/ffl/Register.js",
+    "importStyle": "{Register}",
+    "description": "All indexed will be linked to a array of values, like a DB structure\nCreating a simple-typed DB is easy. When this functionality in growing exponentially introduce in memory-db..\nFor now this is a easy data-structure for many problems. very close to JS/NodeJS",
+    "lineNumber": 7,
+    "unknown": [
+      {
+        "tagName": "@constructor",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 126,
+    "kind": "member",
+    "name": "header",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#header",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 127,
+    "kind": "member",
+    "name": "schema",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#schema",
+    "access": "public",
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 128,
+    "kind": "member",
+    "name": "createdIndexes",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#createdIndexes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 129,
+    "kind": "member",
+    "name": "schema_defaults",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#schema_defaults",
+    "access": "public",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 130,
+    "kind": "member",
+    "name": "changes",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#changes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 131,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true
+  },
+  {
+    "__docId__": 133,
+    "kind": "method",
+    "name": "clean",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#clean",
+    "access": "public",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 135,
+    "kind": "member",
+    "name": "constants",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#constants",
+    "access": "public",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 136,
+    "kind": "member",
+    "name": "formatters",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#formatters",
+    "access": "public",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 138,
+    "kind": "member",
+    "name": "i",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#i",
+    "access": "public",
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 139,
+    "kind": "member",
+    "name": "schemaIndexes",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#schemaIndexes",
+    "access": "public",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 140,
+    "kind": "method",
+    "name": "setFormatters",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#setFormatters",
+    "access": "public",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "params": [
+      {
+        "name": "formatters",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 141,
+    "kind": "method",
+    "name": "findByName",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#findByName",
+    "access": "public",
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "params": [
+      {
+        "name": "n",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 142,
+    "kind": "method",
+    "name": "getNames",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#getNames",
+    "access": "public",
+    "description": null,
+    "lineNumber": 44,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 143,
+    "kind": "method",
+    "name": "getIndex",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#getIndex",
+    "access": "public",
+    "description": null,
+    "lineNumber": 48,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 144,
+    "kind": "method",
+    "name": "lastRowIndex",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#lastRowIndex",
+    "access": "public",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 145,
+    "kind": "method",
+    "name": "addColumns",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addColumns",
+    "access": "public",
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "params": [
+      {
+        "name": "names",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 146,
+    "kind": "method",
+    "name": "addColumn",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addColumn",
+    "access": "public",
+    "description": null,
+    "lineNumber": 61,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 147,
+    "kind": "method",
+    "name": "removeColumn",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#removeColumn",
+    "access": "public",
+    "description": null,
+    "lineNumber": 68,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 148,
+    "kind": "method",
+    "name": "flush",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#flush",
+    "access": "public",
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 149,
+    "kind": "method",
+    "name": "value",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#value",
+    "access": "public",
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "params": [
+      {
+        "name": "idx",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "key",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 150,
+    "kind": "method",
+    "name": "findStream",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#findStream",
+    "access": "public",
+    "description": null,
+    "lineNumber": 89,
+    "undocument": true,
+    "params": [
+      {
+        "name": "key",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "start",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 151,
+    "kind": "method",
+    "name": "find",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#find",
+    "access": "public",
+    "description": null,
+    "lineNumber": 93,
+    "undocument": true,
+    "params": [
+      {
+        "name": "key",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "start",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 152,
+    "kind": "method",
+    "name": "distinct",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#distinct",
+    "access": "public",
+    "description": null,
+    "lineNumber": 99,
+    "undocument": true,
+    "params": [
+      {
+        "name": "schema",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "start",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 153,
+    "kind": "method",
+    "name": "distinctArr",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#distinctArr",
+    "access": "public",
+    "description": null,
+    "lineNumber": 103,
+    "undocument": true,
+    "params": [
+      {
+        "name": "arr",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "schema",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "start",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 154,
+    "kind": "method",
+    "name": "addIndex",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addIndex",
+    "access": "public",
+    "description": null,
+    "lineNumber": 121,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 155,
+    "kind": "method",
+    "name": "createIndex",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#createIndex",
+    "access": "public",
+    "description": null,
+    "lineNumber": 127,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 156,
+    "kind": "member",
+    "name": "[name]",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#[name]",
+    "access": "public",
+    "description": null,
+    "lineNumber": 132,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 157,
+    "kind": "method",
+    "name": "addRowSave",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addRowSave",
+    "access": "public",
+    "description": null,
+    "lineNumber": 137,
+    "undocument": true,
+    "params": [
+      {
+        "name": "row",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 158,
+    "kind": "method",
+    "name": "addRows",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addRows",
+    "access": "public",
+    "description": null,
+    "lineNumber": 147,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rows",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 159,
+    "kind": "method",
+    "name": "initRows",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#initRows",
+    "access": "public",
+    "description": null,
+    "lineNumber": 151,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rows",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 160,
+    "kind": "method",
+    "name": "initRow",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#initRow",
+    "access": "public",
+    "description": null,
+    "lineNumber": 155,
+    "undocument": true,
+    "params": [
+      {
+        "name": "row",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "extra",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 161,
+    "kind": "method",
+    "name": "addRow",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#addRow",
+    "access": "public",
+    "description": null,
+    "lineNumber": 163,
+    "undocument": true,
+    "params": [
+      {
+        "name": "row",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 162,
+    "kind": "method",
+    "name": "inheritProperty",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#inheritProperty",
+    "access": "public",
+    "description": null,
+    "lineNumber": 169,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "paramIndex",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 163,
+    "kind": "method",
+    "name": "doProx",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#doProx",
+    "access": "public",
+    "description": null,
+    "lineNumber": 176,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "metaData",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "param",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 164,
+    "kind": "method",
+    "name": "createInformationObject",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#createInformationObject",
+    "access": "public",
+    "description": null,
+    "lineNumber": 188,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "hidden",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 165,
+    "kind": "method",
+    "name": "getAll",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#getAll",
+    "access": "public",
+    "description": null,
+    "lineNumber": 201,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 166,
+    "kind": "method",
+    "name": "walk",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#walk",
+    "access": "public",
+    "description": null,
+    "lineNumber": 207,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "visitor",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 167,
+    "kind": "member",
+    "name": "print",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#print",
+    "access": "public",
+    "description": null,
+    "lineNumber": 213,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 168,
+    "kind": "method",
+    "name": "printArr",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#printArr",
+    "access": "public",
+    "description": null,
+    "lineNumber": 215,
+    "undocument": true,
+    "params": [
+      {
+        "name": "arr",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "idxMap",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "start",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "filter",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 169,
+    "kind": "method",
+    "name": "translateKeys",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#translateKeys",
+    "access": "public",
+    "description": null,
+    "lineNumber": 236,
+    "undocument": true,
+    "params": [
+      {
+        "name": "formula",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 170,
+    "kind": "method",
+    "name": "iterateRows",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#iterateRows",
+    "access": "public",
+    "description": null,
+    "lineNumber": 241,
+    "undocument": true,
+    "params": [
+      {
+        "name": "addition_property",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "stream",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 171,
+    "kind": "method",
+    "name": "markNow",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#markNow",
+    "access": "public",
+    "description": "mark current moment as last checkpoint",
+    "lineNumber": 249,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 172,
+    "kind": "member",
+    "name": "mark",
+    "memberof": "ffl/Register.js~Register",
+    "static": false,
+    "longname": "ffl/Register.js~Register#mark",
+    "access": "public",
+    "description": null,
+    "lineNumber": 250,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 173,
+    "kind": "method",
+    "name": "toString",
+    "memberof": "ffl/Register.js~Register",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/Register.js~Register#toString",
+    "access": "public",
+    "description": null,
+    "lineNumber": 253,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 174,
+    "kind": "file",
+    "name": "ffl/RegisterFormulaBuilder.js",
+    "content": "const log = require('log6')\r\n\r\nfunction RegisterFormulaBuilder(register) {\r\n\r\n    const referstoIndex = register.schemaIndexes.refersto;\r\n    const nameIndex = register.schemaIndexes.name;\r\n    const formulaindex = register.schemaIndexes.formula;\r\n    const trend_formulaIndex = register.schemaIndexes.formula_trend;\r\n    const notrend_formulaIndex = register.schemaIndexes.formula_notrend;\r\n    const aggregationIndex = register.schemaIndexes.aggregation;\r\n    const modifierIndex = register.schemaIndexes.modifier;\r\n    const tree_index = register.schemaIndexes.tree_index;\r\n    const parentNameIndex = register.schemaIndexes.parentId;\r\n    const childIndex = register.schemaIndexes.children;\r\n    const inherited = {}\r\n    const names = register.getIndex('name');\r\n\r\n    function Builder() {\r\n    }\r\n\r\n    Builder.prototype.inherit = function(node) {\r\n        //only inherit properties once.\r\n        //INFO: inheritance could also be possible via database\r\n        if (names.root == node) return\r\n        if (!inherited[node[nameIndex]]) {\r\n            inherited[node[nameIndex]] = true\r\n            const supertype = node[referstoIndex] ? names[node[referstoIndex]] : names.root\r\n            if (log.DEBUG && supertype == null) log.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');\r\n            //first inherit from parents of parents.\r\n            if (supertype[referstoIndex]) this.inherit(supertype)\r\n            for (var i = 0; i < supertype.length; i++) {\r\n                if (node[i] == null) node[i] = supertype[i];\r\n            }\r\n        }\r\n    }\r\n    Builder.prototype.buildFFLFormula = function(node, summable) {\r\n        var valueFormula;\r\n        if (node[referstoIndex]) {\r\n            valueFormula = node[referstoIndex]\r\n        } else {\r\n            var trendformula = node[trend_formulaIndex];\r\n            valueFormula = node[notrend_formulaIndex] || node[formulaindex];//notrend is more specific than formula\r\n            if (trendformula != null && valueFormula != trendformula) {//first of all, if both formula's are identical. We can skip the exercise\r\n                valueFormula = 'If(IsTrend,' + trendformula + ',' + (valueFormula ? valueFormula : 'NA') + ')';\r\n            }\r\n            if (summable && node[aggregationIndex] == 'flow') {\r\n                valueFormula = 'If(TimeAggregated,Aggregate(Self,x),' + (valueFormula ? valueFormula : 'NA') + ')'\r\n            }\r\n            if (node[modifierIndex] && node[modifierIndex].indexOf('=') > -1) {\r\n                const treeIdx = (node[tree_index] - 2)\r\n                const siblings = register.i[node[parentNameIndex]][childIndex]\r\n                var sumformula = [];\r\n\r\n                for (var i = treeIdx; i >= 0; i--) {\r\n                    const sibling_modifier = siblings[i][modifierIndex];\r\n                    if (sibling_modifier) {\r\n                        if (sibling_modifier.indexOf('=') > -1) break\r\n                        const withouttotal = sibling_modifier.replace(/=/, '');\r\n                        if (withouttotal.length > 0) sumformula.push(withouttotal + siblings[i][nameIndex]);\r\n                    }\r\n                }\r\n                //if (valueFormula) log.error(nodeName + '=\\n' + sumformula.reverse().join('') + '\\nformula:\\n' + valueFormula)\r\n                valueFormula = sumformula.reverse().join('');\r\n            }\r\n        }\r\n        return valueFormula;\r\n    }\r\n    return new Builder();\r\n}\r\n\r\nmodule.exports = RegisterFormulaBuilder",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/RegisterFormulaBuilder.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 175,
+    "kind": "variable",
+    "name": "log",
+    "memberof": "ffl/RegisterFormulaBuilder.js",
+    "static": true,
+    "longname": "ffl/RegisterFormulaBuilder.js~log",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterFormulaBuilder.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 176,
+    "kind": "function",
+    "name": "RegisterFormulaBuilder",
+    "memberof": "ffl/RegisterFormulaBuilder.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterFormulaBuilder.js~RegisterFormulaBuilder",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterFormulaBuilder.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [
+      {
+        "name": "register",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 177,
+    "kind": "file",
+    "name": "ffl/RegisterPlainFFLDecorator.js",
+    "content": "/**\r\n * Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.\r\n */\r\nconst SolutionFacade = require('../../src/SolutionFacade')\r\nconst RegisterToLMEParser = require('./RegisterToLMEParser').RegisterToLMEParser\r\nconst FFLToRegister = require('./FFLToRegister').FFLToRegister\r\nconst Register = require('./Register').Register\r\n\r\nfunction RegisterPlainFFLToLMEParser() {\r\n}\r\n\r\nRegisterPlainFFLToLMEParser.prototype.name = 'ffl'\r\nRegisterPlainFFLToLMEParser.prototype.status = 'green';\r\nRegisterPlainFFLToLMEParser.prototype.headername = '.finance ffl';\r\n\r\nRegisterPlainFFLToLMEParser.prototype.deParse = function(data, workbook) {\r\n    return new RegisterToLMEParser().deParse(data, workbook)\r\n}\r\nRegisterPlainFFLToLMEParser.prototype.parseData = function(data, workbook) {\r\n    /*\r\n     * Backward compatibility:\r\n     * Allow the register to be provided\r\n     */\r\n    const register = data.register || new Register()\r\n    const raw = data.raw || data;\r\n\r\n    const fflFormatter = new FFLToRegister(register, raw)\r\n    fflFormatter.parseProperties();\r\n    workbook.modelName = fflFormatter.name || workbook.modelName;\r\n    return new RegisterToLMEParser().parseData(register, workbook)\r\n}\r\nexports.RegisterPlainFFLToLMEParser = RegisterPlainFFLToLMEParser;\r\nSolutionFacade.addParser(RegisterPlainFFLToLMEParser.prototype);",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 178,
+    "kind": "variable",
+    "name": "SolutionFacade",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~SolutionFacade",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": "Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.",
+    "lineNumber": 4,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 179,
+    "kind": "variable",
+    "name": "RegisterToLMEParser",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~RegisterToLMEParser",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 180,
+    "kind": "variable",
+    "name": "FFLToRegister",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~FFLToRegister",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 181,
+    "kind": "variable",
+    "name": "Register",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~Register",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 182,
+    "kind": "function",
+    "name": "RegisterPlainFFLToLMEParser",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~RegisterPlainFFLToLMEParser",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 183,
+    "kind": "function",
+    "name": "deParse",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~deParse",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "workbook",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 184,
+    "kind": "function",
+    "name": "parseData",
+    "memberof": "ffl/RegisterPlainFFLDecorator.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterPlainFFLDecorator.js~parseData",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterPlainFFLDecorator.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "workbook",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 185,
+    "kind": "file",
+    "name": "ffl/RegisterToFFL.js",
+    "content": "/**\r\n * Used in front-end to reassemble the FFL file when needed.\r\n * extract underlying data-model\r\n * make an register, schema - indexed with array values\r\n * Can expand while adding more properties and keeps its integrity\r\n * schema and nodes\r\n * re-use over implementations\r\n * @param {Register} register\r\n */\r\nfunction RegisterToFFL(register) {\r\n\tthis.schema = register.schema\r\n\tthis.constants = register.constants\r\n\tregister.createIndex('name')\r\n\tthis.vars = register.getIndex('name')\r\n\tthis.child = {}\r\n\tthis.nameIndex = register.schemaIndexes.name\r\n\tthis.descIndex = register.schemaIndexes.desc\r\n\tthis.startIndex = register.schemaIndexes.start\r\n\tthis.endIndex = register.schemaIndexes.end\r\n\tthis.tree_index = register.schemaIndexes.tree_index\r\n\tthis.parentNameIndex = register.schemaIndexes.parentId\r\n\tthis.stringIndex = register.schemaIndexes.index\r\n\tthis.modifierIndex = register.schemaIndexes.modifier\r\n\tthis.referstoIndex = register.schemaIndexes.refersto\r\n\tthis.tupleIndex = register.schemaIndexes.tuple\r\n\tthis.displaytypeIndex = register.schemaIndexes.displaytype\r\n\tthis.visibleIndex = register.schemaIndexes.visible\r\n\tthis.decimalsIndex = register.schemaIndexes.fixed_decimals\r\n\tthis.datatypeIndex = register.schemaIndexes.datatype\r\n\tthis.frequencyIndex = register.schemaIndexes.frequency\r\n\tthis.options_titleIndex = register.schemaIndexes.options_title\r\n\tthis.formulaindex = register.schemaIndexes.formula\r\n\tthis.lockedIndex = register.schemaIndexes.locked\r\n\tthis.requiredIndex = register.schemaIndexes.required\r\n\tthis.childIndex = register.schemaIndexes.children\r\n\tthis.schema_indexes = register.schemaIndexes\r\n\tconst { nameIndex, modifier, refersto, tuple } = register.schemaIndexes\r\n\tthis.output = ''\r\n\tthis.delimiter = ';'\r\n\tthis.line_delimiter = '\\n'\r\n\t//some properties are generated for the tree structure, and cannot be changes manually\r\n\tthis.variableProperties = [nameIndex, modifier, refersto, tuple]\r\n\tthis.hiddenProperties = [this.startIndex, this.endIndex, this.tree_index, this.stringIndex, this.schema.indexOf('version'), this.schema.indexOf('type'), this.schema.indexOf('parent_name'), this.parentNameIndex, this.childIndex, this.descIndex]\r\n\tthis.indents = []\r\n\tconst depth = 30\r\n\tfor (let i = 0; i < depth; i++) this.indents[i] = new Array(i).join(' ')\r\n\tthis.relevant = []\r\n\tfor (let i = 0; i < this.schema.length; i++) {\r\n\t\tif ((this.hiddenProperties.indexOf(i) === -1) && (this.variableProperties.indexOf(i) === -1)) {\r\n\t\t\tthis.relevant.push(i)\r\n\t\t}\r\n\t}\r\n\t//creating indents + brackets\r\n\tconst shiftindent = []\r\n\tfor (let i = 0; i < depth; i++) {\r\n\t\tshiftindent[i] = []\r\n\t\tfor (let j = 0; j <= i; j++) {\r\n\t\t\tlet item = []\r\n\t\t\tfor (let k = 0; k <= j; k++) {\r\n\t\t\t\titem.push(new Array(i - k).join(' '))\r\n\t\t\t\titem.push('}\\n')\r\n\t\t\t}\r\n\t\t\tshiftindent[i][j] = item.join('')\r\n\t\t}\r\n\t}\r\n\r\n\tthis.shiftindent = shiftindent\r\n\tconst formulas = ['valid', 'title', 'hint', 'locked', 'visible', 'required', 'choices']\r\n\tthis.formulaIndexes = formulas.map(formula => register.schemaIndexes[formula])\r\n\tthis.defaultValues = []\r\n\tthis.defaultValues[this.visibleIndex] = {\r\n\t\tundefined: true,\r\n\t\tnull     : true,\r\n\t\t'1.0'    : true,\r\n\t\t'1'      : true,\r\n\t\t'true'   : true,\r\n\t\t'On'     : true\r\n\t}\r\n\tthis.defaultValues[this.lockedIndex] = {\r\n\t\tundefined: true,\r\n\t\tnull     : true,\r\n\t\t'0.0'    : true,\r\n\t\t'0'      : true,\r\n\t\t'false'  : true,\r\n\t\t'Off'    : true,\r\n\t\t'No'     : true\r\n\t}\r\n\tthis.defaultValues[this.requiredIndex] = this.defaultValues[this.lockedIndex]\r\n}\r\n\r\nRegisterToFFL.prototype.toGeneratedCommaSeperated = function(rooNodeName = 'root') {\r\n\tconst { delimiter, hiddenProperties, indents, vars } = this\r\n\tconst lines = []\r\n\tthis.walk(vars[rooNodeName], 0, (variable, depth) => lines.push([indents[depth], variable.filter((value, index) => hiddenProperties.indexOf(index) === -1)].join(delimiter)))\r\n\tthis.output = lines.join(this.line_delimiter)\r\n\treturn this.output\r\n}\r\nRegisterToFFL.prototype.toCSV = function({ rootVariableName = 'root' }) {\r\n\tconst { delimiter, hiddenProperties, vars, schema } = this\r\n\treturn [\r\n\t\tschema.filter((value, index) => hiddenProperties.indexOf(index) === -1).join(delimiter),\r\n\t\t... this.walk(vars[rootVariableName], 0, variable => variable.filter((value, index) => hiddenProperties.indexOf(index) === -1).join(delimiter))\r\n\t]\r\n}\r\nRegisterToFFL.prototype.walk = function(node, depth, visitor, initial = []) {\r\n\tinitial.push(visitor(node, depth))\r\n\tconst c = node[this.childIndex]\r\n\tfor (let i = 0; i < c.length; i++) this.walk(c[i], depth + 1, visitor, initial)\r\n\treturn initial\r\n}\r\nRegisterToFFL.prototype.validate = function(line) {\r\n\treturn (this.schema.length - this.hiddenProperties.length) === ((line.match(/;/g) || []).length + 1)\r\n}\r\n/**\r\n *  Complex situation.\r\n *  Convert Register to FFL.\r\n *    -- internationalization happens here, 'constants'\r\n */\r\nRegisterToFFL.prototype.toGeneratedFFL = function({ rootVariableName = 'root', noChildren = false, auto_join = false }) {\r\n\tconst formattedFFL = []\r\n\tconst traverse = !noChildren\r\n\tconst { modifierIndex, nameIndex, indents, constants, relevant, schema, shiftindent, tupleIndex } = this\r\n\tconst { type, title = nameIndex, refersto } = this.schema_indexes\r\n\tconst tuple = 'tuple ', variable = 'variable ', model = 'model ', ref_postfix = ' refers to '\r\n\r\n\tlet curr_depth = 0\r\n\tconst rootNode = this.vars[rootVariableName]\r\n\tconst visitor = function(node, depth) {\r\n\t\tconst items = []\r\n\t\tconst model_node = node[type] === 'm'\r\n\t\tif (curr_depth >= depth) items.push(shiftindent[curr_depth][(curr_depth - depth)])\r\n\t\titems.push(indents[depth])\r\n\t\titems.push(node[tupleIndex] ? tuple : (model_node ? model : variable))\r\n\t\titems.push(node[modifierIndex] || '')\r\n\t\titems.push(model_node ? node[title] + ' uses BaseModel' : node[nameIndex])\r\n\t\tif (refersto !== -1 && node[refersto]) items.push(ref_postfix, node[refersto])\r\n\t\titems.push('\\n', indents[depth])\r\n\r\n\t\tconst props = []\r\n\t\tfor (let i = 0; i < relevant.length; i++) {\r\n\t\t\tconst real = relevant[i]\r\n\t\t\tif (node[real]) props.push([indents[depth + 1], schema[real], ': ', node[real], ';'].join(''))\r\n\t\t}\r\n\t\tif (props.length > 0) items.push('{\\n', props.join('\\n'))\r\n\t\telse items.push('{')\r\n\t\tcurr_depth = depth\r\n\t\tformattedFFL.push(items.join(''))\r\n\t}\r\n\tif (traverse) this.walk(rootNode, 1, visitor)\r\n\telse visitor(rootNode, 1)\r\n\r\n\tformattedFFL.push(shiftindent[curr_depth][curr_depth - 1])\r\n\tif (!rootVariableName) formattedFFL.shift()\r\n\tconst translated = formattedFFL.map(ffl => ffl.replace(/__(\\d+)/gm, $1 => constants[parseInt($1.substring(2))]))\r\n\treturn auto_join ? translated.join('\\n') : translated\r\n}\r\nexport { RegisterToFFL }",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/RegisterToFFL.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 186,
+    "kind": "function",
+    "name": "toGeneratedCommaSeperated",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~toGeneratedCommaSeperated",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 91,
+    "undocument": true,
+    "params": [
+      {
+        "name": "rooNodeName",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "root",
+        "defaultValue": "root"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 187,
+    "kind": "function",
+    "name": "toCSV",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~toCSV",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 98,
+    "undocument": true,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"rootVariableName\": *}"
+        ],
+        "defaultRaw": {
+          "rootVariableName": null
+        },
+        "defaultValue": "{\"rootVariableName\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "undefined[]"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 188,
+    "kind": "function",
+    "name": "walk",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~walk",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 105,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "visitor",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "initial",
+        "optional": true,
+        "types": [
+          "*[]"
+        ],
+        "defaultRaw": [],
+        "defaultValue": "[]"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 189,
+    "kind": "function",
+    "name": "validate",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~validate",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 111,
+    "undocument": true,
+    "params": [
+      {
+        "name": "line",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 190,
+    "kind": "function",
+    "name": "toGeneratedFFL",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~toGeneratedFFL",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": null,
+    "description": " Complex situation.\n Convert Register to FFL.\n   -- internationalization happens here, 'constants'",
+    "lineNumber": 119,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"rootVariableName\": *, \"noChildren\": *, \"auto_join\": *}"
+        ],
+        "defaultRaw": {
+          "rootVariableName": null,
+          "noChildren": null,
+          "auto_join": null
+        },
+        "defaultValue": "{\"rootVariableName\":null,\"noChildren\":null,\"auto_join\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 191,
+    "kind": "function",
+    "name": "RegisterToFFL",
+    "memberof": "ffl/RegisterToFFL.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToFFL.js~RegisterToFFL",
+    "access": "public",
+    "export": true,
+    "importPath": "ffl-pack/ffl/RegisterToFFL.js",
+    "importStyle": "{RegisterToFFL}",
+    "description": "Used in front-end to reassemble the FFL file when needed.\nextract underlying data-model\nmake an register, schema - indexed with array values\nCan expand while adding more properties and keeps its integrity\nschema and nodes\nre-use over implementations",
+    "lineNumber": 10,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Register"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "register",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 192,
+    "kind": "file",
+    "name": "ffl/RegisterToJSON.js",
+    "content": "import { Register } from './Register'\r\n\r\nexport class RegisterToJSON {\r\n\tregister = null\r\n\thidden_properties = ['desc', 'start', 'end', 'parentId', 'index', 'children']\r\n\r\n\tconstructor(register = new Register) {this.register = register}\r\n\r\n\ttoJSON(root_name = 'root') {\r\n\t\tconst register = this.register\r\n\t\tconst rootNode = register.findByName(root_name)\r\n\t\tconst rows = []\r\n\t\tconst indexes = register.schemaIndexes\r\n\t\tconst schema = register.schema.filter((val) => this.hidden_properties.indexOf(val) === -1)\r\n\t\tconst variable_schema = schema.map(property_name => indexes[property_name])\r\n\t\tregister.walk(rootNode, 0, (variable) => rows.push(\r\n\t\t\tvariable_schema.map(schema_index => variable[schema_index])\r\n\t\t))\r\n\t\treturn { schema, rows }\r\n\t}\r\n\r\n\tfromJSON(json_register) {\r\n\t\tconst register = this.register\r\n\t\tregister.clean()\r\n\t\tregister.addColumns(json_register.schema)\r\n\t\tregister.addColumn('tree_index')\r\n\t\tconst children_index = register.schemaIndexes.children\r\n\t\tjson_register.rows.forEach(row => {\r\n\t\t\tregister.initRow([null, null, null, row[0]], [{\r\n\t\t\t\tval: [],\r\n\t\t\t\tcol: 'children'\r\n\t\t\t}, ... row.map((val, index) => ({ val, col: json_register.schema[index] }))])\r\n\t\t})\r\n\t\tregister.iterateRows('tree_index', (index, row, parent, tree_index = 0) => {\r\n\t\t\tparent[children_index][tree_index] = row\r\n\t\t})\r\n\t\treturn register\r\n\t}\r\n}",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/RegisterToJSON.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 193,
+    "kind": "class",
+    "name": "RegisterToJSON",
+    "memberof": "ffl/RegisterToJSON.js",
+    "static": true,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "access": "public",
+    "export": true,
+    "importPath": "ffl-pack/ffl/RegisterToJSON.js",
+    "importStyle": "{RegisterToJSON}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 194,
+    "kind": "member",
+    "name": "register",
+    "memberof": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "static": false,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON#register",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 195,
+    "kind": "member",
+    "name": "hidden_properties",
+    "memberof": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "static": false,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON#hidden_properties",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 196,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true
+  },
+  {
+    "__docId__": 198,
+    "kind": "method",
+    "name": "toJSON",
+    "memberof": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON#toJSON",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [
+      {
+        "name": "root_name",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "root",
+        "defaultValue": "root"
+      }
+    ],
+    "return": {
+      "types": [
+        "{\"schema\": *, \"rows\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 199,
+    "kind": "method",
+    "name": "fromJSON",
+    "memberof": "ffl/RegisterToJSON.js~RegisterToJSON",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "ffl/RegisterToJSON.js~RegisterToJSON#fromJSON",
+    "access": "public",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "params": [
+      {
+        "name": "json_register",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 200,
+    "kind": "file",
+    "name": "ffl/RegisterToLMEParser.js",
+    "content": "const SolutionFacade = require('../../src/SolutionFacade')\r\nconst RegisterToFFL = require('./RegisterToFFL').RegisterToFFL\r\nconst RegisterFormulaBuilder = require('./RegisterFormulaBuilder')\r\nconst FinFormula = require('./FinFormula')\r\nconst AST = require('../../../ast-node-utils/index').ast\r\nconst log = require('log6')\r\nconst esprima = require('esprima')\r\n\r\n/**\r\n * ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js} field-validations\r\n * V2\r\n *  Quicker, cleaner, flexible, less data-loss                w\r\n *   1) Indexing makes lookups while processing data more efficient and use less code.\r\n *   2) Prefer [\"a\",\"b\"].join('') above \"a\" + \"b\" its way quicker.\r\n *   3) The indexer has removed parsing abnormals with propername \" visible\" etc.. Makes the code more clean\r\n *   4) Own char-interpreter was more complex than recursive regex-replace.\r\n *\r\n * TODO: load property names in DB which directly correspond, fix defaults while saving.\r\n * TODO: some exotic choices not work correctly\r\n */\r\nfunction RegisterToLMEParser() {\r\n}\r\n\r\nRegisterToLMEParser.prototype.name = 'ffl2'\r\nRegisterToLMEParser.prototype.headername = '.finance ffl'\r\nRegisterToLMEParser.prototype.walk = function(node, depth, visitor) {\r\n\tvisitor(node, depth)\r\n\tconst childs = node[this.childIndex]\r\n\tfor (var i = 0; i < childs.length; i++) {\r\n\t\tthis.walk(childs[i], depth + 1, visitor)\r\n\t}\r\n}\r\nRegisterToLMEParser.prototype.deParse = function(data, workbook) {\r\n\tif (!workbook.indexer) return null\r\n\treturn new RegisterToFFL(workbook.indexer).toGeneratedFFL(undefined, workbook.modelName)\r\n}\r\nRegisterToLMEParser.prototype.parseData = function(data, workbook) {\r\n\tconst indexer = data\r\n\tworkbook.indexer = indexer\r\n\r\n\tconst self = this\r\n\tconst fflRegister = new RegisterToFFL(indexer)\r\n\tconst register = data.getIndex('name')\r\n\tconst rfb = new RegisterFormulaBuilder(indexer)\r\n\tconst modelName = workbook.modelName || indexer.name\r\n\tconst solution = SolutionFacade.createSolution(modelName || 'NEW')\r\n\tconst nameIndex = indexer.schemaIndexes.name\r\n\tconst tupleIndex = indexer.schemaIndexes.tuple\r\n\tconst validIndex = indexer.schemaIndexes.valid\r\n\tconst displayOptionsIndex = indexer.schemaIndexes.display_options\r\n\tconst dataOptionsIndex = indexer.schemaIndexes.data_options\r\n\tconst lengthIndex = indexer.schemaIndexes.length\r\n\tconst patternIndex = indexer.schemaIndexes.pattern\r\n\tconst titleIndex = indexer.schemaIndexes.title\r\n\tconst referstoIndex = indexer.schemaIndexes.refersto\r\n\tconst displayTypeIndex = indexer.schemaIndexes.displaytype\r\n\tconst frequencyIndex = indexer.schemaIndexes.frequency\r\n\tconst versionIndex = indexer.schemaIndexes.version\r\n\tconst dataTypeIndex = indexer.schemaIndexes.datatype\r\n\tconst rangeIndex = indexer.schemaIndexes.range\r\n\tconst ipprotectedIndex = indexer.schemaIndexes.ipprotected\r\n\tconst modifierIndex = indexer.schemaIndexes.modifier\r\n\tconst decimalsIndex = indexer.schemaIndexes.fixed_decimals\r\n\tconst parentNameIndex = indexer.schemaIndexes.parentId\r\n\tconst visibleIndex = indexer.schemaIndexes.visible\r\n\r\n\tthis.childIndex = indexer.schemaIndexes.children\r\n\tconst choiceIndex = indexer.schemaIndexes.choices\r\n\r\n\tthis.formulaIndexes = []\r\n\tconst formulaIndexes = this.formulaIndexes\r\n\tvar formulas = ['valid', 'hint', 'locked', 'visible', 'required', 'choices']\r\n\tfor (var i = 0; i < formulas.length; i++) {\r\n\t\t//test if the formula is in the model at all\r\n\t\tif (data.schemaIndexes[formulas[i]] != null) this.formulaIndexes.push(data.schemaIndexes[formulas[i]])\r\n\t}\r\n\r\n\tconst tuples = []\r\n\t/*  var default_frequency = 'column'\r\n\t if (register.root) {\r\n\t default_frequency = register.root[frequencyIndex] || 'column'\r\n\t }*/\r\n\tconst rootNode = register.root || indexer.i[0]\r\n\tworkbook.model_version = rootNode ? rootNode[versionIndex] : ''\r\n\tthis.walk(rootNode, 3, function(node, depth) {\r\n\t\tif (depth < tuples.length) {\r\n\t\t\ttuples.length = depth\r\n\t\t\twhile (tuples.length > 0 && !tuples[depth - 1]) tuples.length--\r\n\t\t}\r\n\t\tconst nodeName = node[nameIndex]\r\n\t\trfb.inherit(node)\r\n\t\tvar displaytype = node[displayTypeIndex] || 'number'\r\n\r\n\t\tvar datatype = node[dataTypeIndex] || 'number'\r\n\t\tvar frequency = node[frequencyIndex] || 'column'\r\n\t\tvar display_options = node[displayOptionsIndex]\r\n\t\tconst title = node[titleIndex] || '\"' + nodeName + '\"'\r\n\t\tconst data_options = node[dataOptionsIndex]\r\n\t\tconst ipprotected = node[ipprotectedIndex] || false\r\n\t\t//TODO: paragraph when no children.\r\n\t\t//TODO: else column frequency..\r\n\t\t/*\r\n\t\t * Don't forget reference variables\r\n\t\t * Don't forget num(1,2) datatype parsing. (fixed_decimals)\r\n\t\t * Don't forget unscalable number\r\n\t\t * Choice -> \" and \" <- fix\r\n\t\t * merge display options and displaytype.\r\n\t\t */\r\n\t\tif (node[tupleIndex]) {\r\n\t\t\tdisplaytype = 'paragraph'\r\n\t\t}\r\n\t\tif (displaytype == 'paragraph') {\r\n\t\t\tdatatype = 'string'\r\n\t\t\tfrequency = 'none'\r\n\t\t}\r\n\t\t// expecting an parentName..\r\n\t\tvar parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null\r\n\t\t//if (parentId == 'root') parentId = undefined;\r\n\r\n\t\t/**\r\n\t\t * number:2 means: number with 2 fixed decimals\r\n\t\t */\r\n\t\tvar fixed_decimals = node[decimalsIndex]\r\n\t\tvar startdecimalsIndex\r\n\t\tif ((fixed_decimals == null) && (startdecimalsIndex = displaytype.indexOf('(')) > -1) {\r\n\t\t\tfixed_decimals = displaytype.substr(startdecimalsIndex).slice(1, -1)\r\n\t\t\tdisplaytype = displaytype.substr(0, startdecimalsIndex)\r\n\t\t}\r\n\t\t/**\r\n\t\t * This is where formula-sets are combined.\r\n\t\t * if the node has and trend and notrend formula, the target formula will be x.trend ? node.formula_trend : valueFormula\r\n\t\t * Ofcourse this will be for every formulaset that exists in the node\r\n\t\t * Document formulaset is notrend, formula = notrend\r\n\t\t * This way it would also be possible to have and formulaset 'orange', 'document' and trend formulasets\r\n\t\t */\r\n\t\tconst valueFormula = rfb.buildFFLFormula(node, frequency == 'column' && datatype == 'number')\r\n\r\n\t\tif (node[modifierIndex] && node[modifierIndex].indexOf('=') > -1) display_options = 'displayAsSummation'\r\n\r\n\t\t//if column && number.. (aggregate)\r\n\t\t/**\r\n\t\t * optional displaytype =select.\r\n\t\t * Having the choice member is enough\r\n\t\t */\r\n\t\tif (node[choiceIndex] || displaytype == 'select') {\r\n\t\t\tif (displaytype == 'date') {\r\n\t\t\t\t//NO-OP (for now..., the choices are used to format the date-picker.\r\n\t\t\t}\r\n\t\t\telse if (!node[choiceIndex]) {\r\n\t\t\t\tif (log.debug) log.debug('Row [' + nodeName + '] is displaytype [select], but does not have choices')\r\n\t\t\t} else if (node[choiceIndex].split('|').length == 2) {\r\n\t\t\t\tdisplaytype = 'radio'\r\n\t\t\t} else {\r\n\t\t\t\tdisplaytype = 'select'\r\n\t\t\t\tif (log.TRACE) log.trace('[' + nodeName + '] ' + node.choices)\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\t//TODO: quick-fix move into IDE ScorecardTool-addon\r\n\t\tif (nodeName.match(/MAP[0-9,A-z]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {\r\n\t\t\tif (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {\r\n\t\t\t\tnode[fflRegister.visibleIndex] = 'Length(' + nodeName + ')'\r\n\t\t\t\tfrequency = 'none'\r\n\t\t\t\tnode[frequencyIndex] = 'none'\r\n\t\t\t}\r\n\t\t\tdisplaytype = 'string'\r\n\t\t\tnode[displayOptionsIndex] = nodeName.split('_').pop().toLowerCase()\r\n\t\t} else if (nodeName.match(/MAP[0-9,A-z]+_PARAGRAAF[0-9]+$/i)) {\r\n\t\t\tnode[frequencyIndex] = 'none'\r\n\t\t\tfrequency = 'none'\r\n\t\t\tdisplaytype = 'paragraph'\r\n\t\t}\r\n\r\n\t\t//we also check nodeName here. With root { .. there are two root nodes, one wihout name.\r\n\t\tif (!node[validIndex] && nodeName) {\r\n\t\t\t//valid formula's (this will become more complex soon valid(list<predicate,message>) now predicate,message\r\n\t\t\t//info: patternIndex is language-specific (f.e. email- regular expression)\r\n\t\t\tconst validFormulas = []\r\n\t\t\t//pattern is optional\r\n\t\t\tif (patternIndex && node[patternIndex]) validFormulas.push('REGEXPMATCH(' + node[patternIndex] + ',' + nodeName + ')')\r\n\t\t\t//length is optional\r\n\t\t\tif (lengthIndex && node[lengthIndex]) validFormulas.push('Length(' + nodeName + ') ' + node[lengthIndex])\r\n\t\t\t//range is optional\r\n\t\t\tif (rangeIndex && node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, nodeName + ' $1') + ')')\r\n\t\t\tif (datatype == 'number') validFormulas.push('not isNaN(OnNA(' + nodeName + ',null))')\r\n\t\t\t//its also only interesting when its a required field and entered\r\n\t\t\t// or when its entered and required\r\n\t\t\t//' + node[nameIndex] + '.required &&\r\n\t\t\t//valid formulas are only interesting when entered OR required\r\n\t\t\tif (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',\"\",\"Enter valid input.\")'\r\n\t\t}\r\n\r\n\t\tconst uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId, ipprotected)\r\n\r\n\t\t//hierarchical visibility\r\n\t\tconst visibleFormula = node[fflRegister.visibleIndex]\r\n\t\tif (parentId) {\r\n\t\t\tnode[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleIndex][visibleFormula] ? parentId + '.visible' : parentId + '.visible and ' + visibleFormula\r\n\t\t}\r\n\r\n\t\tif (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals)\r\n\t\tif (display_options) uiNode.display_options = display_options\r\n\t\tif (data_options) uiNode.data_options = data_options\r\n\r\n\t\t//should not be needed...\r\n\t\tuiNode.frequency = frequency\r\n\r\n\t\t/**\r\n\t\t * Tuple properties\r\n\t\t */\r\n\t\tif (node[tupleIndex] || tuples.length > 0) {\r\n\t\t\tuiNode.tuple = true\r\n\t\t\tuiNode.nestedTupleDepth = 0\r\n\t\t\tfor (var i = 0; i < tuples.length; i++)\r\n\t\t\t\tif (tuples[i]) uiNode.nestedTupleDepth++\r\n\t\t\tif (node[tupleIndex]) {\r\n\t\t\t\tuiNode.tupleDefinition = true\r\n\t\t\t\tuiNode.datatype = 'string' //Will story string-based values (Jan,Piet,123Jaar,Etc..)\r\n\t\t\t\tif (tuples.length > 0) {\r\n\t\t\t\t\tuiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId\r\n\t\t\t\t\tuiNode.tupleProperty = true\r\n\t\t\t\t}\r\n\t\t\t\ttuples[depth] = uiNode\r\n\t\t\t} else {\r\n\t\t\t\tuiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId\r\n\t\t\t\tuiNode.tupleProperty = true\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tif (node[fflRegister.options_titleIndex] == 'locked') uiNode.title_locked = true\r\n\r\n\t\tuiNode.datatype = datatype\r\n\r\n\t\tSolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency, null, null)\r\n\r\n\t\tfor (var i = 0; i < formulaIndexes.length; i++) {\r\n\t\t\tconst index = formulaIndexes[i]\r\n\t\t\tif (node[index]) {\r\n\t\t\t\tif (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {\r\n\t\t\t\t\tSolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency, null, null)\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t})\r\n\t//think about formula-sets, same ritual as trend + notrend formulasets\r\n\treturn solution\r\n}\r\n\r\nRegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeName, col, type, context) {\r\n\tif (!formula) return type == 'string' ? AST.STRING('') : type == 'number' ? {\r\n\t\t'type': 'Identifier',\r\n\t\t'name': 'NA'\r\n\t} : {\r\n\t\t'type': 'Identifier',\r\n\t\t'name': 'null'\r\n\t}\r\n\tvar finparse = col == 'choices' ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula)\r\n\t//allow multi-language here\r\n\tfinparse = indexer.translateKeys(finparse)\r\n\tvar formulaReturn = 'undefined'\r\n\ttry {\r\n\t\tformulaReturn = esprima.parse(finparse).body[0].expression\r\n\t}\r\n\tcatch (e) {\r\n\t\tif (log.DEBUG) log.debug('unable to parse [' + finparse + '] returning it as String value [' + nodeName + '] : ' + col, e)\r\n\t\tformulaReturn = AST.STRING(finparse)\r\n\t\tif (global.IDE_DEBUGMODUS) context.audittrail.addRow(['MODEL', 'ERROR', nodeName, col, '', '', '', e.toString(), formula, null, finparse])\r\n\t}\r\n\treturn formulaReturn\r\n}\r\n\r\nexports.RegisterToLMEParser = RegisterToLMEParser\r\nSolutionFacade.addParser(RegisterToLMEParser.prototype)",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/RegisterToLMEParser.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 201,
+    "kind": "variable",
+    "name": "SolutionFacade",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~SolutionFacade",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 202,
+    "kind": "variable",
+    "name": "RegisterToFFL",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~RegisterToFFL",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 203,
+    "kind": "variable",
+    "name": "RegisterFormulaBuilder",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~RegisterFormulaBuilder",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 204,
+    "kind": "variable",
+    "name": "FinFormula",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~FinFormula",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 205,
+    "kind": "variable",
+    "name": "AST",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~AST",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 206,
+    "kind": "variable",
+    "name": "log",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~log",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 207,
+    "kind": "variable",
+    "name": "esprima",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~esprima",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 208,
+    "kind": "function",
+    "name": "RegisterToLMEParser",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~RegisterToLMEParser",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": "ffl parsing, supports refers-to, modifiers. internationalization. v1:{@fflparser.js} field-validations\nV2\n Quicker, cleaner, flexible, less data-loss                w\n  1) Indexing makes lookups while processing data more efficient and use less code.\n  2) Prefer [\"a\",\"b\"].join('') above \"a\" + \"b\" its way quicker.\n  3) The indexer has removed parsing abnormals with propername \" visible\" etc.. Makes the code more clean\n  4) Own char-interpreter was more complex than recursive regex-replace.\n\nTODO: load property names in DB which directly correspond, fix defaults while saving.\nTODO: some exotic choices not work correctly",
+    "lineNumber": 21,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 209,
+    "kind": "function",
+    "name": "walk",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~walk",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "visitor",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 210,
+    "kind": "function",
+    "name": "deParse",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~deParse",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "workbook",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 211,
+    "kind": "function",
+    "name": "parseData",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~parseData",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 37,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "workbook",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 212,
+    "kind": "function",
+    "name": "parseFFLFormula",
+    "memberof": "ffl/RegisterToLMEParser.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/RegisterToLMEParser.js~parseFFLFormula",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/RegisterToLMEParser.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 249,
+    "undocument": true,
+    "params": [
+      {
+        "name": "indexer",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "formula",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "nodeName",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "col",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "type",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "context",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 213,
+    "kind": "file",
+    "name": "ffl/ScorecardTool.js",
+    "content": "/**\r\n * find displaytype = scorecard\r\n */\r\nvar FFLToRegister = require('./FFLToRegister').FFLToRegister\r\nvar Register = require('./Register').Register\r\n\r\nfunction ScorecardTool() {\r\n    this.on = false;\r\n}\r\n\r\nvar defaultValue = {\r\n    visible: {\r\n        undefined: true,\r\n        '1.0': true,\r\n        '1': true,\r\n        'true': true,\r\n        'On': true\r\n    },\r\n    locked: {\r\n        '0.0': true,\r\n        '0': true,\r\n        'false': true,\r\n        'Off': true,\r\n        'No': true\r\n    },\r\n    required: {\r\n        undefined: true,\r\n        '0.0': true,\r\n        '0': true,\r\n        'false': true,\r\n        'No': true,\r\n        'Off': true\r\n    }\r\n}\r\nScorecardTool.prototype.parse = function(input) {\r\n    //TODO: move radio-choice / VALIDATION names into here..\r\n    var indexer = new Register();\r\n    var model = new FFLToRegister(indexer, input);\r\n    model.parseProperties();\r\n    this.childIndex = indexer.schemaIndexes.children\r\n    const requiredIndex = indexer.schemaIndexes.required\r\n    const nameIndex = indexer.schemaIndexes.name\r\n    const formulaIndex = indexer.schemaIndexes.formula\r\n    const rIndex = indexer.schemaIndexes.index\r\n    //index and parse everything\r\n    //find scorecard types\r\n    const scorecards = indexer.find('displaytype', 'scorecard');\r\n    const adjustments = []\r\n    for (var i = 0; i < scorecards.length; i++) {\r\n        var completeFilledIn = [];\r\n        const scorecard = scorecards[i];\r\n        const steps = scorecard[indexer.schemaIndexes.children];\r\n        //CONVERT A LOT OF THIS INTO SELECT_DECENDANTS\r\n        for (var j = 0; j < steps.length; j++) {\r\n            const requiredvars = []\r\n            const mapVar = steps[j];\r\n            this.walkDepthFirst(mapVar, function(node, depth) {\r\n                if (!defaultValue.required[node[requiredIndex]]) {\r\n                    requiredvars.push(node)\r\n                }\r\n            }, 0)\r\n            if (requiredvars.length > 0) {\r\n                const validFormula = '[AMMOUNT(' + requiredvars.map(function(variable) {\r\n                    return variable[nameIndex] + '.required and ' + variable[nameIndex] + '.entered'\r\n                }).join(',') + '),AMMOUNT(' + requiredvars.map(function(variable) {\r\n                    return variable[nameIndex] + '.required'\r\n                }).join(',') + ')]';\r\n\r\n                adjustments.push({\r\n                    index: mapVar[nameIndex],\r\n                    property: 'valid',\r\n                    value: validFormula\r\n                })\r\n                completeFilledIn = completeFilledIn.concat(requiredvars)\r\n            }\r\n        }\r\n        if (completeFilledIn.length > 0) {\r\n            const validFormula = 'AMMOUNT(' + completeFilledIn.map(function(variable) {\r\n                return variable[nameIndex] + '.required and ' + variable[nameIndex] + '.entered'\r\n            }).join(',') + ')  = AMMOUNT(' + completeFilledIn.map(function(variable) {\r\n                return variable[nameIndex] + '.required'\r\n            }).join(',') + ')';\r\n\r\n            adjustments.push({\r\n                index: scorecard[nameIndex],\r\n                property: 'formula',\r\n                value: validFormula\r\n            })\r\n        }\r\n    }\r\n    var names = indexer.getIndex('name')\r\n    for (var adjindex = 0; adjindex < adjustments.length; adjindex++) {\r\n        var adjustment = adjustments[adjindex];\r\n        indexer.value(names[adjustment.index][rIndex], adjustment.property, adjustment.value)\r\n    }\r\n    return indexer;\r\n}\r\nScorecardTool.prototype.walkDepthFirst = function(node, visitor, depth) {\r\n    const children = node[this.childIndex]\r\n    for (var i = 0; i < children.length; i++) {\r\n        this.walkDepthFirst(children[i], visitor, depth + 1)\r\n    }\r\n    visitor(node, depth)\r\n}\r\n\r\nexports.ScorecardTool = ScorecardTool;",
+    "static": true,
+    "longname": "C:/Users/mbakk/Documents/fesjs/lme-core/exchange_modules/ffl/ScorecardTool.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 214,
+    "kind": "variable",
+    "name": "FFLToRegister",
+    "memberof": "ffl/ScorecardTool.js",
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~FFLToRegister",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": "find displaytype = scorecard",
+    "lineNumber": 4,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 215,
+    "kind": "variable",
+    "name": "Register",
+    "memberof": "ffl/ScorecardTool.js",
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~Register",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 216,
+    "kind": "function",
+    "name": "ScorecardTool",
+    "memberof": "ffl/ScorecardTool.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~ScorecardTool",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 217,
+    "kind": "variable",
+    "name": "defaultValue",
+    "memberof": "ffl/ScorecardTool.js",
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~defaultValue",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"visible\": *, \"locked\": *, \"required\": *}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 218,
+    "kind": "function",
+    "name": "parse",
+    "memberof": "ffl/ScorecardTool.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~parse",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "params": [
+      {
+        "name": "input",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 219,
+    "kind": "function",
+    "name": "walkDepthFirst",
+    "memberof": "ffl/ScorecardTool.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "ffl/ScorecardTool.js~walkDepthFirst",
+    "access": "public",
+    "export": false,
+    "importPath": "ffl-pack/ffl/ScorecardTool.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 98,
+    "undocument": true,
+    "params": [
+      {
+        "name": "node",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "visitor",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "depth",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "kind": "index",
+    "content": "# ffl-pack Release Notes (7.0.3)\r\n\r\n## Latest Updates\r\n* -- return Register in builder patterns\r\n* [babel classes](https://babeljs.io/) -- Register.js OO\r\n* -- Extract RegisterToJSON from Register.js\r\n## Release Information",
+    "longname": "C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\ffl\\README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"ffl-pack\",\n  \"version\": \"7.0.3\",\n  \"description\": \"core package converting ffl\",\n  \"main\": \"dist/\",\n  \"source\": \"index.js\",\n  \"scripts\": {\n    \"build\": \"babel . --ignore node_modules,dist,tests -d dist/\",\n    \"prepare\": \"npm run test && npm run build\",\n    \"test\": \"node -r babel-register tests\",\n    \"source\": \"sh ./node_modules/.bin/esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"ssh://git@stash.topicus.nl:7999/ff/fesjs.git\"\n  },\n  \"dependencies\": {\n    \"array.equals\": \"^0.1.0\",\n    \"log6\": \"^2.0.7\"\n  },\n  \"author\": \"michael.bakker1986@gmail.com\",\n  \"license\": \"BSD-2-Clause\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-core\": \"^6.26.0\",\n    \"babel-plugin-transform-decorators-legacy\": \"^1.3.4\",\n    \"babel-plugin-transform-runtime\": \"^6.23.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"babel-preset-stage-2\": \"^6.24.1\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\"\n  }\n}\n",
+    "longname": "C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\ffl\\package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

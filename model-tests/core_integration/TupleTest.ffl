@@ -1,0 +1,33 @@
+import FinanMath.*;
+import BaseModel.*;
+
+model TUPLETEST uses BaseModel
+{
+    tuple Tuple
+    {
+     title: "TupleDefinition";
+     hint: "test";
+     datatype: string;
+     frequency: document;
+     tuple NestedTuple
+     {
+      title: "NestedTuple";
+      datatype: string;
+      frequency: document;
+      variable NestedTupleVariable
+      {
+        title: "NestedTupleVariable";
+        formula: 123437;
+        datatype: number;
+        frequency: document;
+      }
+     }
+    }
+    variable RootVariable
+    {
+      title: "RootVariable";
+      formula: 12347;
+      datatype: number;
+      frequency: document;
+    }
+}

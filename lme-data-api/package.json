@@ -12,34 +12,36 @@
     "start": "npm install --no-optional && node lme-data-app.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "browserify": "^16.1.1",
+    "body-parser": "^1.18.3",
+    "browserify": "^16.2.2",
     "child-process-es6-promise": "^1.2.0",
     "child-process-promise": "^2.2.1",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "express-prettify": "0.0.9",
     "express-test": "^0.1.2",
+    "ffl-math": "^1.0.17",
     "flatten-object": "^1.2.0",
+    "formulajs-connect": "^1.0.6",
     "glob": "^7.1.2",
     "http-proxy-middleware": "^0.17.4",
-    "log6": "^1.0.26",
+    "log6": "^2.0.9",
     "morgan": "^1.9.0",
-    "mysql": "^2.15.0",
+    "mysql": "^2.16.0",
     "orm": "^4.0.1",
     "orm-timestamps": "^0.5.2",
     "performance-now": "^2.1.0",
-    "pg": "^7.4.0",
+    "pg": "^7.4.3",
     "promise": "^7.1.1",
     "request-promise-json": "^1.0.4",
-    "swagger-jsdoc": "^1.9.7",
+    "swagger-jsdoc": "^1.10.3",
     "swaggerize-express": "^4.0.5",
     "swaggerize-ui": "^1.0.1",
     "uuid4": "^1.0.0",
     "xhr2": "^0.1.4"
   },
   "devDependencies": {
-    "should": "^13.1.3"
+    "should": "^13.2.3"
   },
   "license": "MIT"
 }

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">dist/ScorecardTool.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">dist/ScorecardTool.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+var FFLToRegister = require(&apos;./FFLToRegister&apos;).FFLToRegister;
+var Register = require(&apos;./Register&apos;).Register;
+
+function ScorecardTool() {
+    this.on = false;
+}
+
+var defaultValue = {
+    visible: {
+        undefined: true,
+        &apos;1.0&apos;: true,
+        &apos;1&apos;: true,
+        &apos;true&apos;: true,
+        &apos;On&apos;: true
+    },
+    locked: {
+        &apos;0.0&apos;: true,
+        &apos;0&apos;: true,
+        &apos;false&apos;: true,
+        &apos;Off&apos;: true,
+        &apos;No&apos;: true
+    },
+    required: {
+        undefined: true,
+        &apos;0.0&apos;: true,
+        &apos;0&apos;: true,
+        &apos;false&apos;: true,
+        &apos;No&apos;: true,
+        &apos;Off&apos;: true
+    }
+};
+ScorecardTool.prototype.parse = function (input) {
+    var _this = this;
+
+    var indexer = new Register();
+    var model = new FFLToRegister(indexer, input);
+    model.parseProperties();
+    this.childIndex = indexer.schemaIndexes.children;
+    var requiredIndex = indexer.schemaIndexes.required;
+    var nameIndex = indexer.schemaIndexes.name;
+    var formulaIndex = indexer.schemaIndexes.formula;
+    var rIndex = indexer.schemaIndexes.index;
+
+    var scorecards = indexer.find(&apos;displaytype&apos;, &apos;scorecard&apos;);
+    var adjustments = [];
+    for (var i = 0; i &lt; scorecards.length; i++) {
+        var completeFilledIn = [];
+        var scorecard = scorecards[i];
+        var steps = scorecard[indexer.schemaIndexes.children];
+
+        var _loop = function _loop() {
+            var requiredvars = [];
+            var mapVar = steps[j];
+            _this.walkDepthFirst(mapVar, function (node, depth) {
+                if (!defaultValue.required[node[requiredIndex]]) {
+                    requiredvars.push(node);
+                }
+            }, 0);
+            if (requiredvars.length &gt; 0) {
+                var _validFormula = &apos;[AMMOUNT(&apos; + requiredvars.map(function (variable) {
+                    return variable[nameIndex] + &apos;.required and &apos; + variable[nameIndex] + &apos;.entered&apos;;
+                }).join(&apos;,&apos;) + &apos;),AMMOUNT(&apos; + requiredvars.map(function (variable) {
+                    return variable[nameIndex] + &apos;.required&apos;;
+                }).join(&apos;,&apos;) + &apos;)]&apos;;
+
+                adjustments.push({
+                    index: mapVar[nameIndex],
+                    property: &apos;valid&apos;,
+                    value: _validFormula
+                });
+                completeFilledIn = completeFilledIn.concat(requiredvars);
+            }
+        };
+
+        for (var j = 0; j &lt; steps.length; j++) {
+            _loop();
+        }
+        if (completeFilledIn.length &gt; 0) {
+            var validFormula = &apos;AMMOUNT(&apos; + completeFilledIn.map(function (variable) {
+                return variable[nameIndex] + &apos;.required and &apos; + variable[nameIndex] + &apos;.entered&apos;;
+            }).join(&apos;,&apos;) + &apos;)  = AMMOUNT(&apos; + completeFilledIn.map(function (variable) {
+                return variable[nameIndex] + &apos;.required&apos;;
+            }).join(&apos;,&apos;) + &apos;)&apos;;
+
+            adjustments.push({
+                index: scorecard[nameIndex],
+                property: &apos;formula&apos;,
+                value: validFormula
+            });
+        }
+    }
+    var names = indexer.getIndex(&apos;name&apos;);
+    for (var adjindex = 0; adjindex &lt; adjustments.length; adjindex++) {
+        var adjustment = adjustments[adjindex];
+        indexer.value(names[adjustment.index][rIndex], adjustment.property, adjustment.value);
+    }
+    return indexer;
+};
+ScorecardTool.prototype.walkDepthFirst = function (node, visitor, depth) {
+    var children = node[this.childIndex];
+    for (var i = 0; i &lt; children.length; i++) {
+        this.walkDepthFirst(children[i], visitor, depth + 1);
+    }
+    visitor(node, depth);
+};
+
+exports.ScorecardTool = ScorecardTool;</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

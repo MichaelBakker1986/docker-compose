@@ -1,68 +1,38 @@
 /*
  * (i)(!) There is no way to clear State, every doImport will contribute to static state
  */
-process.alltest = true;
-const log = require('log6')
-const performceTestStartTime = new Date().getTime();
-const tests = [
-    './MathTest',
-    './xaxisTest',
-    './FormulaSetTest',
-    './fflexportTest',//.FFL Language
-    './screendefinitionTest',//.screen definition
-    './webexportTest',
-    './jsonValuesTest',
-    './APIIntegrationTest',
-    './CaseTest',
-    './RegisterTest',
-    './FinChoiceTest',
-    './SwaggerDefinitionParserTest',
-    './TimeTest',
-    './BasicOperationsTest',
-    './BookYearTest',
-    './ChangeManagerTest',
-    './FormulaWithSelfTest',
-    './SelfReferenceTest',
-    './TupleTests'//should include all Tuple logic tests.
-];
-var testResults = [];
-var failure = [];
-for (var i = 0; i < tests.length; i++) {
+import { debug, error, info } from 'log6'
+import { glob }               from 'glob'
+import path                   from 'path'
 
-    var testName = tests[i];
-    var startTime = new Date().getTime();
-    testResults.push([testName, startTime, 'start']);
-    try {
-        require(testName);
-    }
-    catch (e) {
-        failure.push(e);
-        log.error('Error in file:' + testName, e);
-    }
-    var endTime = new Date().getTime();
+const excluded_tests = new Set([])
+process.alltest = true
+const results = [], failures = [], performanceTestStartTime = new Date().getTime()
 
-    for (var j = 0; j < failure.length; j++) {
-        var obj = failure[j];
-        testResults.push([testName, obj]);
-    }
-    testResults.push([testName, endTime, 'end', (endTime - startTime)]);
-}
-var totalTestTime = (new Date().getTime() - performceTestStartTime);
-testResults.push(['performceTest', 'total', totalTestTime]);
-
-testResults.forEach(function(testResult) {
-    log.debug(testResult)
+const test_files = glob.sync('**/*[T|t]est.js')
+test_files.filter(test => !excluded_tests.has(test)).forEach(testName => {
+	const startTime = new Date().getTime()
+	results.push([testName, startTime, 'start'])
+	try {
+		require(path.join(__dirname, testName))
+	}
+	catch (e) {
+		failures.push(e)
+		error(`Error in file:${testName}\nDoes the file exist?`, e)
+	}
+	const endTime = new Date().getTime()
+	failures.forEach(failure => results.push([testName, failure]))
+	results.push([testName, endTime, 'end', (endTime - startTime)])
 })
-if (totalTestTime > 3500) {
-    log.error('Total time exceeded')
-}
-if (failure.length > 0) {
-    log.error('A test failed' + failure)
-    process.exit(1);
-}
-else {
-    log.info('All test success in ' + totalTestTime + 'ms')
-}
-module.exports = {
-    results: testResults
-}
+const totalTestTime = (new Date().getTime() - performanceTestStartTime)
+results.push(['performanceTest', 'total', totalTestTime])
+
+results.forEach((testResult) => debug(testResult))
+if (totalTestTime > 3500) error('Total time exceeded')
+if (failures.length > 0) {
+	error(`A test failed${failures}`)
+	process.exit(1)
+} else info(`All test success in ${totalTestTime}ms`)
+
+module.exports = { results }
+export { results }

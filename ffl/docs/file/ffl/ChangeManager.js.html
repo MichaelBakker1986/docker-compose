@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">ffl/ChangeManager.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/DeltaCompareRegister.js~DeltaCompareRegister.html">DeltaCompareRegister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/Register.js~Register.html">Register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/RegisterToJSON.js~RegisterToJSON.html">RegisterToJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-FinFormula">FinFormula</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RegisterToFFL">RegisterToFFL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">ffl/ChangeManager.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * Track movement in edited file
+ * Record changes made by editor
+ * Syntactical checking
+ */
+const Formatter = require(&apos;./FFLToRegister&apos;).FFLToRegister
+const RegisterToFFL = require(&apos;./RegisterToFFL&apos;).RegisterToFFL
+
+function ChangeManager(register) {
+	this.register = register
+	this.currentVariable = []
+	this.currentVariableName = null
+	this.error = null
+	this.warnings = []
+	this.changed = true
+	this.lines = []
+}
+
+ChangeManager.prototype.setModelChanged = function() {
+	this.changed = true
+}
+
+/**
+ * Extract:
+ * tuple =+test Implies
+ * tuple -test
+ * variable =test refers to
+ * =test refers to
+ * To: test
+ */
+ChangeManager.prototype.extractName = function(line) {
+	return line.replace(/(?:variable |tuple |function )?\s*(?:\+?-?=?)+(\w+).*/i, &apos;$1&apos;)
+}
+ChangeManager.prototype.isVariableLine = function(line) {
+	return /^(?:variable |tuple |function )?\s*(?:\+?-?=?)+(\w+)\s*(?:Refers to \w+|Implies \w+)?\s*\n\s*{/igm.test(line)
+}
+ChangeManager.prototype.syntaxCheck = function(ffl) {
+	try {
+		this.register.clean()
+		const formatter = new Formatter(this.register, ffl)
+		formatter.parseProperties()
+		this.error = null
+	} catch (err) {
+		this.error = err.toString()
+		console.error(&apos;Error while checking syntax&apos;, err)
+	}
+}
+
+ChangeManager.prototype.validCurrentLine = function(line, nextline) {
+	const trimmed = String(line).replace(/\s+/gmi, &apos; &apos;).trim()
+	const trimmedNextLine = String(nextline).replace(/\s+/gmi, &apos; &apos;).trim()
+	return trimmed.endsWith(&apos;;&apos;) || this.isVariableLine(trimmed + &apos;\n&apos; + trimmedNextLine)
+}
+/**
+ * When cursor is changed in file, adept state. Set active variable
+ */
+ChangeManager.prototype.updateCursor = function(ffl, cursor) {
+	this.warnings.length = 0
+	//will also update the register
+	if (this.changed) {
+		this.syntaxCheck(ffl, cursor)
+		this.lines = ffl.split(&apos;\n&apos;)
+		this.namedIndex = this.register.getIndex(&apos;name&apos;)
+		const idIndex = this.register.getIndex(&apos;i&apos;)
+		const names = this.register.getAll(&apos;name&apos;)
+		const doubles = {}
+		for (let i = 0; i &lt; names.length; i++) {
+			if (doubles[names[i]]) {
+				this.warnings.push({
+					pos    : doubles[names[i]],
+					message: &apos;duplicate variablename&apos; + names[i]
+				})
+				doubles[names[i]].push(i)
+			}
+			doubles[names[i]] = [i]
+		}
+	}
+
+	let currentVariable
+	for (let i = cursor.row; i &gt; 0; i--) {
+		if ((this.lines[i] || &apos;&apos;).match(/(variable |tuple |root|model )/)) {
+			currentVariable = this.extractName(this.lines[i].trim())
+			break
+		}
+	}
+	const changedCurrentVariable = this.currentVariableName !== currentVariable
+	if ((this.changed || changedCurrentVariable) &amp;&amp; currentVariable &amp;&amp; this.namedIndex[currentVariable]) {
+		this.currentVariableName = currentVariable
+		const variable = this.register.createInformationObject(this.currentVariableName, new RegisterToFFL(this.register).hiddenProperties)
+		this.currentVariable = variable
+	}
+	this.changed = false
+}
+exports.ChangeManager = ChangeManager</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

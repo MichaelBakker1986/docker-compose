@@ -1,24 +1,23 @@
 //Convert into JBehave
-var formulaJS = require('formulajs')
-var studieDuurInmaanden = 48
+import { info }       from 'log6'
+import * as formulaJS from 'formulajs'
 
-var EDUCATION_COST = 70.000;
-var Algespaard = 10.000;
+const studieDuurInMaanden = 48
+const EDUCATION_COST = 70.000
+const Algespaard = 10.000
 
+const EducationSideJob = 200//$1
+const MonthlyEducationLoan = 200//$2;
+const EducationAgeChild = 17//$3;
 
-var EducationSideJob = 200;//$1
-var MonthlyEducationLoan = 200;//$2;
-const EducationAgeChild = 17;//$3;
+const revenuesSideJob = (EducationSideJob * studieDuurInMaanden)// = € 2.400,- //4jaar
+const Studielening = (MonthlyEducationLoan * studieDuurInMaanden)
 
-
-var revenuesSideJob = (EducationSideJob * studieDuurInmaanden);// = € 2.400,- //4jaar
-var Studielening = (MonthlyEducationLoan * studieDuurInmaanden);
-
-var Spaardoel = 70.000 - (revenuesSideJob + Studielening);
-var Aantalmaandentesparen = (EducationAgeChild - 0) * 12;
-var RentePercentagePerJaar = 2.75;
+const Spaardoel = 70.000 - (revenuesSideJob + Studielening)
+const Aantalmaandentesparen = (EducationAgeChild - 0) * 12
+const RentePercentagePerJaar = 2.75
 //Met de rente van 2,75% betekent dit dat je ~ € 247,36 per maand moet inleggen.
-const rentePerMaand = RentePercentagePerJaar / 1200;// 0.00229166666666667;
-const referentieMaandPunt = 1;
+const rentePerMaand = RentePercentagePerJaar / 1200// 0.00229166666666667;
+const referentieMaandPunt = 1
 
-var ENG = formulaJS.PPMT(rentePerMaand, referentieMaandPunt, Aantalmaandentesparen, 0, Spaardoel)
+info(formulaJS.PPMT(rentePerMaand, referentieMaandPunt, Aantalmaandentesparen, 0, Spaardoel))

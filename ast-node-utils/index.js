@@ -1,1 +1,4 @@
-exports.ast = require('./AST')
+import AST from './AST'
+
+exports.ast = AST
+export { AST }

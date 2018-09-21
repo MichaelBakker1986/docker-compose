@@ -1,45 +1,46 @@
-const fs = require('fs');
-const path = require('path')
-module.exports = class {
+import fs       from 'fs'
+import path     from 'path'
+import { sync } from 'glob'
 
-    constructor(basePath, patterns, extension) {
-        this.paths = {}
-        this.patterns = patterns || ['*', '*/FFL/*', '*/*/FFL/*', '*/*/*/FFL/*', '*/*/*/*/FFL/*']
-        this.basePath = basePath || __dirname + '/CODELISTS/'
-        this.extension = extension || '.ffl'
-    }
+export default class {
 
-    multiple(patterns) {
-        for (var i = 0; i < patterns.length; i++) {
-            var files = require('glob').sync(this.basePath + patterns[i], {});
-            for (var j = 0; j < files.length; j++) {
-                this.filesRead(files[j]);
-            }
-        }
-    }
+	constructor(basePath, patterns, extension) {
+		this.paths = new Set()
+		this.patterns = patterns || ['*', '*/FFL/*', '*/*/FFL/*', '*/*/*/FFL/*', '*/*/*/*/FFL/*']
+		this.basePath = basePath || `${__dirname}/CODELISTS/`
+		this.extension = extension || '.ffl'
+	}
 
-    filesRead(file) {
-        if (file.toLowerCase().endsWith(this.extension))
-            this.paths[file] = true;
-    }
+	multiple(patterns) {
+		patterns.forEach(pattern => {
+			const files = sync(this.basePath + pattern, {})
+			for (let j = 0; j < files.length; j++) {
+				this.filesRead(files[j])
+			}
+		})
+	}
 
-    walk(visit, dontOpenFile) {
-        const promises = []
-        this.multiple(this.patterns)
-        for (var pathName in this.paths) {
-            if (dontOpenFile) {
-                promises.push(visit(path.resolve(pathName), null))
-            } else {
-                this.readFile(path.resolve(pathName), visit)
-            }
-        }
-        return Promise.all(promises)
-    }
+	filesRead(file) {
+		if (file.toLowerCase().endsWith(this.extension))
+			this.paths.add(file)
+	}
 
-    //needs separate method
-    readFile(path, visit) {
-        fs.readFile(path, { encoding: 'utf8' }, function(err, data) {
-            visit(path, data)
-        })
-    }
+	walk(visit, do_not_open_file) {
+		const promises = []
+		this.multiple(this.patterns)
+
+		this.paths.forEach(pathName => {
+			if (do_not_open_file) {
+				promises.push(visit(path.resolve(pathName), null))
+			} else {
+				this.readFile(path.resolve(pathName), visit)
+			}
+		})
+		return Promise.all(promises)
+	}
+
+	//needs separate method
+	readFile(path, visit) {
+		fs.readFile(path, { encoding: 'utf8' }, (err, data) => visit(path, data))
+	}
 }

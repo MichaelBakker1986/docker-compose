@@ -1,167 +1,168 @@
 /**
  * We might actually need the fin->ffl/lme parser since the main fin language is .fin
  */
-var ValueFacade = require('../../src/ValueFacade');
-var SolutionFacade = require('../../src/SolutionFacade');
-var PropertiesAssembler = require('../../src/PropertiesAssembler');
-const AST = require('../../../ast-node-utils/index').ast
-var lineparser = require('./FinToJSON.js');
-var finformula = require('../ffl/FinFormula.js');
-var Solution = require('../../src/Solution.js');
-var assert = require('assert');
-var Stack = require('stack-adt');
-var esprima = require('esprima')
-var logger = require('log6');
+import ValueFacade         from '../../src/ValueFacade'
+import SolutionFacade      from '../../src/SolutionFacade'
+import PropertiesAssembler from '../../src/PropertiesAssembler'
+
+import { ast as AST } from 'ast-node-utils'
+import lineparser     from './FinToJSON.js'
+import finformula     from '../../../ffl/FinFormula.js'
+import assert         from 'assert'
+import Stack          from 'stack-adt'
+import esprima        from 'esprima'
+import logger         from 'log6'
+
 //FIN->JavaScript
 var parser = {
-    name   : 'fin',
-    parse  : function(data) {
-        //should return a parseResult
-        //.with a .valid
-        var solution;
-        var parseResult = lineparser.parse(data);
-        if (!parseResult.valid) {
-            solution = PropertiesAssembler.create();
-        }
-        else {
-            solution = PropertiesAssembler.create(parseResult.solutionName);
+	name   : 'fin',
+	parse  : function(data) {
+		//should return a parseResult
+		//.with a .valid
+		var solution
+		var parseResult = lineparser.parse(data)
+		if (!parseResult.valid) {
+			solution = PropertiesAssembler.create()
+		}
+		else {
+			solution = PropertiesAssembler.create(parseResult.solutionName)
 
-            //at some lines we need to remember some state, f.e. if it were Trend formula or Visible formula
-            var finVariables = parseResult.orderedByType.variables;
+			//at some lines we need to remember some state, f.e. if it were Trend formula or Visible formula
+			var finVariables = parseResult.orderedByType.variables
 
-            createVariableTree(finVariables, solution);
-            //add all Formula Groups, Choices, Trend, NoTrend, Hint, Title
-            createFormulaGroupsSafe(solution, parseResult.orderedByType.formulas);
-        }
-        return solution;
-    },
-    deParse: function(rowId) {
-        var finExport = PropertiesAssembler.create()
-        var exportString = "";
-        //= finExport.getName() + "\n\n";
-        //exportString += ".Variables\n.Variables\n";
-        var formulasString = {};
-        if (rowId) {
-            var startuielem;// = PropertiesAssembler.getOrCreateProperty(rowId, 'value')
-        }
+			createVariableTree(finVariables, solution)
+			//add all Formula Groups, Choices, Trend, NoTrend, Hint, Title
+			createFormulaGroupsSafe(solution, parseResult.orderedByType.formulas)
+		}
+		return solution
+	},
+	deParse: function(rowId) {
+		var finExport = PropertiesAssembler.create()
+		var exportString = ''
+		//= finExport.getName() + "\n\n";
+		//exportString += ".Variables\n.Variables\n";
+		var formulasString = {}
+		if (rowId) {
+			var startuielem// = PropertiesAssembler.getOrCreateProperty(rowId, 'value')
+		}
 
-        PropertiesAssembler.visit(startuielem, function(node, depth) {
-            var formulaProperties = finExport.gatherFormulaProperties(ValueFacade.getFormula, ValueFacade.properties, node.rowId);
-            // exportString += createFinVariableRow(node, formulaProperties['title'] || '');
-            for (var key in formulaProperties) {
-                if (formulasString[key] === undefined) {
-                    formulasString[key] = "";
-                }
-                if (formulaProperties[key] !== 'undefined') {
-                    formulasString[key] = formulasString[key] + createFinFormulaRow(key, node, formulaProperties[key]);
-                }
-            }
-        });
+		PropertiesAssembler.visit(startuielem, function(node, depth) {
+			var formulaProperties = finExport.gatherFormulaProperties(ValueFacade.getFormula, ValueFacade.properties, node.rowId)
+			// exportString += createFinVariableRow(node, formulaProperties['title'] || '');
+			for (var key in formulaProperties) {
+				if (formulasString[key] === undefined) {
+					formulasString[key] = ''
+				}
+				if (formulaProperties[key] !== 'undefined') {
+					formulasString[key] = formulasString[key] + createFinFormulaRow(key, node, formulaProperties[key])
+				}
+			}
+		})
 
-        for (var key in formulasString) {
-            if (key !== 'title') {
-                exportString += "\n.Formulas " + key + "\n" + formulasString[key];
-            }
-        }
-        return exportString;
-        //+ '\n.Quit';
-    }
-};
+		for (var key in formulasString) {
+			if (key !== 'title') {
+				exportString += '\n.Formulas ' + key + '\n' + formulasString[key]
+			}
+		}
+		return exportString
+		//+ '\n.Quit';
+	}
+}
 
 function createVariableTree(variables, solution) {
-    if (variables.length == 0) {
-        //nothing to do
-        return;
-    }
-    var cache = {};
-    var stack = new Stack();
+	if (variables.length == 0) {
+		//nothing to do
+		return
+	}
+	var cache = {}
+	var stack = new Stack()
 
-    var rootVariable = variables[0];
-    var root = rootVariable;
-    stack.push(root);
-    addNode(solution, rootVariable, undefined)
-    //this algorithm required to know the last added variable for a parent.
-    cache[stack.peek().name] = rootVariable;
-    var delta = 0;
-    var count = 0;
+	var rootVariable = variables[0]
+	var root = rootVariable
+	stack.push(root)
+	addNode(solution, rootVariable, undefined)
+	//this algorithm required to know the last added variable for a parent.
+	cache[stack.peek().name] = rootVariable
+	var delta = 0
+	var count = 0
 
-    //FIN contains duplicate variables, we have to do something fun with it later on
-    var allreadyAddedVariables = {};
-    for (var i = 1; i < variables.length; i++) {
-        var variable = variables[i];
-        if (allreadyAddedVariables[variable.name]) {
-            variable.name = variable.name + count++;
-        }
-        allreadyAddedVariables[variable.name] = true;
-        delta = variable._depth - (stack.size() - 1);
-        if (delta > 0) {
-            assert.equal(delta, 1);
-            stack.push(cache[stack.peek().name])
-        }
-        while (delta < 0) {
-            stack.pop()
-            delta++
-        }
-        cache[stack.peek().name] = variable;
-        addNode(solution, variable, stack.peek())
-    }
+	//FIN contains duplicate variables, we have to do something fun with it later on
+	var allreadyAddedVariables = {}
+	for (var i = 1; i < variables.length; i++) {
+		var variable = variables[i]
+		if (allreadyAddedVariables[variable.name]) {
+			variable.name = variable.name + count++
+		}
+		allreadyAddedVariables[variable.name] = true
+		delta = variable._depth - (stack.size() - 1)
+		if (delta > 0) {
+			assert.equal(delta, 1)
+			stack.push(cache[stack.peek().name])
+		}
+		while (delta < 0) {
+			stack.pop()
+			delta++
+		}
+		cache[stack.peek().name] = variable
+		addNode(solution, variable, stack.peek())
+	}
 }
 
 function createFormulaGroupsSafe(solution, formulas) {
-    for (var i = 0; i < formulas.length; i++) {
-        createFormulaSafe(solution, formulas[i]);
-    }
+	for (var i = 0; i < formulas.length; i++) {
+		createFormulaSafe(solution, formulas[i])
+	}
 }
 
 function createFormulaSafe(solution, formula) {
-    var code = formula.formula;
-    var ast;
-    //we open a try-catch literally everything could be in there that could make no sense at all, model builder mistake etc..
-    if (ASTCache[code]) {
-        ast = ASTCache[code]();
-    }
-    else {
+	var code = formula.formula
+	var ast
+	//we open a try-catch literally everything could be in there that could make no sense at all, model builder mistake etc..
+	if (ASTCache[code]) {
+		ast = ASTCache[code]()
+	}
+	else {
 
-        try {
-            //so this can fail easy, impossible to fix, external managed etc.
-            ast = esprima.parse(code).body[0].expression;
-        }
-        catch (e) {
-            logger.log('cannot parse: ' + JSON.stringify(formula));
-            //just add the formula as String value.. maybe it makes sence ..
-            ast = AST.STRING(code);
-        }
-    }
-    //var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
-    if (formula._delegate) {
-        throw Error('refactored')
-        //solution.setDelegate(uiNode, formula._delegate);
-        //solution.setParentName(uiNode, formula.parentName);
-    }
+		try {
+			//so this can fail easy, impossible to fix, external managed etc.
+			ast = esprima.parse(code).body[0].expression
+		}
+		catch (e) {
+			logger.log('cannot parse: ' + JSON.stringify(formula))
+			//just add the formula as String value.. maybe it makes sence ..
+			ast = AST.STRING(code)
+		}
+	}
+	//var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
+	if (formula._delegate) {
+		throw Error('refactored')
+		//solution.setDelegate(uiNode, formula._delegate);
+		//solution.setParentName(uiNode, formula.parentName);
+	}
 }
 
 function createFinVariableRow(variable, title) {
-    var str = title;
-    var pad = "                                                                                    ";
-    var and = str + pad.substring(0, pad.length - str.length);
+	var str = title
+	var pad = '                                                                                    '
+	var and = str + pad.substring(0, pad.length - str.length)
 
-    return "PPP      X     " + variable._depth + "          " + and.substring(0, 81) + "\\" + variable.rowId + "\n";
+	return 'PPP      X     ' + variable._depth + '          ' + and.substring(0, 81) + '\\' + variable.rowId + '\n'
 }
 
 function createFinFormulaRow(key, variable, formula) {
-    var str = variable.rowId;
-    var pad = "                                      ";
-    var and = str + pad.substring(0, pad.length - str.length);
-    var deparsed = finformula.javaScriptToFinGeneric(formula);
-    var formattedFormula;
-    try {
-        formattedFormula = excelFormulaUtilities.formatFormula(deparsed, {});
-    }
-    catch (e) {
-        logger.log('Unable to prettyfy:' + e);
-        formattedFormula = deparsed;
-    }
-    return and + " = " + formattedFormula + "\n";
+	var str = variable.rowId
+	var pad = '                                      '
+	var and = str + pad.substring(0, pad.length - str.length)
+	var deparsed = finformula.javaScriptToFinGeneric(formula)
+	var formattedFormula
+	try {
+		formattedFormula = excelFormulaUtilities.formatFormula(deparsed, {})
+	}
+	catch (e) {
+		logger.log('Unable to prettyfy:' + e)
+		formattedFormula = deparsed
+	}
+	return and + ' = ' + formattedFormula + '\n'
 }
 
 /*space: no special presentation format.
@@ -174,26 +175,26 @@ function createFinFormulaRow(key, variable, formula) {
  'M': Memo = memoscreen. Memos per period are possible.
  */
 var displayAsMapping = {
-    C        : 'select',
-    T        : 'select',
-    " "      : 'StringAnswerType',
-    undefined: 'TextAnswerType',
-    G        : 'AmountAnswerType',
-    I        : 'StringAnswerType',
-    //date: 'DateAnswerType',//requires a converter to work
-    //Causing infinite digest cycles, soemthing with Date types with functions returning either 1 or Undefined.
-    D        : 'StringAnswerType',
-    //D: 'DateAnswerType',
-    '%'      : 'PercentageAnswerType',
-    M        : 'MemoAnswerType'
+	C        : 'select',
+	T        : 'select',
+	' '      : 'StringAnswerType',
+	undefined: 'TextAnswerType',
+	G        : 'AmountAnswerType',
+	I        : 'StringAnswerType',
+	//date: 'DateAnswerType',//requires a converter to work
+	//Causing infinite digest cycles, soemthing with Date types with functions returning either 1 or Undefined.
+	D        : 'StringAnswerType',
+	//D: 'DateAnswerType',
+	'%'      : 'PercentageAnswerType',
+	M        : 'MemoAnswerType'
 }
 var ASTCache = {
-    "undefined": AST.UNDEFINED,
-    "On"       : AST.TRUE,
-    "No"       : AST.FALSE,
-    "Off"      : AST.FALSE,
-    "True"     : AST.TRUE,
-    "False"    : AST.FALSE
+	'undefined': AST.UNDEFINED,
+	'On'       : AST.TRUE,
+	'No'       : AST.FALSE,
+	'Off'      : AST.FALSE,
+	'True'     : AST.TRUE,
+	'False'    : AST.FALSE
 }
 /*
  Column 21: Input required
@@ -221,50 +222,50 @@ var ASTCache = {
  'N': data is hidden, but underlying level can be reached. It is a node.
  */
 var protection = {
-    ' ': false,
-    'I': false,
-    'P': true,
+	' ': false,
+	'I': false,
+	'P': true
 }
 
 function addNode(solution, node, parentId) {
-    var rowId = node.name;
-    if (rowId === 'root') {
-        return
-    }
+	var rowId = node.name
+	if (rowId === 'root') {
+		return
+	}
 
-    throw Error('refactored')
-    // if (solution.hasNode(rowId)) {
-    //     logger.info('Dupe..')
-    // }
-    var parentName;
-    if (parentId !== undefined && parentId !== null) {
-        parentName = parentId.name;
-    }
+	throw Error('refactored')
+	// if (solution.hasNode(rowId)) {
+	//     logger.info('Dupe..')
+	// }
+	var parentName
+	if (parentId !== undefined && parentId !== null) {
+		parentName = parentId.name
+	}
 
-    createFormulaSafe(solution, {
-        _delegate : node,
-        parentName: parentName,
-        displaytype : displayAsMapping[node.displaytype],
-        name      : rowId,
-        property  : 'value',
-        formula   : 'undefined'
-    });
-    createFormulaSafe(solution, { name: rowId, property: 'title', formula: node.title });
+	createFormulaSafe(solution, {
+		_delegate  : node,
+		parentName : parentName,
+		displaytype: displayAsMapping[node.displaytype],
+		name       : rowId,
+		property   : 'value',
+		formula    : 'undefined'
+	})
+	createFormulaSafe(solution, { name: rowId, property: 'title', formula: node.title })
 
-    //locked and visibility
-    if (node.protection === 'I') {
-        //SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
-    }
-    else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N') {
-        //    SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
-    }
-    if (node.required === '+' || node.required === 'R') {
-        // SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
-    }
+	//locked and visibility
+	if (node.protection === 'I') {
+		//SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
+	}
+	else if (node.protection === 'X' || node.protection === ' ' || node.protection === 'N') {
+		//    SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
+	}
+	if (node.required === '+' || node.required === 'R') {
+		// SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
+	}
 
-    if (node.hint.trim().length > 0) {
-        //   SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
-    }
+	if (node.hint.trim().length > 0) {
+		//   SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
+	}
 }
 
-SolutionFacade.addParser(parser);
+SolutionFacade.addParser(parser)

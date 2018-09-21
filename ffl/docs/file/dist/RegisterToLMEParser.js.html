@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">dist/RegisterToLMEParser.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">dist/RegisterToLMEParser.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+var SolutionFacade = require(&apos;../../src/SolutionFacade&apos;);
+var RegisterToFFL = require(&apos;./RegisterToFFL&apos;).RegisterToFFL;
+var RegisterFormulaBuilder = require(&apos;./RegisterFormulaBuilder&apos;);
+var FinFormula = require(&apos;./FinFormula&apos;);
+var AST = require(&apos;../../../ast-node-utils/index&apos;).ast;
+var log = require(&apos;log6&apos;);
+var esprima = require(&apos;esprima&apos;);
+
+function RegisterToLMEParser() {}
+
+RegisterToLMEParser.prototype.name = &apos;ffl2&apos;;
+RegisterToLMEParser.prototype.headername = &apos;.finance ffl&apos;;
+RegisterToLMEParser.prototype.walk = function (node, depth, visitor) {
+	visitor(node, depth);
+	var childs = node[this.childIndex];
+	for (var i = 0; i &lt; childs.length; i++) {
+		this.walk(childs[i], depth + 1, visitor);
+	}
+};
+RegisterToLMEParser.prototype.deParse = function (data, workbook) {
+	if (!workbook.indexer) return null;
+	return new RegisterToFFL(workbook.indexer).toGeneratedFFL(undefined, workbook.modelName);
+};
+RegisterToLMEParser.prototype.parseData = function (data, workbook) {
+	var indexer = data;
+	workbook.indexer = indexer;
+
+	var self = this;
+	var fflRegister = new RegisterToFFL(indexer);
+	var register = data.getIndex(&apos;name&apos;);
+	var rfb = new RegisterFormulaBuilder(indexer);
+	var modelName = workbook.modelName || indexer.name;
+	var solution = SolutionFacade.createSolution(modelName || &apos;NEW&apos;);
+	var nameIndex = indexer.schemaIndexes.name;
+	var tupleIndex = indexer.schemaIndexes.tuple;
+	var validIndex = indexer.schemaIndexes.valid;
+	var displayOptionsIndex = indexer.schemaIndexes.display_options;
+	var dataOptionsIndex = indexer.schemaIndexes.data_options;
+	var lengthIndex = indexer.schemaIndexes.length;
+	var patternIndex = indexer.schemaIndexes.pattern;
+	var titleIndex = indexer.schemaIndexes.title;
+	var referstoIndex = indexer.schemaIndexes.refersto;
+	var displayTypeIndex = indexer.schemaIndexes.displaytype;
+	var frequencyIndex = indexer.schemaIndexes.frequency;
+	var versionIndex = indexer.schemaIndexes.version;
+	var dataTypeIndex = indexer.schemaIndexes.datatype;
+	var rangeIndex = indexer.schemaIndexes.range;
+	var ipprotectedIndex = indexer.schemaIndexes.ipprotected;
+	var modifierIndex = indexer.schemaIndexes.modifier;
+	var decimalsIndex = indexer.schemaIndexes.fixed_decimals;
+	var parentNameIndex = indexer.schemaIndexes.parentId;
+	var visibleIndex = indexer.schemaIndexes.visible;
+
+	this.childIndex = indexer.schemaIndexes.children;
+	var choiceIndex = indexer.schemaIndexes.choices;
+
+	this.formulaIndexes = [];
+	var formulaIndexes = this.formulaIndexes;
+	var formulas = [&apos;valid&apos;, &apos;hint&apos;, &apos;locked&apos;, &apos;visible&apos;, &apos;required&apos;, &apos;choices&apos;];
+	for (var i = 0; i &lt; formulas.length; i++) {
+		if (data.schemaIndexes[formulas[i]] != null) this.formulaIndexes.push(data.schemaIndexes[formulas[i]]);
+	}
+
+	var tuples = [];
+
+	var rootNode = register.root || indexer.i[0];
+	workbook.model_version = rootNode ? rootNode[versionIndex] : &apos;&apos;;
+	this.walk(rootNode, 3, function (node, depth) {
+		if (depth &lt; tuples.length) {
+			tuples.length = depth;
+			while (tuples.length &gt; 0 &amp;&amp; !tuples[depth - 1]) {
+				tuples.length--;
+			}
+		}
+		var nodeName = node[nameIndex];
+		rfb.inherit(node);
+		var displaytype = node[displayTypeIndex] || &apos;number&apos;;
+
+		var datatype = node[dataTypeIndex] || &apos;number&apos;;
+		var frequency = node[frequencyIndex] || &apos;column&apos;;
+		var display_options = node[displayOptionsIndex];
+		var title = node[titleIndex] || &apos;&quot;&apos; + nodeName + &apos;&quot;&apos;;
+		var data_options = node[dataOptionsIndex];
+		var ipprotected = node[ipprotectedIndex] || false;
+
+		if (node[tupleIndex]) {
+			displaytype = &apos;paragraph&apos;;
+		}
+		if (displaytype == &apos;paragraph&apos;) {
+			datatype = &apos;string&apos;;
+			frequency = &apos;none&apos;;
+		}
+
+		var parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null;
+
+		var fixed_decimals = node[decimalsIndex];
+		var startdecimalsIndex;
+		if (fixed_decimals == null &amp;&amp; (startdecimalsIndex = displaytype.indexOf(&apos;(&apos;)) &gt; -1) {
+			fixed_decimals = displaytype.substr(startdecimalsIndex).slice(1, -1);
+			displaytype = displaytype.substr(0, startdecimalsIndex);
+		}
+
+		var valueFormula = rfb.buildFFLFormula(node, frequency == &apos;column&apos; &amp;&amp; datatype == &apos;number&apos;);
+
+		if (node[modifierIndex] &amp;&amp; node[modifierIndex].indexOf(&apos;=&apos;) &gt; -1) display_options = &apos;displayAsSummation&apos;;
+
+		if (node[choiceIndex] || displaytype == &apos;select&apos;) {
+			if (displaytype == &apos;date&apos;) {} else if (!node[choiceIndex]) {
+				if (log.debug) log.debug(&apos;Row [&apos; + nodeName + &apos;] is displaytype [select], but does not have choices&apos;);
+			} else if (node[choiceIndex].split(&apos;|&apos;).length == 2) {
+				displaytype = &apos;radio&apos;;
+			} else {
+				displaytype = &apos;select&apos;;
+				if (log.TRACE) log.trace(&apos;[&apos; + nodeName + &apos;] &apos; + node.choices);
+			}
+		}
+
+		if (nodeName.match(/MAP[0-9,A-z]+_(VALIDATION|INFO|HINT|WARNING)$/i)) {
+			if (fflRegister.defaultValues[fflRegister.visibleIndex][node[fflRegister.visibleIndex]]) {
+				node[fflRegister.visibleIndex] = &apos;Length(&apos; + nodeName + &apos;)&apos;;
+				frequency = &apos;none&apos;;
+				node[frequencyIndex] = &apos;none&apos;;
+			}
+			displaytype = &apos;string&apos;;
+			node[displayOptionsIndex] = nodeName.split(&apos;_&apos;).pop().toLowerCase();
+		} else if (nodeName.match(/MAP[0-9,A-z]+_PARAGRAAF[0-9]+$/i)) {
+			node[frequencyIndex] = &apos;none&apos;;
+			frequency = &apos;none&apos;;
+			displaytype = &apos;paragraph&apos;;
+		}
+
+		if (!node[validIndex] &amp;&amp; nodeName) {
+			var validFormulas = [];
+
+			if (patternIndex &amp;&amp; node[patternIndex]) validFormulas.push(&apos;REGEXPMATCH(&apos; + node[patternIndex] + &apos;,&apos; + nodeName + &apos;)&apos;);
+
+			if (lengthIndex &amp;&amp; node[lengthIndex]) validFormulas.push(&apos;Length(&apos; + nodeName + &apos;) &apos; + node[lengthIndex]);
+
+			if (rangeIndex &amp;&amp; node[rangeIndex]) validFormulas.push(&apos;(&apos; + node[rangeIndex].replace(/(&gt;|&gt;=|&lt;|&lt;=)/gi, nodeName + &apos; $1&apos;) + &apos;)&apos;);
+			if (datatype == &apos;number&apos;) validFormulas.push(&apos;not isNaN(OnNA(&apos; + nodeName + &apos;,null))&apos;);
+
+			if (validFormulas.length &gt; 0) node[validIndex] = &apos;If(&apos; + validFormulas.join(&apos; And &apos;) + &apos;,&quot;&quot;,&quot;Enter valid input.&quot;)&apos;;
+		}
+
+		var uiNode = SolutionFacade.createUIFormulaLink(solution, nodeName, &apos;value&apos;, self.parseFFLFormula(indexer, valueFormula, nodeName, &apos;value&apos;, datatype, workbook.context), displaytype, frequency, null, parentId, ipprotected);
+
+		var visibleFormula = node[fflRegister.visibleIndex];
+		if (parentId) {
+			node[fflRegister.visibleIndex] = fflRegister.defaultValues[visibleIndex][visibleFormula] ? parentId + &apos;.visible&apos; : parentId + &apos;.visible and &apos; + visibleFormula;
+		}
+
+		if (fixed_decimals) uiNode.decimals = parseInt(fixed_decimals);
+		if (display_options) uiNode.display_options = display_options;
+		if (data_options) uiNode.data_options = data_options;
+
+		uiNode.frequency = frequency;
+
+		if (node[tupleIndex] || tuples.length &gt; 0) {
+			uiNode.tuple = true;
+			uiNode.nestedTupleDepth = 0;
+			for (var i = 0; i &lt; tuples.length; i++) {
+				if (tuples[i]) uiNode.nestedTupleDepth++;
+			}if (node[tupleIndex]) {
+				uiNode.tupleDefinition = true;
+				uiNode.datatype = &apos;string&apos;;
+				if (tuples.length &gt; 0) {
+					uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
+					uiNode.tupleProperty = true;
+				}
+				tuples[depth] = uiNode;
+			} else {
+				uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
+				uiNode.tupleProperty = true;
+			}
+		}
+
+		if (node[fflRegister.options_titleIndex] == &apos;locked&apos;) uiNode.title_locked = true;
+
+		uiNode.datatype = datatype;
+
+		SolutionFacade.createUIFormulaLink(solution, nodeName, &apos;title&apos;, self.parseFFLFormula(indexer, title, nodeName, &apos;title&apos;, null, workbook.context), undefined, frequency, null, null);
+
+		for (var i = 0; i &lt; formulaIndexes.length; i++) {
+			var index = formulaIndexes[i];
+			if (node[index]) {
+				if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {
+					SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency, null, null);
+				}
+			}
+		}
+	});
+
+	return solution;
+};
+
+RegisterToLMEParser.prototype.parseFFLFormula = function (indexer, formula, nodeName, col, type, context) {
+	if (!formula) return type == &apos;string&apos; ? AST.STRING(&apos;&apos;) : type == &apos;number&apos; ? {
+		&apos;type&apos;: &apos;Identifier&apos;,
+		&apos;name&apos;: &apos;NA&apos;
+	} : {
+		&apos;type&apos;: &apos;Identifier&apos;,
+		&apos;name&apos;: &apos;null&apos;
+	};
+	var finparse = col == &apos;choices&apos; ? FinFormula.finChoice(formula) : FinFormula.parseFormula(formula);
+
+	finparse = indexer.translateKeys(finparse);
+	var formulaReturn = &apos;undefined&apos;;
+	try {
+		formulaReturn = esprima.parse(finparse).body[0].expression;
+	} catch (e) {
+		if (log.DEBUG) log.debug(&apos;unable to parse [&apos; + finparse + &apos;] returning it as String value [&apos; + nodeName + &apos;] : &apos; + col, e);
+		formulaReturn = AST.STRING(finparse);
+		if (global.IDE_DEBUGMODUS) context.audittrail.addRow([&apos;MODEL&apos;, &apos;ERROR&apos;, nodeName, col, &apos;&apos;, &apos;&apos;, &apos;&apos;, e.toString(), formula, null, finparse]);
+	}
+	return formulaReturn;
+};
+
+exports.RegisterToLMEParser = RegisterToLMEParser;
+SolutionFacade.addParser(RegisterToLMEParser.prototype);</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

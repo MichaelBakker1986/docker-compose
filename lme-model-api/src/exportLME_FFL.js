@@ -1,56 +1,56 @@
 /**
- * Convert Model into front-end distrobution
+ * Convert Model into front-end distribution
  * node exportLME_FFL {modelName}
  */
-const browser  = require('browserify'),
-      fs       = require('fs'),
-      babelify = require('babelify')
-const name = process.argv[2];
-const fileType = '.ffl';
-const lmeAPI = require('./lme')
-const log = require('log6')
-const SolutionFacade = require('../../lme-core/src/SolutionFacade')
-const Context = require('../../lme-core/src/Context')
-require('../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator')
-const LMEFacade = require('../../lme-core').LMEFacade;
-const ExcelLookup = require('../../excel-connect/excel-connect');
-LMEFacade.addFunctions(ExcelLookup)
-//quick-fix resolve XSLX name
-var xlsxname = name.substring(0, 5) == "_tmp_" ? name.split('_')[name.split('_').length - 1] : name
-ExcelLookup.loadExcelFile(xlsxname).then(function(matrix) {
-    SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
-    if (name.indexOf('SCORECARDTESTMODEL') > -1) {
-        const interval = 'detl';
-        const timeModel = require('../../lme-core/resources/CustomImport.json')
-        LME = new lmeAPI(timeModel, new Context({ modelName: name }), interval);
-    } else {
-        LME = new lmeAPI(null, new Context({ modelName: name }), null)
-    }
-    let rawData = fs.readFileSync(__dirname + '/../../git-connect/resources/' + name + fileType, 'utf8');
-    LME.importFFL(rawData);
-    var lmeExport = LME.exportLME();
-    let options = {
-        insertGlobals   : true,
-        insertGlobalVars: {
-            JSON_MODEL: (file, dir) => {
-                return (file.endsWith('lmeAPIWrapper.js')) ? lmeExport : 'undefined';
-            }
-        },
-        gzip            : true,
-        minify          : true,
-        insertGlobals   : true,
-        debug           : false
-    };
-    let b = browser(options)
-        .ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*');
-    b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js');
-    b.add(__dirname + '/lmeAPIWrapper.js');
+import { Context, LMEFacade, SolutionFacade,DETAIL_INTERVAL } from '../../lme-core/'
+import ExcelLookup                            from '../../excel-connect/excel-connect'
+import babelify                               from 'babelify'
+import fs                                     from 'fs'
+import browser                                from 'browserify'
+import timeModel                              from '../../lme-core/resources/CustomImport.json'
+import { error }                              from 'log6'
+import LmeAPI                                 from './lme'
+import '../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator'
 
-    b.transform(babelify, { presets: ["env"] })
-    b.transform(require('browserify-fastjson'));
-    var res = fs.createWriteStream(__dirname + '/../../git-connect/resources/' + name + '.js')
-    b.bundle().pipe(res);
+const modelName = process.argv[2]
+const fileType = '.ffl'
+LMEFacade.addFunctions(ExcelLookup)
+
+//quick-fix resolve XSLX modelName
+if (!'_tmp_'.startsWith('_tmp_')) throw Error('error')
+const xlsx_name = modelName.startsWith('_tmp_') ? modelName.split('_')[modelName.split('_').length - 1] : modelName
+
+ExcelLookup.loadExcelFile(xlsx_name).then((matrix) => {
+	SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
+	if (modelName.includes('SCORECARDTESTMODEL')) {
+		global.LME = new LmeAPI(timeModel, new Context({ modelName }), DETAIL_INTERVAL)
+	} else {
+		global.LME = new LmeAPI(null, new Context({ modelName }), null)
+	}
+	let rawData = fs.readFileSync(`${__dirname}/../../git-connect/resources/${modelName}${fileType}`, 'utf8')
+	LME.importFFL(rawData)
+	const lmeExport = LME.exportLME()
+	const options = {
+		insertGlobals   : true,
+		insertGlobalVars: {
+			JSON_MODEL: (file, dir) => {
+				return (file.endsWith('lmeAPIWrapper.js')) ? lmeExport : 'undefined'
+			}
+		},
+		gzip            : true,
+		minify          : true,
+		debug           : false
+	}
+	let b = browser(options)
+	.ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*')
+	b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js')
+	b.add(__dirname + '/lmeAPIWrapper.js')
+
+	b.transform(babelify, { presets: ['env'] })
+	b.transform(require('browserify-fastjson'))
+	const res = fs.createWriteStream(`${__dirname}/../../git-connect/resources/${modelName}.js`)
+	b.bundle().pipe(res)
 }).catch((err) => {
-    log.error(err)
-    process.exit(1);
+	error(err)
+	process.exit(1)
 })

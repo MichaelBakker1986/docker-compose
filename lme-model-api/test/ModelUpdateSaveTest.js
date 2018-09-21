@@ -1,3 +1,5 @@
+import public from '../public/json/KSP_canvas.json'
+
 var request = require('request')
 var counter = 1000;
 var modelAPI = require('../src/lme')
@@ -26,7 +28,7 @@ class IntegrationTest {
             followRedirect: true,
             maxRedirects: 10
         }, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 log.log('sucess!');
             } else {
                 log.log('error' + response);

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">ffl/DebugManager.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/DeltaCompareRegister.js~DeltaCompareRegister.html">DeltaCompareRegister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/Register.js~Register.html">Register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/RegisterToJSON.js~RegisterToJSON.html">RegisterToJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-FinFormula">FinFormula</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RegisterToFFL">RegisterToFFL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">ffl/DebugManager.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * features breakpoints from FFL file, let them be replayed
+ */
+
+const SolutionFacade = require(&apos;../../src/SolutionFacade&apos;)
+const WorkBook = require(&apos;../../src/JSWorkBook&apos;)
+const Context = require(&apos;../../src/Context&apos;)
+const log = require(&apos;log6&apos;)
+
+function DebugManager(register, audittrail) {
+	this.stack = []
+	this.audittrail = audittrail
+	this.register = register
+	this.steps = []
+	this.active = false
+	this.stepIndex = 0
+	this.vars = {}
+}
+
+DebugManager.prototype.splitName = function(name) {
+	const split = name.split(&apos;_&apos;)
+	return { row: split.slice(1, -1).join(&apos;_&apos;), col: split[split.length - 1] }
+}
+
+DebugManager.prototype.addStep = function(name) {
+	this.active = true
+	this.steps.push(this.splitName(name))
+}
+DebugManager.prototype.initVariables = function(fflModel) {
+	const lines = fflModel.split(&apos;\n&apos;)
+	for (var i = 0; i &lt; lines.length; i++) {
+		var line = lines[i]
+		const trim = line.trim()
+		if (trim.indexOf(&apos;variable&apos;) &gt;= 0) {
+			var name = trim.substring(9).trim().split(&apos; &apos;)[0]
+			this.vars[name] = i
+		}
+	}
+}
+
+DebugManager.prototype.fixForReferenceError = function(variableName, wb, error, e, formula_id) {
+	const self = this
+	return function() {
+		try {
+			log.info(variableName + &apos; : &apos; + &apos;Fix for [&apos; + variableName + &apos;] in solution: &apos; + wb.getSolutionName() + &apos; : &apos; + error)
+			//So we fix the ReferenceError
+			wb.createFormula(&apos;1&apos;, variableName, &apos;value&apos;, false, &apos;document&apos;)
+			//re-init the formula
+			SolutionFacade.initFormulaBootstrap([formula_id], true, wb.context.ma, wb.context.audittrail)
+			const formula = SolutionFacade.fetchFormulaByIndex(formula_id)
+			//All dependencies should be updated
+			for (var i = 0; i &lt; formula.formulaDependencys.length; i++) {
+				var dependency = formula.formulaDependencys[i]
+				if (log.DEBUG) log.info(dependency)
+			}
+		} catch (err) {
+			log.error(&apos;Fatal error in variable [&apos; + variableName + &apos;]&apos;, err)
+		}
+	}
+}
+DebugManager.prototype.validateImportedSolution = function(modelName) {
+	//var feedback = model.lme.fixProblemsInImportedSolution();
+	//  const audittrail = model.lme.context.audittrail;
+	const start = this.audittrail.i.length
+	const names = this.register.getNames()
+	const context = new Context()
+	const wb = new WorkBook(context, null, null, { modelName: modelName })
+	wb.updateValues()
+	const validateResponse = {
+		succes: [],
+		error : []
+	}
+
+	for (var name in names) {
+		try {
+			//iterate all formula-sets to test 100% Trend,NoTrend
+			for (var property in context.propertyDefaults) {
+				wb.get(name, property, 0, wb.resolveY(0))
+				validateResponse.succes.push(name)
+			}
+		} catch (err) {
+			log.error(&apos;Error while trying:&apos; + name + &apos;.&apos; + property + &apos; in model &apos; + modelName, err)
+		}
+	}
+	const errors = this.audittrail.distinctArr(this.audittrail.find(&apos;level&apos;, &apos;ERROR&apos;, start), [&apos;name&apos;, &apos;property&apos;])
+	if (errors.length &gt; 0) {
+		log.info(&apos;Trying to fix : \n&apos; + this.audittrail.printArr(errors, [6, 30, 10, 10, 10, 10, 40, 140, 8]).join(&apos;\n&apos;))
+	}
+	for (var i = 0; i &lt; errors.length; i++) {
+		const error = errors[i]
+		const message = error[this.audittrail.schemaIndexes.message]
+		const error_type = error[this.audittrail.schemaIndexes.message].split(&apos;:&apos;)[0]
+		const formula_id = error[this.audittrail.schemaIndexes.refId]
+		var fix = {}
+		if (error_type === &apos;ReferenceError&apos;) {
+			const referenceName = message.split(&apos; &apos;)[1]
+			fix = {
+				canFix      : true,
+				variableName: referenceName,
+				fixMessage  : &apos;Add&apos;,
+				fix         : this.fixForReferenceError(referenceName, wb, error, error, formula_id)
+			}
+		}
+		fix.formulaName = name
+		fix.reason = message
+		validateResponse.error.push(fix)
+	}
+	//if (!feedback.valid) succes = false
+	validateResponse.valid = validateResponse.error.length === 0
+	return validateResponse
+}
+/**
+ * Try to do: Monte-Carlos simulation
+ * https://nl.wikipedia.org/wiki/Monte-Carlosimulatie
+ * if it is possible to fix missing functions
+ * TRY fix infinite loops in the solution, breaking down chains.
+ */
+DebugManager.prototype.monteCarlo = function(modelName) {
+	var attempt = 0
+	const debugmanager = this
+	var feedback = this.validateImportedSolution(modelName)
+	//four time retry, so one formula, can have a max of 4 errors.
+	while (!feedback.valid &amp;&amp; attempt &lt; 4) {
+		feedback.error.forEach(function(item) {
+			if (item.canFix) item.fix()
+		})
+		feedback = debugmanager.validateImportedSolution(modelName)
+		attempt++
+	}
+	return feedback
+}
+DebugManager.prototype.nextStep = function() {
+	this.stepIndex++
+	if (this.steps.length &lt;= this.stepIndex) {
+		this.active = false
+	}
+}
+exports.DebugManager = DebugManager</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

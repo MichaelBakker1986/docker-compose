@@ -163,10 +163,6 @@
     "args": "vs",
     "body": "EJS.AVERAGE(vs)"
   },
-  "VALUES": {
-    "args": "variable,f,hIndex,from,to",
-    "body": "{ if (to.t < from.t) { to = from; } var values = []; var temp = to; while (temp.t >= from.t && temp.t != 0) { var value = variable.getValue(hIndex, f, temp); if (value != undefined && !isNaN(value)) { values[values.length] = value; } temp = temp.prev; } return values;}"
-  },
   "Case": {
     "args": "number,variable,vars,hIndex,T",
     "body": "{ if (number == undefined || isNaN(number)) { return undefined; } var choice = variable.evalchoices[parseInt(number)]; if (choice == undefined) { return undefined; } return choice(variable, vars, hIndex, T);}"

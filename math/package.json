@@ -1,23 +1,28 @@
 {
-  "name": "math",
-  "version": "1.0.4",
-  "private": true,
-  "description": "finan math",
-  "main": "ff-math.js",
+  "name": "ffl-math",
+  "version": "1.0.17",
+  "description": "FFL MathJs",
   "dependencies": {
     "algebra.js": "^0.2.6",
     "exponential-moving-average": "^1.0.0",
     "jStat": "^1.7.1",
     "js-solver": "0.0.2",
-    "log6": "^1.0.26",
+    "log6": "^2.0.10",
     "regression": "^2.0.1"
   },
+  "source": "ffl-math.js",
+  "main": "./ffl-math.js",
   "scripts": {
+    "build": "babel . --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "math"
+    "ffl-math"
   ],
   "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://log6-example.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-inline-json-import": "^0.2.1"
+  }
 }

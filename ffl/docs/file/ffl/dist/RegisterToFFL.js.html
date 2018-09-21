@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">ffl/dist/RegisterToFFL.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/DeltaCompareRegister.js~DeltaCompareRegister.html">DeltaCompareRegister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/Register.js~Register.html">Register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/RegisterToJSON.js~RegisterToJSON.html">RegisterToJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RegisterToFFL">RegisterToFFL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">ffl/dist/RegisterToFFL.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+Object.defineProperty(exports, &quot;__esModule&quot;, {
+	value: true
+});
+exports.RegisterToFFL = undefined;
+
+var _toConsumableArray2 = require(&apos;babel-runtime/helpers/toConsumableArray&apos;);
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
+function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : { default: obj }; }
+
+function RegisterToFFL(register) {
+	this.schema = register.schema;
+	this.constants = register.constants;
+	register.createIndex(&apos;name&apos;);
+
+	this.vars = register.getIndex(&apos;name&apos;);
+	this.child = {};
+	this.nameIndex = register.schemaIndexes.name;
+	this.descIndex = register.schemaIndexes.desc;
+	this.startIndex = register.schemaIndexes.start;
+	this.endIndex = register.schemaIndexes.end;
+	this.tree_index = register.schemaIndexes.tree_index;
+	this.parentNameIndex = register.schemaIndexes.parentId;
+	this.stringIndex = register.schemaIndexes.index;
+	this.modifierIndex = register.schemaIndexes.modifier;
+	this.referstoIndex = register.schemaIndexes.refersto;
+	this.tupleIndex = register.schemaIndexes.tuple;
+	this.displaytypeIndex = register.schemaIndexes.displaytype;
+	this.visibleIndex = register.schemaIndexes.visible;
+	this.decimalsIndex = register.schemaIndexes.fixed_decimals;
+	this.datatypeIndex = register.schemaIndexes.datatype;
+	this.frequencyIndex = register.schemaIndexes.frequency;
+	this.options_titleIndex = register.schemaIndexes.options_title;
+	this.formulaindex = register.schemaIndexes.formula;
+	this.lockedIndex = register.schemaIndexes.locked;
+	this.requiredIndex = register.schemaIndexes.required;
+	this.childIndex = register.schemaIndexes.children;
+	this.schema_indexes = register.schemaIndexes;
+	this.output = &apos;&apos;;
+	this.delimiter = &apos;;&apos;;
+	this.line_delimiter = &apos;\n&apos;;
+
+	this.variableProperties = [this.nameIndex, this.modifierIndex, this.referstoIndex, this.tupleIndex];
+	this.hiddenProperties = [this.startIndex, this.endIndex, this.tree_index, this.stringIndex, this.schema.indexOf(&apos;version&apos;), this.schema.indexOf(&apos;type&apos;), this.schema.indexOf(&apos;parent_name&apos;), this.parentNameIndex, this.childIndex, this.descIndex];
+	this.indents = [];
+	var depth = 30;
+	for (var i = 0; i &lt; depth; i++) {
+		this.indents[i] = new Array(i).join(&apos; &apos;);
+	}this.relevant = [];
+	for (var _i = 0; _i &lt; this.schema.length; _i++) {
+		if (this.hiddenProperties.indexOf(_i) === -1 &amp;&amp; this.variableProperties.indexOf(_i) === -1) {
+			this.relevant.push(_i);
+		}
+	}
+
+	var shiftindent = [];
+	for (var _i2 = 0; _i2 &lt; depth; _i2++) {
+		shiftindent[_i2] = [];
+		for (var j = 0; j &lt;= _i2; j++) {
+			var item = [];
+			for (var k = 0; k &lt;= j; k++) {
+				item.push(new Array(_i2 - k).join(&apos; &apos;));
+				item.push(&apos;}\n&apos;);
+			}
+			shiftindent[_i2][j] = item.join(&apos;&apos;);
+		}
+	}
+
+	this.shiftindent = shiftindent;
+	var formulas = [&apos;valid&apos;, &apos;title&apos;, &apos;hint&apos;, &apos;locked&apos;, &apos;visible&apos;, &apos;required&apos;, &apos;choices&apos;];
+	this.formulaIndexes = formulas.map(function (formula) {
+		return register.schemaIndexes[formula];
+	});
+	this.defaultValues = [];
+	this.defaultValues[this.visibleIndex] = {
+		undefined: true,
+		null: true,
+		&apos;1.0&apos;: true,
+		&apos;1&apos;: true,
+		&apos;true&apos;: true,
+		&apos;On&apos;: true
+	};
+	this.defaultValues[this.lockedIndex] = {
+		undefined: true,
+		null: true,
+		&apos;0.0&apos;: true,
+		&apos;0&apos;: true,
+		&apos;false&apos;: true,
+		&apos;Off&apos;: true,
+		&apos;No&apos;: true
+	};
+	this.defaultValues[this.requiredIndex] = this.defaultValues[this.lockedIndex];
+}
+
+RegisterToFFL.prototype.toGeneratedCommaSeperated = function () {
+	var rooNodeName = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : &apos;root&apos;;
+	var delimiter = this.delimiter,
+	    hiddenProperties = this.hiddenProperties,
+	    indents = this.indents,
+	    vars = this.vars;
+
+	var lines = [];
+	this.walk(vars[rooNodeName], 0, function (variable, depth) {
+		return lines.push([indents[depth], variable.filter(function (value, index) {
+			return hiddenProperties.indexOf(index) === -1;
+		})].join(delimiter));
+	});
+	this.output = lines.join(this.line_delimiter);
+	return this.output;
+};
+RegisterToFFL.prototype.toCSV = function (_ref) {
+	var _ref$rootVariableName = _ref.rootVariableName,
+	    rootVariableName = _ref$rootVariableName === undefined ? &apos;root&apos; : _ref$rootVariableName;
+	var delimiter = this.delimiter,
+	    hiddenProperties = this.hiddenProperties,
+	    vars = this.vars,
+	    schema = this.schema;
+
+	return [schema.filter(function (value, index) {
+		return hiddenProperties.indexOf(index) === -1;
+	}).join(delimiter)].concat((0, _toConsumableArray3.default)(this.walk(vars[rootVariableName], 0, function (variable) {
+		return variable.filter(function (value, index) {
+			return hiddenProperties.indexOf(index) === -1;
+		}).join(delimiter);
+	})));
+};
+RegisterToFFL.prototype.walk = function (node, depth, visitor) {
+	var initial = arguments.length &gt; 3 &amp;&amp; arguments[3] !== undefined ? arguments[3] : [];
+
+	initial.push(visitor(node, depth));
+	var c = node[this.childIndex];
+	for (var i = 0; i &lt; c.length; i++) {
+		this.walk(c[i], depth + 1, visitor, initial);
+	}return initial;
+};
+RegisterToFFL.prototype.validate = function (line) {
+	return this.schema.length - this.hiddenProperties.length === (line.match(/;/g) || []).length + 1;
+};
+
+RegisterToFFL.prototype.toGeneratedFFL = function (_ref2) {
+	var _ref2$rootVariableNam = _ref2.rootVariableName,
+	    rootVariableName = _ref2$rootVariableNam === undefined ? &apos;root&apos; : _ref2$rootVariableNam,
+	    _ref2$noChildren = _ref2.noChildren,
+	    noChildren = _ref2$noChildren === undefined ? false : _ref2$noChildren,
+	    _ref2$auto_join = _ref2.auto_join,
+	    auto_join = _ref2$auto_join === undefined ? false : _ref2$auto_join;
+
+	var formattedFFL = [];
+	var traverse = !noChildren;
+	var modifierIndex = this.modifierIndex,
+	    nameIndex = this.nameIndex,
+	    indents = this.indents,
+	    constants = this.constants,
+	    relevant = this.relevant,
+	    schema = this.schema,
+	    shiftindent = this.shiftindent,
+	    tupleIndex = this.tupleIndex;
+	var _schema_indexes = this.schema_indexes,
+	    type = _schema_indexes.type,
+	    _schema_indexes$title = _schema_indexes.title,
+	    title = _schema_indexes$title === undefined ? nameIndex : _schema_indexes$title,
+	    refersto = _schema_indexes.refersto;
+
+	var tuple = &apos;tuple &apos;,
+	    variable = &apos;variable &apos;,
+	    model = &apos;model &apos;,
+	    ref_postfix = &apos; refers to &apos;;
+
+	var curr_depth = 0;
+	var rootNode = this.vars[rootVariableName];
+	var visitor = function visitor(node, depth) {
+		var items = [];
+		var model_node = node[type] === &apos;m&apos;;
+		if (curr_depth &gt;= depth) items.push(shiftindent[curr_depth][curr_depth - depth]);
+		items.push(indents[depth]);
+		items.push(node[tupleIndex] ? tuple : model_node ? model : variable);
+		items.push(node[modifierIndex] || &apos;&apos;);
+		items.push(model_node ? node[title] + &apos; uses BaseModel&apos; : node[nameIndex]);
+		if (refersto !== -1 &amp;&amp; node[refersto]) items.push(ref_postfix, node[refersto]);
+		items.push(&apos;\n&apos;, indents[depth]);
+
+		var props = [];
+		for (var i = 0; i &lt; relevant.length; i++) {
+			var real = relevant[i];
+			if (node[real]) props.push([indents[depth + 1], schema[real], &apos;: &apos;, node[real], &apos;;&apos;].join(&apos;&apos;));
+		}
+		if (props.length &gt; 0) items.push(&apos;{\n&apos;, props.join(&apos;\n&apos;));else items.push(&apos;{&apos;);
+		curr_depth = depth;
+		formattedFFL.push(items.join(&apos;&apos;));
+	};
+	if (traverse) this.walk(rootNode, 1, visitor);else visitor(rootNode, 1);
+
+	formattedFFL.push(shiftindent[curr_depth][curr_depth - 1]);
+	if (!rootVariableName) formattedFFL.shift();
+	var translated = formattedFFL.map(function (ffl) {
+		return ffl.replace(/__(\d+)/gm, function ($1) {
+			return constants[parseInt($1.substring(2))];
+		});
+	});
+	return auto_join ? translated.join(&apos;\n&apos;) : translated;
+};
+exports.RegisterToFFL = RegisterToFFL;</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

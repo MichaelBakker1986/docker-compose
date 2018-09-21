@@ -1,0 +1,796 @@
+* [33m8edfc1d881cf431e1514b460d7f6518e032d7f10[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Model update [HACKATHON] by 1683958891676092@127.0.0.1
+* [33mcb924926f2832d02444fdfa53627cfa85b9158fb[m Authorization.js bugfix
+* [33m4063ae61fd6ea6b341a329179b6c595a03604e9a[m Authorization.js - added HACKATHON
+* [33mb82a2bee719ab5f030a24144715707726dcb69e6[m Model update [REALESTATE] by 1683958891676092@127.0.0.1
+* [33mfbb109fa8a5971ce2c1f44cf5180f33f169174e4[m Model update [REALESTATE] by 1683958891676092@127.0.0.1
+* [33ma8fe049a1937d230d6aac18cba1a94038cc9bcd2[m test
+*   [33m06773971f72c8a0b36a7768e369387d08cda4b5a[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m  
+[32m|[m * [33md127a70d94a6d7c99cd5b4d79c1e64b6e848933a[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[32m|[m * [33mf958a9e97584f1d2bd0707cd25e8df6845e7ed6d[m Model update [REALESTATE] by 1565119990220779@127.0.0.1
+[32m|[m * [33m96030faaefe5a50e1c90ac6260c8d2110e644bce[m Model update [REALESTATE] by 1565119990220779@127.0.0.1
+[32m|[m * [33m3262d63e3f9491452131e1a82684ce7ffdcd4b0c[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[32m|[m * [33m515cc46b2ccb2d0c76679c14cd42cacc38562366[m Model update [REALESTATE] by 2023094311299941@127.0.0.1
+[32m|[m *   [33md3926b6c705d2b267e1c38a2e7bc561823985165[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m [34m|[m[35m\[m  
+[32m|[m [34m|[m * [33m2659979d1efc40daf1ce5c84f684c37b4ecff9a9[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[32m|[m [34m|[m * [33md3544e5223d7a5728db3d1f31711f7ab15a1dc08[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[32m|[m [34m|[m * [33m489430fba0c3665437df52f27dd89217987dc215[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[32m|[m [34m|[m * [33m9c8fb12f0e06e5bc48fe22b3f61002112bd3ae6d[m Model update [SCORECARDTESTMODEL] by 1683958891676092@127.0.0.1
+[32m|[m [34m|[m * [33m1dc2356509f264895508056019067c1c36eaedd6[m Update author
+[32m|[m [34m|[m * [33m016b0f339faf7e51a670c4ca3c9abafe4c466208[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[32m|[m [34m|[m * [33mfc4e1643e430e609c8a396daef9971536d8c6e97[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[32m|[m [34m|[m * [33mee22eb785c97672c76a0b7cff807f36679ef79ff[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[32m|[m * [35m|[m [33m266ae8fdd340aa38321370dc6e95636912372251[m Extract Hipchat component and the localstore
+[32m|[m [35m|[m[35m/[m  
+[32m|[m *   [33ma4dab5814e68bd27ffc6724568475ef6fbaba3a1[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m [36m|[m[1;31m\[m  
+[32m|[m * [1;31m|[m [33mb0157f713025df6fad3aa37103a5411013623408[m expose testcase
+* [1;31m|[m [1;31m|[m [33m3931229494089d0641f7bbb63dbf08073ea74065[m test
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33mb842aa04f2118c683a21255686e4be26906dc012[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+* [1;31m|[m [33mdfd27de3066cc4e04665cce48c4c8fb23d15068e[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+* [1;31m|[m [33m609d58a9e47bd55fe0b50e3ec51cf261d54d9cf6[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+[1;31m|[m[1;31m/[m  
+* [33m908ff678e7f58778ce340cb4aaa98a7b6c605664[m Switch docker-image to -alpine introduce excel_converter add regression in math
+* [33m7d5654c90e6ea2eedb77552b55f1518d95879ac7[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+* [33meb8518c862009bc87afc416f4cd4ed65a9cf46c7[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+* [33m3ccf66292a1fd3c27822bb355c4a382cc45cbb56[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+* [33m837153da2a43448841a1e34287338f1223ecab05[m Model update [VASTGOED] by 1694508597275660@127.0.0.1
+*   [33m5bb869d9a4cbb273264afe173df28fc5114cf1c6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m4a3e54e35f70e69f5ee9340994a236b949dcb5f6[m Model update [SCORECARDTESTMODEL] by 1683958891676092@127.0.0.1
+* [1;33m|[m   [33me254c02a15fa9872d98decf9b742dc2d4f2b5e69[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m[1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m * [33me57a7d289f6b4230ceb0e61f730e7be471e0b9c0[m header
+[1;34m|[m * [33m620ddb99f48d3f6d30a65ef07194960fefe2745a[m rename V05FromDBTest to V05FromDB
+* [1;35m|[m [33meddd7d1ec87897531c49476523d6cd0be28ac9b4[m test
+[1;35m|[m[1;35m/[m  
+* [33meee01a835007e957ba337088be141a9ffff44fdd[m Fix scaling in IDE.js Clean up
+* [33mea523a51725af57e1e7a40886fda78a81b34a918[m clean up
+*   [33m748e3b9438d59f3faa063865f0d287098beab453[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m120a98c10b3c4fe7b246f052c374064d8575de75[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[1;36m|[m * [33m35a13b5192b67dd9f69ce1775d48a4373eadd27f[m Model update [VASTGOED] by 1683958891676092@127.0.0.1
+* [31m|[m [33me5d0e5da6442c9b0dfd50c4e68fa6fe52054c69a[m allow babel to transpile ecma6 to5. upgrade exceljs 0.6 to 1.0, allow excel export to FFL introduce initial ExcelToFFlConverter, allowing Sheet "Presentation" to be converted in a flat - variable list ("beta") Add babelify transforms on modules.
+[31m|[m[31m/[m  
+* [33m38a3db34f12bd2e58d96510dae78bb085ca6a678[m Add column selecor
+* [33m569de4f009e9bb88cc461da2b8d32d6f71616d52[m Model update [VASTGOED] by 1683958891676092@127.0.0.1
+* [33m9449d56d24770fc5904ca7e6cc575beee8bc5e67[m Revert "test"
+*   [33m27d3156bbace6ee81ad26953c7e6f71b3444c7ec[m test
+[32m|[m[33m\[m  
+[32m|[m * [33mb7096d0c83682646778b97eea737fd3da44b6b43[m Model update [VASTGOED] by 1683958891676092@127.0.0.1
+* [33m|[m [33m1dca3a18ee17fdcab077af273b79b752965668b2[m clean up vastgeod
+* [33m|[m [33mbda44138c12d4ff97e020ca26a2b3496b12eb38d[m temp fix show 10level depth
+[33m|[m[33m/[m  
+*   [33m9658807918e64b20db72be0c98113fdc0e429770[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m2d1b38b9213ecbbe9b483af2ba6651cb32704c99[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33m1c3ac557de57c4a843d80b801a4af338ef96146f[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33m5951f6503cd999af0b8de414c5a745633eaeaee4[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33me6d52ec1216ab9727ebe2a38804c4b8271fd18f5[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33mdecd09ecf2de35080d23c5f1fc27840776bcaee5[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33m198b42d788d2fd1c14eab9c1813a8c3a03c054c1[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[34m|[m * [33mc39792af5ecb872974ff0d19a78be34e43beaaa1[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[34m|[m * [33ma6a354845a049a3675a80f5c38a8b4c5f7bff13a[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[34m|[m * [33m66027198a6d22d4c8112284e31e0156ecb24fa66[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[34m|[m * [33mffbcc6f17d82f8e0b1dc605462484eb5321b5319[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[34m|[m * [33mb452ef3ef0f4e3e068a3269022f33fb9716eee2c[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+[34m|[m * [33m12281919c82b00d1767c9234abd7f5055c4c82d8[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [35m|[m [33m69dfd5c45aa65826dfcfb1dca51e2c2976351b51[m Add authorization for Deborah and Ronald to VastgoedModel
+* [35m|[m [33m1f44a1af81f7ddc7d8f4fa6d5e429d6d1ccc713e[m Add VASTGOED model
+[35m|[m[35m/[m  
+* [33mc4067c4095781688b1f46dd7faeb69fa15d52e0e[m Story update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m153dbb56e02fbf0c43d408e412c9ad37f05604c1[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+* [33m492594a361520e9157b17097de60ef4b1653586d[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+* [33maf1ba033a32a0676070b5362fa42a81e976abb15[m Model update [FyndooCreditRating] by 115734455923712@127.0.0.1
+* [33m78f1c89abfd49f386de1f85b94bd50e04ac00ec1[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m086b0e6a87be167698594a8911cdc4bde9264b60[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33mbcbd4320258ea4e80a316037ceff71a03567b573[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m03fc3e4523e9e106df0794eb7ccc882ea5a79117[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33mf303407783b85e5996711587e64fde20478f2c68[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m4433523a0c7026655dcd8cdf8f107a32e4625c96[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m14dde35a4068f822e68cab92256087c72d9843aa[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33ma4dfa9ae39ad2d92ebf1fda5b5f5c5b26e70fd23[m Model update [FyndooCreditRating] by 121550868672018@127.0.0.1
+* [33m43a03dde2cc60800f8d994b82fe805dc2550ce3e[m Model update [FyndooCreditRating] by 121550868672018@127.0.0.1
+*   [33m76be089f07092aff43c92bc74a55686d9592af0c[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[36m|[m[1;31m\[m  
+[36m|[m * [33m3957a66f68ec8c1a3a68a954d6e34509e20aa1db[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [1;31m|[m [33m55d81684981246840bbb130c71777a2fe7350e2a[m Expose FyndooCreditRating.js Clean up FCR.ffl
+[1;31m|[m[1;31m/[m  
+* [33mc0a88e32fd76754329e1bdf489f13a75cc3555b0[m Fix Hover in IDE -1 char
+*   [33m74434d1a33cbfe122d7741c1e68e1bd276a779b4[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33me318e75a48ba64ed730d1abad8170140a7117c1f[m Model update [FyndooCreditRating] by 121550868672018@127.0.0.1
+* [1;33m|[m [33mb4c596b8a5362a1404173fb6af2e6b9b75299980[m Use [bkyear] instead of GetValue(a,T,1)
+[1;33m|[m[1;33m/[m  
+*   [33m7095d3dece44285048cfec21b199a71b21f4550e[m Update FFL
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m2de3432c211e7deb140be9a9d2daea8caa2307f8[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;34m|[m * [33ma490f351d3aa1890207aa973db7e9dc6f26845bc[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;34m|[m * [33m3d0d040ea5162f097d094a036325fe012f09f555[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;34m|[m * [33m88ab21170222d5f8532e00662f6207f743f38595[m Story update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;34m|[m * [33mde758c29ed31dc01e6f371868163ca762269fa05[m Story update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [1;35m|[m [33m24872c893922983278b45270c5912e8016c55d6c[m Add firstchild and Variables on LME scope Update creditrating story Extract FFL->FormulaBuilder (reuse in IDE hover) Switch dependencies and references
+[1;35m|[m[1;35m/[m  
+* [33m520dfa0be9ecf71780842047c9c4ff6449aeda66[m add jbehave row: Given Context for year 2018, defaults to currentyear
+* [33m26340ff73ecfe7fbd4c09f33d25bbb8125ce25df[m redirect to current model @ preview restapi
+*   [33mc6b563eb2ec690618ed42500034f1b84b147d69d[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m8f63dbdac85dcbafe792d1601af06d7f1dd79050[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;36m|[m * [33mf3d9afc69ec1b79992af75ec35ef5ba0332cc07f[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+[1;36m|[m * [33m4738017e9f74f315bbcfe1a1fdfe8acf640a2d68[m Model update [FyndooCreditRating] by 1893680553997744@127.0.0.1
+[1;36m|[m * [33mbf9febb3d157878582a67a86f1f853a5ece954db[m Story update [FyndooCreditRating] by 1893680553997744@127.0.0.1
+* [31m|[m [33ma692ae501da94792f768050ab71174660f1e4c94[m Add IP-protected formula's Move Math.Exp implementation to core. change callee from Exp to Math.exp Add unit-test concerning Exp function Open data-docs/ instead of data-api-docs Add tests concerning IP-Protected formula's
+[31m|[m[31m/[m  
+*   [33md4645daa13e356d2287840d18dea698b1b16a1cc[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m  
+[32m|[m * [33m3ea817e2cb247c4bc8a1bdda63f90deb3f3c9943[m Story update [FyndooCreditRating] by 1893680553997744@127.0.0.1
+[32m|[m * [33m9e94051490537e03615ef900d864d49fcaccecd7[m Model update [FyndooCreditRating] by 1893680553997744@127.0.0.1
+[32m|[m * [33m087a6b870f5ee7083dab6f147070d983d0816a07[m Model update [FyndooCreditRating] by 1683958891676092@127.0.0.1
+* [33m|[m [33m87a038abc325c74aa69f6443795d7a8dd0b17ec4[m fix exp function. Add authorization for jamie
+[33m|[m[33m/[m  
+* [33mf3d82822dd2bd4ea1520ef17aedc4eed7394d17b[m increase timecheck
+* [33m8aefa6b122a7562447f955263bc79be4912793e7[m fix import values
+* [33m5715905f248b59d1006a6b583878030cc5d46b58[m  add authorization rule for ckt
+* [33m3578793d5c74cdb4d9cdf8c3f5b02d62b478be77[m case fix
+* [33m62bcce35ef43494db3261e5cb53430a6caa0b14f[m  add deps
+*   [33m900d78e659eab5386dcf0824dee8b7081bfed7cd[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m1ab7f183d80f06a8cbbdb33233103034e19eaf4c[m Story update [LGD] by 1683958891676092@127.0.0.1
+[34m|[m * [33mfc1627067dc39c37d615e660e743964a801a23c1[m Model update [LGD] by 1683958891676092@127.0.0.1
+[34m|[m * [33m306ff5fbb79537ef796db8c569f8429a8f6eb9d1[m Model update [LGD] by 1683958891676092@127.0.0.1
+[34m|[m * [33m52d5b754be0e373135611e576077402a0cf78c9b[m Model update [LGD] by 1683958891676092@127.0.0.1
+[34m|[m * [33md78bf9544440fbf8383cd43dcf032e2eff78b1a6[m Model update [LGD] by 1683958891676092@127.0.0.1
+[34m|[m * [33m7043c526d930674c091c32455af4638d99654aa9[m Model update [LGD] by 1683958891676092@127.0.0.1
+* [35m|[m [33m67f76370eabc2a399e0568307d937142bb62e117[m Introduce OptionViewer Fix NA bug in references viewer Improve IDE Editor usability Fix CreditRating story USe Summation in FFL instead of custom formula Add YearInT formula + unit tests Allow collection functions. [].sum() [].avg() etc.. in FFL formulas matrix[all].avg() Viewmode support for 13periods Show formula_information parts when hover Introduce exponential-moving-average Introduce jStat Add generic test-Runner Allow NA in jbehave story
+* [35m|[m [33m0851dd3c6cb02f31615a66aae7aef8053cc65b1f[m introduce FormulaInfo as file allow hierarchy in root-node Add tests, add Self-reference support Self[T-1] etc.. Use translations from finanfinancials Use 1e-100 as NA value instead of 0.00000000001
+[35m|[m[35m/[m  
+* [33m49457410fe0ad7b3818c1eef65815d983883793c[m Rename displayAs into displaytype, reuse the current displaytype.
+* [33m88450351f827f2e5e15a099d24e1cd753c71e2fe[m another fix for linux
+* [33m1cace9423b26bf4695801572d9342c5fbadf579b[m Linux fix for excel filenames
+* [33m0e5175dc032c676779f05c2f2711c543807ad3ca[m Fix for excel
+* [33m448c38bd59b0c88f997e22c348733fd8e679ca13[m Allow mutli-xlsx per model Allow custom formula's in model clean up Solution.js (@deprecated) -> Register.js alternative.
+* [33m196aca160d51ea22471d425c5fd08733e913fd13[m TempFix URA.story
+* [33m8f4aaee57769b8fa7288d6ea222e50ae65767c48[m Add authorization rules for ramon & michael to PRICING and V05
+* [33m7375361faac709f4bbb31599353a6e50eec44932[m Make V05 work again Remove 80.000 rows of the v05.ffl ..... Fix for += modifiers Fix for >= instead of =>
+* [33ma30b2193f635fe687d0eb4a7f36cfe84d03fef91[m Add some keywords, Add PRICING excel file.
+* [33m65b23f74373c3acf499e51a0715a8ff30333ab53[m Extract FormulaInformation Print failure audittrails Add FyndoCreditRating story ScrollTop in MatrixViewer Add 'Down' to silect actions in aceeditor Better error message while failing tests Fix Case(...) bug didn't test first <= operator (!) + global variable was used. Use of AuditTrailer Remove thousands of lines from PRICING.ffl Fix technical depth in KSP.ffl Update FyndooCreditRating.ffl into new style - 1000 lines
+* [33me32a2113cc0cfa61a1eff523f24a43886f611465[m Add dependencies and references in Variable tooltip
+* [33mdc4eb45e545daf1b05293c9b94c2b7ade619ccf0[m test
+* [33mb40a7e400a66bc6eb84f955075ad960f96207a37[m test
+* [33md2b7a3e74888810b5e58af00e44a7f4f0d6c164f[m test
+*   [33mcedb5624a9b7282948839b986865df96e203c7d7[m mf
+[36m|[m[1;31m\[m  
+[36m|[m * [33m4d4bba6104db35f48c0472144c589104d19d988d[m Model update [SCORECARDTESTMODEL] by 1683958891676092@127.0.0.1
+* [1;31m|[m [33mb2e45a307e6b55f88a00786d523faf8ba011ba94[m Add dependencies and references in Variable tooltip
+* [1;31m|[m [33ma673ef626d73d0736bf6cac0466a47255e571283[m Fix legacy browser support
+* [1;31m|[m [33mb7d15d8641670f1c8a05e102fb4d469c1307c2ec[m Add ffl ide-documentation Longest match for variable names first Start for 'delta update to ffl model' while editing ffl. Add validation Add noChildren property to RegisterToFFL for a partial ffl export (without children) Add test for the ChangeManager Allow (in tuple {variable_name}) in jBehave stories.
+* [1;31m|[m [33mae246298e2c9afa44300a1b002fcd4718db9ed29[m Highlight longer variablenames first Introduce DebugManager, extracting montecarlo from workbook Introduce audit-trailing over FunctionMap, allowing easy trackdown problems in ffl-functions Fix optional validation properties Reload model in highlighting when ModelName changes Add monte-carlo after every jbehave story finishes.
+* [1;31m|[m [33m36e98e8cc5289f66adde2175be0ec6d59d32e0d4[m Allow runtime audittrail
+* [1;31m|[m [33meb01e5ea804922cfcb92c58d00cb93ad919bccb6[m Allow runtime audittrail
+* [1;31m|[m [33m964bc70a5c2f4eecd971824427ec052a5fca8c14[m Clean up Better logging Pass the ma (functionMap_Additional) and AuditTrail in FunctionMap
+* [1;31m|[m [33m4d3181954f33ee5966ac421281b631bd62f9ca1d[m Add Solution dep to parsers
+* [1;31m|[m [33m225d575af39828a887a132781deb897b40577298[m clean up
+* [1;31m|[m [33m8fe6299bd3e907eb08fec1b1bb96b1a7d5a53989[m Initial commit docker-image-composer multi-excel-sheet support (combines existing into one) Inroduce yaml-parser (for swagger and docker-compose files) Add docker file templates to create the images Add db- early exit switch to check if a build is supposed to use DB.
+[1;31m|[m[1;31m/[m  
+* [33mf041cdee770418be45327a39cc9c8196c31187f7[m Fixed NPE when given value in JBehave story is select type
+* [33me9dfb3c020cb588cf38f042ff5ed4728480a3c35[m Add generated tests for new models
+* [33mbaaf075267eacfeee7bca64993ec3cebf3654684[m Test Commit in intellij
+* [33m9532a02b0b426c434b1cc353ed7f637ff44382b1[m StoryParser.js edited online with Bitbucket
+* [33m4a6ea9b0ddd84bc6a2cd7b475c32f2a8db9f5e2c[m StoryParser.js edited online with Bitbucket
+* [33mbca8411d2e75082113105670293f7624d1fec120[m StoryParser.js edited online with Bitbucket Change default decimals to the input value
+*   [33m1586edb44236edc318b999b588ef2c9e8c93e874[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33md7b9274fb78f2ff3f73d6e7e3cfbf03ffc5be17d[m Model update [MVO] by 1683958891676092@127.0.0.1
+[1;32m|[m * [33m1455d0c18f8c6fb2fee256e986efb3465fb0d75e[m Model update [MVO] by 1683958891676092@127.0.0.1
+* [1;33m|[m [33m71c6d80f6115318b80983ef6aa6d761ef82a19d6[m Initial commit DokcerImageBuilder
+[1;33m|[m[1;33m/[m  
+* [33m8805997de238e1f7550eef558897edd568db2764[m Add matrix view, Add hide sidebar button
+* [33m7d1117c0c12bbb5eb008ddfed1216e00a922548c[m Split up ide.js Matrices in IDE Implement FirstUC, FirstLC, DateToMonth, DateToYear,DateToDay,LN,DateToyearNum
+* [33m26ba4d453b63c2d12837d62375d9d19042807e40[m Updarte IDE clean up Clean up FAM
+* [33ma6738fc0ccc70011e2a63e739ee4109adcea1712[m Decompose ide.js into: DebugController MatrixManager FFLController JBehaveController MatrixController
+* [33m15adf840a5dee8d5a787dfe3e9d7b56a0c408fae[m Story update [KSP] by 369400500137629@127.0.0.1
+* [33m7740b029a498b22c04681980fce8dad3600d2563[m Remove unwanted properties from MVO scorecard
+* [33mdd3ee7eba729696a13154eb4e206eb457094f847[m Update KSP story
+* [33m7f7ff5c6442a4b9e597ff457cc17c659c272a3ac[m Introduce Excel-API
+* [33mcf39f484c1b47ea323b268dde83eb8ef3c9ac635[m Add auth rules for PRESCAN/v1 |v2|v3
+* [33m26ea8090b24bbbe29fc6aad2008a82651b8e27cd[m Fix inheritance in Swagger in/-output Adept test KinderSpaarPlan Default swagger input = number
+* [33m519c461d8e55d0d563e1b39575fd7c6aee942402[m Introduce version number in rest-api generator
+* [33m0d9e8906500de477fd15c9d79256f970ac65d9b3[m Fix generic API inputvalues
+* [33m583d99b8327e60a05cbc31a020eb55457653ce15[m add hilde to MVO
+* [33mcc79fce8d88ee78cab017fbeb9bc2fa6cf2b88fe[m Rename FyndooCreditRating camel cased
+* [33mdf6357a5550036e80846db2ed3f48ad22eaad246[m Add authorization rules rename FyndooCreditRating output node name
+* [33m6259d8502c6ad36cc06a0f921c239d0182a6fdf0[m Allow generic way of rest-api generation over models.
+* [33m6c68eb21a542fe771c0bd668a515fc6bed02e2b7[m Add prescan to rest_api interfaces
+* [33m7b02d4c3adaf6be8e83cb95fa610c361f2438458[m Model update [PRESCAN] by 1683958891676092@127.0.0.1
+* [33mf11558125a30c2ad6acd80134fcea1fbe2ac8953[m Add Choice validation checks on JBehave with suggestions Add story for PRESCAN
+*   [33m87bd69bbbc9d19d684d349397baa5eee04bcc3a0[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m[1;35m\[m  
+[1;34m|[m *   [33mffff0bb53674cfad47ccf209b0e64bd4fea85ef5[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m [1;36m|[m[31m\[m  
+[1;34m|[m * [31m|[m [33m1e48dc9021eec8be45bfa1ad7054062e39229ffd[m add PRESCAN
+[1;34m|[m * [31m|[m [33ma7865027b3a0e640bd7b6cb7e073ffe19ca7818d[m test
+* [31m|[m [31m|[m [33m307288e672d1c9cae0e7b31371f3c46ada9dfb91[m updateKSP
+[31m|[m [31m|[m[31m/[m  
+[31m|[m[31m/[m[31m|[m   
+* [31m|[m   [33m8a42656a255ec426e075458108e3320247d9b497[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m [31m\[m  
+[32m|[m * [31m|[m [33m0a32db520961ef50d92837b32244b5233bdf4e5f[m Model update
+[32m|[m [31m|[m[31m/[m  
+* [31m|[m [33mf778a85d2f66ee9786c3d3dce76f436b84c7d032[m develop mode fix
+[31m|[m[31m/[m  
+* [33m70bdc9f2aa8747f06f591fd296f2be5f6e0ddfae[m Add automatic model version number
+* [33mfbdb415d2334e20f1c0cfcd5b229a1d636761152[m IDE usability updates
+* [33m4343a4d18c88cd4e28ad1cf7cb6031860584b3ac[m Update Realestate story
+* [33m4173841fedb89d4798dfe485a3264ef42e05a2e0[m Add KSP test
+* [33m026373bf0d745574306f7322674c31b66e7b3ebe[m Fix test-case paths including ( and )
+*   [33m406c4de55ac18806c8bda53cd805ea53701726c6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m4d3100204ca7f280ea4b2cc41a28023f4adde8b3[m Clean up realestate
+[34m|[m *   [33m78909efa572bdd6e5294f77fe6352aa14dec2e10[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m *   [33m5af09d8ef7075b24786f99ba37ab3916bb820ca0[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m [36m|[m [1;32m|[m[1;33m\[m  
+[34m|[m [36m|[m * [1;33m|[m [33med81518228a03d0990a4d70bd0076b06a70f7c24[m Fix longtext linebreak
+[34m|[m * [1;33m|[m [1;33m|[m [33m6857917230c1046a34bfad503bd60e97db351637[m Remove root { for some models Add display_options: scorecard for realestate
+[34m|[m [1;33m|[m [1;33m|[m[1;33m/[m  
+[34m|[m [1;33m|[m[1;33m/[m[1;33m|[m   
+[34m|[m * [1;33m|[m [33m74436b443b4a9340e7c976ee149ed103711955c0[m Add displayAsSummation for = variables modifiers
+[34m|[m [1;33m|[m[1;33m/[m  
+* [1;33m|[m   [33m2098530e74ad80e4c25f6d1684b57e4b4a166ff1[m Merge branch 'master' of ssh://stash.topicus.nl:7997/ff/fesjs
+[1;34m|[m[1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m * [33m4276e2c0b4b53a582081c0c992725664d804070c[m Add long texts
+* [1;35m|[m [33ma6c65f18a9902e28ee7c3e6f9fff109175d6ad86[m -a
+[1;35m|[m[1;35m/[m  
+*   [33mdbf5097ef8ff0a9afe0cb062ece5bebb30d57899[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33mbea5591c2763c110a4dca2a9f2b3e959a0ffe122[m update info messages
+[1;36m|[m *   [33m0253d3b14ca5e60809325a7c0fe520ad228f00cb[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m [32m|[m[33m\[m  
+[1;36m|[m * [33m|[m [33m096a9b760e07439957a4dee499c3d4a46ea10310[m update sum styling
+* [33m|[m [33m|[m [33m310c3d8a9526d39a0e501cff09c0132e30ccbb9b[m Change skin header in Scorecard.html Test landingscorecard from LME api ad description for options_title in fflmode.js Let scorecards work with display_options: scorecard Add defaults for FFL parsing, datatype number Add datatype: number(2) = fixed_decimals:2 + datatype: number All variables that have choices: ... are by default select displaytypes Make   root {   } optional in FFL Add scorecard unit-tests Change defautl value for number/currency types to NA Fix DMYtoDate function, add unit-test for it Auto-load FFL when page opens Add tests for ffl-export module Add debug function in FunctionMap to trace back the model-formula calls Allow COPY-Variables
+[33m|[m [33m|[m[33m/[m  
+[33m|[m[33m/[m[33m|[m   
+* [33m|[m [33m354fc64b1a1d61667d80256914e5916b20b4177e[m Recover legacy .fin parser Update FYNDOO_RATING model in english Remove title_col in x_axis
+* [33m|[m [33m0fa97b539b1c858db637ef40fee4cb002d5c0532[m Fixed required
+* [33m|[m   [33m0b4d45e254bd866792a104d72440d56ed0d72f0d[m Fix some warnings
+[34m|[m[33m\[m [33m\[m  
+[34m|[m [33m|[m[33m/[m  
+[34m|[m *   [33me4a2740bbd5a15e3f417db581e82f0062d441f41[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33m8ee444e618d78ecc4958c5f2bf657142823f5d2d[m Fix required styling
+* [1;31m|[m [1;31m|[m [33m758aa3e235856a90461d4ca1c51b39002e2102f6[m Add INFO,WARNING,HINT,VALIDATION Display_options(displayAsSum etc..) css classes.
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33m98a8a8ebc020cba187d5c23b3b1c600eaa9ca989[m Add bas to CLAUDIA2
+[1;31m|[m[1;31m/[m  
+* [33m8c569c7f7b6739ae17f871f966b42244fbc5254a[m Add display_options
+*   [33mcd9f9109cdb70339fc04c8f584db3544c571e485[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m *   [33m8b6ff78569748704e2d80e227750b00156e2db88[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m [1;34m|[m[1;35m\[m  
+[1;32m|[m [1;34m|[m *   [33m81230ec414a7bf32628b3aa52febe8ebd38dfc30[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m [1;34m|[m [1;36m|[m[31m\[m  
+[1;32m|[m [1;34m|[m * [31m|[m [33m3f9f9632b4e308f49f497b0e5b166f872bb439da[m Update questionnaire styling
+[1;32m|[m * [31m|[m [31m|[m [33ma991347493730ecbd68a0f28e0e99783e8b8f22a[m Add berry to CLAUDIA2
+[1;32m|[m [31m|[m [31m|[m[31m/[m  
+[1;32m|[m [31m|[m[31m/[m[31m|[m   
+* [31m|[m [31m|[m   [33m703e87b0a51fa88d8de47e7d779a3bf4f73781e0[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[31m\[m [31m\[m [31m\[m  
+[32m|[m [31m|[m[31m/[m [31m/[m  
+[32m|[m * [31m|[m [33m4b668baa636c951ec4a71b045f932545447451bd[m Add authorization rules for history and ffl.js
+* [33m|[m [31m|[m [33m1771e8f321a30e8219f213fbca13374c12b92cfb[m test
+[33m|[m[33m/[m [31m/[m  
+* [31m|[m [33m5d6ca1733f703c76f0231cebc2bb74b87022bab2[m Add model history view in IDE Add finanmath-info in IDE
+* [31m|[m [33m513fc61c8d5f7bd57d81a5eae1678664b6a9075a[m Introduce delta-compare on FFL model Fix scorecardtool + add test. Allow basic model reload via api clean up code tooltip notrend_formula over doc_formula Add URA model Add authorization rules for URA
+* [31m|[m [33m7083b047f11518996ceba465f19e064bfe37f291[m Speed up reload
+[31m|[m[31m/[m  
+* [33me6b318291d0291085fc1aef2fee2b34b18b7a2c2[m Introduce HoverToolTip - Clickthrough Fix tooltips
+* [33m3a9a6ae5ece46434b7a4cf4ee7fdefe1a33add1c[m Fix unittest, failing on locked variables in a model
+* [33mf0b35f1bfccce2bb65eba286b11a79827ee05832[m Add click-words in IDE add paragraphs in KSP Redirect TupleInstanceCount with TupleCount Introduce snippets in editor variable {....} When ....       snippet lines Split editor in IDE. Split with Jbehave and FFL realtime JBehave checks on valid inputs and locked inputs Rename FAM to KAM in KAM
+* [33mf71ae9e7c31ab9cd71729e4be3b03649c98bfc25[m Add some FinanMath functions Introduce some aggregation functions Remove variable-GLOBAL functions. Place them into the FunctionMap, so versionned FunctionMap can be created runtime. Make HINT function work Remove Functions from jsMath.json that are compiled in FormulaBootstrap.js Fix lastTInYear call Remove FormulaInfo for 'null' functions.
+* [33mecb28c6ea3e9278a8efc1c7db12e34ee5d0b5e04[m Let both models work together
+* [33mb19c8efb7cfa1628b1652d79bbcd9c791fd1e95b[m Remove log undefined
+* [33m1c78434b3330939f01848e6238de701ec2c37b18[m Update LGD story
+* [33m8cf3098ad3fb1f3a58e30235ebd77dd6a35d3391[m Send in and output to LogStash Add Viz for grahphiz output Update LGD model & Story
+* [33m5e6e08d67699ac33c1685297b65bcfd65b9a848a[m Commit new KSP file
+* [33m77c9dd63771cf743b6ca7263f8e6585e8380f2fa[m Update matrix file
+* [33m0d5d06b3c8a286ac86e342c852189c35385d3a13[m Fix validation bug (missing unit-test)
+* [33ma0c81c6c2e64d63961060203bfb42e11896a8e18[m Add Tuple header fix
+* [33m1b17c87315be57076c0b7230d66c4d803751e458[m Introduce share-data link
+* [33mdd58fae3010796085918208c4f59024532164f65[m include hasUpdates to pack
+* [33ma9d70c49fcb543f036f9bdaf7d8a260444767aa6[m create new Contexts in JBehave stories using: Given a(n)? Context(\w+)?
+* [33m3d10307a007cf116a65806d56386b99842a524b2[m Enable elk - logging from lme case insensitive jbehave tests.
+* [33m1768772c4bfbaa86a97d8acfd968b8e70e50f163[m Move auth to seperate file fix matrix-file not exists bug
+* [33m2b807b1e781d60497e1068e331f7da700454b358[m Add lgd
+* [33mb85055b28a8f65bae82093d784395da66357ca55[m Add authorization for Jebehave Save
+* [33ma40ead2b54873d685ddcae942edab5cba0f90bee[m Add RUUD to LGD
+* [33m616336b3942bdee4ee412940dfcda7b61a854ac3[m Add some tuple stories
+* [33m29379874d3a44b7b737ee8244b834c97785fe78a[m add tree-view in IDE  (better overview)
+* [33m3f71f349f86326b8d3bf483604605e5f186d1255[m 60sec delay for the update.js
+* [33mcd582b9ce38389f70df0ba3d1994442141b0e488[m Made TCOUNT 1 based instead of 0 based Remove 2nd creation of time axis TD displayType = String TD frequency = None Allow Jbehave stories to be commited from UI Add time-selector
+* [33mb5d505d749ca2308d47a4986256060d8fbbb6108[m Nested tuple support
+* [33m0b3279332ce2d4fdec333d4e31a71b12e3cffe01[m Visual aspects concerning tuples
+* [33mc90b4a505a89f8058aa73022add52eaf0031ceac[m Add nested tuple support in JBehave tests
+* [33mcc24e7469368c361d02405e902e5a54bd6a79120[m Add prescan xlsx
+* [33me48bc9e1f7833c3f98c9f7668d2dcd88f1926d31[m Add more var instead of let
+* [33m08bab58b2f218f1a9b315175e298ba15784d3262[m Add PRESCAN for Joris, "let' is not valid in Safari yet. Falling back to "var'
+* [33m7d08920b32b3b6525dfe838cf9c6ddf198075d95[m Update tests, Change unit-tests into JBehave tests. Remove TupleIndexConverter, its part of the core now ( support also nested tulplesByName ) Adding loads of Tuple-tests Removing legacy unit-tets thats are more clear in JBehave stories Allow MONTH/YEAR JBehave stories Swap 0001 into 1000 fo yAxis.display ( more intuitive ) Make the tupleIndexByName work ChildAge(Piet) will work to reference a tuple now.
+* [33m69f4a29e0703e71f42653d61b4eaad26288a1c97[m Add tuple/nested-tuple support. Fixing unit-tests
+*   [33m4b3e08a62e0e0275df78aab1acdf6e6dd246a7c6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33me7e386094fc7d905a54eb9d93b628f53cd68c958[m REALESTATE.ffl edited online with Bitbucket
+* [35m|[m [33meab2d5882276845dc5f247a7c8b8452906938b1b[m Commit realestate excel
+[35m|[m[35m/[m  
+* [33m658ad4366e8d75c16db2adaf57864472b3cfab9c[m Add richard real-estate
+* [33me3ecf8e5b6ad3c12895df520cb150406e60e3102[m Add change rights for sc on mb
+* [33m067fa89876e0ec3f90eb201a74b730a313f00d15[m Add initial commit for Nested Tuple support
+* [33m7d37e8d1d500c089906f91803f23ca2d78084274[m Add tuple functions
+* [33m6a862603352931c2ff474a7223061fa75c33b427[m Add support for first level tuples TSUM,TMIN,MAX,AVG,COUNT etc...
+* [33m3d8c1146f457ef0a1b188f5c91db3c38bf6404da[m initial commit formula generation of variable-modifiers
+* [33m44ab31dae6d9994fb50bd17588b74d8d4d1f7ebb[m Initial commit Tuples in UI
+* [33m59115ac3a73a0ba892be6a1f6491c0da932a32b9[m Update basic_exmple with scorecardTestModel
+* [33m543deafde5b9720b91fa653d0ed676c541e66f0e[m Update LGD response
+* [33m7d031932e4ee7b81d63a62d48f3aa6600a6be632[m Add default response for LGD, add authorization Add initial tests for Tuples
+* [33ma08e231354f5db1cf8a7e5b43fa5b17db8dc63ae[m Initial commit Tuples in Screen Add tests for xsd converter
+* [33m00279502a476dcc1a4c196b5ec9f71350917a09c[m Add realestate
+* [33m4136a62e0fa60ef4e55e37da4f5b4295b269e7fc[m remove lib
+* [33m60f0638edd9bcc7983b52bea0f49acf309d27de0[m Inital commit LGD model.
+* [33mbe0dbfdd1d66df7fccc8038f886d557360590235[m Add Marco to BLG, Introduce BLG end-point
+* [33ma74fbcab4c8ad3b4e7a08deba21ac220639dc9b7[m Add update.js
+* [33mf3ff96b5ea57a90c8f16969acc8ab5739abea08b[m Add whoami page
+* [33m3ee45db5e92163f26c00e80d6aa85bf084e3a856[m Add serveral time-references to the language Allow And 18year document and 400columns Create BLG model Add whoami on IDE page Add fb id to blg portal Who name in IDE
+* [33m64e3e2e985b02566b33c03cbe6b45e4c7b223a39[m Fix messages
+* [33m7edf409129959b11da5dd2e77973ac96b376b7d9[m Update devcheck
+* [33m2f1b21ca3e35de2bec83fa0a5cc4e008cdd7b331[m Change monli fb acc
+* [33m472e2ced4e83713e3724d9dc8a538610cabfb25b[m Add logging-filter Add time-related unit-tests
+* [33m4c913116dcb3e62af12bfd115456a41ae359a4b2[m Fix dev-check
+* [33m6e18f19dc6ac8bdc46f4170e4cafef0a97a37882[m Remove dev-check
+* [33m23c88d24cbf4413a8b616f2c4caa50dab72e2c11[m Add unit-tests, Add tests for SelectDecendants, Add Tests for Time-based operators. Add Monli fb to KSP
+* [33mf2875d58cd9d9a530292b5657dc2741b707dfb71[m fix paths
+* [33m7f023502118e4d64f1c0e922abd6e6a5d6856cca[m change endpoint
+* [33m2a8cbd6ac526c4b93f33277d0633a36def17b76f[m Add ksp-app to  be backwards compatible Update docs Add x-auth-id for data and model Allow x-forwarded-host for swagger Rename auth-facebook into SecurityPortal Remove auth-local Add auth-rules.
+* [33mc381bee57fb428c963f64e6cd475126225a4929f[m increase self-update -> proxy registercall
+* [33m02e14b9cc88bedccefc07326383fe0ec72d1c3ab[m Update request-logging
+* [33m46d4c9301e90b56d0138351f60db152a56e74037[m Rename aceide into ide
+* [33m6b70035257d67cc17963c1e6556a6e7bed326512[m Add authorization rules Fix some relative paths Update docs, promotion.js
+* [33meb752d19acfe71cbdd6391c3bdcb6984fc6a5575[m Model update [KSP] by 1683958891676092@localhost
+* [33m4f765c7b12506e2daabb2906467e4f6814170588[m Model update [SCORECARDTESTMODEL] by 1547057165410069@blfif-tv-tr03.finance.lab
+* [33m9fc532de2f70cc10609bca6da8fa13bb97289c1c[m Model update [SCORECARDTESTMODEL] by 1547057165410069@blfif-tv-tr03.finance.lab
+* [33m481923afa494f3f4035d490286ce28ac2e2fd181[m Model update [SCORECARDTESTMODEL] by 1547057165410069@blfif-tv-tr03.finance.lab
+* [33m6b78a10ef7267b68ce5ad9c50f16b92b84d86e0a[m Model update [SCORECARDTESTMODEL] by 1547057165410069@blfif-tv-tr03.finance.lab
+* [33mc65e55c0ae7c3d76d9988012bea404202faa27bc[m Model update [SCORECARDTESTMODEL] by 10212522378267893@blfif-tv-tr03.finance.lab
+* [33mf30462140d1d34f0a9288a38bfef0c1fffd2a6d9[m Add some Authorization rules
+* [33m46d6941320a103cf496c013f27f12afb15ac9117[m Remove value-app (its authorization within data-app) Reroute all end-points to authorization-proxy
+* [33mcfcd1b3e0b12bd43bb70638c5c9e8a21fb9ebe9b[m add testrun file add facebook prox to update.js
+* [33me1eae85f5704282351467f015d4136aaa23f75b5[m Update README, make external and internal proxies configurable
+* [33mc3ecf33f16dc9902968c0e3e5068ae80dcac963d[m Model update [SCORECARDTESTMODEL] by 1683958891676092@localhost
+* [33m598acd9361f6b3c2cbf7b5098a7949a129d12a3c[m README edited online with Bitbucket
+* [33m2e694f2c531d2baea6539d4be4a7aa9297d7dfe7[m Model update [SCORECARDTESTMODEL] by DEMO@blfif-tv-tr03.finance.lab
+* [33m2bc1608c59e65efd5ed596facc0087bbd228589b[m Model update [KSP] by DEMO@blfif-tv-tr03.finance.lab
+* [33me36f5a5e4770188dda59130fe5bf69e8095b6ba7[m Model update [KSP] by DEMO@blfif-cv-lme01.finance.lab
+* [33maf8a23bb0e9a1aa14287fc681fdb1260c38ad6d4[m Model update [SCORECARDTESTMODEL] by DEMO@blfif-cv-lme01.finance.lab
+* [33m0290cf1bce42455e38b3f8dd477115ec428e9d8a[m README edited online with Bitbucket
+* [33m9f216a99d92818255cab67bf35d3388bd5637360[m next attempt
+*   [33mddc4b981bfc94970727decb306e6771a1f4ca101[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[36m|[m[1;31m\[m  
+[36m|[m * [33mb3146e7214e1974fe083b4ad988c12654bb93c62[m test
+[36m|[m * [33mf170eb6fc1c2f287270a665c7560916ee6a0ea18[m test
+[36m|[m * [33m28de33c50286afdea1c9030eea5f67ff6dee230f[m test
+* [1;31m|[m [33mc5f8bf8275f73f36d10a2c92a726670579f15f24[m commit message
+[1;31m|[m[1;31m/[m  
+* [33md15ca9272ad4dd468f39ad0a941c55415b27778a[m Delay works
+* [33m2cbe7d2f8c6a404b5bace44c12c6b0798a19d95c[m Delay update.js->proxy
+* [33m30116064000b5d975e956f1cbfca0ef9edcd5931[m Add logging etc..
+*   [33mccbbd609be2d44c11aeddb0cb1322cf12ababb31[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m3470e5ebdaa66de1b8e257ba803315eaf359acb1[m Model update SCORECARDTESTMODEL by DEMO@blfif-tv-tr03.finance.lab
+* [1;33m|[m [33m066c7fd0e2d1b334469ea88e0d3fed7440a8a3d9[m Delay proxy register
+* [1;33m|[m [33mf3842130c1343783a237c89b70e0ce3050fff9d1[m See log
+[1;33m|[m[1;33m/[m  
+* [33mdcfb357fb937ba896a5b0749c16aefc6eb6b83c2[m try hasChanges fix
+* [33mc136173caeb942c9ecf81eb97f6d482ef03c30cd[m " no changes detected " is succes
+* [33m87db579fe5273dfa515e8910d304acac2783bca8[m Model update MVO by DEMO@localhost
+* [33mf8e3e1ad4dcbe99eb5b16fd1d67af9421c63cdd8[m Model update MVO by DEMO@localhost
+* [33mce78704444557c2af627309860974b9603f7dbb1[m temp commit to test local
+* [33m0f9ea57bd6e4bd2618bd4c8c71f3dd0b176800db[m Model update MVO by localhost
+* [33md6925f54b6eb539b282178a1d16e4f1494e09ed0[m Model update MVO by blfif-tv-tr03.finance.lab
+* [33md65d075ecb08f10c0bab81d41e57b3cad15fddec[m rename ff-log into log6 update dependencies fix hidden problems in tests add tests for log6
+*   [33m92aae88534067675c59744231c93d54fb1618e7a[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m212bf117fcd09228661ce42b37ad663412b9165a[m Model update SCORECARDTESTMODEL by blfif-tv-tr03.finance.lab
+* [1;35m|[m [33m3acf6d2adb10212408c79f2a7c80746c12278692[m Add favicon.ico to proxy
+* [1;35m|[m [33m1f0aec4821bcd5c5b0c79cc4fc37897af52cbec6[m Add lme_docs to proxy reroute
+[1;35m|[m[1;35m/[m  
+* [33m89bb2ae7d2216febfc11d615dd3d7c3bb549a1d3[m Use 127.0.0.1 instead of localhost, works without internet-connection. Introduce authorization on resource-base (introduce anonymous resources) Increase speed scorecard.html Increase overal speed exportwebmodel Change default db to postgres, also local Strip data-def swagger docs Add tests/fix none-valid choice value beeing set Fix value-store of multiple values Simplify UI, add some behaviors to ui elements. disabled/readonly on select and radio, memo.. Add entered on selects Remove generic *.css proxy and provide specific ones. (was breaking swagger-docs api) Update README Modify docker-compose.yml using the ENVIRONMENT parameters as required by default setup
+* [33m581b30e8974058ee347cb0da892c0a07e40deded[m Use 127.0.0.1 instead of localhost, works without internet-connection. Introduce authorization on resource-base (introduce anonymous resources) Increase speed scorecard.html Increase overal speed exportwebmodel Change default db to postgres, also local Strip data-def swagger docs Add tests/fix none-valid choice value beeing set Fix value-store of multiple values Simplify UI, add some behaviors to ui elements. disabled/readonly on select and radio, memo.. Add entered on selects Remove generic *.css proxy and provide specific ones. (was breaking swagger-docs api) Update README Modify docker-compose.yml using the ENVIRONMENT parameters as required by default setup
+* [33maa4513be1996a5c978fffa927ca18568cd2fb32a[m remove more logging
+* [33m272f109147ac784cd3d4e3ece56c2773b92c6568[m Less logging
+* [33mf1b24dd388b11355d0a566ac4e59e16cff19348c[m Upgrade hipchat-connect
+* [33mf3da941085abd6cf6ebd37694971ad70e835f76b[m Remove excessive logging
+* [33m36bcba0c7f32c64cc0ec53b1d9862532a27f83c7[m Total commit, making facebook authentication and ACL authorization possible. Model and Data instance grained authorization combined with Git-Tree-alike datastructure Added morgan logging
+* [33m383ef72ddab3c785f3b3e30178e8d56492fdaf4f[m Add request- loggin
+* [33m42c0a54ff09a00128b7058117ef0a34b74437b37[m Dynamic reverse proxy on 7080 Facebook authentication on 8091 Demo-apps only for fs now 7080 new gateway Extract hipchat-connect post values via token
+*   [33mf67c578e4c19d601b61459b9ed886348b741ac67[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m36bf708ee109db6d68e71ac31b46ff24c92021bc[m Model update KSP by blfif-cv-lme01
+* [31m|[m [33m6aa24e34a1a4f22215885e61975034a675acff8e[m test new git clean -f -x && git stash for updates remove request-promise use path in update.js
+[31m|[m[31m/[m  
+* [33m9793db4edb763007d6cee04475ea7e14ff3bc047[m Case-fix
+* [33mdfbc51e0fd51adc6773ec7c1bb4818ac249ebbfa[m Add KSP story to integration test. Make KSP JBehave test work in IDE Move logic from webexport to parse input into LMEService. Remove duplicate MatrixLookup, move into math module. Add larger key in formulacache, adding frequency to the key since formula's can't be re-used when not having same frequency Make Jbehave story parser work with columns
+* [33m36d4aab6fb4287679f53067f9c40c4e3790bec1e[m Reduce local formulas
+* [33m910e1f87eda26fb47d2f2e500e6e64e29f14be2b[m Increase api performance a bit
+* [33m243b7de14d68d51b80fcbb3a010aea4ec6622358[m Model update KSP by blfif-tv-tr03
+* [33m9bb97575e6e2f31df2b0371dae8f546c93f10e45[m add gitignore for *.cert
+* [33maf7df882b85c9f36da7ac870b5ec5c3cab1cceb8[m Stricter swagger docs
+* [33m2693b49a41b9eb214b7cc67c8c9f018bf5ce585b[m Add unit-tests concerning Case statements and Trend-NoTrend formula's
+* [33m7e18d9851e83a0d567ee34e3f253f0649b5d836a[m Revert ";" change. Failing Case functions
+*   [33m37fb96567bc0ae34f8a58331176f2c3c4263aee8[m Fix merge conflicts
+[32m|[m[33m\[m  
+[32m|[m * [33m5e75abab9f4f3de226fa0b269065ac0d99ff28fa[m README edited online with Bitbucket
+[32m|[m * [33mce8afb3ffcb9c27e9bb2b4d678e6a7a4e40cab2a[m Model update KSP by blfif-tv-tr03
+[32m|[m * [33md5de8fa4a1cac53f5405cbd20ed29dbffeb13f83[m Model update KSP by blfif-tv-tr03
+* [33m|[m [33m34567b32404f7d47e0026f80a3261c0015e44685[m New parser does not need to throw ':' chars away. Generic implementation of HSUM function. Local use of the proxy.js
+[33m|[m[33m/[m  
+* [33m398819ff95204d8888cbdde3f77a2cc5b8004ec6[m Add unittest for EconomicView
+* [33m001470fdac4c0b39b241e2910901258541e796a6[m Rename ffl2 into ffl2
+* [33m351932271aecc5f640a6401ec95516b41664f0f2[m rename FFL parser module
+* [33m6fd5d65e6d7ad2c0ce4a0e70220d9956ad7e85ef[m Remove console print in output
+*   [33m3b95a1a4b7370d9fa890f34cdddb533b313b7a73[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m14f3bebfab89cfdb42c1b56bba34c30fbbb05abe[m README edited online with Bitbucket
+* [35m|[m [33mce521cd2fe762dcd08e8ed45f8690f14af29c0f1[m Formatted view in CICD view
+[35m|[m[35m/[m  
+* [33m5f50915fb7592d78deea7f611ee3c1e8f612f2de[m Rename FESFacade into ValueFacade Rename webexport_with_template into webexport.
+*   [33m8f7efe1c6753d07ae43b9fce0323b625c48ea5b6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[36m|[m[1;31m\[m  
+[36m|[m * [33m4b31a27a792eface462b21acacb68fcd7d42c471[m README edited online with Bitbucket
+* [1;31m|[m [33m31a7b5d071d13eae678d4bc6cc798362f7335ebe[m Fix Economic view, add unit-test Tests throw exit 1 when failing Fix MVO sotry Add KSP story Add root {} to KSP Convert EconomicView into new style parser. (throw away boiler plate)
+[1;31m|[m[1;31m/[m  
+* [33mb41714876310da4d34d2149e4bb699dace79dabe[m Add V05 xlsx
+* [33m5e25a77c33c55a962dfef985ec88763b33fdc279[m Bugfix for economic view
+* [33m69191044ef52a65332e815580a9d79967f07e855[m Remove legacy parser. Remove legacy webexport module
+* [33me5f959e5d703d56fb03076fbf825074273670212[m Remove webexport legacy
+* [33m411967bbc2eb91cf50e052783ccffc0d68a076f5[m Remove "root" message
+* [33md62ad5431b27cb9fd518c0c72cc7af98476aacd2[m prefer own NA variable over formulaJs function.  Introduce KSP.story
+* [33ma6c577fbd66a0afb17b03e7661752532d282933b[m Add KSP.story
+* [33me164e1f3f6b767d816fd1d74b6eaa730418079c3[m Update generic output variables
+*   [33mdc7ceba32cbd355e89c3f0929bd4d31ae459ec31[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m2f384ce6773c3ad6126091806ca43ae5a3f787ca[m Model update KSP by blfif-cv-lme01
+[1;32m|[m * [33m101a251436e2d3f1f96304ca81f764cbcbe01112[m Model update KSP by blfif-cv-lme01
+[1;32m|[m *   [33m8c7e7b423cca1707c30bfd86c20ba1036d45c91f[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m [1;34m|[m[1;35m\[m  
+[1;32m|[m * [1;35m|[m [33m3bbd00d28dd378f4a82dc75afcbaf81873617737[m test
+* [1;35m|[m [1;35m|[m [33me8ae14ed9ba1c9267709e0df9e197c6eb60cfb37[m Add express test framework
+[1;35m|[m [1;35m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[1;35m|[m   
+* [1;35m|[m [33m66deb636706b5f36feb6505e1d06a61a42476663[m Rename ff-fes into index.js
+* [1;35m|[m [33m3e679523121219dd0112f461362417f45bdd5b8a[m Move KSP test, remove old generated javascripts
+* [1;35m|[m [33mfb863378e80650760a38fb554e4ea708958ebff1[m Clean up, rename FES/lme to Domain names
+* [1;35m|[m [33m8b3c9baf663683014f2ee3fbf1788af27389c597[m Rename fesjs into CalculationFacade, clean up comments. Document some new classes.
+[1;35m|[m[1;35m/[m  
+* [33m02530d2bcb94eeb17d469f39fa07caedf72f5550[m Add environment filter for loaded models. Remove Value from path parameters in the swagger doc. Use KSP test-model-file for unit test
+* [33mc1f856eadd1acf9042ce2cd21f335d9a383c7b30[m Fix domain
+* [33m341b18c9f08a53a7079f8adcce6d1844d1a20ca7[m seperate host and port
+*   [33m2a2855bc4a3690aaaf75e0603fe41ff9c585d1d8[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m8284ecde5c5bfaee1694c082e6693c08a00af751[m Model update KSP by blfif-tv-tr03
+[1;36m|[m * [33m64680b94dd07e2cb01507f06a86b8ff3ee75c3b1[m Model update KSP by blfif-tv-tr03
+[1;36m|[m * [33m8f24021cf96f4b2ba700df1085a5c49edd46ef71[m Model update KSP by blfif-tv-tr03
+* [31m|[m [33m694b75b3a5456c4583a8edba8de94ef770ed5c16[m use matrix file in rest-api use 18 columns instead of 17
+[31m|[m[31m/[m  
+* [33md799485fb40ee9bdcb6eeba538d93ce254dbce4b[m Add unauthorized page. Remove state from MatrixStore.js
+* [33m0aedf21646fb24cdfb82c264c80ff5e100dfdcb1[m facebook_proxy_port to environment variable
+* [33md4c3813b000344cb3521c7aed388404846a7ff06[m Model update KSP by blfif-tv-tr03
+* [33m31e511b257bfebcd6367e46a71309d276c495c5c[m Model update KSP by blfif-tv-tr03
+* [33mf6a41420d16e14275a62ca522a879d9bf863c253[m Implement HSUM
+* [33m544bd1deb3881cb9efacf28b2fbdcb57a8184f97[m Model update KSP by blfif-cv-lme01
+* [33mb44298aebbe3796ba0bd7850036c8c9629a2b999[m Model update MVO by blfif-tv-tr03
+* [33m921ee5f3b93e245bcca049548a00a809b8f6c92f[m Making more specific logging while loading models
+* [33m96554555bdc25701f790a1e9caf3c546d4faf1c0[m Add hostname to loggin
+* [33m20044f375c2fc822f642ec4e7dce203284383fd0[m make paths relative, add facebook -identification
+* [33mcab8fb61b4b9db52dac201f406c5e0148b1a6acb[m add domain
+* [33mfa0c029fc3d4a6890169c86795d055bf0e6f8610[m Test localhost redirect.
+* [33m84cc7f931fc6030e29306225970a951f7f49af62[m add domain as environment
+* [33m0039461d43beaa1dbe38acae3a186b0dc2914fd1[m update swagger host
+* [33m54a97400bfcef7527764db8ccffd6aace80f5cbe[m Fix indexes for postgres
+* [33mb2d08fccb8260710beb254ad27777dcb6642bfe3[m no message
+* [33m5980070d62717fdd9592daebe50ff6f4dabae90b[m Fix scorecard, silence the proxy
+* [33md494988ac8daea94f5f76678a286464d7331c23c[m add proxy to updatejs
+* [33m02a43545ed1e14c691fbf1561cd7dd002860fec2[m Model update KSP by blfif-tv-tr03
+* [33m80e9212ad095054bcf4f3355a442b0ab0ee462db[m Model update MVO by blfif-tv-tr03
+* [33mec8a93cfbf59fdcc9f686c5b7c8f571fc0bddbc0[m Model update MVO by blfif-tv-tr03
+* [33mb7faa9db8c4514eaa934cae0a5a14a7a00235060[m Model update MVO by blfif-tv-tr03
+* [33m5376447fa7337955cc7e9748a56acce21f77d414[m Clean up the web-js, remove ff-log,ast-node-utils, tracer etc... Add unit-tests Remove legacy code
+*   [33m17fae8a7d297270c73173c994686e46dac24297e[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m  
+[32m|[m * [33meae7af5c2742d4718555cd3aec471db3cb6f71c1[m Model update KSP by blfif-cv-lme01
+[32m|[m * [33m7448c5d37758169ca5fabc51617764f78eb90503[m Model update KSP by blfif-cv-lme01
+* [33m|[m [33m80a8b0ca2b13835644e77579115da14cf3b1d4da[m Return erorr value when REST-request fail
+[33m|[m[33m/[m  
+* [33m7c43e637f75a3cbec17777bb66d149fef058995b[m Remove solution prefixes in output
+* [33m6d40b716c9dffe544fdb88c3daeed7042d44fb24[m Return swagger-alike result
+* [33mfcff126fc0451bde0cb523ebf1db84ff01af2bd3[m Generic input rest-api
+* [33m4b8045e5f4c768eb0bb05ec3a92e0f920f7ce443[m Fix type in IncomeParent02
+*   [33m1f7d3976d4df63782c6d25693bd159e6f7a3f0b5[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m56a2e31be7a88271893c58e609426f968b0b766d[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33mce907f0aa81f75b1807fd6fea82ca269fe304ddd[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33mf4083ff7cc5a5a27daf1ef9e865180b3d8c9324f[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33mfe1f1a332feeb7943023738c4b24201d475f5d65[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33mae9e3744472d593db7c28adc3bfce70f72cffc43[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33m7b95f30a4bb42731a17e4f1df398d75571235bbc[m Model update KSP by blfif-cv-lme01
+[34m|[m * [33mc8d93b1d24ce5d8bdef65c1a1291cb145ba33ad2[m Model update KSP by blfif-cv-lme01
+* [35m|[m [33m2926589f4261b67cbdc4455f0cd10f4053c98b7d[m Remove swagger template
+[35m|[m[35m/[m  
+* [33mbd65155a7d3380f539afd54f7b0be425905939c3[m Model update KSP by blfif-cv-lme01
+* [33m592a14a7c0ea7fa4c6fdfdfcca492b9b79b8396f[m Generate output node swagger
+* [33mfa8679d6d75212457ca9f848421ac7269c94a6c3[m Filter input parameters
+*   [33mcb8e707863912a9baa79bde735b75a3b1d799f97[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[36m|[m[1;31m\[m  
+[36m|[m * [33m76fa211af5cc335feece9d30d02912355787342f[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m384a5d7ea19cc7b6058b222700359a51b1ab27a6[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m473da06bf2737f87b580bd6409fa93f6987aa80b[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33ma5223c0c5ba0e28511ae73f8924bd3e58a74e0e1[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mabfc52aaa6cb29c04914106900d30d326b84b5da[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m4fc7cb979b40b9a10a1ee1230a52442bba8f3605[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m9d1bcf33faa5e493da7bf40f92d3a8510ad9bb2e[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m98dc102fb63abe83fece2cfa1b0dfbb9649c28b1[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m2a0beddb6feffac891260d84d272e78d9fe03106[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m5cf08d66351095da4d528e72d920f696236026cb[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m2ab71ba4a61938d6834d049ab7e228763c7487e7[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mb0fc4e0f8f4a8ecc67f36860bd128fe41a276cdb[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mab721debbf622987cfd30fb36883ae34593eb4fd[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m0b889d19db25a7d4b8829aace9dc3885f5ebf4a7[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m0e401856f117dc09a7cc5f5e6bd243525d94ed10[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mce5c32c59b8a4aa0d432f2f854eeaf5f1abf1951[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mb96797dd6c4ea5475e4cb2813d630c1124f362d3[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m6bc0badc3e2c453bb33d4d38dbadce1540f9f15d[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33ma3916e586af3ebefea6b61de81090f70efc1245b[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m5f7a56a84ba94093702c99613016eb8353485ce2[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33mdd21890bec332c1bfaf47fcb018af17d085df4f7[m Model update KSP by blfif-cv-lme01
+[36m|[m * [33m53911965ff935bcefbd97b348392ac93f7f0872f[m Model update KSP by blfif-cv-lme01
+* [1;31m|[m [33m860b48b703540a9fc5c654947ebce350aab44b09[m Update swagger-generator. Fix [doc] time reference from column based variables Add tests concerning swagger parser
+[1;31m|[m[1;31m/[m  
+*   [33m887040d0d6b911f5d0f7820fc1951bdc5b42bbf8[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m45e68d7da7ad3926a68c20bd0a533cb6b563f8f2[m Model update KSP by blfif-cv-lme01
+* [1;33m|[m [33mff719709d475027cfeeeda2f24e48aacdc0ac8de[m Fix unit-tests
+[1;33m|[m[1;33m/[m  
+*   [33m7c293dca5ef5f3248d4911d3280e44700e163176[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m4634c5e116dcd8b282987c9f190ef292379ab9b3[m Model update KSP by blfif-cv-lme01
+[1;34m|[m * [33m33ff907bc8ed93172f160b8a76c4403e59e63512[m Model update KSP by blfif-cv-lme01
+[1;34m|[m * [33m62a3a76750099c7ab3b818cfcc91d4bed2ab54b7[m Model update KSP by blfif-cv-lme01
+* [1;35m|[m [33m97ec21df0995df2835ac95306ba786db69ad6e6c[m Allow 0 to be valid
+[1;35m|[m[1;35m/[m  
+*   [33m39d90381fa1f3d9353cc6beb080d1d45a7d290d3[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m9dc58a83d6ab209f5bd1df711686963ca9720f52[m Model update KSP by blfif-cv-lme01
+[1;36m|[m * [33ma0ea8d0523312cc38f9d4d6539c64c0e835c6929[m Model update KSP by blfif-cv-lme01
+* [31m|[m [33mec91ec31cf084b0773c1fe36e34e81ced17f59aa[m Fix last or previous lookup
+[31m|[m[31m/[m  
+*   [33m2c2efbd3ba26b8a0537353706a277ebefbb2093d[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m  
+[32m|[m * [33m21cb57df079ac9446103f0d03910cbecdb7415e9[m Model update KSP by blfif-cv-lme01
+[32m|[m * [33m5b0534553d1cfca525b8fee2c98c280f6115b6b2[m Model update KSP by blfif-cv-lme01
+[32m|[m * [33m96fa191ceb47ad3831e9ec5e446ae16a75b4589c[m Model update KSP by blfif-cv-lme01
+[32m|[m * [33m47191c087a3225f6246a73d1611d65b1da06b307[m Model update MVO by blfif-cv-lme01
+[32m|[m * [33mb24dd126f5a96bcc77f3349ab16bda6fdb76856b[m Model update KSP by blfif-cv-lme01
+[32m|[m * [33m1bea47967d7b4655914a313c5526682834d05941[m Model update MVO by blfif-cv-lme01
+* [33m|[m [33m75f67b23835dbf816282b51c858aa77fdf27eaa9[m Fix matrixlookup
+[33m|[m[33m/[m  
+* [33m591974d30235a4896843b6d5e1f0f8ada5e01fe7[m Update excel file
+* [33m161ef94ea8f059db3ecbbefc0cd938347302747f[m Add column shifter
+* [33m74eac80b7e9b88e98a0e06dbf67e80e52675d821[m Model update KSP by blfif-tv-tr03
+* [33m9fa99f96978d8cd1449b52cb77a9e7780f6f8566[m Model update KSP by blfif-tv-tr03
+* [33m86833f1ed9e21c4bc9e2446a2fa8e2fb58ec0f08[m Model update KSP by blfif-tv-tr03
+*   [33m4fc29f33b2e8fe9c64b55e7c9d47a11707cb8b3a[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33mabf4c48adfe29c8164743deb63a6a321ad0dce79[m Model update KSP by blfif-tv-tr03
+* [35m|[m [33m9b5abb242718f78760b7f489499915c67378966a[m update dit lijkt de meeste potentie te hebben
+* [35m|[m   [33m41f9c735b1aba06527dd838e37c55bb5a0e3c821[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[36m|[m[35m\[m [35m\[m  
+[36m|[m [35m|[m[35m/[m  
+[36m|[m *   [33m2632165cf7c570c70bf5e90f0bb41406862d339e[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[36m|[m [1;32m|[m[1;33m\[m  
+[36m|[m * [1;33m|[m [33mdf05aa491e4384c297cdbdb439ac3491a93736b0[m Add formula information pdf,
+* [1;33m|[m [1;33m|[m [33m168a0c7e4081e553178478d74651a873bdb24491[m update
+* [1;33m|[m [1;33m|[m   [33mb18e08d3ca7091db68d1b3e3a5b29404e8f33586[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;34m|[m[1;33m\[m [1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m [1;33m|[m[1;33m/[m[1;33m|[m   
+[1;34m|[m * [1;33m|[m [33m9f5a9d9060b104205593f86ad01a24a61bdb342b[m Model update KSP by blfif-tv-tr03
+* [1;35m|[m [1;33m|[m   [33m75bf2dc3501bd064e1791e43e8c807e306467391[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;36m|[m[1;35m\[m [1;35m\[m [1;33m\[m  
+[1;36m|[m [1;35m|[m[1;35m/[m [1;33m/[m  
+[1;36m|[m * [1;33m|[m [33mbce05eb33c968382bcb38107dda268ca16c37d21[m Model update KSP by blfif-tv-tr03
+* [31m|[m [1;33m|[m   [33m482b53ed8a2ef40fffac1f64170da9a15f9ccc93[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[32m|[m[31m\[m [31m\[m [1;33m\[m  
+[32m|[m [31m|[m[31m/[m [1;33m/[m  
+[32m|[m * [1;33m|[m [33mfdcadd24a159ab7f9253da0b88f86bb743880589[m Model update KSP by blfif-tv-tr03
+[32m|[m * [1;33m|[m [33mef1a39ed4fdf595f40aa9193fbd1356763cc4bf2[m Model update KSP by blfif-tv-tr03
+[32m|[m * [1;33m|[m [33m8101ad22fdf66ebc4f9c64d4bcd36a2bb092051c[m Model update KSP by blfif-tv-tr03
+* [33m|[m [1;33m|[m [33m435d5959483b0dcc9df84b593400e34ae89e8bc3[m update
+* [33m|[m [1;33m|[m [33m11c294d2393286c0df1d76a9dcf40e6b00da4d43[m update
+* [33m|[m [1;33m|[m   [33m507112d5932993a7f3f628b16797253c2ffbe7fd[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[34m|[m[33m\[m [33m\[m [1;33m\[m  
+[34m|[m [33m|[m[33m/[m [1;33m/[m  
+[34m|[m * [1;33m|[m [33m813c592ab9bfb286e11bc8b8e3c63d6a61444465[m README edited online with Bitbucket
+[34m|[m [1;33m|[m[1;33m/[m  
+[34m|[m * [33mfbe0e107c08b624a7b73388f3e3cbc0c28dd65d6[m reload when pressing update
+[34m|[m * [33me4c9d3e89e97899355ee399cb24fe33d88535dec[m README edited online with Bitbucket
+[34m|[m * [33m851cd3ad0d6ef3a767707e3a99ef51456252b712[m Attempt to fix proxy
+[34m|[m * [33m8a04fdd2aafa695e63fc076bb715803e792188f2[m Add exception handling
+[34m|[m * [33m5389686f8169ef3c4d65307221f9593f9e023564[m README edited online with Bitbucket
+[34m|[m * [33m1889f8a2a992cd78a023db3481d5cedbfc06cbb7[m README edited online with Bitbucket
+[34m|[m *   [33m9d907fb534960fe01739e354ad8c9ef6091e68ef[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m * [33m0333efd25cd511fc082559d57054ad262efea228[m test commit
+[34m|[m [36m|[m * [33m1643dee8e47055c6552be6762c24c2af584cb908[m Update readme
+[34m|[m * [1;31m|[m [33m69e4a6e16652a3c17d7b8a7f30e7861624f48b87[m auto-check updates on start
+[34m|[m [1;31m|[m[1;31m/[m  
+[34m|[m * [33m246417e6a408f50a6a73851397d7dfce9c29bcde[m Hide update button when no changes available
+[34m|[m * [33m3255463757b252ada760a86795d16c64a91fb541[m Fix bug in self-updating mechanism
+[34m|[m * [33mcf4d62f1c0aa4ec2be6d7932364cbafe410ecd6d[m Update readme
+[34m|[m *   [33me4efe32c148d61810588e52239c11b6ba3985f22[m fix merge conflicts
+[34m|[m [1;32m|[m[1;33m\[m  
+[34m|[m [1;32m|[m * [33mec01462b4260ac545756cf724ca927f52be92687[m Update KSP by DEMO
+[34m|[m [1;32m|[m * [33m7417e486939d8976e703055fc47ab2c75907bcbf[m Update KSP by DEMO
+[34m|[m [1;32m|[m * [33md3d21f80fd80a2e161833b5b7409e46209bab3f2[m Update MVO by DEMO
+[34m|[m [1;32m|[m * [33me9653be3262a8bc6338836030821056c71114c9d[m Update KSP by DEMO
+[34m|[m [1;32m|[m * [33mb981d76dbc1775ee1ce9387c3862f82e705fbae9[m Update KSP by DEMO
+[34m|[m [1;32m|[m * [33m812aa5d7a85694706107bfa423b3a6934db7b5b0[m Update KSP by DEMO
+[34m|[m [1;32m|[m * [33m90a036160d11cd15f4d7181a353a38eddc93df46[m Update KSP by DEMO
+[34m|[m * [1;33m|[m [33m71f9b1cf460f4ff4139d4b885a92c6e23e01dd1b[m Simplify host-lookup, use environment variable HOST. Fix ecel lookup, docker- hostname Upgrade Generated Swagger docs
+* [1;33m|[m [1;33m|[m   [33m44a34e8d76527af6af7b372d606637d2459ac92c[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;34m|[m[1;33m\[m [1;33m\[m [1;33m\[m  
+[1;34m|[m [1;33m|[m [1;33m|[m[1;33m/[m  
+[1;34m|[m [1;33m|[m[1;33m/[m[1;33m|[m   
+[1;34m|[m * [1;33m|[m [33m952477b9ecc6e60d3b5efefab6a98c27e1e920e1[m Update KSP by DEMO
+[1;34m|[m * [1;33m|[m [33mb21fb41ac9e8f4e908d4b8f42a42a7511d7f43ca[m Update KSP by DEMO
+[1;34m|[m * [1;33m|[m [33ma93bd7c3058bd89e1d3642870d6a32a5c16eff99[m Update KSP by DEMO
+* [1;35m|[m [1;33m|[m   [33m9dd0b9c8c9463e507e59960e2e3241f112da89d7[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;36m|[m[1;35m\[m [1;35m\[m [1;33m\[m  
+[1;36m|[m [1;35m|[m[1;35m/[m [1;33m/[m  
+[1;36m|[m * [1;33m|[m [33m6943663fcc4a12a52c283b71d38fed31d82a04cf[m Update KSP by DEMO
+* [31m|[m [1;33m|[m [33mee6d591542db0b3504189fff21a83052cd4fa250[m gulp gaat ook niet werken
+* [31m|[m [1;33m|[m [33m98dbd3444c9f923609738f4c4e5a6ae903d35e9b[m update
+* [31m|[m [1;33m|[m   [33m1ce4b9c23311864bfdbf2a1dc28b2d532cbee33e[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[32m|[m[31m\[m [31m\[m [1;33m\[m  
+[32m|[m [31m|[m[31m/[m [1;33m/[m  
+[32m|[m * [1;33m|[m [33mda738f6571035ce58eb4f682315d13d191b00455[m Update KSP by DEMO
+* [33m|[m [1;33m|[m   [33m9b208cf52d2a4ac9804adce313652d011e09b845[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[34m|[m[33m\[m [33m\[m [1;33m\[m  
+[34m|[m [33m|[m[33m/[m [1;33m/[m  
+[34m|[m * [1;33m|[m [33m5e19ba5912049f08777cd96a37f0ddbff684e0b3[m Update KSP by DEMO
+[34m|[m * [1;33m|[m [33m3af7574f9f5ae545752dd307e485635751ce1977[m Update PLAYAROUND by DEMO
+[34m|[m * [1;33m|[m [33mcbccea5a41b5d032eb25f8a4c69e9d8bae4d9e54[m Update PLAYAROUND by DEMO
+* [35m|[m [1;33m|[m [33md2c4468019b57b007267cd3349a0a65cc3cdcb14[m update
+* [35m|[m [1;33m|[m [33mc3d34f068a9abc032e6e48d02183ded250960c16[m update
+* [35m|[m [1;33m|[m   [33ma244ee717d9215902c95ae8a498683c8673ae439[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[36m|[m[35m\[m [35m\[m [1;33m\[m  
+[36m|[m [35m|[m[35m/[m [1;33m/[m  
+[36m|[m * [1;33m|[m [33m51553e7192fbede713b6df1b86d18876ad6be770[m Update MVO by DEMO
+[36m|[m [1;33m|[m[1;33m/[m  
+[36m|[m * [33m9b67f6ce2158aab2d661e7a92c62d8975a475cdd[m Change function information link
+* [1;31m|[m [33m276f87594d7da1bfe4b6626e0f0ca626e1e35f00[m bundledDependencies
+* [1;31m|[m   [33m731d6cf4b65c128f100d3ba98c8781b832702829[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;32m|[m[1;31m\[m [1;31m\[m  
+[1;32m|[m [1;31m|[m[1;31m/[m  
+[1;32m|[m *   [33ma0474abab900e155a53193102cc15380891a4fd8[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m [1;34m|[m[1;35m\[m  
+[1;32m|[m [1;34m|[m * [33mddf77c0987ce6613ed5275408b1067a0a8d78463[m Update HAPPYWORLD by DEMO
+[1;32m|[m [1;34m|[m * [33mb32f24c3d578b5a7a7a13f13d97a305e57d70f4d[m Update HAPPYWORLD by DEMO
+[1;32m|[m [1;34m|[m * [33m7633f58a35a0fd505d9b1c85ee6c87fc9257a382[m test
+[1;32m|[m [1;34m|[m * [33mb857962ed16cad09d03b9c84f9b44036bb6b46e0[m Update KSP by DEMO
+[1;32m|[m * [1;35m|[m [33madf71a714e8e9565da54794836aa3262e4ae0343[m Add tupleDefinition flag
+[1;32m|[m * [1;35m|[m [33m343dd8d4142506f0bf4b8431b259a91b886e6353[m Fix for currency types
+* [1;35m|[m [1;35m|[m [33m467292a75fd2c2f587c91a2aba544fbae4a065e2[m update
+[1;35m|[m [1;35m|[m[1;35m/[m  
+[1;35m|[m[1;35m/[m[1;35m|[m   
+* [1;35m|[m [33mf11ca1ad30c7f98d7d33e354a38d3e25a1b149da[m Update KSP by DEMO
+* [1;35m|[m [33m26e61ae74dff5ee0e78d297e0343416a5a9e5917[m Update KSP by DEMO
+* [1;35m|[m   [33mc907ea169e2ddee6b42801298946606be3971913[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[1;36m|[m[31m\[m [1;35m\[m  
+[1;36m|[m * [1;35m|[m [33mb433a679ae3d3f09da5740951ee8a012fb00c4cc[m Update KSP by DEMO
+[1;36m|[m * [1;35m|[m [33m32b956ab95f2c21d26952be5d3bbe863cc39526a[m Update KSP by DEMO
+[1;36m|[m [1;35m|[m[1;35m/[m  
+[1;36m|[m *   [33m95b9da5a37bdad176ad545fe0405a38188cff1ec[m Fix merge conflicts
+[1;36m|[m [32m|[m[33m\[m  
+[1;36m|[m * [33m|[m [33m3722541974ded246557c5c01b832185447256bf7[m update proxy reroutes Add formula-information to the IDE Add tuple properties in ffl2 parser Load FFL files with ffl2 parser in rest-api
+* [33m|[m [33m|[m [33m19aa02b68ec2c0e4d674f1a4ebab4d62414ca93e[m update
+* [33m|[m [33m|[m [33m10f743f359cf441eb544bac28f8450770a9ce9d0[m betere aanzet om de api te hosten vanuit azure
+[33m|[m [33m|[m[33m/[m  
+[33m|[m[33m/[m[33m|[m   
+* [33m|[m   [33me778d2f62d1fb9b58d9f942707c2d4ff475417c2[m Merge branch 'master' of https://stash.topicus.nl/scm/ff/fesjs
+[34m|[m[35m\[m [33m\[m  
+[34m|[m * [33m|[m [33m5d733095bc07647e7bb2476a5624d1b9ba300356[m Update MVO by DEMO
+[34m|[m [33m|[m[33m/[m  
+[34m|[m *   [33m6445ca1fa1e77beb3525641a31cc114e59273fa6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33mbe1b9b1cc641477d2a5001b98e8164a606ea8ffa[m Prototype SWAGGER DEF generate
+* [1;31m|[m [1;31m|[m [33m19b46b89d4fee33a14e0e92c1fcb8974d881b080[m server.js voor azure
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33mc5214519d503885660fa8d84c3f5bd285223666b[m azure api-only
+[1;31m|[m[1;31m/[m  
+*   [33m9bd7db7082676992cb42ef254bec0db20df38c71[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m523291a2d628be6920da86c880c33458f2b4bf7d[m Update KSP by DEMO
+[1;32m|[m * [33m6d8816d4badc6b372107228b6354189632c890f6[m Update KSP by DEMO
+[1;32m|[m * [33md835d2aacd53e35152f62b33fba77b79696390d2[m Update KSP by DEMO
+[1;32m|[m * [33m6932055953a396a3784655112abf80cf26a11e5e[m Update KSP by DEMO
+* [1;33m|[m [33mc92a48681590dc20e12beb8b71ca8e6d40f3f023[m make port dynamic
+* [1;33m|[m [33m83313717cf02cc02fa204077231c6f309661ce24[m Add api-only
+[1;33m|[m[1;33m/[m  
+* [33m37a7dc9da2b32eb7a3e9a81d7d65bea2d817fecd[m revert old tests, fix Case function. convert number for choices
+* [33mf052e1cdbc7099abefdc4e4f0a844e3e5c20b874[m Update KSP by DEMO
+* [33m014731dbc25c3d0ed866f4344f42a97f72fe8ddc[m Update KSP by DEMO
+* [33m0dbd408ed3ca20d32d8987001ef414e8066cb415[m Update KSP by DEMO
+* [33md8965f7c96caf14e0393f15c4f8f60cc86597750[m Update KSP by DEMO
+* [33mb7121efc84f501adb2808afed35d30aaa38d4669[m Update KSP by DEMO
+* [33m3557ba6f6636ba1ec3e32b12d679c5148b21e327[m Update KSP by DEMO
+* [33m31a3096134bda3f82716a5d82f696aa9f940ba0f[m Fix ffl and excel lookup
+*   [33mb14d0789fbe6ac27598bcd6f8d43aeb47f75cf95[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;34m|[m[1;35m\[m  
+[1;34m|[m * [33m689062b7998f6a9df7dc7f1fe083c39f223db525[m Update KSP by DEMO
+[1;34m|[m * [33m36cd4424a199776ffc3afcf41e3d2a240386d234[m Update KSP by DEMO
+* [1;35m|[m [33m69a4fd231cbcd9fdf7ac222d3a217ebd07aa1f82[m Add excel api to startup
+[1;35m|[m[1;35m/[m  
+* [33m61af4b228efff9db9a2e75ccf550cb912bda719d[m Reinit fflexporttest
+* [33mddf75399505031412ff3df44166bd26c6e6941c0[m Remove legacy test
+* [33ma80763ee073dad9da91f09b1f05b158a5a5e76b8[m remove test
+* [33meb88197865be3ca47ec0ab7587dd799fff3a6b30[m add fflimporttest
+* [33ma821ff51d1f29ee1922ce9e969830e9ff6bedfcf[m test decorator
+* [33m7f5e5e25750b57ad34f6b6f6abb9ac4268d4d0b5[m Update KSP by DEMO
+* [33ma74de34ff15f131edba5e4eb4a44cb0316c6f859[m Update KSP by DEMO
+* [33m978510cf71cc20bd1c646e0ed49d475d1ebae68e[m disable ffllimporttest
+* [33m602db40ffb4b296d259b94d33612914e381fe853[m remove hypotheektest
+* [33me78c2f8a773aa62889f3b5645b5804a9ec4fdd46[m Add matrix download-file
+*   [33mc47c5c33a53379837b8ded6da64725037749cb3f[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33m82a4d7a52a886b0045a12417fd89e2e942fa3279[m Update KSP by DEMO
+[1;36m|[m * [33me9dec7499baa888c0eb75d33de4e8cfabe1a7fee[m Update KSP by DEMO
+[1;36m|[m * [33m7474233a3bb8400faf9024f929c11cb7e0a48db5[m Update KSP by DEMO
+[1;36m|[m * [33md067772f8a0595827d02ccf269cb16d67bec7e39[m Update KSP by DEMO
+[1;36m|[m * [33me7ea95345300e7d8ee3790d41a99a59261dc1a4e[m Update KSP by DEMO
+[1;36m|[m * [33m7aa956bb51526d544d7a4f8af4ed73ddb64edd83[m Update KSP by DEMO
+[1;36m|[m * [33mf9479ad448d52652e7dbcbc5b595900bf0fe16e4[m Update KSP by DEMO
+[1;36m|[m * [33m02ff086377ff599c15c43ec532d74a62a5d4d5ca[m Update KSP by DEMO
+[1;36m|[m * [33me595a61ca9f9b8d1f9b0a8b6e1ad15627451ebf5[m Update KSP by DEMO
+[1;36m|[m * [33m5f903769b628387131637c19c78710ef77014a40[m Update KSP by DEMO
+[1;36m|[m * [33m4568ca2a5892856fe960f4b363197a08137fe31d[m Update KSP by DEMO
+[1;36m|[m * [33mf2b7760939a38b19083569df20f69e0eef4c6e48[m Update KSP by DEMO
+* [31m|[m [33m71dc73c1d2e092d06fe196835fbbb55b0e25bede[m Add model specific excel sheet lookup, now excel sheets {MODELNAME}.xlsx are loaded with the model if exists
+[31m|[m[31m/[m  
+*   [33m133d3a8fea1db6be8b099ff152414bdb90a79b5c[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[32m|[m[33m\[m  
+[32m|[m * [33m356fab6a5a8c03d2a20732d9831d6920f49ea6b3[m Update KSP by DEMO
+[32m|[m * [33ma2ecfe2dd24848c0e9e1fcf66400ca094163f38e[m Update KSP by DEMO
+* [33m|[m [33md833e49b3a8bc0273b2e4839a35f95076108881f[m Deprecate legacy ffl-parser, use the new parser to compile.
+[33m|[m[33m/[m  
+*   [33mb80d6817a88921f1b45ed5070f8e2c5be3e879f6[m Merge branch 'master' of ssh://stash.topicus.nl:7999/ff/fesjs
+[34m|[m[35m\[m  
+[34m|[m * [33m2b3edaf0970569e6230c810745abe02d4899f51a[m Update KSP by DEMO
+[34m|[m * [33me7cbd96b1176adfe8bc4feaf672302b3f63219e0[m Update KSP by DEMO
+[34m|[m * [33ma099bf1acb3ca4846caa17f99038170f4f22823c[m Update KSP by DEMO
+[34m|[m * [33m8681fcce3cb0ef97df4b160701c7b1c3f84168a1[m Update KSP by DEMO
+[34m|[m * [33mdd29faa59d2520a3ce7b30daaa1cfafc9ed6b022[m Update KSP by DEMO
+[34m|[m * [33m0cd598952e6eba0c66ada707535eea3a02cefac5[m Update KSP by DEMO
+[34m|[m * [33m8b74731ec33302eee254ace9c177e55a3baf0794[m Update KSP by DEMO
+[34m|[m * [33m90eeb43591e1139199c81605a7beff7d43866a2f[m Update KSP by DEMO
+[34m|[m * [33m0209ec8cc0a31cb3bfadce959e30d0df23982b91[m Update KSP by DEMO
+[34m|[m * [33mad30588dd49f7164873a0a84d58c10fc807a09df[m Update KSP by DEMO
+[34m|[m * [33m8da247df2e91a5e3b0d09b02902aaed93253d205[m Update MVO by DEMO
+[34m|[m * [33m242b8e177bccab1534f19ee092b35d82edfdf980[m Update MVO by DEMO
+[34m|[m * [33m7e97ad9de3f9e18c2aefc317de8faffd7292740b[m Update MVO by DEMO
+[34m|[m * [33m6367c93c9c6350851b465b5f95ae19a2fa94071a[m Update MVO by DEMO
+[34m|[m * [33mb3ac7c1db4f41522d564b29ba34dcac5f9b0a8f0[m Update KSP by DEMO
+* [35m|[m [33m65e985530738b719be2985a78a7cfb14e8f19482[m remove paths towards git-connect/resources from units-tests. They are leading to test-fails because the model is getting changed.
+[35m|[m[35m/[m  

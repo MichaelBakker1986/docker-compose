@@ -1,49 +1,79 @@
 /**
  * user friendly API
  * TODO: Move tuple related work to FESFacade
+ * just let it inject into the FESFacade
  */
-require("./exchange_modules/ffl/RegisterPlainFFLDecorator");//just let it inject into the FESFacade
-const log = require("log6");
-const WorkBook = require("./src/JSWorkBook");
-const Context = require("./src/Context");
+import { Context }                           from './src/Context'
+import { AuditTrail }                        from './src/AuditTrail'
+import { JSWorkBook as WorkBook }            from './src/JSWorkBook'
+import JSVisitor                             from './src/JSVisitor'
+import { Register }                          from './src/Register'
+import FormulaService                        from './src/FormulaService'
+import ValueFacade                           from './src/ValueFacade'
+import PropertiesAssembler                   from './src/PropertiesAssembler'
+import YAxis                                 from './src/YAxis'
+import XAxis                                 from './src/XAxis'
+import resources                             from './resources/CustomImport.json'
+import TimeAxis                              from './src/TimeAxis'
+import SolutionFacade                        from './src/SolutionFacade'
+import JSONParser                            from './exchange_modules/jsonvalues/jsonvalues'
+import WebExportParser                       from './exchange_modules/presentation/webexport'
+import LMEParser                             from './exchange_modules/lme/lmeparser'
+import { debug, DEBUG, error, trace, TRACE } from 'log6'
+import {
+	COLUMN,
+	DETAIL_INTERVAL,
+	DOCUMENT,
+	ENCODING,
+	FUNCTION_TYPE,
+	NUMBER,
+	OBJECT_TYPE,
+	STRING_TYPE,
+	TITLE,
+	VALUE,
+	VISIBLE,
+	LOCKED
+}                                            from './src/Constants'
 
 function LMEFacade() {
 }
 
 LMEFacade.prototype.initializeFFlModelData = function(data, path) {
-    var JSWorkBook;
-    if (path.indexOf('KSP') > -1) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
-        JSWorkBook = new WorkBook(new Context());
-    } else {
-        const TimeAxis = require('./src/TimeAxis');
-        const timeAxis = new TimeAxis(require('./resources/CustomImport'));
-        JSWorkBook = new WorkBook(new Context(), timeAxis, 'detl');
-    }
-    JSWorkBook.importFFL(data);
-    const validate = JSWorkBook.validateImportedSolution();
-    JSWorkBook.fixProblemsInImportedSolution();
-    const validateFeedback = JSWorkBook.validateImportedSolution();
-    if (validateFeedback.valid) {
-        //valid
-        if (log.DEBUG) log.debug("Initialized model [" + JSWorkBook.getSolutionName() + "]");
-    } else {
-        if (log.DEBUG) log.error(validateFeedback);
-        throw Error("unable to initialize");
-    }
-    return JSWorkBook;
-};
+	let JSWorkBook
+	if (path.includes('KSP')) {//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
+		JSWorkBook = new WorkBook(new Context())
+	} else {
+		JSWorkBook = new WorkBook(new Context(), new TimeAxis(resources), DETAIL_INTERVAL)
+	}
+	JSWorkBook.importFFL(data)
+	JSWorkBook.validateImportedSolution()
+	JSWorkBook.fixProblemsInImportedSolution()
+	const validateFeedback = JSWorkBook.validateImportedSolution()
+	if (validateFeedback.valid) {
+		if (DEBUG) debug(`Initialized model [${JSWorkBook.getSolutionName()}]`)
+	} else {
+		if (DEBUG) error(validateFeedback)
+		throw Error(`Unable to initialize model ${JSWorkBook.getSolutionName()}`)
+	}
+	return JSWorkBook
+}
 /**
  * TODO: Inject this functions into the FunctionMap instead of global.
  * @param plugin
  */
-LMEFacade.prototype.addFunctions = function(plugin) {
-    var functions = [];
-    for (var functionName in plugin.entries) {
-        functions.push(functionName);
-        global[functionName] = plugin.entries[functionName];
-    }
-    if (log.TRACE) log.trace('Added fes-plugin [%s] functions [%s]', plugin.name, functions);
-};
+LMEFacade.prototype.registerParser = function() {
+	for (let i = 0; i < arguments.length; i++) SolutionFacade.addParser(arguments[i])
+}
+LMEFacade.prototype.addFunctions = function() {
+	for (let i = 0; i < arguments.length; i++) {
+		const plugin = arguments[i]
+		Object.assign(global, plugin.entries)
+		/*Object.keys(plugin.entries).forEach(function_name => {
+		 global[function_name] = plugin.entries[function_name]
+		 })*/
+		if (TRACE) trace(`Added fes-plugin [${plugin.name}] functions [${Object.keys(plugin.entries)}]`)
+	}
+}
 /**
  * rowId - VariableName
  * @Optional value - new value
@@ -51,158 +81,171 @@ LMEFacade.prototype.addFunctions = function(plugin) {
  */
 // Convert tuple index to tuple number
 
-LMEFacade.prototype.getValue = function(context, rowId, columncontext, value, tupleindex) {
-    columncontext = columncontext || 0;
-    const fesContext = new Context();
-    fesContext._values = context.values;
-    const JSWorkBook = new WorkBook(fesContext);
-    JSWorkBook.columns = context.columns || 2;
-    JSWorkBook.properties = context.properties || JSWorkBook.properties;
-    //prepare the workbook and context to match current appscope
-    if (!context.isset) {
-        JSWorkBook.updateValues();
-        context.isset = true;
-    }
-    if (tupleindex != null) {
-        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
-        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
-    }
-    //setvalue
-    if (value !== undefined) {
-        //choice(select) requests
-        JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', columncontext, tupleindex);
-        return [];
-    } else {
-        //getValue
-        var values = [];
-        var rootNode = JSWorkBook.getSolutionNode(rowId);
-        if (rootNode) {
-            JSWorkBook.walkProperties(rootNode, function(node, type, depth, yax) {
-                values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, columncontext, yax));
-            }, JSWorkBook.resolveY(tupleindex), null, 0);
-        } else {
-            values.push({
-                variable: rowId
-            });
-        }
-        return values;
-    }
-};
-
-LMEFacade.prototype.getObjectValues = function(context, rowId, tupleindex) {
-
-    var fesContext = new Context();
-    var JSWorkBook = new WorkBook(fesContext);
-    JSWorkBook.importValues(context.values)
-    JSWorkBook.columns = context.columns || 2;
-    JSWorkBook.properties = context.properties || JSWorkBook.properties;
-    const values = [];
-    if (!context.isset) {
-        JSWorkBook.updateValues();
-        context.isset = true;
-    }
-    if (tupleindex != null) {
-        tupleindex = JSWorkBook.tupleIndexForName(rowId, tupleindex);
-        if (tupleindex == -1) tupleindex = JSWorkBook.insertTuple(rowId, tupleindex);
-    }
-    var rootNode = JSWorkBook.getSolutionNode(rowId);
-    const flattenValues = {}
-    if (rootNode) {
-        JSWorkBook.visitProperties(rootNode, function(node, type, innerTreeDepth, yax) {
-            const nodeName = node.rowId;
-            const parentName = node.parentName.split("_").slice(0, -1).join("_")
-            const columns = node.frequency == 'document' ? 0 : context.columns;
-            for (var i = 0; i <= columns; i++) {
-                const appendix = columns == 0 ? "" : "$" + i
-                flattenValues[node.rowId + appendix] = {
-                    parent: parentName + appendix,
-                    name  : nodeName,
-                    value : getValueObject(JSWorkBook, node.solutionName + "_" + node.rowId, i, yax),
-                    data  : []
-                }
-            }
-        }, JSWorkBook.resolveY(0).parent, null, 0)
-        //reassemble results
-        for (var key in flattenValues) {
-            if (flattenValues[flattenValues[key].parent]) {
-                flattenValues[flattenValues[key].parent][flattenValues[key].name] = (flattenValues[key].value)
-            } else {
-                //array variants
-                const parentName = flattenValues[key].parent.split("$")[0];
-                if (flattenValues[parentName]) {
-                    flattenValues[parentName].data.push(flattenValues[key])
-                }
-            }
-        }
-        for (var key in flattenValues) {
-            delete flattenValues[key].parent
-            delete flattenValues[key].name
-            if (flattenValues[key].data.length == 0) delete flattenValues[key].data
-        }
-    } else {
-        values.push({
-            variable: rowId
-        });
-    }
-    /**
-     * Values are not bound.
-     */
-    return flattenValues[rowId.split("_").slice(1).join("_")];
+LMEFacade.prototype.getValue = function(context, rowId, column_context = 0, value, tuple_index) {
+	const fesContext = new Context()
+	fesContext._values = context.values
+	const JSWorkBook = new WorkBook(fesContext)
+	JSWorkBook.columns = context.columns || 2
+	JSWorkBook.properties = context.properties || JSWorkBook.properties
+	//prepare the workbook and context to match current appscope
+	if (!context.isset) {
+		JSWorkBook.updateValues()
+		context.isset = true
+	}
+	if (tuple_index != null) {
+		tuple_index = JSWorkBook.tupleIndexForName(rowId, tuple_index)
+		if (tuple_index === -1) tuple_index = JSWorkBook.insertTuple(rowId, tuple_index)
+	}
+	if (value !== undefined) {
+		//choice(select) requests
+		JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', column_context, tuple_index)
+		return []
+	} else {
+		//getValue
+		const values = []
+		const rootNode = JSWorkBook.getSolutionNode(rowId)
+		if (rootNode) {
+			JSWorkBook.walkProperties(rootNode, function(node, type, depth, yax) {
+				values.push(getEntry(JSWorkBook, `${node.solutionName}_${node.rowId}`, column_context, yax))
+			}, JSWorkBook.resolveY(tuple_index), null, 0)
+		} else {
+			values.push({ variable: rowId })
+		}
+		return values
+	}
 }
 
-function getValueObject(workbook, rowId, columncontext, yAxis) {
-    const dataEnty = {}
-    for (var type in workbook.properties) {
-        dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, columncontext, yAxis);
-    }
-    return dataEnty;
+LMEFacade.prototype.getObjectValues = function(context, rowId, tuple_index) {
+	const fesContext = new Context()
+	const JSWorkBook = new WorkBook(fesContext)
+	JSWorkBook.importValues(context.values)
+	JSWorkBook.columns = context.columns || 2
+	JSWorkBook.properties = context.properties || JSWorkBook.properties
+	const values = []
+	if (!context.isset) {
+		JSWorkBook.updateValues()
+		context.isset = true
+	}
+	if (tuple_index != null) {
+		tuple_index = JSWorkBook.tupleIndexForName(rowId, tuple_index)
+		if (tuple_index === -1) tuple_index = JSWorkBook.insertTuple(rowId, tuple_index)
+	}
+	const rootNode = JSWorkBook.getSolutionNode(rowId)
+	const flattenValues = {}
+	if (rootNode) {
+		JSWorkBook.visitProperties(rootNode, function(node, type, innerTreeDepth, yax) {
+			const nodeName = node.rowId
+			const parentName = node.parentName.split('_').slice(0, -1).join('_')
+			const columns = node.frequency === 'document' ? 0 : context.columns
+			for (let i = 0; i <= columns; i++) {
+				const appendix = columns === 0 ? '' : `$${i}`
+				flattenValues[node.rowId + appendix] = {
+					parent: parentName + appendix,
+					name  : nodeName,
+					value : getValueObject(JSWorkBook, node.solutionName + '_' + node.rowId, i, yax),
+					data  : []
+				}
+			}
+		}, JSWorkBook.resolveY(0).parent, null, 0)
+		//reassemble results
+		Object.keys(flattenValues).forEach(key => {
+			if (flattenValues[flattenValues[key].parent]) {
+				flattenValues[flattenValues[key].parent][flattenValues[key].name] = (flattenValues[key].value)
+			} else {
+				//array variants
+				const parentName = flattenValues[key].parent.split('$')[0]
+				if (flattenValues[parentName]) {
+					flattenValues[parentName].data.push(flattenValues[key])
+				}
+			}
+		})
+		for (let key in flattenValues) {
+			delete flattenValues[key].parent
+			delete flattenValues[key].name
+			if (flattenValues[key].data.length === 0) delete flattenValues[key].data
+		}
+	} else {
+		values.push({ variable: rowId })
+	}
+	/**
+	 * Values are not bound.
+	 */
+	return flattenValues[rowId.split('_').slice(1).join('_')]
+}
+
+function getValueObject(workbook, rowId, column_context, yAxis) {
+	const dataEntry = {}
+	Object.keys(workbook.properties).forEach(type => {
+		dataEntry[type] = workbook.getSolutionPropertyValue(rowId, type, column_context, yAxis)
+	})
+	return dataEntry
 }
 
 /**
  * Given properties in workbook return all values for given columns
  * @param workbook
  * @param rowId
- * @param columncontext
+ * @param column_context
+ * @param yAxis
  * @returns {Array}
  */
-function getEntry(workbook, rowId, columncontext, yAxis) {
-    var outputData = [];
-    var columnStart = columncontext;
-    var columnEnd = workbook.columns;
-    var variable = workbook.getSolutionNode(rowId, 'value');
+function getEntry(workbook, rowId, column_context, yAxis) {
+	let outputData = []
+	const columnStart = column_context
+	let columnEnd = workbook.columns
+	const variable = workbook.getSolutionNode(rowId, 'value')
 
-    if (variable && variable.frequency === 'document') {
-        columnEnd = columnStart;
-    }
-    var tupleStart = 0;
-    var tupleEnd = 0;
+	if (variable && variable.frequency === 'document') {
+		columnEnd = columnStart
+	}
+	/*
+	 let tupleStart = 0
+	 let tupleEnd = 0
+	 */
 
-    // If frequency = column: return multiple columns
-    for (var xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
-        var dataEnty = {};
-        outputData.push(dataEnty);
+	// If frequency = column: return multiple columns
+	for (let xAxisCounter = columnStart; xAxisCounter <= columnEnd; xAxisCounter++) {
+		let dataEntry = {}
+		outputData.push(dataEntry)
 
-        // For properties of the variable
-        for (var type in workbook.properties) {
-            dataEnty[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis);
+		// For properties of the variable
+		Object.keys(workbook.properties).forEach(type => {
+			dataEntry[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis)
 
-            if (columnStart !== columnEnd || columnStart > 0) {
-                dataEnty.column = xAxisCounter;
-            }
-            dataEnty.variable = variable.rowId;
-            if (variable.tuple) {
-                dataEnty.tupleIndex = yAxis.index;
-            }
-            dataEnty.hash = yAxis.hash + xAxisCounter + 0;
-        }
-    }
-    //if there is only one column, the exported value is not presented to be an array
-    if (columnStart == columnEnd) {
-        outputData = outputData[0];
-    }
-    return outputData;
+			if (columnStart !== columnEnd || columnStart > 0) {
+				dataEntry.column = xAxisCounter
+			}
+			dataEntry.variable = variable.rowId
+			if (variable.tuple) {
+				dataEntry.tupleIndex = yAxis.index
+			}
+			dataEntry.hash = yAxis.hash + xAxisCounter + 0
+		})
+	}
+	//if there is only one column, the exported value is not presented to be an array
+	if (columnStart === columnEnd) {
+		outputData = outputData[0]
+	}
+	return outputData
 }
 
-exports.JSWorkbook = WorkBook;
-exports.LMEContext = WorkBook;
-exports.LMEFacade = LMEFacade.prototype;
+export {
+	Context,
+	WorkBook,
+	SolutionFacade,
+	JSONParser,
+	LMEParser,
+	WebExportParser,
+	YAxis,
+	ValueFacade,
+	PropertiesAssembler,
+	FormulaService,
+	JSVisitor,
+	TimeAxis,
+	XAxis,
+	Register,
+	resources,
+	AuditTrail,
+	DOCUMENT, VALUE, VISIBLE,LOCKED, DETAIL_INTERVAL, NUMBER, COLUMN, TITLE, OBJECT_TYPE, FUNCTION_TYPE, STRING_TYPE, ENCODING
+}
+export default LMEFacade.prototype

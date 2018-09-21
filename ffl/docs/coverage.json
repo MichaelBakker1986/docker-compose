@@ -1,0 +1,224 @@
+{
+  "coverage": "9.74%",
+  "expectCount": 154,
+  "actualCount": 15,
+  "files": {
+    "ffl/AuditTrail.js": {
+      "expectCount": 7,
+      "actualCount": 1,
+      "undocumentLines": [
+        10,
+        15,
+        18,
+        21,
+        25,
+        30
+      ]
+    },
+    "ffl/ChangeManager.js": {
+      "expectCount": 9,
+      "actualCount": 3,
+      "undocumentLines": [
+        7,
+        9,
+        19,
+        34,
+        37,
+        49
+      ]
+    },
+    "ffl/DebugManager.js": {
+      "expectCount": 12,
+      "actualCount": 2,
+      "undocumentLines": [
+        6,
+        7,
+        8,
+        10,
+        20,
+        25,
+        29,
+        41,
+        61,
+        132
+      ]
+    },
+    "ffl/DeltaCompareRegister.js": {
+      "expectCount": 21,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        27,
+        32,
+        39,
+        40,
+        41,
+        53,
+        84,
+        112,
+        113,
+        114,
+        116
+      ]
+    },
+    "ffl/FFLToRegister.js": {
+      "expectCount": 14,
+      "actualCount": 2,
+      "undocumentLines": [
+        37,
+        45,
+        51,
+        61,
+        66,
+        81,
+        85,
+        95,
+        109,
+        143,
+        180,
+        207
+      ]
+    },
+    "ffl/FinFormula.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        94,
+        107,
+        151,
+        171,
+        148
+      ]
+    },
+    "ffl/Register.js": {
+      "expectCount": 46,
+      "actualCount": 2,
+      "undocumentLines": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        20,
+        22,
+        23,
+        27,
+        28,
+        36,
+        40,
+        44,
+        48,
+        53,
+        57,
+        61,
+        68,
+        81,
+        85,
+        89,
+        93,
+        99,
+        103,
+        121,
+        127,
+        132,
+        137,
+        147,
+        151,
+        155,
+        163,
+        169,
+        176,
+        188,
+        201,
+        207,
+        213,
+        215,
+        236,
+        241,
+        250,
+        253
+      ]
+    },
+    "ffl/RegisterFormulaBuilder.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        1,
+        3
+      ]
+    },
+    "ffl/RegisterPlainFFLDecorator.js": {
+      "expectCount": 7,
+      "actualCount": 1,
+      "undocumentLines": [
+        5,
+        6,
+        7,
+        9,
+        16,
+        19
+      ]
+    },
+    "ffl/RegisterToFFL.js": {
+      "expectCount": 6,
+      "actualCount": 2,
+      "undocumentLines": [
+        91,
+        98,
+        105,
+        111
+      ]
+    },
+    "ffl/RegisterToJSON.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        7,
+        9,
+        22
+      ]
+    },
+    "ffl/RegisterToLMEParser.js": {
+      "expectCount": 12,
+      "actualCount": 1,
+      "undocumentLines": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        26,
+        33,
+        37,
+        249
+      ]
+    },
+    "ffl/ScorecardTool.js": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        5,
+        7,
+        11,
+        35,
+        98
+      ]
+    }
+  }
+}

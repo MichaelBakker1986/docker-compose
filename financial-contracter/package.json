@@ -1,0 +1,24 @@
+{
+  "name": "financial-contracter",
+  "version": "1.0.1",
+  "description": "",
+  "main": "dist/financial-contracter.js",
+  "scripts": {
+    "build": "babel . --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build",
+    "test": "node -r babel-register tests"
+  },
+  "license": "BSD-2-Clause",
+  "keywords": [],
+  "author": "michael.bakker1986@gmail.com",
+  "dependencies": {
+    "ffl-pack": "^6.0.3",
+    "log6": "^1.0.26",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}

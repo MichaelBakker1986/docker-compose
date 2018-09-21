@@ -1,0 +1,470 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:300|Lato:300,400,600,700|Roboto+Condensed:300,700|Open+Sans+Condensed:300,600|Open+Sans:400,300,600,700|Maven+Pro:400,700);
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    background: black;
+}
+
+body {
+    font-family: "Open Sans";
+    font-size: 16px;
+    color: White;
+    font-smoothing: antialiased;
+    font-weight: 600;
+}
+
+a {
+    color: #BBB;
+}
+
+.content:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    background-color: black;
+    background-image: url("background2.jpg");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 1040px;
+    height: 640px;
+    background-color: rgba(10, 10, 10, 0.5);
+    margin: auto auto;
+    padding: 40px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-shadow: 0 0 10px black;
+    -webkit-box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
+}
+
+.content .title {
+    text-align: center;
+    font-size: 2.0rem;
+    font-weight: 600;
+    padding-bottom: 30px;
+}
+
+.content input {
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: "Open Sans";
+    margin: 10px 0px;
+    border: none;
+    padding: 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.content input[type=checkbox] {
+    display: none;
+}
+
+.content label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 5px;
+    margin-right: 10px;
+    top: 5px;
+}
+
+.content label:before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    background-color: #aaa;
+    -moz-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+    -webkit-box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+}
+
+.content input[type=checkbox]:checked + label:before {
+    content: "0x2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    color: Black;
+    text-align: center;
+    line-height: 20px;
+}
+
+.content span {
+    font-size: 0.9rem;
+}
+
+.content button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin: 20px 0px;
+    background-color: #66A756;
+    color: White;
+    border: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.content .social {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.content .social span {
+    display: inline-block;
+    vertical-align: baseline;
+    padding: 0 20px;
+}
+
+.content .social span:before, .content .social span:after {
+    content: '';
+    display: block;
+    width: 500px;
+    position: absolute;
+    top: 0.9em;
+    border-top: 1px solid White;
+}
+
+.content .social span:before {
+    right: 75%;
+}
+
+.content .social span:after {
+    left: 75%;
+}
+
+.content .buttons {
+    width: 100%;
+    margin: 30px 0px;
+}
+
+.content .buttons button {
+    float: left;
+    width: 30%;
+    margin: 0px 1.5%;
+}
+
+.content .buttons button i {
+    padding-right: 7px;
+}
+
+.content .buttons button.facebook {
+    background-color: #4464B2;
+}
+
+.content .buttons button.twitter {
+    background-color: #28A9E0;
+}
+
+.content .buttons button.google {
+    background-color: #DA4735;
+}
+
+.content .buttons:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.content .already {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.social-header {
+    padding: 10px 10px;
+}
+
+.social-header button {
+    width: 100%;
+    margin: 10px 10px;
+}
+
+.buttons button.facebook {
+    background-color: #4464B2;
+}
+
+.buttons button.twitter {
+    background-color: #28A9E0;
+}
+
+.buttons button.google {
+    background-color: #DA4735;
+}
+
+button {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    margin: 20px 0px;
+    background-color: #66A756;
+    color: White;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border: 1px solid gray;
+}
+
+.buttons button {
+    float: left;
+    width: 30%;
+    margin: 0px 1.5%;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+}
+
+h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #272822;
+    color: antiquewhite;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn {
+    border: 2px solid gray;
+    color: gray;
+    cursor: pointer;
+    padding: 4px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header {
+    color: gray;
+    position: absolute;
+    background-color: white;
+    padding: 7px 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 25px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+section {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    width: 100%;
+}
+
+#editor-section {
+    position: absolute;
+    top: 36px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.8);
+}
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(100, 100, 100, 0.4);
+}
+
+section.grid {
+    opacity: 0.9;
+}
+
+div.left, div.right {
+    overflow: auto;
+}
+
+div.left {
+    width: 50%;
+    resize: both;
+}
+
+div.right {
+    -webkit-flex: 1; /* Safari 6.1+ */
+    -ms-flex: 1; /* IE 10 */
+    flex: 1;
+}
+
+#menuToggle {
+    display: block;
+    position: relative;
+    top: 50px;
+    left: 50px;
+
+    z-index: 1;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle input {
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: -7px;
+    left: -5px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    position: relative;
+
+    background: #cdcdcd;
+    border-radius: 3px;
+
+    z-index: 1;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+    transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+    position: absolute;
+    width: 300px;
+    margin: -100px 0 0 -50px;
+    padding: 50px;
+    padding-top: 125px;
+
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+
+    transform-origin: 0% 0%;
+    transform: translate(-100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menu li {
+    padding: 10px 0;
+    font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul {
+    transform: none;
+}

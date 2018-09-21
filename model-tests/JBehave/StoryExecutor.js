@@ -1,15 +1,8 @@
 /**
  * This is the template runner for JBehave stories
  */
-const modelname = process.argv[2];
-const fflFile = process.argv[3];
-const story = process.argv[4];
+import { JBehaveStoryParser } from '../JBehave/JBehaveStoryParser'
 
-const JBehaveStoryParser = require('../JBehave/JBehaveStoryParser')
+const [not_used, not_used2, modelName, fflFile, storyFile] = process.argv
 
-const storyParser = new JBehaveStoryParser({
-    fflFile: fflFile,
-    modelName: modelname,
-    storyFile: story
-})
-storyParser.start()
+new JBehaveStoryParser({ fflFile, modelName, storyFile }).start()

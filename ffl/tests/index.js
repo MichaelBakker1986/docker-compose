@@ -1,0 +1,5 @@
+import './ChangeManagerTest'
+import './FinChoiceTest'
+import './RegisterArrayObjectInitRowTest'
+import './RegisterTest'
+import './RegisterToFFLTest'

@@ -1,13 +1,6 @@
 /*
- register/resolve echange modules e.g. ffl,screendefinition,presentation
- TODO: rename into exchangeModulesSerivce
+ register/resolve exchange modules e.g. ffl,screen_definition,presentation
  */
-var parsers = {};
-function ParserService() {
-}
-ParserService.prototype.addParser = function (parser) {
-    parsers[parser.name] = parser;
-}
 /*Class Parser
  {
  name: String,
@@ -16,12 +9,26 @@ ParserService.prototype.addParser = function (parser) {
  deParse: Function() : Export
  }
  */
-ParserService.prototype.visitParsers = function (visitFunction) {
-    for (var key in parsers) {
-        visitFunction(parsers[key]);
-    }
+import { debug, DEBUG } from 'log6'
+
+const parsers = {}
+
+class ParserService {
+
+	static addParser(parser) {
+		if (!parser || !parser.headername) throw Error(`Invalid parser ${JSON.stringify(parser)}`)
+		if (DEBUG) debug(`Adding parser ${parser.headername}`)
+		parsers[parser.name] = parser
+	}
+
+	static visitParsers(visitFunction) {
+		Object.keys(parsers).forEach(parser => visitFunction(parser))
+	}
+
+	static findParser(parserName) {
+		return parsers[parserName]
+	}
+
 }
-ParserService.prototype.findParser = function (parserName) {
-    return parsers[parserName];
-}
-module.exports = ParserService.prototype;
+
+export default ParserService

@@ -1,7 +1,9 @@
-const assert = require('assert')
-const mvoFLLFile = require('fs').readFileSync(__dirname + '/MVO.ffl', 'utf8');
-const ScorecardTool = require('../../lme-core/exchange_modules/ffl/ScorecardTool').ScorecardTool;
-const RegisterToFFL = require('../../lme-core/exchange_modules/ffl/RegisterToFFL').RegisterToFFL;
-const parsedMVOFFL = new RegisterToFFL(new ScorecardTool().parse(mvoFLLFile)).toGeneratedFFL(null, null).join('\n')
+import assert from 'assert'
+import { readFileSync } from 'fs'
+import { ScorecardTool } from '../../lme-core/exchange_modules/ffl/ScorecardTool'
+import { RegisterToFFL } from '../../lme-core/exchange_modules/ffl/RegisterToFFL'
+
+const mvoFLLFile = readFileSync(__dirname + '/MVO.ffl', 'utf8')
+const parsedMVOFFL = new RegisterToFFL(new ScorecardTool().parse(mvoFLLFile)).toGeneratedFFL({ rootVariableName: undefined }).join('\n')
 assert.ok(parsedMVOFFL.length > 100)
 assert.ok(new RegisterToFFL(new ScorecardTool().parse(mvoFLLFile)).toGeneratedCommaSeperated().length > 100)

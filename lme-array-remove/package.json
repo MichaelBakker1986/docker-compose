@@ -1,0 +1,12 @@
+{
+  "name": "lme-array-remove",
+  "version": "1.0.0",
+  "description": "",
+  "main": "array-remove.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "michael.bakker1986@gmail.com",
+  "license": "ISC"
+}

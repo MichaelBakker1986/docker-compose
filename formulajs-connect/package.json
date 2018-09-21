@@ -1,16 +1,18 @@
 {
   "name": "formulajs-connect",
-  "version": "1.0.4",
-  "main": "formulajs.js",
+  "version": "1.0.6",
   "description": "binding between core and formulajs",
+  "main": "dist/formulajs",
   "scripts": {
-    "test": "node test/NPVTest.js"
+    "build": "babel . --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build",
+    "test": "node test/UsedFunctionsSmokeTest.js"
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "formulajs": "^1.0.8",
-    "log6": "^1.0.26"
+    "@handsontable/formulajs": "^2.0.0",
+    "log6": "^2.0.9"
   },
   "repository": {
     "type": "git",

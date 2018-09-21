@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">ffl/DeltaCompareRegister.js | ffl-pack</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="core package converting ffl"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="ffl-pack"><meta property="twitter:description" content="core package converting ffl"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/DeltaCompareRegister.js~DeltaCompareRegister.html">DeltaCompareRegister</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/Register.js~Register.html">Register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/ffl/RegisterToJSON.js~RegisterToJSON.html">RegisterToJSON</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-FinFormula">FinFormula</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RegisterToFFL">RegisterToFFL</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">ffl/DeltaCompareRegister.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * We only want to store delta&apos;s from models in the database
+ * Therefore we require a comparator between two models
+ * returns an action list for current state to update into other state.
+ *
+ * A compare has three categories.
+ 1) UPDATES
+ 2) INSERTS
+ 3) REMOVES
+ */
+import &apos;array.equals&apos;
+
+export default class DeltaCompareRegister {
+
+	_source_to_target_property_map = []
+	_target_to_source_property_map = []
+	_updates = []
+	_inserts = []
+	_deletes = []
+	_changes = 0
+
+	constructor(source_register, target_register) {
+		this.source_register = source_register
+		this.target_register = target_register
+	}
+
+	addChange(changeType, property_name, var_name, value) {
+		this[&apos;_&apos; + changeType].push([changeType, var_name, property_name, value])
+		this._changes++
+	}
+
+	compare() {
+		this.buildSchema()
+		this.checkInserts()
+		this.checkDeletes()
+		return this
+	}
+
+	buildSchema() {
+		this.source_schema = this.source_register.schema.slice()
+		this.target_schema = this.target_register.schema.slice()
+		const max_schema_length = Math.max(this.source_schema.length, this.target_schema.length)
+		const source_schema = this.source_register.schemaIndexes, target_schema = this.target_register.schemaIndexes
+		this.source_schema.length = max_schema_length
+		this.target_schema.length = max_schema_length
+
+		for (let i = 0; i &lt; max_schema_length; i++) {
+			this._source_to_target_property_map[source_schema[this.source_schema[i]]] = target_schema[this.source_schema[i]]
+			this._target_to_source_property_map[target_schema[this.target_schema[i]]] = source_schema[this.target_schema[i]]
+		}
+	}
+
+	checkInserts() {
+		const indexes = this.target_register.schemaIndexes
+		const hidden_keys = new Set([indexes.parentId, indexes.index, indexes.children])
+		const source_variables = this.source_register.getIndex(&apos;name&apos;)
+		const target_variables = this.target_register.getIndex(&apos;name&apos;)
+		//check inserts and updates
+		const target_variable_names = Object.keys(target_variables)
+		for (let variable_name of target_variable_names) {
+			const source_variable = source_variables[variable_name], target_variable = target_variables[variable_name]
+			if (!source_variable) {
+				//INSERT every property for the variable
+				for (let target_property_index = 3; target_property_index &lt; target_variable.length; target_property_index++) {
+					const target_property = target_variable[target_property_index]
+					if (hidden_keys.has(target_property_index) || target_property == null) continue
+					this.addChange(&apos;inserts&apos;, this.target_schema[target_property_index], variable_name, target_property)
+				}
+			} else {
+				for (let target_property_index = 3; target_property_index &lt; target_variable.length; target_property_index++) {
+					if (hidden_keys.has(target_property_index)) continue
+					const sourceProperty = source_variable[this._target_to_source_property_map[target_property_index]]
+					const targetProperty = target_variable[target_property_index]
+					if (sourceProperty == null &amp;&amp; targetProperty != null) {
+						this.addChange(&apos;inserts&apos;, this.target_schema[target_property_index], variable_name, targetProperty)
+					} else if (sourceProperty !== targetProperty &amp;&amp; targetProperty != null &amp;&amp; !Array.isArray(sourceProperty)) {
+						this.addChange(&apos;updates&apos;, this.target_schema[target_property_index], variable_name, targetProperty)
+					}
+				}
+			}
+		}
+	}
+
+	checkDeletes() {
+		const source_variables = this.source_register.getIndex(&apos;name&apos;)
+		const target_variables = this.target_register.getIndex(&apos;name&apos;)
+		//check deletes
+		const source_variable_names = Object.keys(source_variables)
+		const indexes = this.source_register.schemaIndexes
+		const props = this.source_schema.filter((val, i) =&gt; i &gt; 3 &amp;&amp;
+			i !== indexes.parentId &amp;&amp;
+			i !== indexes.index &amp;&amp;
+			i !== indexes.children).map(property_name =&gt; [indexes[property_name], property_name])
+
+		for (let variable_name of source_variable_names) {
+			const source_variable = source_variables[variable_name]
+			const target_variable = target_variables[variable_name]
+			props.forEach(([source_variable_property_index, source_variable_property_name]) =&gt; {
+				const source_property = source_variable[source_variable_property_index]
+				if (!target_variable) {
+					if (source_property != null) this.addChange(&apos;deletes&apos;, source_variable_property_name, variable_name, null)
+				} else {
+					const target_property = target_variable[this._source_to_target_property_map[source_variable_property_index]]
+					if (target_property == null &amp;&amp; source_property != null) {
+						this.addChange(&apos;deletes&apos;, source_variable_property_name, variable_name, null)
+					}
+				}
+			})
+		}
+	}
+
+	collect = () =&gt; [... this._updates, ... this._inserts, ... this._deletes]
+	map = (stream) =&gt; this.collect().map(stream)
+	forEach = (stream) =&gt; this.collect().forEach(stream)
+
+	toString() {
+		const diff = this.map(change_set =&gt; change_set.map(change =&gt; change.filter(Boolean).join(&apos;;&apos;)).join(&apos;\n&apos;))
+		return [&apos;Changes:&apos; + this._changes, JSON.stringify(this.target_register.schemaIndexes), diff.filter(Boolean).join(&apos;\n&apos;)].join(&apos;\n&apos;)
+	}
+}</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

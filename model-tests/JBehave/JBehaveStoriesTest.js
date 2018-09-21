@@ -3,33 +3,34 @@
  * Match them with a *.ffl model-file
  * Call the JBehaveStoryParser to execute vs Financial Model File
  */
-const Walker = require('../../git-connect/FileWalker')
-const modelTests = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
-const coreTests = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
-const stashedResources = new Walker(__dirname + '/../../git-connect/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story');
-const fs = require('fs')
-const path = require('path')
-const log = require('log6')
-const exec = require('child-process-promise').exec;
+import Walker          from '../../git-connect/FileWalker'
+import fs              from 'fs'
+import path            from 'path'
+import { error, info } from 'log6'
 
-const visit = function(file) {
-    fs.exists(file.replace(/(\(\w+\))?\.story/gm, '.ffl'), function(exists) {
-            if (exists) {
-                const fflFile = file.replace(/(\(\w+\))?\.story/gm, '.ffl');
-                const jbehaveStoryFile = file;
-                const modelName = path.basename(fflFile).replace('.ffl', '')
+import { exec } from 'child-process-promise'
 
-                const command = 'node ' + __dirname + '/StoryExecutor.js ' + [modelName, '"' + fflFile + '"', '"' + jbehaveStoryFile + '"'].join(' ');
-                exec(command).then((result) => {
-                    log.info('Success story ' + file)
-                }).catch((err) => {
-                    log.error('Fail story ' + err.toString())
-                });
-            } else {
-                log.info('Story has no matching ffl file [' + file + ']')
-            }
-        }
-    )
-};
+const modelTests = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+const coreTests = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+new Walker(__dirname + '/../../git-connect/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+const visit = (file) => {
+	fs.exists(file.replace(/(\(\w+\))?\.story/gm, '.ffl'), async (exists) => {
+			if (exists) {
+				const fflFile = file.replace(/(\(\w+\))?\.story/gm, '.ffl')
+				const jBehaveStoryFile = file
+				const modelName = path.basename(fflFile).replace('.ffl', '')
+				const command = `node -r babel-register ${__dirname}/StoryExecutor.js ${[modelName, '"' + fflFile + '"', '"' + jBehaveStoryFile + '"'].join(' ')}`
+				try {
+					await exec(command)
+					info(`Success story ${file}`)
+				} catch (err) {
+					error(`Fail story ${err.toString()}`)
+				}
+			} else {
+				info(`Story has no matching ffl file [${file}]`)
+			}
+		}
+	)
+}
 modelTests.walk(visit, true)
 coreTests.walk(visit, true)
