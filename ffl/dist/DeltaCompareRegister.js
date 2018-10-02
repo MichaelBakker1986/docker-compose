@@ -9,6 +9,10 @@ var _stringify = require('babel-runtime/core-js/json/stringify');
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
@@ -25,10 +29,6 @@ var _set = require('babel-runtime/core-js/set');
 
 var _set2 = _interopRequireDefault(_set);
 
-var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
-
-var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -43,27 +43,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DeltaCompareRegister = function () {
 	function DeltaCompareRegister(source_register, target_register) {
-		var _this = this;
-
 		(0, _classCallCheck3.default)(this, DeltaCompareRegister);
+
+
 		this._source_to_target_property_map = [];
 		this._target_to_source_property_map = [];
 		this._updates = [];
 		this._inserts = [];
 		this._deletes = [];
 		this._changes = 0;
-
-		this.collect = function () {
-			return [].concat((0, _toConsumableArray3.default)(_this._updates), (0, _toConsumableArray3.default)(_this._inserts), (0, _toConsumableArray3.default)(_this._deletes));
-		};
-
-		this.map = function (stream) {
-			return _this.collect().map(stream);
-		};
-
-		this.forEach = function (stream) {
-			return _this.collect().forEach(stream);
-		};
 
 		this.source_register = source_register;
 		this.target_register = target_register;
@@ -155,7 +143,7 @@ var DeltaCompareRegister = function () {
 	}, {
 		key: 'checkDeletes',
 		value: function checkDeletes() {
-			var _this2 = this;
+			var _this = this;
 
 			var source_variables = this.source_register.getIndex('name');
 			var target_variables = this.target_register.getIndex('name');
@@ -178,11 +166,11 @@ var DeltaCompareRegister = function () {
 
 					var source_property = source_variable[source_variable_property_index];
 					if (!target_variable) {
-						if (source_property != null) _this2.addChange('deletes', source_variable_property_name, variable_name, null);
+						if (source_property != null) _this.addChange('deletes', source_variable_property_name, variable_name, null);
 					} else {
-						var target_property = target_variable[_this2._source_to_target_property_map[source_variable_property_index]];
+						var target_property = target_variable[_this._source_to_target_property_map[source_variable_property_index]];
 						if (target_property == null && source_property != null) {
-							_this2.addChange('deletes', source_variable_property_name, variable_name, null);
+							_this.addChange('deletes', source_variable_property_name, variable_name, null);
 						}
 					}
 				});
@@ -212,6 +200,21 @@ var DeltaCompareRegister = function () {
 					}
 				}
 			}
+		}
+	}, {
+		key: 'collect',
+		value: function collect() {
+			return [].concat((0, _toConsumableArray3.default)(this._updates), (0, _toConsumableArray3.default)(this._inserts), (0, _toConsumableArray3.default)(this._deletes));
+		}
+	}, {
+		key: 'map',
+		value: function map(stream) {
+			return this.collect().map(stream);
+		}
+	}, {
+		key: 'forEach',
+		value: function forEach(stream) {
+			return this.collect().forEach(stream);
 		}
 	}, {
 		key: 'toString',

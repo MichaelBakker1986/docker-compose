@@ -353,7 +353,8 @@ var traverseTypes = {
 			buildFunc(orId, node.consequent, 0, node.consequent)
 		}
 	},
-	MemberExpression     : function(orId, parent, node) {
+	UpdateExpression     : function() {},
+	MemberExpression: function(orId, parent, node) {
 		var object = node.object
 		if (object.refn) {
 			var property = node.property
@@ -538,7 +539,7 @@ function buildFormula(formulaInfo, parent, node) {
 		}
 	}
 	if (!traverseTypes[node.type]) {
-		log.error('ERROR: [%s] not registered AST expression [%s]', node.type, name)
+		log.error('ERROR: [%s] not registered AST expression [%s]', node.type)
 	}
 	traverseTypes[node.type](formulaInfo, parent, node)
 }
@@ -569,10 +570,10 @@ FormulaBootstrap.prototype.parseAsFormula = function(formulaInfo) {
 }
 FormulaBootstrap.prototype.initStateBootstrap = function(configs) {
 	functions = configs.functions
-	variables = configs.contains//to distinct FesVariable from references
-	properties = configs.properties//to check if we use this property from the model language
-	getOrCreateProperty = configs.getOrCreateProperty//getOrCreateProperty a PropertyAssembler, to do a variable lookup.  We must have knowledge from the PropertyAssembler. To find corresponding referenceId
+	variables = configs.contains//to distinct FesVariable from referencesembler, to do a variable lookup.  We must have knowledge from the PropertyAssembler. To find corresponding referenceId
 	addFormulaDependency = configs.addFormulaDependency
+	properties = configs.properties//to check if we use this property from the model language
+	getOrCreateProperty = configs.getOrCreateProperty//getOrCreateProperty a PropertyAss
 	for (let property in properties) {
 		varproperties[property] = {
 			f: properties[property],

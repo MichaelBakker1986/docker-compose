@@ -262,4 +262,4 @@ simplified.min = simplified.Min
 simplified.max = simplified.Max
 simplified.ABS = simplified.Abs
 simplified.EXP = simplified.Exp
-module.exports = simplified
+export default simplified

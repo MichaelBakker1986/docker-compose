@@ -1,7 +1,7 @@
 model CLAUDIA2 uses BaseModel
 {
  version: "1.0";
- root
+ variable CLAUDIA2
  {
   variable Q_ROOT
   {

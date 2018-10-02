@@ -12,14 +12,15 @@ import 'array.equals'
 
 export default class DeltaCompareRegister {
 
-	_source_to_target_property_map = []
-	_target_to_source_property_map = []
-	_updates = []
-	_inserts = []
-	_deletes = []
-	_changes = 0
-
 	constructor(source_register, target_register) {
+
+		this._source_to_target_property_map = []
+		this._target_to_source_property_map = []
+		this._updates = []
+		this._inserts = []
+		this._deletes = []
+		this._changes = 0
+
 		this.source_register = source_register
 		this.target_register = target_register
 	}
@@ -109,9 +110,11 @@ export default class DeltaCompareRegister {
 		}
 	}
 
-	collect = () => [... this._updates, ... this._inserts, ... this._deletes]
-	map = (stream) => this.collect().map(stream)
-	forEach = (stream) => this.collect().forEach(stream)
+	collect() {return [... this._updates, ... this._inserts, ... this._deletes]}
+
+	map(stream) {return this.collect().map(stream)}
+
+	forEach(stream) {return this.collect().forEach(stream)}
 
 	toString() {
 		const diff = this.map(change_set => change_set.map(change => change.filter(Boolean).join(';')).join('\n'))

@@ -130,4 +130,4 @@ DebugManager.prototype.nextStep = function() {
 		this.active = false
 	}
 }
-exports.DebugManager = DebugManager
+export { DebugManager }

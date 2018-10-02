@@ -1,6 +1,6 @@
 model SCORECARDTESTMODEL uses BaseModel 
 {
- variable RootSub1
+ variable SCORECARDTESTMODEL
  {
   datatype: none;
   visible: 0;

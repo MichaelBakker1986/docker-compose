@@ -184,5 +184,4 @@ SwaggerParser.prototype.parseOutput = function(metaData, workbook) {
 SwaggerParser.prototype.parseData = function(data, workbook) {
 	throw new Error('There is no support to convert swagger into lme yet.')
 }
-exports.RegisterPlainFFLToLMEParser = SwaggerParser
-SolutionFacade.addParser(SwaggerParser.prototype)
+export default new SwaggerParser()

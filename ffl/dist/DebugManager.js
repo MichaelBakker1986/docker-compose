@@ -1,6 +1,11 @@
 'use strict';
 
-var _lmeCore = require('lme-core');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.DebugManager = undefined;
+
+var _index = require('../lme-core/index');
 
 var _log = require('log6');
 
@@ -42,8 +47,8 @@ DebugManager.prototype.fixForReferenceError = function (variableName, wb, error,
 
 			wb.createFormula('1', variableName, 'value', false, 'document');
 
-			_lmeCore.SolutionFacade.initFormulaBootstrap([formula_id], true, wb.context.ma, wb.context.audittrail);
-			var formula = _lmeCore.SolutionFacade.fetchFormulaByIndex(formula_id);
+			_index.SolutionFacade.initFormulaBootstrap([formula_id], true, wb.context.ma, wb.context.audittrail);
+			var formula = _index.SolutionFacade.fetchFormulaByIndex(formula_id);
 
 			for (var i = 0; i < formula.formulaDependencys.length; i++) {
 				var dependency = formula.formulaDependencys[i];
@@ -57,8 +62,8 @@ DebugManager.prototype.fixForReferenceError = function (variableName, wb, error,
 DebugManager.prototype.validateImportedSolution = function (modelName) {
 	var start = this.audittrail.i.length;
 	var names = this.register.getNames();
-	var context = new _lmeCore.Context();
-	var wb = new _lmeCore.WorkBook(context, null, null, { modelName: modelName });
+	var context = new _index.Context();
+	var wb = new _index.WorkBook(context, null, null, { modelName: modelName });
 	wb.updateValues();
 	var validateResponse = {
 		succes: [],

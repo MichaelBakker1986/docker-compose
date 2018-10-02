@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.RegisterToLMEParser = undefined;
 
 var _esprima = require('esprima');
 
@@ -17,20 +16,18 @@ var _RegisterToFFL = require('./RegisterToFFL');
 
 var _RegisterFormulaBuilder = require('./RegisterFormulaBuilder');
 
-var _RegisterFormulaBuilder2 = _interopRequireDefault(_RegisterFormulaBuilder);
-
 var _FinFormula = require('./FinFormula');
 
 var _FinFormula2 = _interopRequireDefault(_FinFormula);
 
-var _lmeCore = require('lme-core');
+var _index = require('../lme-core/index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RegisterToLMEParser() {}
 
 RegisterToLMEParser.prototype.name = 'ffl2';
-RegisterToLMEParser.prototype.headername = '.finance ffl';
+RegisterToLMEParser.prototype.headername = '.finance ffl2';
 RegisterToLMEParser.prototype.walk = function (node, depth, visitor) {
 	visitor(node, depth);
 	var children = node[this.childIndex];
@@ -49,9 +46,9 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 	var self = this;
 	var fflRegister = new _RegisterToFFL.RegisterToFFL(indexer);
 	var register = data.getIndex('name');
-	var rfb = new _RegisterFormulaBuilder2.default(indexer);
+	var rfb = new _RegisterFormulaBuilder.RegisterFormulaBuilder(indexer);
 	var modelName = workbook.modelName || indexer.name;
-	var solution = _lmeCore.SolutionFacade.createSolution(modelName || 'NEW');
+	var solution = _index.SolutionFacade.createSolution(modelName || 'NEW');
 	var nameIndex = indexer.schemaIndexes.name;
 	var tupleIndex = indexer.schemaIndexes.tuple;
 	var validIndex = indexer.schemaIndexes.valid;
@@ -95,10 +92,10 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 		}
 		var nodeName = node[nameIndex];
 		rfb.inherit(node);
-		var displaytype = node[displayTypeIndex] || 'number';
+		var displaytype = node[displayTypeIndex] || _index.NUMBER;
 
-		var datatype = node[dataTypeIndex] || 'number';
-		var frequency = node[frequencyIndex] || 'column';
+		var data_type = node[dataTypeIndex] || _index.NUMBER;
+		var frequency = node[frequencyIndex] || _index.COLUMN;
 		var display_options = node[displayOptionsIndex];
 		var title = node[titleIndex] || '"' + nodeName + '"';
 		var data_options = node[dataOptionsIndex];
@@ -108,20 +105,20 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 			displaytype = 'paragraph';
 		}
 		if (displaytype === 'paragraph') {
-			datatype = 'string';
+			data_type = 'string';
 			frequency = 'none';
 		}
 
 		var parentId = node[parentNameIndex] ? indexer.i[node[parentNameIndex]][nameIndex] : null;
 
 		var fixed_decimals = node[decimalsIndex];
-		var startdecimalsIndex;
-		if (fixed_decimals == null && (startdecimalsIndex = displaytype.indexOf('(')) > -1) {
-			fixed_decimals = displaytype.substr(startdecimalsIndex).slice(1, -1);
-			displaytype = displaytype.substr(0, startdecimalsIndex);
+		var startDecimalsIndex = void 0;
+		if (fixed_decimals == null && (startDecimalsIndex = displaytype.indexOf('(')) > -1) {
+			fixed_decimals = displaytype.substr(startDecimalsIndex).slice(1, -1);
+			displaytype = displaytype.substr(0, startDecimalsIndex);
 		}
 
-		var valueFormula = rfb.buildFFLFormula(node, frequency == 'column' && datatype == 'number');
+		var valueFormula = rfb.buildFFLFormula(node, frequency === _index.COLUMN && data_type === _index.NUMBER);
 
 		if (node[modifierIndex] && node[modifierIndex].indexOf('=') > -1) display_options = 'displayAsSummation';
 
@@ -158,12 +155,12 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 			if (lengthIndex && node[lengthIndex]) validFormulas.push('Length(' + nodeName + ') ' + node[lengthIndex]);
 
 			if (rangeIndex && node[rangeIndex]) validFormulas.push('(' + node[rangeIndex].replace(/(>|>=|<|<=)/gi, nodeName + ' $1') + ')');
-			if (datatype === 'number') validFormulas.push('not isNaN(OnNA(' + nodeName + ',null))');
+			if (data_type === _index.NUMBER) validFormulas.push('not isNaN(OnNA(' + nodeName + ',null))');
 
 			if (validFormulas.length > 0) node[validIndex] = 'If(' + validFormulas.join(' And ') + ',"","Enter valid input.")';
 		}
 
-		var uiNode = _lmeCore.SolutionFacade.createUIFormulaLink(solution, nodeName, 'value', self.parseFFLFormula(indexer, valueFormula, nodeName, 'value', datatype, workbook.context), displaytype, frequency, null, parentId, ipprotected);
+		var uiNode = _index.SolutionFacade.createUIFormulaLink(solution, nodeName, _index.VALUE, self.parseFFLFormula(indexer, valueFormula, nodeName, _index.VALUE, data_type, workbook.context), displaytype, frequency, null, parentId, ipprotected);
 
 		var visibleFormula = node[fflRegister.visibleIndex];
 		if (parentId) {
@@ -183,7 +180,7 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 				if (tuples[_i]) uiNode.nestedTupleDepth++;
 			}if (node[tupleIndex]) {
 				uiNode.tupleDefinition = true;
-				uiNode.datatype = 'string';
+				uiNode.data_type = 'string';
 				if (tuples.length > 0) {
 					uiNode.tupleDefinitionName = tuples[tuples.length - 1].rowId;
 					uiNode.tupleProperty = true;
@@ -197,15 +194,15 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 
 		if (node[fflRegister.options_titleIndex] === 'locked') uiNode.title_locked = true;
 
-		uiNode.datatype = datatype;
+		uiNode.data_type = data_type;
 
-		_lmeCore.SolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency, null, null);
+		_index.SolutionFacade.createUIFormulaLink(solution, nodeName, 'title', self.parseFFLFormula(indexer, title, nodeName, 'title', null, workbook.context), undefined, frequency, null, null);
 
 		for (var i = 0; i < formulaIndexes.length; i++) {
 			var index = formulaIndexes[i];
 			if (node[index]) {
 				if (!fflRegister.defaultValues[index] || !fflRegister.defaultValues[index][node[index]]) {
-					_lmeCore.SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency, null, null);
+					_index.SolutionFacade.createUIFormulaLink(solution, nodeName, indexer.schema[index], self.parseFFLFormula(indexer, node[index], nodeName, indexer.schema[index], null, workbook.context), undefined, frequency, null, null);
 				}
 			}
 		}
@@ -215,7 +212,7 @@ RegisterToLMEParser.prototype.parseData = function (data, workbook) {
 };
 
 RegisterToLMEParser.prototype.parseFFLFormula = function (indexer, formula, nodeName, col, type, context) {
-	if (!formula) return type === 'string' ? _astNodeUtils.AST.STRING('') : type === 'number' ? {
+	if (!formula) return type === 'string' ? _astNodeUtils.AST.STRING('') : type === _index.NUMBER ? {
 		'type': 'Identifier',
 		'name': 'NA'
 	} : {
@@ -235,5 +232,4 @@ RegisterToLMEParser.prototype.parseFFLFormula = function (indexer, formula, node
 	}
 	return formulaReturn;
 };
-_lmeCore.SolutionFacade.addParser(RegisterToLMEParser.prototype);
-exports.RegisterToLMEParser = RegisterToLMEParser;
+exports.default = RegisterToLMEParser;

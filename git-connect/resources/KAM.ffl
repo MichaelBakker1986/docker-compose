@@ -4,7 +4,7 @@ import BaseModel.*;
 model KAM uses BaseModel
 {
  version: "00.00.001.042";
- root
+ variable KAM
  {
   variable RootSub1
   {

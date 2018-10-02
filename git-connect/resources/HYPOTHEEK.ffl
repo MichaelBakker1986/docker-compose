@@ -1,6 +1,6 @@
 model HYPOTHEEK uses BaseModel
 {
- root
+ variable HYPOTHEEK
  {
   variable Q_ROOT
   {

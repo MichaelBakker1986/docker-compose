@@ -1,10 +1,11 @@
 import { Register } from 'lme-core'
 
 export class RegisterToJSON {
-	register = null
-	hidden_properties = ['desc', 'start', 'end', 'parentId', 'index', 'children']
 
-	constructor(register = new Register) {this.register = register}
+	constructor(register = new Register) {
+		this.register = register
+		this.hidden_properties = ['desc', 'start', 'end', 'parentId', 'index', 'children']
+	}
 
 	toJSON(root_name = 'root') {
 		const register = this.register

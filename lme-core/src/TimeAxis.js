@@ -1,5 +1,7 @@
 import { debug, DEBUG } from 'log6'
 
+import resources from './CustomImport'
+
 const headers = {
 	columns: {
 		title: 'timeline'
@@ -19,7 +21,7 @@ const headers = {
 }
 
 function CViewModes(data) {
-	data = data || require('../resources/CustomImport.json')
+	data = data || resources()
 	const formulasets = data.formulasets
 
 	const viewmodes = {}
@@ -37,7 +39,7 @@ function CViewModes(data) {
 	var currentperiod = periods[0]
 	const aggregationformulaset = formulasets[formulasets.length - 1]
 	currentperiod.formulaset = formulasets[currentperiod.formulasetId]
-	for (var i = 0; i < data.layout.idx; i++) {
+	for (let i = 0; i < data.layout.idx; i++) {
 		if (i >= currentperiod.idx) {
 			currentperiod = periods[currentperiod.formulasetId + 1]
 			// assign the formulaset, it was stored as reference
@@ -46,7 +48,7 @@ function CViewModes(data) {
 		formulasetLookup[i] = currentperiod
 	}
 	currentperiod.last = data.layout.idx
-	var infinitColumn = {
+	const infinitColumn = {
 		hash : 0,
 		dummy: true
 	}
@@ -310,15 +312,15 @@ function CViewModes(data) {
 						entree['previn' + aggtype] = agg.prevme == undefined ? infinitColumn : indexed[calculateIndex(tId, agg.prevme)]
 						entree['isinfirst' + aggtype] = agg.prevme == undefined
 						const prevagg = aggentree.prev
-						entree['lastinprev' + aggtype] = (prevagg.hash == 0) ? infinitColumn : prevagg.lastchild
-						entree['firstinprev' + aggtype] = (prevagg.hash == 0) ? infinitColumn : prevagg.firstchild
+						entree['lastinprev' + aggtype] = (prevagg.hash === 0) ? infinitColumn : prevagg.lastchild
+						entree['firstinprev' + aggtype] = (prevagg.hash === 0) ? infinitColumn : prevagg.firstchild
 						entree['lastin' + aggtype] = prevagg
 						const firstEntree = indexed[calculateIndex(tId, tempatechilds[0])]
 						entree['first' + aggtype] = firstEntree
-						entree['isfirst' + aggtype] = (firstEntree.hash == entree.hash)
+						entree['isfirst' + aggtype] = (firstEntree.hash === entree.hash)
 						const lastEntree = indexed[calculateIndex(tId, tempatechilds[tempatechilds.length - 1])]
 						entree['last' + aggtype] = lastEntree
-						entree['islast' + aggtype] = (lastEntree.hash == entree.hash)
+						entree['islast' + aggtype] = (lastEntree.hash === entree.hash)
 					}
 					entree.mutcalc = entree.infirstbkyr ? 1 : NA// information not available in aggcolumns,yet...
 				}
@@ -342,4 +344,4 @@ CViewModes.prototype.toString = function() {
 		return [mode, '(', self.viewmodes[mode].cols.length, ')'].join('')
 	})
 }
-module.exports = CViewModes
+export default CViewModes

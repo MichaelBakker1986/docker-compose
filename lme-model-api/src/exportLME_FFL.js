@@ -2,15 +2,17 @@
  * Convert Model into front-end distribution
  * node exportLME_FFL {modelName}
  */
-import { Context, LMEFacade, SolutionFacade,DETAIL_INTERVAL } from '../../lme-core/'
-import ExcelLookup                            from '../../excel-connect/excel-connect'
-import babelify                               from 'babelify'
-import fs                                     from 'fs'
-import browser                                from 'browserify'
-import timeModel                              from '../../lme-core/resources/CustomImport.json'
-import { error }                              from 'log6'
-import LmeAPI                                 from './lme'
-import '../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator'
+import LMEFacade, { Context, DETAIL_INTERVAL, ENCODING, SolutionFacade } from '../../lme-core/index'
+import ExcelLookup                                                       from '../../excel-connect/excel-connect'
+import babelify                                                          from 'babelify'
+import { createWriteStream, readFileSync }                               from 'fs'
+import browser                                                           from 'browserify'
+import timeModel
+                                                                         from '../../lme-core/resources/CustomImport.json'
+import { error }                                                         from 'log6'
+import LmeAPI                                                            from './lme'
+import '../../ffl/RegisterPlainFFLDecorator'
+import browserify_fastjson                                               from 'browserify-fastjson'
 
 const modelName = process.argv[2]
 const fileType = '.ffl'
@@ -18,7 +20,7 @@ LMEFacade.addFunctions(ExcelLookup)
 
 //quick-fix resolve XSLX modelName
 if (!'_tmp_'.startsWith('_tmp_')) throw Error('error')
-const xlsx_name = modelName.startsWith('_tmp_') ? modelName.split('_')[modelName.split('_').length - 1] : modelName
+const xlsx_name = modelName.startsWith('_tmp_') ? modelName.split('_').slice(-1)[0] : modelName
 
 ExcelLookup.loadExcelFile(xlsx_name).then((matrix) => {
 	SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
@@ -27,7 +29,7 @@ ExcelLookup.loadExcelFile(xlsx_name).then((matrix) => {
 	} else {
 		global.LME = new LmeAPI(null, new Context({ modelName }), null)
 	}
-	let rawData = fs.readFileSync(`${__dirname}/../../git-connect/resources/${modelName}${fileType}`, 'utf8')
+	let rawData = readFileSync(`${__dirname}/../../git-connect/resources/${modelName}${fileType}`, ENCODING)
 	LME.importFFL(rawData)
 	const lmeExport = LME.exportLME()
 	const options = {
@@ -47,8 +49,8 @@ ExcelLookup.loadExcelFile(xlsx_name).then((matrix) => {
 	b.add(__dirname + '/lmeAPIWrapper.js')
 
 	b.transform(babelify, { presets: ['env'] })
-	b.transform(require('browserify-fastjson'))
-	const res = fs.createWriteStream(`${__dirname}/../../git-connect/resources/${modelName}.js`)
+	b.transform(browserify_fastjson)
+	const res = createWriteStream(`${__dirname}/../../git-connect/resources/${modelName}.js`)
 	b.bundle().pipe(res)
 }).catch((err) => {
 	error(err)

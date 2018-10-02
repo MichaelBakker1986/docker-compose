@@ -5,7 +5,7 @@ model Invoice uses BaseModel
 {
     version: "1.01";
     frequency: document;
-    root
+    variable Invoice
     {
         frequency: document;
         variable logo

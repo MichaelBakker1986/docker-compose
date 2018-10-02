@@ -3,7 +3,7 @@ import BaseModel.*;
 
 model TUPLETEST uses BaseModel
 {
- variable QQ
+ variable TUPLETEST
  {
   displaytype: scorecard;
   tuple Tuple

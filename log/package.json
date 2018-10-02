@@ -1,8 +1,8 @@
 {
   "name": "log6",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "description": "The lme logger",
-  "main": "dist/log",
+  "main": "dist/log.js",
   "scripts": {
     "build": "babel . --ignore node_modules,dist,tests -d dist/",
     "prepare": "npm run build",

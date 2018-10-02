@@ -102,4 +102,4 @@ ScorecardTool.prototype.walkDepthFirst = function(node, visitor, depth) {
 	}
 	visitor(node, depth)
 }
-exports.ScorecardTool = ScorecardTool
+export default new ScorecardTool()

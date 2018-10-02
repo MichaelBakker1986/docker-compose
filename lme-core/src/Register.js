@@ -6,13 +6,14 @@
  */
 class Register {
 
-	header = ''
-	schema = []
-	createdIndexes = []
-	schema_defaults = []
-	changes = []
-
 	constructor(schema_defaults = ['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'tree_index', 'children', 'valid', 'title', 'type', 'parent_name']) {//expect 'valid' to exist) {
+
+		this.header = ''
+		this.schema = []
+		this.createdIndexes = []
+		this.schema_defaults = []
+		this.changes = []
+
 		this.schema_defaults = schema_defaults
 		this.clean()
 	}
@@ -226,7 +227,9 @@ class Register {
 		for (let i = 0; i < children.length; i++) this.walk(children[i], depth + 1, visitor)
 	}
 
-	print = (idxMap, start, filter) => this.printArr(this.i, idxMap, this.mark || start, filter)
+	print(idxMap, start, filter) {
+		return this.printArr(this.i, idxMap, this.mark || start, filter)
+	}
 
 	printArr(arr, idxMap, start, filter) {
 		filter = filter || []
@@ -242,7 +245,7 @@ class Register {
 			tout.push((filter.length > 0 ? el.filter(f) : el).map(function(innerEl, idx) {
 				const v = self.formatters[idx] ? self.formatters[idx](innerEl) : innerEl
 				const prefix = []
-				prefix.length =  Math.max(idxMap[idx] - String(v).length, 0)
+				prefix.length = Math.max(idxMap[idx] - String(v).length, 0)
 				return String(v).slice(0, idxMap[idx] - 1) + prefix.join(' ')
 			}).join('|'))
 		}

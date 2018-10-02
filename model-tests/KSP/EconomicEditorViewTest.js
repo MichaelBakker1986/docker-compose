@@ -1,5 +1,8 @@
-const mvoFLLFile = require('fs').readFileSync(__dirname + '/KSP.ffl', 'utf8');
-require('../EconomicEditorView').EconomicEditorView.parse(mvoFLLFile)
+import EconomicEditorView from '../EconomicEditorView'
+import { readFileSync }   from 'fs'
+
+const mvoFLLFile = readFileSync(__dirname + '/KSP.ffl', 'utf8')
+EconomicEditorView.parse(mvoFLLFile)
 
 
 

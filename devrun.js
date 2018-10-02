@@ -1,6 +1,5 @@
-require('./proxy/SecurityPortal')
-require('./proxy')
-require('./lme-model-api')
-//require('./lme-model-api/update')
-require('./demo-apps')
-require('./lme-data-api')
+import './lme-model-api/lme-model-app'
+import './proxy/SecurityPortal'
+import './proxy'
+import './demo-apps'
+import './lme-data-api'

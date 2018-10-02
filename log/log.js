@@ -47,11 +47,19 @@ console.DEBUG = levels[logLevel].DEBUG
 console.INFO = levels[logLevel].INFO
 console.TRACE = levels[logLevel].TRACE
 console.WARN = levels[logLevel].WARN
-module.exports = console
 
-export const info = console.info
-export const error = console.error
-export const trace = console.trace
-export const warn = console.warn
-export const debug = console.debug
+const { DEBUG, INFO, TRACE, WARN, info, error, trace, warn, debug } = console
+module.exports = { DEBUG, INFO, TRACE, WARN, info, error, trace, warn, debug }
+module.exports.error = error
+export {
+	info,
+	error,
+	trace,
+	warn,
+	debug,
+	DEBUG,
+	INFO,
+	TRACE,
+	WARN
+}
 export default console

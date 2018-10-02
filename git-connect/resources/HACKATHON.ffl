@@ -1,5 +1,7 @@
 model HACKATHON uses BaseModel
 {
+variable HACKATHON
+{
  variable Q_ROOT
  {
   title: "Huishouding";
@@ -529,5 +531,6 @@ model HACKATHON uses BaseModel
     }
    }
   }
+ }
  }
 }

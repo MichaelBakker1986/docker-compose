@@ -1,7 +1,7 @@
 /**
  * Backwards compatible decorator, until all unit-tests success it will serve to fix bugs.
  */
-import { Register }        from '../lme-core/index'
+import { Register }        from 'lme-core'
 import { FFLToRegister }   from './FFLToRegister'
 import RegisterToLMEParser from './RegisterToLMEParser'
 

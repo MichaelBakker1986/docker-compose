@@ -1,7 +1,7 @@
 model TESTMODEL uses BaseModel
 {
  version: "1.0";
- root
+ variable TESTMODEL
  {
   variable Q_ROOT
   {

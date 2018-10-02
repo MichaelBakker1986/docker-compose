@@ -1,16 +1,19 @@
 model ProtectedTest uses BaseModel
 {
- variable ScorecardRoot
- {
-  display_options:scorecard;
-  variable VariableOne
-  {
-   protected:true;
-   formula: 100;
-  }
-  variable VariableTwo
-  {
-   formula: 200;
-  }
- }
+   variable ProtectedTest
+   {
+     variable ScorecardRoot
+     {
+      display_options:scorecard;
+      variable VariableOne
+      {
+       protected:true;
+       formula: 100;
+      }
+      variable VariableTwo
+      {
+       formula: 200;
+      }
+     }
+   }
 }

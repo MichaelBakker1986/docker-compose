@@ -3,7 +3,7 @@ import BaseModel.*;
 
 model PARENTTUPLE uses BaseModel
 {
- root
+ variable PARENTTUPLE
  {
   tuple ParentTuple
   {

@@ -2,7 +2,7 @@ import esprima                                   from 'esprima'
 import { debug, DEBUG, TRACE, trace }            from 'log6'
 import { AST }                                   from 'ast-node-utils'
 import { RegisterToFFL }                         from './RegisterToFFL'
-import RegisterFormulaBuilder                    from './RegisterFormulaBuilder'
+import { RegisterFormulaBuilder }                from './RegisterFormulaBuilder'
 import finFormula                                from './FinFormula'
 import { COLUMN, NUMBER, SolutionFacade, VALUE } from '../lme-core/index'
 

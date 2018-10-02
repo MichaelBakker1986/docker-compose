@@ -2,11 +2,13 @@
 
 var _index = require('../index');
 
+var _index2 = _interopRequireDefault(_index);
+
 var _assert = require('assert');
 
-require('../exchange_modules/jsonvalues/jsonvalues');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-require('../exchange_modules/presentation/webexport');
+_index2.default.registerParser(_index.JSONParser, _index.WebExportParser);
 
 var wb = new _index.WorkBook(new _index.Context());
 wb.modelName = 'JSON_VALUES_TEST';

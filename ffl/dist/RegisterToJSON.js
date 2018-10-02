@@ -25,9 +25,9 @@ var RegisterToJSON = exports.RegisterToJSON = function () {
 	function RegisterToJSON() {
 		var register = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _lmeCore.Register();
 		(0, _classCallCheck3.default)(this, RegisterToJSON);
-		this.register = null;
-		this.hidden_properties = ['desc', 'start', 'end', 'parentId', 'index', 'children'];
+
 		this.register = register;
+		this.hidden_properties = ['desc', 'start', 'end', 'parentId', 'index', 'children'];
 	}
 
 	(0, _createClass3.default)(RegisterToJSON, [{

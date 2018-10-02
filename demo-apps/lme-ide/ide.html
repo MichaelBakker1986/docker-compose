@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>IDE</title>
-
+    
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD8fwAA/H8AAPxjAAD/4wAA/+MAAMY/AADGPwAAxjEAAP/xAAD/8QAA4x8AAOMfAADjHwAA//8AAP//AAA="
-        rel="icon" type="image/x-icon">
+          rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+          crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
@@ -22,436 +22,435 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="bootstrap.min.js"></script>
-    <script src="ide.js"></script>
+    <script src="/src/ide.js"></script>
     <link rel="stylesheet" href="ide.css">
 
 </head>
 
 <body class="controlsidebar hold-transition sidebar-mini skin-black-light sidebar-collapse fixed" ng-controller="ideController">
-    <div id="pagewrapper" class="wrapper">
-        <header class="main-header">
-            <a class="logo">
+<div id="pagewrapper" class="wrapper">
+    <header class="main-header">
+        <a class="logo">
                 <span class="logo-mini">
                     <b>l</b>me</span>
-                <span class="logo-lg">
+            <span class="logo-lg">
                     <b>LME</b> IDE</span>
-            </a>
-            <nav class="navbar navbar-static-top">
-                    <div class="" ng-switch="currentView">
-                        <div class="col-xs-2">
-                            <a class="sidebar-toggle col-xs-1" data-toggle="push-menu" role="button">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </a>
-                        </div>
-
-                        <div class="col-xs-3" style="padding-top: 8px;">
-                            <div class="input-group" role="group" aria-label="...">
-                                <div class="input-group-btn">
+        </a>
+        <nav class="navbar navbar-static-top">
+            <div class="" ng-switch="currentView">
+                <div class="col-xs-2">
+                    <a class="sidebar-toggle col-xs-1" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </div>
+                
+                <div class="col-xs-3" style="padding-top: 8px;">
+                    <div class="input-group" role="group" aria-label="...">
+                        <div class="input-group-btn">
                                     <span ng-switch-when="FFLModelEditorView" class="" ng-if="breakpoints.length>0">
                                         <button type="button" ng-click="callDebug()" data-toggle="tooltip" title="Debug breakpoints" class="btn btn-info btn-flat bg-gray">
                                             <i class="fa fa-play"></i>
                                         </button>
                                     </span>
-                                    <span ng-switch-when="FFLModelEditorView" class="">
+                            <span ng-switch-when="FFLModelEditorView" class="">
                                         <button type="button" ng-click="toggleAceEditorMode()" data-toggle="tooltip" title="Toggle economic / FFL" class="btn btn-info btn-flat">
                                             <i class="fa fa-cubes"></i>
                                         </button>
                                     </span>
-                                    <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode">
+                            <span ng-switch-when="FFLModelEditorView" ng-show="!fflmode">
                                         <button ng-click="toggleProperties()" type="button" data-toggle="tooltip" title="show visible, locked, required" class="btn btn-info btn-flat">
                                             <i class="fa fa-sliders"></i>
                                         </button>
                                     </span>
-                                    <span ng-switch-when="FFLModelEditorView" ng-show="fflmode">
+                            <span ng-switch-when="FFLModelEditorView" ng-show="fflmode">
                                         <button ng-click="toggleFormatter()" type="button" data-toggle="tooltip" title="format" class="btn btn-info btn-flat">
                                             <i class="fa fa-indent"> Tidy</i>
                                         </button>
                                     </span>
-                                </div>
-                                <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
-                                <span class="input-group-addon">
+                        </div>
+                        <input ng-model="session.fflModelPath" id="models" type="text" class="form-control" placeholder="HYPOTHEEK">
+                        <span class="input-group-addon">
                                     v.{{model_history.length}}
                                 </span>
-                            </div>
+                    </div>
+                </div>
+                
+                <div class="col-xs-3" style="padding-top: 8px;">
+                    <div class="input-group" role="group" aria-label="...">
+                        <div class="input-group-btn">
+                            <button id="saveFileInView" type="button" ng-disabled="!((fflmode && currentView == 'FFLModelEditorView')|| currentView == 'jbehaveView')"
+                                    ng-click="saveFileInView()" data-toggle="modal" data-toggle="tooltip" title="Save {{session.fflModelPath}}"
+                                    data-target="#modal-success" class="btn btn-info btn-flat">
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip"
+                                    title="Preview {{session.fflModelPath}}" class="btn btn-info btn-flat">
+                                <i class="fa fa-window-restore"></i>
+                            </button>
+                            <button type="button" ng-if="currentView == 'FFLModelEditorView' && error" data-toggle="tooltip" title="{{error}}" class="btn btn-info btn-flat"
+                                    style="background-color: orange">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+                            <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="previewRestApi()" data-toggle="tooltip"
+                                    title="Preview {{session.fflModelPath}} API" class="btn btn-info btn-flat">
+                                <i class="fa fa-file-code-o"></i>
+                            </button>
                         </div>
-
-                        <div class="col-xs-3" style="padding-top: 8px;">
-                            <div class="input-group" role="group" aria-label="...">
-                                <div class="input-group-btn">
-                                    <button id="saveFileInView" type="button" ng-disabled="!((fflmode && currentView == 'FFLModelEditorView')|| currentView == 'jbehaveView')"
-                                        ng-click="saveFileInView()" data-toggle="modal" data-toggle="tooltip" title="Save {{session.fflModelPath}}"
-                                        data-target="#modal-success" class="btn btn-info btn-flat">
-                                        <i class="fa fa-save"></i>
-                                    </button>
-                                    <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="sneakPreviewModel()" data-toggle="tooltip"
-                                        title="Preview {{session.fflModelPath}}" class="btn btn-info btn-flat">
-                                        <i class="fa fa-window-restore"></i>
-                                    </button>
-                                    <button type="button" ng-if="currentView == 'FFLModelEditorView' && error" data-toggle="tooltip" title="{{error}}" class="btn btn-info btn-flat"
-                                        style="background-color: orange">
-                                        <i class="fa fa-info-circle"></i>
-                                    </button>
-                                    <button type="button" ng-disabled="!(fflmode && currentView == 'FFLModelEditorView')" ng-click="previewRestApi()" data-toggle="tooltip"
-                                        title="Preview {{session.fflModelPath}} API" class="btn btn-info btn-flat">
-                                        <i class="fa fa-file-code-o"></i>
-                                    </button>
-                                </div>
-                                <input id="page" ng-model="session.page" type="text" class="form-control" placeholder="scorecard">
-                            </div>
-                        </div>
-                        <div class="col-xs-2" style="padding-top: 8px;">
-                            <div class="input-group" role="group" aria-label="...">
+                        <input id="page" ng-model="session.page" type="text" class="form-control" placeholder="scorecard">
+                    </div>
+                </div>
+                <div class="col-xs-2" style="padding-top: 8px;">
+                    <div class="input-group" role="group" aria-label="...">
                                 <span class="input-group-addon">
                                     Columns
                                 </span>
-                                <input id="column_size" ng-model="session.column_size" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty"
-                                    placeholder="6">
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <ul class="nav navbar-nav" style="float: right">
-                                <li>
-                                    <a ng-show="hasChanges" ng-click="gotoUpdateScreen()" data-toggle="tooltip" title="Update server">
-                                        <i class="fa fa-refresh"></i>
-                                        <span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ng-click="publishDockerImage()" data-toggle="tooltip" title="Publish">
-                                        <i class="fa fa-server"></i>
-                                        <span></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ng-click="toggleSideBarUsed()" data-toggle="tooltip" title="Toggle settings">
-                                        <i class="fa fa-gears"></i>
-                                        <span></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-            </nav>
-        </header>
-
-        <aside class="main-sidebar">
-            <section class="sidebar">
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p>{{session.user.name}}</p>
-                        <a>
-                            <i class="fa fa-circle text-success"></i> Online</a>
+                        <input id="column_size" ng-model="session.column_size" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                               placeholder="6">
                     </div>
                 </div>
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="treeview {{currentView == 'FFLModelEditorView' ? 'active' : ''}} menu-open model-tree">
-                        <a ng-click="changeView('FFLModelEditorView')" class="data-toggle-ide" data-toggle="tooltip" title="FFL- Editor" href="">
-                            <i class="fa fa-subscript"></i>
-                            <span>IDE</span>
-                            <span class="pull-right-container">
+                <div class="col-xs-2">
+                    <ul class="nav navbar-nav" style="float: right">
+                        <li>
+                            <a ng-show="hasChanges" ng-click="gotoUpdateScreen()" data-toggle="tooltip" title="Update server">
+                                <i class="fa fa-refresh"></i>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="publishDockerImage()" data-toggle="tooltip" title="Publish">
+                                <i class="fa fa-server"></i>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="toggleSideBarUsed()" data-toggle="tooltip" title="Toggle settings">
+                                <i class="fa fa-gears"></i>
+                                <span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>{{session.user.name}}</p>
+                    <a>
+                        <i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview {{currentView == 'FFLModelEditorView' ? 'active' : ''}} menu-open model-tree">
+                    <a ng-click="changeView('FFLModelEditorView')" class="data-toggle-ide" data-toggle="tooltip" title="FFL- Editor" href="">
+                        <i class="fa fa-subscript"></i>
+                        <span>IDE</span>
+                        <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
-                        </a>
-                        <ul class="treeview-menu" style="display: block;" ng-init="closed_nodes={}">
-                            <li ng-repeat="node in LME_MODEL | toArray | pick:'children.length > 0 && treeDepth < 3' | orderBy : 'order_id'" class="treeview model-tree-{{node.treeDepth}} menu-open"
-                                ng-if="isOpen(node,closed_nodes)">
-                                <a ng-click="showNode(node)" href="">
-                                    <i class="fa fa-circle-o"></i> {{node.id}} ({{node.children.length}})
-                                    <span ng-click="closed_nodes[node.id] = !closed_nodes[node.id]" ng-if="node.treeDepth < 2" class="pull-right-container">
+                    </a>
+                    <ul class="treeview-menu" style="display: block;" ng-init="closed_nodes={}">
+                        <li ng-repeat="node in LME_MODEL | toArray | pick:'children.length > 0 && treeDepth < 3' | orderBy : 'order_id'" class="treeview model-tree-{{node.treeDepth}} menu-open"
+                            ng-if="isOpen(node,closed_nodes)">
+                            <a ng-click="showNode(node)" href="">
+                                <i class="fa fa-circle-o"></i> {{node.id}} ({{node.children.length}})
+                                <span ng-click="closed_nodes[node.id] = !closed_nodes[node.id]" ng-if="node.treeDepth < 2" class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview {{currentView == 'jbehaveView' ? 'active' : ''}}">
-                        <a class="data-story" ng-click="split_window=!split_window;changeView('jbehaveView')" data-toggle="tooltip" title="jBehave tests"
-                            href="">
-                            <i class="fa fa-heartbeat"></i>
-                            <span>Tests</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="excel/{{session.fflModelPath}}" data-toggle="tooltip" title="Download matrix" download>
-                            <i class="fa fa-cloud-download"></i>
-                            <span>Excel matrix</span>
-                        </a>
-                        <ul class="treeview-menu" style="display: block;">
-                            <li ng-repeat="matrix_table in matrix_tables" title="{{matrix_table}}">
-                                <a href="">
-                                    <i class="fa fa-table"></i> {{matrix_table.name}}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="resources/lme_docs.pdf" target="_blank" data-toggle="tooltip" title="Formula information">
-                            <i class="fa fa-question-circle-o"></i>
-                            <span>Formula information</span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a data-toggle="tooltip" title="History" href="">
-                            <i class="fa fa-history"></i>
-                            <span>History</span>
-                        </a>
-                        <ul class="treeview-menu" style="display: block;">
-                            <li ng-repeat="model_history_item in model_history" title="{{model_history_item.data.join(';')}}">
-                                <a href="">
-                                    <i class="fa fa-pencil-square-o"></i> {{model_history_item.create_time}}
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                       <!-- <a ng-click="changeView('Settings')" data-toggle="tooltip" title="Configuration" href="" class="{{currentView == 'Settings' ? 'active' : ''}}">
-                            <i class="fa fa-cog"></i>
-                            <span>Configuration</span>
-                        </a>-->
-                    </li>
-                </ul>
-            </section>
-        </aside>
-        <div class="content-wrapper">
-            <!--<section id="editor-container" class="content" style="max-height: 100%;" ng-switch="currentView">-->
-            <!--<div style="max-height: 100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">-->
-
-            <section id="editor-container" class="content" style="max-height: 90vh;position:  relative;" ng-switch="currentView">
-                <div style="max-height: 90vh;position:  absolute;top: 0px;bottom: 0px;left:  0px;right: 0px;width: 100%;height:  100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">
-
-
-                    <!--The Editor is persistent to the page-->
-                    <div class="row">
-                        <div class="col-xs-{{split_window?6:12}} editor-left">
-                            <div id="editor"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview {{currentView == 'jbehaveView' ? 'active' : ''}}">
+                    <a class="data-story" ng-click="split_window=!split_window;changeView('jbehaveView')" data-toggle="tooltip" title="jBehave tests"
+                       href="">
+                        <i class="fa fa-heartbeat"></i>
+                        <span>Tests</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="excel/{{session.fflModelPath}}" data-toggle="tooltip" title="Download matrix" download>
+                        <i class="fa fa-cloud-download"></i>
+                        <span>Excel matrix</span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li ng-repeat="matrix_table in matrix_tables" title="{{matrix_table}}">
+                            <a href="">
+                                <i class="fa fa-table"></i> {{matrix_table.name}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="resources/lme_docs.pdf" target="_blank" data-toggle="tooltip" title="Formula information">
+                        <i class="fa fa-question-circle-o"></i>
+                        <span>Formula information</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a data-toggle="tooltip" title="History" href="">
+                        <i class="fa fa-history"></i>
+                        <span>History</span>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li ng-repeat="model_history_item in model_history" title="{{model_history_item.data.join(';')}}">
+                            <a href="">
+                                <i class="fa fa-pencil-square-o"></i> {{model_history_item.create_time}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <!-- <a ng-click="changeView('Settings')" data-toggle="tooltip" title="Configuration" href="" class="{{currentView == 'Settings' ? 'active' : ''}}">
+                         <i class="fa fa-cog"></i>
+                         <span>Configuration</span>
+                     </a>-->
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper">
+        <!--<section id="editor-container" class="content" style="max-height: 100%;" ng-switch="currentView">-->
+        <!--<div style="max-height: 100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">-->
+        
+        <section id="editor-container" class="content" style="max-height: 90vh;position:  relative;" ng-switch="currentView">
+            <div style="max-height: 90vh;position:  absolute;top: 0px;bottom: 0px;left:  0px;right: 0px;width: 100%;height:  100%;" ng-show="currentView == 'FFLModelEditorView'|| currentView == 'jbehaveView'">
+                
+                
+                <!--The Editor is persistent to the page-->
+                <div class="row">
+                    <div class="col-xs-{{split_window?6:12}} editor-left">
+                        <div id="editor"></div>
+                    </div>
+                    <div ng-show="split_window" class="col-xs-6 editor-right">
+                        <div id="right_editor"></div>
+                        <div id="matrix_editor"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-switch-when="updateView">
+                <div class="box">
+                    <div class="box-body">
+                        <div ng-show="hasChanges">
+                            <p>Update</p>
+                            <pre>{{changes}}</pre>
                         </div>
-                        <div ng-show="split_window" class="col-xs-6 editor-right">
-                            <div id="right_editor"></div>
-                            <div id="matrix_editor"></div>
+                        <a class="form-control" ng-click="update()">Do update</a>
+                        <div ng-show="!hasChanges">
+                            <p>No update found</p>
                         </div>
                     </div>
                 </div>
-                <div ng-switch-when="updateView">
-                    <div class="box">
-                        <div class="box-body">
-                            <div ng-show="hasChanges">
-                                <p>Update</p>
-                                <pre>{{changes}}</pre>
-                            </div>
-                            <a class="form-control" ng-click="update()">Do update</a>
-                            <div ng-show="!hasChanges">
-                                <p>No update found</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-switch-when="Settings">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Permissions</h3>
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
+            </div>
+            <div ng-switch-when="Settings">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Permissions</h3>
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                                
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <span class="label label-success">Approved</span>
-                                        </td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <span class="label label-warning">Pending</span>
-                                        </td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <span class="label label-primary">Approved</span>
-                                        </td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td>
-                                            <span class="label label-danger">Denied</span>
-                                        </td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Hooks</h3>
-                        </div>
-                        <div class="box-tools"></div>
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Reason</th>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <span class="label label-success">Approved</span>
+                                </td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>219</td>
+                                <td>Alexander Pierce</td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <span class="label label-warning">Pending</span>
+                                </td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>657</td>
+                                <td>Bob Doe</td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <span class="label label-primary">Approved</span>
+                                </td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>175</td>
+                                <td>Mike Doe</td>
+                                <td>11-7-2014</td>
+                                <td>
+                                    <span class="label label-danger">Denied</span>
+                                </td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Configuration</h3>
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Hooks</h3>
+                    </div>
+                    <div class="box-tools"></div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>219</td>
+                                <td>Alexander Pierce</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>657</td>
+                                <td>Bob Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>175</td>
+                                <td>Mike Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Configuration</h3>
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                                
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    </div>
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>219</td>
+                                <td>Alexander Pierce</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>657</td>
+                                <td>Bob Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            <tr>
+                                <td>175</td>
+                                <td>Mike Doe</td>
+                                <td>11-7-2014</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> {{session.version}}
         </div>
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> {{session.version}}
+        <strong>Copyright &copy; 2014-2018
+            <a>{{session.author}}</a>.</strong> All rights reserved.
+    </footer>
+    <aside id="sidebar" style="display: none;" class="control-sidebar-light container">
+        <div ng-repeat="p in activeVariable">
+            <div class="input-group input-xsm">
+                <label>{{p.name}}</label>
+                <input placeholder="enter value" class="input-xsm form-control" ng-model="p.value">
             </div>
-            <strong>Copyright &copy; 2014-2018
-                <a>{{session.author}}</a>.</strong> All rights reserved.
-        </footer>
-        <aside id="sidebar" style="display: none;" class="control-sidebar-light container">
-            <div ng-repeat="p in activeVariable">
-                <div class="input-group input-xsm">
-                    <label>{{p.name}}</label>
-                    <input placeholder="enter value" class="input-xsm form-control" ng-model="p.value">
+        </div>
+    </aside>
+    <div class="control-sidebar-bg"></div>
+    <div class="modal modal-info fade" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">{{saveFeedbackTitle}}</h4>
                 </div>
-            </div>
-        </aside>
-        <div class="control-sidebar-bg"></div>
-        <div class="modal modal-info fade" id="modal-success" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <h4 class="modal-title">{{saveFeedbackTitle}}</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="pre">{{saveFeedback}}
-                            <i ng-if="saveFeedbackTitle !== 'Finished'" class="fa fa-spin fa-refresh"> </i>
-                        </p>
-                        <a ng-if="downloadJsLink" href="{{downloadJsLink}}" download>Download JS</a>
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-disabled="session.disablePreviewButton" ng-click="goToPreviewPage()" type="button" class="btn btn-outline">Preview
-                        </button>
-                    </div>
+                <div class="modal-body">
+                    <p class="pre">{{saveFeedback}}
+                        <i ng-if="saveFeedbackTitle !== 'Finished'" class="fa fa-spin fa-refresh"> </i>
+                    </p>
+                    <a ng-if="downloadJsLink" href="{{downloadJsLink}}" download>Download JS</a>
+                </div>
+                <div class="modal-footer">
+                    <button ng-disabled="session.disablePreviewButton" ng-click="goToPreviewPage()" type="button" class="btn btn-outline">Preview
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-    <script src="dist/js/adminlte.min.js"></script>
-    <script src="dist/js/demo.js"></script>
-    <script src="ace.js"></script>
-    <script src="ext-language_tools.js"></script>
-    <script src="javascripts/fflmode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+</div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="ace.js"></script>
+<script src="ext-language_tools.js"></script>
+<script src="javascripts/fflmode.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
 </body>
-
 </html>

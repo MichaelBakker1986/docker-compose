@@ -426,7 +426,7 @@ REFS[${refs.length}]:[${refs}]`
 				})
 				error(e)
 				warn(`unable to fix problem in ${formulaInfo.original} fail:${e}`)
-				warn(formulaInfo)
+				warn(JSON.stringify(formulaInfo))
 				fix = {
 					canFix: false
 				}

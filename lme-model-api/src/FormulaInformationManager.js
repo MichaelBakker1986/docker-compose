@@ -1,4 +1,4 @@
-import { FinFormula } from '../../lme-core/exchange_modules/ffl/FinFormula'
+import { FinFormula } from '../../ffl/FinFormula'
 
 const info = {
 	NA                : 1e-100,
@@ -9,20 +9,20 @@ const info = {
 	average           : 'Aggregation type ',
 	paragraph         : 'Display type',
 	flow              : 'Flow is a quantity which is measured with reference to a period of time.\n' +
-	'Thus, flows are defined with reference to a specific period (length of time),\n' +
-	' e.g., hours, days, weeks, months or years. It has time dimension.\n' +
-	' National income is a flow. It describes and measures flow of goods and services which\n' +
-	' become available to a country during a year.\n Similarly, all other economic variables which have time dimension,\n' +
-	' i.e., whose magnitude can be measured over a period of time are called flow variables.\n' +
-	' For instance, income of a person is a flow which is earned during a week or a month or any other period.\n' +
-	' Likewise, investment (i.e., addition to the stock of capital) is a flow as it pertains to a period of time.',
+		'Thus, flows are defined with reference to a specific period (length of time),\n' +
+		' e.g., hours, days, weeks, months or years. It has time dimension.\n' +
+		' National income is a flow. It describes and measures flow of goods and services which\n' +
+		' become available to a country during a year.\n Similarly, all other economic variables which have time dimension,\n' +
+		' i.e., whose magnitude can be measured over a period of time are called flow variables.\n' +
+		' For instance, income of a person is a flow which is earned during a week or a month or any other period.\n' +
+		' Likewise, investment (i.e., addition to the stock of capital) is a flow as it pertains to a period of time.',
 	balance           : 'Balance Variables:\n' +
-	'A stock is a quantity which is measurable at a particular point of time, e.g., 4 p.m.,\n' +
-	' 1st January, Monday, 2010, etc. Capital is a stock variable.\n' +
-	' On a particular date (say, 1st April, 2011), a country owns and commands stock of machines,\n' +
-	' buildings, accessories, raw materials, etc. It is stock of capital.\n' +
-	' Like a balance-sheet, a stock has a reference to a particular date on which it shows stock position.\n' +
-	' Clearly, a stock has no time dimension (length of time) as against a flow which has time dimension.',
+		'A stock is a quantity which is measurable at a particular point of time, e.g., 4 p.m.,\n' +
+		' 1st January, Monday, 2010, etc. Capital is a stock variable.\n' +
+		' On a particular date (say, 1st April, 2011), a country owns and commands stock of machines,\n' +
+		' buildings, accessories, raw materials, etc. It is stock of capital.\n' +
+		' Like a balance-sheet, a stock has a reference to a particular date on which it shows stock position.\n' +
+		' Clearly, a stock has no time dimension (length of time) as against a flow which has time dimension.',
 	TSUM              : 'TSUM(variable_name)\nSUM of TupleInstances given name',
 	DMYtoDate         : 'DayMonthYear to Date\nExample DMYtoDate(d,m,y)=NOW()',
 	Exp               : 'Example: Exp(2) = 4',
@@ -54,10 +54,10 @@ const info = {
 	number            : 'Is a datatype. And the default one.',
 	unscalable        : 'While scaling don\'t scale this variable',
 	afterinput        : 'Is not supported in lme.\n FFL is descriptive\n' +
-	'One of the benefits of using descriptive language is that it helps the writer to convey the meaning behind the text.\n' +
-	' By using descriptive language, the writer can describe exactly how a setting looks,\n' +
-	' how a character behaves or what action is taking place. The benefit for the reader is the ability\n' +
-	' to more clearly visualize what is being described.',
+		'One of the benefits of using descriptive language is that it helps the writer to convey the meaning behind the text.\n' +
+		' By using descriptive language, the writer can describe exactly how a setting looks,\n' +
+		' how a character behaves or what action is taking place. The benefit for the reader is the ability\n' +
+		' to more clearly visualize what is being described.',
 	Execute           : 'This is not supported in lme. FFL is a descriptive language',
 	memo              : 'displaytype: Textarea',
 	String            : 'Convert any to String\nExample\nString(1)',
@@ -67,7 +67,7 @@ const info = {
 	Pos               : 'Position \nExample Pos("hoi","o")==2',
 	MatrixLookup      : 'Example:\n  MatrixLookup(a,named_table,row_name,column_name)',
 	SelectDescendants : 'Abstract:\n  Count(X,{variable_name},{lambda})\nExample:\n' +
-	'  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
+		'  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
 	Count             : 'Example:\n  Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X))',
 	Case              : 'Example:\n  Case(1,[1:100|2:200])==100',
 	SubStr            : 'Example:\n  SubStr("Hoi",2)==i',
@@ -89,7 +89,7 @@ const info = {
 	Off               : 'Synonym to 0, false, False',
 	False             : 'Synonym to 0, false, False',
 	'choices:'        : 'Specify the choices for a given variable\nImplies displaytype: select\nExample: "0:No|1:Yes"\n' +
-	'Example: "High|Low|None"',
+		'Example: "High|Low|None"',
 	'hint:'           : 'Specify the dynamic hint formula for a given variable',
 	ValueT            : 'Convert a period into a time-index',
 	'aggregation:'    : 'A number can be aggregated over time.\nOptions:flow|balance\nDefaults to balance',
@@ -102,16 +102,16 @@ const info = {
 	 ".locked"         : 'Is a figure property. VAR.locked is a synonym to Locked(VAR)',
 	 ".entered"        : 'Is a figure property. VAR.entered is a synonym to DataEntered(VAR)',*/
 	'frequency:'      : 'The frequency a variable-value is repeated over time.\nOptions:[document|column|timeline|none]' +
-	'\nDefaults to column',
+		'\nDefaults to column',
 	'datatype:'       : 'Datatype for the variable:\nOptions:[number|string|boolean|currency|matrix|none]\nDefaults to number',
 	'options_title:'  : 'Descibes if a title can be changed by user.\nOptions: locked|unlocked.\n Defaults to unlocked',
 	percentage        : 'Displaytype ',
 	currency          : 'Displaytype ',
 	'fixed_decimals:' : 'a number or currency datatype can be restricted to an ammount of decimals shown.',
 	'displaytype:'    : 'Displaytype for the variable:\n' +
-	'Options:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\n' +
-	'currency(2) implies fixed_decimals: 2\n' +
-	'Defaults to default',
+		'Options:[default|radio|select|string|currency|paragraph|customwidget|date|memo|percentage|piechart|polarchart|scorecard]\n' +
+		'currency(2) implies fixed_decimals: 2\n' +
+		'Defaults to default',
 	Input             : 'Is a data_option',
 	Output            : 'Is a data_option',
 	scorecard         : 'Display type',
@@ -318,25 +318,25 @@ FormulaInformationManager.prototype.lookupFunction = function(name, line, offset
 		const parts = []
 		var lastChar = line.length
 		//assume first character is (
-		if (line.charAt(lastopen) != '(') throw Error('first char must be (')
+		if (line.charAt(lastopen) !== '(') throw Error('first char must be (')
 		for (var i = lastopen; i < line.length; i++) {
 			const c = line[i]
-			if (c == '(') open++
-			else if (c == ')') {
+			if (c === '(') open++
+			else if (c === ')') {
 				open--
 				//last part
-				if (open == 0) {
+				if (open === 0) {
 					parts.push(line.substring(lastopen + 1, i))
 					lastChar = i + 1
 					break
 				}
-			} else if (c == ',') {
-				if (open == 1) {
+			} else if (c === ',') {
+				if (open === 1) {
 					parts.push(line.substring(lastopen + 1, i))
 					lastopen = i
 				}
 			}
-			if (open < 0 || c == ';') {
+			if (open < 0 || c === ';') {
 				lastChar = i
 				break
 			}
@@ -381,9 +381,9 @@ FormulaInformationManager.prototype.extractParts = function(workbook, info) {
 			} catch (err) {
 				dep_value = 'ERR:' + err.toString()
 			}
-			const total = dep_var_name + (lastpart == 'value' ? '' : '.' + lastpart) + '=' + dep_value
+			const total = dep_var_name + (lastpart === 'value' ? '' : '.' + lastpart) + '=' + dep_value
 			prefix.length = Math.max(deplength - String(total).length, 0)
-			return (String(total).slice(0, deplength - 1) + prefix.join(' ')) + ((idx2 + 1) % dep_ammount_in_row == 0 ? '\n' : '')
+			return (String(total).slice(0, deplength - 1) + prefix.join(' ')) + ((idx2 + 1) % dep_ammount_in_row === 0 ? '\n' : '')
 
 		}).join('')
 
@@ -396,4 +396,4 @@ FormulaInformationManager.prototype.mathDefinitions = function() {
 FormulaInformationManager.prototype.highlights = highlights
 FormulaInformationManager.prototype.info = info
 
-module.exports = new FormulaInformationManager()
+export default new FormulaInformationManager()

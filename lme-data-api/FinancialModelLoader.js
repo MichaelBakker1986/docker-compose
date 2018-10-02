@@ -2,16 +2,17 @@
  * Load FFL models, update Dynamic Swagger docs
  */
 import { error, warn }               from 'log6'
-import { LMEFacade, SolutionFacade } from '../lme-core'
-import * as fflMath                  from 'ffl-math'
-import * as formulaJs                from 'formulajs-connect'
-import '../lme-core/exchange_modules/swagger/swaggerParser'
+import LMEFacade, { SolutionFacade } from '../lme-core/index'
+import fflMath                       from '../math/ffl-math'
+import { RegisterPlainFFLDecorator } from '../ffl/index'
+import formulaJs                     from '../formulajs-connect/formulajs'
 import { ModelListener }             from '../git-connect'
-import excelPlugin                   from '../excel-connect'
-import { basename } from 'path'
+import excelPlugin                   from '../excel-connect/excel-connect'
+import { basename }                  from 'path'
+import SwaggerParser                 from '../lme-core/exchange_modules/swagger/swaggerParser'
 
-LMEFacade.addFunctions(fflMath.entries)
-LMEFacade.addFunctions(formulaJs.entries)
+LMEFacade.registerParser(RegisterPlainFFLDecorator, SwaggerParser)
+LMEFacade.addFunctions(fflMath, formulaJs)
 
 const modelLoadListener = new ModelListener()
 
@@ -100,3 +101,7 @@ modelLoadListener.addListener((fflModelData, path) => {
 modelLoadListener.initializeModels()
 exports.ModelLoader = modelLoadListener
 exports.LMEFacade = LMEFacade
+export default {
+	ModelLoader: modelLoadListener,
+	LMEFacade
+}

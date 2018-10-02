@@ -1,7 +1,7 @@
 model HAPPYWORLD uses BaseModel
 {
  version: "1.0";
- root
+ variable HAPPYWORLD
  {
   variable Q_ROOT
   {

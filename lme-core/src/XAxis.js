@@ -1,5 +1,7 @@
 import { debug, DEBUG } from 'log6'
 
+import resources from './BookYearTimeModel'
+
 const headers = {
 	columns: {
 		title: 'timeline'
@@ -19,7 +21,7 @@ const headers = {
 }
 
 function ViewModes(data) {
-	data = data || require('../resources/BookYearTimeModel.json')
+	data = data || resources()
 	const formulasets = data.formulasets
 
 	const viewmodes = {}
@@ -343,4 +345,4 @@ ViewModes.prototype.toString = function() {
 	})
 }
 
-module.exports = ViewModes
+export default ViewModes  

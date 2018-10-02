@@ -10,22 +10,25 @@ var _FFLToRegister = require('./FFLToRegister');
 
 var _RegisterToLMEParser = require('./RegisterToLMEParser');
 
-function RegisterPlainFFLDecorator() {}
+var _RegisterToLMEParser2 = _interopRequireDefault(_RegisterToLMEParser);
 
-RegisterPlainFFLDecorator.prototype.name = 'ffl';
-RegisterPlainFFLDecorator.prototype.status = 'green';
-RegisterPlainFFLDecorator.prototype.headername = '.finance ffl';
-RegisterPlainFFLDecorator.prototype.deParse = function (data, workbook) {
-	return new _RegisterToLMEParser.RegisterToLMEParser().deParse(data, workbook);
-};
-RegisterPlainFFLDecorator.prototype.parseData = function (data, workbook) {
-	var register = data.register || new _lmeCore.Register();
-	var raw_model_data = data.raw || data;
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var fflFormatter = new _FFLToRegister.FFLToRegister(register, raw_model_data);
-	fflFormatter.parseProperties();
-	workbook.modelName = fflFormatter.name || workbook.modelName;
-	return new _RegisterToLMEParser.RegisterToLMEParser().parseData(register, workbook);
+var RegisterPlainFFLDecorator = {
+	name: 'ffl',
+	status: 'green',
+	headername: '.finance ffl',
+	deParse: function deParse(data, workbook) {
+		return new _RegisterToLMEParser2.default().deParse(data, workbook);
+	},
+	parseData: function parseData(data, workbook) {
+		var register = data.register || new _lmeCore.Register();
+		var raw_model_data = data.raw || data;
+
+		var fflFormatter = new _FFLToRegister.FFLToRegister(register, raw_model_data);
+		fflFormatter.parseProperties();
+		workbook.modelName = fflFormatter.name || workbook.modelName;
+		return new _RegisterToLMEParser2.default().parseData(register, workbook);
+	}
 };
-_lmeCore.SolutionFacade.addParser(RegisterPlainFFLDecorator.prototype);
-exports.default = RegisterPlainFFLDecorator.prototype;
+exports.default = RegisterPlainFFLDecorator;

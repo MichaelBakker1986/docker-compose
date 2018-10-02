@@ -67,4 +67,4 @@ function RegisterFormulaBuilder(register) {
 	return new Builder()
 }
 
-module.exports = RegisterFormulaBuilder
+export { RegisterFormulaBuilder }

@@ -3,7 +3,7 @@ import BaseModel.*;
 
 model NESTTUPLETEST uses BaseModel
 {
- root
+ variable NESTTUPLETEST
  {
   tuple Tuple
   {

@@ -1,7 +1,7 @@
 model HALLOHALLO uses BaseModel
 {
- root
- {
+variable HALLOHALLO
+{
   variable Q_ROOT
   {
    displaytype: scorecard;
@@ -16,5 +16,5 @@ model HALLOHALLO uses BaseModel
     }
    }
   }
- }
+  }
 }

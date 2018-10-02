@@ -1,5 +1,7 @@
 model REALESTATE uses BaseModel
 {
+variable REALESTATE
+{
  variable Q_ROOT
  {
   frequency: document;
@@ -2084,5 +2086,6 @@ model REALESTATE uses BaseModel
    title: "Rapportage";
    locked: 1;
   }
+ }
  }
 }

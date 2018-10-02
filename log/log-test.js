@@ -1,5 +1,5 @@
-import assert from 'assert'
-import log    from './log'
+import assert         from 'assert'
+import log, { error } from './dist/log'
 
 const debug = (process.env.ENV === 'debug')
 log.dateformat = 'HHMM;ssl'

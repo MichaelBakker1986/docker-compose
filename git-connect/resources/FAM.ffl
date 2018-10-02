@@ -1,7 +1,7 @@
 model FAM uses BaseModel
 {
  version: "00.00.001.042";
- variable RootSub1
+ variable FAM
  {
   datatype: none;
   title: "General variables for webclient";

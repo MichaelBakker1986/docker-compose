@@ -1,6 +1,7 @@
 //just an dummy-template to quickly create a model
-import { EconomicEditorView } from '../../model-tests/EconomicEditorView'
-import $                      from 'jquery'
+import EconomicEditorView               from '../../model-tests/EconomicEditorView'
+import $                                from 'jquery'
+import { FFLToRegister, ScorecardTool } from '../../ffl/index'
 
 const newModelTemplate =
 	      'model $1 uses BaseModel\n' +
@@ -24,7 +25,6 @@ const newModelTemplate =
 	      '  }\n' +
 	      ' }\n' +
 	      '}'
-const { FFLFormatter, ScorecardTool } = require('../../lme-core/exchange_modules/ffl/')
 
 function FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine) {
 	this.register = register
@@ -63,10 +63,9 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 		Pace.track(function() {
 			$scope.saveFeedback = 'Customizing ' + $scope.session.fflModelPath + '… '
 			$scope.saveFeedbackTitle = 'Working on it... '
-			var data = fflEditor.getValue()
+			const data = fflEditor.getValue()
 			$.post('saveFFLModel/' + $scope.session.fflModelPath, {
-				data: data,
-				type: type
+				data, type
 			}, function(data) {
 				$scope.$apply(function() {
 					$scope.saveFeedbackTitle = 'Finished'
@@ -74,7 +73,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 					$scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.js'
 					$scope.session.disablePreviewButton = false
 					if (data.status === 'success') {
-						window.open(`${$scope.session.page}.html#${$scope.session.fflModelPath}&${userID}`)
+						window.open(`${$scope.session.page}.html#${$scope.session.fflModelPath}&${$scope.session.userID}`)
 						$('#modal-success').modal('hide')
 					}
 				})
@@ -83,7 +82,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	}
 	$scope.toggleFormatter = function() {
 		const cursor = fflEditor.getCursor()
-		user_session.fflModel = new FFLFormatter(register, fflEditor.getValue()).toString()
+		user_session.fflModel = new FFLToRegister(register, fflEditor.getValue()).toString()
 		fflEditor.setParsedValue(user_session.fflModel)
 		fflEditor.aceEditor.gotoLine(cursor.row + 1, cursor.column)
 	}
@@ -201,7 +200,7 @@ FFLController.prototype.updateFFLModel = function(model_name) {
 			self.fflEditor.setParsedValue(self.user_session.fflModel)
 			self.changeManager.setModelChanged()
 			self.register.clean()
-			const formatter = new FFLFormatter(self.register, self.user_session.fflModel)
+			const formatter = new FFLToRegister(self.register, self.user_session.fflModel)
 			formatter.parseProperties()
 
 			self.fflEditor.scrollTop()
@@ -212,4 +211,4 @@ FFLController.prototype.updateFFLModel = function(model_name) {
 
 }
 
-module.exports = FFLController
+export default FFLController

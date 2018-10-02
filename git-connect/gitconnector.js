@@ -57,7 +57,7 @@ ModelListener.prototype.initializeModels = function() {
             files.forEach(function(file) {
                 const caseInsensitiveFileName = file.toLowerCase()
                 //filter files other than *.ffl or containing _tmp_
-                if (caseInsensitiveFileName.endsWith('.ffl') && caseInsensitiveFileName.indexOf('_tmp_') == -1) {
+                if (caseInsensitiveFileName.endsWith('.ffl') && caseInsensitiveFileName.indexOf('_tmp_') === -1) {
                     if (enabledModel(caseInsensitiveFileName)) {
                         fs.readFile(file, 'utf8', self.loadModel(file));
                     }
@@ -72,7 +72,7 @@ ModelListener.prototype.addListener = function(listener) {
 }
 ModelListener.prototype.onNewModel = function(modeldata, path) {
     if (log.TRACE) log.trace(modeldata)
-    for (var i = 0; i < this.listeners.length; i++) {
+    for (let i = 0; i < this.listeners.length; i++) {
         this.listeners[i](modeldata, path)
     }
 }

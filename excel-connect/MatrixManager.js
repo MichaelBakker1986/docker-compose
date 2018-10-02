@@ -44,4 +44,4 @@ MatrixManager.prototype.setMatrices = function(matrixArg) {
 		this.matrix.push(matrixArg[table_name])
 	}
 }
-module.exports = MatrixManager
+export default MatrixManager

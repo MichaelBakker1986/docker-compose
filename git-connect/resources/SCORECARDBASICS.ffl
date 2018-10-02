@@ -1,5 +1,7 @@
 model SCORECARDBASICS uses BaseModel
 {
+ variable SCORECARDBASICS
+ {
   variable ScorecardRoot
   {
    display_options:scorecard;
@@ -14,4 +16,5 @@ model SCORECARDBASICS uses BaseModel
     datatype: string;
    }
   }
+ }
 }

@@ -3,9 +3,7 @@ import BaseModel.*;
 
 model HUIS uses BaseModel
 {
- root
- {
-  variable Huis
+  variable HUIS
   {
    displaytype: scorecard;
    variable HuisStap
@@ -130,6 +128,5 @@ model HUIS uses BaseModel
      hint: "TupleTestStap2";
     }
    }
-  }
  }
 }

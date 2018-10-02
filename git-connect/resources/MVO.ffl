@@ -1,5 +1,7 @@
 model MVO uses BaseModel
 {
+variable MVO
+{
  variable Q_ROOT
  {
   datatype: boolean;
@@ -1933,5 +1935,6 @@ model MVO uses BaseModel
     displaytype: memo;
    }
   }
+ }
  }
 }

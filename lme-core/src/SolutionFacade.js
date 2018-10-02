@@ -109,17 +109,27 @@ class SolutionFacade {
 		return property
 	}
 
-	static getOrCreateProperty = PropertiesAssembler.getOrCreateProperty
-	static contains = PropertiesAssembler.contains
-	static getFunctions = getFunctions
-	static addParser = ParserService.addParser
-	static visitParsers = ParserService.visitParsers
-	static properties = properties
-	static functions = functions
-	static addVariables = addVariables
-	static initVariables = initVariables
-	static fetchFormulaByIndex = fetchFormulaByIndex
+	/*static getOrCreateProperty = PropertiesAssembler.getOrCreateProperty
+	 static contains = PropertiesAssembler.contains
+	 static getFunctions = getFunctions
+	 static addParser = ParserService.addParser
+	 static visitParsers = ParserService.visitParsers
+	 static properties = properties
+	 static functions = functions
+	 static addVariables = addVariables
+	 static initVariables = initVariables
+	 static fetchFormulaByIndex = fetchFormulaByIndex*/
 }
 
+SolutionFacade.getOrCreateProperty = PropertiesAssembler.getOrCreateProperty
+SolutionFacade.contains = PropertiesAssembler.contains
+SolutionFacade.getFunctions = getFunctions
+SolutionFacade.addParser = ParserService.addParser
+SolutionFacade.visitParsers = ParserService.visitParsers
+SolutionFacade.properties = properties
+SolutionFacade.functions = functions
+SolutionFacade.addVariables = addVariables
+SolutionFacade.initVariables = initVariables
+SolutionFacade.fetchFormulaByIndex = fetchFormulaByIndex
 FormulaBootstrap.initStateBootstrap(SolutionFacade)
 export default SolutionFacade

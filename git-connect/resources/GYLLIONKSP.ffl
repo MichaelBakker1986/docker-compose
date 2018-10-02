@@ -7,7 +7,7 @@ import BaseModel.*;
 model GYLLIONKSP uses BaseModel 
 {
  version: "1.28";
- root
+ variable GYLLIONKSP
  {
   variable Q_ROOT
   {

@@ -1,1 +1,1 @@
-require('./lme-model-api/update')
+import './lme-model-api/update'

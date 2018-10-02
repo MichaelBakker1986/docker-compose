@@ -1,7 +1,8 @@
 /**
  * Convert Register into Formula-View only
  */
-import { FFLToRegister, Register } from '../lme-core'
+import { Register }      from '../lme-core/index'
+import { FFLToRegister } from '../ffl/index'
 
 function EconomicEditorView() {
 	this.on = false
@@ -54,7 +55,7 @@ EconomicEditorView.prototype.parse = function(input, rootNodeName) {
 	const formulaIndex = indexer.schemaIndexes.formula
 	const hintIndex = indexer.schemaIndexes.hint
 	const notrend_formulaIndex = indexer.schemaIndexes.formula_notrend
-	var output = []
+	let output = []
 	const names = indexer.getIndex('name')
 	const rootNode = names[rootNodeName || 'root']
 	indexer.walk(rootNode, 0, function(node, depth) {
@@ -107,5 +108,5 @@ EconomicEditorView.prototype.parse = function(input, rootNodeName) {
 	return output.join('\n')
 }
 
-exports.EconomicEditorView = new EconomicEditorView()
+export default EconomicEditorView
 

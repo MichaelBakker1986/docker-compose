@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _FFLToRegister = require('./FFLToRegister');
 
 var _lmeCore = require('lme-core');
@@ -106,4 +110,4 @@ ScorecardTool.prototype.walkDepthFirst = function (node, visitor, depth) {
 	}
 	visitor(node, depth);
 };
-exports.ScorecardTool = ScorecardTool;
+exports.default = new ScorecardTool();

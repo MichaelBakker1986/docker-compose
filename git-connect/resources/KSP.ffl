@@ -1,5 +1,7 @@
 model KSP uses BaseModel
 {
+variable KSP
+{
  variable Q_ROOT
  {
   title: "Costs of child raising (v1.37)";
@@ -926,5 +928,6 @@ model KSP uses BaseModel
     fixed_decimals: 2;
    }
   }
+ }
  }
 }

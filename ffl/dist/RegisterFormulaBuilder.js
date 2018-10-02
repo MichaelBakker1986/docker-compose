@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.RegisterFormulaBuilder = undefined;
+
 var _log = require('log6');
 
 function RegisterFormulaBuilder(register) {
@@ -66,4 +71,4 @@ function RegisterFormulaBuilder(register) {
 	return new Builder();
 }
 
-module.exports = RegisterFormulaBuilder;
+exports.RegisterFormulaBuilder = RegisterFormulaBuilder;

@@ -257,7 +257,7 @@ global.HVALUES = (values, start, end) => {
 }
 const checkIntegrity = (result) => {
 	const set = new Set(result.map(el => typeof el))
-	info(Array.from(set.keys()).toString())
+	debug(`Data types in ${Array.from(set.keys()).toString()}`)
 }
 global.VALUES = function(func, fId, x, y, z, v, m) {
 	const result = []
@@ -265,8 +265,7 @@ global.VALUES = function(func, fId, x, y, z, v, m) {
 		if (!x.aggcols[i].aggregated)//TODO: aggregation is several levels
 			result.push(func(fId, x.aggcols[i], y, z, v, m))
 	}
-	//if (DEBUG)
-	checkIntegrity(result)
+	if (DEBUG) checkIntegrity(result)
 	return result
 }
 /*f=Self for now..*/

@@ -1,5 +1,7 @@
 model PRICING uses BaseModel
 {
+ variable PRICING
+ {
  version: "1.34.5";
  variable RootSub1
  {
@@ -5792,5 +5794,6 @@ model PRICING uses BaseModel
     locked: 1;
    }
   }
+ }
  }
 }
