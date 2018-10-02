@@ -14,12 +14,15 @@ api.registerParser(RegisterPlainFFLDecorator)
 api.addFunctions(fflMath)
 api.addFunctions(formulaJs)
 
-ExcelApi.loadExcelFile('KSP').then(async () => {
-	const wb = new WorkBook(new Context)
-	wb.importFFL(KSP_FFL_MODEL)
-	equal(wb.get('ActualDiapers'), 300)
-}).catch((err) => {
-	console.error(err)
-	error(err)
-	process.exit(1)
-})
+function currently_disabled() {
+	ExcelApi.loadExcelFile('KSP').then(async () => {
+		const wb = new WorkBook(new Context)
+		wb.importFFL(KSP_FFL_MODEL)
+		equal(wb.get('ActualDiapers'), 300)
+	}).catch((err) => {
+		console.error(err)
+		error(err)
+		process.exit(1)
+	})
+}
+
