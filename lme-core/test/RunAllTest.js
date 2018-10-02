@@ -28,7 +28,7 @@ const totalTestTime = (new Date().getTime() - performanceTestStartTime)
 results.push(['performanceTest', 'total', totalTestTime])
 
 results.forEach((testResult) => debug(testResult))
-if (totalTestTime > 3500) error('Total time exceeded')
+if (totalTestTime > 9500) error('Total time exceeded')
 if (failures.length > 0) {
 	error(`A test failed${failures}`)
 	process.exit(1)
