@@ -91,7 +91,7 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.fflmode = true
 	$scope.currentView = 'FFLModelEditorView'
 	$scope.fflType = '.ffl'
-	var currentIndexer = new RegisterToFFL(register, { schema: [], nodes: [] })//current modelindexer
+	var currentIndexer = new RegisterToFFL(register)//current modelindexer
 	const fflEditor = new AceEditor('editor')
 	fflEditor.initResize()
 	const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
@@ -104,8 +104,8 @@ angular.module('lmeapp', ['angular.filter'])
 	$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 		console.warn('error while getting [' + settings.url + ']', thrownError)
 	})
-	var sidebaropen = false
-	var hideSideBar = true
+	let sidebaropen = false
+	let hideSideBar = true
 	$scope.publishDockerImage = function() {
 		Pace.track(function() {
 			$.post('publishDockerImage/' + $scope.session.fflModelPath, {
@@ -215,7 +215,7 @@ angular.module('lmeapp', ['angular.filter'])
 	}
 	/*** Auto-complete for JBehave view **/
 	$scope.changedView = function() {
-		if ($scope.currentView == 'jbehaveView') {
+		if ($scope.currentView === 'jbehaveView') {
 			console.info('Changed to JBEHAVE VIEW')
 			const names = register.getIndex('name')
 			const wordMap = []
@@ -291,7 +291,10 @@ angular.module('lmeapp', ['angular.filter'])
 			if (scope.register.changes.length > 0) {
 				console.info('Register changes')
 				scope.register.changes.length = 0
-				const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL(undefined, user_session.fflModelPath).join('\n')
+				const newValue = scope.register.header + '{\n' + new RegisterToFFL(scope.register).toGeneratedFFL({
+					rootVariableName: user_session.fflModelPath,
+					auto_join       : true
+				})
 				fflEditor.setValue(newValue)
 			}
 			return scope.register.changes
@@ -313,10 +316,10 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.showNode = function(node) {
 		$scope.changeView('FFLModelEditorView')
 		console.info('Looking at node ' + node)
-		fflEditor.setValue(new RegisterToFFL(register).toGeneratedFFL(node.id, undefined).join('\n'))
+		fflEditor.setValue(new RegisterToFFL(register).toGeneratedFFL({ rootVariableName: node.id, auto_join: true }))
 	}
 	$scope.changeView = function(viewName) {
-		if ($scope.currentView != viewName) {
+		if ($scope.currentView !== viewName) {
 			console.info('Switched to ' + viewName)
 			$scope.currentView = viewName
 			$scope.changedView()

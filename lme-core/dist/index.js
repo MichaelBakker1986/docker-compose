@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_j3vsqggp7 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\index.js',
-	    hash = 'ef56d331b6a61f39f73e216d4dbadaf50a0c3cfb',
+var cov_7uwhnrqb7 = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\index.js',
+	    hash = '37696dea61a37b20e305d8e220d49ea7292a198a',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\index.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\index.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2711,94 +2711,94 @@ var resources = {
 
 
 function LMEFacade() {
-	cov_j3vsqggp7.f[0]++;
+	cov_7uwhnrqb7.f[0]++;
 }
 
-cov_j3vsqggp7.s[0]++;
+cov_7uwhnrqb7.s[0]++;
 LMEFacade.prototype.initializeFFlModelData = function (data, path) {
-	cov_j3vsqggp7.f[1]++;
+	cov_7uwhnrqb7.f[1]++;
 
 	var JSWorkBook = void 0;
-	cov_j3vsqggp7.s[1]++;
+	cov_7uwhnrqb7.s[1]++;
 	if (path.includes('KSP')) {
-		cov_j3vsqggp7.b[0][0]++;
-		cov_j3vsqggp7.s[2]++;
+		cov_7uwhnrqb7.b[0][0]++;
+		cov_7uwhnrqb7.s[2]++;
 		//KSP is only model with the 18year TimeModel, need 1 more example to generalize.
 		JSWorkBook = new _JSWorkBook.JSWorkBook(new _Context.Context());
 	} else {
-		cov_j3vsqggp7.b[0][1]++;
-		cov_j3vsqggp7.s[3]++;
+		cov_7uwhnrqb7.b[0][1]++;
+		cov_7uwhnrqb7.s[3]++;
 
 		JSWorkBook = new _JSWorkBook.JSWorkBook(new _Context.Context(), new _TimeAxis2.default(resources), _Constants.DETAIL_INTERVAL);
 	}
-	cov_j3vsqggp7.s[4]++;
+	cov_7uwhnrqb7.s[4]++;
 	JSWorkBook.importFFL(data);
-	cov_j3vsqggp7.s[5]++;
+	cov_7uwhnrqb7.s[5]++;
 	JSWorkBook.validateImportedSolution();
-	cov_j3vsqggp7.s[6]++;
+	cov_7uwhnrqb7.s[6]++;
 	JSWorkBook.fixProblemsInImportedSolution();
-	var validateFeedback = (cov_j3vsqggp7.s[7]++, JSWorkBook.validateImportedSolution());
-	cov_j3vsqggp7.s[8]++;
+	var validateFeedback = (cov_7uwhnrqb7.s[7]++, JSWorkBook.validateImportedSolution());
+	cov_7uwhnrqb7.s[8]++;
 	if (validateFeedback.valid) {
-		cov_j3vsqggp7.b[1][0]++;
-		cov_j3vsqggp7.s[9]++;
+		cov_7uwhnrqb7.b[1][0]++;
+		cov_7uwhnrqb7.s[9]++;
 
 		if (_log.DEBUG) {
-				cov_j3vsqggp7.b[2][0]++;
-				cov_j3vsqggp7.s[10]++;
+				cov_7uwhnrqb7.b[2][0]++;
+				cov_7uwhnrqb7.s[10]++;
 				(0, _log.debug)('Initialized model [' + JSWorkBook.getSolutionName() + ']');
 			} else {
-			cov_j3vsqggp7.b[2][1]++;
+			cov_7uwhnrqb7.b[2][1]++;
 		}
 	} else {
-		cov_j3vsqggp7.b[1][1]++;
-		cov_j3vsqggp7.s[11]++;
+		cov_7uwhnrqb7.b[1][1]++;
+		cov_7uwhnrqb7.s[11]++;
 
 		if (_log.DEBUG) {
-				cov_j3vsqggp7.b[3][0]++;
-				cov_j3vsqggp7.s[12]++;
+				cov_7uwhnrqb7.b[3][0]++;
+				cov_7uwhnrqb7.s[12]++;
 				(0, _log.error)(validateFeedback);
 			} else {
-			cov_j3vsqggp7.b[3][1]++;
-		}cov_j3vsqggp7.s[13]++;
+			cov_7uwhnrqb7.b[3][1]++;
+		}cov_7uwhnrqb7.s[13]++;
 		throw Error('Unable to initialize model ' + JSWorkBook.getSolutionName());
 	}
-	cov_j3vsqggp7.s[14]++;
+	cov_7uwhnrqb7.s[14]++;
 	return JSWorkBook;
 };
 /**
  * TODO: Inject this functions into the FunctionMap instead of global.
  * @param plugin
  */
-cov_j3vsqggp7.s[15]++;
+cov_7uwhnrqb7.s[15]++;
 LMEFacade.prototype.registerParser = function () {
-	cov_j3vsqggp7.f[2]++;
-	cov_j3vsqggp7.s[16]++;
+	cov_7uwhnrqb7.f[2]++;
+	cov_7uwhnrqb7.s[16]++;
 
 	for (var i = 0; i < arguments.length; i++) {
-		cov_j3vsqggp7.s[17]++;
+		cov_7uwhnrqb7.s[17]++;
 		_SolutionFacade2.default.addParser(arguments[i]);
 	}
 };
-cov_j3vsqggp7.s[18]++;
+cov_7uwhnrqb7.s[18]++;
 LMEFacade.prototype.addFunctions = function () {
-	cov_j3vsqggp7.f[3]++;
-	cov_j3vsqggp7.s[19]++;
+	cov_7uwhnrqb7.f[3]++;
+	cov_7uwhnrqb7.s[19]++;
 
 	for (var i = 0; i < arguments.length; i++) {
-		var plugin = (cov_j3vsqggp7.s[20]++, arguments[i]);
-		cov_j3vsqggp7.s[21]++;
+		var plugin = (cov_7uwhnrqb7.s[20]++, arguments[i]);
+		cov_7uwhnrqb7.s[21]++;
 		Object.assign(global, plugin.entries);
 		/*Object.keys(plugin.entries).forEach(function_name => {
    global[function_name] = plugin.entries[function_name]
    })*/
-		cov_j3vsqggp7.s[22]++;
+		cov_7uwhnrqb7.s[22]++;
 		if (_log.TRACE) {
-				cov_j3vsqggp7.b[4][0]++;
-				cov_j3vsqggp7.s[23]++;
+				cov_7uwhnrqb7.b[4][0]++;
+				cov_7uwhnrqb7.s[23]++;
 				(0, _log.trace)('Added fes-plugin [' + plugin.name + '] functions [' + Object.keys(plugin.entries) + ']');
 			} else {
-			cov_j3vsqggp7.b[4][1]++;
+			cov_7uwhnrqb7.b[4][1]++;
 		}
 	}
 };
@@ -2809,145 +2809,145 @@ LMEFacade.prototype.addFunctions = function () {
  */
 // Convert tuple index to tuple number
 
-cov_j3vsqggp7.s[24]++;
+cov_7uwhnrqb7.s[24]++;
 LMEFacade.prototype.getValue = function (context, rowId) {
-	var column_context = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (cov_j3vsqggp7.b[5][0]++, 0);
+	var column_context = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (cov_7uwhnrqb7.b[5][0]++, 0);
 	var value = arguments[3];
 	var tuple_index = arguments[4];
-	cov_j3vsqggp7.f[4]++;
+	cov_7uwhnrqb7.f[4]++;
 
-	var fesContext = (cov_j3vsqggp7.s[25]++, new _Context.Context());
-	cov_j3vsqggp7.s[26]++;
+	var fesContext = (cov_7uwhnrqb7.s[25]++, new _Context.Context());
+	cov_7uwhnrqb7.s[26]++;
 	fesContext._values = context.values;
-	var JSWorkBook = (cov_j3vsqggp7.s[27]++, new _JSWorkBook.JSWorkBook(fesContext));
-	cov_j3vsqggp7.s[28]++;
-	JSWorkBook.columns = (cov_j3vsqggp7.b[6][0]++, context.columns) || (cov_j3vsqggp7.b[6][1]++, 2);
-	cov_j3vsqggp7.s[29]++;
-	JSWorkBook.properties = (cov_j3vsqggp7.b[7][0]++, context.properties) || (cov_j3vsqggp7.b[7][1]++, JSWorkBook.properties);
+	var JSWorkBook = (cov_7uwhnrqb7.s[27]++, new _JSWorkBook.JSWorkBook(fesContext));
+	cov_7uwhnrqb7.s[28]++;
+	JSWorkBook.columns = (cov_7uwhnrqb7.b[6][0]++, context.columns) || (cov_7uwhnrqb7.b[6][1]++, 2);
+	cov_7uwhnrqb7.s[29]++;
+	JSWorkBook.properties = (cov_7uwhnrqb7.b[7][0]++, context.properties) || (cov_7uwhnrqb7.b[7][1]++, JSWorkBook.properties);
 	//prepare the workbook and context to match current appscope
-	cov_j3vsqggp7.s[30]++;
+	cov_7uwhnrqb7.s[30]++;
 	if (!context.isset) {
-		cov_j3vsqggp7.b[8][0]++;
-		cov_j3vsqggp7.s[31]++;
+		cov_7uwhnrqb7.b[8][0]++;
+		cov_7uwhnrqb7.s[31]++;
 
 		JSWorkBook.updateValues();
-		cov_j3vsqggp7.s[32]++;
+		cov_7uwhnrqb7.s[32]++;
 		context.isset = true;
 	} else {
-		cov_j3vsqggp7.b[8][1]++;
+		cov_7uwhnrqb7.b[8][1]++;
 	}
-	cov_j3vsqggp7.s[33]++;
+	cov_7uwhnrqb7.s[33]++;
 	if (tuple_index != null) {
-		cov_j3vsqggp7.b[9][0]++;
-		cov_j3vsqggp7.s[34]++;
+		cov_7uwhnrqb7.b[9][0]++;
+		cov_7uwhnrqb7.s[34]++;
 
 		tuple_index = JSWorkBook.tupleIndexForName(rowId, tuple_index);
-		cov_j3vsqggp7.s[35]++;
+		cov_7uwhnrqb7.s[35]++;
 		if (tuple_index === -1) {
-				cov_j3vsqggp7.b[10][0]++;
-				cov_j3vsqggp7.s[36]++;
+				cov_7uwhnrqb7.b[10][0]++;
+				cov_7uwhnrqb7.s[36]++;
 				tuple_index = JSWorkBook.insertTuple(rowId, tuple_index);
 			} else {
-			cov_j3vsqggp7.b[10][1]++;
+			cov_7uwhnrqb7.b[10][1]++;
 		}
 	} else {
-		cov_j3vsqggp7.b[9][1]++;
+		cov_7uwhnrqb7.b[9][1]++;
 	}
-	cov_j3vsqggp7.s[37]++;
+	cov_7uwhnrqb7.s[37]++;
 	if (value !== undefined) {
-		cov_j3vsqggp7.b[11][0]++;
-		cov_j3vsqggp7.s[38]++;
+		cov_7uwhnrqb7.b[11][0]++;
+		cov_7uwhnrqb7.s[38]++;
 
 		//choice(select) requests
 		JSWorkBook.setSolutionPropertyValue(rowId, value, 'value', column_context, tuple_index);
-		cov_j3vsqggp7.s[39]++;
+		cov_7uwhnrqb7.s[39]++;
 		return [];
 	} else {
-		cov_j3vsqggp7.b[11][1]++;
+		cov_7uwhnrqb7.b[11][1]++;
 
 		//getValue
-		var values = (cov_j3vsqggp7.s[40]++, []);
-		var rootNode = (cov_j3vsqggp7.s[41]++, JSWorkBook.getSolutionNode(rowId));
-		cov_j3vsqggp7.s[42]++;
+		var values = (cov_7uwhnrqb7.s[40]++, []);
+		var rootNode = (cov_7uwhnrqb7.s[41]++, JSWorkBook.getSolutionNode(rowId));
+		cov_7uwhnrqb7.s[42]++;
 		if (rootNode) {
-			cov_j3vsqggp7.b[12][0]++;
-			cov_j3vsqggp7.s[43]++;
+			cov_7uwhnrqb7.b[12][0]++;
+			cov_7uwhnrqb7.s[43]++;
 
 			JSWorkBook.walkProperties(rootNode, function (node, type, depth, yax) {
-				cov_j3vsqggp7.f[5]++;
-				cov_j3vsqggp7.s[44]++;
+				cov_7uwhnrqb7.f[5]++;
+				cov_7uwhnrqb7.s[44]++;
 
 				values.push(getEntry(JSWorkBook, node.solutionName + '_' + node.rowId, column_context, yax));
 			}, JSWorkBook.resolveY(tuple_index), null, 0);
 		} else {
-			cov_j3vsqggp7.b[12][1]++;
-			cov_j3vsqggp7.s[45]++;
+			cov_7uwhnrqb7.b[12][1]++;
+			cov_7uwhnrqb7.s[45]++;
 
 			values.push({ variable: rowId });
 		}
-		cov_j3vsqggp7.s[46]++;
+		cov_7uwhnrqb7.s[46]++;
 		return values;
 	}
 };
 
-cov_j3vsqggp7.s[47]++;
+cov_7uwhnrqb7.s[47]++;
 LMEFacade.prototype.getObjectValues = function (context, rowId, tuple_index) {
-	cov_j3vsqggp7.f[6]++;
+	cov_7uwhnrqb7.f[6]++;
 
-	var fesContext = (cov_j3vsqggp7.s[48]++, new _Context.Context());
-	var JSWorkBook = (cov_j3vsqggp7.s[49]++, new _JSWorkBook.JSWorkBook(fesContext));
-	cov_j3vsqggp7.s[50]++;
+	var fesContext = (cov_7uwhnrqb7.s[48]++, new _Context.Context());
+	var JSWorkBook = (cov_7uwhnrqb7.s[49]++, new _JSWorkBook.JSWorkBook(fesContext));
+	cov_7uwhnrqb7.s[50]++;
 	JSWorkBook.importValues(context.values);
-	cov_j3vsqggp7.s[51]++;
-	JSWorkBook.columns = (cov_j3vsqggp7.b[13][0]++, context.columns) || (cov_j3vsqggp7.b[13][1]++, 2);
-	cov_j3vsqggp7.s[52]++;
-	JSWorkBook.properties = (cov_j3vsqggp7.b[14][0]++, context.properties) || (cov_j3vsqggp7.b[14][1]++, JSWorkBook.properties);
-	var values = (cov_j3vsqggp7.s[53]++, []);
-	cov_j3vsqggp7.s[54]++;
+	cov_7uwhnrqb7.s[51]++;
+	JSWorkBook.columns = (cov_7uwhnrqb7.b[13][0]++, context.columns) || (cov_7uwhnrqb7.b[13][1]++, 2);
+	cov_7uwhnrqb7.s[52]++;
+	JSWorkBook.properties = (cov_7uwhnrqb7.b[14][0]++, context.properties) || (cov_7uwhnrqb7.b[14][1]++, JSWorkBook.properties);
+	var values = (cov_7uwhnrqb7.s[53]++, []);
+	cov_7uwhnrqb7.s[54]++;
 	if (!context.isset) {
-		cov_j3vsqggp7.b[15][0]++;
-		cov_j3vsqggp7.s[55]++;
+		cov_7uwhnrqb7.b[15][0]++;
+		cov_7uwhnrqb7.s[55]++;
 
 		JSWorkBook.updateValues();
-		cov_j3vsqggp7.s[56]++;
+		cov_7uwhnrqb7.s[56]++;
 		context.isset = true;
 	} else {
-		cov_j3vsqggp7.b[15][1]++;
+		cov_7uwhnrqb7.b[15][1]++;
 	}
-	cov_j3vsqggp7.s[57]++;
+	cov_7uwhnrqb7.s[57]++;
 	if (tuple_index != null) {
-		cov_j3vsqggp7.b[16][0]++;
-		cov_j3vsqggp7.s[58]++;
+		cov_7uwhnrqb7.b[16][0]++;
+		cov_7uwhnrqb7.s[58]++;
 
 		tuple_index = JSWorkBook.tupleIndexForName(rowId, tuple_index);
-		cov_j3vsqggp7.s[59]++;
+		cov_7uwhnrqb7.s[59]++;
 		if (tuple_index === -1) {
-				cov_j3vsqggp7.b[17][0]++;
-				cov_j3vsqggp7.s[60]++;
+				cov_7uwhnrqb7.b[17][0]++;
+				cov_7uwhnrqb7.s[60]++;
 				tuple_index = JSWorkBook.insertTuple(rowId, tuple_index);
 			} else {
-			cov_j3vsqggp7.b[17][1]++;
+			cov_7uwhnrqb7.b[17][1]++;
 		}
 	} else {
-		cov_j3vsqggp7.b[16][1]++;
+		cov_7uwhnrqb7.b[16][1]++;
 	}
-	var rootNode = (cov_j3vsqggp7.s[61]++, JSWorkBook.getSolutionNode(rowId));
-	var flattenValues = (cov_j3vsqggp7.s[62]++, {});
-	cov_j3vsqggp7.s[63]++;
+	var rootNode = (cov_7uwhnrqb7.s[61]++, JSWorkBook.getSolutionNode(rowId));
+	var flattenValues = (cov_7uwhnrqb7.s[62]++, {});
+	cov_7uwhnrqb7.s[63]++;
 	if (rootNode) {
-		cov_j3vsqggp7.b[18][0]++;
-		cov_j3vsqggp7.s[64]++;
+		cov_7uwhnrqb7.b[18][0]++;
+		cov_7uwhnrqb7.s[64]++;
 
 		JSWorkBook.visitProperties(rootNode, function (node, type, innerTreeDepth, yax) {
-			cov_j3vsqggp7.f[7]++;
+			cov_7uwhnrqb7.f[7]++;
 
-			var nodeName = (cov_j3vsqggp7.s[65]++, node.rowId);
-			var parentName = (cov_j3vsqggp7.s[66]++, node.parentName.split('_').slice(0, -1).join('_'));
-			var columns = (cov_j3vsqggp7.s[67]++, node.frequency === 'document' ? (cov_j3vsqggp7.b[19][0]++, 0) : (cov_j3vsqggp7.b[19][1]++, context.columns));
-			cov_j3vsqggp7.s[68]++;
+			var nodeName = (cov_7uwhnrqb7.s[65]++, node.rowId);
+			var parentName = (cov_7uwhnrqb7.s[66]++, node.parentName.split('_').slice(0, -1).join('_'));
+			var columns = (cov_7uwhnrqb7.s[67]++, node.frequency === 'document' ? (cov_7uwhnrqb7.b[19][0]++, 0) : (cov_7uwhnrqb7.b[19][1]++, context.columns));
+			cov_7uwhnrqb7.s[68]++;
 			for (var i = 0; i <= columns; i++) {
-				var appendix = (cov_j3vsqggp7.s[69]++, columns === 0 ? (cov_j3vsqggp7.b[20][0]++, '') : (cov_j3vsqggp7.b[20][1]++, '$' + i));
-				cov_j3vsqggp7.s[70]++;
+				var appendix = (cov_7uwhnrqb7.s[69]++, columns === 0 ? (cov_7uwhnrqb7.b[20][0]++, '') : (cov_7uwhnrqb7.b[20][1]++, '$' + i));
+				cov_7uwhnrqb7.s[70]++;
 				flattenValues[node.rowId + appendix] = {
 					parent: parentName + appendix,
 					name: nodeName,
@@ -2957,73 +2957,73 @@ LMEFacade.prototype.getObjectValues = function (context, rowId, tuple_index) {
 			}
 		}, JSWorkBook.resolveY(0).parent, null, 0);
 		//reassemble results
-		cov_j3vsqggp7.s[71]++;
+		cov_7uwhnrqb7.s[71]++;
 		Object.keys(flattenValues).forEach(function (key) {
-			cov_j3vsqggp7.f[8]++;
-			cov_j3vsqggp7.s[72]++;
+			cov_7uwhnrqb7.f[8]++;
+			cov_7uwhnrqb7.s[72]++;
 
 			if (flattenValues[flattenValues[key].parent]) {
-				cov_j3vsqggp7.b[21][0]++;
-				cov_j3vsqggp7.s[73]++;
+				cov_7uwhnrqb7.b[21][0]++;
+				cov_7uwhnrqb7.s[73]++;
 
 				flattenValues[flattenValues[key].parent][flattenValues[key].name] = flattenValues[key].value;
 			} else {
-				cov_j3vsqggp7.b[21][1]++;
+				cov_7uwhnrqb7.b[21][1]++;
 
 				//array variants
-				var parentName = (cov_j3vsqggp7.s[74]++, flattenValues[key].parent.split('$')[0]);
-				cov_j3vsqggp7.s[75]++;
+				var parentName = (cov_7uwhnrqb7.s[74]++, flattenValues[key].parent.split('$')[0]);
+				cov_7uwhnrqb7.s[75]++;
 				if (flattenValues[parentName]) {
-					cov_j3vsqggp7.b[22][0]++;
-					cov_j3vsqggp7.s[76]++;
+					cov_7uwhnrqb7.b[22][0]++;
+					cov_7uwhnrqb7.s[76]++;
 
 					flattenValues[parentName].data.push(flattenValues[key]);
 				} else {
-					cov_j3vsqggp7.b[22][1]++;
+					cov_7uwhnrqb7.b[22][1]++;
 				}
 			}
 		});
-		cov_j3vsqggp7.s[77]++;
+		cov_7uwhnrqb7.s[77]++;
 		for (var key in flattenValues) {
-			cov_j3vsqggp7.s[78]++;
+			cov_7uwhnrqb7.s[78]++;
 
 			delete flattenValues[key].parent;
-			cov_j3vsqggp7.s[79]++;
+			cov_7uwhnrqb7.s[79]++;
 			delete flattenValues[key].name;
-			cov_j3vsqggp7.s[80]++;
+			cov_7uwhnrqb7.s[80]++;
 			if (flattenValues[key].data.length === 0) {
-					cov_j3vsqggp7.b[23][0]++;
-					cov_j3vsqggp7.s[81]++;
+					cov_7uwhnrqb7.b[23][0]++;
+					cov_7uwhnrqb7.s[81]++;
 					delete flattenValues[key].data;
 				} else {
-				cov_j3vsqggp7.b[23][1]++;
+				cov_7uwhnrqb7.b[23][1]++;
 			}
 		}
 	} else {
-		cov_j3vsqggp7.b[18][1]++;
-		cov_j3vsqggp7.s[82]++;
+		cov_7uwhnrqb7.b[18][1]++;
+		cov_7uwhnrqb7.s[82]++;
 
 		values.push({ variable: rowId });
 	}
 	/**
   * Values are not bound.
   */
-	cov_j3vsqggp7.s[83]++;
+	cov_7uwhnrqb7.s[83]++;
 	return flattenValues[rowId.split('_').slice(1).join('_')];
 };
 
 function getValueObject(workbook, rowId, column_context, yAxis) {
-	cov_j3vsqggp7.f[9]++;
+	cov_7uwhnrqb7.f[9]++;
 
-	var dataEntry = (cov_j3vsqggp7.s[84]++, {});
-	cov_j3vsqggp7.s[85]++;
+	var dataEntry = (cov_7uwhnrqb7.s[84]++, {});
+	cov_7uwhnrqb7.s[85]++;
 	Object.keys(workbook.properties).forEach(function (type) {
-		cov_j3vsqggp7.f[10]++;
-		cov_j3vsqggp7.s[86]++;
+		cov_7uwhnrqb7.f[10]++;
+		cov_7uwhnrqb7.s[86]++;
 
 		dataEntry[type] = workbook.getSolutionPropertyValue(rowId, type, column_context, yAxis);
 	});
-	cov_j3vsqggp7.s[87]++;
+	cov_7uwhnrqb7.s[87]++;
 	return dataEntry;
 }
 
@@ -3036,21 +3036,21 @@ function getValueObject(workbook, rowId, column_context, yAxis) {
  * @returns {Array}
  */
 function getEntry(workbook, rowId, column_context, yAxis) {
-	cov_j3vsqggp7.f[11]++;
+	cov_7uwhnrqb7.f[11]++;
 
-	var outputData = (cov_j3vsqggp7.s[88]++, []);
-	var columnStart = (cov_j3vsqggp7.s[89]++, column_context);
-	var columnEnd = (cov_j3vsqggp7.s[90]++, workbook.columns);
-	var variable = (cov_j3vsqggp7.s[91]++, workbook.getSolutionNode(rowId, 'value'));
+	var outputData = (cov_7uwhnrqb7.s[88]++, []);
+	var columnStart = (cov_7uwhnrqb7.s[89]++, column_context);
+	var columnEnd = (cov_7uwhnrqb7.s[90]++, workbook.columns);
+	var variable = (cov_7uwhnrqb7.s[91]++, workbook.getSolutionNode(rowId, 'value'));
 
-	cov_j3vsqggp7.s[92]++;
-	if ((cov_j3vsqggp7.b[25][0]++, variable) && (cov_j3vsqggp7.b[25][1]++, variable.frequency === 'document')) {
-		cov_j3vsqggp7.b[24][0]++;
-		cov_j3vsqggp7.s[93]++;
+	cov_7uwhnrqb7.s[92]++;
+	if ((cov_7uwhnrqb7.b[25][0]++, variable) && (cov_7uwhnrqb7.b[25][1]++, variable.frequency === 'document')) {
+		cov_7uwhnrqb7.b[24][0]++;
+		cov_7uwhnrqb7.s[93]++;
 
 		columnEnd = columnStart;
 	} else {
-		cov_j3vsqggp7.b[24][1]++;
+		cov_7uwhnrqb7.b[24][1]++;
 	}
 	/*
   let tupleStart = 0
@@ -3058,42 +3058,42 @@ function getEntry(workbook, rowId, column_context, yAxis) {
   */
 
 	// If frequency = column: return multiple columns
-	cov_j3vsqggp7.s[94]++;
+	cov_7uwhnrqb7.s[94]++;
 
 	var _loop = function _loop(xAxisCounter) {
-		var dataEntry = (cov_j3vsqggp7.s[95]++, {});
-		cov_j3vsqggp7.s[96]++;
+		var dataEntry = (cov_7uwhnrqb7.s[95]++, {});
+		cov_7uwhnrqb7.s[96]++;
 		outputData.push(dataEntry);
 
 		// For properties of the variable
-		cov_j3vsqggp7.s[97]++;
+		cov_7uwhnrqb7.s[97]++;
 		Object.keys(workbook.properties).forEach(function (type) {
-			cov_j3vsqggp7.f[12]++;
-			cov_j3vsqggp7.s[98]++;
+			cov_7uwhnrqb7.f[12]++;
+			cov_7uwhnrqb7.s[98]++;
 
 			dataEntry[type] = workbook.getSolutionPropertyValue(rowId, type, xAxisCounter, yAxis);
 
-			cov_j3vsqggp7.s[99]++;
-			if ((cov_j3vsqggp7.b[27][0]++, columnStart !== columnEnd) || (cov_j3vsqggp7.b[27][1]++, columnStart > 0)) {
-				cov_j3vsqggp7.b[26][0]++;
-				cov_j3vsqggp7.s[100]++;
+			cov_7uwhnrqb7.s[99]++;
+			if ((cov_7uwhnrqb7.b[27][0]++, columnStart !== columnEnd) || (cov_7uwhnrqb7.b[27][1]++, columnStart > 0)) {
+				cov_7uwhnrqb7.b[26][0]++;
+				cov_7uwhnrqb7.s[100]++;
 
 				dataEntry.column = xAxisCounter;
 			} else {
-				cov_j3vsqggp7.b[26][1]++;
+				cov_7uwhnrqb7.b[26][1]++;
 			}
-			cov_j3vsqggp7.s[101]++;
+			cov_7uwhnrqb7.s[101]++;
 			dataEntry.variable = variable.rowId;
-			cov_j3vsqggp7.s[102]++;
+			cov_7uwhnrqb7.s[102]++;
 			if (variable.tuple) {
-				cov_j3vsqggp7.b[28][0]++;
-				cov_j3vsqggp7.s[103]++;
+				cov_7uwhnrqb7.b[28][0]++;
+				cov_7uwhnrqb7.s[103]++;
 
 				dataEntry.tupleIndex = yAxis.index;
 			} else {
-				cov_j3vsqggp7.b[28][1]++;
+				cov_7uwhnrqb7.b[28][1]++;
 			}
-			cov_j3vsqggp7.s[104]++;
+			cov_7uwhnrqb7.s[104]++;
 			dataEntry.hash = yAxis.hash + xAxisCounter + 0;
 		});
 	};
@@ -3102,16 +3102,16 @@ function getEntry(workbook, rowId, column_context, yAxis) {
 		_loop(xAxisCounter);
 	}
 	//if there is only one column, the exported value is not presented to be an array
-	cov_j3vsqggp7.s[105]++;
+	cov_7uwhnrqb7.s[105]++;
 	if (columnStart === columnEnd) {
-		cov_j3vsqggp7.b[29][0]++;
-		cov_j3vsqggp7.s[106]++;
+		cov_7uwhnrqb7.b[29][0]++;
+		cov_7uwhnrqb7.s[106]++;
 
 		outputData = outputData[0];
 	} else {
-		cov_j3vsqggp7.b[29][1]++;
+		cov_7uwhnrqb7.b[29][1]++;
 	}
-	cov_j3vsqggp7.s[107]++;
+	cov_7uwhnrqb7.s[107]++;
 	return outputData;
 }
 

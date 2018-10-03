@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2jcihsdio4 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ValueFacade.js',
-	    hash = '37a01d0dedf51bc67c1119abd16bd656b0dc8cb2',
+var cov_19e2q96r4r = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ValueFacade.js',
+	    hash = '02c8a8b71a5c0396b33be2eb818cc94266db7db5',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ValueFacade.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ValueFacade.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -3906,222 +3906,222 @@ var _Constants = require('./Constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ValueFacade = (cov_2jcihsdio4.s[0]++, {});
+var ValueFacade = (cov_19e2q96r4r.s[0]++, {});
 
-cov_2jcihsdio4.s[1]++;
+cov_19e2q96r4r.s[1]++;
 if (Error.prototype.stack === undefined) {
-		cov_2jcihsdio4.b[0][0]++;
-		cov_2jcihsdio4.s[2]++;
+		cov_19e2q96r4r.b[0][0]++;
+		cov_19e2q96r4r.s[2]++;
 
 		Error.prototype.stack = '';
 	} else {
-	cov_2jcihsdio4.b[0][1]++;
+	cov_19e2q96r4r.b[0][1]++;
 } /**
    * For small arrays, lets say until 1000, elements. There is no need to map by name.
    * Just iterate the shabang and test the property
    */
-cov_2jcihsdio4.s[3]++;
+cov_19e2q96r4r.s[3]++;
 Array.prototype.lookup = function (property, name) {
-	cov_2jcihsdio4.f[0]++;
-	cov_2jcihsdio4.s[4]++;
+	cov_19e2q96r4r.f[0]++;
+	cov_19e2q96r4r.s[4]++;
 
 	for (var i = 0; i < this.length; i++) {
-		cov_2jcihsdio4.s[5]++;
+		cov_19e2q96r4r.s[5]++;
 
 		if (this[i][property] === name) {
-				cov_2jcihsdio4.b[1][0]++;
-				cov_2jcihsdio4.s[6]++;
+				cov_19e2q96r4r.b[1][0]++;
+				cov_19e2q96r4r.s[6]++;
 				return this[i];
 			} else {
-			cov_2jcihsdio4.b[1][1]++;
+			cov_19e2q96r4r.b[1][1]++;
 		}
 	}
-	cov_2jcihsdio4.s[7]++;
+	cov_19e2q96r4r.s[7]++;
 	return undefined;
 };
-cov_2jcihsdio4.s[8]++;
+cov_19e2q96r4r.s[8]++;
 if (!String.prototype.startsWith) {
-	cov_2jcihsdio4.b[2][0]++;
-	cov_2jcihsdio4.s[9]++;
+	cov_19e2q96r4r.b[2][0]++;
+	cov_19e2q96r4r.s[9]++;
 
 	String.prototype.startsWith = function (searchString, position) {
-		cov_2jcihsdio4.f[1]++;
-		cov_2jcihsdio4.s[10]++;
+		cov_19e2q96r4r.f[1]++;
+		cov_19e2q96r4r.s[10]++;
 
-		position = (cov_2jcihsdio4.b[3][0]++, position) || (cov_2jcihsdio4.b[3][1]++, 0);
-		cov_2jcihsdio4.s[11]++;
+		position = (cov_19e2q96r4r.b[3][0]++, position) || (cov_19e2q96r4r.b[3][1]++, 0);
+		cov_19e2q96r4r.s[11]++;
 		return this.substr(position, searchString.length) === searchString;
 	};
 } else {
-	cov_2jcihsdio4.b[2][1]++;
+	cov_19e2q96r4r.b[2][1]++;
 }
-cov_2jcihsdio4.s[12]++;
+cov_19e2q96r4r.s[12]++;
 if (!String.prototype.endsWith) {
-	cov_2jcihsdio4.b[4][0]++;
-	cov_2jcihsdio4.s[13]++;
+	cov_19e2q96r4r.b[4][0]++;
+	cov_19e2q96r4r.s[13]++;
 
 	String.prototype.endsWith = function (suffix) {
-		cov_2jcihsdio4.f[2]++;
-		cov_2jcihsdio4.s[14]++;
+		cov_19e2q96r4r.f[2]++;
+		cov_19e2q96r4r.s[14]++;
 
 		return this.indexOf(suffix, this.length - suffix.length) !== -1;
 	};
 } else {
-	cov_2jcihsdio4.b[4][1]++;
+	cov_19e2q96r4r.b[4][1]++;
 }
-cov_2jcihsdio4.s[15]++;
+cov_19e2q96r4r.s[15]++;
 if (!String.prototype.trim) {
-	cov_2jcihsdio4.b[5][0]++;
-	cov_2jcihsdio4.s[16]++;
+	cov_19e2q96r4r.b[5][0]++;
+	cov_19e2q96r4r.s[16]++;
 
 	String.prototype.trim = function () {
-		cov_2jcihsdio4.f[3]++;
-		cov_2jcihsdio4.s[17]++;
+		cov_19e2q96r4r.f[3]++;
+		cov_19e2q96r4r.s[17]++;
 
 		return this.replace(/^\s+|\s+$/g, '');
 	};
 } else {
-	cov_2jcihsdio4.b[5][1]++;
+	cov_19e2q96r4r.b[5][1]++;
 }
 
 function findFormula(uiModel) {
-	cov_2jcihsdio4.f[4]++;
-	cov_2jcihsdio4.s[18]++;
+	cov_19e2q96r4r.f[4]++;
+	cov_19e2q96r4r.s[18]++;
 
 	if (uiModel === undefined) {
-			cov_2jcihsdio4.b[6][0]++;
-			cov_2jcihsdio4.s[19]++;
+			cov_19e2q96r4r.b[6][0]++;
+			cov_19e2q96r4r.s[19]++;
 			return undefined;
 		} else {
-		cov_2jcihsdio4.b[6][1]++;
-	}cov_2jcihsdio4.s[20]++;
+		cov_19e2q96r4r.b[6][1]++;
+	}cov_19e2q96r4r.s[20]++;
 	return _FormulaService2.default.findFormulaByIndex(uiModel.ref);
 }
 
-cov_2jcihsdio4.s[21]++;
+cov_19e2q96r4r.s[21]++;
 var fetchSolutionNode = function fetchSolutionNode(row, col) {
-	cov_2jcihsdio4.f[5]++;
-	cov_2jcihsdio4.s[22]++;
+	cov_19e2q96r4r.f[5]++;
+	cov_19e2q96r4r.s[22]++;
 	return _PropertiesAssembler2.default.fetch(row + '_' + col);
 };
 
-cov_2jcihsdio4.s[23]++;
+cov_19e2q96r4r.s[23]++;
 ValueFacade.validChoice = function (choices, row, userValue) {
-	cov_2jcihsdio4.f[6]++;
-	cov_2jcihsdio4.s[24]++;
+	cov_19e2q96r4r.f[6]++;
+	cov_19e2q96r4r.s[24]++;
 
-	userValue = userValue === true ? (cov_2jcihsdio4.b[7][0]++, '1') : (cov_2jcihsdio4.b[7][1]++, userValue === false ? (cov_2jcihsdio4.b[8][0]++, '0') : (cov_2jcihsdio4.b[8][1]++, userValue));
-	cov_2jcihsdio4.s[25]++;
-	return (cov_2jcihsdio4.b[9][0]++, choices.lookup(_Constants.VALUE, String(userValue))) || (cov_2jcihsdio4.b[9][1]++, choices.lookup('name', String(userValue)));
+	userValue = userValue === true ? (cov_19e2q96r4r.b[7][0]++, '1') : (cov_19e2q96r4r.b[7][1]++, userValue === false ? (cov_19e2q96r4r.b[8][0]++, '0') : (cov_19e2q96r4r.b[8][1]++, userValue));
+	cov_19e2q96r4r.s[25]++;
+	return (cov_19e2q96r4r.b[9][0]++, choices.lookup(_Constants.VALUE, String(userValue))) || (cov_19e2q96r4r.b[9][1]++, choices.lookup('name', String(userValue)));
 };
-cov_2jcihsdio4.s[26]++;
+cov_19e2q96r4r.s[26]++;
 ValueFacade.putSolutionPropertyValue = function (context, row, value, col, xas, yas) {
-	cov_2jcihsdio4.f[7]++;
+	cov_19e2q96r4r.f[7]++;
 
-	var rowId = (cov_2jcihsdio4.s[27]++, row + '_' + ((cov_2jcihsdio4.b[10][0]++, col) || (cov_2jcihsdio4.b[10][1]++, _Constants.VALUE)));
-	var localFormula = (cov_2jcihsdio4.s[28]++, findFormula(_PropertiesAssembler2.default.fetch(rowId)));
+	var rowId = (cov_19e2q96r4r.s[27]++, row + '_' + ((cov_19e2q96r4r.b[10][0]++, col) || (cov_19e2q96r4r.b[10][1]++, _Constants.VALUE)));
+	var localFormula = (cov_19e2q96r4r.s[28]++, findFormula(_PropertiesAssembler2.default.fetch(rowId)));
 	//because only Formula's are known here, we cannot give away variable name here.
-	cov_2jcihsdio4.s[29]++;
+	cov_19e2q96r4r.s[29]++;
 	if (localFormula === undefined) {
-			cov_2jcihsdio4.b[11][0]++;
-			cov_2jcihsdio4.s[30]++;
+			cov_19e2q96r4r.b[11][0]++;
+			cov_19e2q96r4r.s[30]++;
 			throw Error('Cannot find variable');
 		} else {
-		cov_2jcihsdio4.b[11][1]++;
-	}cov_2jcihsdio4.s[31]++;
+		cov_19e2q96r4r.b[11][1]++;
+	}cov_19e2q96r4r.s[31]++;
 	if (_log.TRACE) {
-			cov_2jcihsdio4.b[12][0]++;
-			cov_2jcihsdio4.s[32]++;
+			cov_19e2q96r4r.b[12][0]++;
+			cov_19e2q96r4r.s[32]++;
 			(0, _log.trace)('Set value row:[%s] x:[%s] y:[%s] value:[%s]', rowId, xas.hash, yas.hash, value);
 		} else {
-		cov_2jcihsdio4.b[12][1]++;
-	}cov_2jcihsdio4.s[33]++;
+		cov_19e2q96r4r.b[12][1]++;
+	}cov_19e2q96r4r.s[33]++;
 	context.calc_count++;
-	cov_2jcihsdio4.s[34]++;
+	cov_19e2q96r4r.s[34]++;
 	context.audit.push({
 		saveToken: context.saveToken,
 		hash: xas.hash + yas.hash + 0,
-		formulaId: (cov_2jcihsdio4.b[13][0]++, localFormula.id) || (cov_2jcihsdio4.b[13][1]++, localFormula.index)
+		formulaId: (cov_19e2q96r4r.b[13][0]++, localFormula.id) || (cov_19e2q96r4r.b[13][1]++, localFormula.index)
 	});
-	var userValue = (cov_2jcihsdio4.s[35]++, value);
-	var variable = (cov_2jcihsdio4.s[36]++, fetchSolutionNode(row, (cov_2jcihsdio4.b[14][0]++, col) || (cov_2jcihsdio4.b[14][1]++, _Constants.VALUE)));
-	cov_2jcihsdio4.s[37]++;
-	if ((cov_2jcihsdio4.b[16][0]++, variable.displaytype === 'radio') || (cov_2jcihsdio4.b[16][1]++, variable.displaytype === 'select')) {
-		cov_2jcihsdio4.b[15][0]++;
-		cov_2jcihsdio4.s[38]++;
+	var userValue = (cov_19e2q96r4r.s[35]++, value);
+	var variable = (cov_19e2q96r4r.s[36]++, fetchSolutionNode(row, (cov_19e2q96r4r.b[14][0]++, col) || (cov_19e2q96r4r.b[14][1]++, _Constants.VALUE)));
+	cov_19e2q96r4r.s[37]++;
+	if ((cov_19e2q96r4r.b[16][0]++, variable.displaytype === 'radio') || (cov_19e2q96r4r.b[16][1]++, variable.displaytype === 'select')) {
+		cov_19e2q96r4r.b[15][0]++;
+		cov_19e2q96r4r.s[38]++;
 
 		if (userValue != null) {
-			cov_2jcihsdio4.b[17][0]++;
+			cov_19e2q96r4r.b[17][0]++;
 
-			var choices = (cov_2jcihsdio4.s[39]++, ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas));
-			var lookup_value = (cov_2jcihsdio4.s[40]++, ValueFacade.validChoice(choices, row, userValue));
-			cov_2jcihsdio4.s[41]++;
-			if ((cov_2jcihsdio4.b[19][0]++, _log.DEBUG) && (cov_2jcihsdio4.b[19][1]++, lookup_value == null)) {
-					cov_2jcihsdio4.b[18][0]++;
-					cov_2jcihsdio4.s[42]++;
+			var choices = (cov_19e2q96r4r.s[39]++, ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas));
+			var lookup_value = (cov_19e2q96r4r.s[40]++, ValueFacade.validChoice(choices, row, userValue));
+			cov_19e2q96r4r.s[41]++;
+			if ((cov_19e2q96r4r.b[19][0]++, _log.DEBUG) && (cov_19e2q96r4r.b[19][1]++, lookup_value == null)) {
+					cov_19e2q96r4r.b[18][0]++;
+					cov_19e2q96r4r.s[42]++;
 					(0, _log.warn)('Invalid choice-value set for ' + row + ' [' + userValue + ']');
 				} else {
-				cov_2jcihsdio4.b[18][1]++;
-			}cov_2jcihsdio4.s[43]++;
-			userValue = lookup_value ? (cov_2jcihsdio4.b[20][0]++, lookup_value.name) : (cov_2jcihsdio4.b[20][1]++, null);
-			cov_2jcihsdio4.s[44]++;
+				cov_19e2q96r4r.b[18][1]++;
+			}cov_19e2q96r4r.s[43]++;
+			userValue = lookup_value ? (cov_19e2q96r4r.b[20][0]++, lookup_value.name) : (cov_19e2q96r4r.b[20][1]++, null);
+			cov_19e2q96r4r.s[44]++;
 			if (!isNaN(userValue)) {
-				cov_2jcihsdio4.b[21][0]++;
-				cov_2jcihsdio4.s[45]++;
+				cov_19e2q96r4r.b[21][0]++;
+				cov_19e2q96r4r.s[45]++;
 
 				userValue = parseFloat(userValue);
 			} else {
-				cov_2jcihsdio4.b[21][1]++;
+				cov_19e2q96r4r.b[21][1]++;
 			}
 		} else {
-			cov_2jcihsdio4.b[17][1]++;
+			cov_19e2q96r4r.b[17][1]++;
 		}
 	} else {
-		cov_2jcihsdio4.b[15][1]++;
+		cov_19e2q96r4r.b[15][1]++;
 	}
-	cov_2jcihsdio4.s[46]++;
+	cov_19e2q96r4r.s[46]++;
 	if (variable.frequency === _Constants.DOCUMENT) {
-			cov_2jcihsdio4.b[22][0]++;
-			cov_2jcihsdio4.s[47]++;
+			cov_19e2q96r4r.b[22][0]++;
+			cov_19e2q96r4r.s[47]++;
 			xas = xas.doc;
 		} else {
-		cov_2jcihsdio4.b[22][1]++;
+		cov_19e2q96r4r.b[22][1]++;
 	} //NULL values are allowed, and should not be parsed into a real data type.
-	cov_2jcihsdio4.s[48]++;
+	cov_19e2q96r4r.s[48]++;
 	if (userValue != null) {
-		cov_2jcihsdio4.b[23][0]++;
-		cov_2jcihsdio4.s[49]++;
+		cov_19e2q96r4r.b[23][0]++;
+		cov_19e2q96r4r.s[49]++;
 
 		if (variable.datatype === _Constants.NUMBER) {
-			cov_2jcihsdio4.b[24][0]++;
-			cov_2jcihsdio4.s[50]++;
+			cov_19e2q96r4r.b[24][0]++;
+			cov_19e2q96r4r.s[50]++;
 
 			userValue = Number(userValue);
 		} else {
-				cov_2jcihsdio4.b[24][1]++;
-				cov_2jcihsdio4.s[51]++;
+				cov_19e2q96r4r.b[24][1]++;
+				cov_19e2q96r4r.s[51]++;
 				if (variable.datatype === _Constants.STRING_TYPE) {
-					cov_2jcihsdio4.b[25][0]++;
-					cov_2jcihsdio4.s[52]++;
+					cov_19e2q96r4r.b[25][0]++;
+					cov_19e2q96r4r.s[52]++;
 
 					userValue = String(userValue);
 				} else {
-						cov_2jcihsdio4.b[25][1]++;
-						cov_2jcihsdio4.s[53]++;
+						cov_19e2q96r4r.b[25][1]++;
+						cov_19e2q96r4r.s[53]++;
 						if (variable.datatype === 'boolean') {
-							cov_2jcihsdio4.b[26][0]++;
-							cov_2jcihsdio4.s[54]++;
+							cov_19e2q96r4r.b[26][0]++;
+							cov_19e2q96r4r.s[54]++;
 
 							userValue = Boolean(userValue);
 						} else {
-							cov_2jcihsdio4.b[26][1]++;
+							cov_19e2q96r4r.b[26][1]++;
 						}
 					}
 			}
 	} else {
-		cov_2jcihsdio4.b[23][1]++;
+		cov_19e2q96r4r.b[23][1]++;
 	}
-	cov_2jcihsdio4.s[55]++;
+	cov_19e2q96r4r.s[55]++;
 	_FunctionMap2.default.apiSet(localFormula, xas, yas, 0, userValue, context.getValues());
 };
 /**
@@ -4129,239 +4129,239 @@ ValueFacade.putSolutionPropertyValue = function (context, row, value, col, xas, 
  * TODO: introduce data-masks to keep these checks quick
  * - every variable has one mask, this one includes display and data types.
  */
-cov_2jcihsdio4.s[56]++;
+cov_19e2q96r4r.s[56]++;
 ValueFacade.fetchSolutionPropertyValue = function (context, row, col, xas, yas) {
-	cov_2jcihsdio4.f[8]++;
+	cov_19e2q96r4r.f[8]++;
 
-	var colType = (cov_2jcihsdio4.s[57]++, (cov_2jcihsdio4.b[27][0]++, col) || (cov_2jcihsdio4.b[27][1]++, _Constants.VALUE));
-	cov_2jcihsdio4.s[58]++;
+	var colType = (cov_19e2q96r4r.s[57]++, (cov_19e2q96r4r.b[27][0]++, col) || (cov_19e2q96r4r.b[27][1]++, _Constants.VALUE));
+	cov_19e2q96r4r.s[58]++;
 	if (colType === 'entered') {
-		cov_2jcihsdio4.b[28][0]++;
+		cov_19e2q96r4r.b[28][0]++;
 
 		//kinda copy-paste, find way to refactor. there is no real enteredValue formula.
 		//retrieve the 'value' formula, check if there is an entered value
-		var _variable = (cov_2jcihsdio4.s[59]++, fetchSolutionNode(row, _Constants.VALUE));
-		var _localFormula = (cov_2jcihsdio4.s[60]++, findFormula(_variable));
-		cov_2jcihsdio4.s[61]++;
+		var _variable = (cov_19e2q96r4r.s[59]++, fetchSolutionNode(row, _Constants.VALUE));
+		var _localFormula = (cov_19e2q96r4r.s[60]++, findFormula(_variable));
+		cov_19e2q96r4r.s[61]++;
 		if (_localFormula === undefined) {
-			cov_2jcihsdio4.b[29][0]++;
-			cov_2jcihsdio4.s[62]++;
+			cov_19e2q96r4r.b[29][0]++;
+			cov_19e2q96r4r.s[62]++;
 
 			return false;
 		} else {
-			cov_2jcihsdio4.b[29][1]++;
+			cov_19e2q96r4r.b[29][1]++;
 		}
-		var id = (cov_2jcihsdio4.s[63]++, (cov_2jcihsdio4.b[30][0]++, _localFormula.id) || (cov_2jcihsdio4.b[30][1]++, _localFormula.index));
-		var hash = (cov_2jcihsdio4.s[64]++, xas.hash + yas.hash + 0);
-		cov_2jcihsdio4.s[65]++;
+		var id = (cov_19e2q96r4r.s[63]++, (cov_19e2q96r4r.b[30][0]++, _localFormula.id) || (cov_19e2q96r4r.b[30][1]++, _localFormula.index));
+		var hash = (cov_19e2q96r4r.s[64]++, xas.hash + yas.hash + 0);
+		cov_19e2q96r4r.s[65]++;
 		return context.getValues()[id][hash] != null;
 	} else {
-			cov_2jcihsdio4.b[28][1]++;
-			cov_2jcihsdio4.s[66]++;
+			cov_19e2q96r4r.b[28][1]++;
+			cov_19e2q96r4r.s[66]++;
 			if (colType === 'original') {
-				cov_2jcihsdio4.b[31][0]++;
+				cov_19e2q96r4r.b[31][0]++;
 
-				var _variable2 = (cov_2jcihsdio4.s[67]++, fetchSolutionNode(row, _Constants.VALUE));
-				var _localFormula2 = (cov_2jcihsdio4.s[68]++, findFormula(_variable2));
-				cov_2jcihsdio4.s[69]++;
+				var _variable2 = (cov_19e2q96r4r.s[67]++, fetchSolutionNode(row, _Constants.VALUE));
+				var _localFormula2 = (cov_19e2q96r4r.s[68]++, findFormula(_variable2));
+				cov_19e2q96r4r.s[69]++;
 				return _localFormula2.original;
 			} else {
-				cov_2jcihsdio4.b[31][1]++;
+				cov_19e2q96r4r.b[31][1]++;
 			}
-		}cov_2jcihsdio4.s[70]++;
-	if ((cov_2jcihsdio4.b[33][0]++, colType === _Constants.VALUE) && (cov_2jcihsdio4.b[33][1]++, row === 'KSP2_TotalGrossCostsChildTillEighteen')) {
-		cov_2jcihsdio4.b[32][0]++;
+		}cov_19e2q96r4r.s[70]++;
+	if ((cov_19e2q96r4r.b[33][0]++, colType === _Constants.VALUE) && (cov_19e2q96r4r.b[33][1]++, row === 'KSP2_TotalGrossCostsChildTillEighteen')) {
+		cov_19e2q96r4r.b[32][0]++;
 
-		var rt = (cov_2jcihsdio4.s[71]++, 21);
+		var rt = (cov_19e2q96r4r.s[71]++, 21);
 	} else {
-		cov_2jcihsdio4.b[32][1]++;
+		cov_19e2q96r4r.b[32][1]++;
 	}
-	var variable = (cov_2jcihsdio4.s[72]++, fetchSolutionNode(row, colType));
-	var localFormula = (cov_2jcihsdio4.s[73]++, findFormula(variable));
+	var variable = (cov_19e2q96r4r.s[72]++, fetchSolutionNode(row, colType));
+	var localFormula = (cov_19e2q96r4r.s[73]++, findFormula(variable));
 	var returnValue = void 0;
-	cov_2jcihsdio4.s[74]++;
+	cov_19e2q96r4r.s[74]++;
 	if (localFormula === undefined) {
-			cov_2jcihsdio4.b[34][0]++;
-			cov_2jcihsdio4.s[75]++;
+			cov_19e2q96r4r.b[34][0]++;
+			cov_19e2q96r4r.s[75]++;
 			returnValue = context.propertyDefaults[colType];
 		} else {
-		cov_2jcihsdio4.b[34][1]++;
-		cov_2jcihsdio4.s[76]++;
+		cov_19e2q96r4r.b[34][1]++;
+		cov_19e2q96r4r.s[76]++;
 
 		if (variable.frequency === _Constants.DOCUMENT) {
-				cov_2jcihsdio4.b[35][0]++;
-				cov_2jcihsdio4.s[77]++;
+				cov_19e2q96r4r.b[35][0]++;
+				cov_19e2q96r4r.s[77]++;
 				xas = xas.doc;
 			} else {
-			cov_2jcihsdio4.b[35][1]++;
-		}cov_2jcihsdio4.s[78]++;
+			cov_19e2q96r4r.b[35][1]++;
+		}cov_19e2q96r4r.s[78]++;
 		returnValue = _FunctionMap2.default.apiGet(localFormula, xas, yas, 0, context.getValues(), context.ma, context.audittrail);
 	}
-	cov_2jcihsdio4.s[79]++;
+	cov_19e2q96r4r.s[79]++;
 	if (variable) {
-		cov_2jcihsdio4.b[36][0]++;
-		cov_2jcihsdio4.s[80]++;
+		cov_19e2q96r4r.b[36][0]++;
+		cov_19e2q96r4r.s[80]++;
 
 		if (colType === _Constants.VALUE) {
-			cov_2jcihsdio4.b[37][0]++;
-			cov_2jcihsdio4.s[81]++;
+			cov_19e2q96r4r.b[37][0]++;
+			cov_19e2q96r4r.s[81]++;
 
-			if ((cov_2jcihsdio4.b[39][0]++, variable.displaytype === 'radio') || (cov_2jcihsdio4.b[39][1]++, variable.displaytype === 'select')) {
-				cov_2jcihsdio4.b[38][0]++;
-				cov_2jcihsdio4.s[82]++;
+			if ((cov_19e2q96r4r.b[39][0]++, variable.displaytype === 'radio') || (cov_19e2q96r4r.b[39][1]++, variable.displaytype === 'select')) {
+				cov_19e2q96r4r.b[38][0]++;
+				cov_19e2q96r4r.s[82]++;
 
 				if (returnValue != null) {
-					cov_2jcihsdio4.b[40][0]++;
+					cov_19e2q96r4r.b[40][0]++;
 
-					var choices = (cov_2jcihsdio4.s[83]++, ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas));
-					cov_2jcihsdio4.s[84]++;
-					returnValue = returnValue === true ? (cov_2jcihsdio4.b[41][0]++, '1') : (cov_2jcihsdio4.b[41][1]++, returnValue === false ? (cov_2jcihsdio4.b[42][0]++, '0') : (cov_2jcihsdio4.b[42][1]++, returnValue));
-					var choicesLookup = (cov_2jcihsdio4.s[85]++, choices.lookup('name', String(returnValue)));
-					cov_2jcihsdio4.s[86]++;
-					returnValue = choicesLookup ? (cov_2jcihsdio4.b[43][0]++, choicesLookup.value) : (cov_2jcihsdio4.b[43][1]++, returnValue);
+					var choices = (cov_19e2q96r4r.s[83]++, ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas));
+					cov_19e2q96r4r.s[84]++;
+					returnValue = returnValue === true ? (cov_19e2q96r4r.b[41][0]++, '1') : (cov_19e2q96r4r.b[41][1]++, returnValue === false ? (cov_19e2q96r4r.b[42][0]++, '0') : (cov_19e2q96r4r.b[42][1]++, returnValue));
+					var choicesLookup = (cov_19e2q96r4r.s[85]++, choices.lookup('name', String(returnValue)));
+					cov_19e2q96r4r.s[86]++;
+					returnValue = choicesLookup ? (cov_19e2q96r4r.b[43][0]++, choicesLookup.value) : (cov_19e2q96r4r.b[43][1]++, returnValue);
 				} else {
-					cov_2jcihsdio4.b[40][1]++;
+					cov_19e2q96r4r.b[40][1]++;
 				}
 			} else {
-				cov_2jcihsdio4.b[38][1]++;
-				cov_2jcihsdio4.s[87]++;
+				cov_19e2q96r4r.b[38][1]++;
+				cov_19e2q96r4r.s[87]++;
 
 				if (variable.decimals !== undefined) {
-					cov_2jcihsdio4.b[44][0]++;
-					cov_2jcihsdio4.s[88]++;
+					cov_19e2q96r4r.b[44][0]++;
+					cov_19e2q96r4r.s[88]++;
 
 					if (variable.datatype === 'matrix') {
-						cov_2jcihsdio4.b[45][0]++;
-						cov_2jcihsdio4.s[89]++;
+						cov_19e2q96r4r.b[45][0]++;
+						cov_19e2q96r4r.s[89]++;
 
 						for (var i = 0; i < returnValue.length; i++) {
-							var innerx = (cov_2jcihsdio4.s[90]++, returnValue[i]);
-							cov_2jcihsdio4.s[91]++;
+							var innerx = (cov_19e2q96r4r.s[90]++, returnValue[i]);
+							cov_19e2q96r4r.s[91]++;
 							if (!isNaN(innerx)) {
-								cov_2jcihsdio4.b[46][0]++;
+								cov_19e2q96r4r.b[46][0]++;
 
-								var level = (cov_2jcihsdio4.s[92]++, Math.pow(10, variable.decimals));
-								cov_2jcihsdio4.s[93]++;
+								var level = (cov_19e2q96r4r.s[92]++, Math.pow(10, variable.decimals));
+								cov_19e2q96r4r.s[93]++;
 								returnValue[i] = Math.round(innerx * level) / level;
 							} else {
-								cov_2jcihsdio4.b[46][1]++;
+								cov_19e2q96r4r.b[46][1]++;
 							}
-							cov_2jcihsdio4.s[94]++;
+							cov_19e2q96r4r.s[94]++;
 							for (var y = 0; y < returnValue[i].length; y++) {
-								var innery = (cov_2jcihsdio4.s[95]++, returnValue[i][y]);
-								cov_2jcihsdio4.s[96]++;
+								var innery = (cov_19e2q96r4r.s[95]++, returnValue[i][y]);
+								cov_19e2q96r4r.s[96]++;
 								if (!isNaN(innery)) {
-									cov_2jcihsdio4.b[47][0]++;
+									cov_19e2q96r4r.b[47][0]++;
 
-									var _level = (cov_2jcihsdio4.s[97]++, Math.pow(10, variable.decimals));
-									cov_2jcihsdio4.s[98]++;
+									var _level = (cov_19e2q96r4r.s[97]++, Math.pow(10, variable.decimals));
+									cov_19e2q96r4r.s[98]++;
 									returnValue[i][y] = Math.round(innery * _level) / _level;
 								} else {
-									cov_2jcihsdio4.b[47][1]++;
+									cov_19e2q96r4r.b[47][1]++;
 								}
 							}
 						}
 					} else {
-							cov_2jcihsdio4.b[45][1]++;
-							cov_2jcihsdio4.s[99]++;
+							cov_19e2q96r4r.b[45][1]++;
+							cov_19e2q96r4r.s[99]++;
 							if (!isNaN(returnValue)) {
-								cov_2jcihsdio4.b[48][0]++;
+								cov_19e2q96r4r.b[48][0]++;
 
-								var _level2 = (cov_2jcihsdio4.s[100]++, Math.pow(10, variable.decimals));
-								cov_2jcihsdio4.s[101]++;
+								var _level2 = (cov_19e2q96r4r.s[100]++, Math.pow(10, variable.decimals));
+								cov_19e2q96r4r.s[101]++;
 								returnValue = Math.round(returnValue * _level2) / _level2;
 							} else {
-								cov_2jcihsdio4.b[48][1]++;
+								cov_19e2q96r4r.b[48][1]++;
 							}
 						}
 				} else {
-					cov_2jcihsdio4.b[44][1]++;
+					cov_19e2q96r4r.b[44][1]++;
 				}
-				cov_2jcihsdio4.s[102]++;
+				cov_19e2q96r4r.s[102]++;
 				if (variable.datatype === _Constants.NUMBER) {
-						cov_2jcihsdio4.b[49][0]++;
-						cov_2jcihsdio4.s[103]++;
+						cov_19e2q96r4r.b[49][0]++;
+						cov_19e2q96r4r.s[103]++;
 						returnValue = OnNA(returnValue, 0);
 					} else {
-					cov_2jcihsdio4.b[49][1]++;
-				}cov_2jcihsdio4.s[104]++;
+					cov_19e2q96r4r.b[49][1]++;
+				}cov_19e2q96r4r.s[104]++;
 				if (variable.displaytype === 'piechart') {
-						cov_2jcihsdio4.b[50][0]++;
-						cov_2jcihsdio4.s[105]++;
+						cov_19e2q96r4r.b[50][0]++;
+						cov_19e2q96r4r.s[105]++;
 						returnValue = PIECHART(returnValue);
 					} else {
-					cov_2jcihsdio4.b[50][1]++;
+					cov_19e2q96r4r.b[50][1]++;
 				}
 			}
-			cov_2jcihsdio4.s[106]++;
+			cov_19e2q96r4r.s[106]++;
 			if (variable.displaytype === 'date') {
-					cov_2jcihsdio4.b[51][0]++;
-					cov_2jcihsdio4.s[107]++;
+					cov_19e2q96r4r.b[51][0]++;
+					cov_19e2q96r4r.s[107]++;
 					returnValue = new Date(returnValue);
 				} else {
-				cov_2jcihsdio4.b[51][1]++;
+				cov_19e2q96r4r.b[51][1]++;
 			}
 		} else {
-				cov_2jcihsdio4.b[37][1]++;
-				cov_2jcihsdio4.s[108]++;
+				cov_19e2q96r4r.b[37][1]++;
+				cov_19e2q96r4r.s[108]++;
 				if (colType === _Constants.LOCKED) {
-						cov_2jcihsdio4.b[52][0]++;
-						cov_2jcihsdio4.s[109]++;
+						cov_19e2q96r4r.b[52][0]++;
+						cov_19e2q96r4r.s[109]++;
 						return Boolean(returnValue);
 					} else {
-						cov_2jcihsdio4.b[52][1]++;
-						cov_2jcihsdio4.s[110]++;
+						cov_19e2q96r4r.b[52][1]++;
+						cov_19e2q96r4r.s[110]++;
 						if (colType === _Constants.VISIBLE) {
-								cov_2jcihsdio4.b[53][0]++;
-								cov_2jcihsdio4.s[111]++;
+								cov_19e2q96r4r.b[53][0]++;
+								cov_19e2q96r4r.s[111]++;
 								return Boolean(returnValue);
 							} else {
-							cov_2jcihsdio4.b[53][1]++;
+							cov_19e2q96r4r.b[53][1]++;
 						}
 					}
 			}
 	} else {
-		cov_2jcihsdio4.b[36][1]++;
+		cov_19e2q96r4r.b[36][1]++;
 	}
-	cov_2jcihsdio4.s[112]++;
+	cov_19e2q96r4r.s[112]++;
 	return returnValue;
 };
-cov_2jcihsdio4.s[113]++;
+cov_19e2q96r4r.s[113]++;
 ValueFacade.fetchRootSolutionProperty = _PropertiesAssembler2.default.getRootProperty;
-cov_2jcihsdio4.s[114]++;
+cov_19e2q96r4r.s[114]++;
 ValueFacade.fetchSolutionNode = fetchSolutionNode;
-cov_2jcihsdio4.s[115]++;
+cov_19e2q96r4r.s[115]++;
 ValueFacade.apiGetValue = _FunctionMap2.default.apiGet;
-cov_2jcihsdio4.s[116]++;
+cov_19e2q96r4r.s[116]++;
 ValueFacade.getAllValues = function (docValues) {
-	cov_2jcihsdio4.f[9]++;
-	cov_2jcihsdio4.s[117]++;
+	cov_19e2q96r4r.f[9]++;
+	cov_19e2q96r4r.s[117]++;
 
 	return this.getValuesFromFormulaIds(Object.keys(docValues), docValues);
 };
-cov_2jcihsdio4.s[118]++;
+cov_19e2q96r4r.s[118]++;
 ValueFacade.getValuesFromFormulaIds = function (keys, docValues) {
-	cov_2jcihsdio4.f[10]++;
+	cov_19e2q96r4r.f[10]++;
 
 	//we cannot just return everything here, Because for now all formula's have a user-entered value cache.
 	//Also Functions themSelves are bound to this object.
 	//So we have to strip them out here.
 	//should be part of the apiGet, to query all *_value functions. or *_validation etc.
-	var values = (cov_2jcihsdio4.s[119]++, []);
-	cov_2jcihsdio4.s[120]++;
+	var values = (cov_19e2q96r4r.s[119]++, []);
+	cov_19e2q96r4r.s[120]++;
 	for (var i = 0; i < keys.length; i++) {
-		var formulaId = (cov_2jcihsdio4.s[121]++, keys[i]);
-		var cached_values = (cov_2jcihsdio4.s[122]++, docValues[formulaId]);
-		cov_2jcihsdio4.s[123]++;
+		var formulaId = (cov_19e2q96r4r.s[121]++, keys[i]);
+		var cached_values = (cov_19e2q96r4r.s[122]++, docValues[formulaId]);
+		cov_19e2q96r4r.s[123]++;
 		if (cached_values) {
-			cov_2jcihsdio4.b[54][0]++;
+			cov_19e2q96r4r.b[54][0]++;
 
-			var formula = (cov_2jcihsdio4.s[124]++, _FormulaService2.default.findFormulaByIndex(formulaId));
-			var formulaName = (cov_2jcihsdio4.s[125]++, formula === undefined ? (cov_2jcihsdio4.b[55][0]++, formulaId) : (cov_2jcihsdio4.b[55][1]++, formula.name));
+			var formula = (cov_19e2q96r4r.s[124]++, _FormulaService2.default.findFormulaByIndex(formulaId));
+			var formulaName = (cov_19e2q96r4r.s[125]++, formula === undefined ? (cov_19e2q96r4r.b[55][0]++, formulaId) : (cov_19e2q96r4r.b[55][1]++, formula.name));
 
-			cov_2jcihsdio4.s[126]++;
+			cov_19e2q96r4r.s[126]++;
 			for (var cached_value in cached_values) {
-				cov_2jcihsdio4.s[127]++;
+				cov_19e2q96r4r.s[127]++;
 
 				values.push({
 					varName: formulaName,
@@ -4370,46 +4370,46 @@ ValueFacade.getValuesFromFormulaIds = function (keys, docValues) {
 				});
 			}
 		} else {
-			cov_2jcihsdio4.b[54][1]++;
+			cov_19e2q96r4r.b[54][1]++;
 		}
 	}
-	cov_2jcihsdio4.s[128]++;
+	cov_19e2q96r4r.s[128]++;
 	return values;
 };
 //when new formula's arrive, we have to update the user-entered map so we don't get NPE
-cov_2jcihsdio4.s[129]++;
+cov_19e2q96r4r.s[129]++;
 ValueFacade.updateValueMap = function (values) {
-	cov_2jcihsdio4.f[11]++;
-	cov_2jcihsdio4.s[130]++;
+	cov_19e2q96r4r.f[11]++;
+	cov_19e2q96r4r.s[130]++;
 
 	_FormulaService2.default.visitFormulas(function (formula) {
-		cov_2jcihsdio4.f[12]++;
-		cov_2jcihsdio4.s[131]++;
+		cov_19e2q96r4r.f[12]++;
+		cov_19e2q96r4r.s[131]++;
 
 		//later will add values['_'+key] for the cache
 		//for unlocked add values[key] here will user entered values stay
 		if (formula.type === 'noCacheUnlocked') {
-			cov_2jcihsdio4.b[56][0]++;
+			cov_19e2q96r4r.b[56][0]++;
 
-			var id = (cov_2jcihsdio4.s[132]++, (cov_2jcihsdio4.b[57][0]++, formula.id) || (cov_2jcihsdio4.b[57][1]++, formula.index));
-			cov_2jcihsdio4.s[133]++;
+			var id = (cov_19e2q96r4r.s[132]++, (cov_19e2q96r4r.b[57][0]++, formula.id) || (cov_19e2q96r4r.b[57][1]++, formula.index));
+			cov_19e2q96r4r.s[133]++;
 			if (!values[id]) {
-					cov_2jcihsdio4.b[58][0]++;
-					cov_2jcihsdio4.s[134]++;
+					cov_19e2q96r4r.b[58][0]++;
+					cov_19e2q96r4r.s[134]++;
 					values[id] = {};
 				} else {
-				cov_2jcihsdio4.b[58][1]++;
+				cov_19e2q96r4r.b[58][1]++;
 			}
 		} else {
-			cov_2jcihsdio4.b[56][1]++;
+			cov_19e2q96r4r.b[56][1]++;
 		}
 	});
 };
-cov_2jcihsdio4.s[135]++;
+cov_19e2q96r4r.s[135]++;
 ValueFacade.visit = _PropertiesAssembler2.default.visitProperty;
-cov_2jcihsdio4.s[136]++;
+cov_19e2q96r4r.s[136]++;
 ValueFacade.visitChildren = _PropertiesAssembler2.default.visitChildren;
-cov_2jcihsdio4.s[137]++;
+cov_19e2q96r4r.s[137]++;
 ValueFacade.findAllInSolution = _PropertiesAssembler2.default.findAllInSolution;
 
 exports.default = ValueFacade;

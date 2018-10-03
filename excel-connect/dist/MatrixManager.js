@@ -1,49 +1,527 @@
 'use strict';
 
+var cov_s5m5r8rnb = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\MatrixManager.js',
+	    hash = 'bc29f829ed4a095e7c4fb182616e640b38f31756',
+	    Function = function () {}.constructor,
+	    global = new Function('return this')(),
+	    gcv = '__coverage__',
+	    coverageData = {
+		path: 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\MatrixManager.js',
+		statementMap: {
+			'0': {
+				start: {
+					line: 7,
+					column: 1
+				},
+				end: {
+					line: 7,
+					column: 19
+				}
+			},
+			'1': {
+				start: {
+					line: 8,
+					column: 1
+				},
+				end: {
+					line: 8,
+					column: 17
+				}
+			},
+			'2': {
+				start: {
+					line: 14,
+					column: 0
+				},
+				end: {
+					line: 38,
+					column: 1
+				}
+			},
+			'3': {
+				start: {
+					line: 15,
+					column: 18
+				},
+				end: {
+					line: 15,
+					column: 64
+				}
+			},
+			'4': {
+				start: {
+					line: 16,
+					column: 1
+				},
+				end: {
+					line: 24,
+					column: 2
+				}
+			},
+			'5': {
+				start: {
+					line: 17,
+					column: 16
+				},
+				end: {
+					line: 17,
+					column: 41
+				}
+			},
+			'6': {
+				start: {
+					line: 18,
+					column: 21
+				},
+				end: {
+					line: 18,
+					column: 31
+				}
+			},
+			'7': {
+				start: {
+					line: 19,
+					column: 2
+				},
+				end: {
+					line: 23,
+					column: 3
+				}
+			},
+			'8': {
+				start: {
+					line: 20,
+					column: 3
+				},
+				end: {
+					line: 22,
+					column: 4
+				}
+			},
+			'9': {
+				start: {
+					line: 21,
+					column: 4
+				},
+				end: {
+					line: 21,
+					column: 70
+				}
+			},
+			'10': {
+				start: {
+					line: 25,
+					column: 14
+				},
+				end: {
+					line: 25,
+					column: 61
+				}
+			},
+			'11': {
+				start: {
+					line: 26,
+					column: 1
+				},
+				end: {
+					line: 29,
+					column: 2
+				}
+			},
+			'12': {
+				start: {
+					line: 27,
+					column: 14
+				},
+				end: {
+					line: 27,
+					column: 40
+				}
+			},
+			'13': {
+				start: {
+					line: 28,
+					column: 2
+				},
+				end: {
+					line: 28,
+					column: 47
+				}
+			},
+			'14': {
+				start: {
+					line: 30,
+					column: 1
+				},
+				end: {
+					line: 36,
+					column: 3
+				}
+			},
+			'15': {
+				start: {
+					line: 31,
+					column: 2
+				},
+				end: {
+					line: 35,
+					column: 14
+				}
+			},
+			'16': {
+				start: {
+					line: 32,
+					column: 18
+				},
+				end: {
+					line: 32,
+					column: 20
+				}
+			},
+			'17': {
+				start: {
+					line: 33,
+					column: 3
+				},
+				end: {
+					line: 33,
+					column: 59
+				}
+			},
+			'18': {
+				start: {
+					line: 34,
+					column: 3
+				},
+				end: {
+					line: 34,
+					column: 36
+				}
+			},
+			'19': {
+				start: {
+					line: 37,
+					column: 1
+				},
+				end: {
+					line: 37,
+					column: 25
+				}
+			},
+			'20': {
+				start: {
+					line: 39,
+					column: 0
+				},
+				end: {
+					line: 46,
+					column: 1
+				}
+			},
+			'21': {
+				start: {
+					line: 40,
+					column: 1
+				},
+				end: {
+					line: 40,
+					column: 23
+				}
+			},
+			'22': {
+				start: {
+					line: 41,
+					column: 1
+				},
+				end: {
+					line: 41,
+					column: 19
+				}
+			},
+			'23': {
+				start: {
+					line: 42,
+					column: 1
+				},
+				end: {
+					line: 45,
+					column: 2
+				}
+			},
+			'24': {
+				start: {
+					line: 43,
+					column: 2
+				},
+				end: {
+					line: 43,
+					column: 51
+				}
+			},
+			'25': {
+				start: {
+					line: 44,
+					column: 2
+				},
+				end: {
+					line: 44,
+					column: 41
+				}
+			}
+		},
+		fnMap: {
+			'0': {
+				name: 'MatrixManager',
+				decl: {
+					start: {
+						line: 6,
+						column: 9
+					},
+					end: {
+						line: 6,
+						column: 22
+					}
+				},
+				loc: {
+					start: {
+						line: 6,
+						column: 25
+					},
+					end: {
+						line: 9,
+						column: 1
+					}
+				},
+				line: 6
+			},
+			'1': {
+				name: '(anonymous_1)',
+				decl: {
+					start: {
+						line: 14,
+						column: 35
+					},
+					end: {
+						line: 14,
+						column: 36
+					}
+				},
+				loc: {
+					start: {
+						line: 14,
+						column: 46
+					},
+					end: {
+						line: 38,
+						column: 1
+					}
+				},
+				line: 14
+			},
+			'2': {
+				name: '(anonymous_2)',
+				decl: {
+					start: {
+						line: 30,
+						column: 21
+					},
+					end: {
+						line: 30,
+						column: 22
+					}
+				},
+				loc: {
+					start: {
+						line: 30,
+						column: 34
+					},
+					end: {
+						line: 36,
+						column: 2
+					}
+				},
+				line: 30
+			},
+			'3': {
+				name: '(anonymous_3)',
+				decl: {
+					start: {
+						line: 31,
+						column: 16
+					},
+					end: {
+						line: 31,
+						column: 17
+					}
+				},
+				loc: {
+					start: {
+						line: 31,
+						column: 27
+					},
+					end: {
+						line: 35,
+						column: 3
+					}
+				},
+				line: 31
+			},
+			'4': {
+				name: '(anonymous_4)',
+				decl: {
+					start: {
+						line: 39,
+						column: 38
+					},
+					end: {
+						line: 39,
+						column: 39
+					}
+				},
+				loc: {
+					start: {
+						line: 39,
+						column: 58
+					},
+					end: {
+						line: 46,
+						column: 1
+					}
+				},
+				line: 39
+			}
+		},
+		branchMap: {},
+		s: {
+			'0': 0,
+			'1': 0,
+			'2': 0,
+			'3': 0,
+			'4': 0,
+			'5': 0,
+			'6': 0,
+			'7': 0,
+			'8': 0,
+			'9': 0,
+			'10': 0,
+			'11': 0,
+			'12': 0,
+			'13': 0,
+			'14': 0,
+			'15': 0,
+			'16': 0,
+			'17': 0,
+			'18': 0,
+			'19': 0,
+			'20': 0,
+			'21': 0,
+			'22': 0,
+			'23': 0,
+			'24': 0,
+			'25': 0
+		},
+		f: {
+			'0': 0,
+			'1': 0,
+			'2': 0,
+			'3': 0,
+			'4': 0
+		},
+		b: {},
+		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+	},
+	    coverage = global[gcv] || (global[gcv] = {});
+
+	if (coverage[path] && coverage[path].hash === hash) {
+		return coverage[path];
+	}
+
+	coverageData.hash = hash;
+	return coverage[path] = coverageData;
+}(); /**
+      * Do data-manipulations over the result of excel-connect.
+      */
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _index = require('../lme-core/index');
 
 function MatrixManager() {
-    this.register = {};
-    this.matrix = [];
+	cov_s5m5r8rnb.f[0]++;
+	cov_s5m5r8rnb.s[0]++;
+
+	this.register = {};
+	cov_s5m5r8rnb.s[1]++;
+	this.matrix = [];
 }
 
 /*
  * Language used by the editor
  */
-/**
- * Do data-manupulations over the result of excel-connect.
- */
+cov_s5m5r8rnb.s[2]++;
 MatrixManager.prototype.toFatrix = function () {
-    var register = new _index.Register(['table', 'row', 'col', 'value']);
-    for (var i = 0; i < this.matrix.length; i++) {
-        var table = this.matrix[i];
-        var table_name = table.name;
-        for (var row in table.xasValues) {
-            for (var col in table.xasValues[row]) {
-                register.addRow([table_name, row, col, table.xasValues[row][col]]);
-            }
-        }
-    }
-    var output = [['TableName', 'RowName', 'ColumnID', 'Value']];
-    for (var i = 0; i < register.i.length; i++) {
-        var obj = register.i[i];
-        output.push([obj[0], obj[1], obj[2], obj[3]]);
-    }
-    output = output.map(function (el) {
-        return el.map(function (innerEl) {
-            var prefix = [];
-            prefix.length = Math.max(30 - String(innerEl).length, 0);
-            return innerEl + prefix.join(' ');
-        }).join("|");
-    });
-    return output.join('\n');
+	cov_s5m5r8rnb.f[1]++;
+
+	var register = (cov_s5m5r8rnb.s[3]++, new _index.Register(['table', 'row', 'col', 'value']));
+	cov_s5m5r8rnb.s[4]++;
+	for (var matrix_index = 0; matrix_index < this.matrix.length; matrix_index++) {
+		var table = (cov_s5m5r8rnb.s[5]++, this.matrix[matrix_index]);
+		var table_name = (cov_s5m5r8rnb.s[6]++, table.name);
+		cov_s5m5r8rnb.s[7]++;
+		for (var row in table.xasValues) {
+			cov_s5m5r8rnb.s[8]++;
+
+			for (var col in table.xasValues[row]) {
+				cov_s5m5r8rnb.s[9]++;
+
+				register.addRow([table_name, row, col, table.xasValues[row][col]]);
+			}
+		}
+	}
+	var output = (cov_s5m5r8rnb.s[10]++, [['TableName', 'RowName', 'ColumnID', 'Value']]);
+	cov_s5m5r8rnb.s[11]++;
+	for (var register_index = 0; register_index < register.i.length; register_index++) {
+		var obj = (cov_s5m5r8rnb.s[12]++, register.i[register_index]);
+		cov_s5m5r8rnb.s[13]++;
+		output.push([obj[0], obj[1], obj[2], obj[3]]);
+	}
+	cov_s5m5r8rnb.s[14]++;
+	output = output.map(function (el) {
+		cov_s5m5r8rnb.f[2]++;
+		cov_s5m5r8rnb.s[15]++;
+
+		return el.map(function (innerEl) {
+			cov_s5m5r8rnb.f[3]++;
+
+			var prefix = (cov_s5m5r8rnb.s[16]++, []);
+			cov_s5m5r8rnb.s[17]++;
+			prefix.length = Math.max(30 - String(innerEl).length, 0);
+			cov_s5m5r8rnb.s[18]++;
+			return innerEl + prefix.join(' ');
+		}).join('|');
+	});
+	cov_s5m5r8rnb.s[19]++;
+	return output.join('\n');
 };
+cov_s5m5r8rnb.s[20]++;
 MatrixManager.prototype.setMatrices = function (matrixArg) {
-    this.matrix.length = 0;
-    this.register = {};
-    for (var table_name in matrixArg) {
-        this.register[table_name] = matrixArg[table_name];
-        this.matrix.push(matrixArg[table_name]);
-    }
+	cov_s5m5r8rnb.f[4]++;
+	cov_s5m5r8rnb.s[21]++;
+
+	this.matrix.length = 0;
+	cov_s5m5r8rnb.s[22]++;
+	this.register = {};
+	cov_s5m5r8rnb.s[23]++;
+	for (var table_name in matrixArg) {
+		cov_s5m5r8rnb.s[24]++;
+
+		this.register[table_name] = matrixArg[table_name];
+		cov_s5m5r8rnb.s[25]++;
+		this.matrix.push(matrixArg[table_name]);
+	}
 };
-module.exports = MatrixManager;
+exports.default = MatrixManager;

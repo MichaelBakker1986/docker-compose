@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_10jkdyl5yl = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\SolutionFacade.js',
-	    hash = '8e926b5920be7de9aa139dfeb3b7239db063898a',
+var cov_ce2jxnwhx = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\SolutionFacade.js',
+	    hash = '40cd9a60c9bab9c8abf862b5051b2ee650850c59',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\SolutionFacade.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\SolutionFacade.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -486,6 +486,106 @@ var cov_10jkdyl5yl = function () {
 				},
 				end: {
 					line: 124,
+					column: 76
+				}
+			},
+			'48': {
+				start: {
+					line: 125,
+					column: 0
+				},
+				end: {
+					line: 125,
+					column: 54
+				}
+			},
+			'49': {
+				start: {
+					line: 126,
+					column: 0
+				},
+				end: {
+					line: 126,
+					column: 42
+				}
+			},
+			'50': {
+				start: {
+					line: 127,
+					column: 0
+				},
+				end: {
+					line: 127,
+					column: 50
+				}
+			},
+			'51': {
+				start: {
+					line: 128,
+					column: 0
+				},
+				end: {
+					line: 128,
+					column: 56
+				}
+			},
+			'52': {
+				start: {
+					line: 129,
+					column: 0
+				},
+				end: {
+					line: 129,
+					column: 38
+				}
+			},
+			'53': {
+				start: {
+					line: 130,
+					column: 0
+				},
+				end: {
+					line: 130,
+					column: 36
+				}
+			},
+			'54': {
+				start: {
+					line: 131,
+					column: 0
+				},
+				end: {
+					line: 131,
+					column: 42
+				}
+			},
+			'55': {
+				start: {
+					line: 132,
+					column: 0
+				},
+				end: {
+					line: 132,
+					column: 44
+				}
+			},
+			'56': {
+				start: {
+					line: 133,
+					column: 0
+				},
+				end: {
+					line: 133,
+					column: 56
+				}
+			},
+			'57': {
+				start: {
+					line: 134,
+					column: 0
+				},
+				end: {
+					line: 134,
 					column: 51
 				}
 			}
@@ -1163,7 +1263,17 @@ var cov_10jkdyl5yl = function () {
 			'44': 0,
 			'45': 0,
 			'46': 0,
-			'47': 0
+			'47': 0,
+			'48': 0,
+			'49': 0,
+			'50': 0,
+			'51': 0,
+			'52': 0,
+			'53': 0,
+			'54': 0,
+			'55': 0,
+			'56': 0,
+			'57': 0
 		},
 		f: {
 			'0': 0,
@@ -1250,7 +1360,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var properties = (cov_10jkdyl5yl.s[0]++, {
+var properties = (cov_ce2jxnwhx.s[0]++, {
 	value: 0,
 	visible: 1,
 	required: 2,
@@ -1263,16 +1373,16 @@ var properties = (cov_10jkdyl5yl.s[0]++, {
 	hint: 9,
 	_testh: 10
 });
-var functions = (cov_10jkdyl5yl.s[1]++, {});
-cov_10jkdyl5yl.s[2]++;
+var functions = (cov_ce2jxnwhx.s[1]++, {});
+cov_ce2jxnwhx.s[2]++;
 var getFunctions = function getFunctions() {
-	cov_10jkdyl5yl.f[0]++;
-	cov_10jkdyl5yl.s[3]++;
+	cov_ce2jxnwhx.f[0]++;
+	cov_ce2jxnwhx.s[3]++;
 	return functions;
 };
-var addVariables = (cov_10jkdyl5yl.s[4]++, _FormulaService2.default.addVariables);
-var initVariables = (cov_10jkdyl5yl.s[5]++, _FormulaService2.default.initVariables);
-var fetchFormulaByIndex = (cov_10jkdyl5yl.s[6]++, _FormulaService2.default.findFormulaByIndex);
+var addVariables = (cov_ce2jxnwhx.s[4]++, _FormulaService2.default.addVariables);
+var initVariables = (cov_ce2jxnwhx.s[5]++, _FormulaService2.default.initVariables);
+var fetchFormulaByIndex = (cov_ce2jxnwhx.s[6]++, _FormulaService2.default.findFormulaByIndex);
 
 var SolutionFacade = function () {
 	function SolutionFacade() {
@@ -1282,72 +1392,72 @@ var SolutionFacade = function () {
 	(0, _createClass3.default)(SolutionFacade, null, [{
 		key: 'createSolution',
 		value: function createSolution(solutionName) {
-			cov_10jkdyl5yl.f[1]++;
-			cov_10jkdyl5yl.s[7]++;
+			cov_ce2jxnwhx.f[1]++;
+			cov_ce2jxnwhx.s[7]++;
 
 			return new _Solution2.default(_PropertiesAssembler2.default.createRootNode(solutionName).solutionName);
 		}
 	}, {
 		key: 'importSolutionData',
 		value: function importSolutionData(data, parserType, workbook) {
-			cov_10jkdyl5yl.f[2]++;
+			cov_ce2jxnwhx.f[2]++;
 
-			var foundParser = (cov_10jkdyl5yl.s[8]++, _ParserService2.default.findParser(parserType));
-			cov_10jkdyl5yl.s[9]++;
+			var foundParser = (cov_ce2jxnwhx.s[8]++, _ParserService2.default.findParser(parserType));
+			cov_ce2jxnwhx.s[9]++;
 			if (foundParser == null) {
-					cov_10jkdyl5yl.b[0][0]++;
-					cov_10jkdyl5yl.s[10]++;
+					cov_ce2jxnwhx.b[0][0]++;
+					cov_ce2jxnwhx.s[10]++;
 					throw Error('Parser for type \'' + parserType + '\' is not found. You have to include it in the startup script (require/import)');
 				} else {
-				cov_10jkdyl5yl.b[0][1]++;
-			}var solution = (cov_10jkdyl5yl.s[11]++, foundParser.parseData(data, workbook));
-			cov_10jkdyl5yl.s[12]++;
+				cov_ce2jxnwhx.b[0][1]++;
+			}var solution = (cov_ce2jxnwhx.s[11]++, foundParser.parseData(data, workbook));
+			cov_ce2jxnwhx.s[12]++;
 			_PropertiesAssembler2.default.bulkInsert(solution);
-			cov_10jkdyl5yl.s[13]++;
+			cov_ce2jxnwhx.s[13]++;
 			SolutionFacade.initFormulaBootstrap(solution.getFormulaKeys(), false, workbook.context.ma, workbook.context.audittrail);
-			cov_10jkdyl5yl.s[14]++;
+			cov_ce2jxnwhx.s[14]++;
 			return solution;
 		}
 	}, {
 		key: 'exportSolution',
 		value: function exportSolution(parserType, rowId, workbook) {
-			cov_10jkdyl5yl.f[3]++;
+			cov_ce2jxnwhx.f[3]++;
 
-			var parser = (cov_10jkdyl5yl.s[15]++, _ParserService2.default.findParser(parserType));
-			cov_10jkdyl5yl.s[16]++;
+			var parser = (cov_ce2jxnwhx.s[15]++, _ParserService2.default.findParser(parserType));
+			cov_ce2jxnwhx.s[16]++;
 			if (parser == null) {
-					cov_10jkdyl5yl.b[1][0]++;
-					cov_10jkdyl5yl.s[17]++;
+					cov_ce2jxnwhx.b[1][0]++;
+					cov_ce2jxnwhx.s[17]++;
 					throw Error('No such parser found:[' + parserType + ']');
 				} else {
-				cov_10jkdyl5yl.b[1][1]++;
-			}cov_10jkdyl5yl.s[18]++;
+				cov_ce2jxnwhx.b[1][1]++;
+			}cov_ce2jxnwhx.s[18]++;
 			return parser.deParse(rowId, workbook);
 		}
 	}, {
 		key: 'initFormulaBootstrap',
 		value: function initFormulaBootstrap(formulas, resetParsedFormula, ma, audittrail) {
-			cov_10jkdyl5yl.f[4]++;
-			cov_10jkdyl5yl.s[19]++;
+			cov_ce2jxnwhx.f[4]++;
+			cov_ce2jxnwhx.s[19]++;
 
 			for (var i = 0; i < formulas.length; i++) {
-				var formulaInfo = (cov_10jkdyl5yl.s[20]++, _FormulaService2.default.findFormulaByIndex(formulas[i]));
-				cov_10jkdyl5yl.s[21]++;
+				var formulaInfo = (cov_ce2jxnwhx.s[20]++, _FormulaService2.default.findFormulaByIndex(formulas[i]));
+				cov_ce2jxnwhx.s[21]++;
 				if (resetParsedFormula) {
-						cov_10jkdyl5yl.b[2][0]++;
-						cov_10jkdyl5yl.s[22]++;
+						cov_ce2jxnwhx.b[2][0]++;
+						cov_ce2jxnwhx.s[22]++;
 						formulaInfo.parsed = undefined;
 					} else {
-					cov_10jkdyl5yl.b[2][1]++;
+					cov_ce2jxnwhx.b[2][1]++;
 				} //explicitly reset parsed. (The formula-bootstrap) will skip parsed formulas
-				cov_10jkdyl5yl.s[23]++;
+				cov_ce2jxnwhx.s[23]++;
 				if (formulaInfo.parsed == null) {
-						cov_10jkdyl5yl.b[3][0]++;
-						cov_10jkdyl5yl.s[24]++;
+						cov_ce2jxnwhx.b[3][0]++;
+						cov_ce2jxnwhx.s[24]++;
 						_FormulaBootstrap2.default.parseAsFormula(formulaInfo);
 					} else {
-					cov_10jkdyl5yl.b[3][1]++;
-				}cov_10jkdyl5yl.s[25]++;
+					cov_ce2jxnwhx.b[3][1]++;
+				}cov_ce2jxnwhx.s[25]++;
 				_FunctionMap2.default.initializeFormula(formulaInfo, ma, audittrail);
 			}
 		}
@@ -1359,25 +1469,25 @@ var SolutionFacade = function () {
 	}, {
 		key: 'gatherFormulaProperties',
 		value: function gatherFormulaProperties(modelName, properties, rowId) {
-			cov_10jkdyl5yl.f[5]++;
+			cov_ce2jxnwhx.f[5]++;
 
-			var formulaProperties = (cov_10jkdyl5yl.s[26]++, {});
-			cov_10jkdyl5yl.s[27]++;
+			var formulaProperties = (cov_ce2jxnwhx.s[26]++, {});
+			cov_ce2jxnwhx.s[27]++;
 			Object.keys(properties).forEach(function (prop_name) {
-				cov_10jkdyl5yl.f[6]++;
+				cov_ce2jxnwhx.f[6]++;
 
-				var formula = (cov_10jkdyl5yl.s[28]++, _FormulaService2.default.findFormulaByIndex(_PropertiesAssembler2.default.getOrCreateProperty(modelName, rowId, prop_name).ref));
-				cov_10jkdyl5yl.s[29]++;
-				if ((cov_10jkdyl5yl.b[5][0]++, formula !== undefined) && (cov_10jkdyl5yl.b[5][1]++, formula.original !== undefined) && (cov_10jkdyl5yl.b[5][2]++, formula.original !== null) && (cov_10jkdyl5yl.b[5][3]++, formula.original !== '')) {
-					cov_10jkdyl5yl.b[4][0]++;
-					cov_10jkdyl5yl.s[30]++;
+				var formula = (cov_ce2jxnwhx.s[28]++, _FormulaService2.default.findFormulaByIndex(_PropertiesAssembler2.default.getOrCreateProperty(modelName, rowId, prop_name).ref));
+				cov_ce2jxnwhx.s[29]++;
+				if ((cov_ce2jxnwhx.b[5][0]++, formula !== undefined) && (cov_ce2jxnwhx.b[5][1]++, formula.original !== undefined) && (cov_ce2jxnwhx.b[5][2]++, formula.original !== null) && (cov_ce2jxnwhx.b[5][3]++, formula.original !== '')) {
+					cov_ce2jxnwhx.b[4][0]++;
+					cov_ce2jxnwhx.s[30]++;
 
 					formulaProperties[prop_name] = formula.original;
 				} else {
-					cov_10jkdyl5yl.b[4][1]++;
+					cov_ce2jxnwhx.b[4][1]++;
 				}
 			});
-			cov_10jkdyl5yl.s[31]++;
+			cov_ce2jxnwhx.s[31]++;
 			return formulaProperties;
 		}
 
@@ -1391,17 +1501,17 @@ var SolutionFacade = function () {
 	}, {
 		key: 'createFormulaAndStructure',
 		value: function createFormulaAndStructure(solutionName, formulaAsString, rowId, colId, displaytype, frequency, ma, audittrail, self_body, parent_id) {
-			cov_10jkdyl5yl.f[7]++;
+			cov_ce2jxnwhx.f[7]++;
 
 			//create a formula for the element
-			var ast = (cov_10jkdyl5yl.s[32]++, esprima.parse(formulaAsString));
+			var ast = (cov_ce2jxnwhx.s[32]++, esprima.parse(formulaAsString));
 			//create Solution if not exists.
-			var solution = (cov_10jkdyl5yl.s[33]++, SolutionFacade.createSolution(solutionName));
+			var solution = (cov_ce2jxnwhx.s[33]++, SolutionFacade.createSolution(solutionName));
 			//integrate Property with Formula
-			cov_10jkdyl5yl.s[34]++;
+			cov_ce2jxnwhx.s[34]++;
 			SolutionFacade.createUIFormulaLink(solution, rowId, colId, ast.body[0].expression, displaytype, frequency, self_body, parent_id);
 			//integrate one formula from just created Solution
-			cov_10jkdyl5yl.s[35]++;
+			cov_ce2jxnwhx.s[35]++;
 			SolutionFacade.initFormulaBootstrap(solution.getFormulaKeys(), false, ma, audittrail);
 		}
 
@@ -1412,58 +1522,80 @@ var SolutionFacade = function () {
 	}, {
 		key: 'createUIFormulaLink',
 		value: function createUIFormulaLink(solution, rowId, colId, body, displaytype, frequency, self_body, parent_id, ip_protected) {
-			cov_10jkdyl5yl.f[8]++;
+			cov_ce2jxnwhx.f[8]++;
 
 			//by default only value properties can be user entered
 			//in simple (LOCKED = (colId !== 'value'))
-			var property = (cov_10jkdyl5yl.s[36]++, _PropertiesAssembler2.default.getOrCreateProperty(solution.name, rowId, colId));
-			cov_10jkdyl5yl.s[37]++;
-			if ((cov_10jkdyl5yl.b[7][0]++, rowId !== 'root') && (cov_10jkdyl5yl.b[7][1]++, colId === 'value')) {
-					cov_10jkdyl5yl.b[6][0]++;
-					cov_10jkdyl5yl.s[38]++;
-					property.parentName = parent_id ? (cov_10jkdyl5yl.b[8][0]++, parent_id + '_value') : (cov_10jkdyl5yl.b[8][1]++, 'root_value');
+			var property = (cov_ce2jxnwhx.s[36]++, _PropertiesAssembler2.default.getOrCreateProperty(solution.name, rowId, colId));
+			cov_ce2jxnwhx.s[37]++;
+			if ((cov_ce2jxnwhx.b[7][0]++, rowId !== 'root') && (cov_ce2jxnwhx.b[7][1]++, colId === 'value')) {
+					cov_ce2jxnwhx.b[6][0]++;
+					cov_ce2jxnwhx.s[38]++;
+					property.parentName = parent_id ? (cov_ce2jxnwhx.b[8][0]++, parent_id + '_value') : (cov_ce2jxnwhx.b[8][1]++, 'root_value');
 				} else {
-				cov_10jkdyl5yl.b[6][1]++;
-			}cov_10jkdyl5yl.s[39]++;
+				cov_ce2jxnwhx.b[6][1]++;
+			}cov_ce2jxnwhx.s[39]++;
 			if (displaytype) {
-					cov_10jkdyl5yl.b[9][0]++;
-					cov_10jkdyl5yl.s[40]++;
+					cov_ce2jxnwhx.b[9][0]++;
+					cov_ce2jxnwhx.s[40]++;
 					property.displaytype = displaytype;
 				} else {
-				cov_10jkdyl5yl.b[9][1]++;
-			}var formulaId = (cov_10jkdyl5yl.s[41]++, _FormulaService2.default.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) === -1, body, frequency, self_body, ip_protected));
-			cov_10jkdyl5yl.s[42]++;
+				cov_ce2jxnwhx.b[9][1]++;
+			}var formulaId = (cov_ce2jxnwhx.s[41]++, _FormulaService2.default.addModelFormula(property, solution.name, rowId, colId, ['value', 'title'].indexOf(colId) === -1, body, frequency, self_body, ip_protected));
+			cov_ce2jxnwhx.s[42]++;
 			solution.createNode(formulaId, displaytype, property);
-			cov_10jkdyl5yl.s[43]++;
+			cov_ce2jxnwhx.s[43]++;
 			return property;
 		}
 	}, {
 		key: 'addFormulaDependency',
 		value: function addFormulaDependency(formulaInfo, name, propertyName) {
-			cov_10jkdyl5yl.f[9]++;
+			cov_ce2jxnwhx.f[9]++;
 
-			var property = (cov_10jkdyl5yl.s[44]++, _PropertiesAssembler2.default.getOrCreateProperty(formulaInfo.name.split('_')[0], name, (cov_10jkdyl5yl.b[10][0]++, propertyName) || (cov_10jkdyl5yl.b[10][1]++, 'value')));
-			cov_10jkdyl5yl.s[45]++;
+			var property = (cov_ce2jxnwhx.s[44]++, _PropertiesAssembler2.default.getOrCreateProperty(formulaInfo.name.split('_')[0], name, (cov_ce2jxnwhx.b[10][0]++, propertyName) || (cov_ce2jxnwhx.b[10][1]++, 'value')));
+			cov_ce2jxnwhx.s[45]++;
 			_FormulaService2.default.addFormulaDependency(formulaInfo, property.ref, property.name);
-			cov_10jkdyl5yl.s[46]++;
+			cov_ce2jxnwhx.s[46]++;
 			return property;
 		}
+
+		/*static getOrCreateProperty = PropertiesAssembler.getOrCreateProperty
+   static contains = PropertiesAssembler.contains
+   static getFunctions = getFunctions
+   static addParser = ParserService.addParser
+   static visitParsers = ParserService.visitParsers
+   static properties = properties
+   static functions = functions
+   static addVariables = addVariables
+   static initVariables = initVariables
+   static fetchFormulaByIndex = fetchFormulaByIndex*/
+
 	}]);
 	return SolutionFacade;
 }();
 
+cov_ce2jxnwhx.s[47]++;
+
+
 SolutionFacade.getOrCreateProperty = _PropertiesAssembler2.default.getOrCreateProperty;
+cov_ce2jxnwhx.s[48]++;
 SolutionFacade.contains = _PropertiesAssembler2.default.contains;
+cov_ce2jxnwhx.s[49]++;
 SolutionFacade.getFunctions = getFunctions;
+cov_ce2jxnwhx.s[50]++;
 SolutionFacade.addParser = _ParserService2.default.addParser;
+cov_ce2jxnwhx.s[51]++;
 SolutionFacade.visitParsers = _ParserService2.default.visitParsers;
+cov_ce2jxnwhx.s[52]++;
 SolutionFacade.properties = properties;
+cov_ce2jxnwhx.s[53]++;
 SolutionFacade.functions = functions;
+cov_ce2jxnwhx.s[54]++;
 SolutionFacade.addVariables = addVariables;
+cov_ce2jxnwhx.s[55]++;
 SolutionFacade.initVariables = initVariables;
+cov_ce2jxnwhx.s[56]++;
 SolutionFacade.fetchFormulaByIndex = fetchFormulaByIndex;
-cov_10jkdyl5yl.s[47]++;
-
-
+cov_ce2jxnwhx.s[57]++;
 _FormulaBootstrap2.default.initStateBootstrap(SolutionFacade);
 exports.default = SolutionFacade;

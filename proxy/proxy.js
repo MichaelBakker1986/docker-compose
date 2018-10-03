@@ -2,14 +2,13 @@
  * JSON parsing does not work here yet, it will modify the proxy requests
  * Just a dynamic reverse proxy
  */
-import Logstash        from 'logstash-client'
-import now             from 'performance-now'
-import log             from 'log6'
-import proxy           from 'http-proxy-middleware'
-import bodyParser      from 'body-parser'
-import express         from 'express'
-import express_favicon from 'express-favicon'
-import cors            from 'cors'
+import Logstash   from 'logstash-client'
+import now        from 'performance-now'
+import log        from 'log6'
+import proxy      from 'http-proxy-middleware'
+import bodyParser from 'body-parser'
+import express    from 'express'
+import cors       from 'cors'
 
 import method_override from 'method-override'
 
@@ -42,7 +41,7 @@ const restream = function(proxyReq, req, res, options) {
 		proxyReq.write(bodyData)
 	}
 }
-app.use(express_favicon())
+/*app.use(express_favicon())*/
 app.use(cors())
 app.set('port', internal_proxy_port)
 app.set('host', host)

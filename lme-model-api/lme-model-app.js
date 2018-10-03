@@ -2,7 +2,6 @@ import { exec }                 from 'child-process-promise'
 import log                      from 'log6'
 import browserify               from 'browserify-middleware'
 import babelify                 from 'babelify'
-import express_favicon          from 'express-favicon'
 import bodyParser               from 'body-parser'
 import expressStaticGzip        from 'express-static-gzip'
 import fs, { createReadStream } from 'fs'
@@ -18,7 +17,7 @@ import cors                     from 'cors'
 import path                     from 'path'
 import { setup }                from './api-def'
 
-import IDECodeBuilder from './src/IDE_code_builder'
+/*import IDECodeBuilder from './src/IDE_code_builder'*/
 
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -38,11 +37,17 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	extended: true,
 	limit   : '50mb'
 }))
-app.use(IDECodeBuilder)
+/*app.use(IDECodeBuilder)*/
 browserify.settings({
 	transform: [
 		/*require('browserify-fastjson'),*/
-		[babelify, { presets: ['env'] }]
+		[babelify, {
+			presets: ['env', 'stage-0'], 'plugins': [
+				'transform-runtime',
+				'transform-class-properties',
+				'transform-decorators-legacy'
+			]
+		}]
 	]
 })
 app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
@@ -85,12 +90,13 @@ app.get('*/model', (req, res) => {
 })
 app.get('*/modelChanges/:model_name', (req, res) => {
 	const model_name = req.params.model_name
-	DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
-		res.json({ status: 'success', data: data })
-	}).catch((err) => {
-		log.debug('Failed to fetch model changes from database', err)
-		res.json({ status: 'fail', reason: err.toString() })
-	})
+	res.json({ status: 'success', data : {} })
+	/*DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
+	 res.json({ status: 'success', data: data })
+	 }).catch((err) => {
+	 log.debug('Failed to fetch model changes from database', err)
+	 res.json({ status: 'fail', reason: err.toString() })
+	 })*/
 })
 app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
 	const model_name = req.params.model_name

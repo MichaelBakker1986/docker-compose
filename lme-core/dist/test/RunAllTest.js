@@ -48,7 +48,7 @@ results.push(['performanceTest', 'total', totalTestTime]);
 results.forEach(function (testResult) {
 	return (0, _log.debug)(testResult);
 });
-if (totalTestTime > 3500) (0, _log.error)('Total time exceeded');
+if (totalTestTime > 9500) (0, _log.error)('Total time exceeded');
 if (failures.length > 0) {
 	(0, _log.error)('A test failed' + failures);
 	process.exit(1);

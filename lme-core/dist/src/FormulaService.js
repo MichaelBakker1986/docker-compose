@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1wbvip2w7x = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FormulaService.js',
-	    hash = '340e74ab8fff2a132dcc2321d07d185605ef7d7f',
+var cov_55rl3h4jo = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FormulaService.js',
+	    hash = '1ee22a0921f3b20413ba6512373e80477702c5fa',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FormulaService.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FormulaService.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2170,11 +2170,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * * FormulaId '0' is not a valid ID!
  */
-var variables = (cov_1wbvip2w7x.s[0]++, []);
+var variables = (cov_55rl3h4jo.s[0]++, []);
 //the array index is used to be next formulaId
-var formulas = (cov_1wbvip2w7x.s[1]++, []);
+var formulas = (cov_55rl3h4jo.s[1]++, []);
 //make 100.000 entries, we start counting here for temporally formula's
-cov_1wbvip2w7x.s[2]++;
+cov_55rl3h4jo.s[2]++;
 formulas[1000] = null;
 /**
  * Todo: add formula.frequency into the cache key?
@@ -2182,134 +2182,134 @@ formulas[1000] = null;
  * One a formula is created, its stored in cache.
  * When another formula with the same modelFormula String is presented its checked with cache
  */
-var cache = (cov_1wbvip2w7x.s[3]++, {});
+var cache = (cov_55rl3h4jo.s[3]++, {});
 
 function FormulaService() {
-	cov_1wbvip2w7x.f[0]++;
+	cov_55rl3h4jo.f[0]++;
 }
 
-cov_1wbvip2w7x.s[4]++;
+cov_55rl3h4jo.s[4]++;
 FormulaService.prototype.visitFormulas = function (visitFunctionArg) {
-	cov_1wbvip2w7x.f[1]++;
-	cov_1wbvip2w7x.s[5]++;
+	cov_55rl3h4jo.f[1]++;
+	cov_55rl3h4jo.s[5]++;
 
 	for (var i = 0; i < formulas.length; i++) {
-		var formula = (cov_1wbvip2w7x.s[6]++, formulas[i]);
-		cov_1wbvip2w7x.s[7]++;
-		if ((cov_1wbvip2w7x.b[1][0]++, formula !== null) && (cov_1wbvip2w7x.b[1][1]++, formula !== undefined)) {
-			cov_1wbvip2w7x.b[0][0]++;
-			cov_1wbvip2w7x.s[8]++;
+		var formula = (cov_55rl3h4jo.s[6]++, formulas[i]);
+		cov_55rl3h4jo.s[7]++;
+		if ((cov_55rl3h4jo.b[1][0]++, formula !== null) && (cov_55rl3h4jo.b[1][1]++, formula !== undefined)) {
+			cov_55rl3h4jo.b[0][0]++;
+			cov_55rl3h4jo.s[8]++;
 
 			visitFunctionArg(formula);
 		} else {
-				cov_1wbvip2w7x.b[0][1]++;
-				cov_1wbvip2w7x.s[9]++;
+				cov_55rl3h4jo.b[0][1]++;
+				cov_55rl3h4jo.s[9]++;
 				if (i > 1000) {
-					cov_1wbvip2w7x.b[2][0]++;
-					cov_1wbvip2w7x.s[10]++;
+					cov_55rl3h4jo.b[2][0]++;
+					cov_55rl3h4jo.s[10]++;
 
 					visitFunctionArg(formula);
 				} else {
-					cov_1wbvip2w7x.b[2][1]++;
+					cov_55rl3h4jo.b[2][1]++;
 				}
 			}
 	}
 };
-cov_1wbvip2w7x.s[11]++;
+cov_55rl3h4jo.s[11]++;
 FormulaService.prototype.addFormulaDependency = function (formulaInfo, referenceFormulaIndex, referenceName) {
-	cov_1wbvip2w7x.f[2]++;
+	cov_55rl3h4jo.f[2]++;
 
 	//we want do know if we can all the value straight away or we have to invoke a function for it
 	//in future we want to check here if its a dynamic formula, or plain value.
 	//also inherited functions are nice to play around with.
 	//if type is not static, we add it as dependency
-	var referenceFormulaInfo = (cov_1wbvip2w7x.s[12]++, formulas[referenceFormulaIndex]);
+	var referenceFormulaInfo = (cov_55rl3h4jo.s[12]++, formulas[referenceFormulaIndex]);
 	//ok so we going to allow default values, this could because this formula was the default.
 	//there was once an idea to create static formula types
 	//we could now reference to the index instead...
-	var refName = (cov_1wbvip2w7x.s[13]++, referenceName);
+	var refName = (cov_55rl3h4jo.s[13]++, referenceName);
 	var refId;
-	cov_1wbvip2w7x.s[14]++;
+	cov_55rl3h4jo.s[14]++;
 	if (referenceFormulaInfo === undefined) {
-		cov_1wbvip2w7x.b[3][0]++;
-		cov_1wbvip2w7x.s[15]++;
+		cov_55rl3h4jo.b[3][0]++;
+		cov_55rl3h4jo.s[15]++;
 
 		if (_log2.default.TRACE) {
-				cov_1wbvip2w7x.b[4][0]++;
-				cov_1wbvip2w7x.s[16]++;
+				cov_55rl3h4jo.b[4][0]++;
+				cov_55rl3h4jo.s[16]++;
 				_log2.default.trace('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula');
 			} else {
-			cov_1wbvip2w7x.b[4][1]++;
-		}cov_1wbvip2w7x.s[17]++;
+			cov_55rl3h4jo.b[4][1]++;
+		}cov_55rl3h4jo.s[17]++;
 		if (_log2.default.TRACE) {
-				cov_1wbvip2w7x.b[5][0]++;
-				cov_1wbvip2w7x.s[18]++;
+				cov_55rl3h4jo.b[5][0]++;
+				cov_55rl3h4jo.s[18]++;
 				_log2.default.trace(formulaInfo.original);
 			} else {
-			cov_1wbvip2w7x.b[5][1]++;
+			cov_55rl3h4jo.b[5][1]++;
 		}
 	} else {
-		cov_1wbvip2w7x.b[3][1]++;
-		cov_1wbvip2w7x.s[19]++;
+		cov_55rl3h4jo.b[3][1]++;
+		cov_55rl3h4jo.s[19]++;
 
 		refName = referenceFormulaInfo.name;
-		cov_1wbvip2w7x.s[20]++;
-		refId = (cov_1wbvip2w7x.b[6][0]++, referenceFormulaInfo.id) || (cov_1wbvip2w7x.b[6][1]++, referenceFormulaInfo.index);
+		cov_55rl3h4jo.s[20]++;
+		refId = (cov_55rl3h4jo.b[6][0]++, referenceFormulaInfo.id) || (cov_55rl3h4jo.b[6][1]++, referenceFormulaInfo.index);
 
-		cov_1wbvip2w7x.s[21]++;
+		cov_55rl3h4jo.s[21]++;
 		if (referenceFormulaInfo.refs[formulaInfo.name] === undefined) {
-			cov_1wbvip2w7x.b[7][0]++;
-			cov_1wbvip2w7x.s[22]++;
+			cov_55rl3h4jo.b[7][0]++;
+			cov_55rl3h4jo.s[22]++;
 
 			referenceFormulaInfo.refs[formulaInfo.name] = true;
-			cov_1wbvip2w7x.s[23]++;
+			cov_55rl3h4jo.s[23]++;
 			referenceFormulaInfo.formulaDependencys.push({
 				name: formulaInfo.name,
 				association: 'refs',
-				refId: (cov_1wbvip2w7x.b[8][0]++, formulaInfo.id) || (cov_1wbvip2w7x.b[8][1]++, formulaInfo.index)
+				refId: (cov_55rl3h4jo.b[8][0]++, formulaInfo.id) || (cov_55rl3h4jo.b[8][1]++, formulaInfo.index)
 			});
 		} else {
-			cov_1wbvip2w7x.b[7][1]++;
+			cov_55rl3h4jo.b[7][1]++;
 		}
 	}
-	cov_1wbvip2w7x.s[24]++;
+	cov_55rl3h4jo.s[24]++;
 	if (formulaInfo.deps[refName] === undefined) {
-		cov_1wbvip2w7x.b[9][0]++;
-		cov_1wbvip2w7x.s[25]++;
+		cov_55rl3h4jo.b[9][0]++;
+		cov_55rl3h4jo.s[25]++;
 
 		formulaInfo.deps[refName] = true;
-		cov_1wbvip2w7x.s[26]++;
+		cov_55rl3h4jo.s[26]++;
 		formulaInfo.formulaDependencys.push({
 			name: refName,
 			association: 'deps',
 			refId: refId
 		});
 	} else {
-		cov_1wbvip2w7x.b[9][1]++;
+		cov_55rl3h4jo.b[9][1]++;
 	}
-	cov_1wbvip2w7x.s[27]++;
+	cov_55rl3h4jo.s[27]++;
 	return referenceFormulaInfo;
 };
 
-cov_1wbvip2w7x.s[28]++;
+cov_55rl3h4jo.s[28]++;
 FormulaService.prototype.addAssociation = function (index, property, associationType) {
-	cov_1wbvip2w7x.f[3]++;
+	cov_55rl3h4jo.f[3]++;
 
-	var formula = (cov_1wbvip2w7x.s[29]++, formulas[index]);
-	var otherFormula = (cov_1wbvip2w7x.s[30]++, formulas[property.ref]);
-	cov_1wbvip2w7x.s[31]++;
-	if ((cov_1wbvip2w7x.b[11][0]++, otherFormula.name !== formula.name) && (cov_1wbvip2w7x.b[11][1]++, formula.refs[otherFormula.name] === undefined)) {
-		cov_1wbvip2w7x.b[10][0]++;
-		cov_1wbvip2w7x.s[32]++;
+	var formula = (cov_55rl3h4jo.s[29]++, formulas[index]);
+	var otherFormula = (cov_55rl3h4jo.s[30]++, formulas[property.ref]);
+	cov_55rl3h4jo.s[31]++;
+	if ((cov_55rl3h4jo.b[11][0]++, otherFormula.name !== formula.name) && (cov_55rl3h4jo.b[11][1]++, formula.refs[otherFormula.name] === undefined)) {
+		cov_55rl3h4jo.b[10][0]++;
+		cov_55rl3h4jo.s[32]++;
 
 		formula.formulaDependencys.push({
 			name: otherFormula.name,
 			association: associationType
 		});
 	} else {
-		cov_1wbvip2w7x.b[10][1]++;
+		cov_55rl3h4jo.b[10][1]++;
 	}
-	cov_1wbvip2w7x.s[33]++;
+	cov_55rl3h4jo.s[33]++;
 	formula[associationType][property.name] = true;
 };
 
@@ -2319,48 +2319,48 @@ FormulaService.prototype.addAssociation = function (index, property, association
  * called to parse modelString formula and add to current state
  * if formulaString already parsed, its returned from cache
  */
-cov_1wbvip2w7x.s[34]++;
+cov_55rl3h4jo.s[34]++;
 FormulaService.prototype.addModelFormula = function (property, groupName, row, col, locked, body, frequency, self_body, ipprotected) {
-	cov_1wbvip2w7x.f[4]++;
-	cov_1wbvip2w7x.s[35]++;
+	cov_55rl3h4jo.f[4]++;
+	cov_55rl3h4jo.s[35]++;
 
 	(0, _assert2.default)(frequency, 'A formula must have a frequency');
-	cov_1wbvip2w7x.s[36]++;
+	cov_55rl3h4jo.s[36]++;
 	(0, _assert2.default)(body !== undefined, 'refactored, this function return undefined when body is undefined');
 	var formula;
 	//This is stupid, we have an AST and we going to deconstruct it into a string here.
 	//The string should be supplied!
-	var key = (cov_1wbvip2w7x.s[37]++, _escodegen2.default.generate(_astNodeUtils.ast.EXPRESSION(body)));
+	var key = (cov_55rl3h4jo.s[37]++, _escodegen2.default.generate(_astNodeUtils.ast.EXPRESSION(body)));
 	//if not locked and the formula isn't already cached, we can reuse it
 	//if not locked, its not possible to re-use since the user to override the value of the formula
 	//when running in DEBUG-MODUS, we cannot re-use Formula's since they will result in incorrect method calls
 	//SelfBody is supposed to be a JSON string
-	var cache_key = (cov_1wbvip2w7x.s[38]++, [(cov_1wbvip2w7x.b[12][0]++, self_body) || (cov_1wbvip2w7x.b[12][1]++, ''), (cov_1wbvip2w7x.b[13][0]++, frequency) || (cov_1wbvip2w7x.b[13][1]++, ''), key].join('_'));
+	var cache_key = (cov_55rl3h4jo.s[38]++, [(cov_55rl3h4jo.b[12][0]++, self_body) || (cov_55rl3h4jo.b[12][1]++, ''), (cov_55rl3h4jo.b[13][0]++, frequency) || (cov_55rl3h4jo.b[13][1]++, ''), key].join('_'));
 
-	cov_1wbvip2w7x.s[39]++;
-	if ((cov_1wbvip2w7x.b[15][0]++, locked) && (cov_1wbvip2w7x.b[15][1]++, cache[cache_key] !== undefined)) {
-			cov_1wbvip2w7x.b[14][0]++;
-			cov_1wbvip2w7x.s[40]++;
+	cov_55rl3h4jo.s[39]++;
+	if ((cov_55rl3h4jo.b[15][0]++, locked) && (cov_55rl3h4jo.b[15][1]++, cache[cache_key] !== undefined)) {
+			cov_55rl3h4jo.b[14][0]++;
+			cov_55rl3h4jo.s[40]++;
 			formula = cache[cache_key];
 		} else {
-		cov_1wbvip2w7x.b[14][1]++;
-		cov_1wbvip2w7x.s[41]++;
+		cov_55rl3h4jo.b[14][1]++;
+		cov_55rl3h4jo.s[41]++;
 
 		//else we have to create a new formula
 		formula = this.newFormula(locked, _astNodeUtils.ast.EXPRESSION(body), formulas.length, property.name, self_body, ipprotected);
-		cov_1wbvip2w7x.s[42]++;
+		cov_55rl3h4jo.s[42]++;
 		cache[key] = formula;
 	}
-	cov_1wbvip2w7x.s[43]++;
+	cov_55rl3h4jo.s[43]++;
 	property.ref = formula.index;
-	cov_1wbvip2w7x.s[44]++;
+	cov_55rl3h4jo.s[44]++;
 	property.formulaName = formula.name;
 
 	//add the formula Association, so formula 1 knows C12_value uses it.
-	cov_1wbvip2w7x.s[45]++;
+	cov_55rl3h4jo.s[45]++;
 	this.addAssociation(formula.index, property, 'refs');
-	cov_1wbvip2w7x.s[46]++;
-	return (cov_1wbvip2w7x.b[16][0]++, formula.id) || (cov_1wbvip2w7x.b[16][1]++, formula.index);
+	cov_55rl3h4jo.s[46]++;
+	return (cov_55rl3h4jo.b[16][0]++, formula.id) || (cov_55rl3h4jo.b[16][1]++, formula.index);
 };
 /*
  Class Formula
@@ -2379,18 +2379,18 @@ FormulaService.prototype.addModelFormula = function (property, groupName, row, c
  */
 //create a new Formula
 //initiate a new Object, add it to the Array
-cov_1wbvip2w7x.s[47]++;
+cov_55rl3h4jo.s[47]++;
 FormulaService.prototype.newFormula = function (locked, body, index, propertyName, self_body, ipprotected) {
-	cov_1wbvip2w7x.f[5]++;
+	cov_55rl3h4jo.f[5]++;
 
-	var original = (cov_1wbvip2w7x.s[48]++, _astNodeUtils.ast.PROGRAM(body));
-	var self = (cov_1wbvip2w7x.s[49]++, self_body ? (cov_1wbvip2w7x.b[17][0]++, JSON.parse(self_body)) : (cov_1wbvip2w7x.b[17][1]++, {}));
-	var formula = (cov_1wbvip2w7x.s[50]++, {
-		type: locked ? (cov_1wbvip2w7x.b[18][0]++, 'noCacheLocked') : (cov_1wbvip2w7x.b[18][1]++, 'noCacheUnlocked'), //there are some types, for nor only locked and unlocked are interesting
+	var original = (cov_55rl3h4jo.s[48]++, _astNodeUtils.ast.PROGRAM(body));
+	var self = (cov_55rl3h4jo.s[49]++, self_body ? (cov_55rl3h4jo.b[17][0]++, JSON.parse(self_body)) : (cov_55rl3h4jo.b[17][1]++, {}));
+	var formula = (cov_55rl3h4jo.s[50]++, {
+		type: locked ? (cov_55rl3h4jo.b[18][0]++, 'noCacheLocked') : (cov_55rl3h4jo.b[18][1]++, 'noCacheUnlocked'), //there are some types, for nor only locked and unlocked are interesting
 		refs: {}, //map of references
 		formulaDependencys: [], //array of associations (deps and refs)
 		deps: {}, //map of dependencies
-		ipprotected: (cov_1wbvip2w7x.b[19][0]++, ipprotected) || (cov_1wbvip2w7x.b[19][1]++, false),
+		ipprotected: (cov_55rl3h4jo.b[19][0]++, ipprotected) || (cov_55rl3h4jo.b[19][1]++, false),
 		body: original, //AST
 		self: self.body, //JSON body
 		params: self.params, //function parameters
@@ -2398,124 +2398,124 @@ FormulaService.prototype.newFormula = function (locked, body, index, propertyNam
 		index: index, //index used in formula array
 		name: propertyName //default formula name.
 	});
-	cov_1wbvip2w7x.s[51]++;
+	cov_55rl3h4jo.s[51]++;
 	formulas.push(formula);
-	cov_1wbvip2w7x.s[52]++;
+	cov_55rl3h4jo.s[52]++;
 	return formula;
 };
 
-cov_1wbvip2w7x.s[53]++;
+cov_55rl3h4jo.s[53]++;
 FormulaService.prototype.findFormulaByIndex = function (index) {
-	cov_1wbvip2w7x.f[6]++;
-	cov_1wbvip2w7x.s[54]++;
+	cov_55rl3h4jo.f[6]++;
+	cov_55rl3h4jo.s[54]++;
 
 	return formulas[index];
 };
 /**
  * used with javascript models, they are pre-parsed
  */
-cov_1wbvip2w7x.s[55]++;
+cov_55rl3h4jo.s[55]++;
 FormulaService.prototype.bulkInsertFormula = function (formulasArg) {
-	cov_1wbvip2w7x.f[7]++;
-	cov_1wbvip2w7x.s[56]++;
+	cov_55rl3h4jo.f[7]++;
+	cov_55rl3h4jo.s[56]++;
 
 	for (var i = 0; i < formulasArg.length; i++) {
-		var formula = (cov_1wbvip2w7x.s[57]++, formulasArg[i]);
-		cov_1wbvip2w7x.s[58]++;
+		var formula = (cov_55rl3h4jo.s[57]++, formulasArg[i]);
+		cov_55rl3h4jo.s[58]++;
 		formulas[formula.id] = formula;
 	}
 };
-cov_1wbvip2w7x.s[59]++;
+cov_55rl3h4jo.s[59]++;
 FormulaService.prototype.moveFormula = function (old, newFormula) {
-	cov_1wbvip2w7x.f[8]++;
-	cov_1wbvip2w7x.s[60]++;
+	cov_55rl3h4jo.f[8]++;
+	cov_55rl3h4jo.s[60]++;
 
 	if (old.index !== newFormula.id) {
-		cov_1wbvip2w7x.b[20][0]++;
-		cov_1wbvip2w7x.s[61]++;
+		cov_55rl3h4jo.b[20][0]++;
+		cov_55rl3h4jo.s[61]++;
 
 		formulas[newFormula.id] = formulas[old.index];
-		cov_1wbvip2w7x.s[62]++;
+		cov_55rl3h4jo.s[62]++;
 		formulas[newFormula.id].id = newFormula.id;
-		cov_1wbvip2w7x.s[63]++;
+		cov_55rl3h4jo.s[63]++;
 		delete formulas[newFormula.id].index;
 		//we can make the ID final.
-		cov_1wbvip2w7x.s[64]++;
+		cov_55rl3h4jo.s[64]++;
 		delete formulas[old.index];
 	} else {
-		cov_1wbvip2w7x.b[20][1]++;
+		cov_55rl3h4jo.b[20][1]++;
 	}
 };
-cov_1wbvip2w7x.s[65]++;
+cov_55rl3h4jo.s[65]++;
 FormulaService.prototype.addVariables = function (variablesArg) {
-	cov_1wbvip2w7x.f[9]++;
-	cov_1wbvip2w7x.s[66]++;
+	cov_55rl3h4jo.f[9]++;
+	cov_55rl3h4jo.s[66]++;
 
 	for (var i = 0; i < variablesArg.length; i++) {
-		var variable = (cov_1wbvip2w7x.s[67]++, variablesArg[i]);
-		cov_1wbvip2w7x.s[68]++;
+		var variable = (cov_55rl3h4jo.s[67]++, variablesArg[i]);
+		cov_55rl3h4jo.s[68]++;
 		if (variables[variable.name] !== undefined) {
-			cov_1wbvip2w7x.b[21][0]++;
-			cov_1wbvip2w7x.s[69]++;
+			cov_55rl3h4jo.b[21][0]++;
+			cov_55rl3h4jo.s[69]++;
 
 			throw Error('already declared variable [' + variable.name + ']');
 		} else {
-			cov_1wbvip2w7x.b[21][1]++;
+			cov_55rl3h4jo.b[21][1]++;
 		}
-		cov_1wbvip2w7x.s[70]++;
+		cov_55rl3h4jo.s[70]++;
 		variables.push({
 			name: variable.name,
 			expression: variable.expression
 		});
 	}
 };
-cov_1wbvip2w7x.s[71]++;
+cov_55rl3h4jo.s[71]++;
 FormulaService.prototype.getVariables = function (visit) {
-	cov_1wbvip2w7x.f[10]++;
-	cov_1wbvip2w7x.s[72]++;
+	cov_55rl3h4jo.f[10]++;
+	cov_55rl3h4jo.s[72]++;
 
 	for (var i = 0; i < variables.length; i++) {
-		cov_1wbvip2w7x.s[73]++;
+		cov_55rl3h4jo.s[73]++;
 		visit(variables[i]);
 	}
 };
-cov_1wbvip2w7x.s[74]++;
+cov_55rl3h4jo.s[74]++;
 FormulaService.prototype.initVariables = function (variables) {
-	cov_1wbvip2w7x.f[11]++;
-	cov_1wbvip2w7x.s[75]++;
+	cov_55rl3h4jo.f[11]++;
+	cov_55rl3h4jo.s[75]++;
 
 	variables.forEach(function (variable) {
-		cov_1wbvip2w7x.f[12]++;
-		cov_1wbvip2w7x.s[76]++;
+		cov_55rl3h4jo.f[12]++;
+		cov_55rl3h4jo.s[76]++;
 
 		variable.x = [];
 		//TODO strange construction here....
-		cov_1wbvip2w7x.s[77]++;
+		cov_55rl3h4jo.s[77]++;
 		if (variable.xasValues) {
-				cov_1wbvip2w7x.b[22][0]++;
-				cov_1wbvip2w7x.s[78]++;
+				cov_55rl3h4jo.b[22][0]++;
+				cov_55rl3h4jo.s[78]++;
 
 				Object.keys(variable.xasValues).forEach(function (key) {
-					cov_1wbvip2w7x.f[13]++;
-					cov_1wbvip2w7x.s[79]++;
+					cov_55rl3h4jo.f[13]++;
+					cov_55rl3h4jo.s[79]++;
 
 					Object.keys(variable.xasValues[key]).forEach(function (keyX) {
-						cov_1wbvip2w7x.f[14]++;
-						cov_1wbvip2w7x.s[80]++;
+						cov_55rl3h4jo.f[14]++;
+						cov_55rl3h4jo.s[80]++;
 						return variable.x.push(keyX);
 					});
 				});
 			} else {
-			cov_1wbvip2w7x.b[22][1]++;
-		}cov_1wbvip2w7x.s[81]++;
+			cov_55rl3h4jo.b[22][1]++;
+		}cov_55rl3h4jo.s[81]++;
 		if (global[variable.name]) {
-				cov_1wbvip2w7x.b[23][0]++;
-				cov_1wbvip2w7x.s[82]++;
+				cov_55rl3h4jo.b[23][0]++;
+				cov_55rl3h4jo.s[82]++;
 
 				Object.assign(global[variable.name], variable.expression);
 			} else {
-				cov_1wbvip2w7x.b[23][1]++;
-				cov_1wbvip2w7x.s[83]++;
+				cov_55rl3h4jo.b[23][1]++;
+				cov_55rl3h4jo.s[83]++;
 
 				global[variable.name] = variable.expression;
 			}

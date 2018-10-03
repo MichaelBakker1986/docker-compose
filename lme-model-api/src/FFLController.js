@@ -35,7 +35,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	this.changeManager = changeManager
 
 	$.get(`resources/${user_session.fflModelPath}.ffl`, data => {
-		console.info('Loaded engine')
+		console.info(`Loaded engine ${data.length}bytes`)
 		fflEditor.setValue(data)
 		$scope.reloadFFL()
 		//Also tell the auto-complete manager to initiate
