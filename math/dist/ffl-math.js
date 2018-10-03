@@ -384,7 +384,7 @@ var jsMath = {
 };
 
 
-var entries = {};
+var NA = jsMath.NA;
 
 if (!global.MatrixLookup) global.MatrixLookup = function () {
 	return 1;
@@ -562,10 +562,9 @@ global.SOLVER = function (args) {
 };
 global.AMMOUNT = function () {
 	var total = 0;
-	for (var key in arguments) {
-		if (arguments[key]) total++;
-	}
-	return total;
+	for (var key in _arguments) {
+		if (_arguments[key]) total++;
+	}return total;
 };
 global.OnNAIfNumber = function (v, nav) {
 	return isNaN(v) ? v : OnNA(v, nav);
@@ -573,11 +572,10 @@ global.OnNAIfNumber = function (v, nav) {
 global.OnNA = function (v, nav) {
 	return v == null || isNaN(v) || v !== 0 && v !== -0 && v < this.n && v > this.ng ? nav : v;
 }.bind({
-	n: 1e-100 * 1000,
-	ng: -1e-100 * 1000
+	n: 1e-10,
+	ng: -1e-10
 });
-
-function closestLowerNum(num, arr) {
+var closestLowerNum = function closestLowerNum(num, arr) {
 	var mid = void 0;
 	var lo = 0;
 	var hi = arr.length - 1;
@@ -587,7 +585,7 @@ function closestLowerNum(num, arr) {
 	}
 	if (num - arr[lo] <= arr[hi] - num) return arr[lo];
 	return arr[lo]; //change to hi to get the nearest
-}
+};
 
 global.MatrixLookDown = function (table, row, col) {
 	var rv = NA;
@@ -643,12 +641,19 @@ global.HVALUES = function (values, start, end) {
 	}
 	return returnValue;
 };
+var checkIntegrity = function checkIntegrity(result) {
+	var set = new Set(result.map(function (el) {
+		return typeof el === 'undefined' ? 'undefined' : (0, _typeof3.default)(el);
+	}));
+	(0, _log.debug)('Data types in ' + Array.from(set.keys()).toString());
+};
 global.VALUES = function (func, fId, x, y, z, v, m) {
 	var result = [];
 	for (var i = 0; i < x.aggcols.length; i++) {
 		if (!x.aggcols[i].aggregated) //TODO: aggregation is several levels
 			result.push(func(fId, x.aggcols[i], y, z, v, m));
 	}
+	if (_log.DEBUG) checkIntegrity(result);
 	return result;
 };
 /*f=Self for now..*/
@@ -679,9 +684,12 @@ if (!global.NOW) global.NOW = function () {
 };else (0, _log.warn)('NOW is already defined ' + global.NOW.toString());
 
 initJSMath(jsMath);
-
-/*if (!global.PPMT) global.PPMT = () => 1*/
-var name = 'ff-math';
+var entries = {
+	closestLowerNum: closestLowerNum,
+	NA: NA
+	/*if (!global.PPMT) global.PPMT = () => 1*/
+};var name = 'ff-math';
 exports.mathJs = { name: name, entries: entries };
 exports.name = name;
 exports.entries = entries;
+exports.default = { name: name, entries: entries };

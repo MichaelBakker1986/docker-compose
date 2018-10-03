@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_9jxq1ombk = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FunctionMap.js',
-	    hash = '92311452ab07877b7ee48f2fea687ab4943814a8',
+var cov_1h8vmsm7dn = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FunctionMap.js',
+	    hash = '8f2a72ee68071a2fb8beb3632a13a4aa4471ae25',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FunctionMap.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FunctionMap.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1196,41 +1196,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 function Fm() {
-	cov_9jxq1ombk.f[0]++;
+	cov_1h8vmsm7dn.f[0]++;
 }
 
 //don't directly use this method, use JSWorkBook instead.
-cov_9jxq1ombk.s[0]++;
+cov_1h8vmsm7dn.s[0]++;
 Fm.prototype.apiGet = function (formula, x, y, z, v, map) {
-	cov_9jxq1ombk.f[1]++;
+	cov_1h8vmsm7dn.f[1]++;
 
 	//temp fix fallback for ID, index is the Virtual ID, not persisted in the database
 	//should be checked outside this function call
-	var id = (cov_9jxq1ombk.s[1]++, (cov_9jxq1ombk.b[0][0]++, formula.id) || (cov_9jxq1ombk.b[0][1]++, formula.index));
-	cov_9jxq1ombk.s[2]++;
+	var id = (cov_1h8vmsm7dn.s[1]++, (cov_1h8vmsm7dn.b[0][0]++, formula.id) || (cov_1h8vmsm7dn.b[0][1]++, formula.index));
+	cov_1h8vmsm7dn.s[2]++;
 	return map[id](id, x, y, z, v, map);
 };
-cov_9jxq1ombk.s[3]++;
+cov_1h8vmsm7dn.s[3]++;
 Fm.prototype.apiSet = function (formula, x, y, z, value, v) {
-	cov_9jxq1ombk.f[2]++;
+	cov_1h8vmsm7dn.f[2]++;
 
-	var id = (cov_9jxq1ombk.s[4]++, (cov_9jxq1ombk.b[1][0]++, formula.id) || (cov_9jxq1ombk.b[1][1]++, formula.index));
-	cov_9jxq1ombk.s[5]++;
+	var id = (cov_1h8vmsm7dn.s[4]++, (cov_1h8vmsm7dn.b[1][0]++, formula.id) || (cov_1h8vmsm7dn.b[1][1]++, formula.index));
+	cov_1h8vmsm7dn.s[5]++;
 	if (v[id] !== undefined) {
-		cov_9jxq1ombk.b[2][0]++;
+		cov_1h8vmsm7dn.b[2][0]++;
 
-		var hash = (cov_9jxq1ombk.s[6]++, x.hash + y.hash + z);
-		cov_9jxq1ombk.s[7]++;
+		var hash = (cov_1h8vmsm7dn.s[6]++, x.hash + y.hash + z);
+		cov_1h8vmsm7dn.s[7]++;
 		v[id][hash] = value;
 	} else {
-			cov_9jxq1ombk.b[2][1]++;
-			cov_9jxq1ombk.s[8]++;
+			cov_1h8vmsm7dn.b[2][1]++;
+			cov_1h8vmsm7dn.s[8]++;
 			if (_log.DEBUG) {
-					cov_9jxq1ombk.b[3][0]++;
-					cov_9jxq1ombk.s[9]++;
+					cov_1h8vmsm7dn.b[3][0]++;
+					cov_1h8vmsm7dn.s[9]++;
 					(0, _log.debug)('[%s] does not exist in the model.', id);
 				} else {
-				cov_9jxq1ombk.b[3][1]++;
+				cov_1h8vmsm7dn.b[3][1]++;
 			}
 		}
 };
@@ -1241,34 +1241,34 @@ Fm.prototype.apiSet = function (formula, x, y, z, value, v) {
  *  100 + m[10002]   when m[10002] = 1(but can be entered.)
  *  100 + 1          when m[10002] = 1(and locked.)
  */
-cov_9jxq1ombk.s[10]++;
+cov_1h8vmsm7dn.s[10]++;
 Fm.prototype.initializeFormula = function (newFormula, map, audittrail) {
-	cov_9jxq1ombk.f[3]++;
+	cov_1h8vmsm7dn.f[3]++;
 
-	var id = (cov_9jxq1ombk.s[11]++, (cov_9jxq1ombk.b[4][0]++, newFormula.id) || (cov_9jxq1ombk.b[4][1]++, newFormula.index));
-	var stringFunction = (cov_9jxq1ombk.s[12]++, 'return ' + newFormula.parsed + ' /*\n' + newFormula.name + ':' + newFormula.original + '  */ ');
+	var id = (cov_1h8vmsm7dn.s[11]++, (cov_1h8vmsm7dn.b[4][0]++, newFormula.id) || (cov_1h8vmsm7dn.b[4][1]++, newFormula.index));
+	var stringFunction = (cov_1h8vmsm7dn.s[12]++, 'return ' + newFormula.parsed + ' /*\n' + newFormula.name + ':' + newFormula.original + '  */ ');
 
 	//we going to use .bind for function-scope variable binding. First of all we going to bind all CHOICES!
 	//In the choice we can use this.options[]....
 
-	var modelFunction = (cov_9jxq1ombk.s[13]++, Function((cov_9jxq1ombk.b[5][0]++, newFormula.params) || (cov_9jxq1ombk.b[5][1]++, 'f, x, y, z, v, m'), stringFunction));
-	cov_9jxq1ombk.s[14]++;
+	var modelFunction = (cov_1h8vmsm7dn.s[13]++, Function((cov_1h8vmsm7dn.b[5][0]++, newFormula.params) || (cov_1h8vmsm7dn.b[5][1]++, 'f, x, y, z, v, m'), stringFunction));
+	cov_1h8vmsm7dn.s[14]++;
 	if (newFormula.self != null) {
-			cov_9jxq1ombk.b[6][0]++;
-			cov_9jxq1ombk.s[15]++;
+			cov_1h8vmsm7dn.b[6][0]++;
+			cov_1h8vmsm7dn.s[15]++;
 			modelFunction = modelFunction.bind(newFormula.self);
 		} else {
-		cov_9jxq1ombk.b[6][1]++;
-	}var javaScriptFunction = (cov_9jxq1ombk.s[16]++, formulaDecorators[newFormula.type](modelFunction, id, newFormula.name));
+		cov_1h8vmsm7dn.b[6][1]++;
+	}var javaScriptFunction = (cov_1h8vmsm7dn.s[16]++, formulaDecorators[newFormula.type](modelFunction, id, newFormula.name));
 
-	cov_9jxq1ombk.s[17]++;
+	cov_1h8vmsm7dn.s[17]++;
 	if (global.IDE_DEBUGMODUS) {
-			cov_9jxq1ombk.b[7][0]++;
-			cov_9jxq1ombk.s[18]++;
+			cov_1h8vmsm7dn.b[7][0]++;
+			cov_1h8vmsm7dn.s[18]++;
 			map[id] = debugwrapper(javaScriptFunction, id, newFormula, audittrail);
 		} else {
-			cov_9jxq1ombk.b[7][1]++;
-			cov_9jxq1ombk.s[19]++;
+			cov_1h8vmsm7dn.b[7][1]++;
+			cov_1h8vmsm7dn.s[19]++;
 			map[id] = javaScriptFunction;
 		}
 };
@@ -1279,89 +1279,89 @@ Fm.prototype.initializeFormula = function (newFormula, map, audittrail) {
  * @param javaScriptFunction
  * @returns {Function}
  */
-cov_9jxq1ombk.s[20]++;
+cov_1h8vmsm7dn.s[20]++;
 var debugwrapper = function debugwrapper(javaScriptFunction, id, newFormula, audit_trail_argument) {
-	cov_9jxq1ombk.f[4]++;
+	cov_1h8vmsm7dn.f[4]++;
 
 
-	var audittrail = (cov_9jxq1ombk.s[21]++, audit_trail_argument);
-	var original = (cov_9jxq1ombk.s[22]++, newFormula.original);
-	var variableName = (cov_9jxq1ombk.s[23]++, newFormula.name.split('_').slice(1, -1).join('_'));
-	var property = (cov_9jxq1ombk.s[24]++, newFormula.name.split('_').pop());
-	var ff = (cov_9jxq1ombk.s[25]++, javaScriptFunction);
+	var audittrail = (cov_1h8vmsm7dn.s[21]++, audit_trail_argument);
+	var original = (cov_1h8vmsm7dn.s[22]++, newFormula.original);
+	var variableName = (cov_1h8vmsm7dn.s[23]++, newFormula.name.split('_').slice(1, -1).join('_'));
+	var property = (cov_1h8vmsm7dn.s[24]++, newFormula.name.split('_').pop());
+	var ff = (cov_1h8vmsm7dn.s[25]++, javaScriptFunction);
 
-	cov_9jxq1ombk.s[26]++;
+	cov_1h8vmsm7dn.s[26]++;
 	audittrail.addRow(['MODEL', 'INFO', variableName, property, '', '', '', 'Ok', newFormula.original, id, newFormula.parsed, '-']);
-	cov_9jxq1ombk.s[27]++;
+	cov_1h8vmsm7dn.s[27]++;
 	return function () {
-		cov_9jxq1ombk.f[5]++;
+		cov_1h8vmsm7dn.f[5]++;
 
 		var value = void 0,
-		    state = (cov_9jxq1ombk.s[28]++, 'INFO'),
-		    message = (cov_9jxq1ombk.s[29]++, '');
+		    state = (cov_1h8vmsm7dn.s[28]++, 'INFO'),
+		    message = (cov_1h8vmsm7dn.s[29]++, '');
 
-		cov_9jxq1ombk.s[30]++;
+		cov_1h8vmsm7dn.s[30]++;
 		try {
-			cov_9jxq1ombk.s[31]++;
+			cov_1h8vmsm7dn.s[31]++;
 
 			value = ff.apply(this, arguments);
 		} catch (err) {
-			cov_9jxq1ombk.s[32]++;
+			cov_1h8vmsm7dn.s[32]++;
 
 			state = 'ERROR';
-			cov_9jxq1ombk.s[33]++;
+			cov_1h8vmsm7dn.s[33]++;
 			message = err.toString();
-			cov_9jxq1ombk.s[34]++;
+			cov_1h8vmsm7dn.s[34]++;
 			value = NA;
 		}
 		//*growing too fast for V05*//
 		//*For static functions args[1] and args[2] can be anythng*//
-		cov_9jxq1ombk.s[35]++;
-		audittrail.addRow(['DATA', state, variableName, property, (cov_9jxq1ombk.b[8][0]++, arguments[2].display) || (cov_9jxq1ombk.b[8][1]++, arguments[2]), (cov_9jxq1ombk.b[9][0]++, arguments[1].hash) || (cov_9jxq1ombk.b[9][1]++, arguments[1]), value, message, original, id, typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)]);
-		cov_9jxq1ombk.s[36]++;
+		cov_1h8vmsm7dn.s[35]++;
+		audittrail.addRow(['DATA', state, variableName, property, (cov_1h8vmsm7dn.b[8][0]++, arguments[2].display) || (cov_1h8vmsm7dn.b[8][1]++, arguments[2]), (cov_1h8vmsm7dn.b[9][0]++, arguments[1].hash) || (cov_1h8vmsm7dn.b[9][1]++, arguments[1]), value, message, original, id, typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value)]);
+		cov_1h8vmsm7dn.s[36]++;
 		return value;
 	};
 };
 //we do need this functions to be here, so the FormulaBootstrap can directly call the function on its map instead of
 //for now we just use static functions and user editable function that will not cache.
 // the ApiGet. we don't need the CacheLocked and the NoCacheUnlocked they are just for further optimizations.
-var formulaDecorators = (cov_9jxq1ombk.s[37]++, {
+var formulaDecorators = (cov_1h8vmsm7dn.s[37]++, {
 	//nothing to to, just return the inner function
 	noCacheLocked: function noCacheLocked(innerFunction, formulaName) {
-		cov_9jxq1ombk.f[6]++;
-		cov_9jxq1ombk.s[38]++;
+		cov_1h8vmsm7dn.f[6]++;
+		cov_1h8vmsm7dn.s[38]++;
 		return innerFunction;
 	},
 	//Unlocked formula's can be user entered.
 	//Encapsulates that part.
 	noCacheUnlocked: function noCacheUnlocked(innerFunction, formulaName, varName) {
-		cov_9jxq1ombk.f[7]++;
-		cov_9jxq1ombk.s[39]++;
+		cov_1h8vmsm7dn.f[7]++;
+		cov_1h8vmsm7dn.s[39]++;
 
 		//add a user value cache
 		//f = formulaId
 		//y,x,z dimensions Tuple,Column,Layer
 		//v = enteredValues
 		return function (f, x, y, z, v, m) {
-			cov_9jxq1ombk.f[8]++;
-			cov_9jxq1ombk.s[40]++;
+			cov_1h8vmsm7dn.f[8]++;
+			cov_1h8vmsm7dn.s[40]++;
 
 			if (x.dummy) {
-					cov_9jxq1ombk.b[10][0]++;
-					cov_9jxq1ombk.s[41]++;
+					cov_1h8vmsm7dn.b[10][0]++;
+					cov_1h8vmsm7dn.s[41]++;
 					return NA;
 				} else {
-				cov_9jxq1ombk.b[10][1]++;
-			}var hash = (cov_9jxq1ombk.s[42]++, x.hash + y.hash + z);
+				cov_1h8vmsm7dn.b[10][1]++;
+			}var hash = (cov_1h8vmsm7dn.s[42]++, x.hash + y.hash + z);
 			//check if user entered a value
-			cov_9jxq1ombk.s[43]++;
+			cov_1h8vmsm7dn.s[43]++;
 			if (v[f][hash] == null) {
-					cov_9jxq1ombk.b[11][0]++;
-					cov_9jxq1ombk.s[44]++;
+					cov_1h8vmsm7dn.b[11][0]++;
+					cov_1h8vmsm7dn.s[44]++;
 					return innerFunction(f, x, y, z, v, m);
 				} else {
-				cov_9jxq1ombk.b[11][1]++;
-			}cov_9jxq1ombk.s[45]++;
+				cov_1h8vmsm7dn.b[11][1]++;
+			}cov_1h8vmsm7dn.s[45]++;
 			return v[f][hash]; //return entered value
 		};
 	}

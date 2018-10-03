@@ -13,7 +13,7 @@
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "excel-connect": "^1.0.4",
+    "excel-connect": "file:../excel-connect/",
     "ffl-pack": "^7.0.7",
     "ast-types": "^0.9.14",
     "browserify": "^14.5.0",
