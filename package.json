@@ -38,7 +38,7 @@
     "pre-commit": "^1.2.2"
   },
   "pre-commit": [
-    "test"
+  
   ],
   "scripts": {
     "install": "concurrently \"cd log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd excel-connect && npm install --no-optional \" \"cd lme-core && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd formulajs-connect && npm install --no-optional\" \"cd demo-apps && npm install --no-optional --allow-root\" \"cd git-connect && npm install --no-optional\" \"cd math && npm install --no-optional\" \"cd model-tests && npm install --no-optional\" \"cd proxy && npm install --no-optional\" \"cd ffl && npm install --no-optional \"",
