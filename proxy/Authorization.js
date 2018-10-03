@@ -84,7 +84,7 @@ class Authorization {
          "/dist/img/user2-160x160.jpg",
          "/favicon.ico",
          "/ide.js",
-         "src/ide.js",
+         "/src/ide.js",
          '/data-api-docs',
          "/showcase.js",
          "/ext-searchbox.js",
