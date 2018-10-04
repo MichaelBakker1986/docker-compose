@@ -30,7 +30,7 @@ model SCORECARDTESTMODEL uses BaseModel
   variable FES_FLATINPUT
   {
    frequency: document;
-   title: "Is flat input used? (1=yes)";
+   title: "Is flat input used? (1=yes1)";
    options_title: locked;
    fixed_decimals: 0;
   }

@@ -13,7 +13,7 @@
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "excel-connect": "file:../excel-connect/",
+    "excel-connect": "^1.0.4",
     "ffl-pack": "^7.0.7",
     "ast-types": "^0.9.14",
     "browserify": "^14.5.0",
@@ -23,7 +23,7 @@
     "esprima-walk": "^0.1.0",
     "excel-formula": "^1.4.2",
     "exceljs": "^0.6.2",
-    "ffl-math": "file:../math/",
+    "ffl-math": "^1.0.17",
     "formulajs": "^1.0.8",
     "fs-extra": "^7.0.0",
     "jgexml": "^0.3.8",

@@ -91,7 +91,7 @@ ModelStorage.prototype.doDeltaCompare = function(name, fflPath, data) {
 		const fflformat = new FFLToRegister(modelRegister, readFileSync(fflPath, 'utf8'))
 		fflformat.parseProperties()
 		const otherModelRegister = new Register()
-		const otherFFLFormat = new FFLFormatter(otherModelRegister, data)
+		const otherFFLFormat = new FFLToRegister(otherModelRegister, data)
 		otherFFLFormat.parseProperties()
 		const dcompare = new DeltaCompareRegister(modelRegister, otherModelRegister)
 		const compareResults = dcompare.compare()

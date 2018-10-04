@@ -1,11 +1,19 @@
-import { RegisterPlainFFLDecorator }                                                         from '../../ffl/index'
-import api, { Context, JSONParser, LMEParser, TimeAxis, WorkBook, XAxis as BkYearTimeModel } from '../../lme-core/index'
+import { RegisterPlainFFLDecorator } from '../../ffl/index'
+import api, {
+	Context,
+	JSONParser,
+	LMEParser,
+	TimeAxis,
+	WebExportParser,
+	WorkBook,
+	XAxis as BkYearTimeModel
+}                                    from '../../lme-core/index'
 
 import formulaJs from '../../formulajs-connect/formulajs'
 import fflMath   from '../../math/ffl-math'
 
 const DEFAULT_MODELNAME = 'SCORECARDTESTMODEL'
-api.registerParser(RegisterPlainFFLDecorator, JSONParser, LMEParser)
+api.registerParser(RegisterPlainFFLDecorator, JSONParser, LMEParser, WebExportParser)
 api.addFunctions(fflMath, formulaJs)
 
 function LmeAPI(TimeModel, Ctx, interval, options) {
@@ -123,6 +131,4 @@ LmeAPI.prototype.persistData = function(callBack) {
 	http.send(JSON.stringify({ data: self.exportData() }))
 	return http
 }
-module.exports = LmeAPI
 export { LmeAPI }
-export default LmeAPI

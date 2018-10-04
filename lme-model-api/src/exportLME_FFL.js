@@ -10,7 +10,7 @@ import browser                                                           from 'b
 import timeModel
                                                                          from '../../lme-core/resources/CustomImport.json'
 import { error }                                                         from 'log6'
-import LmeAPI                                                            from './lme'
+import { LmeAPI }                                                        from './lme'
 import '../../ffl/RegisterPlainFFLDecorator'
 import browserify_fastjson                                               from 'browserify-fastjson'
 

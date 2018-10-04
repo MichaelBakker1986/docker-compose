@@ -664,7 +664,6 @@ variable KSP
     title: "Spaar dit bedrag om je spaardoel te bereiken:";
     locked: 1;
     frequency: document;
-    formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(70000 - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
     displaytype: currency(0);
     hint: "per maand";
    }

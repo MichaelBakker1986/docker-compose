@@ -1,6 +1,6 @@
 import { AceEditor }                                               from './ace_editor_api'
 import { ChangeManager, RegisterPlainFFLDecorator, RegisterToFFL } from '../../ffl/index'
-import LMEModelEngine                                              from './lme'
+import { LmeAPI }                                                  from './lme'
 import FFLController                                               from './FFLController'
 import DebugController                                             from './DebugController'
 import { MatrixController }                                        from './MatrixController'
@@ -39,7 +39,7 @@ global['session'] = new LocalStorage(user_session)
 angular.module('lmeapp', ['angular.filter'])
 .controller('ideController', function($scope, $http, $timeout) {
 
-	const modelEngine = new LMEModelEngine()
+	const modelEngine = new LmeAPI()
 	$scope.LMEMETA = modelEngine
 	global.LME = modelEngine
 	modelEngine.loadData(function(response) {
