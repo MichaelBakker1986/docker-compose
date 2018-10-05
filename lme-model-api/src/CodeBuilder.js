@@ -29,6 +29,10 @@ export class CodeBuilder {
 				context: __dirname + './',
 				entry  : [filename],
 				mode   : 'development',
+				node   : {
+					fs           : 'empty',
+					child_process: 'empty'
+				},
 				output : {
 					publicPath: 'http://localhost:10500/',
 					path      : path.resolve(__dirname, './dist'),

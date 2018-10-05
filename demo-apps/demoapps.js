@@ -26,7 +26,7 @@ app.use('/id/:id/', expressStaticGzip(__dirname + '/data-graph/'))
 app.use('/id/:id/', expressStaticGzip(__dirname + '/showcase/'))
 app.use('/id/:id/', expressStaticGzip(__dirname + '/monli/'))
 app.use('*/font-awesome', expressStaticGzip(__dirname + '/node_modules/font-awesome'))
-app.use('/id/:id/', expressStaticGzip(__dirname + '/'))
+/*app.use('/id/:id/', expressStaticGzip(__dirname + '/'))*/
 
 //showcase proxies
 app.use('/id/:id/', expressStaticGzip(__dirname + '/showcase/'))

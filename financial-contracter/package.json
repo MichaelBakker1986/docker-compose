@@ -12,13 +12,13 @@
   "keywords": [],
   "author": "michael.bakker1986@gmail.com",
   "dependencies": {
-    "ffl-pack": "^6.0.3",
-    "log6": "^1.0.26",
-    "uuid": "^3.2.1"
+    "ffl-pack": "^6.1.0",
+    "log6": "^2.0.14",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1"
   }
 }

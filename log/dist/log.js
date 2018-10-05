@@ -9,9 +9,9 @@ var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
 
 var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
-var _tracer = require('tracer');
+var _michaelbakkerTracer = require('michaelbakker-tracer');
 
-var _tracer2 = _interopRequireDefault(_tracer);
+var _michaelbakkerTracer2 = _interopRequireDefault(_michaelbakkerTracer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43,7 +43,7 @@ var levels = {
 		WARN: true
 	}
 };
-var console = _tracer2.default.colorConsole({
+var console = _michaelbakkerTracer2.default.colorConsole({
 	format: '{{timestamp}} ({{file}}:{{line}}) \t- {{message}}',
 	dateformat: format,
 	level: logLevel,

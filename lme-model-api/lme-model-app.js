@@ -13,11 +13,11 @@ import DockerImageBuilder       from '../docker-connect/DockerImageBuilder'
 import request                  from 'request-promise-json'
 import express                  from 'express'
 import compression              from 'compression'
-import cors                     from 'cors'
 import path                     from 'path'
 import { setup }                from './api-def'
+import cors                     from 'cors'
 
-/*import IDECodeBuilder from './src/IDE_code_builder'*/
+import IDECodeBuilder from './src/IDE_code_builder'
 
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -37,10 +37,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	extended: true,
 	limit   : '50mb'
 }))
-/*app.use(IDECodeBuilder)*/
+app.use('/src', IDECodeBuilder)
 browserify.settings({
 	transform: [
-		/*require('browserify-fastjson'),*/
+		/*	require('browserify-fastjson'),*/
 		[babelify, {
 			presets: ['env', 'stage-0'], 'plugins': [
 				'transform-runtime',
@@ -58,17 +58,17 @@ app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
 	minify       : true,
 	precompile   : true
 }))
-app.get('*/ide.js', browserify(__dirname + '/src/ide.js', {
-	gzip         : true,
-	insertGlobals: true,
-	debug        : false
-}))
+/*app.get('*!/ide.js', browserify(__dirname + '/src/ide.js', {
+ gzip         : true,
+ insertGlobals: true,
+ debug        : false
+ }))*/
 app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
 	gzip         : true,
 	insertGlobals: true,
 	debug        : false
 }))
-app.post('*/:user_id/preview/:model_name', (req, res) => {
+app.post('*/:user_id/preview/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 	stash.preview(user_id, model_name, req.body.data).then((data) => {
@@ -79,7 +79,7 @@ app.post('*/:user_id/preview/:model_name', (req, res) => {
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
-app.get('*/model', (req, res) => {
+app.get('*/model', async (req, res) => {
 	const name = req.query.model
 	DBModel.getModel(name).then((data) => {
 		res.json({ status: 'success', data: data })
@@ -88,17 +88,17 @@ app.get('*/model', (req, res) => {
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
-app.get('*/modelChanges/:model_name', (req, res) => {
+app.get('*/modelChanges/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
-	res.json({ status: 'success', data : {} })
-	/*DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
-	 res.json({ status: 'success', data: data })
-	 }).catch((err) => {
-	 log.debug('Failed to fetch model changes from database', err)
-	 res.json({ status: 'fail', reason: err.toString() })
-	 })*/
+	res.json({ status: 'success', data: {} })
+	DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
+		res.json({ status: 'success', data: data })
+	}).catch((err) => {
+		log.debug('Failed to fetch model changes from database', err)
+		res.json({ status: 'fail', reason: err.toString() })
+	})
 })
-app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
+app.post('*/:user_id/saveFFLModel/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 	stash.commit(user_id, model_name, req.body.data, req.body.type).then((data) => {
@@ -108,7 +108,7 @@ app.post('*/:user_id/saveFFLModel/:model_name', (req, res) => {
 		res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
 	})
 })
-app.post('*/:user_id/saveJBehaveStory/:model_name', (req, res) => {
+app.post('*/:user_id/saveJBehaveStory/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 	stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then((data) => {
@@ -119,7 +119,7 @@ app.post('*/:user_id/saveJBehaveStory/:model_name', (req, res) => {
 	})
 })
 
-app.get('*/branches', (req, res) => {
+app.get('*/branches', async (req, res) => {
 	stash.branches().then(data => {
 		res.json(data)
 	}).catch(err => {
@@ -127,7 +127,7 @@ app.get('*/branches', (req, res) => {
 		res.json([])
 	})
 })
-app.get('*/models', (req, res) => {
+app.get('*/models', async (req, res) => {
 	stash.models('master', 'ffl').then((data) => {
 		res.json(data)
 	}).catch((err) => {
@@ -135,7 +135,7 @@ app.get('*/models', (req, res) => {
 		res.status(500).send(err.toString())
 	})
 })
-app.get('*/tmp_model/:model', (req, res) => {
+app.get('*/tmp_model/:model', async (req, res) => {
 	const name = req.params.model
 	return exec(`node ${__dirname}/src/exportLME_FFL.js ${name}`).then(() => {
 		const readStream = createReadStream(`${__dirname}/../git-connect/resources/${name}.js`)
@@ -147,7 +147,7 @@ app.get('*/tmp_model/:model', (req, res) => {
 
 // default options
 app.use(fileUpload())
-app.get('*/excel/:model', (req, res) => {
+app.get('*/excel/:model', async (req, res) => {
 	const modelName = req.params.model
 	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result, err) => {
 		const targetFilePath = `${__dirname}/../git-connect/resources/${modelName}.xlsx`
@@ -159,12 +159,12 @@ app.get('*/excel/:model', (req, res) => {
 		}
 	})
 })
-app.post('*/upload', (req, res) => {
+app.post('*/upload', async (req, res) => {
 	log.info('upload')
 	res.status(200).json({ status: 'ok' })
 })
 
-app.get('*/readExcel/:model', function(req, res) {
+app.get('*/readExcel/:model', async function(req, res) {
 	const modelName = req.params.model
 	ExcelConnect.loadExcelFile(modelName).then(function(matrix) {
 		res.json(matrix)
@@ -177,7 +177,7 @@ app.get('*/readExcel/:model', function(req, res) {
  * Build image
  * Publish to nexus
  */
-app.post('*/:user_id/publishDockerImage/:model_name', function(req, res) {
+app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 
@@ -207,7 +207,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', function(req, res) {
 	})
 })
 /** * TODO: add commit to stash */
-app.post('*/excel/:model', function(req, res) {
+app.post('*/excel/:model', async function(req, res) {
 	const modelName = req.params.model
 	if (!req.files) {
 		log.debug(`Failed to write ${modelName}.xlsx file.`)
@@ -230,13 +230,17 @@ setup(app)
 app.listen(port, (application) => {
 
 	//talk with the proxy
-	const routes = ['*/model-docs*', '*/ide.js']
+	const custom_routes = ['*/model-docs*', '/code/ui_ide.js', '*/ide.js']
+	const routes = []
 	app._router.stack.forEach(r => {
 		if (r.route && r.route.path) {
 			routes.push(r.route.path)
 		}
 	})
 	request.get(`http://${host}:${internal_proxy_port}/register/service/model-api/${host}/${port}/${routes.join(',')}`).then(data => {
-		if (log.DEBUG) log.debug(data)
+		if (log.DEBUG) log.debug(`${JSON.stringify(routes)} ${data}`)
+	}).catch(err => log.error('Failed to register ', err))
+	request.get(`http://${host}:${internal_proxy_port}/register/service/model-api/${host}/${port}/${custom_routes.join(',')}`).then(data => {
+		if (log.DEBUG) log.debug(`${JSON.stringify(custom_routes)} ${data}`)
 	}).catch(err => log.error('Failed to register ', err))
 })

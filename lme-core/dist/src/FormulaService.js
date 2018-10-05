@@ -2228,7 +2228,7 @@ FormulaService.prototype.addFormulaDependency = function (formulaInfo, reference
 	//there was once an idea to create static formula types
 	//we could now reference to the index instead...
 	var refName = (cov_1wbvip2w7x.s[13]++, referenceName);
-	var refId;
+	var refId = void 0;
 	cov_1wbvip2w7x.s[14]++;
 	if (referenceFormulaInfo === undefined) {
 		cov_1wbvip2w7x.b[3][0]++;

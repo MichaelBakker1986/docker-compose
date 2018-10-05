@@ -2,7 +2,7 @@
 
 var cov_1axbif5cdy = function () {
 	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\formulajs-connect\\formulajs.js',
-	    hash = 'f63e017e6e57592151ee0c1cb29ec71d03bc67b5',
+	    hash = '2b5d6b76fa053940bae86cd23d467f590bd145ab',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -55,11 +55,21 @@ var cov_1axbif5cdy = function () {
 					column: 28
 				},
 				end: {
-					line: 11,
-					column: 96
+					line: 13,
+					column: 53
 				}
 			},
 			'5': {
+				start: {
+					line: 11,
+					column: 39
+				},
+				end: {
+					line: 11,
+					column: 107
+				}
+			},
+			'6': {
 				start: {
 					line: 12,
 					column: 6
@@ -69,17 +79,27 @@ var cov_1axbif5cdy = function () {
 					column: 53
 				}
 			},
-			'6': {
+			'7': {
 				start: {
 					line: 12,
 					column: 47
 				},
 				end: {
-					line: 12,
-					column: 104
+					line: 13,
+					column: 53
 				}
 			},
-			'7': {
+			'8': {
+				start: {
+					line: 12,
+					column: 58
+				},
+				end: {
+					line: 12,
+					column: 115
+				}
+			},
+			'9': {
 				start: {
 					line: 13,
 					column: 6
@@ -153,6 +173,39 @@ var cov_1axbif5cdy = function () {
 			'1': {
 				loc: {
 					start: {
+						line: 11,
+						column: 28
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				},
+				type: 'if',
+				locations: [{
+					start: {
+						line: 11,
+						column: 28
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				}, {
+					start: {
+						line: 11,
+						column: 28
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				}],
+				line: 11
+			},
+			'2': {
+				loc: {
+					start: {
 						line: 12,
 						column: 6
 					},
@@ -182,6 +235,39 @@ var cov_1axbif5cdy = function () {
 					}
 				}],
 				line: 12
+			},
+			'3': {
+				loc: {
+					start: {
+						line: 12,
+						column: 47
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				},
+				type: 'if',
+				locations: [{
+					start: {
+						line: 12,
+						column: 47
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				}, {
+					start: {
+						line: 12,
+						column: 47
+					},
+					end: {
+						line: 13,
+						column: 53
+					}
+				}],
+				line: 12
 			}
 		},
 		s: {
@@ -192,14 +278,18 @@ var cov_1axbif5cdy = function () {
 			'4': 0,
 			'5': 0,
 			'6': 0,
-			'7': 0
+			'7': 0,
+			'8': 0,
+			'9': 0
 		},
 		f: {
 			'0': 0
 		},
 		b: {
 			'0': [0, 0],
-			'1': [0, 0]
+			'1': [0, 0],
+			'2': [0, 0],
+			'3': [0, 0]
 		},
 		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
 	},
@@ -240,20 +330,32 @@ Object.keys(formulaJs).forEach(function (functionName) {
 	if (functionName === 'NA') {
 			cov_1axbif5cdy.b[0][0]++;
 			cov_1axbif5cdy.s[4]++;
-			return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
-		} else {
-			cov_1axbif5cdy.b[0][1]++;
-			cov_1axbif5cdy.s[5]++;
-			if (global.hasOwnProperty(functionName)) {
+			if (_log.DEBUG) {
 					cov_1axbif5cdy.b[1][0]++;
-					cov_1axbif5cdy.s[6]++;
-					(0, _log.debug)('global function already used : [' + functionName + ']');
+					cov_1axbif5cdy.s[5]++;
+					return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
 				} else {
 					cov_1axbif5cdy.b[1][1]++;
-					cov_1axbif5cdy.s[7]++;
-					entries[functionName] = formulaJs[functionName];
+					cov_1axbif5cdy.s[6]++;
+					if (global.hasOwnProperty(functionName)) {
+							cov_1axbif5cdy.b[2][0]++;
+							cov_1axbif5cdy.s[7]++;
+							if (_log.DEBUG) {
+									cov_1axbif5cdy.b[3][0]++;
+									cov_1axbif5cdy.s[8]++;
+									(0, _log.debug)('global function already used : [' + functionName + ']');
+								} else {
+									cov_1axbif5cdy.b[3][1]++;
+									cov_1axbif5cdy.s[9]++;
+									entries[functionName] = formulaJs[functionName];
+								}
+						} else {
+						cov_1axbif5cdy.b[2][1]++;
+					}
 				}
-		}
+		} else {
+		cov_1axbif5cdy.b[0][1]++;
+	}
 });
 exports.name = name;
 exports.entries = entries;

@@ -43,8 +43,8 @@ FormulaService.prototype.addFormulaDependency = function(formulaInfo, referenceF
 	//ok so we going to allow default values, this could because this formula was the default.
 	//there was once an idea to create static formula types
 	//we could now reference to the index instead...
-	var refName = referenceName
-	var refId
+	let refName = referenceName
+	let refId
 	if (referenceFormulaInfo === undefined) {
 		if (log.TRACE) log.trace('failed to lookup:[' + referenceName + '] but it was in the model, could be in another model. OR it just have default value formula')
 		if (log.TRACE) log.trace(formulaInfo.original)

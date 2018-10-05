@@ -1,4 +1,4 @@
-import tracer from 'tracer'
+import tracer from 'michaelbakker-tracer'
 
 const format = process.env.TIME_FORMAT || 'HH.MM.ssl'
 const logLevel = process.env.ENV || 'info'

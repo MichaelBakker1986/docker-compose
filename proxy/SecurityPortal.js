@@ -30,12 +30,12 @@ app.use(cookie_parser())
 app.use(express_session({ secret: 'elm a1tm', resave: true, saveUninitialized: true }))
 const idProvider = new Authentication(app)
 
-app.get('/fail', (req, res) => res.status(401).send('Unauthorized facebook user'))
-app.get('/whoami', (req, res) => res.status(200).send(req.isAuthenticated() ? (req.user.displayName + ',' + req.user.id) : 'guest'))
+app.get('/fail', async (req, res) => res.status(401).send('Unauthorized facebook user'))
+app.get('/whoami', async (req, res) => res.status(200).send(req.isAuthenticated() ? (`${req.user.displayName},${req.user.id}`) : 'guest'))
 /**
  * proxy every request
  */
-app.all('*', function(req, res, next) {
+app.all('*', async function(req, res, next) {
 		/**
 		 * There is two kinds of allowed requests,
 		 * 1) authenticated and authorized
@@ -74,9 +74,8 @@ app.all('*', function(req, res, next) {
  * when the response includes the x-auth-id header.
  * The secure internal system implies the requester owns the new hash.
  */
-proxy.on('proxyRes', (res) => {
+proxy.on('proxyRes', async (res) => {
 	if (res.headers['x-auth-id']) auth.addModelInstancePrivileges(res.req.path.split('/')[2], res.headers['x-auth-id'])
 	if (res.headers['x-share-id']) auth.shareData(res.req.path.split('/')[2], res.headers['x-share-id'])
 })
-
 app.listen(exposed_authentication_port, () => log.info(`<a href="http://${domain}/">AUTH Server</a><span> deployed.</span>`))
