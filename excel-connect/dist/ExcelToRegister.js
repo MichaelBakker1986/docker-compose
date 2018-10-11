@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2go7lfpe34 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\ExcelToRegister.js',
-	    hash = 'a8fe4db389ab20b9191d273cea5bee2d433e89f3',
+var cov_9ii97383t = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\ExcelToRegister.js',
+	    hash = '17a54d690d742c0ffc4733728b57a6cfc795da3e',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\ExcelToRegister.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\ExcelToRegister.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2187,240 +2187,240 @@ var _index2 = require('../ffl/index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var variable_name_index = (cov_2go7lfpe34.s[0]++, 3);
-var excel_title_index = (cov_2go7lfpe34.s[1]++, 1);
-var depth_index = (cov_2go7lfpe34.s[2]++, 2);
-var required_index = (cov_2go7lfpe34.s[3]++, 6);
-var visible_index = (cov_2go7lfpe34.s[4]++, 7);
-var displaytype_index = (cov_2go7lfpe34.s[5]++, 8);
+var variable_name_index = (cov_9ii97383t.s[0]++, 3);
+var excel_title_index = (cov_9ii97383t.s[1]++, 1);
+var depth_index = (cov_9ii97383t.s[2]++, 2);
+var required_index = (cov_9ii97383t.s[3]++, 6);
+var visible_index = (cov_9ii97383t.s[4]++, 7);
+var displaytype_index = (cov_9ii97383t.s[5]++, 8);
 
-cov_2go7lfpe34.s[6]++;
+cov_9ii97383t.s[6]++;
 var map = function map(value) {
-	cov_2go7lfpe34.f[0]++;
-	cov_2go7lfpe34.s[7]++;
+	cov_9ii97383t.f[0]++;
+	cov_9ii97383t.s[7]++;
 
 	if (value) {
-		cov_2go7lfpe34.b[0][0]++;
-		cov_2go7lfpe34.s[8]++;
+		cov_9ii97383t.b[0][0]++;
+		cov_9ii97383t.s[8]++;
 
-		if ((cov_2go7lfpe34.b[2][0]++, value.text) || (cov_2go7lfpe34.b[2][1]++, value.hyperlink)) {
-				cov_2go7lfpe34.b[1][0]++;
-				cov_2go7lfpe34.s[9]++;
-				return (cov_2go7lfpe34.b[3][0]++, value.hyperlink) || (cov_2go7lfpe34.b[3][1]++, value.text) || (cov_2go7lfpe34.b[3][2]++, '');
+		if ((cov_9ii97383t.b[2][0]++, value.text) || (cov_9ii97383t.b[2][1]++, value.hyperlink)) {
+				cov_9ii97383t.b[1][0]++;
+				cov_9ii97383t.s[9]++;
+				return (cov_9ii97383t.b[3][0]++, value.hyperlink) || (cov_9ii97383t.b[3][1]++, value.text) || (cov_9ii97383t.b[3][2]++, '');
 			} else {
-			cov_2go7lfpe34.b[1][1]++;
-		}cov_2go7lfpe34.s[10]++;
-		if ((cov_2go7lfpe34.b[5][0]++, value.formula) || (cov_2go7lfpe34.b[5][1]++, value.result)) {
-				cov_2go7lfpe34.b[4][0]++;
-				cov_2go7lfpe34.s[11]++;
-				return (cov_2go7lfpe34.b[6][0]++, value.result) || (cov_2go7lfpe34.b[6][1]++, '');
+			cov_9ii97383t.b[1][1]++;
+		}cov_9ii97383t.s[10]++;
+		if ((cov_9ii97383t.b[5][0]++, value.formula) || (cov_9ii97383t.b[5][1]++, value.result)) {
+				cov_9ii97383t.b[4][0]++;
+				cov_9ii97383t.s[11]++;
+				return (cov_9ii97383t.b[6][0]++, value.result) || (cov_9ii97383t.b[6][1]++, '');
 			} else {
-			cov_2go7lfpe34.b[4][1]++;
-		}cov_2go7lfpe34.s[12]++;
+			cov_9ii97383t.b[4][1]++;
+		}cov_9ii97383t.s[12]++;
 		if (value instanceof Date) {
-				cov_2go7lfpe34.b[7][0]++;
-				cov_2go7lfpe34.s[13]++;
-				return dateFormat ? (cov_2go7lfpe34.b[8][0]++, (0, _moment2.default)(value).format(dateFormat)) : (cov_2go7lfpe34.b[8][1]++, (0, _moment2.default)(value).format());
+				cov_9ii97383t.b[7][0]++;
+				cov_9ii97383t.s[13]++;
+				return dateFormat ? (cov_9ii97383t.b[8][0]++, (0, _moment2.default)(value).format(dateFormat)) : (cov_9ii97383t.b[8][1]++, (0, _moment2.default)(value).format());
 			} else {
-			cov_2go7lfpe34.b[7][1]++;
-		}cov_2go7lfpe34.s[14]++;
+			cov_9ii97383t.b[7][1]++;
+		}cov_9ii97383t.s[14]++;
 		if (value.error) {
-				cov_2go7lfpe34.b[9][0]++;
-				cov_2go7lfpe34.s[15]++;
+				cov_9ii97383t.b[9][0]++;
+				cov_9ii97383t.s[15]++;
 				return value.error;
 			} else {
-			cov_2go7lfpe34.b[9][1]++;
-		}cov_2go7lfpe34.s[16]++;
-		if ((typeof value === 'undefined' ? (cov_2go7lfpe34.b[11][0]++, 'undefined') : (cov_2go7lfpe34.b[11][1]++, typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value))) === 'object') {
-			cov_2go7lfpe34.b[10][0]++;
-			cov_2go7lfpe34.s[17]++;
+			cov_9ii97383t.b[9][1]++;
+		}cov_9ii97383t.s[16]++;
+		if ((typeof value === 'undefined' ? (cov_9ii97383t.b[11][0]++, 'undefined') : (cov_9ii97383t.b[11][1]++, typeof value === 'undefined' ? 'undefined' : (0, _typeof3.default)(value))) === 'object') {
+			cov_9ii97383t.b[10][0]++;
+			cov_9ii97383t.s[17]++;
 
 			return JSON.stringify(value);
 		} else {
-			cov_2go7lfpe34.b[10][1]++;
+			cov_9ii97383t.b[10][1]++;
 		}
 	} else {
-		cov_2go7lfpe34.b[0][1]++;
+		cov_9ii97383t.b[0][1]++;
 	}
-	cov_2go7lfpe34.s[18]++;
+	cov_9ii97383t.s[18]++;
 	return value;
 };
 
 function ExcelToFFLStream(stream, opts) {
-	cov_2go7lfpe34.f[1]++;
+	cov_9ii97383t.f[1]++;
 
-	var audit = (cov_2go7lfpe34.s[19]++, []);
-	cov_2go7lfpe34.s[20]++;
+	var audit = (cov_9ii97383t.s[19]++, []);
+	cov_9ii97383t.s[20]++;
 	return new _promise2.default(function (success, fail) {
-		cov_2go7lfpe34.f[2]++;
-		cov_2go7lfpe34.s[21]++;
+		cov_9ii97383t.f[2]++;
+		cov_9ii97383t.s[21]++;
 
 		new _exceljs2.default.Workbook().xlsx.readFile(stream).then(function (data) {
-			cov_2go7lfpe34.f[3]++;
-			cov_2go7lfpe34.s[22]++;
+			cov_9ii97383t.f[3]++;
+			cov_9ii97383t.s[22]++;
 
 			success(data);
 		}).catch(function (err) {
-			cov_2go7lfpe34.f[4]++;
-			cov_2go7lfpe34.s[23]++;
+			cov_9ii97383t.f[4]++;
+			cov_9ii97383t.s[23]++;
 
 			console.info(err);
-			cov_2go7lfpe34.s[24]++;
+			cov_9ii97383t.s[24]++;
 			fail('Error reading XLSX ' + JSON.stringify(opts), err.toString());
 		});
 	}).then(function (data) {
-		cov_2go7lfpe34.f[5]++;
+		cov_9ii97383t.f[5]++;
 
-		var register = (cov_2go7lfpe34.s[25]++, new _index.Register());
+		var register = (cov_9ii97383t.s[25]++, new _index.Register());
 		/*const csv = data.csv.writeFile('./raw_excel_data.csv', { delimiter: ";" })*/
 
-		cov_2go7lfpe34.s[26]++;
+		cov_9ii97383t.s[26]++;
 		register.addColumn('title');
-		cov_2go7lfpe34.s[27]++;
+		cov_9ii97383t.s[27]++;
 		register.addColumn('display_options');
-		cov_2go7lfpe34.s[28]++;
+		cov_9ii97383t.s[28]++;
 		register.addColumn('required');
-		cov_2go7lfpe34.s[29]++;
+		cov_9ii97383t.s[29]++;
 		register.addColumn('visible');
-		cov_2go7lfpe34.s[30]++;
+		cov_9ii97383t.s[30]++;
 		register.addColumn('displaytype');
-		cov_2go7lfpe34.s[31]++;
+		cov_9ii97383t.s[31]++;
 		var valid_excel_row = function valid_excel_row(row) {
-			cov_2go7lfpe34.f[6]++;
-			cov_2go7lfpe34.s[32]++;
+			cov_9ii97383t.f[6]++;
+			cov_9ii97383t.s[32]++;
 
 			if (row.length <= 2) {
-					cov_2go7lfpe34.b[12][0]++;
-					cov_2go7lfpe34.s[33]++;
+					cov_9ii97383t.b[12][0]++;
+					cov_9ii97383t.s[33]++;
 					return false;
 				} else {
-				cov_2go7lfpe34.b[12][1]++;
-			}var variable_name = (cov_2go7lfpe34.s[34]++, row[variable_name_index]);
-			cov_2go7lfpe34.s[35]++;
+				cov_9ii97383t.b[12][1]++;
+			}var variable_name = (cov_9ii97383t.s[34]++, row[variable_name_index]);
+			cov_9ii97383t.s[35]++;
 			if (!variable_name) {
-					cov_2go7lfpe34.b[13][0]++;
-					cov_2go7lfpe34.s[36]++;
+					cov_9ii97383t.b[13][0]++;
+					cov_9ii97383t.s[36]++;
 					return false;
 				} else {
-				cov_2go7lfpe34.b[13][1]++;
-			}cov_2go7lfpe34.s[37]++;
+				cov_9ii97383t.b[13][1]++;
+			}cov_9ii97383t.s[37]++;
 			variable_name = variable_name.replace(/ /gmi, '');
-			cov_2go7lfpe34.s[38]++;
+			cov_9ii97383t.s[38]++;
 			return variable_name.length > 2;
 		};
-		cov_2go7lfpe34.s[39]++;
+		cov_9ii97383t.s[39]++;
 		register.addRowSave([0, 1, '', opts.root_name, 0, null, null, false, false, false, [], null, '"Presentation root variable"', 'scorecard', false, null, null]);
-		var worksheet = (cov_2go7lfpe34.s[40]++, data.getWorksheet(opts.presentation_sheet_name));
-		var children_index = (cov_2go7lfpe34.s[41]++, register.schemaIndexes.children);
-		var parent_index = (cov_2go7lfpe34.s[42]++, register.schemaIndexes.parentId);
+		var worksheet = (cov_9ii97383t.s[40]++, data.getWorksheet(opts.presentation_sheet_name));
+		var children_index = (cov_9ii97383t.s[41]++, register.schemaIndexes.children);
+		var parent_index = (cov_9ii97383t.s[42]++, register.schemaIndexes.parentId);
 
-		var matrix = (cov_2go7lfpe34.s[43]++, []);
-		cov_2go7lfpe34.s[44]++;
+		var matrix = (cov_9ii97383t.s[43]++, []);
+		cov_9ii97383t.s[44]++;
 		if (worksheet) {
-			cov_2go7lfpe34.b[14][0]++;
-			cov_2go7lfpe34.s[45]++;
+			cov_9ii97383t.b[14][0]++;
+			cov_9ii97383t.s[45]++;
 
 			worksheet.eachRow(function (row, rowNumber) {
-				cov_2go7lfpe34.f[7]++;
+				cov_9ii97383t.f[7]++;
 
-				var values = (cov_2go7lfpe34.s[46]++, row.values);
-				cov_2go7lfpe34.s[47]++;
+				var values = (cov_9ii97383t.s[46]++, row.values);
+				cov_9ii97383t.s[47]++;
 				values.shift();
-				cov_2go7lfpe34.s[48]++;
+				cov_9ii97383t.s[48]++;
 				if (rowNumber === 1) {
-						cov_2go7lfpe34.b[15][0]++;
-						cov_2go7lfpe34.s[49]++;
+						cov_9ii97383t.b[15][0]++;
+						cov_9ii97383t.s[49]++;
 						audit.push('Header columns: ' + values.map(map).join('|'));
 					} else {
-					cov_2go7lfpe34.b[15][1]++;
+					cov_9ii97383t.b[15][1]++;
 
-					var vals = (cov_2go7lfpe34.s[50]++, values.map(map));
-					cov_2go7lfpe34.s[51]++;
+					var vals = (cov_9ii97383t.s[50]++, values.map(map));
+					cov_9ii97383t.s[51]++;
 					if (valid_excel_row(vals)) {
-							cov_2go7lfpe34.b[16][0]++;
-							cov_2go7lfpe34.s[52]++;
+							cov_9ii97383t.b[16][0]++;
+							cov_9ii97383t.s[52]++;
 							matrix.push(vals);
 						} else {
-							cov_2go7lfpe34.b[16][1]++;
-							cov_2go7lfpe34.s[53]++;
+							cov_9ii97383t.b[16][1]++;
+							cov_9ii97383t.s[53]++;
 							audit.push('Invalid row ' + rowNumber + ': ' + vals.join('|'));
 						}
 				}
 			});
 		} else {
-			cov_2go7lfpe34.b[14][1]++;
+			cov_9ii97383t.b[14][1]++;
 		}
 
-		var parents = (cov_2go7lfpe34.s[54]++, []);
-		var curr_depth = (cov_2go7lfpe34.s[55]++, 1);
-		cov_2go7lfpe34.s[56]++;
+		var parents = (cov_9ii97383t.s[54]++, []);
+		var curr_depth = (cov_9ii97383t.s[55]++, 1);
+		cov_9ii97383t.s[56]++;
 		for (var matrix_index = 0; matrix_index < matrix.length; matrix_index++) {
-			var excel_row = (cov_2go7lfpe34.s[57]++, matrix[matrix_index]);
+			var excel_row = (cov_9ii97383t.s[57]++, matrix[matrix_index]);
 
-			var variable_name = (cov_2go7lfpe34.s[58]++, 'P' + matrix_index + '_' + excel_row[variable_name_index].replace(/ /gmi, ''));
-			var refer_variable_name = (cov_2go7lfpe34.s[59]++, excel_row[variable_name_index].replace(/ /gmi, ''));
-			var current_depth = (cov_2go7lfpe34.s[60]++, excel_row[depth_index]);
-			cov_2go7lfpe34.s[61]++;
+			var variable_name = (cov_9ii97383t.s[58]++, 'P' + matrix_index + '_' + excel_row[variable_name_index].replace(/ /gmi, ''));
+			var refer_variable_name = (cov_9ii97383t.s[59]++, excel_row[variable_name_index].replace(/ /gmi, ''));
+			var current_depth = (cov_9ii97383t.s[60]++, excel_row[depth_index]);
+			cov_9ii97383t.s[61]++;
 			if (current_depth !== curr_depth) {
-				cov_2go7lfpe34.b[17][0]++;
-				cov_2go7lfpe34.s[62]++;
+				cov_9ii97383t.b[17][0]++;
+				cov_9ii97383t.s[62]++;
 
 				if (current_depth > curr_depth) {
-					cov_2go7lfpe34.b[18][0]++;
-					cov_2go7lfpe34.s[63]++;
+					cov_9ii97383t.b[18][0]++;
+					cov_9ii97383t.s[63]++;
 
 					if (current_depth !== curr_depth + 1) {
-						cov_2go7lfpe34.b[19][0]++;
-						cov_2go7lfpe34.s[64]++;
+						cov_9ii97383t.b[19][0]++;
+						cov_9ii97383t.s[64]++;
 
 						//log.info('r:' + i + ": " + curr_depth + " to " + current_depth)
 						audit.push('Invalid row r:' + matrix_index + ': ' + curr_depth + ' to ' + current_depth + excel_row.join('|'));
 					} else {
-						cov_2go7lfpe34.b[19][1]++;
+						cov_9ii97383t.b[19][1]++;
 					}
 				} else {
-					cov_2go7lfpe34.b[18][1]++;
+					cov_9ii97383t.b[18][1]++;
 				}
-				cov_2go7lfpe34.s[65]++;
+				cov_9ii97383t.s[65]++;
 				curr_depth = current_depth;
 			} else {
-				cov_2go7lfpe34.b[17][1]++;
+				cov_9ii97383t.b[17][1]++;
 			}
-			cov_2go7lfpe34.s[66]++;
+			cov_9ii97383t.s[66]++;
 			parents[current_depth] = variable_name;
-			var parent_name = (cov_2go7lfpe34.s[67]++, parents[current_depth - 1]);
-			var required = (cov_2go7lfpe34.s[68]++, parseInt(excel_row[required_index]) == 1 ? (cov_2go7lfpe34.b[20][0]++, 'On') : (cov_2go7lfpe34.b[20][1]++, null));
-			var visible = (cov_2go7lfpe34.s[69]++, parseInt(excel_row[visible_index]) == 0 ? (cov_2go7lfpe34.b[21][0]++, 'Off') : (cov_2go7lfpe34.b[21][1]++, null));
-			var display_type = (cov_2go7lfpe34.s[70]++, (cov_2go7lfpe34.b[22][0]++, excel_row[displaytype_index]) || (cov_2go7lfpe34.b[22][1]++, null));
+			var parent_name = (cov_9ii97383t.s[67]++, parents[current_depth - 1]);
+			var required = (cov_9ii97383t.s[68]++, parseInt(excel_row[required_index]) == 1 ? (cov_9ii97383t.b[20][0]++, 'On') : (cov_9ii97383t.b[20][1]++, null));
+			var visible = (cov_9ii97383t.s[69]++, parseInt(excel_row[visible_index]) == 0 ? (cov_9ii97383t.b[21][0]++, 'Off') : (cov_9ii97383t.b[21][1]++, null));
+			var display_type = (cov_9ii97383t.s[70]++, (cov_9ii97383t.b[22][0]++, excel_row[displaytype_index]) || (cov_9ii97383t.b[22][1]++, null));
 
-			cov_2go7lfpe34.s[71]++;
+			cov_9ii97383t.s[71]++;
 			register.addRowSave([0, 1, '', variable_name, matrix_index + 1, null, parent_name, false, refer_variable_name, false, [], null, '"' + excel_row[excel_title_index] + '"', null, required, visible, display_type]);
 		}
-		var names = (cov_2go7lfpe34.s[72]++, register.getIndex('name'));
-		var root = (cov_2go7lfpe34.s[73]++, names[opts.root_name]);
-		cov_2go7lfpe34.s[74]++;
+		var names = (cov_9ii97383t.s[72]++, register.getIndex('name'));
+		var root = (cov_9ii97383t.s[73]++, names[opts.root_name]);
+		cov_9ii97383t.s[74]++;
 		for (var i = 1; i < register.i.length; i++) {
-			var n = (cov_2go7lfpe34.s[75]++, register.i[i]);
-			var pp = (cov_2go7lfpe34.s[76]++, (cov_2go7lfpe34.b[23][0]++, names[n[parent_index]]) || (cov_2go7lfpe34.b[23][1]++, root));
-			cov_2go7lfpe34.s[77]++;
+			var n = (cov_9ii97383t.s[75]++, register.i[i]);
+			var pp = (cov_9ii97383t.s[76]++, (cov_9ii97383t.b[23][0]++, names[n[parent_index]]) || (cov_9ii97383t.b[23][1]++, root));
+			cov_9ii97383t.s[77]++;
 			pp[children_index].push(n);
 		}
-		var sizes = (cov_2go7lfpe34.s[78]++, register.i[0].map(function (el) {
-			cov_2go7lfpe34.f[8]++;
-			cov_2go7lfpe34.s[79]++;
+		var sizes = (cov_9ii97383t.s[78]++, register.i[0].map(function (el) {
+			cov_9ii97383t.f[8]++;
+			cov_9ii97383t.s[79]++;
 			return 10;
 		}));
 		//console.info(register.getAll('refersto').join('\n'))
-		var child_index = (cov_2go7lfpe34.s[80]++, register.schemaIndexes.children);
-		cov_2go7lfpe34.s[81]++;
+		var child_index = (cov_9ii97383t.s[80]++, register.schemaIndexes.children);
+		cov_9ii97383t.s[81]++;
 		var filter = function filter(f, i) {
-			cov_2go7lfpe34.f[9]++;
-			cov_2go7lfpe34.s[82]++;
-			return (cov_2go7lfpe34.b[24][0]++, i > 2) && (cov_2go7lfpe34.b[24][1]++, i != child_index);
+			cov_9ii97383t.f[9]++;
+			cov_9ii97383t.s[82]++;
+			return (cov_9ii97383t.b[24][0]++, i > 2) && (cov_9ii97383t.b[24][1]++, i != child_index);
 		};
 
-		var registerToFFL = (cov_2go7lfpe34.s[83]++, new _index2.RegisterToFFL(register));
-		cov_2go7lfpe34.s[84]++;
+		var registerToFFL = (cov_9ii97383t.s[83]++, new _index2.RegisterToFFL(register));
+		cov_9ii97383t.s[84]++;
 		return {
 			ffl: registerToFFL.toGeneratedFFL(opts.root_name, null),
 			csv: registerToFFL.toCSV(opts.root_name),
@@ -2429,13 +2429,13 @@ function ExcelToFFLStream(stream, opts) {
 			audit: audit
 		};
 	}).catch(function (err) {
-		cov_2go7lfpe34.f[10]++;
-		cov_2go7lfpe34.s[85]++;
+		cov_9ii97383t.f[10]++;
+		cov_9ii97383t.s[85]++;
 
 		_log2.default.error(err);
-		cov_2go7lfpe34.s[86]++;
+		cov_9ii97383t.s[86]++;
 		audit.push(err.toString());
-		cov_2go7lfpe34.s[87]++;
+		cov_9ii97383t.s[87]++;
 		return { ffl: '', register: '', audit: audit };
 	});
 }
@@ -2454,8 +2454,8 @@ function ExcelToFFLStream(stream, opts) {
  })
  */
 
-cov_2go7lfpe34.s[88]++;
+cov_9ii97383t.s[88]++;
 exports.parse = ExcelToFFLStream;
-cov_2go7lfpe34.s[89]++;
+cov_9ii97383t.s[89]++;
 module.exports = ExcelToFFLStream;
 exports.ExcelToFFLStream = ExcelToFFLStream;

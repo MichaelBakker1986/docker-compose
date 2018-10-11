@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1f8nydttkd = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ASTPreparser.js',
-	    hash = 'ef0731adfdf70b36907c6e5b90a6d2cfa6d435f9',
+var cov_2fpyn4f1a5 = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ASTPreparser.js',
+	    hash = '4c798acc4a06720470dd280ce6b1fc78570998d8',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ASTPreparser.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ASTPreparser.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2018,11 +2018,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // some variables we shall use..
 //we want to modify its default behavior
 //Before entering a Function..
-var caseCount = (cov_1f8nydttkd.s[0]++, 0);
-var simplified = (cov_1f8nydttkd.s[1]++, {
+var caseCount = (cov_2fpyn4f1a5.s[0]++, 0);
+var simplified = (cov_2fpyn4f1a5.s[1]++, {
 	YearInT: function YearInT(formulaInfo, node) {
-		cov_1f8nydttkd.f[0]++;
-		cov_1f8nydttkd.s[2]++;
+		cov_2fpyn4f1a5.f[0]++;
+		cov_2fpyn4f1a5.s[2]++;
 
 		node.arguments.unshift({
 			type: 'Identifier',
@@ -2031,8 +2031,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 	},
 	//gets Sels for the value also
 	ExpandLevel: function ExpandLevel(formulaInfo, node) {
-		cov_1f8nydttkd.f[1]++;
-		cov_1f8nydttkd.s[3]++;
+		cov_2fpyn4f1a5.f[1]++;
+		cov_2fpyn4f1a5.s[3]++;
 
 		node.arguments = [{
 			'type': 'Identifier',
@@ -2041,64 +2041,64 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 		}];
 	},
 	IRR: function IRR(formulaInfo, node) {
-		cov_1f8nydttkd.f[2]++;
-		cov_1f8nydttkd.s[4]++;
+		cov_2fpyn4f1a5.f[2]++;
+		cov_2fpyn4f1a5.s[4]++;
 
 		node.arguments[0].name = '[1,2]';
 	},
 	Min: function Min(formulaInfo, node) {
-		cov_1f8nydttkd.f[3]++;
-		cov_1f8nydttkd.s[5]++;
+		cov_2fpyn4f1a5.f[3]++;
+		cov_2fpyn4f1a5.s[5]++;
 
 		node.callee.name = 'Math.min';
 	},
 	Exp: function Exp(formulaInfo, node) {
-		cov_1f8nydttkd.f[4]++;
-		cov_1f8nydttkd.s[6]++;
+		cov_2fpyn4f1a5.f[4]++;
+		cov_2fpyn4f1a5.s[6]++;
 
 		node.callee.name = 'Math.exp';
 	},
 	//we will need this one later to determine + or &&
 	EvaluateAsString: function EvaluateAsString(formulaInfo, node) {
-		cov_1f8nydttkd.f[5]++;
-		cov_1f8nydttkd.s[7]++;
+		cov_2fpyn4f1a5.f[5]++;
+		cov_2fpyn4f1a5.s[7]++;
 
 		node.callee.name = 'String';
 	},
 	Max: function Max(formulaInfo, node) {
-		cov_1f8nydttkd.f[6]++;
-		cov_1f8nydttkd.s[8]++;
+		cov_2fpyn4f1a5.f[6]++;
+		cov_2fpyn4f1a5.s[8]++;
 
 		node.callee.name = 'Math.max';
 	},
 	Abs: function Abs(formulaInfo, node) {
-		cov_1f8nydttkd.f[7]++;
-		cov_1f8nydttkd.s[9]++;
+		cov_2fpyn4f1a5.f[7]++;
+		cov_2fpyn4f1a5.s[9]++;
 
 		node.callee.name = 'Math.abs';
 	},
 	InvNormal: function InvNormal(formulaInfo, node) {
-		cov_1f8nydttkd.f[8]++;
-		cov_1f8nydttkd.s[10]++;
+		cov_2fpyn4f1a5.f[8]++;
+		cov_2fpyn4f1a5.s[10]++;
 
 		node.callee.name = 'NORMSINV';
 	},
 	//the format is strange, hard to get a better format in the fin->json parser.
 	//Expected format: Case(X_MAP01_Verplicht,[0,0||1,10||2,20||11,30||12,120||13,130])
 	Case: function Case(formulaInfo, node) {
-		cov_1f8nydttkd.f[9]++;
-		cov_1f8nydttkd.s[11]++;
+		cov_2fpyn4f1a5.f[9]++;
+		cov_2fpyn4f1a5.s[11]++;
 
 		_assert2.default.ok(node.arguments.length === 2, 'Only expecting 2 arguments for now');
-		var statements = (cov_1f8nydttkd.s[12]++, node.arguments[1]);
-		cov_1f8nydttkd.s[13]++;
+		var statements = (cov_2fpyn4f1a5.s[12]++, node.arguments[1]);
+		cov_2fpyn4f1a5.s[13]++;
 		_assert2.default.ok(statements.type === 'ArrayExpression', 'Second argument has to be ArrayExpression for now');
 
-		var cs = (cov_1f8nydttkd.s[14]++, 'arguments.__c0s' + caseCount++);
-		cov_1f8nydttkd.s[15]++;
+		var cs = (cov_2fpyn4f1a5.s[14]++, 'arguments.__c0s' + caseCount++);
+		cov_2fpyn4f1a5.s[15]++;
 		node.type = 'SequenceExpression';
-		var elements = (cov_1f8nydttkd.s[16]++, statements.elements);
-		cov_1f8nydttkd.s[17]++;
+		var elements = (cov_2fpyn4f1a5.s[16]++, statements.elements);
+		cov_2fpyn4f1a5.s[17]++;
 		node.expressions = [{
 			'type': 'AssignmentExpression',
 			'operator': '=',
@@ -2109,38 +2109,38 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 			'right': node.arguments[0]
 		}];
 
-		cov_1f8nydttkd.s[18]++;
+		cov_2fpyn4f1a5.s[18]++;
 		if (elements.length === 1) {
-			cov_1f8nydttkd.b[0][0]++;
-			cov_1f8nydttkd.s[19]++;
+			cov_2fpyn4f1a5.b[0][0]++;
+			cov_2fpyn4f1a5.s[19]++;
 
 			elements.unshift(_astNodeUtils.ast.IDENTIFIER(true));
 		} else {
-			cov_1f8nydttkd.b[0][1]++;
+			cov_2fpyn4f1a5.b[0][1]++;
 		}
 		//make the first argument have a right member as other ContionalExpression have
 		//this way the loop don't need to check it every iteration
 		//can be removed because add Infinity in front while FinFormula
 		//!elements[0].left =Case(statement,[0,576||1,906||2,535||3,535])
 		//elements[0].left = Case(statement,[0:1,576||<1:2])
-		cov_1f8nydttkd.s[20]++;
-		if ((cov_1f8nydttkd.b[2][0]++, !elements[0].left) || (cov_1f8nydttkd.b[2][1]++, elements[0].left.name !== 'Infinity')) {
-			cov_1f8nydttkd.b[1][0]++;
-			cov_1f8nydttkd.s[21]++;
+		cov_2fpyn4f1a5.s[20]++;
+		if ((cov_2fpyn4f1a5.b[2][0]++, !elements[0].left) || (cov_2fpyn4f1a5.b[2][1]++, elements[0].left.name !== 'Infinity')) {
+			cov_2fpyn4f1a5.b[1][0]++;
+			cov_2fpyn4f1a5.s[21]++;
 
 			elements[0] = {
 				right: elements[0]
 			};
 		} else {
-			cov_1f8nydttkd.b[1][1]++;
+			cov_2fpyn4f1a5.b[1][1]++;
 		}
 
 		//the the last argument a ContditionalExpression, with default return value NA
 		//in the loop this statement is being used to be the alternate
-		var lastExpression = (cov_1f8nydttkd.s[22]++, elements[elements.length - 1]);
-		var lastOp = (cov_1f8nydttkd.s[23]++, elements[elements.length - 2].operator);
-		var usedLastOP = (cov_1f8nydttkd.s[24]++, lastOp == '||' ? (cov_1f8nydttkd.b[3][0]++, '==') : (cov_1f8nydttkd.b[3][1]++, lastOp));
-		cov_1f8nydttkd.s[25]++;
+		var lastExpression = (cov_2fpyn4f1a5.s[22]++, elements[elements.length - 1]);
+		var lastOp = (cov_2fpyn4f1a5.s[23]++, elements[elements.length - 2].operator);
+		var usedLastOP = (cov_2fpyn4f1a5.s[24]++, lastOp == '||' ? (cov_2fpyn4f1a5.b[3][0]++, '==') : (cov_2fpyn4f1a5.b[3][1]++, lastOp));
+		cov_2fpyn4f1a5.s[25]++;
 		elements[elements.length - 1] = {
 			type: 'ConditionalExpression',
 			test: _astNodeUtils.ast.IDENTIFIER(cs + usedLastOP + elements[elements.length - 2].right.value),
@@ -2148,95 +2148,95 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 			alternate: _astNodeUtils.ast.IDENTIFIER('NA')
 
 			/*right: elements[0]*/
-		};cov_1f8nydttkd.s[26]++;
+		};cov_2fpyn4f1a5.s[26]++;
 		for (var i = elements.length - 2; i > 0; i--) {
-			var element = (cov_1f8nydttkd.s[27]++, elements[i]);
-			cov_1f8nydttkd.s[28]++;
+			var element = (cov_2fpyn4f1a5.s[27]++, elements[i]);
+			cov_2fpyn4f1a5.s[28]++;
 			element.type = 'ConditionalExpression';
-			cov_1f8nydttkd.s[29]++;
-			element.test = _astNodeUtils.ast.IDENTIFIER(cs + (element.operator == '||' ? (cov_1f8nydttkd.b[4][0]++, '==') : (cov_1f8nydttkd.b[4][1]++, element.operator)) + elements[i - 1].right.value);
-			cov_1f8nydttkd.s[30]++;
+			cov_2fpyn4f1a5.s[29]++;
+			element.test = _astNodeUtils.ast.IDENTIFIER(cs + (element.operator == '||' ? (cov_2fpyn4f1a5.b[4][0]++, '==') : (cov_2fpyn4f1a5.b[4][1]++, element.operator)) + elements[i - 1].right.value);
+			cov_2fpyn4f1a5.s[30]++;
 			element.consequent = element.left;
-			cov_1f8nydttkd.s[31]++;
+			cov_2fpyn4f1a5.s[31]++;
 			element.alternate = elements[i + 1];
-			cov_1f8nydttkd.s[32]++;
+			cov_2fpyn4f1a5.s[32]++;
 			element.operator = undefined;
-			cov_1f8nydttkd.s[33]++;
+			cov_2fpyn4f1a5.s[33]++;
 			element.right = undefined;
-			cov_1f8nydttkd.s[34]++;
+			cov_2fpyn4f1a5.s[34]++;
 			element.left = undefined;
 		}
-		cov_1f8nydttkd.s[35]++;
+		cov_2fpyn4f1a5.s[35]++;
 		node.expressions.push(elements[1]);
 		//look into delete and undefined, we better use undefined since its quicker.
-		cov_1f8nydttkd.s[36]++;
+		cov_2fpyn4f1a5.s[36]++;
 		node.callee = undefined;
-		cov_1f8nydttkd.s[37]++;
+		cov_2fpyn4f1a5.s[37]++;
 		node.arguments = undefined;
-		cov_1f8nydttkd.s[38]++;
+		cov_2fpyn4f1a5.s[38]++;
 		if (_log2.default.TRACE) {
-				cov_1f8nydttkd.b[5][0]++;
-				cov_1f8nydttkd.s[39]++;
+				cov_2fpyn4f1a5.b[5][0]++;
+				cov_2fpyn4f1a5.s[39]++;
 				_log2.default.trace('[%s] CASE parsed into: [%s]', formulaInfo.name, _escodegen2.default.generate(node));
 			} else {
-			cov_1f8nydttkd.b[5][1]++;
+			cov_2fpyn4f1a5.b[5][1]++;
 		}
 	},
 	//convert traditional If(q,a,b) into q?a:b, skip the entire Callee
 	If: function If(formulaInfo, node) {
-		cov_1f8nydttkd.f[10]++;
-		cov_1f8nydttkd.s[40]++;
+		cov_2fpyn4f1a5.f[10]++;
+		cov_2fpyn4f1a5.s[40]++;
 
 		//could be replaced with the default property value..
 		if (node.arguments.length === 2) {
-			cov_1f8nydttkd.b[6][0]++;
-			cov_1f8nydttkd.s[41]++;
+			cov_2fpyn4f1a5.b[6][0]++;
+			cov_2fpyn4f1a5.s[41]++;
 
 			if (_log2.default.TRACE) {
-					cov_1f8nydttkd.b[7][0]++;
-					cov_1f8nydttkd.s[42]++;
+					cov_2fpyn4f1a5.b[7][0]++;
+					cov_2fpyn4f1a5.s[42]++;
 					_log2.default.trace('Strange formuala setup IF(q,a,b) without b) Using NA as b. [' + formulaInfo.original + ']');
 				} else {
-				cov_1f8nydttkd.b[7][1]++;
-			}cov_1f8nydttkd.s[43]++;
+				cov_2fpyn4f1a5.b[7][1]++;
+			}cov_2fpyn4f1a5.s[43]++;
 			node.arguments.push(_astNodeUtils.ast.IDENTIFIER('NA'));
 		} else {
-			cov_1f8nydttkd.b[6][1]++;
+			cov_2fpyn4f1a5.b[6][1]++;
 		}
-		cov_1f8nydttkd.s[44]++;
+		cov_2fpyn4f1a5.s[44]++;
 		_assert2.default.equal(node.arguments.length, 3, formulaInfo.original);
-		cov_1f8nydttkd.s[45]++;
+		cov_2fpyn4f1a5.s[45]++;
 		node.type = 'ConditionalExpression';
-		cov_1f8nydttkd.s[46]++;
+		cov_2fpyn4f1a5.s[46]++;
 		node.test = node.arguments[0];
-		cov_1f8nydttkd.s[47]++;
+		cov_2fpyn4f1a5.s[47]++;
 		node.consequent = node.arguments[1];
-		cov_1f8nydttkd.s[48]++;
+		cov_2fpyn4f1a5.s[48]++;
 		node.alternate = node.arguments[2];
-		cov_1f8nydttkd.s[49]++;
+		cov_2fpyn4f1a5.s[49]++;
 		node.arguments.length = 0;
-		cov_1f8nydttkd.s[50]++;
+		cov_2fpyn4f1a5.s[50]++;
 		node.arguments = undefined;
-		cov_1f8nydttkd.s[51]++;
+		cov_2fpyn4f1a5.s[51]++;
 		node.callee = undefined;
 	},
 	OnER: function OnER(formulaInfo, node) {
-		cov_1f8nydttkd.f[11]++;
-		cov_1f8nydttkd.s[52]++;
+		cov_2fpyn4f1a5.f[11]++;
+		cov_2fpyn4f1a5.s[52]++;
 
 		_assert2.default.equal(node.arguments.length, 2, formulaInfo.original);
 		//TODO: for now we fix in math. but its better to compile this in the JS code
 	},
 	//wants horizontale aggregation from values in between two given columns
 	HSUM: function HSUM(formulaInfo, node) {
-		cov_1f8nydttkd.f[12]++;
-		cov_1f8nydttkd.s[53]++;
+		cov_2fpyn4f1a5.f[12]++;
+		cov_2fpyn4f1a5.s[53]++;
 
 		node.callee.name = 'HSUM';
-		cov_1f8nydttkd.s[54]++;
+		cov_2fpyn4f1a5.s[54]++;
 		if (node.arguments[0].type == 'Identifier') {
-			cov_1f8nydttkd.b[8][0]++;
-			cov_1f8nydttkd.s[55]++;
+			cov_2fpyn4f1a5.b[8][0]++;
+			cov_2fpyn4f1a5.s[55]++;
 
 			node.arguments[0] = {
 				'type': 'MemberExpression',
@@ -2251,18 +2251,18 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 				}
 			};
 		} else {
-			cov_1f8nydttkd.b[8][1]++;
+			cov_2fpyn4f1a5.b[8][1]++;
 		}
 	},
 	HVALUES: function HVALUES(formulaInfo, node) {
-		cov_1f8nydttkd.f[13]++;
-		cov_1f8nydttkd.s[56]++;
+		cov_2fpyn4f1a5.f[13]++;
+		cov_2fpyn4f1a5.s[56]++;
 
 		node.callee.name = 'HVALUES';
-		cov_1f8nydttkd.s[57]++;
+		cov_2fpyn4f1a5.s[57]++;
 		if (node.arguments[0].type == 'Identifier') {
-			cov_1f8nydttkd.b[9][0]++;
-			cov_1f8nydttkd.s[58]++;
+			cov_2fpyn4f1a5.b[9][0]++;
+			cov_2fpyn4f1a5.s[58]++;
 
 			node.arguments[0] = {
 				'type': 'MemberExpression',
@@ -2277,7 +2277,7 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 				}
 			};
 		} else {
-			cov_1f8nydttkd.b[9][1]++;
+			cov_2fpyn4f1a5.b[9][1]++;
 		}
 	},
 	/*
@@ -2290,8 +2290,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
   },*/
 	//returns max value in between two given columns. entered/non-entered
 	MaxValueT: function MaxValueT(formulaInfo, node) {
-		cov_1f8nydttkd.f[14]++;
-		cov_1f8nydttkd.s[59]++;
+		cov_2fpyn4f1a5.f[14]++;
+		cov_2fpyn4f1a5.s[59]++;
 
 		node.arguments = [{
 			'type': 'Identifier',
@@ -2302,8 +2302,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 	//ExpandFraction ExpandFraction(VariableCosts,Sales)
 	//http://wiki.findesk.com/index.php/ExpandFraction_(numeric_function)
 	ExpandFraction: function ExpandFraction(formulaInfo, node) {
-		cov_1f8nydttkd.f[15]++;
-		cov_1f8nydttkd.s[60]++;
+		cov_2fpyn4f1a5.f[15]++;
+		cov_2fpyn4f1a5.s[60]++;
 
 		node.arguments = [{
 			'type': 'Identifier',
@@ -2315,8 +2315,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 		}];
 	},
 	ExpandOriginalValue: function ExpandOriginalValue(formulaInfo, node) {
-		cov_1f8nydttkd.f[16]++;
-		cov_1f8nydttkd.s[61]++;
+		cov_2fpyn4f1a5.f[16]++;
+		cov_2fpyn4f1a5.s[61]++;
 
 		node.arguments = [{
 			'type': 'Identifier',
@@ -2327,8 +2327,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
   * Inject the x parameter into the call
   */
 	FirstValueT: function FirstValueT(formulaInfo, node) {
-		cov_1f8nydttkd.f[17]++;
-		cov_1f8nydttkd.s[62]++;
+		cov_2fpyn4f1a5.f[17]++;
+		cov_2fpyn4f1a5.s[62]++;
 
 		node.arguments.unshift({
 			'type': 'Identifier',
@@ -2336,8 +2336,8 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 		});
 	},
 	DateToT: function DateToT(formulaInfo, node) {
-		cov_1f8nydttkd.f[18]++;
-		cov_1f8nydttkd.s[63]++;
+		cov_2fpyn4f1a5.f[18]++;
+		cov_2fpyn4f1a5.s[63]++;
 
 		node.arguments.unshift({
 			'type': 'Identifier',
@@ -2345,56 +2345,56 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 		});
 	},
 	Visible: function Visible(formulaInfo, node) {
-		cov_1f8nydttkd.f[19]++;
-		cov_1f8nydttkd.s[64]++;
+		cov_2fpyn4f1a5.f[19]++;
+		cov_2fpyn4f1a5.s[64]++;
 
 		node.type = 'MemberExpression';
-		cov_1f8nydttkd.s[65]++;
+		cov_2fpyn4f1a5.s[65]++;
 		node.computed = false;
-		cov_1f8nydttkd.s[66]++;
+		cov_2fpyn4f1a5.s[66]++;
 		node.object = _astNodeUtils.ast.IDENTIFIER(node.arguments[0].name);
-		cov_1f8nydttkd.s[67]++;
+		cov_2fpyn4f1a5.s[67]++;
 		node.property = _astNodeUtils.ast.IDENTIFIER('visible');
-		cov_1f8nydttkd.s[68]++;
+		cov_2fpyn4f1a5.s[68]++;
 		delete node.arguments;
-		cov_1f8nydttkd.s[69]++;
+		cov_2fpyn4f1a5.s[69]++;
 		delete node.callee;
 	},
 	HINT: function HINT(formulaInfo, node) {
-		cov_1f8nydttkd.f[20]++;
-		cov_1f8nydttkd.s[70]++;
+		cov_2fpyn4f1a5.f[20]++;
+		cov_2fpyn4f1a5.s[70]++;
 
 		node.type = 'MemberExpression';
-		cov_1f8nydttkd.s[71]++;
+		cov_2fpyn4f1a5.s[71]++;
 		node.computed = false;
-		cov_1f8nydttkd.s[72]++;
+		cov_2fpyn4f1a5.s[72]++;
 		node.object = _astNodeUtils.ast.IDENTIFIER(node.arguments[0].name);
-		cov_1f8nydttkd.s[73]++;
+		cov_2fpyn4f1a5.s[73]++;
 		node.property = _astNodeUtils.ast.IDENTIFIER('hint');
-		cov_1f8nydttkd.s[74]++;
+		cov_2fpyn4f1a5.s[74]++;
 		delete node.arguments;
-		cov_1f8nydttkd.s[75]++;
+		cov_2fpyn4f1a5.s[75]++;
 		delete node.callee;
 	},
 	//now its provided with (x,SelectDecendents/Array,LambaExpression)
 	//we gonna narrow it down until further use of the 'X'. so ForAll(array,property[])
 	//now ForAllFunction has no use anymore
 	Count: function Count(formulaInfo, node) {
-		cov_1f8nydttkd.f[21]++;
-		cov_1f8nydttkd.s[76]++;
+		cov_2fpyn4f1a5.f[21]++;
+		cov_2fpyn4f1a5.s[76]++;
 
 		//ok remove first argument X
 		node.arguments.splice(0, 1);
 		//give the lambda expression to the SelectDecendants function
-		cov_1f8nydttkd.s[77]++;
+		cov_2fpyn4f1a5.s[77]++;
 		node.arguments[0].arguments.push(node.arguments[1]);
 		//remove the lambda expression
-		cov_1f8nydttkd.s[78]++;
+		cov_2fpyn4f1a5.s[78]++;
 		node.arguments.splice(1, 1);
 	},
 	Mut: function Mut(formulaInfo, node) {
-		cov_1f8nydttkd.f[22]++;
-		cov_1f8nydttkd.s[79]++;
+		cov_2fpyn4f1a5.f[22]++;
+		cov_2fpyn4f1a5.s[79]++;
 
 		node.arguments = [{
 			'type': 'Identifier',
@@ -2402,35 +2402,35 @@ var simplified = (cov_1f8nydttkd.s[1]++, {
 		}];
 	},
 	NPV2: function NPV2(formulaInfo, node) {
-		cov_1f8nydttkd.f[23]++;
-		cov_1f8nydttkd.s[80]++;
+		cov_2fpyn4f1a5.f[23]++;
+		cov_2fpyn4f1a5.s[80]++;
 
 		node.callee.name = 'NPV';
 	}
 });
-cov_1f8nydttkd.s[81]++;
+cov_2fpyn4f1a5.s[81]++;
 simplified.ForAll = simplified.Count;
-cov_1f8nydttkd.s[82]++;
+cov_2fpyn4f1a5.s[82]++;
 simplified.Exists = simplified.ForAll;
-cov_1f8nydttkd.s[83]++;
+cov_2fpyn4f1a5.s[83]++;
 simplified.IF = simplified.If;
-cov_1f8nydttkd.s[84]++;
+cov_2fpyn4f1a5.s[84]++;
 simplified.Hsum = simplified.HSUM;
-cov_1f8nydttkd.s[85]++;
+cov_2fpyn4f1a5.s[85]++;
 simplified.HSum = simplified.HSUM;
-cov_1f8nydttkd.s[86]++;
+cov_2fpyn4f1a5.s[86]++;
 simplified.if = simplified.If;
-cov_1f8nydttkd.s[87]++;
+cov_2fpyn4f1a5.s[87]++;
 simplified.MAX = simplified.Max;
 
-cov_1f8nydttkd.s[88]++;
+cov_2fpyn4f1a5.s[88]++;
 simplified.MIN = simplified.Min;
-cov_1f8nydttkd.s[89]++;
+cov_2fpyn4f1a5.s[89]++;
 simplified.min = simplified.Min;
-cov_1f8nydttkd.s[90]++;
+cov_2fpyn4f1a5.s[90]++;
 simplified.max = simplified.Max;
-cov_1f8nydttkd.s[91]++;
+cov_2fpyn4f1a5.s[91]++;
 simplified.ABS = simplified.Abs;
-cov_1f8nydttkd.s[92]++;
+cov_2fpyn4f1a5.s[92]++;
 simplified.EXP = simplified.Exp;
 exports.default = simplified;

@@ -58,11 +58,7 @@ app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
 	minify       : true,
 	precompile   : true
 }))
-app.get('*/ide.js', browserify(__dirname + '/src/ide.js', {
-	gzip         : true,
-	insertGlobals: true,
-	debug        : false
-}))
+
 app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
 	gzip         : true,
 	insertGlobals: true,
@@ -226,17 +222,22 @@ app.post('*/excel/:model', function(req, res) {
 		res.json({ status: 'ok' })
 	})
 })
+app.get('/ide.js', browserify(__dirname + '/src/ide.js', {
+	insertGlobals: true,
+	precompile: true,
+	debug        : false
+}))
 setup(app)
 app.listen(port, (application) => {
 
 	//talk with the proxy
-	const routes = ['*/model-docs*', '*/ide.js']
+	const routes = ['*/model-docs*','*/ide.js']
 	app._router.stack.forEach(r => {
 		if (r.route && r.route.path) {
 			routes.push(r.route.path)
 		}
 	})
 	request.get(`http://${host}:${internal_proxy_port}/register/service/model-api/${host}/${port}/${routes.join(',')}`).then(data => {
-		if (log.DEBUG) log.debug(data)
+		log.debug(data)
 	}).catch(err => log.error('Failed to register ', err))
 })
