@@ -1,12 +1,12 @@
-FROM node:9.8.0-alpine
+FROM node:10.11.0
 
 USER root
 #ENV ENABLED_MODELS KSP -- only when not build via dc_restapi.yml
 ENV HOST '127.0.0.1'
 ENV INTERNAL_PROXY_PORT 7081
-ENV DATA_API_PORT 8085
+ENV DATA_API_PORT 7086
 ENV ENABLED_MODELS KSP
-ENV ENV info
+ENV ENV debug
 
 #docker build . -f LMERestAPIBuilder -t=nexus.topicusfinance.nl:8444/ksp:2.0
 #docker push nexus.topicusfinance.nl:8444/ksp:1.1
@@ -26,6 +26,7 @@ COPY git-connect /git-connect
 COPY lme-core /lme-core
 #TODO: morph into the Generated FFLModel.js
 COPY formulajs-connect /formulajs-connect
+COPY ffl /ffl
 #TODO: morph into the Generated FFLModel.js
 COPY excel-connect /excel-connect
 COPY ast-node-utils /ast-node-utils
@@ -35,7 +36,9 @@ COPY math /math
 #We require proxy since swagger and rest-api are tunneled.
 #blfyn-dv-doc01
 COPY proxy /proxy
+COPY rest_only.js /rest_only.js
 #WORKDIR docker-connect
-RUN npm install --unsafe-perm --allow-root --production
-CMD npm start
+RUN npm install -g concurrently babel-cli babel-core
+RUN npm install --unsafe-perm --allow-root
+CMD node -r babel-register rest_only
 EXPOSE 7081

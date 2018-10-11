@@ -13,48 +13,47 @@
  # - excel-connect
  # nexus.topicusfinance.nl:8444
  **/
+import { WebpackCompiler } from './WebpackCompiler'
+import MemoryFS            from 'memory-fs'
+import path                from 'path'
 
-//#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../devrun.js -i fsevents -i thread-sleep -i tweetnacl -i jsbn -i ecc-jsbn -i bcrypt-pbkdf -i ecc-jsbn/lib/ec
-//#browserify -o ./bundle.js --bare --node --standalone=test --dg false ../lme-data-api/lme-data-app.js
-
-//const log = require('log6')
-//const exec = require('child-process-promise').exec;
 const params = process.env.MODEL || 'MVO'
-const path = require('path')
 
-function DockerImageBuilder(fflModel, story, matrix, model_name) {
-    this.fflModel = fflModel
-    this.story = story
-    this.matrix = matrix
-    this.model_name = model_name
-}
-//browserify --output bundle.js --bare --dg false input.js.
-/*const compile = require('nexe')*/
-/*compile.compile({
-    input : 'C:/Users/mbakk/Documents/fesjs/lme-model-api/lme.js',
-    python: 'C:/Users/mbakk/Documents/python/python.exe',
-    /!*target: 'linux-x64',*!/
-    build : true   //required to use patches
-    /!* patches: [
-         async (compiler, next) => {
-             await compiler.setFileContentsAsync(
-                 'lib/new-native-module.js',
-                 'module.exports = 42'
-             )
-             return next()
-         }
-     ]*!/
-}).then(() => {
-    console.log('success')
-})*/
+class DockerImageBuilder {
+	constructor(fflModel, story, matrix, model_name, model_version) {
+		this.fflModel = fflModel
+		this.story = story
+		this.matrix = matrix
+		this.model_name = model_name
+		this.model_version = model_version
+	}
 
-DockerImageBuilder.prototype.buildDockerImage = function() {
-    /*log.info('Start build image')
-    const command = 'cd .. && docker build . -f LMERestAPIBuilder -t=' + this.model_name + ':0.002'
-    exec(command).then((resp) => {
-        if (resp.stderr.length > 0) return log.error('failed to create docker image ', resp.stderr)
-        log.info(resp.stdout)
-    })*/
+	async buildDockerFile(path_info) {
+		const memory_fs = new MemoryFS()
+		const stats = await new WebpackCompiler({ memory_fs }).buildProductionFile(path_info)
+		//add Model-file
+		const base_dir = `${__dirname}/dist`
+
+		const read_stream = fs.createReadStream('../model-tests/KSP/KSP.ffl')
+		const write_stream = fs.createWriteStream(path.join(base_dir, 'KSP.ffl'))
+		read_stream.pipe(write_stream)
+
+		const source = memory_fs.readFileSync(path.resolve(base_dir, 'rest-api-backend.js'), 'utf8')
+
+		console.info(stats)
+		console.info(source)
+	}
+
+	start() {
+		log.info('Start build image')
+		const command = `cd .. && docker build . --build-arg ENABLED_MODELS=${this.model_name} -f LMERestAPIBuilder  -t=${this.model_name}:0.${this.model_version}`
+		exec(command).then((resp) => {
+			if (resp.stderr.length > 0) return log.error('failed to create docker image ', resp.stderr)
+			log.info(resp.stdout)
+		})
+	}
 }
+
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()
-module.exports = DockerImageBuilder
+export { DockerImageBuilder }
+new DockerImageBuilder('KSP', undefined, undefined, 2).buildDockerFile('../lme-data-api/lme-data-app.js')

@@ -12,7 +12,12 @@
     "esprima": "^4.0.1",
     "log6": "^2.0.15",
     "stack-adt": "^0.2.3",
-    "tracer": "^0.8.15"
+    "tracer": "^0.8.15",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0"
   },
   "main": "dist/",
   "devDependencies": {

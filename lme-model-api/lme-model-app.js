@@ -90,7 +90,6 @@ app.get('*/model', async (req, res) => {
 })
 app.get('*/modelChanges/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
-	res.json({ status: 'success', data: {} })
 	DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
 		res.json({ status: 'success', data: data })
 	}).catch((err) => {
@@ -178,13 +177,13 @@ app.get('*/readExcel/:model', async function(req, res) {
  * Publish to nexus
  */
 app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
-	const model_name = req.params.model_name
+	const model_name = req.params.model_name          
 	const user_id = req.params.user_id
 
 	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(data => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
 			stash.commit(user_id, model_name, req.body.fflData, null).then(data => {
-				new DockerImageBuilder(model_name, null, null, null).buildDockerImage()
+				new DockerImageBuilder(model_name, null, null, null, req.body.model_version).buildDockerImage()
 				return res.json({
 					version   : 1,
 					status    : 'ok',

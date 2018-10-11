@@ -226,10 +226,11 @@ class Authorization {
 	allow(id, resource, role) {
 		this.acl.allow(id, resource, role)
 		//require('./Auth').rules.push({id: id, resource: resource, role: role})
-		if (log.DEBUG) log.debug('allow:' + id + ':[' + resource + ']')
+		if (log.TRACE) log.trace('allow:' + id + ':[' + resource + ']')
 	}
 
 	addModelPrivileges(id, modelname, changeExisting) {
+
 		this.allow(id, '/resources/' + modelname + '.js', VIEW_RULE)
 		this.allow(id, '/resources/' + modelname + '.story', VIEW_RULE)
 		this.allow(id, '/resources/' + modelname + '.story', VIEW_RULE)
@@ -242,7 +243,7 @@ class Authorization {
 		this.allow(id, '/scorecard.html', VIEW_RULE)
 		this.allow(id, '/resources/lme_docs.pdf', VIEW_RULE)
 		this.allow(id, '/readExcel/' + modelname, VIEW_RULE)
-		this.allow(id, '/publishDockerImage/' + modelname, VIEW_RULE)
+		this.allow(id, `/publishDockerImage/${modelname}`, VIEW_RULE)
 		//allow generic rest-api outputnode  (same name as model_name)
 		anonymous['/figure/' + modelname] = true
 	}

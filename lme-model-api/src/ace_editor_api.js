@@ -113,15 +113,16 @@ AceEditor.prototype.addCompleter = function(callback) {
 AceEditor.prototype.setAnnotations = function(annotations) {
 	this.aceEditor.session.setAnnotations(annotations)
 }
-AceEditor.prototype.setParsedValue = function(value) {
-	var fflModel = value
+AceEditor.prototype.setParsedValue = function(fflModel) {
 	if (ConvertEvaluateAsString.on) fflModel = ConvertEvaluateAsString.parse(fflModel)
 	if (AmpersandConverter.on) fflModel = AmpersandConverter.parse(fflModel)
 	if (ScorecardQ_caseFix.on) fflModel = ScorecardQ_caseFix.parse(fflModel)
 	if (V05CaseFix.on) fflModel = V05CaseFix.parse(fflModel)
 	if (EconomicEditorView.on) fflModel = EconomicEditorView.parse(fflModel)
 	this.fflModel = fflModel
+
 	this.setValue(fflModel)
+	console.info(`Response text: ${this.getValue()}`)
 }
 AceEditor.prototype.setValue = function(value) {
 	this.aceEditor.session.setValue(value)

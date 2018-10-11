@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.6/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.17/angular-filter.min.js"></script>
     <script src="bootstrap.min.js"></script>
-    <script src="/src/ide.js"></script>
     <link rel="stylesheet" href="ide.css">
 
 </head>
@@ -229,11 +228,11 @@
                 <!--The Editor is persistent to the page-->
                 <div class="row">
                     <div class="col-xs-{{split_window?6:12}} editor-left">
-                        <div id="editor"></div>
+                        <div id="editor" style="height: 100px"></div>
                     </div>
                     <div ng-show="split_window" class="col-xs-6 editor-right">
-                        <div id="right_editor"></div>
-                        <div id="matrix_editor"></div>
+                        <div id="right_editor" style="height: 100px"></div>
+                        <div id="matrix_editor" style="display: none;"></div>
                     </div>
                 </div>
             </div>
@@ -452,5 +451,6 @@
 <script src="ext-language_tools.js"></script>
 <script src="javascripts/fflmode.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+<script src="/src/ide.js"></script>
 </body>
 </html>

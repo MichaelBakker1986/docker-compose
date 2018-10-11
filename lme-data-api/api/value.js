@@ -4,17 +4,17 @@ import ModelLoader     from '../FinancialModelLoader'
 
 const LMEFacade = ModelLoader.LMEFacade
 
-module.exports.setup = function(app) {
-	var ds = new MatrixStore()
+export function setup(app) {
+	const ds = new MatrixStore()
 
 	function defaultResponse(req, res) {
 		//handle request Async by default, create Promise, result when done.
 		new Promise(function(success, fail) {
 			try {
-				var context = ds.getOrCreate(req.params.id)
-				var columncontext = parseInt(req.params.columncontext || '0')
-				var variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName
-				var value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
+				const context = ds.getOrCreate(req.params.id)
+				const columncontext = parseInt(req.params.columncontext || '0')
+				const variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName
+				const value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
 
 				success(LMEFacade.getValue(context, variablename, columncontext, value, undefined))
 			} catch (err) {
