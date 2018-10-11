@@ -1,27 +1,15 @@
-/**
- build docker image and publish to Registry
- #docker build . -f LMERestAPIBuilder -t=nexus.topicusfinance.nl:8444/model_name:version
- #docker push nexus.topicusfinance.nl:8444/ksp:1.1
- #sudo docker run -p 80:7081 nexus.topicusfinance.nl:8444/ksp:0.3
- #should only include the generated model.js from the generator instead of
- # -- but for now we include all to make the docker-image file work
- #http://blfyn-dv-doc01.finance.lab
- # - lme-core
- # - math
- # - ast-node-utils
- # - formulajs
- # - excel-connect
- # nexus.topicusfinance.nl:8444
- **/
-import { WebpackCompiler } from './WebpackCompiler'
-import MemoryFS            from 'memory-fs'
-import path                from 'path'
+import { WebpackCompiler }                                from './WebpackCompiler'
+import path                                               from 'path'
+import uuid4                                              from 'uuid4'
+import MemoryFS                                           from 'memory-fs'
+import { createReadStream, createWriteStream, mkdirSync } from 'fs'
 
 const params = process.env.MODEL || 'MVO'
 
 class DockerImageBuilder {
 	constructor(fflModel, story, matrix, model_name, model_version) {
 		this.fflModel = fflModel
+		this.entry_code = 'rest-api-backend.js'
 		this.story = story
 		this.matrix = matrix
 		this.model_name = model_name
@@ -34,14 +22,17 @@ class DockerImageBuilder {
 		//add Model-file
 		const base_dir = `${__dirname}/dist`
 
-		const read_stream = fs.createReadStream('../model-tests/KSP/KSP.ffl')
-		const write_stream = fs.createWriteStream(path.join(base_dir, 'KSP.ffl'))
+		const folder_id = uuid4()
+		let new_folder = path.join(__dirname, folder_id)
+		mkdirSync(new_folder)
+
+		const read_stream = createReadStream(`../model-tests/${this.model_name}/KSP.ffl`)
+		const write_stream = createWriteStream(path.join(new_folder, `${this.model_name}.ffl`))
 		read_stream.pipe(write_stream)
 
-		const source = memory_fs.readFileSync(path.resolve(base_dir, 'rest-api-backend.js'), 'utf8')
+		memory_fs.createReadStream(path.resolve(base_dir, 'rest-api-backend.js')).pipe(createWriteStream(path.join(new_folder, 'rest-api-backend.js')))
 
 		console.info(stats)
-		console.info(source)
 	}
 
 	start() {
@@ -56,4 +47,4 @@ class DockerImageBuilder {
 
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()
 export { DockerImageBuilder }
-new DockerImageBuilder('KSP', undefined, undefined, 2).buildDockerFile('../lme-data-api/lme-data-app.js')
+new DockerImageBuilder('KSP', undefined, undefined, 'KSP', 2).buildDockerFile('../lme-data-api/lme-data-app.js')

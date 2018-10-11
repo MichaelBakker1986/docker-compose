@@ -2227,15 +2227,9 @@ FormulaService.prototype.addFormulaDependency = function (formulaInfo, reference
 	//ok so we going to allow default values, this could because this formula was the default.
 	//there was once an idea to create static formula types
 	//we could now reference to the index instead...
-<<<<<<< HEAD
 	var refName = (cov_55rl3h4jo.s[13]++, referenceName);
-	var refId;
-	cov_55rl3h4jo.s[14]++;
-=======
-	var refName = (cov_1wbvip2w7x.s[13]++, referenceName);
 	var refId = void 0;
-	cov_1wbvip2w7x.s[14]++;
->>>>>>> f75cb73b5b563ead30a5e5a01a69458a748b7c28
+	cov_55rl3h4jo.s[14]++;
 	if (referenceFormulaInfo === undefined) {
 		cov_55rl3h4jo.b[3][0]++;
 		cov_55rl3h4jo.s[15]++;

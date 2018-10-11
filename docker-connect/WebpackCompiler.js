@@ -1,8 +1,6 @@
-import webpack   from 'webpack'
-import { error } from 'log6'
-import fs        from 'fs'
-import path      from 'path'
-import MemoryFS  from 'memory-fs'
+import webpack from 'webpack'
+import fs      from 'fs'
+import path    from 'path'
 
 /**
  * Combine workspace into a REST-API js
@@ -88,6 +86,6 @@ export class WebpackCompiler {
 }
 
 /*new WebpackCompiler({ memory_fs: new MemoryFS() }).readProductionFile('../lme-data-api/lme-data-app.js').then((source) => {
-		console.info(source)
-	}
-).catch((er) => error('err', er))*/
+ console.info(source)
+ }
+ ).catch((er) => error('err', er))*/

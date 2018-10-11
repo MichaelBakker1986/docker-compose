@@ -1,7 +1,7 @@
 {
   "name": "lme-all",
   "private": true,
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "lme-all",
   "main": "index.js",
   "dependencies": {
@@ -23,7 +23,7 @@
     "concurrently": "^3.6.1",
     "escodegen": "^1.11.0",
     "esprima": "^4.0.1",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "formulajs-connect": "^1.0.6",
     "glob": "^7.1.3",
     "jquery": "^3.3.1",

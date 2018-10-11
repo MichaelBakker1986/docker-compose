@@ -10,10 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "child-process-promise": "^2.2.1",
-    "frb": "^4.0.2",
-    "frbxa": "0.0.22",
     "log6": "^2.0.15",
     "memory-fs": "^0.4.1",
+    "uuid": "^3.3.2",
+    "uuid4": "^1.1.4",
     "webpack": "^4.20.2"
   }
 }
