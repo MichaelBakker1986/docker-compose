@@ -1,6 +1,6 @@
 {
   "name": "log6",
-  "version": "2.0.11",
+  "version": "2.0.15",
   "description": "The lme logger",
   "main": "dist/log.js",
   "scripts": {
@@ -17,12 +17,15 @@
   ],
   "author": "michael.bakker <npm.michael.bakker1986@gmail.com> (http://log6-example.com)",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1"
   },
   "dependencies": {
-    "tracer": "^0.8.12"
+    "michaelbakker-tracer": "^0.9.2",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0"
   },
   "license": "ISC"
 }

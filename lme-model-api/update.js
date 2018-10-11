@@ -86,13 +86,13 @@ function pullBranchAndRedeploy() {
 	})
 }
 
-app.get('*/update/git/notifyCommit', (req, res) => {
+app.get('*/update/git/notifyCommit',async (req, res) => {
 	pullBranchAndRedeploy().then(result => {
 		res.end(result.toString())
 	}).catch(err => res.end(err.toString()))
 })
 
-app.get('*/hasUpdates', (req, res) => {
+app.get('*/hasUpdates', async (req, res) => {
 	checkForUpdates().then((result) => {
 		res.end(result.toString())
 	}).catch(err => res.end(err.toString()))

@@ -1,9 +1,9 @@
-import regression                                 from 'regression'
-import ema                                        from 'exponential-moving-average'
-import Solver                                     from 'js-solver'
-import { DEBUG, debug, info, trace, TRACE, warn } from 'log6'
-import * as jStat                                 from 'jStat'
-import jsMath                                     from './jsMath.json'
+import regression                           from 'regression'
+import ema                                  from 'exponential-moving-average'
+import Solver                               from 'js-solver'
+import { DEBUG, debug, trace, TRACE, warn } from 'log6'
+import * as jStat                           from 'jStat'
+import jsMath                               from './jsMath.json'
 
 const NA = jsMath.NA
 
@@ -296,6 +296,5 @@ const entries = {
 }
 /*if (!global.PPMT) global.PPMT = () => 1*/
 const name = 'ff-math'
-exports.mathJs = { name, entries }
 export { name, entries }
 export default { name, entries }

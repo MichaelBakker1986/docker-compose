@@ -29,7 +29,7 @@ const user_session = {
 	messages            : {
 		data: [
 			{ text: 'Scorecard converter!' },
-			{ text: 'Implement refersTo generic!\nrefersTo STEP01\nrefersTo numberVariable</br>Multi dimentional is a Step and a Tuple' },
+			{ text: 'Implement refersTo generic!\nrefersTo STEP01\nrefersTo numberVariable</br>Multi dimensional is a Step and a Tuple' },
 			{ text: 'Make bigdata analyses from all models to find generics' }
 		]
 	}
@@ -47,16 +47,16 @@ angular.module('lmeapp', ['angular.filter'])
 	const matrixManager = new MatrixManager()
 	const matrixController = new MatrixController($scope, $http, matrixManager, { halfHeight: true })
 	const debugController = new DebugController($scope, $http)
-	$http.get('whoami').then(function(response) {
-		user_session.user.name = response.data.split(',')[0]
-	}).catch(function(err) {
-		user_session.user.name = 'DEMO'
-	})
+	/*	$http.get('whoami').then(function(response) {
+	 user_session.user.name = response.data.split(',')[0]
+	 }).catch(function(err) {
+	 user_session.user.name = 'DEMO'
+	 })*/
 	$scope.session = user_session
 	$scope.model_history = []
 
 	$scope.updateModelChanges = function() {
-		$.get('modelChanges/' + user_session.fflModelPath, function(data, status, xhr) {
+		$.get(`modelChanges/${user_session.fflModelPath}`, function(data, status, xhr) {
 			const history = []
 			const hashes = {}
 			for (var i = 0; i < data.data.length; i++) {
@@ -108,12 +108,14 @@ angular.module('lmeapp', ['angular.filter'])
 	let hideSideBar = true
 	$scope.publishDockerImage = function() {
 		Pace.track(function() {
-			$.post('publishDockerImage/' + $scope.session.fflModelPath, {
-				story  : right_editor.getValue(),
-				matrix : matrixManager.toFatrix(),
-				fflData: fflEditor.getValue()
+			$.post(`publishDockerImage/${$scope.session.fflModelPath}`, {
+				story        : right_editor.getValue(),
+				model_version: 4,
+				matrix       : matrixManager.toFatrix(),
+				fflData      : fflEditor.getValue()
 			}, function(data) {
 				console.info('Finished publishing docker image.')
+				alert(`Finished publishing docker image. ${$scope.session.fflModelPath}`)
 			})
 		})
 	}
@@ -151,8 +153,8 @@ angular.module('lmeapp', ['angular.filter'])
 		})
 	}
 	$scope.saveFileInView = function() {
-		if ($scope.currentView == 'FFLModelEditorView') $scope.saveFFLModel()
-		else if ($scope.currentView == 'jbehaveView') $scope.saveJBehaveStory()
+		if ($scope.currentView === 'FFLModelEditorView') $scope.saveFFLModel()
+		else if ($scope.currentView === 'jbehaveView') $scope.saveJBehaveStory()
 	}
 	$scope.goToPreviewPage = function() {
 		$scope.session.disablePreviewButton = true
@@ -185,14 +187,13 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.hasChanges = false
 	$scope.changes = ''
 
-	$http.get('hasUpdates').then(function(data) {
-		$scope.hasChanges = data.data.hasChanges
-		$scope.changes = data.data.changes
-	}).catch(function(err) {
-		$scope.hasChanges = ''
-		$scope.changes = undefined
-
-	})
+	/*$http.get('hasUpdates').then(function(data) {
+	 $scope.hasChanges = data.data.hasChanges
+	 $scope.changes = data.data.changes
+	 }).catch(function(err) {
+	 $scope.hasChanges = ''
+	 $scope.changes = undefined
+	 })*/
 	$scope.gotoUpdateScreen = function() {
 		$scope.changeView('updateView')
 	}

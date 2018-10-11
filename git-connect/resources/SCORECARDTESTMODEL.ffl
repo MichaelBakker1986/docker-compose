@@ -3,7 +3,6 @@ model SCORECARDTESTMODEL uses BaseModel
  variable SCORECARDTESTMODEL
  {
   datatype: none;
-  visible: 0;
   variable FES_LAYOUTNR
   {
    frequency: document;

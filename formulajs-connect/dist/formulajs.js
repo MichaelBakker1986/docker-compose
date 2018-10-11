@@ -1,8 +1,14 @@
 'use strict';
 
+<<<<<<< HEAD
 var cov_20cv0q0vrj = function () {
 	var path = 'C:\\Users\\michael\\Documents\\lme\\formulajs-connect\\formulajs.js',
 	    hash = '99e274b8b24ef4f0bee878d83c7abc38335409b4',
+=======
+var cov_1axbif5cdy = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\formulajs-connect\\formulajs.js',
+	    hash = '2b5d6b76fa053940bae86cd23d467f590bd145ab',
+>>>>>>> f75cb73b5b563ead30a5e5a01a69458a748b7c28
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -328,6 +334,7 @@ Object.keys(formulaJs).forEach(function (functionName) {
 	cov_20cv0q0vrj.s[3]++;
 
 	if (functionName === 'NA') {
+<<<<<<< HEAD
 			cov_20cv0q0vrj.b[0][0]++;
 			cov_20cv0q0vrj.s[4]++;
 			if (_log.DEBUG) {
@@ -355,6 +362,35 @@ Object.keys(formulaJs).forEach(function (functionName) {
 				}
 		} else {
 		cov_20cv0q0vrj.b[0][1]++;
+=======
+			cov_1axbif5cdy.b[0][0]++;
+			cov_1axbif5cdy.s[4]++;
+			if (_log.DEBUG) {
+					cov_1axbif5cdy.b[1][0]++;
+					cov_1axbif5cdy.s[5]++;
+					return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
+				} else {
+					cov_1axbif5cdy.b[1][1]++;
+					cov_1axbif5cdy.s[6]++;
+					if (global.hasOwnProperty(functionName)) {
+							cov_1axbif5cdy.b[2][0]++;
+							cov_1axbif5cdy.s[7]++;
+							if (_log.DEBUG) {
+									cov_1axbif5cdy.b[3][0]++;
+									cov_1axbif5cdy.s[8]++;
+									(0, _log.debug)('global function already used : [' + functionName + ']');
+								} else {
+									cov_1axbif5cdy.b[3][1]++;
+									cov_1axbif5cdy.s[9]++;
+									entries[functionName] = formulaJs[functionName];
+								}
+						} else {
+						cov_1axbif5cdy.b[2][1]++;
+					}
+				}
+		} else {
+		cov_1axbif5cdy.b[0][1]++;
+>>>>>>> f75cb73b5b563ead30a5e5a01a69458a748b7c28
 	}
 });
 exports.name = name;

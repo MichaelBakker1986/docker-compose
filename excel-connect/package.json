@@ -27,9 +27,9 @@
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
   "dependencies": {
-    "exceljs": "^1.0.0",
-    "log6": "^2.0.10",
-    "promise": "^8.0.1",
-    "tracer": "^0.8.11"
+    "exceljs": "^1.6.2",
+    "log6": "^2.0.15",
+    "promise": "^8.0.2",
+    "tracer": "^0.8.15"
   }
 }

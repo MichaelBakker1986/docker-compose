@@ -209,5 +209,4 @@ FFLToRegister.prototype.toString = function() {
 	this.buildTree()
 	return `${this.header}{\n${this.reassembled}\n}`
 }
-exports.FFLToRegister = FFLToRegister
 export { FFLToRegister }

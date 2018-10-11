@@ -689,7 +689,6 @@ var entries = {
 	NA: NA
 	/*if (!global.PPMT) global.PPMT = () => 1*/
 };var name = 'ff-math';
-exports.mathJs = { name: name, entries: entries };
 exports.name = name;
 exports.entries = entries;
 exports.default = { name: name, entries: entries };

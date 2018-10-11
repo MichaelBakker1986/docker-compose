@@ -135,7 +135,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 		changing_ace_commands.add(el)
 	})
 	fflEditor.aceEditor.commands.on('afterExec', function(e) {
-		var changingValue = false
+		let changingValue = false
 		$scope.changeView('FFLModelEditorView')
 		if (!silent_ace_commands.has(e.command.name)) {
 			//rather white-list actions.
@@ -148,7 +148,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 			}
 		}
 		changeManager.updateCursor(fflEditor.getValue(), fflEditor.getCursor())
-		var annotations = []
+		let annotations = []
 		$scope.$apply(function() {
 			$scope.error = changeManager.error
 			$scope.activeVariable = changeManager.currentVariable
@@ -165,10 +165,10 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 			if (changeManager.warnings.length > 0) console.info('There are warnings:' + JSON.stringify(changeManager.warnings))
 		})
 		if (changeManager.warnings.length > 0) {
-			for (var i = 0; i < changeManager.warnings.length; i++) {
-				var warning = changeManager.warnings[i]
-				for (var j = 0; j < changeManager.warnings[i].pos.length; j++) {
-					var obj = changeManager.warnings[i].pos[j]
+			for (let i = 0; i < changeManager.warnings.length; i++) {
+				const warning = changeManager.warnings[i]
+				for (let j = 0; j < changeManager.warnings[i].pos.length; j++) {
+					const obj = changeManager.warnings[i].pos[j]
 					annotations.push({
 						row   : user_session.fflModel.substring(0, obj.char).split('\n').length,
 						column: 0,
@@ -186,10 +186,12 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 FFLController.prototype.updateFFLModel = function(model_name) {
 	const self = this
 	Pace.track(function() {
-		window.location.href = '#' + model_name + '&' + self.user_session.user.name + '&' + 6
+		window.location.href = `#${model_name}&${self.user_session.user.name}&6`
 		var xhr = new XMLHttpRequest()
 		xhr.addEventListener('progress', function(e) {
-			self.fflEditor.setValue('Loading data: ' + e.loaded + ' of ' + (e.total || 'unknown') + ' bytes...')
+			const load_data_information = `Loading data: ${e.loaded} of ` + (e.total || 'unknown') + ' bytes...'
+			console.info(load_data_information)
+			self.fflEditor.setValue(load_data_information)
 		})
 		xhr.addEventListener('load', function(e) {
 			if (this.responseText.startsWith('<!DOCTYPE html>')) {
@@ -197,6 +199,7 @@ FFLController.prototype.updateFFLModel = function(model_name) {
 			} else {
 				self.user_session.fflModel = this.responseText
 			}
+
 			self.fflEditor.setParsedValue(self.user_session.fflModel)
 			self.changeManager.setModelChanged()
 			self.register.clean()

@@ -5,7 +5,18 @@
   "description": "lme-all",
   "main": "index.js",
   "dependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-private": "^0.1.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0"
   },
   "devDependencies": {
     "xhr2": "^0.1.4",
@@ -15,7 +26,7 @@
     "test"
   ],
   "scripts": {
-    "install": "concurrently \"cd log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd proxy && npm install --no-optional\" \"cd excel-connect && npm install --no-optional \" \"cd lme-core && npm install --no-optional\" \"cd formulajs-connect && npm install --no-optional\" \"cd git-connect && npm install --no-optional\" \"cd math && npm install --no-optional\"",
+    "install": "concurrently \"cd log && npm install --no-optional \" \"cd lme-data-api && npm install --no-optional \" \"cd proxy && npm install --no-optional\" \"cd excel-connect && npm install --no-optional \" \"cd lme-core && npm install --no-optional\" \"cd formulajs-connect && npm install --no-optional\" \"cd git-connect && npm install --no-optional\" \"cd ffl && npm install --no-optional\" \"cd math && npm install --no-optional\"",
     "start": "NODE_ENV=production concurrently \"cd lme-data-api && node lme-data-app.js\" \"cd proxy && node proxy.js\""
   },
   "config": {
@@ -27,6 +38,19 @@
   },
   "keywords": [
     "lme"
+  ],
+  "transform": [
+    [
+      "babelify",
+      {
+        "comments": false
+      }
+    ]
+  ],
+  "presets": [
+    "env",
+    "stage-0",
+    "stage-2"
   ],
   "author": "michael.bakker",
   "license": "ISC"

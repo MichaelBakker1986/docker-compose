@@ -207,4 +207,3 @@ FFLToRegister.prototype.toString = function () {
 	return this.header + '{\n' + this.reassembled + '\n}';
 };
 exports.FFLToRegister = FFLToRegister;
-exports.FFLToRegister = FFLToRegister;

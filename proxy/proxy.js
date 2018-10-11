@@ -71,7 +71,7 @@ function clientErrorHandler(err, req, res, next) {
  * If ever want to register multiple endpoints, use a separator in the last argument
  * This should also be able to generate a report of the services
  */
-app.get('/register/service/:name/:host/:port/*', function(req, res) {
+app.get('/register/service/:name/:host/:port/*', async function(req, res) {
 	const routes = (req.params['1'] || req.params['0']).split(',')
 	const name = req.params.name
 	const targetProxyHost = req.params.host
@@ -87,7 +87,7 @@ app.get('/register/service/:name/:host/:port/*', function(req, res) {
 			onProxyRes  : onProxyRes
 		}))
 	}
-	if (log.DEBUG) log.debug(`service registered [${name}] http://${host}:${internal_proxy_port}/${routes}] ~ >  http://${targetProxyHost}:${targetProxyPort}`)
+	if (log.DEBUG) log.debug(`service registered [${name}] http://${host}:${internal_proxy_port}/${routes} ~ >  http://${targetProxyHost}:${targetProxyPort}`)
 	res.send('ok')
 })
 

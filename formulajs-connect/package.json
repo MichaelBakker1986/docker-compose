@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@handsontable/formulajs": "^2.0.0",
-    "log6": "^2.0.9"
+    "log6": "^2.0.15"
   },
   "repository": {
     "type": "git",
