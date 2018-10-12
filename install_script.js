@@ -2,16 +2,16 @@
  * Run all tests in project
  **/
 
-import main                                                        from 'michaelbakker196_concurrently'
-import { exists, existsSync, readdirSync, readFileSync, statSync } from 'fs'
-import { info }                                                    from 'log6'
-import path                                                        from 'path'
-import { exec }                                                    from 'child-process-promise'
+import main                                                from 'michaelbakker196_concurrently'
+import { existsSync, readdirSync, readFileSync, statSync } from 'fs'
+import { info }                                            from 'log6'
+import path                                                from 'path'
+import { exec }                                            from 'child-process-promise'
 
 const path_info = __dirname
 
 async function getModules() {
-	return new Promise((accept, reject) => {
+	return new Promise((accept) => {
 		const files = []
 		const items = readdirSync(path_info)
 		items.forEach(item => {
@@ -33,10 +33,8 @@ async function getModules() {
 }
 
 Promise.all([
-	exec('cd model-tests'),
-	exec('cd model-tests'),
-	/*exec('cd model-tests && npm link ../math --no-update-notifier ').then(({ stdout, stderr }) => info(stdout)),
-	 exec('cd model-tests && npm link ../excel-connect --no-update-notifier ').then(({ stdout, stderr }) => info(stdout)),*/
+	exec('cd model-tests && npm link ../math --no-update-notifier ').then(({ stdout }) => info(stdout)),
+	exec('cd model-tests && npm link ../excel-connect --no-update-notifier ').then(({ stdout }) => info(stdout)),
 	getModules()
 ])
 .catch(err => {console.error(err)}).then(([link_math, link_excel_connect, modules]) => {
@@ -45,23 +43,3 @@ Promise.all([
 	main(commands)
 })
 
-class Installer {
-	constructor() {
-		const modules = []
-		exec('cd model-tests && npm link ../math --no-update-notifier ', (err, output) => {
-			info(output)
-			exec('cd model-tests && npm link ../excel-connect --no-update-notifier ', (err, output) => {
-				info(output)
-				main([
-					'cd excel-connect && npm install --no-update-notifier --no-optional',
-					'cd ffl && npm install --no-update-notifier  --no-optional',
-					'cd lme-core && npm install --no-update-notifier  --no-optional',
-					'cd model-tests && npm install --no-update-notifier --no-optional',
-					'cd lme-model-api && npm install --no-update-notifier --no-optional',
-					'cd log && npm install --no-update-notifier --no-optional'])
-			})
-		})
-	}
-}
-
-//new Installer()

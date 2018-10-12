@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1axbif5cdy = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\formulajs-connect\\formulajs.js',
-	    hash = '2b5d6b76fa053940bae86cd23d467f590bd145ab',
+var cov_20cv0q0vrj = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\formulajs-connect\\formulajs.js',
+	    hash = '99e274b8b24ef4f0bee878d83c7abc38335409b4',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\formulajs-connect\\formulajs.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\formulajs-connect\\formulajs.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -319,42 +319,42 @@ var formulaJs = _interopRequireWildcard(_formulajs);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var entries = (cov_1axbif5cdy.s[0]++, {});
-var name = (cov_1axbif5cdy.s[1]++, 'formulaJs');
+var entries = (cov_20cv0q0vrj.s[0]++, {});
+var name = (cov_20cv0q0vrj.s[1]++, 'formulaJs');
 
-cov_1axbif5cdy.s[2]++;
+cov_20cv0q0vrj.s[2]++;
 Object.keys(formulaJs).forEach(function (functionName) {
-	cov_1axbif5cdy.f[0]++;
-	cov_1axbif5cdy.s[3]++;
+	cov_20cv0q0vrj.f[0]++;
+	cov_20cv0q0vrj.s[3]++;
 
 	if (functionName === 'NA') {
-			cov_1axbif5cdy.b[0][0]++;
-			cov_1axbif5cdy.s[4]++;
+			cov_20cv0q0vrj.b[0][0]++;
+			cov_20cv0q0vrj.s[4]++;
 			if (_log.DEBUG) {
-					cov_1axbif5cdy.b[1][0]++;
-					cov_1axbif5cdy.s[5]++;
+					cov_20cv0q0vrj.b[1][0]++;
+					cov_20cv0q0vrj.s[5]++;
 					return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
 				} else {
-					cov_1axbif5cdy.b[1][1]++;
-					cov_1axbif5cdy.s[6]++;
+					cov_20cv0q0vrj.b[1][1]++;
+					cov_20cv0q0vrj.s[6]++;
 					if (global.hasOwnProperty(functionName)) {
-							cov_1axbif5cdy.b[2][0]++;
-							cov_1axbif5cdy.s[7]++;
+							cov_20cv0q0vrj.b[2][0]++;
+							cov_20cv0q0vrj.s[7]++;
 							if (_log.DEBUG) {
-									cov_1axbif5cdy.b[3][0]++;
-									cov_1axbif5cdy.s[8]++;
+									cov_20cv0q0vrj.b[3][0]++;
+									cov_20cv0q0vrj.s[8]++;
 									(0, _log.debug)('global function already used : [' + functionName + ']');
 								} else {
-									cov_1axbif5cdy.b[3][1]++;
-									cov_1axbif5cdy.s[9]++;
+									cov_20cv0q0vrj.b[3][1]++;
+									cov_20cv0q0vrj.s[9]++;
 									entries[functionName] = formulaJs[functionName];
 								}
 						} else {
-						cov_1axbif5cdy.b[2][1]++;
+						cov_20cv0q0vrj.b[2][1]++;
 					}
 				}
 		} else {
-		cov_1axbif5cdy.b[0][1]++;
+		cov_20cv0q0vrj.b[0][1]++;
 	}
 });
 exports.name = name;

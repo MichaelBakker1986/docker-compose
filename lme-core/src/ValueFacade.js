@@ -16,11 +16,13 @@ if (Error.prototype.stack === undefined)
  * For small arrays, lets say until 1000, elements. There is no need to map by name.
  * Just iterate the shabang and test the property
  */
-Array.prototype.lookup = function(property, name) {
-	for (let i = 0; i < this.length; i++) {
-		if (this[i][property] === name) return this[i]
+if (!String.prototype.lookup) {
+	Array.prototype.lookup = function(property, name) {
+		for (let i = 0; i < this.length; i++) {
+			if (this[i][property] === name) return this[i]
+		}
+		return undefined
 	}
-	return undefined
 }
 if (!String.prototype.startsWith) {
 	String.prototype.startsWith = function(searchString, position) {
@@ -112,7 +114,7 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
 		return localFormula.original
 	}
 	if (colType === VALUE && row === 'KSP2_TotalGrossCostsChildTillEighteen') {
-		                                                                     var rt=21;
+		var rt = 21
 	}
 	const variable = fetchSolutionNode(row, colType)
 	const localFormula = findFormula(variable)

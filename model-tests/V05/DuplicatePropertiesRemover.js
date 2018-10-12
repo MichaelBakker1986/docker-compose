@@ -1,13 +1,15 @@
-import { Context, Register, RegisterToFFL, WorkBook } from '../../lme-core/'
-import 'ffl-math'
+import api, { Context, ENCODING, Register, WorkBook } from '../../lme-core/index'
+import fflMath                                        from '../../math/ffl-math'
 import { readFileSync, writeFileSync }                from 'fs'
 import { info }                                       from 'log6'
-import LME                                            from '../../lme-model-api/src/lme'
-import '../../lme-core/exchange_modules/ffl/RegisterToLMEParser'
+import { LmeAPI }                                     from '../../lme-model-api/src/lme'
+import { RegisterToLMEParser }                        from '../../ffl/index'
 
-new LME()
+api.registerParser(RegisterToLMEParser)
+api.addFunctions(fflMath)
+new LmeAPI()
 
-const ffl = readFileSync('../../git-connect/resources/V05.ffl', 'utf8')
+const ffl = readFileSync('../../git-connect/resources/V05.ffl', ENCODING)
 const register = new Register()
 const wb = new WorkBook(new Context())
 wb.importFFL({ register, raw: ffl })
@@ -22,5 +24,5 @@ for (let i = 0; i < register.i.length; i++) {
 		obj[register.schemaIndexes.valid] = null
 	}
 }
-writeFileSync('./testv05.ffl', new RegisterToFFL(register).toGeneratedFFL({ rootVariableName: 'V05' }).join('\n'), 'utf8')
+writeFileSync('./testv05.ffl', new RegisterToFFL(register).toGeneratedFFL({ rootVariableName: 'V05' }).join('\n'), ENCODING)
 info(`done${register.i.length}`)

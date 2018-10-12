@@ -67,14 +67,15 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
 		error : []
 	}
 	for (let name in names) {
-		try {
-			//iterate all formula-sets to test 100% Trend,NoTrend
-			for (let property in context.propertyDefaults) {
+		//iterate all formula-sets to test 100% Trend,NoTrend
+		for (let property in context.propertyDefaults) {
+			try {
 				wb.get(name, property, 0, wb.resolveY(0))
 				validateResponse.succes.push(name)
+
+			} catch (err) {
+				error(`Error while trying:${name}.${property} in model ${modelName}`, err)
 			}
-		} catch (err) {
-			error(`Error while trying:${name}.${property} in model ${modelName}`, err)
 		}
 	}
 	const errors = this.audittrail.distinctArr(this.audittrail.find('level', 'ERROR', start), ['name', 'property'])

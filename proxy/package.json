@@ -9,7 +9,7 @@
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "license": "ISC",
   "dependencies": {
@@ -19,12 +19,11 @@
     "connect-ensure-login": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "express-favicon": "^2.0.1",
     "express-http-proxy": "^1.4.0",
     "express-no-favicons": "0.0.1",
     "express-session": "^1.15.6",
-    "express-sessions": "^1.0.6",
     "express-static-gzip": "^0.3.0",
     "http": "0.0.0",
     "http-proxy": "^1.17.0",

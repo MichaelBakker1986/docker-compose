@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2r1yd1lb8p = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\swagger\\swaggerParser.js',
-	    hash = '317ad5c655851dacd5d28fcb67b6019f8166423a',
+var cov_2bja0hends = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\swagger\\swaggerParser.js',
+	    hash = '97ccfdab16a949bd00311c3187b302cb2b69fe11',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\swagger\\swaggerParser.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\swagger\\swaggerParser.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2772,403 +2772,403 @@ var _log2 = _interopRequireDefault(_log);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function SwaggerParser() {
-	cov_2r1yd1lb8p.f[0]++;
+	cov_2bja0hends.f[0]++;
 }
 
-cov_2r1yd1lb8p.s[0]++;
+cov_2bja0hends.s[0]++;
 SwaggerParser.prototype.name = 'swagger';
-cov_2r1yd1lb8p.s[1]++;
+cov_2bja0hends.s[1]++;
 SwaggerParser.prototype.headername = '.swagger';
 
-cov_2r1yd1lb8p.s[2]++;
+cov_2bja0hends.s[2]++;
 SwaggerParser.prototype.deParse = function (metaData, workbook) {
-	cov_2r1yd1lb8p.f[1]++;
-	cov_2r1yd1lb8p.s[3]++;
+	cov_2bja0hends.f[1]++;
+	cov_2bja0hends.s[3]++;
 
 	if (metaData.type === 'output') {
-			cov_2r1yd1lb8p.b[0][0]++;
-			cov_2r1yd1lb8p.s[4]++;
+			cov_2bja0hends.b[0][0]++;
+			cov_2bja0hends.s[4]++;
 			return this.parseInput(metaData, workbook);
 		} else {
-			cov_2r1yd1lb8p.b[0][1]++;
-			cov_2r1yd1lb8p.s[5]++;
+			cov_2bja0hends.b[0][1]++;
+			cov_2bja0hends.s[5]++;
 			if (metaData.type === 'input') {
-					cov_2r1yd1lb8p.b[1][0]++;
-					cov_2r1yd1lb8p.s[6]++;
+					cov_2bja0hends.b[1][0]++;
+					cov_2bja0hends.s[6]++;
 					return this.parseOutput(metaData, workbook);
 				} else {
-					cov_2r1yd1lb8p.b[1][1]++;
-					cov_2r1yd1lb8p.s[7]++;
+					cov_2bja0hends.b[1][1]++;
+					cov_2bja0hends.s[7]++;
 					throw Error('Error while parsing Swagger. Invalid conversion type valid types: input|output');
 				}
 		}
 };
-cov_2r1yd1lb8p.s[8]++;
+cov_2bja0hends.s[8]++;
 SwaggerParser.prototype.parseInput = function (metaData, workbook) {
-	cov_2r1yd1lb8p.f[2]++;
+	cov_2bja0hends.f[2]++;
 
-	var rowId = (cov_2r1yd1lb8p.s[9]++, metaData.rowId);
-	var type = (cov_2r1yd1lb8p.s[10]++, metaData.type);
+	var rowId = (cov_2bja0hends.s[9]++, metaData.rowId);
+	var type = (cov_2bja0hends.s[10]++, metaData.type);
 
-	var indexer = (cov_2r1yd1lb8p.s[11]++, workbook.indexer);
-	var register = (cov_2r1yd1lb8p.s[12]++, indexer.getIndex('name'));
-	var startnode = (cov_2r1yd1lb8p.s[13]++, indexer.getIndex('name')[rowId]);
-	var nameIndex = (cov_2r1yd1lb8p.s[14]++, indexer.schemaIndexes.name);
-	var childrenIndex = (cov_2r1yd1lb8p.s[15]++, indexer.schemaIndexes.children);
-	var frequencyIndex = (cov_2r1yd1lb8p.s[16]++, indexer.schemaIndexes.frequency);
-	var datatypeIndex = (cov_2r1yd1lb8p.s[17]++, indexer.schemaIndexes.datatype);
-	var parentIdIndex = (cov_2r1yd1lb8p.s[18]++, indexer.schemaIndexes.parentId);
-	var referstoIndex = (cov_2r1yd1lb8p.s[19]++, indexer.schemaIndexes.refersto);
-	var variables = (cov_2r1yd1lb8p.s[20]++, {});
-	var names = (cov_2r1yd1lb8p.s[21]++, indexer.getIndex('i'));
-	var firstArray = (cov_2r1yd1lb8p.s[22]++, true);
+	var indexer = (cov_2bja0hends.s[11]++, workbook.indexer);
+	var register = (cov_2bja0hends.s[12]++, indexer.getIndex('name'));
+	var startnode = (cov_2bja0hends.s[13]++, indexer.getIndex('name')[rowId]);
+	var nameIndex = (cov_2bja0hends.s[14]++, indexer.schemaIndexes.name);
+	var childrenIndex = (cov_2bja0hends.s[15]++, indexer.schemaIndexes.children);
+	var frequencyIndex = (cov_2bja0hends.s[16]++, indexer.schemaIndexes.frequency);
+	var datatypeIndex = (cov_2bja0hends.s[17]++, indexer.schemaIndexes.datatype);
+	var parentIdIndex = (cov_2bja0hends.s[18]++, indexer.schemaIndexes.parentId);
+	var referstoIndex = (cov_2bja0hends.s[19]++, indexer.schemaIndexes.refersto);
+	var variables = (cov_2bja0hends.s[20]++, {});
+	var names = (cov_2bja0hends.s[21]++, indexer.getIndex('i'));
+	var firstArray = (cov_2bja0hends.s[22]++, true);
 
 	//TODO: copy-paste from RegisterToLMEParser...
 	//only inherit properties once.
-	var inherited = (cov_2r1yd1lb8p.s[23]++, {});
+	var inherited = (cov_2bja0hends.s[23]++, {});
 	//INFO: inheritance could also be possible via database
 	//TODO: copy-paste from RegisterToLMEParser...
 	function inheritProperties(node) {
-		cov_2r1yd1lb8p.f[3]++;
-		cov_2r1yd1lb8p.s[24]++;
+		cov_2bja0hends.f[3]++;
+		cov_2bja0hends.s[24]++;
 
-		if ((cov_2r1yd1lb8p.b[3][0]++, !inherited[node[nameIndex]]) && (cov_2r1yd1lb8p.b[3][1]++, node[referstoIndex])) {
-			cov_2r1yd1lb8p.b[2][0]++;
-			cov_2r1yd1lb8p.s[25]++;
+		if ((cov_2bja0hends.b[3][0]++, !inherited[node[nameIndex]]) && (cov_2bja0hends.b[3][1]++, node[referstoIndex])) {
+			cov_2bja0hends.b[2][0]++;
+			cov_2bja0hends.s[25]++;
 
 			inherited[node[nameIndex]] = true;
-			var supertype = (cov_2r1yd1lb8p.s[26]++, register[node[referstoIndex]]);
-			cov_2r1yd1lb8p.s[27]++;
+			var supertype = (cov_2bja0hends.s[26]++, register[node[referstoIndex]]);
+			cov_2bja0hends.s[27]++;
 			if (supertype == null) {
-				cov_2r1yd1lb8p.b[4][0]++;
-				cov_2r1yd1lb8p.s[28]++;
+				cov_2bja0hends.b[4][0]++;
+				cov_2bja0hends.s[28]++;
 
 				if (_log2.default.DEBUG) {
-						cov_2r1yd1lb8p.b[5][0]++;
-						cov_2r1yd1lb8p.s[29]++;
+						cov_2bja0hends.b[5][0]++;
+						cov_2bja0hends.s[29]++;
 						_log2.default.debug('RefersTo: [' + node[referstoIndex] + '] is declared in the model but does not exsists');
 					} else {
-					cov_2r1yd1lb8p.b[5][1]++;
+					cov_2bja0hends.b[5][1]++;
 				}
 			} else {
-				cov_2r1yd1lb8p.b[4][1]++;
+				cov_2bja0hends.b[4][1]++;
 			}
 			//first inherit from parents of parents.
-			cov_2r1yd1lb8p.s[30]++;
+			cov_2bja0hends.s[30]++;
 			if (supertype[referstoIndex]) {
-					cov_2r1yd1lb8p.b[6][0]++;
-					cov_2r1yd1lb8p.s[31]++;
+					cov_2bja0hends.b[6][0]++;
+					cov_2bja0hends.s[31]++;
 					inheritProperties(supertype);
 				} else {
-				cov_2r1yd1lb8p.b[6][1]++;
-			}cov_2r1yd1lb8p.s[32]++;
+				cov_2bja0hends.b[6][1]++;
+			}cov_2bja0hends.s[32]++;
 			for (var i = 0; i < supertype.length; i++) {
-				cov_2r1yd1lb8p.s[33]++;
+				cov_2bja0hends.s[33]++;
 
 				if (node[i] == null) {
-						cov_2r1yd1lb8p.b[7][0]++;
-						cov_2r1yd1lb8p.s[34]++;
+						cov_2bja0hends.b[7][0]++;
+						cov_2bja0hends.s[34]++;
 						node[i] = supertype[i];
 					} else {
-					cov_2r1yd1lb8p.b[7][1]++;
+					cov_2bja0hends.b[7][1]++;
 				}
 			}
 		} else {
-			cov_2r1yd1lb8p.b[2][1]++;
+			cov_2bja0hends.b[2][1]++;
 		}
 	}
 
-	cov_2r1yd1lb8p.s[35]++;
+	cov_2bja0hends.s[35]++;
 	indexer.walk(startnode, 0, function (node, depth) {
-		cov_2r1yd1lb8p.f[4]++;
+		cov_2bja0hends.f[4]++;
 
-		var nodeName = (cov_2r1yd1lb8p.s[36]++, node[nameIndex]);
-		cov_2r1yd1lb8p.s[37]++;
+		var nodeName = (cov_2bja0hends.s[36]++, node[nameIndex]);
+		cov_2bja0hends.s[37]++;
 		inheritProperties(node);
 
-		var hasChildren = (cov_2r1yd1lb8p.s[38]++, node[childrenIndex].length == 0);
-		cov_2r1yd1lb8p.s[39]++;
-		if ((cov_2r1yd1lb8p.b[9][0]++, workbook.get(nodeName, 'locked')) && (cov_2r1yd1lb8p.b[9][1]++, !hasChildren)) {
-			cov_2r1yd1lb8p.b[8][0]++;
-			cov_2r1yd1lb8p.s[40]++;
+		var hasChildren = (cov_2bja0hends.s[38]++, node[childrenIndex].length == 0);
+		cov_2bja0hends.s[39]++;
+		if ((cov_2bja0hends.b[9][0]++, workbook.get(nodeName, 'locked')) && (cov_2bja0hends.b[9][1]++, !hasChildren)) {
+			cov_2bja0hends.b[8][0]++;
+			cov_2bja0hends.s[40]++;
 
 			return;
 		} else {
-			cov_2r1yd1lb8p.b[8][1]++;
+			cov_2bja0hends.b[8][1]++;
 		}
-		var nodeType = (cov_2r1yd1lb8p.s[41]++, 'number');
-		var currentNode = (cov_2r1yd1lb8p.s[42]++, {
+		var nodeType = (cov_2bja0hends.s[41]++, 'number');
+		var currentNode = (cov_2bja0hends.s[42]++, {
 			type: nodeType,
 			description: workbook.get(nodeName, 'title')
 		});
 		var choices = void 0;
-		cov_2r1yd1lb8p.s[43]++;
+		cov_2bja0hends.s[43]++;
 		if (node[childrenIndex].length > 0) {
-			cov_2r1yd1lb8p.b[10][0]++;
-			cov_2r1yd1lb8p.s[44]++;
+			cov_2bja0hends.b[10][0]++;
+			cov_2bja0hends.s[44]++;
 
 			currentNode.type = 'object';
 		} else {
-				cov_2r1yd1lb8p.b[10][1]++;
-				cov_2r1yd1lb8p.s[45]++;
+				cov_2bja0hends.b[10][1]++;
+				cov_2bja0hends.s[45]++;
 				if (choices = workbook.get(nodeName, 'choices')) {
-					cov_2r1yd1lb8p.b[11][0]++;
-					cov_2r1yd1lb8p.s[46]++;
+					cov_2bja0hends.b[11][0]++;
+					cov_2bja0hends.s[46]++;
 
 					currentNode.enum = [];
-					cov_2r1yd1lb8p.s[47]++;
+					cov_2bja0hends.s[47]++;
 					for (var i = 0; i < choices.length; i++) {
-						var obj = (cov_2r1yd1lb8p.s[48]++, choices[i]);
-						cov_2r1yd1lb8p.s[49]++;
+						var obj = (cov_2bja0hends.s[48]++, choices[i]);
+						cov_2bja0hends.s[49]++;
 						currentNode.enum.push(obj.value);
 					}
 				} else {
-					cov_2r1yd1lb8p.b[11][1]++;
-					cov_2r1yd1lb8p.s[50]++;
+					cov_2bja0hends.b[11][1]++;
+					cov_2bja0hends.s[50]++;
 
 					if (node[datatypeIndex]) {
-						cov_2r1yd1lb8p.b[12][0]++;
-						cov_2r1yd1lb8p.s[51]++;
+						cov_2bja0hends.b[12][0]++;
+						cov_2bja0hends.s[51]++;
 
 						currentNode.type = node[datatypeIndex];
 					} else {
-						cov_2r1yd1lb8p.b[12][1]++;
-						cov_2r1yd1lb8p.s[52]++;
+						cov_2bja0hends.b[12][1]++;
+						cov_2bja0hends.s[52]++;
 
 						currentNode.type = 'string';
 					}
 				}
-			}cov_2r1yd1lb8p.s[53]++;
+			}cov_2bja0hends.s[53]++;
 		variables[nodeName] = currentNode;
-		cov_2r1yd1lb8p.s[54]++;
+		cov_2bja0hends.s[54]++;
 		if (currentNode.type == 'object') {
-				cov_2r1yd1lb8p.b[13][0]++;
-				cov_2r1yd1lb8p.s[55]++;
+				cov_2bja0hends.b[13][0]++;
+				cov_2bja0hends.s[55]++;
 				currentNode.properties = {};
 			} else {
-			cov_2r1yd1lb8p.b[13][1]++;
-		}cov_2r1yd1lb8p.s[56]++;
+			cov_2bja0hends.b[13][1]++;
+		}cov_2bja0hends.s[56]++;
 		if (currentNode.type == 'number') {
-				cov_2r1yd1lb8p.b[14][0]++;
-				cov_2r1yd1lb8p.s[57]++;
+				cov_2bja0hends.b[14][0]++;
+				cov_2bja0hends.s[57]++;
 				currentNode.format = 'double';
 			} else {
-			cov_2r1yd1lb8p.b[14][1]++;
-		}cov_2r1yd1lb8p.s[58]++;
+			cov_2bja0hends.b[14][1]++;
+		}cov_2bja0hends.s[58]++;
 		if (currentNode.type != 'object') {
-			cov_2r1yd1lb8p.b[15][0]++;
-			cov_2r1yd1lb8p.s[59]++;
+			cov_2bja0hends.b[15][0]++;
+			cov_2bja0hends.s[59]++;
 
 			currentNode.properties = {};
-			cov_2r1yd1lb8p.s[60]++;
+			cov_2bja0hends.s[60]++;
 			for (var type in workbook.properties) {
-				cov_2r1yd1lb8p.s[61]++;
+				cov_2bja0hends.s[61]++;
 
 				if (type.startsWith('_')) {
-						cov_2r1yd1lb8p.b[16][0]++;
-						cov_2r1yd1lb8p.s[62]++;
+						cov_2bja0hends.b[16][0]++;
+						cov_2bja0hends.s[62]++;
 						continue;
 					} else {
-					cov_2r1yd1lb8p.b[16][1]++;
-				}cov_2r1yd1lb8p.s[63]++;
+					cov_2bja0hends.b[16][1]++;
+				}cov_2bja0hends.s[63]++;
 				currentNode.properties[type] = {
-					'type': type == 'title' ? (cov_2r1yd1lb8p.b[17][0]++, 'string') : (cov_2r1yd1lb8p.b[17][1]++, 'boolean')
+					'type': type == 'title' ? (cov_2bja0hends.b[17][0]++, 'string') : (cov_2bja0hends.b[17][1]++, 'boolean')
 				};
 			}
-			cov_2r1yd1lb8p.s[64]++;
+			cov_2bja0hends.s[64]++;
 			currentNode.properties.value = {
 				'type': currentNode.type
 			};
-			cov_2r1yd1lb8p.s[65]++;
+			cov_2bja0hends.s[65]++;
 			if (currentNode.type == 'number') {
-					cov_2r1yd1lb8p.b[18][0]++;
-					cov_2r1yd1lb8p.s[66]++;
+					cov_2bja0hends.b[18][0]++;
+					cov_2bja0hends.s[66]++;
 					currentNode.properties.value.format = 'double';
 				} else {
-				cov_2r1yd1lb8p.b[18][1]++;
-			}cov_2r1yd1lb8p.s[67]++;
+				cov_2bja0hends.b[18][1]++;
+			}cov_2bja0hends.s[67]++;
 			currentNode.type = 'object';
 
-			cov_2r1yd1lb8p.s[68]++;
+			cov_2bja0hends.s[68]++;
 			delete currentNode.format;
 		} else {
-			cov_2r1yd1lb8p.b[15][1]++;
+			cov_2bja0hends.b[15][1]++;
 		}
-		cov_2r1yd1lb8p.s[69]++;
-		if ((cov_2r1yd1lb8p.b[20][0]++, node[frequencyIndex] == 'column') && (cov_2r1yd1lb8p.b[20][1]++, firstArray)) {
-			cov_2r1yd1lb8p.b[19][0]++;
-			cov_2r1yd1lb8p.s[70]++;
+		cov_2bja0hends.s[69]++;
+		if ((cov_2bja0hends.b[20][0]++, node[frequencyIndex] == 'column') && (cov_2bja0hends.b[20][1]++, firstArray)) {
+			cov_2bja0hends.b[19][0]++;
+			cov_2bja0hends.s[70]++;
 
 			firstArray = false;
-			cov_2r1yd1lb8p.s[71]++;
+			cov_2bja0hends.s[71]++;
 			currentNode.type = 'array';
-			cov_2r1yd1lb8p.s[72]++;
+			cov_2bja0hends.s[72]++;
 			currentNode.items = {
 				properties: currentNode.properties
 			};
-			cov_2r1yd1lb8p.s[73]++;
+			cov_2bja0hends.s[73]++;
 			delete currentNode.properties;
 		} else {
-			cov_2r1yd1lb8p.b[19][1]++;
+			cov_2bja0hends.b[19][1]++;
 		}
 	});
-	cov_2r1yd1lb8p.s[74]++;
+	cov_2bja0hends.s[74]++;
 	indexer.walk(startnode, 0, function (node, depth) {
-		cov_2r1yd1lb8p.f[5]++;
-		cov_2r1yd1lb8p.s[75]++;
+		cov_2bja0hends.f[5]++;
+		cov_2bja0hends.s[75]++;
 
 		if (node[parentIdIndex]) {
-			cov_2r1yd1lb8p.b[21][0]++;
+			cov_2bja0hends.b[21][0]++;
 
-			var variable = (cov_2r1yd1lb8p.s[76]++, variables[node[nameIndex]]);
-			var parent = (cov_2r1yd1lb8p.s[77]++, variables[names[node[parentIdIndex]][nameIndex]]);
-			cov_2r1yd1lb8p.s[78]++;
+			var variable = (cov_2bja0hends.s[76]++, variables[node[nameIndex]]);
+			var parent = (cov_2bja0hends.s[77]++, variables[names[node[parentIdIndex]][nameIndex]]);
+			cov_2bja0hends.s[78]++;
 			if (parent) {
-				cov_2r1yd1lb8p.b[22][0]++;
-				cov_2r1yd1lb8p.s[79]++;
+				cov_2bja0hends.b[22][0]++;
+				cov_2bja0hends.s[79]++;
 
 				if (parent.type == 'array') {
-					cov_2r1yd1lb8p.b[23][0]++;
-					cov_2r1yd1lb8p.s[80]++;
+					cov_2bja0hends.b[23][0]++;
+					cov_2bja0hends.s[80]++;
 
 					parent.items.properties[node[nameIndex]] = variable;
 				} else {
-					cov_2r1yd1lb8p.b[23][1]++;
-					cov_2r1yd1lb8p.s[81]++;
+					cov_2bja0hends.b[23][1]++;
+					cov_2bja0hends.s[81]++;
 
 					parent.properties[node[nameIndex]] = variable;
 				}
 			} else {
-				cov_2r1yd1lb8p.b[22][1]++;
+				cov_2bja0hends.b[22][1]++;
 			}
 		} else {
-			cov_2r1yd1lb8p.b[21][1]++;
+			cov_2bja0hends.b[21][1]++;
 		}
 	});
-	cov_2r1yd1lb8p.s[82]++;
+	cov_2bja0hends.s[82]++;
 	return variables[rowId];
 };
-cov_2r1yd1lb8p.s[83]++;
+cov_2bja0hends.s[83]++;
 SwaggerParser.prototype.parseOutput = function (metaData, workbook) {
-	cov_2r1yd1lb8p.f[6]++;
+	cov_2bja0hends.f[6]++;
 
-	var rowId = (cov_2r1yd1lb8p.s[84]++, metaData.rowId);
-	var type = (cov_2r1yd1lb8p.s[85]++, metaData.type);
-	var register = (cov_2r1yd1lb8p.s[86]++, workbook.indexer);
-	var startnode = (cov_2r1yd1lb8p.s[87]++, register.getIndex('name')[rowId]);
-	var nameIndex = (cov_2r1yd1lb8p.s[88]++, register.schemaIndexes.name);
-	var childrenIndex = (cov_2r1yd1lb8p.s[89]++, register.schemaIndexes.children);
-	var frequencyIndex = (cov_2r1yd1lb8p.s[90]++, register.schemaIndexes.frequency);
-	var datatypeIndex = (cov_2r1yd1lb8p.s[91]++, register.schemaIndexes.datatype);
-	var parentIdIndex = (cov_2r1yd1lb8p.s[92]++, register.schemaIndexes.parentId);
-	var variables = (cov_2r1yd1lb8p.s[93]++, {});
-	var names = (cov_2r1yd1lb8p.s[94]++, register.getIndex('i'));
-	var firstArray = (cov_2r1yd1lb8p.s[95]++, true);
-	cov_2r1yd1lb8p.s[96]++;
+	var rowId = (cov_2bja0hends.s[84]++, metaData.rowId);
+	var type = (cov_2bja0hends.s[85]++, metaData.type);
+	var register = (cov_2bja0hends.s[86]++, workbook.indexer);
+	var startnode = (cov_2bja0hends.s[87]++, register.getIndex('name')[rowId]);
+	var nameIndex = (cov_2bja0hends.s[88]++, register.schemaIndexes.name);
+	var childrenIndex = (cov_2bja0hends.s[89]++, register.schemaIndexes.children);
+	var frequencyIndex = (cov_2bja0hends.s[90]++, register.schemaIndexes.frequency);
+	var datatypeIndex = (cov_2bja0hends.s[91]++, register.schemaIndexes.datatype);
+	var parentIdIndex = (cov_2bja0hends.s[92]++, register.schemaIndexes.parentId);
+	var variables = (cov_2bja0hends.s[93]++, {});
+	var names = (cov_2bja0hends.s[94]++, register.getIndex('i'));
+	var firstArray = (cov_2bja0hends.s[95]++, true);
+	cov_2bja0hends.s[96]++;
 	register.walk(startnode, 0, function (node, depth) {
-		cov_2r1yd1lb8p.f[7]++;
+		cov_2bja0hends.f[7]++;
 
-		var nodeName = (cov_2r1yd1lb8p.s[97]++, node[nameIndex]);
-		var nodeType = (cov_2r1yd1lb8p.s[98]++, 'number');
-		var currentNode = (cov_2r1yd1lb8p.s[99]++, {
+		var nodeName = (cov_2bja0hends.s[97]++, node[nameIndex]);
+		var nodeType = (cov_2bja0hends.s[98]++, 'number');
+		var currentNode = (cov_2bja0hends.s[99]++, {
 			type: nodeType,
 			description: workbook.get(nodeName, 'title')
 		});
 		var choices = void 0;
-		cov_2r1yd1lb8p.s[100]++;
+		cov_2bja0hends.s[100]++;
 		if (node[childrenIndex].length > 0) {
-			cov_2r1yd1lb8p.b[24][0]++;
-			cov_2r1yd1lb8p.s[101]++;
+			cov_2bja0hends.b[24][0]++;
+			cov_2bja0hends.s[101]++;
 
 			currentNode.type = 'object';
 		} else {
-				cov_2r1yd1lb8p.b[24][1]++;
-				cov_2r1yd1lb8p.s[102]++;
+				cov_2bja0hends.b[24][1]++;
+				cov_2bja0hends.s[102]++;
 				if (choices = workbook.get(nodeName, 'choices')) {
-					cov_2r1yd1lb8p.b[25][0]++;
-					cov_2r1yd1lb8p.s[103]++;
+					cov_2bja0hends.b[25][0]++;
+					cov_2bja0hends.s[103]++;
 
 					currentNode.enum = [];
-					cov_2r1yd1lb8p.s[104]++;
+					cov_2bja0hends.s[104]++;
 					for (var i = 0; i < choices.length; i++) {
-						var obj = (cov_2r1yd1lb8p.s[105]++, choices[i]);
-						cov_2r1yd1lb8p.s[106]++;
+						var obj = (cov_2bja0hends.s[105]++, choices[i]);
+						cov_2bja0hends.s[106]++;
 						currentNode.enum.push(obj.value);
 					}
 				} else {
-					cov_2r1yd1lb8p.b[25][1]++;
-					cov_2r1yd1lb8p.s[107]++;
+					cov_2bja0hends.b[25][1]++;
+					cov_2bja0hends.s[107]++;
 
 					if (node[datatypeIndex]) {
-						cov_2r1yd1lb8p.b[26][0]++;
-						cov_2r1yd1lb8p.s[108]++;
+						cov_2bja0hends.b[26][0]++;
+						cov_2bja0hends.s[108]++;
 
 						currentNode.type = node[datatypeIndex];
 					} else {
-						cov_2r1yd1lb8p.b[26][1]++;
-						cov_2r1yd1lb8p.s[109]++;
+						cov_2bja0hends.b[26][1]++;
+						cov_2bja0hends.s[109]++;
 
 						currentNode.type = 'number';
 					}
 				}
-			}cov_2r1yd1lb8p.s[110]++;
+			}cov_2bja0hends.s[110]++;
 		variables[nodeName] = currentNode;
-		cov_2r1yd1lb8p.s[111]++;
+		cov_2bja0hends.s[111]++;
 		if (currentNode.type == 'object') {
-				cov_2r1yd1lb8p.b[27][0]++;
-				cov_2r1yd1lb8p.s[112]++;
+				cov_2bja0hends.b[27][0]++;
+				cov_2bja0hends.s[112]++;
 				currentNode.properties = {};
 			} else {
-			cov_2r1yd1lb8p.b[27][1]++;
-		}cov_2r1yd1lb8p.s[113]++;
+			cov_2bja0hends.b[27][1]++;
+		}cov_2bja0hends.s[113]++;
 		if (currentNode.type == 'number') {
-				cov_2r1yd1lb8p.b[28][0]++;
-				cov_2r1yd1lb8p.s[114]++;
+				cov_2bja0hends.b[28][0]++;
+				cov_2bja0hends.s[114]++;
 				currentNode.format = 'double';
 			} else {
-			cov_2r1yd1lb8p.b[28][1]++;
+			cov_2bja0hends.b[28][1]++;
 		}
 	});
-	cov_2r1yd1lb8p.s[115]++;
+	cov_2bja0hends.s[115]++;
 	register.walk(startnode, 0, function (node, depth) {
-		cov_2r1yd1lb8p.f[8]++;
-		cov_2r1yd1lb8p.s[116]++;
+		cov_2bja0hends.f[8]++;
+		cov_2bja0hends.s[116]++;
 
 		if (node[parentIdIndex]) {
-			cov_2r1yd1lb8p.b[29][0]++;
+			cov_2bja0hends.b[29][0]++;
 
-			var variable = (cov_2r1yd1lb8p.s[117]++, variables[node[nameIndex]]);
-			var parent = (cov_2r1yd1lb8p.s[118]++, variables[names[node[parentIdIndex]][nameIndex]]);
-			cov_2r1yd1lb8p.s[119]++;
+			var variable = (cov_2bja0hends.s[117]++, variables[node[nameIndex]]);
+			var parent = (cov_2bja0hends.s[118]++, variables[names[node[parentIdIndex]][nameIndex]]);
+			cov_2bja0hends.s[119]++;
 			if (parent) {
-				cov_2r1yd1lb8p.b[30][0]++;
-				cov_2r1yd1lb8p.s[120]++;
+				cov_2bja0hends.b[30][0]++;
+				cov_2bja0hends.s[120]++;
 
 				if (parent.type == 'array') {
-					cov_2r1yd1lb8p.b[31][0]++;
-					cov_2r1yd1lb8p.s[121]++;
+					cov_2bja0hends.b[31][0]++;
+					cov_2bja0hends.s[121]++;
 
 					parent.items.properties[node[nameIndex]] = variable;
 				} else {
-					cov_2r1yd1lb8p.b[31][1]++;
-					cov_2r1yd1lb8p.s[122]++;
+					cov_2bja0hends.b[31][1]++;
+					cov_2bja0hends.s[122]++;
 
 					parent.properties[node[nameIndex]] = variable;
 				}
 			} else {
-				cov_2r1yd1lb8p.b[30][1]++;
+				cov_2bja0hends.b[30][1]++;
 			}
 		} else {
-			cov_2r1yd1lb8p.b[29][1]++;
+			cov_2bja0hends.b[29][1]++;
 		}
 	});
-	cov_2r1yd1lb8p.s[123]++;
+	cov_2bja0hends.s[123]++;
 	return variables[rowId];
 };
-cov_2r1yd1lb8p.s[124]++;
+cov_2bja0hends.s[124]++;
 SwaggerParser.prototype.parseData = function (data, workbook) {
-	cov_2r1yd1lb8p.f[9]++;
-	cov_2r1yd1lb8p.s[125]++;
+	cov_2bja0hends.f[9]++;
+	cov_2bja0hends.s[125]++;
 
 	throw new Error('There is no support to convert swagger into lme yet.');
 };

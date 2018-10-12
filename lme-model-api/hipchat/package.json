@@ -8,7 +8,7 @@
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "author": "michael.bakker1986@gmail.com",
   "license": "ISC"

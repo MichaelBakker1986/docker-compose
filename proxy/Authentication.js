@@ -1,10 +1,10 @@
-const passport = require('passport')
-const FaceBookStrategy = require('passport-facebook').Strategy
+import passport from 'passport'
+import Strategy from 'passport-facebook'
 
 class Authentication {
 	constructor(app) {
 
-		passport.use(new FaceBookStrategy({
+		passport.use(new Strategy({
 				clientID         : '180467995863988',
 				clientSecret     : 'b10828749578d1bd1402e8c57b72b01d',
 				passReqToCallback: true

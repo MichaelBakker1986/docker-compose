@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_12qwcjf81u = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\CustomImport.js',
-	    hash = '6262976a1cfd1167ff67f0e64186887e75a06859',
+var cov_15108hhb6r = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\CustomImport.js',
+	    hash = '8d66cee19e8b4b8413aea3b0400af990ba2a9244',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\CustomImport.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\CustomImport.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -71,8 +71,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-	cov_12qwcjf81u.f[0]++;
-	cov_12qwcjf81u.s[0]++;
+	cov_15108hhb6r.f[0]++;
+	cov_15108hhb6r.s[0]++;
 
 	return {
 		'formulasets': [{

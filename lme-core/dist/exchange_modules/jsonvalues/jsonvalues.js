@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1urkdgnx3f = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js',
-	    hash = '603019507a6ff9b342156fbb5eda7d5b5473b724',
+var cov_ffxvjscnd = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js',
+	    hash = '66f80ae3fbc69dd5d175e2d40bd90cea3c7cd0ff',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\jsonvalues\\jsonvalues.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -710,52 +710,52 @@ var _index = require('../../index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var jsonValues = (cov_1urkdgnx3f.s[0]++, {
+var jsonValues = (cov_ffxvjscnd.s[0]++, {
 	headername: 'jsonvalues',
 	name: 'jsonvalues',
 	parseData: function parseData(data, workbook) {
-		cov_1urkdgnx3f.f[0]++;
-		cov_1urkdgnx3f.s[1]++;
+		cov_ffxvjscnd.f[0]++;
+		cov_ffxvjscnd.s[1]++;
 
 		updateValues(data, workbook.context);
-		cov_1urkdgnx3f.s[2]++;
+		cov_ffxvjscnd.s[2]++;
 		return _index.SolutionFacade.createSolution(workbook.getSolutionName());
 	},
 	deParse: function deParse(rowId, workbook) {
-		cov_1urkdgnx3f.f[1]++;
+		cov_ffxvjscnd.f[1]++;
 
-		var allValues = (cov_1urkdgnx3f.s[3]++, workbook.getAllChangedValues());
+		var allValues = (cov_ffxvjscnd.s[3]++, workbook.getAllChangedValues());
 		//clean up the audit while de-parsing.
-		cov_1urkdgnx3f.s[4]++;
+		cov_ffxvjscnd.s[4]++;
 		allValues.forEach(function (single_value) {
-			cov_1urkdgnx3f.f[2]++;
-			cov_1urkdgnx3f.s[5]++;
+			cov_ffxvjscnd.f[2]++;
+			cov_ffxvjscnd.s[5]++;
 
 			if (single_value.varName.endsWith('_title')) {
-					cov_1urkdgnx3f.b[0][0]++;
-					cov_1urkdgnx3f.s[6]++;
+					cov_ffxvjscnd.b[0][0]++;
+					cov_ffxvjscnd.s[6]++;
 					single_value.varName = correctPropertyName(single_value.varName);
 				} else {
-					cov_1urkdgnx3f.b[0][1]++;
-					cov_1urkdgnx3f.s[7]++;
+					cov_ffxvjscnd.b[0][1]++;
+					cov_ffxvjscnd.s[7]++;
 					single_value.varName = correctFileName(single_value.varName);
 				}
 		});
-		cov_1urkdgnx3f.s[8]++;
+		cov_ffxvjscnd.s[8]++;
 		return allValues;
 	}
 });
 
-cov_1urkdgnx3f.s[9]++;
+cov_ffxvjscnd.s[9]++;
 var correctPropertyName = function correctPropertyName(name) {
-	cov_1urkdgnx3f.f[3]++;
-	cov_1urkdgnx3f.s[10]++;
+	cov_ffxvjscnd.f[3]++;
+	cov_ffxvjscnd.s[10]++;
 	return name.replace(/^([^_]+_[\w]*_\w+)$/gmi, '$1');
 };
-cov_1urkdgnx3f.s[11]++;
+cov_ffxvjscnd.s[11]++;
 var correctFileName = function correctFileName(name) {
-	cov_1urkdgnx3f.f[4]++;
-	cov_1urkdgnx3f.s[12]++;
+	cov_ffxvjscnd.f[4]++;
+	cov_ffxvjscnd.s[12]++;
 	return name.replace(/^([^_]+_[\w]*)_\w+$/gmi, '$1');
 };
 
@@ -764,59 +764,59 @@ var correctFileName = function correctFileName(name) {
  * They will not be saved in the audit.
  */
 function updateValues(data, context) {
-	cov_1urkdgnx3f.f[5]++;
+	cov_ffxvjscnd.f[5]++;
 
-	var docValues = (cov_1urkdgnx3f.s[13]++, context.getValues());
-	cov_1urkdgnx3f.s[14]++;
+	var docValues = (cov_ffxvjscnd.s[13]++, context.getValues());
+	cov_ffxvjscnd.s[14]++;
 	for (var key in docValues) {
-		cov_1urkdgnx3f.s[15]++;
+		cov_ffxvjscnd.s[15]++;
 		if (!isNaN(key)) {
-				cov_1urkdgnx3f.b[1][0]++;
-				cov_1urkdgnx3f.s[16]++;
+				cov_ffxvjscnd.b[1][0]++;
+				cov_ffxvjscnd.s[16]++;
 				docValues[key] = {};
 			} else {
-			cov_1urkdgnx3f.b[1][1]++;
+			cov_ffxvjscnd.b[1][1]++;
 		}
-	}cov_1urkdgnx3f.s[17]++;
+	}cov_ffxvjscnd.s[17]++;
 	for (var _key in data.values) {
-		var value = (cov_1urkdgnx3f.s[18]++, data.values[_key]);
+		var value = (cov_ffxvjscnd.s[18]++, data.values[_key]);
 
-		var _ref = (cov_1urkdgnx3f.s[19]++, _key.split('#')[0]),
+		var _ref = (cov_ffxvjscnd.s[19]++, _key.split('#')[0]),
 		    _ref2 = (0, _slicedToArray3.default)(_ref, 2),
 		    nodeId = _ref2[0],
 		    nodeColId = _ref2[1];
 
-		cov_1urkdgnx3f.s[20]++;
+		cov_ffxvjscnd.s[20]++;
 
 
 		if (!nodeId.endsWith('_value')) {
-			cov_1urkdgnx3f.b[2][0]++;
-			cov_1urkdgnx3f.s[21]++;
+			cov_ffxvjscnd.b[2][0]++;
+			cov_ffxvjscnd.s[21]++;
 
 			nodeId = nodeId + '_value';
 		} else {
-			cov_1urkdgnx3f.b[2][1]++;
+			cov_ffxvjscnd.b[2][1]++;
 		}
-		var fetch = (cov_1urkdgnx3f.s[22]++, _index.PropertiesAssembler.fetch(nodeId));
+		var fetch = (cov_ffxvjscnd.s[22]++, _index.PropertiesAssembler.fetch(nodeId));
 		//we don't have to import values for variables we don't use.
-		cov_1urkdgnx3f.s[23]++;
+		cov_ffxvjscnd.s[23]++;
 		if (fetch) {
-			cov_1urkdgnx3f.b[3][0]++;
+			cov_ffxvjscnd.b[3][0]++;
 
-			var enteredValue = (cov_1urkdgnx3f.s[24]++, value.value);
-			cov_1urkdgnx3f.s[25]++;
+			var enteredValue = (cov_ffxvjscnd.s[24]++, value.value);
+			cov_ffxvjscnd.s[25]++;
 			if (fetch.datatype === _index.NUMBER) {
-				cov_1urkdgnx3f.b[4][0]++;
-				cov_1urkdgnx3f.s[26]++;
+				cov_ffxvjscnd.b[4][0]++;
+				cov_ffxvjscnd.s[26]++;
 
-				enteredValue = enteredValue == null ? (cov_1urkdgnx3f.b[5][0]++, null) : (cov_1urkdgnx3f.b[5][1]++, Number(enteredValue));
+				enteredValue = enteredValue == null ? (cov_ffxvjscnd.b[5][0]++, null) : (cov_ffxvjscnd.b[5][1]++, Number(enteredValue));
 			} else {
-				cov_1urkdgnx3f.b[4][1]++;
+				cov_ffxvjscnd.b[4][1]++;
 			}
-			cov_1urkdgnx3f.s[27]++;
+			cov_ffxvjscnd.s[27]++;
 			docValues[fetch.ref][parseInt(nodeColId)] = enteredValue;
 		} else {
-			cov_1urkdgnx3f.b[3][1]++;
+			cov_ffxvjscnd.b[3][1]++;
 		}
 	}
 }

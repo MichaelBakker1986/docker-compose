@@ -1,4 +1,4 @@
-import tracer from 'michaelbakker-tracer'
+import { colorConsole } from 'michaelbakker-tracer'
 
 const format = process.env.TIME_FORMAT || 'HH.MM.ssl'
 const logLevel = process.env.ENV || 'info'
@@ -28,7 +28,7 @@ const levels = {
 		WARN : true
 	}
 }
-const console = tracer.colorConsole({
+const console = colorConsole({
 	format    : '{{timestamp}} ({{file}}:{{line}}) \t- {{message}}',
 	dateformat: format,
 	level     : logLevel,
