@@ -1,7 +1,8 @@
 {
   "name": "lme-array-roller",
   "version": "1.0.0",
-  "description": "",
+  "repository": {},
+  "description": "Array with cursor",
   "main": "array-roller.js",
   "scripts": {
     "test": "node test.js"

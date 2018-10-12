@@ -1,14 +1,14 @@
 {
   "name": "lme-throttle",
   "version": "1.0.0",
-  "description": "",
+  "author": "michael.bakker1986@gmail.com",
+  "description": "Throttle plugin",
+  "repository": {},
   "main": "throttle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

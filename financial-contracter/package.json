@@ -1,7 +1,8 @@
 {
   "name": "financial-contracter",
   "version": "1.0.1",
-  "description": "",
+  "description": "Contact api for financial language editor",
+  "repository": {},
   "main": "dist/financial-contracter.js",
   "scripts": {
     "build": "babel . --ignore node_modules,dist,tests -d dist/",

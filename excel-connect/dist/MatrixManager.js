@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_s5m5r8rnb = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\MatrixManager.js',
-	    hash = 'bc29f829ed4a095e7c4fb182616e640b38f31756',
+var cov_1ulwyircap = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\MatrixManager.js',
+	    hash = 'e7162b37ae372902d87638e2e0476d5925abed0e',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\MatrixManager.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\MatrixManager.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -451,76 +451,76 @@ Object.defineProperty(exports, "__esModule", {
 var _index = require('../lme-core/index');
 
 function MatrixManager() {
-	cov_s5m5r8rnb.f[0]++;
-	cov_s5m5r8rnb.s[0]++;
+	cov_1ulwyircap.f[0]++;
+	cov_1ulwyircap.s[0]++;
 
 	this.register = {};
-	cov_s5m5r8rnb.s[1]++;
+	cov_1ulwyircap.s[1]++;
 	this.matrix = [];
 }
 
 /*
  * Language used by the editor
  */
-cov_s5m5r8rnb.s[2]++;
+cov_1ulwyircap.s[2]++;
 MatrixManager.prototype.toFatrix = function () {
-	cov_s5m5r8rnb.f[1]++;
+	cov_1ulwyircap.f[1]++;
 
-	var register = (cov_s5m5r8rnb.s[3]++, new _index.Register(['table', 'row', 'col', 'value']));
-	cov_s5m5r8rnb.s[4]++;
+	var register = (cov_1ulwyircap.s[3]++, new _index.Register(['table', 'row', 'col', 'value']));
+	cov_1ulwyircap.s[4]++;
 	for (var matrix_index = 0; matrix_index < this.matrix.length; matrix_index++) {
-		var table = (cov_s5m5r8rnb.s[5]++, this.matrix[matrix_index]);
-		var table_name = (cov_s5m5r8rnb.s[6]++, table.name);
-		cov_s5m5r8rnb.s[7]++;
+		var table = (cov_1ulwyircap.s[5]++, this.matrix[matrix_index]);
+		var table_name = (cov_1ulwyircap.s[6]++, table.name);
+		cov_1ulwyircap.s[7]++;
 		for (var row in table.xasValues) {
-			cov_s5m5r8rnb.s[8]++;
+			cov_1ulwyircap.s[8]++;
 
 			for (var col in table.xasValues[row]) {
-				cov_s5m5r8rnb.s[9]++;
+				cov_1ulwyircap.s[9]++;
 
 				register.addRow([table_name, row, col, table.xasValues[row][col]]);
 			}
 		}
 	}
-	var output = (cov_s5m5r8rnb.s[10]++, [['TableName', 'RowName', 'ColumnID', 'Value']]);
-	cov_s5m5r8rnb.s[11]++;
+	var output = (cov_1ulwyircap.s[10]++, [['TableName', 'RowName', 'ColumnID', 'Value']]);
+	cov_1ulwyircap.s[11]++;
 	for (var register_index = 0; register_index < register.i.length; register_index++) {
-		var obj = (cov_s5m5r8rnb.s[12]++, register.i[register_index]);
-		cov_s5m5r8rnb.s[13]++;
+		var obj = (cov_1ulwyircap.s[12]++, register.i[register_index]);
+		cov_1ulwyircap.s[13]++;
 		output.push([obj[0], obj[1], obj[2], obj[3]]);
 	}
-	cov_s5m5r8rnb.s[14]++;
+	cov_1ulwyircap.s[14]++;
 	output = output.map(function (el) {
-		cov_s5m5r8rnb.f[2]++;
-		cov_s5m5r8rnb.s[15]++;
+		cov_1ulwyircap.f[2]++;
+		cov_1ulwyircap.s[15]++;
 
 		return el.map(function (innerEl) {
-			cov_s5m5r8rnb.f[3]++;
+			cov_1ulwyircap.f[3]++;
 
-			var prefix = (cov_s5m5r8rnb.s[16]++, []);
-			cov_s5m5r8rnb.s[17]++;
+			var prefix = (cov_1ulwyircap.s[16]++, []);
+			cov_1ulwyircap.s[17]++;
 			prefix.length = Math.max(30 - String(innerEl).length, 0);
-			cov_s5m5r8rnb.s[18]++;
+			cov_1ulwyircap.s[18]++;
 			return innerEl + prefix.join(' ');
 		}).join('|');
 	});
-	cov_s5m5r8rnb.s[19]++;
+	cov_1ulwyircap.s[19]++;
 	return output.join('\n');
 };
-cov_s5m5r8rnb.s[20]++;
+cov_1ulwyircap.s[20]++;
 MatrixManager.prototype.setMatrices = function (matrixArg) {
-	cov_s5m5r8rnb.f[4]++;
-	cov_s5m5r8rnb.s[21]++;
+	cov_1ulwyircap.f[4]++;
+	cov_1ulwyircap.s[21]++;
 
 	this.matrix.length = 0;
-	cov_s5m5r8rnb.s[22]++;
+	cov_1ulwyircap.s[22]++;
 	this.register = {};
-	cov_s5m5r8rnb.s[23]++;
+	cov_1ulwyircap.s[23]++;
 	for (var table_name in matrixArg) {
-		cov_s5m5r8rnb.s[24]++;
+		cov_1ulwyircap.s[24]++;
 
 		this.register[table_name] = matrixArg[table_name];
-		cov_s5m5r8rnb.s[25]++;
+		cov_1ulwyircap.s[25]++;
 		this.matrix.push(matrixArg[table_name]);
 	}
 };

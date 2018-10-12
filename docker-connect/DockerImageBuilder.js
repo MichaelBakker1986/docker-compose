@@ -47,4 +47,8 @@ class DockerImageBuilder {
 
 //new DockerImageBuilder(null, null, null, 'prescan').buildDockerImage()
 export { DockerImageBuilder }
-new DockerImageBuilder('KSP', undefined, undefined, 'KSP', 2).buildDockerFile('../lme-data-api/lme-data-app.js')
+new DockerImageBuilder('KSP', undefined, undefined, 'KSP', 2).buildDockerFile('../lme-data-api/lme-data-app.js').then(() => {
+
+}).catch((err) => {
+
+})

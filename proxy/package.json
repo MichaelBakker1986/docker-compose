@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "proxy.js",
+  "author": "michael.bakker1986@gmail.com",
   "repository": {
     "type": "git",
     "url": "ssh://git@stash.topicus.nl:7999/ff/fesjs.git"
@@ -10,7 +11,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "michael.bakker@topicus.nl",
   "license": "ISC",
   "dependencies": {
     "acl": "^0.4.11",

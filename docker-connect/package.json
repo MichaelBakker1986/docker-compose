@@ -1,12 +1,13 @@
 {
   "name": "docker-connect",
   "version": "1.0.0",
-  "description": "",
+  "description": "connect lme with docker",
+  "repository": {},
   "main": "DockerImageBuilder.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "michael.bakker1986@gmail.com",
   "license": "ISC",
   "dependencies": {
     "child-process-promise": "^2.2.1",

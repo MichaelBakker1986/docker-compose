@@ -1,7 +1,9 @@
 {
   "name": "ffl-math",
   "version": "1.0.17",
+  "author": "michael.bakker1986@gmail.com",
   "description": "FFL MathJs",
+  "repository": {},
   "dependencies": {
     "algebra.js": "^0.2.6",
     "exponential-moving-average": "^1.0.0",
@@ -26,7 +28,6 @@
   "keywords": [
     "ffl-math"
   ],
-  "author": "michael.bakker <npm.michael.bakker@gmail.com> (http://log6-example.com)",
   "license": "ISC",
   "devDependencies": {
     "babel-plugin-inline-json-import": "^0.2.1"

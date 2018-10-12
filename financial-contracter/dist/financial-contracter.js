@@ -17,8 +17,6 @@ var _log2 = _interopRequireDefault(_log);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var dummy_orig = '\nmodel SCORECARDBASICS uses BaseModel\n{\n variable Q_ROOT\n {\n  display_options:scorecard;\n  variable FirstMAP\n  {\n   title: "FirstMAP";\n   datatype: number(2);\n  }\n }\n}';
@@ -45,7 +43,7 @@ var Contracter = exports.Contracter = function () {
 			if (compareResults.status === 'ok' && compareResults.changes > 0) {
 				var relativeFFLPath = root_hash;
 				var create_time = new Date().getTime();
-				[].concat(_toConsumableArray(compareResults.compare.updates), _toConsumableArray(compareResults.compare.inserts), _toConsumableArray(compareResults.compare.deletes)).forEach(function (_ref) {
+				compareResults.compare.forEach(function (_ref) {
 					var _ref2 = _slicedToArray(_ref, 4),
 					    name = _ref2[0],
 					    from = _ref2[1],
@@ -69,9 +67,9 @@ var Contracter = exports.Contracter = function () {
 			var target_register = new _fflPack.Register();
 			new _fflPack.Formatter(target_register, target_data).parseProperties();
 			var database_compare = new _fflPack.DeltaCompareRegister(source_register, target_register);
-			var compareResults = database_compare.compare();
-			if (_log2.default.TRACE) _log2.default.trace(compareResults);
-			return { status: 'ok', changes: compareResults.changes, compare: compareResults };
+			database_compare.compare();
+			if (_log2.default.TRACE) _log2.default.trace(database_compare);
+			return { status: 'ok', changes: database_compare.changes, compare: database_compare };
 		}
 	}]);
 

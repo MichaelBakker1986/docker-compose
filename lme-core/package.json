@@ -38,6 +38,6 @@
     "source": "sh ./node_modules/.bin/esdoc",
     "test": "cd test && node -r babel-register ./RunAllTest.js"
   },
-  "author": "Michael Bakker",
+  "author": "michael.bakker1986@gmail.com",
   "license": "MIT"
 }
