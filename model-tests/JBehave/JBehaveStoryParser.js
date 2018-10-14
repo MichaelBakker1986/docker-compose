@@ -7,10 +7,11 @@ import { LmeAPI }                                            from '../../lme-mod
 import CustomImport                                          from '../../lme-core/resources/CustomImport.json'
 import { readFileSync }                                      from 'fs'
 import fflMath                                               from '../../math/ffl-math'
+import formulaJs                                             from '../../formulajs-connect/formulajs'
 import ExcelApi                                              from '../excel-api'
 
 api.registerParser(RegisterPlainFFLDecorator)
-api.addFunctions(fflMath)
+api.addFunctions(fflMath, formulaJs)
 
 class JBehaveStoryParser {
 	constructor(props) {

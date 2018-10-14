@@ -198,10 +198,10 @@ function resolveY(wb, y) {
 }
 
 JSWorkBook.prototype.get = function(row, col, x, y) {
-	return this.getSolutionPropertyValue(this.modelName + '_' + row, col, x, y)
+	return this.getSolutionPropertyValue(`${this.modelName}_${row}`, col, x, y)
 }
 JSWorkBook.prototype.getValue = function(row, x, y) {
-	return this.getSolutionPropertyValue(this.modelName + '_' + row, VALUE, x, y)
+	return this.getSolutionPropertyValue(`${this.modelName}_${row}`, VALUE, x, y)
 }
 JSWorkBook.prototype.getSolutionPropertyValue = function(row, col, x, y) {
 	const xas = this.resolveX(x), yas = this.resolveY(y)
@@ -217,9 +217,7 @@ JSWorkBook.prototype.setSolutionPropertyValue = function(row, value, col, x, y) 
 	return ValueFacade.putSolutionPropertyValue(this.context, row, value, col, xas, yas)
 }
 JSWorkBook.prototype.importValues = function(values) {
-	for (var key in values) {
-		this.context._values[key] = values[key]
-	}
+	Object.keys(values).forEach(key => this.context._values[key] = values[key])
 }
 JSWorkBook.prototype.updateValues = function() {
 	ValueFacade.updateValueMap(this.context.getValues())
@@ -235,9 +233,9 @@ JSWorkBook.prototype.getRootSolutionProperty = function() {
 JSWorkBook.prototype.maxTupleCountForRow = function(node, yas) {
 	if (!node.tuple) return -1
 	yas = this.resolveY(yas)
-	var tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
-	var allrefIdes = []
-	PropertiesAssembler.visitProperty(tupleDefinition, function(child, depth) {
+	const tupleDefinition = node.tupleDefinition ? node : this.getSolutionNode(node.solutionName + '_' + node.tupleDefinitionName)
+	const allrefIdes = []
+	PropertiesAssembler.visitProperty(tupleDefinition, (child) => {
 		if (child.ref) allrefIdes.push(String(child.ref))
 	}, 0)
 	return TINSTANCECOUNT(allrefIdes, this.context.getValues(), yas)
@@ -272,9 +270,10 @@ JSWorkBook.prototype.tupleIndexForName = function(nodeName, name, yas, delta) {
 	if (delta >= 2) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(`${tupleDefinition.solutionName}_${tupleDefinition.tupleDefinitionName}`) : tupleDefinition
 	if (delta >= 3) tupleDefinition = tupleDefinition.tupleDefinitionName ? this.getSolutionNode(`${tupleDefinition.solutionName}_${tupleDefinition.tupleDefinitionName}`) : tupleDefinition
 	const values = this.context.getValues()[String(tupleDefinition.ref)]
-	for (let key in values) {
+	let keys = Object.keys(values)
+	for (let key of keys) {
 		if (name === values[key]) {
-			if (DEBUG) debug('Found ' + key + '' + values[key])
+			if (DEBUG) debug(`Found ${key}${values[key]}`)
 			return REVERSEYAXIS(parseInt(key), yas)
 		}
 	}

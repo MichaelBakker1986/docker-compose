@@ -5,15 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WARN = exports.TRACE = exports.INFO = exports.DEBUG = exports.debug = exports.warn = exports.trace = exports.error = exports.info = undefined;
 
-var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
-
-var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
 var _michaelbakkerTracer = require('michaelbakker-tracer');
-
-var _michaelbakkerTracer2 = _interopRequireDefault(_michaelbakkerTracer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var format = process.env.TIME_FORMAT || 'HH.MM.ssl';
 var logLevel = process.env.ENV || 'info';
@@ -43,7 +35,7 @@ var levels = {
 		WARN: true
 	}
 };
-var console = _michaelbakkerTracer2.default.colorConsole({
+var console = (0, _michaelbakkerTracer.colorConsole)({
 	format: '{{timestamp}} ({{file}}:{{line}}) \t- {{message}}',
 	dateformat: format,
 	level: logLevel,
@@ -51,9 +43,7 @@ var console = _michaelbakkerTracer2.default.colorConsole({
 		var args = _ref.args;
 
 		if (args.length > 0) {
-			var _args = (0, _slicedToArray3.default)(args, 1),
-			    first_arg = _args[0];
-
+			var first_arg = args[0];
 			if (typeof first_arg.toString === 'function') {
 				args[0] = first_arg.toString();
 			} else if (first_arg.stack) {

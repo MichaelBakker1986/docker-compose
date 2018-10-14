@@ -1,4 +1,4 @@
-import LMEApi                   from '../src/lme'
+import { LmeAPI }               from '../src/lme'
 import api, { WebExportParser } from '../../lme-core/index'
 import log                      from 'log6'
 import { readFileSync }         from 'fs'
@@ -6,7 +6,7 @@ import { equal, ok }            from 'assert'
 
 api.registerParser(WebExportParser)
 
-const newModel = new LMEApi()
+const newModel = new LmeAPI()
 ok((1 || false))
 ok(!(null == 'true'))
 Number.prototype.countDecimals = function() {
@@ -16,7 +16,7 @@ Number.prototype.countDecimals = function() {
 /**
  * FFL->LME->WebExport
  */
-newModel.importFFL(readFileSync(__dirname + '/TESTMODEL.ffl', 'utf8'))
+newModel.importFFL(readFileSync(`${__dirname}/TESTMODEL.ffl`, 'utf8'))
 const nodes = newModel.exportWebModel().no
 /**
  * Declare variables
@@ -63,3 +63,5 @@ function disabled_test() {
 	newModel.exportData()
 	log.debug('Tests passed')
 }
+
+disabled_test()

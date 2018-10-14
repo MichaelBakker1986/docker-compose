@@ -4,11 +4,11 @@
  */
 import fs                     from 'fs'
 import { DEBUG, debug, warn } from 'log6'
-import Excel                  from 'exceljs'
+import * as Excel             from 'exceljs'
 import Promise                from 'promise'
 import path                   from 'path'
 
-const default_resources_map = path.join(__dirname, '../git-connect/resources/')
+const default_resources_map = path.join(__dirname, process.env.RESOURCES_PATH || '../git-connect/resources/')
 
 /**
  * Result after excel parsing.
@@ -68,21 +68,21 @@ const findXasValues = (range, yasNames, bounds) => {
 const getDefinedNames = (wb) => {
 	const names = {}
 	const matrixMap = wb._definedNames.matrixMap
-	for (let name in matrixMap) {
+	Object.keys(matrixMap).forEach(name => {
 		//checks concerning assumptions made during creating code.
 		const matrixMapDefinedName = matrixMap[name]
 		if (!matrixMapDefinedName) {
 			warn(`invalid named range [${name}]`)
-			continue
+			return
 		}
 		if (!matrixMapDefinedName.sheets) {
 			warn(`invalid named range sheets [${name}]`)
-			continue
+			return
 		}
 		const matrixMapDefinedNamesSheetKeys = Object.keys(matrixMapDefinedName.sheets)
 		if (matrixMapDefinedNamesSheetKeys.length > 1) {
 			warn(`invalid named range sheet count [${name}]`)
-			continue
+			return
 		}
 		const sheetName = matrixMapDefinedNamesSheetKeys[0]
 		names[name] = {
@@ -90,30 +90,30 @@ const getDefinedNames = (wb) => {
 			sheet : wb.getWorksheet(sheetName),
 			ranges: matrixMapDefinedName.sheets[sheetName]
 		}
-	}
+	})
 	return names
 }
 
 const readFunction = (wb) => {
 	const matrix = {}
 	const definedNames = getDefinedNames(wb)
-	for (let definedName in definedNames) {
+	Object.keys(definedNames).forEach(definedName => {
 		const range = definedNames[definedName]
 		const bounds = findStart(range)
 		const yasNames = findYasNames(range, bounds)
 		const xasValues = findXasValues(range, yasNames, bounds)
 		const sorted = []
-		for (let key in xasValues) sorted.push(key)
+		Object.keys(xasValues).forEach(key => sorted.push(key))
 		matrix[definedName] = {
 			name                    : range.name,
 			table                   : {},
 			bounds, yasNames, x_sort: sorted, xasValues
 		}
-		for (let xas_key in xasValues) {
+		Object.keys(xasValues).forEach(xas_key => {
 			matrix[definedName].x = []
-			for (let keyX in xasValues[xas_key]) matrix[definedName].x.push(keyX)
-		}
-	}
+			Object.keys(xasValues[xas_key]).forEach(keyX => matrix[definedName].x.push(keyX))
+		})
+	})
 	// use workbook
 	// This variable should be available in the client.
 	return matrix

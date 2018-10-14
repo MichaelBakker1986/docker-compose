@@ -294,7 +294,7 @@ const entries = {
 	closestLowerNum,
 	NA
 }
-/*if (!global.PPMT) global.PPMT = () => 1*/
+if (!global.PPMT) global.PPMT = () => 1
 const name = 'ff-math'
 export { name, entries }
 export default { name, entries }

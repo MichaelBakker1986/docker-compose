@@ -29,12 +29,10 @@ try {
 	const indexer = new ScorecardTool().parse(ffl)
 	const scorecard_data = `${modelRegister.header}{\n${new RegisterToFFL(indexer).toGeneratedFFL({ auto_join: true })}`
 	const context = new Context()
-	const lme = new LmeAPI(null, context)
-	lme.importFFL(scorecard_data)
+	const lme = new LmeAPI(null, context, undefined, { ffl: scorecard_data })
 	const debugManager = new DebugManager(modelRegister, context.audittrail)
 
 	ok(debugManager.monteCarlo(modelName).valid)
-
 } catch (err) {
 	error(err.stack)
 	process.exit(1)

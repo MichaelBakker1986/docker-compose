@@ -10,13 +10,12 @@ import { ModelListener }             from '../git-connect'
 import excelPlugin                   from '../excel-connect/excel-connect'
 import { basename }                  from 'path'
 import SwaggerParser                 from '../lme-core/exchange_modules/swagger/swaggerParser'
+import { APIDefinition }             from './resources/AuthenticatedSwaggerDefinition'
 
 LMEFacade.registerParser(RegisterPlainFFLDecorator, SwaggerParser)
 LMEFacade.addFunctions(fflMath, formulaJs)
 
 const modelLoadListener = new ModelListener()
-
-const APIDefinition = require(`${__dirname}/resources/AuthenticatedSwaggerDefinition.json`)
 
 LMEFacade.addFunctions(excelPlugin)
 modelLoadListener.addListener((fflModelData, path) => {

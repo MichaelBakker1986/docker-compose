@@ -21,7 +21,7 @@ const visit = (file) => {
 				const modelName = path.basename(fflFile).replace('.ffl', '')
 				const command = `node -r babel-register ${__dirname}/StoryExecutor.js ${[modelName, '"' + fflFile + '"', '"' + jBehaveStoryFile + '"'].join(' ')}`
 				try {
-					await exec(command)
+					await exec(command, { maxBuffer: 1024 * 500 })
 					info(`Success story ${file}`)
 				} catch (err) {
 					error(`Fail story ${err.toString()}`)

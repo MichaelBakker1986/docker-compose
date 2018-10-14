@@ -7,8 +7,8 @@ const browserify  = require('browserify'),
 //store for revert
 const old_module_version = packageInfo.version
 //major version bumb
-packageInfo.version = String(parseInt(packageInfo.version.split('.')[0]) + 1) + '.0.0'
-const module_tag_name = packageInfo.author.split('@')[0].replace(/\W/g, '').toLowerCase() + '/' + packageInfo.name + ':' + packageInfo.version
+packageInfo.version = `${String(parseInt(packageInfo.version.split('.')[0]) + 1)}.0.0`
+const module_tag_name = `${packageInfo.author.split('@')[0].replace(/\W/g, '').toLowerCase()}/${packageInfo.name}:${packageInfo.version}`
 
 fs.writeFileSync('./package.json', JSON.stringify(packageInfo, null, 2), 'utf8')
 const REQUIRE_FILES = [`${__dirname}/${packageInfo.main}`]

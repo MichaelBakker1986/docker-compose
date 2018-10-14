@@ -1,4 +1,4 @@
-import esprima                                   from 'esprima'
+import * as esprima                              from 'esprima'
 import { debug, DEBUG, TRACE, trace }            from 'log6'
 import { AST }                                   from 'ast-node-utils'
 import { RegisterToFFL }                         from './RegisterToFFL'

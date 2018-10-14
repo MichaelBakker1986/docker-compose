@@ -1,3 +1,6 @@
+/**
+ * @DEPRECATED
+ */
 import browserify      from 'browserify'
 import { error, info } from 'log6'
 import fs              from 'fs'

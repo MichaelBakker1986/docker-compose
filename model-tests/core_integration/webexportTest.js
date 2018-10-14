@@ -1,7 +1,6 @@
 import { RegisterPlainFFLDecorator }                                         from '../../ffl/index'
 import { equal }                                                             from 'assert'
 import api, { Context, ENCODING, VALUE, VISIBLE, WebExportParser, WorkBook } from '../../lme-core/index'
-import { debug }                                                             from 'log6'
 import fflMath                                                               from '../../math/ffl-math'
 import { readFileSync }                                                      from 'fs'
 
@@ -16,4 +15,4 @@ const webExport = wb.export('webexport')
 const rows = webExport.rows
 webExport.sortRows()
 equal(rows.length, 33)
-debug(rows[0].visible)
+equal(rows[0].visible, true)

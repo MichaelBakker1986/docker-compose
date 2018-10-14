@@ -1,4 +1,4 @@
-{
+export const APIDefinition ={
   "swagger": "2.0",
   "info": {
     "title": "LME API",

@@ -19,7 +19,7 @@ import orm       from 'orm'
 import { error } from 'log6'
 
 const dbConnectString = process.env.FIGURE_DB_STRING
-exports.orm = Promise.all([
+const Figure = Promise.all([
 	orm.connectAsync(dbConnectString).then(async (db) => {
 
 		db.use(require('orm-timestamps'), {
@@ -146,3 +146,4 @@ exports.orm = Promise.all([
 	}).catch((err) => error(err))
 ]).catch((err) => error(err))
 
+export { Figure }

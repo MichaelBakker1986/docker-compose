@@ -1502,8 +1502,8 @@ model URA uses BaseModel
      datatype: number;
      frequency: column;
      aggregation: average;
-     formula_notrend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
-     formula_trend: if(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
+     formula_notrend: If(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
+     formula_trend: If(ModelConfiguration=0,0.018,Case(YearInT,[<=2004:0.016|=2005:0.015|=2006:0.009|=2007:0.009|=2008:0.009|=2009:0.013|=2010:0.016|=2011:0.017|=2012:0.021|=2013:0.023|=2014:0.019|=2015:0.014|=2016:0.012|>=2017:0.012]));
      data_options: saveCalculatedValue,unscalable;
      displaytype: percentage;
      fixed_decimals: 1;
@@ -1549,8 +1549,8 @@ model URA uses BaseModel
      datatype: number;
      frequency: column;
      aggregation: balance;
-     formula_notrend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
-     formula_trend: if(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+     formula_notrend: If(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
+     formula_trend: If(krZValue=NA,NA,OnER(1/(1+Exp(krZValue)*krRDFsample*(1-krInsolvenzquote)/krInsolvenzquote),NA));
      data_options: saveCalculatedValue,calculateAggregation,unscalable;
      displaytype: percentage;
      fixed_decimals: 3;

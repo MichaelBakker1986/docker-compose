@@ -113,9 +113,6 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
 		const localFormula = findFormula(variable)
 		return localFormula.original
 	}
-	if (colType === VALUE && row === 'KSP2_TotalGrossCostsChildTillEighteen') {
-		var rt = 21
-	}
 	const variable = fetchSolutionNode(row, colType)
 	const localFormula = findFormula(variable)
 	let returnValue
@@ -130,8 +127,19 @@ ValueFacade.fetchSolutionPropertyValue = function(context, row, col, xas, yas) {
 				if (returnValue != null) {
 					const choices = ValueFacade.fetchSolutionPropertyValue(context, row, 'choices', xas, yas)
 					returnValue = returnValue === true ? '1' : returnValue === false ? '0' : returnValue
-					const choicesLookup = choices.lookup('name', String(returnValue))
-					returnValue = choicesLookup ? choicesLookup.value : returnValue
+					if (!choices.lookup) {
+						warn(`
+This is presumably a bug in LME (Choices were not parsed during initialization).
+ERR will be returned as Value. 
+Variable "${row}" has no parsed choices display type: "${variable.displaytype}".
+Parsed choices value "${choices}"
+Stack ${new Error().stack}
+`)
+						returnValue = 'ERR'
+					} else {
+						const choicesLookup = choices.lookup('name', String(returnValue))
+						returnValue = choicesLookup ? choicesLookup.value : returnValue
+					}
 				}
 			} else {
 				if (variable.decimals !== undefined) {
@@ -185,12 +193,13 @@ ValueFacade.getValuesFromFormulaIds = function(keys, docValues) {
 			const formula = FormulaService.findFormulaByIndex(formulaId)
 			const formulaName = formula === undefined ? formulaId : formula.name
 
-			for (let cached_value in cached_values)
+			Object.keys(cached_values).forEach(cached_value => {
 				values.push({
 					varName: formulaName,
 					colId  : cached_value,
 					value  : cached_values[cached_value]
 				})
+			})
 		}
 	}
 	return values

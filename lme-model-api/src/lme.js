@@ -25,6 +25,7 @@ function LmeAPI(TimeModel, Ctx, interval, options) {
 	this.modelName = undefined
 	this.urlPrefix = ''
 	Object.assign(this, options)
+	if (options && options.ffl) this.importFFL(options.ffl)
 }
 
 LmeAPI.prototype.hasChanges = function() {

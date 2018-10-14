@@ -1,4 +1,4 @@
-import LmeAPI from './src/lme'
+import { LmeAPI } from './src/lme'
 
 export {
 	LmeAPI

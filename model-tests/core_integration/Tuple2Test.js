@@ -1,12 +1,12 @@
 import { debug, DEBUG }                    from 'log6'
 import { Context, ENCODING, VALUE, YAxis } from '../../lme-core/index'
-import LME                                 from '../../lme-model-api/src/lme'
+import { LmeAPI }                          from '../../lme-model-api/src/lme'
 import { readFileSync }                    from 'fs'
 import { equal }                           from 'assert'
 //We add custom TimeAxis because we are going to extend columns here to the max to test the 10bit into tuple range
 import defaultImport                       from '../../lme-core/resources/CustomImport.json'
 
-const TUPLE_TEST = new LME(defaultImport, new Context({ columnSize: 1, columns: [VALUE] }))
+const TUPLE_TEST = new LmeAPI(defaultImport, new Context({ columnSize: 1, columns: [VALUE] }))
 const wb = TUPLE_TEST.lme
 TUPLE_TEST.importFFL(readFileSync(`${__dirname}/TupleTest.ffl`, ENCODING))
 const rootVariable = wb.getRootSolutionProperty()

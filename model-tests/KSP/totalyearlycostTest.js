@@ -1,13 +1,12 @@
 import { error }                        from 'log6'
-import excelPlugin                      from '../../excel-connect'
-import { entries }                      from '../../formulajs-connect'
-import { Context, LMEFacade, WorkBook } from '../../lme-core'
+import excelPlugin                      from '../../excel-connect/excel-connect'
+import formulaJs                        from '../../formulajs-connect/formulajs'
+import LMEFacade, { Context, WorkBook } from '../../lme-core/index'
 import { equal }                        from 'assert'
 import 'ffl-math'
 import '../../lme-core/exchange_modules/ffl/RegisterPlainFFLDecorator'
 
-LMEFacade.addFunctions(entries)
-LMEFacade.addFunctions(excelPlugin)
+LMEFacade.addFunctions(formulaJs, excelPlugin)
 excelPlugin.loadExcelFile('KSP').then(() => {
 	const wb = new WorkBook(new Context())
 	wb.importSolution(require('fs').readFileSync(`${__dirname}/KSP.ffl`, 'utf8'), 'ffl')

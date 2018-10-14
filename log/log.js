@@ -34,7 +34,7 @@ const console = colorConsole({
 	level     : logLevel,
 	preprocess: ({ args }) => {
 		if (args.length > 0) {
-			const [first_arg] = args
+			const first_arg = args[0]
 			if (typeof (first_arg.toString) === 'function') {
 				args[0] = first_arg.toString()
 			} else if (first_arg.stack) {

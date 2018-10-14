@@ -1,4 +1,5 @@
-import swaggerUi from 'swaggerize-ui'
+import swaggerUi         from 'swaggerize-ui'
+import { APIDefinition } from '../resources/AuthenticatedSwaggerDefinition'
 
 /**
  * Dynamic Swagger definition route
@@ -14,8 +15,7 @@ export function setup(app) {
 	app.get('*/data-api-docs', function(req, res) {
 		//TODO: check authorization role for fire-grained definiton. For now privacy > rest
 		//maybe via filename, maybe life-generated.
-		let swaggerData = require(__dirname + '/../resources/AuthenticatedSwaggerDefinition.json')
-		swaggerData.host = req.headers['x-forwarded-host']
-		res.json(swaggerData)
+		APIDefinition.host = req.headers['x-forwarded-host']
+		res.json(APIDefinition)
 	})
 }

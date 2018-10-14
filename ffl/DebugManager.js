@@ -45,8 +45,8 @@ DebugManager.prototype.fixForReferenceError = function(variableName, wb, error, 
 			SolutionFacade.initFormulaBootstrap([formula_id], true, wb.context.ma, wb.context.audittrail)
 			const formula = SolutionFacade.fetchFormulaByIndex(formula_id)
 			//All dependencies should be updated
-			for (var i = 0; i < formula.formulaDependencys.length; i++) {
-				var dependency = formula.formulaDependencys[i]
+			for (let i = 0; i < formula.formulaDependencys.length; i++) {
+				const dependency = formula.formulaDependencys[i]
 				if (DEBUG) info(dependency)
 			}
 		} catch (err) {
@@ -66,7 +66,7 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
 		succes: [],
 		error : []
 	}
-	for (let name in names) {
+	Object.keys(names).forEach(name => {
 		//iterate all formula-sets to test 100% Trend,NoTrend
 		for (let property in context.propertyDefaults) {
 			try {
@@ -77,7 +77,7 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
 				error(`Error while trying:${name}.${property} in model ${modelName}`, err)
 			}
 		}
-	}
+	})
 	const errors = this.audittrail.distinctArr(this.audittrail.find('level', 'ERROR', start), ['name', 'property'])
 	if (errors.length > 0) {
 		info('Trying to fix : \n' + this.audittrail.printArr(errors, [6, 30, 10, 10, 10, 10, 40, 140, 8]).join('\n'))

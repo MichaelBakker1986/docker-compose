@@ -3,11 +3,11 @@ FROM node:10.11.0-alpine
 USER root
 ENV PORT 80
 ENV NODE_ENV production
+#COPY package.json package.json
+COPY . .
+#COPY package-lock.json package-lock.json
+#COPY dist .
 
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-COPY dist .
-
-RUN npm install
+RUN npm install --unsafe-perm --allow-root --no-optional
 CMD npm start
-EXPOSE 80
+EXPOSE 8085

@@ -26,13 +26,13 @@ import {
 	DOCUMENT,
 	ENCODING,
 	FUNCTION_TYPE,
+	LOCKED,
 	NUMBER,
 	OBJECT_TYPE,
 	STRING_TYPE,
 	TITLE,
 	VALUE,
-	VISIBLE,
-	LOCKED
+	VISIBLE
 }                                            from './src/Constants'
 
 function LMEFacade() {
@@ -59,7 +59,6 @@ LMEFacade.prototype.initializeFFlModelData = function(data, path) {
 }
 /**
  * TODO: Inject this functions into the FunctionMap instead of global.
- * @param plugin
  */
 LMEFacade.prototype.registerParser = function() {
 	for (let i = 0; i < arguments.length; i++) SolutionFacade.addParser(arguments[i])
@@ -121,14 +120,13 @@ LMEFacade.prototype.getObjectValues = function(context, rowId, tuple_index) {
 	JSWorkBook.importValues(context.values)
 	JSWorkBook.columns = context.columns || 2
 	JSWorkBook.properties = context.properties || JSWorkBook.properties
-	const values = []
 	if (!context.isset) {
 		JSWorkBook.updateValues()
 		context.isset = true
 	}
 	if (tuple_index != null) {
 		tuple_index = JSWorkBook.tupleIndexForName(rowId, tuple_index)
-		if (tuple_index === -1) tuple_index = JSWorkBook.insertTuple(rowId, tuple_index)
+		if (tuple_index === -1) if (DEBUG) debug(`tuple id = ${JSWorkBook.insertTuple(rowId, tuple_index)}`)
 	}
 	const rootNode = JSWorkBook.getSolutionNode(rowId)
 	const flattenValues = {}
@@ -159,13 +157,12 @@ LMEFacade.prototype.getObjectValues = function(context, rowId, tuple_index) {
 				}
 			}
 		})
-		for (let key in flattenValues) {
+
+		Object.keys(flattenValues).forEach(key => {
 			delete flattenValues[key].parent
 			delete flattenValues[key].name
 			if (flattenValues[key].data.length === 0) delete flattenValues[key].data
-		}
-	} else {
-		values.push({ variable: rowId })
+		})
 	}
 	/**
 	 * Values are not bound.
@@ -246,6 +243,17 @@ export {
 	Register,
 	resources,
 	AuditTrail,
-	DOCUMENT, VALUE, VISIBLE,LOCKED, DETAIL_INTERVAL, NUMBER, COLUMN, TITLE, OBJECT_TYPE, FUNCTION_TYPE, STRING_TYPE, ENCODING
+	DOCUMENT,
+	VALUE,
+	VISIBLE,
+	LOCKED,
+	DETAIL_INTERVAL,
+	NUMBER,
+	COLUMN,
+	TITLE,
+	OBJECT_TYPE,
+	FUNCTION_TYPE,
+	STRING_TYPE,
+	ENCODING
 }
 export default LMEFacade.prototype
