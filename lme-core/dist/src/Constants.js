@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2emcxw73j0 = function () {
-      var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Constants.js',
-          hash = '4b97cd426fe9b79cb88adefc348b88c43ed111e4',
+var cov_tgvu3f4bs = function () {
+      var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Constants.js',
+          hash = 'b5f83ed65f8a8aa1afd192e5752835e9fb1af26d',
           Function = function () {}.constructor,
           global = new Function('return this')(),
           gcv = '__coverage__',
           coverageData = {
-            path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Constants.js',
+            path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Constants.js',
             statementMap: {
                   '0': {
                         start: {
@@ -163,18 +163,18 @@ var cov_2emcxw73j0 = function () {
 Object.defineProperty(exports, "__esModule", {
       value: true
 });
-var DOCUMENT = (cov_2emcxw73j0.s[0]++, 'document'),
-    VALUE = (cov_2emcxw73j0.s[1]++, 'value'),
-    VISIBLE = (cov_2emcxw73j0.s[2]++, 'visible'),
-    LOCKED = (cov_2emcxw73j0.s[3]++, 'locked'),
-    DETAIL_INTERVAL = (cov_2emcxw73j0.s[4]++, 'detl'),
-    NUMBER = (cov_2emcxw73j0.s[5]++, 'number'),
-    STRING_TYPE = (cov_2emcxw73j0.s[6]++, 'string'),
-    COLUMN = (cov_2emcxw73j0.s[7]++, 'column'),
-    TITLE = (cov_2emcxw73j0.s[8]++, 'title'),
-    OBJECT_TYPE = (cov_2emcxw73j0.s[9]++, 'object'),
-    FUNCTION_TYPE = (cov_2emcxw73j0.s[10]++, 'function'),
-    ENCODING = (cov_2emcxw73j0.s[11]++, 'utf8');
+var DOCUMENT = (cov_tgvu3f4bs.s[0]++, 'document'),
+    VALUE = (cov_tgvu3f4bs.s[1]++, 'value'),
+    VISIBLE = (cov_tgvu3f4bs.s[2]++, 'visible'),
+    LOCKED = (cov_tgvu3f4bs.s[3]++, 'locked'),
+    DETAIL_INTERVAL = (cov_tgvu3f4bs.s[4]++, 'detl'),
+    NUMBER = (cov_tgvu3f4bs.s[5]++, 'number'),
+    STRING_TYPE = (cov_tgvu3f4bs.s[6]++, 'string'),
+    COLUMN = (cov_tgvu3f4bs.s[7]++, 'column'),
+    TITLE = (cov_tgvu3f4bs.s[8]++, 'title'),
+    OBJECT_TYPE = (cov_tgvu3f4bs.s[9]++, 'object'),
+    FUNCTION_TYPE = (cov_tgvu3f4bs.s[10]++, 'function'),
+    ENCODING = (cov_tgvu3f4bs.s[11]++, 'utf8');
 
 exports.DOCUMENT = DOCUMENT;
 exports.VALUE = VALUE;

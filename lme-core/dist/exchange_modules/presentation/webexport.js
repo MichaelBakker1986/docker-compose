@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_a3wkdqx36 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\presentation\\webexport.js',
-	    hash = '7fd52a583a321c71bdc8a6b565ac4a8ee76359af',
+var cov_1mjjk0d79r = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\presentation\\webexport.js',
+	    hash = 'a74d3fb89ec4f3e7316a36ef6db33e083f40e8d0',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\presentation\\webexport.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\presentation\\webexport.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -3772,11 +3772,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Parser object
  */
 function WebExportParser() {
-	cov_a3wkdqx36.f[0]++;
-	cov_a3wkdqx36.s[0]++;
+	cov_1mjjk0d79r.f[0]++;
+	cov_1mjjk0d79r.s[0]++;
 
 	this.name = 'webexport';
-	cov_a3wkdqx36.s[1]++;
+	cov_1mjjk0d79r.s[1]++;
 	this.headername = 'Native Object Web Presentation';
 }
 
@@ -3794,36 +3794,36 @@ function WebExportParser() {
  */
 
 function LMETree(name, workbook) {
-	cov_a3wkdqx36.f[1]++;
-	cov_a3wkdqx36.s[2]++;
+	cov_1mjjk0d79r.f[1]++;
+	cov_1mjjk0d79r.s[2]++;
 
 	this.name = name;
-	cov_a3wkdqx36.s[3]++;
+	cov_1mjjk0d79r.s[3]++;
 	this.workbook = workbook;
-	cov_a3wkdqx36.s[4]++;
+	cov_1mjjk0d79r.s[4]++;
 	this.nodes = {};
-	cov_a3wkdqx36.s[5]++;
+	cov_1mjjk0d79r.s[5]++;
 	this.names = {};
-	cov_a3wkdqx36.s[6]++;
+	cov_1mjjk0d79r.s[6]++;
 	this.rows = [];
-	cov_a3wkdqx36.s[7]++;
+	cov_1mjjk0d79r.s[7]++;
 	this.no = {};
-	cov_a3wkdqx36.s[8]++;
+	cov_1mjjk0d79r.s[8]++;
 	this.columns = workbook.context.columns;
-	var rowColumns = (cov_a3wkdqx36.s[9]++, workbook.context.columns.slice());
-	cov_a3wkdqx36.s[10]++;
+	var rowColumns = (cov_1mjjk0d79r.s[9]++, workbook.context.columns.slice());
+	cov_1mjjk0d79r.s[10]++;
 	if (this.columns.indexOf('choices') === -1) {
-			cov_a3wkdqx36.b[0][0]++;
-			cov_a3wkdqx36.s[11]++;
+			cov_1mjjk0d79r.b[0][0]++;
+			cov_1mjjk0d79r.s[11]++;
 			rowColumns.push('choices');
 		} else {
-		cov_a3wkdqx36.b[0][1]++;
-	}cov_a3wkdqx36.s[12]++;
+		cov_1mjjk0d79r.b[0][1]++;
+	}cov_1mjjk0d79r.s[12]++;
 	this.propertyNames = rowColumns;
-	cov_a3wkdqx36.s[13]++;
+	cov_1mjjk0d79r.s[13]++;
 	this.tuplecounter = 0;
 
-	cov_a3wkdqx36.s[14]++;
+	cov_1mjjk0d79r.s[14]++;
 	this.repeats_amount = {
 		undefined: workbook.context.columnSize,
 		none: 1,
@@ -3831,7 +3831,7 @@ function LMETree(name, workbook) {
 		document: 1,
 		timeline: 1
 	};
-	cov_a3wkdqx36.s[15]++;
+	cov_1mjjk0d79r.s[15]++;
 	this.repeats_colspan = {
 		undefined: 1,
 		none: 1,
@@ -3841,143 +3841,143 @@ function LMETree(name, workbook) {
 	};
 }
 
-cov_a3wkdqx36.s[16]++;
+cov_1mjjk0d79r.s[16]++;
 LMETree.prototype.findWebNode = function (name) {
-	cov_a3wkdqx36.f[2]++;
-	cov_a3wkdqx36.s[17]++;
+	cov_1mjjk0d79r.f[2]++;
+	cov_1mjjk0d79r.s[17]++;
 
 	return this.rows.find(function (n) {
-		cov_a3wkdqx36.f[3]++;
-		cov_a3wkdqx36.s[18]++;
+		cov_1mjjk0d79r.f[3]++;
+		cov_1mjjk0d79r.s[18]++;
 		return n.id === name;
 	});
 };
 /**
  * Sort created rows output for UI
  */
-cov_a3wkdqx36.s[19]++;
+cov_1mjjk0d79r.s[19]++;
 LMETree.prototype.sortRows = function () {
-	cov_a3wkdqx36.f[4]++;
-	cov_a3wkdqx36.s[20]++;
+	cov_1mjjk0d79r.f[4]++;
+	cov_1mjjk0d79r.s[20]++;
 
 	this.rows.sort(function (a, b) {
-		cov_a3wkdqx36.f[5]++;
-		cov_a3wkdqx36.s[21]++;
+		cov_1mjjk0d79r.f[5]++;
+		cov_1mjjk0d79r.s[21]++;
 
 		if (a.order_id === b.order_id) {
-				cov_a3wkdqx36.b[1][0]++;
-				cov_a3wkdqx36.s[22]++;
+				cov_1mjjk0d79r.b[1][0]++;
+				cov_1mjjk0d79r.s[22]++;
 				throw Error('Duplicate variable names in financial model are not supported. Choose an unique name for every variable. [' + a.id + '] in \'' + b.path + '\' and in \'' + a.path + '\'');
 			} else {
-			cov_a3wkdqx36.b[1][1]++;
-		}cov_a3wkdqx36.s[23]++;
-		return a.order_id === b.order_id ? (cov_a3wkdqx36.b[2][0]++, 0) : (cov_a3wkdqx36.b[2][1]++, a.order_id < b.order_id ? (cov_a3wkdqx36.b[3][0]++, -1) : (cov_a3wkdqx36.b[3][1]++, 1));
+			cov_1mjjk0d79r.b[1][1]++;
+		}cov_1mjjk0d79r.s[23]++;
+		return a.order_id === b.order_id ? (cov_1mjjk0d79r.b[2][0]++, 0) : (cov_1mjjk0d79r.b[2][1]++, a.order_id < b.order_id ? (cov_1mjjk0d79r.b[3][0]++, -1) : (cov_1mjjk0d79r.b[3][1]++, 1));
 	});
 };
-cov_a3wkdqx36.s[24]++;
+cov_1mjjk0d79r.s[24]++;
 LMETree.prototype.findScorecardTypes = function () {
-	cov_a3wkdqx36.f[6]++;
+	cov_1mjjk0d79r.f[6]++;
 
-	var scorecards = (cov_a3wkdqx36.s[25]++, []);
-	cov_a3wkdqx36.s[26]++;
+	var scorecards = (cov_1mjjk0d79r.s[25]++, []);
+	cov_1mjjk0d79r.s[26]++;
 	for (var name in this.no) {
-		var row_element = (cov_a3wkdqx36.s[27]++, this.no[name]);
-		cov_a3wkdqx36.s[28]++;
-		if ((cov_a3wkdqx36.b[5][0]++, row_element.type === 'scorecard') || (cov_a3wkdqx36.b[5][1]++, row_element.display_options === 'scorecard')) {
-				cov_a3wkdqx36.b[4][0]++;
-				cov_a3wkdqx36.s[29]++;
+		var row_element = (cov_1mjjk0d79r.s[27]++, this.no[name]);
+		cov_1mjjk0d79r.s[28]++;
+		if ((cov_1mjjk0d79r.b[5][0]++, row_element.type === 'scorecard') || (cov_1mjjk0d79r.b[5][1]++, row_element.display_options === 'scorecard')) {
+				cov_1mjjk0d79r.b[4][0]++;
+				cov_1mjjk0d79r.s[29]++;
 				scorecards.push(row_element);
 			} else {
-			cov_a3wkdqx36.b[4][1]++;
+			cov_1mjjk0d79r.b[4][1]++;
 		}
 	}
-	cov_a3wkdqx36.s[30]++;
+	cov_1mjjk0d79r.s[30]++;
 	return scorecards;
 };
 
 function noChange(workbook, rowId, col, index, type, yas) {
-	cov_a3wkdqx36.f[7]++;
+	cov_1mjjk0d79r.f[7]++;
 
 	var r = void 0; //return value
-	var c = (cov_a3wkdqx36.s[31]++, -1); //calculation counter
-	cov_a3wkdqx36.s[32]++;
+	var c = (cov_1mjjk0d79r.s[31]++, -1); //calculation counter
+	cov_1mjjk0d79r.s[32]++;
 	return {
 		get: function get() {
-			cov_a3wkdqx36.f[8]++;
-			cov_a3wkdqx36.s[33]++;
+			cov_1mjjk0d79r.f[8]++;
+			cov_1mjjk0d79r.s[33]++;
 
-			if ((cov_a3wkdqx36.b[7][0]++, workbook.context.calc_count !== c) && (cov_a3wkdqx36.b[7][1]++, c < 0)) {
-				cov_a3wkdqx36.b[6][0]++;
-				cov_a3wkdqx36.s[34]++;
+			if ((cov_1mjjk0d79r.b[7][0]++, workbook.context.calc_count !== c) && (cov_1mjjk0d79r.b[7][1]++, c < 0)) {
+				cov_1mjjk0d79r.b[6][0]++;
+				cov_1mjjk0d79r.s[34]++;
 
 				c = workbook.context.calc_count;
-				cov_a3wkdqx36.s[35]++;
+				cov_1mjjk0d79r.s[35]++;
 				r = workbook.get(rowId, col, index, yas);
 			} else {
-				cov_a3wkdqx36.b[6][1]++;
+				cov_1mjjk0d79r.b[6][1]++;
 			}
-			cov_a3wkdqx36.s[36]++;
+			cov_1mjjk0d79r.s[36]++;
 			return r;
 		}
 	};
 }
 
 function changeAble(workbook, rowId, col, index, type, yas) {
-	cov_a3wkdqx36.f[9]++;
+	cov_1mjjk0d79r.f[9]++;
 
 	var r = void 0; //return value
-	var c = (cov_a3wkdqx36.s[37]++, -1); //calculation counter
-	cov_a3wkdqx36.s[38]++;
+	var c = (cov_1mjjk0d79r.s[37]++, -1); //calculation counter
+	cov_1mjjk0d79r.s[38]++;
 	return {
 		get: function get() {
-			cov_a3wkdqx36.f[10]++;
-			cov_a3wkdqx36.s[39]++;
+			cov_1mjjk0d79r.f[10]++;
+			cov_1mjjk0d79r.s[39]++;
 
 			if (workbook.context.calc_count !== c) {
-				cov_a3wkdqx36.b[8][0]++;
-				cov_a3wkdqx36.s[40]++;
+				cov_1mjjk0d79r.b[8][0]++;
+				cov_1mjjk0d79r.s[40]++;
 
 				c = workbook.context.calc_count;
-				cov_a3wkdqx36.s[41]++;
+				cov_1mjjk0d79r.s[41]++;
 				r = workbook.get(rowId, col, index, yas);
 			} else {
-				cov_a3wkdqx36.b[8][1]++;
+				cov_1mjjk0d79r.b[8][1]++;
 			}
-			cov_a3wkdqx36.s[42]++;
+			cov_1mjjk0d79r.s[42]++;
 			return r;
 		}
 	};
 }
 
 function changeAndCache(workbook, rowId, col, index, type, yas) {
-	cov_a3wkdqx36.f[11]++;
+	cov_1mjjk0d79r.f[11]++;
 
 	var r = void 0; //return value
-	var c = (cov_a3wkdqx36.s[43]++, -1); //calculation counter
-	cov_a3wkdqx36.s[44]++;
+	var c = (cov_1mjjk0d79r.s[43]++, -1); //calculation counter
+	cov_1mjjk0d79r.s[44]++;
 	return {
 		get: function get() {
-			cov_a3wkdqx36.f[12]++;
-			cov_a3wkdqx36.s[45]++;
+			cov_1mjjk0d79r.f[12]++;
+			cov_1mjjk0d79r.s[45]++;
 
 			if (workbook.context.calc_count !== c) {
-				cov_a3wkdqx36.b[9][0]++;
-				cov_a3wkdqx36.s[46]++;
+				cov_1mjjk0d79r.b[9][0]++;
+				cov_1mjjk0d79r.s[46]++;
 
 				c = workbook.context.calc_count;
-				cov_a3wkdqx36.s[47]++;
+				cov_1mjjk0d79r.s[47]++;
 				r = workbook.get(rowId, col, index, yas);
 			} else {
-				cov_a3wkdqx36.b[9][1]++;
+				cov_1mjjk0d79r.b[9][1]++;
 			}
-			cov_a3wkdqx36.s[48]++;
+			cov_1mjjk0d79r.s[48]++;
 			return r;
 		},
 		set: function set(v) {
-			cov_a3wkdqx36.f[13]++;
-			cov_a3wkdqx36.s[49]++;
+			cov_1mjjk0d79r.f[13]++;
+			cov_1mjjk0d79r.s[49]++;
 
-			workbook.set(rowId, (cov_a3wkdqx36.b[11][0]++, v == null) || (cov_a3wkdqx36.b[11][1]++, v === '') ? (cov_a3wkdqx36.b[10][0]++, null) : (cov_a3wkdqx36.b[10][1]++, v), col, index, yas);
+			workbook.set(rowId, (cov_1mjjk0d79r.b[11][0]++, v == null) || (cov_1mjjk0d79r.b[11][1]++, v === '') ? (cov_1mjjk0d79r.b[10][0]++, null) : (cov_1mjjk0d79r.b[10][1]++, v), col, index, yas);
 		}
 	};
 }
@@ -3986,7 +3986,7 @@ function changeAndCache(workbook, rowId, col, index, type, yas) {
  * Cache means only resolve once
  * Change means user can modify the value
  */
-var properties = (cov_a3wkdqx36.s[50]++, {
+var properties = (cov_1mjjk0d79r.s[50]++, {
 	title: { change: true, prox: changeAndCache },
 	original: { change: true, prox: noChange },
 	value: { change: true, prox: changeAndCache },
@@ -3999,93 +3999,93 @@ var properties = (cov_a3wkdqx36.s[50]++, {
 	choices: { cache: true, prox: noChange }
 });
 
-cov_a3wkdqx36.s[51]++;
+cov_1mjjk0d79r.s[51]++;
 LMETree.prototype.addTupleNode = function (node, treePath, index, yas, treeDepth) {
-	cov_a3wkdqx36.f[14]++;
+	cov_1mjjk0d79r.f[14]++;
 
-	var tree = (cov_a3wkdqx36.s[52]++, this);
-	var unique = (cov_a3wkdqx36.s[53]++, yas.display + '__' + node.rowId);
-	var workbook = (cov_a3wkdqx36.s[54]++, this.workbook);
-	var rowId = (cov_a3wkdqx36.s[55]++, node.rowId);
-	var amount = (cov_a3wkdqx36.s[56]++, this.repeats_amount.document);
-	var colspan = (cov_a3wkdqx36.s[57]++, this.repeats_colspan.document);
-	var parent = (cov_a3wkdqx36.s[58]++, this.nodes[yas.display + '_' + treePath[treePath.length - 1]]);
-	var path = (cov_a3wkdqx36.s[59]++, treePath.join('.'));
-	var has = (cov_a3wkdqx36.s[60]++, node.hash.slice());
-	cov_a3wkdqx36.s[61]++;
+	var tree = (cov_1mjjk0d79r.s[52]++, this);
+	var unique = (cov_1mjjk0d79r.s[53]++, yas.display + '__' + node.rowId);
+	var workbook = (cov_1mjjk0d79r.s[54]++, this.workbook);
+	var rowId = (cov_1mjjk0d79r.s[55]++, node.rowId);
+	var amount = (cov_1mjjk0d79r.s[56]++, this.repeats_amount.document);
+	var colspan = (cov_1mjjk0d79r.s[57]++, this.repeats_colspan.document);
+	var parent = (cov_1mjjk0d79r.s[58]++, this.nodes[yas.display + '_' + treePath[treePath.length - 1]]);
+	var path = (cov_1mjjk0d79r.s[59]++, treePath.join('.'));
+	var has = (cov_1mjjk0d79r.s[60]++, node.hash.slice());
+	cov_1mjjk0d79r.s[61]++;
 	if (yas.depth === 0) {
-		cov_a3wkdqx36.b[12][0]++;
-		cov_a3wkdqx36.s[62]++;
+		cov_1mjjk0d79r.b[12][0]++;
+		cov_1mjjk0d79r.s[62]++;
 
 		has[1] = '999';
 	} else {
-			cov_a3wkdqx36.b[12][1]++;
-			cov_a3wkdqx36.s[63]++;
+			cov_1mjjk0d79r.b[12][1]++;
+			cov_1mjjk0d79r.s[63]++;
 			if (yas.depth === 1) {
-				cov_a3wkdqx36.b[13][0]++;
-				cov_a3wkdqx36.s[64]++;
+				cov_1mjjk0d79r.b[13][0]++;
+				cov_1mjjk0d79r.s[64]++;
 
 				has[1] = yas.uihash;
-				cov_a3wkdqx36.s[65]++;
+				cov_1mjjk0d79r.s[65]++;
 				has[3] = '999';
 			} else {
-					cov_a3wkdqx36.b[13][1]++;
-					cov_a3wkdqx36.s[66]++;
+					cov_1mjjk0d79r.b[13][1]++;
+					cov_1mjjk0d79r.s[66]++;
 					if (yas.depth === 2) {
-						cov_a3wkdqx36.b[14][0]++;
-						cov_a3wkdqx36.s[67]++;
+						cov_1mjjk0d79r.b[14][0]++;
+						cov_1mjjk0d79r.s[67]++;
 
 						has[1] = yas.parent.uihash;
-						cov_a3wkdqx36.s[68]++;
+						cov_1mjjk0d79r.s[68]++;
 						has[3] = yas.uihash;
-						cov_a3wkdqx36.s[69]++;
+						cov_1mjjk0d79r.s[69]++;
 						has[5] = '999';
 					} else {
-							cov_a3wkdqx36.b[14][1]++;
-							cov_a3wkdqx36.s[70]++;
+							cov_1mjjk0d79r.b[14][1]++;
+							cov_1mjjk0d79r.s[70]++;
 							if (yas.depth === 3) {
-								cov_a3wkdqx36.b[15][0]++;
-								cov_a3wkdqx36.s[71]++;
+								cov_1mjjk0d79r.b[15][0]++;
+								cov_1mjjk0d79r.s[71]++;
 
 								//throw Error('Something wrong here..')
 								has[1] = yas.parent.uihash;
-								cov_a3wkdqx36.s[72]++;
+								cov_1mjjk0d79r.s[72]++;
 								has[3] = yas.uihash;
-								cov_a3wkdqx36.s[73]++;
+								cov_1mjjk0d79r.s[73]++;
 								has[5] = '999';
 							} else {
-								cov_a3wkdqx36.b[15][1]++;
+								cov_1mjjk0d79r.b[15][1]++;
 							}
 						}
 				}
-		}var rv = (cov_a3wkdqx36.s[74]++, {
+		}var rv = (cov_1mjjk0d79r.s[74]++, {
 		id: rowId,
 		order_id: has.join('.'),
 		treeDepth: treeDepth,
 		add: function add() {
-			cov_a3wkdqx36.f[15]++;
+			cov_1mjjk0d79r.f[15]++;
 
-			var inneryas = (cov_a3wkdqx36.s[75]++, workbook.addTuple(node.rowId, ++tree.tuplecounter + '_' + yas.display + '_' + node.rowId, yas));
-			cov_a3wkdqx36.s[76]++;
+			var inneryas = (cov_1mjjk0d79r.s[75]++, workbook.addTuple(node.rowId, ++tree.tuplecounter + '_' + yas.display + '_' + node.rowId, yas));
+			cov_1mjjk0d79r.s[76]++;
 			workbook.set(node.rowId, inneryas.display + ':' + node.rowId, 'value', undefined, inneryas);
-			cov_a3wkdqx36.s[77]++;
+			cov_1mjjk0d79r.s[77]++;
 			workbook.walkProperties(node, function (child, yasi, cTreeDepth, yi) {
-				cov_a3wkdqx36.f[16]++;
-				cov_a3wkdqx36.s[78]++;
+				cov_1mjjk0d79r.f[16]++;
+				cov_1mjjk0d79r.s[78]++;
 
 				if (yasi === 'new') {
-					cov_a3wkdqx36.b[16][0]++;
-					cov_a3wkdqx36.s[79]++;
+					cov_1mjjk0d79r.b[16][0]++;
+					cov_1mjjk0d79r.s[79]++;
 
 					tree.addTupleNode(child, path.split('.'), index, yi, cTreeDepth);
 				} else {
-					cov_a3wkdqx36.b[16][1]++;
-					cov_a3wkdqx36.s[80]++;
+					cov_1mjjk0d79r.b[16][1]++;
+					cov_1mjjk0d79r.s[80]++;
 
 					tree.addWebNode(child, path.split('.'), index, yi, cTreeDepth);
 				}
 			}, inneryas, node.rowId, treePath.length);
-			cov_a3wkdqx36.s[81]++;
+			cov_1mjjk0d79r.s[81]++;
 			return inneryas;
 		},
 		//index is deprecated. Lookup the next sibling when needed. Could be tuple..
@@ -4107,114 +4107,114 @@ LMETree.prototype.addTupleNode = function (node, treePath, index, yas, treeDepth
 		}],
 		children: []
 	});
-	cov_a3wkdqx36.s[82]++;
+	cov_1mjjk0d79r.s[82]++;
 	if (node.display_options) {
-			cov_a3wkdqx36.b[17][0]++;
-			cov_a3wkdqx36.s[83]++;
+			cov_1mjjk0d79r.b[17][0]++;
+			cov_1mjjk0d79r.s[83]++;
 			rv.display_options = node.display_options;
 		} else {
-		cov_a3wkdqx36.b[17][1]++;
+		cov_1mjjk0d79r.b[17][1]++;
 	} /**
     * Proxy properties to the row object
     */
-	cov_a3wkdqx36.s[84]++;
+	cov_1mjjk0d79r.s[84]++;
 	for (var columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
-		var col = (cov_a3wkdqx36.s[85]++, this.columns[columnIndex]);
-		cov_a3wkdqx36.s[86]++;
+		var col = (cov_1mjjk0d79r.s[85]++, this.columns[columnIndex]);
+		cov_1mjjk0d79r.s[86]++;
 		rv[col] = null;
-		cov_a3wkdqx36.s[87]++;
+		cov_1mjjk0d79r.s[87]++;
 		Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, undefined, yas));
 	}
-	cov_a3wkdqx36.s[88]++;
+	cov_1mjjk0d79r.s[88]++;
 	if (parent) {
-			cov_a3wkdqx36.b[18][0]++;
-			cov_a3wkdqx36.s[89]++;
+			cov_1mjjk0d79r.b[18][0]++;
+			cov_1mjjk0d79r.s[89]++;
 			parent.children.push(rv);
 		} else {
-		cov_a3wkdqx36.b[18][1]++;
-	}cov_a3wkdqx36.s[90]++;
+		cov_1mjjk0d79r.b[18][1]++;
+	}cov_1mjjk0d79r.s[90]++;
 	this.nodes[unique] = rv;
-	cov_a3wkdqx36.s[91]++;
+	cov_1mjjk0d79r.s[91]++;
 	this.rows.push(rv);
 };
-cov_a3wkdqx36.s[92]++;
+cov_1mjjk0d79r.s[92]++;
 LMETree.prototype.diagnose = function (_ref) {
 	var _ref$auto_join = _ref.auto_join,
-	    auto_join = _ref$auto_join === undefined ? (cov_a3wkdqx36.b[19][0]++, true) : _ref$auto_join;
-	cov_a3wkdqx36.f[17]++;
+	    auto_join = _ref$auto_join === undefined ? (cov_1mjjk0d79r.b[19][0]++, true) : _ref$auto_join;
+	cov_1mjjk0d79r.f[17]++;
 
-	var rows = (cov_a3wkdqx36.s[93]++, this.rows.map(function (row) {
-		cov_a3wkdqx36.f[18]++;
-		cov_a3wkdqx36.s[94]++;
+	var rows = (cov_1mjjk0d79r.s[93]++, this.rows.map(function (row) {
+		cov_1mjjk0d79r.f[18]++;
+		cov_1mjjk0d79r.s[94]++;
 		return '' + row.order_id + ' '.repeat(row.depth) + row.id;
 	}));
-	cov_a3wkdqx36.s[95]++;
-	return auto_join ? (cov_a3wkdqx36.b[20][0]++, rows.join('\n')) : (cov_a3wkdqx36.b[20][1]++, rows);
+	cov_1mjjk0d79r.s[95]++;
+	return auto_join ? (cov_1mjjk0d79r.b[20][0]++, rows.join('\n')) : (cov_1mjjk0d79r.b[20][1]++, rows);
 };
 
-cov_a3wkdqx36.s[96]++;
+cov_1mjjk0d79r.s[96]++;
 LMETree.prototype.addWebNode = function (node, treePath, index, yas, treeDepth) {
-	cov_a3wkdqx36.f[19]++;
-	cov_a3wkdqx36.s[97]++;
+	cov_1mjjk0d79r.f[19]++;
+	cov_1mjjk0d79r.s[97]++;
 
 	if (!this.repeats_amount[node.frequency]) {
-			cov_a3wkdqx36.b[21][0]++;
-			cov_a3wkdqx36.s[98]++;
+			cov_1mjjk0d79r.b[21][0]++;
+			cov_1mjjk0d79r.s[98]++;
 			throw Error('Invalid frequency ' + node.frequency);
 		} else {
-		cov_a3wkdqx36.b[21][1]++;
-	}var workbook = (cov_a3wkdqx36.s[99]++, this.workbook);
-	var rowId = (cov_a3wkdqx36.s[100]++, node.rowId);
-	var unique = (cov_a3wkdqx36.s[101]++, yas.display + '_' + rowId);
-	var amount = (cov_a3wkdqx36.s[102]++, this.repeats_amount[node.frequency]);
-	var colspan = (cov_a3wkdqx36.s[103]++, this.repeats_colspan[node.frequency]);
-	var type = (cov_a3wkdqx36.s[104]++, node.displaytype);
-	var displaytype = (cov_a3wkdqx36.s[105]++, type);
-	var path = (cov_a3wkdqx36.s[106]++, treePath.join('.'));
-	var has = (cov_a3wkdqx36.s[107]++, node.hash.slice());
+		cov_1mjjk0d79r.b[21][1]++;
+	}var workbook = (cov_1mjjk0d79r.s[99]++, this.workbook);
+	var rowId = (cov_1mjjk0d79r.s[100]++, node.rowId);
+	var unique = (cov_1mjjk0d79r.s[101]++, yas.display + '_' + rowId);
+	var amount = (cov_1mjjk0d79r.s[102]++, this.repeats_amount[node.frequency]);
+	var colspan = (cov_1mjjk0d79r.s[103]++, this.repeats_colspan[node.frequency]);
+	var type = (cov_1mjjk0d79r.s[104]++, node.displaytype);
+	var displaytype = (cov_1mjjk0d79r.s[105]++, type);
+	var path = (cov_1mjjk0d79r.s[106]++, treePath.join('.'));
+	var has = (cov_1mjjk0d79r.s[107]++, node.hash.slice());
 	//alright this is a big step. and seems to work (there is a variable set wrongly.)
-	cov_a3wkdqx36.s[108]++;
+	cov_1mjjk0d79r.s[108]++;
 	if (yas.depth === 0) {
-		cov_a3wkdqx36.b[22][0]++;
-		cov_a3wkdqx36.s[109]++;
+		cov_1mjjk0d79r.b[22][0]++;
+		cov_1mjjk0d79r.s[109]++;
 
 		has[1] = yas.uihash;
 	} else {
-			cov_a3wkdqx36.b[22][1]++;
-			cov_a3wkdqx36.s[110]++;
+			cov_1mjjk0d79r.b[22][1]++;
+			cov_1mjjk0d79r.s[110]++;
 			if (yas.depth === 1) {
-				cov_a3wkdqx36.b[23][0]++;
-				cov_a3wkdqx36.s[111]++;
+				cov_1mjjk0d79r.b[23][0]++;
+				cov_1mjjk0d79r.s[111]++;
 
 				has[1] = yas.uihash;
 			} else {
-					cov_a3wkdqx36.b[23][1]++;
-					cov_a3wkdqx36.s[112]++;
+					cov_1mjjk0d79r.b[23][1]++;
+					cov_1mjjk0d79r.s[112]++;
 					if (yas.depth === 2) {
-						cov_a3wkdqx36.b[24][0]++;
-						cov_a3wkdqx36.s[113]++;
+						cov_1mjjk0d79r.b[24][0]++;
+						cov_1mjjk0d79r.s[113]++;
 
 						has[3] = yas.uihash;
-						cov_a3wkdqx36.s[114]++;
+						cov_1mjjk0d79r.s[114]++;
 						has[1] = yas.parent.uihash;
 					} else {
-							cov_a3wkdqx36.b[24][1]++;
-							cov_a3wkdqx36.s[115]++;
+							cov_1mjjk0d79r.b[24][1]++;
+							cov_1mjjk0d79r.s[115]++;
 							if (yas.depth === 3) {
-								cov_a3wkdqx36.b[25][0]++;
-								cov_a3wkdqx36.s[116]++;
+								cov_1mjjk0d79r.b[25][0]++;
+								cov_1mjjk0d79r.s[116]++;
 
 								has[5] = yas.uihash;
-								cov_a3wkdqx36.s[117]++;
+								cov_1mjjk0d79r.s[117]++;
 								has[3] = yas.parent.uihash;
-								cov_a3wkdqx36.s[118]++;
+								cov_1mjjk0d79r.s[118]++;
 								has[1] = yas.parent.parent.uihash;
 							} else {
-								cov_a3wkdqx36.b[25][1]++;
+								cov_1mjjk0d79r.b[25][1]++;
 							}
 						}
 				}
-		}var rv = (cov_a3wkdqx36.s[119]++, {
+		}var rv = (cov_1mjjk0d79r.s[119]++, {
 		id: rowId,
 		treeDepth: treeDepth,
 		depth: yas.depth,
@@ -4232,26 +4232,26 @@ LMETree.prototype.addWebNode = function (node, treePath, index, yas, treeDepth) 
 		children: []
 	});
 
-	cov_a3wkdqx36.s[120]++;
+	cov_1mjjk0d79r.s[120]++;
 	Object.defineProperty(rv, 'firstChild', {
 		get: function get() {
-			cov_a3wkdqx36.f[20]++;
-			cov_a3wkdqx36.s[121]++;
+			cov_1mjjk0d79r.f[20]++;
+			cov_1mjjk0d79r.s[121]++;
 
-			return rv.children.length > 0 ? (cov_a3wkdqx36.b[26][0]++, rv.children[0]) : (cov_a3wkdqx36.b[26][1]++, null);
+			return rv.children.length > 0 ? (cov_1mjjk0d79r.b[26][0]++, rv.children[0]) : (cov_1mjjk0d79r.b[26][1]++, null);
 		}
 	});
 
 	/**
   * Proxy properties to the column objects
   */
-	var rt = (cov_a3wkdqx36.s[122]++, {});
-	cov_a3wkdqx36.s[123]++;
+	var rt = (cov_1mjjk0d79r.s[122]++, {});
+	cov_1mjjk0d79r.s[123]++;
 	Object.defineProperty(rt, 'value', properties.title.prox(workbook, rowId, 'title', 0, undefined, yas));
-	cov_a3wkdqx36.s[124]++;
+	cov_1mjjk0d79r.s[124]++;
 	if (node.frequency !== 'none') {
-		cov_a3wkdqx36.b[27][0]++;
-		cov_a3wkdqx36.s[125]++;
+		cov_1mjjk0d79r.b[27][0]++;
+		cov_1mjjk0d79r.s[125]++;
 
 		rv.cols.push({
 			value: null,
@@ -4262,11 +4262,11 @@ LMETree.prototype.addWebNode = function (node, treePath, index, yas, treeDepth) 
 			valid: null
 		});
 	} else {
-		cov_a3wkdqx36.b[27][1]++;
+		cov_1mjjk0d79r.b[27][1]++;
 	}
-	cov_a3wkdqx36.s[126]++;
+	cov_1mjjk0d79r.s[126]++;
 	for (var column_index = 0; column_index < amount; column_index++) {
-		var r = (cov_a3wkdqx36.s[127]++, {
+		var r = (cov_1mjjk0d79r.s[127]++, {
 			type: type,
 			value: null,
 			visible: null,
@@ -4275,125 +4275,125 @@ LMETree.prototype.addWebNode = function (node, treePath, index, yas, treeDepth) 
 			locked: null,
 			valid: null
 		});
-		cov_a3wkdqx36.s[128]++;
+		cov_1mjjk0d79r.s[128]++;
 		rv.cols.push(r);
-		cov_a3wkdqx36.s[129]++;
+		cov_1mjjk0d79r.s[129]++;
 		for (var propertyIndex = 0; propertyIndex < this.propertyNames.length; propertyIndex++) {
-			var propertyName = (cov_a3wkdqx36.s[130]++, this.propertyNames[propertyIndex]);
-			cov_a3wkdqx36.s[131]++;
+			var propertyName = (cov_1mjjk0d79r.s[130]++, this.propertyNames[propertyIndex]);
+			cov_1mjjk0d79r.s[131]++;
 			Object.defineProperty(r, propertyName, properties[propertyName].prox(workbook, rowId, propertyName, column_index, displaytype, yas));
 		}
 	}
 	/**
   * Proxy properties to the row object
   */
-	cov_a3wkdqx36.s[132]++;
+	cov_1mjjk0d79r.s[132]++;
 	for (var columnIndex = 0; columnIndex < this.columns.length; columnIndex++) {
-		var col = (cov_a3wkdqx36.s[133]++, this.columns[columnIndex]);
-		cov_a3wkdqx36.s[134]++;
+		var col = (cov_1mjjk0d79r.s[133]++, this.columns[columnIndex]);
+		cov_1mjjk0d79r.s[134]++;
 		rv[col] = null;
-		cov_a3wkdqx36.s[135]++;
+		cov_1mjjk0d79r.s[135]++;
 		Object.defineProperty(rv, col, properties[col].prox(workbook, rowId, col, 0, displaytype, yas));
 	}
-	var parent = (cov_a3wkdqx36.s[136]++, this.nodes[yas.display + '_' + treePath[treePath.length - 1]]);
-	cov_a3wkdqx36.s[137]++;
+	var parent = (cov_1mjjk0d79r.s[136]++, this.nodes[yas.display + '_' + treePath[treePath.length - 1]]);
+	cov_1mjjk0d79r.s[137]++;
 	if (parent) {
-		cov_a3wkdqx36.b[28][0]++;
-		cov_a3wkdqx36.s[138]++;
+		cov_1mjjk0d79r.b[28][0]++;
+		cov_1mjjk0d79r.s[138]++;
 
 		parent[rowId] = rv;
-		cov_a3wkdqx36.s[139]++;
+		cov_1mjjk0d79r.s[139]++;
 		parent.children.push(rv);
 	} else {
-		cov_a3wkdqx36.b[28][1]++;
+		cov_1mjjk0d79r.b[28][1]++;
 	}
-	cov_a3wkdqx36.s[140]++;
+	cov_1mjjk0d79r.s[140]++;
 	this.nodes[unique] = rv;
-	cov_a3wkdqx36.s[141]++;
+	cov_1mjjk0d79r.s[141]++;
 	this.no[rowId] = rv;
-	cov_a3wkdqx36.s[142]++;
+	cov_1mjjk0d79r.s[142]++;
 	this.rows.push(rv);
 };
-cov_a3wkdqx36.s[143]++;
+cov_1mjjk0d79r.s[143]++;
 WebExportParser.prototype.parseData = function (webExport, workbook) {
-	cov_a3wkdqx36.f[21]++;
-	cov_a3wkdqx36.s[144]++;
+	cov_1mjjk0d79r.f[21]++;
+	cov_1mjjk0d79r.s[144]++;
 	return _SolutionFacade2.default.createSolution(workbook.modelName);
 };
 
-cov_a3wkdqx36.s[145]++;
+cov_1mjjk0d79r.s[145]++;
 WebExportParser.prototype.deParse = function (rowId, workbook) {
-	cov_a3wkdqx36.f[22]++;
+	cov_1mjjk0d79r.f[22]++;
 
-	var modelName = (cov_a3wkdqx36.s[146]++, workbook.getSolutionName());
-	var lmeTree = (cov_a3wkdqx36.s[147]++, new LMETree(modelName, workbook));
-	cov_a3wkdqx36.s[148]++;
+	var modelName = (cov_1mjjk0d79r.s[146]++, workbook.getSolutionName());
+	var lmeTree = (cov_1mjjk0d79r.s[147]++, new LMETree(modelName, workbook));
+	cov_1mjjk0d79r.s[148]++;
 	_PropertiesAssembler2.default.findAllInSolution(modelName, function (node) {
-		cov_a3wkdqx36.f[23]++;
-		cov_a3wkdqx36.s[149]++;
+		cov_1mjjk0d79r.f[23]++;
+		cov_1mjjk0d79r.s[149]++;
 		return lmeTree.names[node.rowId] = true;
 	});
-	var treePath = (cov_a3wkdqx36.s[150]++, []);
-	var currentDepth = (cov_a3wkdqx36.s[151]++, 0);
-	var indexPath = (cov_a3wkdqx36.s[152]++, []);
+	var treePath = (cov_1mjjk0d79r.s[150]++, []);
+	var currentDepth = (cov_1mjjk0d79r.s[151]++, 0);
+	var indexPath = (cov_1mjjk0d79r.s[152]++, []);
 	//make the walk here,
-	var rootNode = (cov_a3wkdqx36.s[153]++, (cov_a3wkdqx36.b[29][0]++, workbook.fetchSolutionNode(rowId, 'value')) || (cov_a3wkdqx36.b[29][1]++, workbook.getRootSolutionProperty(modelName)));
-	cov_a3wkdqx36.s[154]++;
+	var rootNode = (cov_1mjjk0d79r.s[153]++, (cov_1mjjk0d79r.b[29][0]++, workbook.fetchSolutionNode(rowId, 'value')) || (cov_1mjjk0d79r.b[29][1]++, workbook.getRootSolutionProperty(modelName)));
+	cov_1mjjk0d79r.s[154]++;
 	_PropertiesAssembler2.default.indexProperties(modelName);
 
-	cov_a3wkdqx36.s[155]++;
+	cov_1mjjk0d79r.s[155]++;
 	workbook.walkProperties(rootNode, function (node, yas, treeDepth, y) {
-		cov_a3wkdqx36.f[24]++;
-		cov_a3wkdqx36.s[156]++;
+		cov_1mjjk0d79r.f[24]++;
+		cov_1mjjk0d79r.s[156]++;
 
-		if ((cov_a3wkdqx36.b[31][0]++, node) && (cov_a3wkdqx36.b[31][1]++, node.rowId !== 'root')) {
-			cov_a3wkdqx36.b[30][0]++;
-			cov_a3wkdqx36.s[157]++;
+		if ((cov_1mjjk0d79r.b[31][0]++, node) && (cov_1mjjk0d79r.b[31][1]++, node.rowId !== 'root')) {
+			cov_1mjjk0d79r.b[30][0]++;
+			cov_1mjjk0d79r.s[157]++;
 
 			if (treeDepth > currentDepth) {
-				cov_a3wkdqx36.b[32][0]++;
-				cov_a3wkdqx36.s[158]++;
+				cov_1mjjk0d79r.b[32][0]++;
+				cov_1mjjk0d79r.s[158]++;
 
 				treePath.push(node.parentrowId);
-				cov_a3wkdqx36.s[159]++;
+				cov_1mjjk0d79r.s[159]++;
 				indexPath.push(-1);
-				cov_a3wkdqx36.s[160]++;
+				cov_1mjjk0d79r.s[160]++;
 				currentDepth = treeDepth;
 			} else {
-					cov_a3wkdqx36.b[32][1]++;
-					cov_a3wkdqx36.s[161]++;
+					cov_1mjjk0d79r.b[32][1]++;
+					cov_1mjjk0d79r.s[161]++;
 					if (treeDepth < currentDepth) {
-						cov_a3wkdqx36.b[33][0]++;
-						cov_a3wkdqx36.s[162]++;
+						cov_1mjjk0d79r.b[33][0]++;
+						cov_1mjjk0d79r.s[162]++;
 
 						treePath.length = treeDepth;
-						cov_a3wkdqx36.s[163]++;
+						cov_1mjjk0d79r.s[163]++;
 						indexPath.length = treeDepth;
-						cov_a3wkdqx36.s[164]++;
+						cov_1mjjk0d79r.s[164]++;
 						currentDepth = treeDepth;
 					} else {
-						cov_a3wkdqx36.b[33][1]++;
+						cov_1mjjk0d79r.b[33][1]++;
 					}
-				}var index = (cov_a3wkdqx36.s[165]++, indexPath[indexPath.length - 1] + 1);
-			cov_a3wkdqx36.s[166]++;
+				}var index = (cov_1mjjk0d79r.s[165]++, indexPath[indexPath.length - 1] + 1);
+			cov_1mjjk0d79r.s[166]++;
 			indexPath[indexPath.length - 1] = index;
-			cov_a3wkdqx36.s[167]++;
+			cov_1mjjk0d79r.s[167]++;
 			if (yas === 'new') {
-				cov_a3wkdqx36.b[34][0]++;
-				cov_a3wkdqx36.s[168]++;
+				cov_1mjjk0d79r.b[34][0]++;
+				cov_1mjjk0d79r.s[168]++;
 
 				lmeTree.addTupleNode(node, treePath, index, y, treeDepth);
 			} else {
-				cov_a3wkdqx36.b[34][1]++;
-				cov_a3wkdqx36.s[169]++;
+				cov_1mjjk0d79r.b[34][1]++;
+				cov_1mjjk0d79r.s[169]++;
 
 				lmeTree.addWebNode(node, treePath, index, y, treeDepth);
 			}
 		} else {
-			cov_a3wkdqx36.b[30][1]++;
+			cov_1mjjk0d79r.b[30][1]++;
 		}
 	}, workbook.resolveY(0).parent, null, 0);
-	cov_a3wkdqx36.s[170]++;
+	cov_1mjjk0d79r.s[170]++;
 	return lmeTree;
 };
 exports.default = new WebExportParser();

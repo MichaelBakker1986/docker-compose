@@ -1,6 +1,8 @@
-import webpack from 'webpack'
-import fs      from 'fs'
-import path    from 'path'
+import webpack         from 'webpack'
+import { readdirSync } from 'fs'
+import path            from 'path'
+import MemoryFS        from 'memory-fs'
+import { error }       from 'log6'
 
 /**
  * Combine workspace into a REST-API js
@@ -10,18 +12,15 @@ const compilers = {}
 const nodeModules = {}
 
 const resolveCompiler = (memory_fs, filename) => {
-	const basename = path.basename(filename)
 	let compiler = compilers[filename]
 	if (!compiler) {
-		const dist_path = path.resolve(`${__dirname}/`, basename)
 		compiler = webpack({
 			entry    : [path.resolve(__dirname, filename)],
 			mode     : 'development',
 			target   : 'node',
 			node     : {},
 			output   : {
-				/*		publicPath: 'http://localhost:10500/',*/
-				path    : path.join(__dirname, '/dist'),
+				path    : __dirname,
 				filename: 'rest-api-backend.js'
 			},
 			module   : {
@@ -50,12 +49,11 @@ const resolveCompiler = (memory_fs, filename) => {
 export class WebpackCompiler {
 	constructor({ memory_fs }) {
 		this.memory_fs = memory_fs
-
-		fs.readdirSync('../node_modules')
+		readdirSync(path.join(__dirname, '../node_modules'))
 		.filter((x) => ['.bin'].indexOf(x) === -1)
 		.forEach(mod => nodeModules[mod] = `commonjs ${mod}`)
 
-		fs.readdirSync('../lme-data-api/node_modules')
+		readdirSync(path.join(__dirname, '../lme-data-api/node_modules'))
 		.filter((x) => ['.bin'].indexOf(x) === -1)
 		.forEach(mod => nodeModules[mod] = `commonjs ${mod}`)
 	}
@@ -64,28 +62,30 @@ export class WebpackCompiler {
 		const memory_fs = this.memory_fs
 		const compiler = resolveCompiler(memory_fs, filename)
 		return new Promise((accept, reject) => {
-			compiler.run((err, stats) => {
-				if (err) reject(err)
-				/*const readFileSync = memory_fs.readFileSync(path.resolve(__dirname + '/dist', 'rest-api-backend.js'), 'utf8')*/
-				accept(stats.toString({
-					aggregateTimeout: 300,
-					poll            : undefined,
-					chunks          : false,  // Makes the build much quieter
-					colors          : true    // Shows colors in the console
-				}))
-			})
+			try {
+				compiler.run((err, stats) => {
+					if (err) reject(err)
+					accept(stats.toString({
+						aggregateTimeout: 300,
+						poll            : undefined,
+						chunks          : false,  // Makes the build much quieter
+						colors          : true    // Shows colors in the console
+					}))
+				})
+			} catch (err) {
+				reject(err)
+			}
 		})
 	}
 
 	async readProductionFile(filename) {
-		const memory_fs = this.memory_fs
-		const source = await this.buildProductionFile(filename)
-		return memory_fs.readFileSync(path.resolve(__dirname + '/dist', 'rest-api-backend.js'), 'utf8')
+		const stats = await this.buildProductionFile(filename)
+		console.info(stats)
+		return this.memory_fs.readFileSync(path.join(__dirname, 'rest-api-backend.js'), 'utf8')
 	}
-
 }
 
-/*new WebpackCompiler({ memory_fs: new MemoryFS() }).readProductionFile('../lme-data-api/lme-data-app.js').then((source) => {
- console.info(source)
- }
- ).catch((er) => error('err', er))*/
+/*new WebpackCompiler({ memory_fs: new MemoryFS }).readProductionFile('../lme-data-api/lme-data-app.js').then((source) => {
+		console.info(source)
+	}
+).catch((er) => error('err', er))*/

@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1k1wz6dkr4 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Context.js',
-	    hash = 'd8563b65023479883513e38cef5b0e03a9a3d9ba',
+var cov_27cwcpq5fe = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Context.js',
+	    hash = '389754541f8df57acfb8a571b18b1ce916ce1e43',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Context.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Context.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -460,13 +460,13 @@ exports.Context = undefined;
 
 var _AuditTrail = require('./AuditTrail');
 
-var ApplicationContext = (cov_1k1wz6dkr4.s[0]++, {
+var ApplicationContext = (cov_27cwcpq5fe.s[0]++, {
 	parsers: [], //holds all injected parsers
 	ma: [], //holds all loaded model-functions.
 	/*audittrail: {}*/
 	audittrail: new _AuditTrail.AuditTrail() //trailer*/
 });
-var propertyDefaults = (cov_1k1wz6dkr4.s[1]++, {
+var propertyDefaults = (cov_27cwcpq5fe.s[1]++, {
 	'visible': true,
 	'value': 1e-10,
 	'required': false,
@@ -477,63 +477,63 @@ var propertyDefaults = (cov_1k1wz6dkr4.s[1]++, {
 
 	//request scope context
 });function Context(opts) {
-	cov_1k1wz6dkr4.f[0]++;
-	cov_1k1wz6dkr4.s[2]++;
+	cov_27cwcpq5fe.f[0]++;
+	cov_27cwcpq5fe.s[2]++;
 
 	//reference to the ApplicationContext context
 	this.applicationContext = ApplicationContext;
-	cov_1k1wz6dkr4.s[3]++;
+	cov_27cwcpq5fe.s[3]++;
 	this._values = {};
-	cov_1k1wz6dkr4.s[4]++;
+	cov_27cwcpq5fe.s[4]++;
 	this.ma = ApplicationContext.ma;
-	cov_1k1wz6dkr4.s[5]++;
+	cov_27cwcpq5fe.s[5]++;
 	this.audittrail = ApplicationContext.audittrail;
-	cov_1k1wz6dkr4.s[6]++;
+	cov_27cwcpq5fe.s[6]++;
 	this.audit = [];
-	cov_1k1wz6dkr4.s[7]++;
+	cov_27cwcpq5fe.s[7]++;
 	this.calc_count = 0;
-	cov_1k1wz6dkr4.s[8]++;
+	cov_27cwcpq5fe.s[8]++;
 	this.columnSize = 6;
-	cov_1k1wz6dkr4.s[9]++;
+	cov_27cwcpq5fe.s[9]++;
 	this.columns = ['title', 'value', 'visible', 'entered', 'locked', 'required', 'hint', 'choices', 'original', 'valid'];
-	cov_1k1wz6dkr4.s[10]++;
+	cov_27cwcpq5fe.s[10]++;
 	this.saveToken = undefined; //commit hash
-	cov_1k1wz6dkr4.s[11]++;
+	cov_27cwcpq5fe.s[11]++;
 	Object.assign(this, opts);
-	cov_1k1wz6dkr4.s[12]++;
-	this._values.absolute_start_year = (cov_1k1wz6dkr4.b[0][0]++, this.absolute_start_year) || (cov_1k1wz6dkr4.b[0][1]++, new Date().getFullYear());
+	cov_27cwcpq5fe.s[12]++;
+	this._values.absolute_start_year = (cov_27cwcpq5fe.b[0][0]++, this.absolute_start_year) || (cov_27cwcpq5fe.b[0][1]++, new Date().getFullYear());
 }
 
-cov_1k1wz6dkr4.s[13]++;
+cov_27cwcpq5fe.s[13]++;
 Context.prototype.propertyDefaults = propertyDefaults;
-cov_1k1wz6dkr4.s[14]++;
+cov_27cwcpq5fe.s[14]++;
 Context.prototype.getValues = function () {
-	cov_1k1wz6dkr4.f[1]++;
-	cov_1k1wz6dkr4.s[15]++;
+	cov_27cwcpq5fe.f[1]++;
+	cov_27cwcpq5fe.s[15]++;
 
 	return this._values;
 };
-cov_1k1wz6dkr4.s[16]++;
+cov_27cwcpq5fe.s[16]++;
 Context.prototype.clear = function () {
-	cov_1k1wz6dkr4.f[2]++;
-	cov_1k1wz6dkr4.s[17]++;
+	cov_27cwcpq5fe.f[2]++;
+	cov_27cwcpq5fe.s[17]++;
 
 	for (var key in this.values) {
-		cov_1k1wz6dkr4.s[18]++;
+		cov_27cwcpq5fe.s[18]++;
 		if (!isNaN(key)) {
-				cov_1k1wz6dkr4.b[1][0]++;
-				cov_1k1wz6dkr4.s[19]++;
+				cov_27cwcpq5fe.b[1][0]++;
+				cov_27cwcpq5fe.s[19]++;
 				this.values[key] = {};
 			} else {
-			cov_1k1wz6dkr4.b[1][1]++;
+			cov_27cwcpq5fe.b[1][1]++;
 		}
-	}cov_1k1wz6dkr4.s[20]++;
+	}cov_27cwcpq5fe.s[20]++;
 	this.audit.length = 0;
 };
-cov_1k1wz6dkr4.s[21]++;
+cov_27cwcpq5fe.s[21]++;
 Context.prototype.hasChanges = function () {
-	cov_1k1wz6dkr4.f[3]++;
-	cov_1k1wz6dkr4.s[22]++;
+	cov_27cwcpq5fe.f[3]++;
+	cov_27cwcpq5fe.s[22]++;
 
 	return this.audit.length > 0;
 };

@@ -687,8 +687,11 @@ initJSMath(jsMath);
 var entries = {
 	closestLowerNum: closestLowerNum,
 	NA: NA
-	/*if (!global.PPMT) global.PPMT = () => 1*/
-};var name = 'ff-math';
+};
+if (!global.PPMT) global.PPMT = function () {
+	return 1;
+};
+var name = 'ff-math';
 exports.name = name;
 exports.entries = entries;
 exports.default = { name: name, entries: entries };

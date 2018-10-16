@@ -1,16 +1,17 @@
-import ORM       from './ModelProperty'
+import { ORM }   from './ModelProperty'
 import { error } from 'log6'
 
-exports.started = ORM.orm.then(function() {
+export const started = ORM.orm.then(() => {
 	exports.insertProperties = ORM.ModelProperty.insertModelProperties
 	exports.getFFLModelPropertyChanges = ORM.ModelProperty.getFFLModelPropertyChanges
-	exports.getModel = function(modelName) {
-		return ORM.ModelProperty.getModel(modelName).then(function(ok) {
+	exports.getModel = (modelName) => {
+		return ORM.ModelProperty.getModel(modelName).then((ok) => {
 			const schemaIndex = {}
-			const schema = []
-			const constants = []
-			const nodes = []
-			const index = {}
+				, schema       = []
+				, constants    = []
+				, nodes        = []
+				, index        = {}
+
 			ok.map((row) => {
 				index[row.var] = index[row.var] || {}
 				if (!schemaIndex[row.col]) {
@@ -27,13 +28,7 @@ exports.started = ORM.orm.then(function() {
 				}
 				nodes.push(node)
 			}
-			return {
-				schema   : schema,
-				nodes    : nodes,
-				constants: constants
-			}
+			return { schema, nodes, constants }
 		}).catch(err => error(err))
 	}
-}).catch(err => {
-	console.error(err)
-})
+}).catch(err => error(err))

@@ -110,4 +110,4 @@ ScorecardTool.prototype.walkDepthFirst = function (node, visitor, depth) {
 	}
 	visitor(node, depth);
 };
-exports.default = new ScorecardTool();
+exports.default = ScorecardTool;

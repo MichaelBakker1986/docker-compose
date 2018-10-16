@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1eev4y3nr6 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\excel-connect.js',
-	    hash = '6c087c2907e380e7afa32da7d33465890a3a0218',
+var cov_pwh1274lb = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\excel-connect.js',
+	    hash = 'b39ac142bc5c5e4d4f84c4333e19844e52c2bb6a',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\excel-connect\\excel-connect.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\excel-connect\\excel-connect.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -16,7 +16,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 11,
-					column: 79
+					column: 109
 				}
 			},
 			'1': {
@@ -336,7 +336,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 93,
-					column: 2
+					column: 3
 				}
 			},
 			'33': {
@@ -376,7 +376,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 76,
-					column: 11
+					column: 9
 				}
 			},
 			'37': {
@@ -406,7 +406,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 80,
-					column: 11
+					column: 9
 				}
 			},
 			'40': {
@@ -446,7 +446,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 85,
-					column: 11
+					column: 9
 				}
 			},
 			'44': {
@@ -516,7 +516,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 116,
-					column: 2
+					column: 3
 				}
 			},
 			'51': {
@@ -576,17 +576,17 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 106,
-					column: 45
+					column: 57
 				}
 			},
 			'57': {
 				start: {
 					line: 106,
-					column: 29
+					column: 40
 				},
 				end: {
 					line: 106,
-					column: 45
+					column: 56
 				}
 			},
 			'58': {
@@ -606,7 +606,7 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 115,
-					column: 3
+					column: 4
 				}
 			},
 			'60': {
@@ -626,17 +626,17 @@ var cov_1eev4y3nr6 = function () {
 				},
 				end: {
 					line: 114,
-					column: 72
+					column: 84
 				}
 			},
 			'62': {
 				start: {
 					line: 114,
-					column: 40
+					column: 51
 				},
 				end: {
 					line: 114,
-					column: 72
+					column: 83
 				}
 			},
 			'63': {
@@ -1035,6 +1035,30 @@ var cov_1eev4y3nr6 = function () {
 				name: '(anonymous_5)',
 				decl: {
 					start: {
+						line: 71,
+						column: 32
+					},
+					end: {
+						line: 71,
+						column: 33
+					}
+				},
+				loc: {
+					start: {
+						line: 71,
+						column: 40
+					},
+					end: {
+						line: 93,
+						column: 2
+					}
+				},
+				line: 71
+			},
+			'6': {
+				name: '(anonymous_6)',
+				decl: {
+					start: {
 						line: 97,
 						column: 21
 					},
@@ -1055,8 +1079,104 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 97
 			},
-			'6': {
-				name: '(anonymous_6)',
+			'7': {
+				name: '(anonymous_7)',
+				decl: {
+					start: {
+						line: 100,
+						column: 35
+					},
+					end: {
+						line: 100,
+						column: 36
+					}
+				},
+				loc: {
+					start: {
+						line: 100,
+						column: 50
+					},
+					end: {
+						line: 116,
+						column: 2
+					}
+				},
+				line: 100
+			},
+			'8': {
+				name: '(anonymous_8)',
+				decl: {
+					start: {
+						line: 106,
+						column: 33
+					},
+					end: {
+						line: 106,
+						column: 34
+					}
+				},
+				loc: {
+					start: {
+						line: 106,
+						column: 40
+					},
+					end: {
+						line: 106,
+						column: 56
+					}
+				},
+				line: 106
+			},
+			'9': {
+				name: '(anonymous_9)',
+				decl: {
+					start: {
+						line: 112,
+						column: 33
+					},
+					end: {
+						line: 112,
+						column: 34
+					}
+				},
+				loc: {
+					start: {
+						line: 112,
+						column: 44
+					},
+					end: {
+						line: 115,
+						column: 3
+					}
+				},
+				line: 112
+			},
+			'10': {
+				name: '(anonymous_10)',
+				decl: {
+					start: {
+						line: 114,
+						column: 43
+					},
+					end: {
+						line: 114,
+						column: 44
+					}
+				},
+				loc: {
+					start: {
+						line: 114,
+						column: 51
+					},
+					end: {
+						line: 114,
+						column: 83
+					}
+				},
+				line: 114
+			},
+			'11': {
+				name: '(anonymous_11)',
 				decl: {
 					start: {
 						line: 123,
@@ -1079,8 +1199,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 123
 			},
-			'7': {
-				name: '(anonymous_7)',
+			'12': {
+				name: '(anonymous_12)',
 				decl: {
 					start: {
 						line: 128,
@@ -1103,8 +1223,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 128
 			},
-			'8': {
-				name: '(anonymous_8)',
+			'13': {
+				name: '(anonymous_13)',
 				decl: {
 					start: {
 						line: 129,
@@ -1127,8 +1247,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 129
 			},
-			'9': {
-				name: '(anonymous_9)',
+			'14': {
+				name: '(anonymous_14)',
 				decl: {
 					start: {
 						line: 133,
@@ -1151,8 +1271,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 133
 			},
-			'10': {
-				name: '(anonymous_10)',
+			'15': {
+				name: '(anonymous_15)',
 				decl: {
 					start: {
 						line: 142,
@@ -1175,8 +1295,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 142
 			},
-			'11': {
-				name: '(anonymous_11)',
+			'16': {
+				name: '(anonymous_16)',
 				decl: {
 					start: {
 						line: 143,
@@ -1199,8 +1319,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 143
 			},
-			'12': {
-				name: '(anonymous_12)',
+			'17': {
+				name: '(anonymous_17)',
 				decl: {
 					start: {
 						line: 144,
@@ -1223,8 +1343,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 144
 			},
-			'13': {
-				name: '(anonymous_13)',
+			'18': {
+				name: '(anonymous_18)',
 				decl: {
 					start: {
 						line: 146,
@@ -1247,8 +1367,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 146
 			},
-			'14': {
-				name: '(anonymous_14)',
+			'19': {
+				name: '(anonymous_19)',
 				decl: {
 					start: {
 						line: 148,
@@ -1271,8 +1391,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 148
 			},
-			'15': {
-				name: '(anonymous_15)',
+			'20': {
+				name: '(anonymous_20)',
 				decl: {
 					start: {
 						line: 150,
@@ -1295,8 +1415,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 150
 			},
-			'16': {
-				name: '(anonymous_16)',
+			'21': {
+				name: '(anonymous_21)',
 				decl: {
 					start: {
 						line: 150,
@@ -1319,8 +1439,8 @@ var cov_1eev4y3nr6 = function () {
 				},
 				line: 150
 			},
-			'17': {
-				name: '(anonymous_17)',
+			'22': {
+				name: '(anonymous_22)',
 				decl: {
 					start: {
 						line: 155,
@@ -1346,6 +1466,39 @@ var cov_1eev4y3nr6 = function () {
 		},
 		branchMap: {
 			'0': {
+				loc: {
+					start: {
+						line: 11,
+						column: 51
+					},
+					end: {
+						line: 11,
+						column: 108
+					}
+				},
+				type: 'binary-expr',
+				locations: [{
+					start: {
+						line: 11,
+						column: 51
+					},
+					end: {
+						line: 11,
+						column: 77
+					}
+				}, {
+					start: {
+						line: 11,
+						column: 81
+					},
+					end: {
+						line: 11,
+						column: 108
+					}
+				}],
+				line: 11
+			},
+			'1': {
 				loc: {
 					start: {
 						line: 30,
@@ -1378,7 +1531,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 30
 			},
-			'1': {
+			'2': {
 				loc: {
 					start: {
 						line: 33,
@@ -1411,7 +1564,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 33
 			},
-			'2': {
+			'3': {
 				loc: {
 					start: {
 						line: 74,
@@ -1444,7 +1597,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 74
 			},
-			'3': {
+			'4': {
 				loc: {
 					start: {
 						line: 78,
@@ -1477,7 +1630,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 78
 			},
-			'4': {
+			'5': {
 				loc: {
 					start: {
 						line: 83,
@@ -1510,7 +1663,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 83
 			},
-			'5': {
+			'6': {
 				loc: {
 					start: {
 						line: 128,
@@ -1534,7 +1687,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 128
 			},
-			'6': {
+			'7': {
 				loc: {
 					start: {
 						line: 137,
@@ -1567,7 +1720,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 137
 			},
-			'7': {
+			'8': {
 				loc: {
 					start: {
 						line: 137,
@@ -1600,7 +1753,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 137
 			},
-			'8': {
+			'9': {
 				loc: {
 					start: {
 						line: 139,
@@ -1633,7 +1786,7 @@ var cov_1eev4y3nr6 = function () {
 				}],
 				line: 139
 			},
-			'9': {
+			'10': {
 				loc: {
 					start: {
 						line: 151,
@@ -1777,7 +1930,12 @@ var cov_1eev4y3nr6 = function () {
 			'14': 0,
 			'15': 0,
 			'16': 0,
-			'17': 0
+			'17': 0,
+			'18': 0,
+			'19': 0,
+			'20': 0,
+			'21': 0,
+			'22': 0
 		},
 		b: {
 			'0': [0, 0],
@@ -1785,11 +1943,12 @@ var cov_1eev4y3nr6 = function () {
 			'2': [0, 0],
 			'3': [0, 0],
 			'4': [0, 0],
-			'5': [0],
-			'6': [0, 0],
+			'5': [0, 0],
+			'6': [0],
 			'7': [0, 0],
 			'8': [0, 0],
-			'9': [0, 0]
+			'9': [0, 0],
+			'10': [0, 0]
 		},
 		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
 	},
@@ -1827,7 +1986,7 @@ var _log = require('log6');
 
 var _exceljs = require('exceljs');
 
-var _exceljs2 = _interopRequireDefault(_exceljs);
+var Excel = _interopRequireWildcard(_exceljs);
 
 var _promise = require('promise');
 
@@ -1837,9 +1996,11 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var default_resources_map = (cov_1eev4y3nr6.s[0]++, _path2.default.join(__dirname, '../git-connect/resources/'));
+var default_resources_map = (cov_pwh1274lb.s[0]++, _path2.default.join(__dirname, (cov_pwh1274lb.b[0][0]++, process.env.RESOURCES_PATH) || (cov_pwh1274lb.b[0][1]++, '../git-connect/resources/')));
 
 /**
  * Result after excel parsing.
@@ -1854,282 +2015,290 @@ var default_resources_map = (cov_1eev4y3nr6.s[0]++, _path2.default.join(__dirnam
  *   }
  * }
  */
-cov_1eev4y3nr6.s[1]++;
+cov_pwh1274lb.s[1]++;
 var findStart = function findStart(range) {
-	cov_1eev4y3nr6.f[0]++;
+	cov_pwh1274lb.f[0]++;
 
-	var yStart = (cov_1eev4y3nr6.s[2]++, -1);
-	var xStart = (cov_1eev4y3nr6.s[3]++, -1);
-	cov_1eev4y3nr6.s[4]++;
+	var yStart = (cov_pwh1274lb.s[2]++, -1);
+	var xStart = (cov_pwh1274lb.s[3]++, -1);
+	cov_pwh1274lb.s[4]++;
 	for (var y = 0; y < range.ranges.length; y++) {
-		cov_1eev4y3nr6.s[5]++;
+		cov_pwh1274lb.s[5]++;
 
 		if (range.ranges[y]) {
-			cov_1eev4y3nr6.b[0][0]++;
-			cov_1eev4y3nr6.s[6]++;
+			cov_pwh1274lb.b[1][0]++;
+			cov_pwh1274lb.s[6]++;
 
 			yStart = y;
-			cov_1eev4y3nr6.s[7]++;
+			cov_pwh1274lb.s[7]++;
 			for (var x = 0; x < range.ranges[y].length; x++) {
-				cov_1eev4y3nr6.s[8]++;
+				cov_pwh1274lb.s[8]++;
 
 				if (range.ranges[y][x]) {
-					cov_1eev4y3nr6.b[1][0]++;
-					cov_1eev4y3nr6.s[9]++;
+					cov_pwh1274lb.b[2][0]++;
+					cov_pwh1274lb.s[9]++;
 
 					xStart = x;
-					cov_1eev4y3nr6.s[10]++;
+					cov_pwh1274lb.s[10]++;
 					break;
 				} else {
-					cov_1eev4y3nr6.b[1][1]++;
+					cov_pwh1274lb.b[2][1]++;
 				}
 			}
-			cov_1eev4y3nr6.s[11]++;
+			cov_pwh1274lb.s[11]++;
 			break;
 		} else {
-			cov_1eev4y3nr6.b[0][1]++;
+			cov_pwh1274lb.b[1][1]++;
 		}
 	}
-	cov_1eev4y3nr6.s[12]++;
+	cov_pwh1274lb.s[12]++;
 	return { xStart: xStart, yStart: yStart };
 };
-cov_1eev4y3nr6.s[13]++;
+cov_pwh1274lb.s[13]++;
 var getCellValueFromRangeCell = function getCellValueFromRangeCell(range, rangeCell) {
-	cov_1eev4y3nr6.f[1]++;
-	cov_1eev4y3nr6.s[14]++;
+	cov_pwh1274lb.f[1]++;
+	cov_pwh1274lb.s[14]++;
 
 	return range.sheet.getCell(rangeCell.address).value;
 };
 
-cov_1eev4y3nr6.s[15]++;
+cov_pwh1274lb.s[15]++;
 var findYasNames = function findYasNames(range, bounds) {
-	cov_1eev4y3nr6.f[2]++;
+	cov_pwh1274lb.f[2]++;
 
-	var yAsNames = (cov_1eev4y3nr6.s[16]++, {});
-	cov_1eev4y3nr6.s[17]++;
+	var yAsNames = (cov_pwh1274lb.s[16]++, {});
+	cov_pwh1274lb.s[17]++;
 	for (var y = bounds.yStart; y < range.ranges.length; y++) {
-		cov_1eev4y3nr6.s[18]++;
+		cov_pwh1274lb.s[18]++;
 
 		yAsNames[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = range.ranges[y][bounds.xStart];
 	}
-	cov_1eev4y3nr6.s[19]++;
+	cov_pwh1274lb.s[19]++;
 	return yAsNames;
 };
 
-cov_1eev4y3nr6.s[20]++;
+cov_pwh1274lb.s[20]++;
 var findXasValues = function findXasValues(range, yasNames, bounds) {
-	cov_1eev4y3nr6.f[3]++;
+	cov_pwh1274lb.f[3]++;
 
-	var xAsValues = (cov_1eev4y3nr6.s[21]++, {});
-	cov_1eev4y3nr6.s[22]++;
+	var xAsValues = (cov_pwh1274lb.s[21]++, {});
+	cov_pwh1274lb.s[22]++;
 	for (var y = bounds.yStart; y < range.ranges.length; y++) {
-		var currentXAs = (cov_1eev4y3nr6.s[23]++, {});
-		cov_1eev4y3nr6.s[24]++;
+		var currentXAs = (cov_pwh1274lb.s[23]++, {});
+		cov_pwh1274lb.s[24]++;
 		xAsValues[getCellValueFromRangeCell(range, range.ranges[y][bounds.xStart])] = currentXAs;
-		cov_1eev4y3nr6.s[25]++;
+		cov_pwh1274lb.s[25]++;
 		for (var x = bounds.xStart; x < range.ranges[y].length; x++) {
-			var cellAddress = (cov_1eev4y3nr6.s[26]++, range.ranges[y][x]);
-			cov_1eev4y3nr6.s[27]++;
+			var cellAddress = (cov_pwh1274lb.s[26]++, range.ranges[y][x]);
+			cov_pwh1274lb.s[27]++;
 			currentXAs[x - bounds.xStart] = getCellValueFromRangeCell(range, cellAddress);
 		}
 	}
-	cov_1eev4y3nr6.s[28]++;
+	cov_pwh1274lb.s[28]++;
 	return xAsValues;
 };
 
-cov_1eev4y3nr6.s[29]++;
+cov_pwh1274lb.s[29]++;
 var getDefinedNames = function getDefinedNames(wb) {
-	cov_1eev4y3nr6.f[4]++;
+	cov_pwh1274lb.f[4]++;
 
-	var names = (cov_1eev4y3nr6.s[30]++, {});
-	var matrixMap = (cov_1eev4y3nr6.s[31]++, wb._definedNames.matrixMap);
-	cov_1eev4y3nr6.s[32]++;
-	for (var name in matrixMap) {
+	var names = (cov_pwh1274lb.s[30]++, {});
+	var matrixMap = (cov_pwh1274lb.s[31]++, wb._definedNames.matrixMap);
+	cov_pwh1274lb.s[32]++;
+	Object.keys(matrixMap).forEach(function (name) {
+		cov_pwh1274lb.f[5]++;
+
 		//checks concerning assumptions made during creating code.
-		var matrixMapDefinedName = (cov_1eev4y3nr6.s[33]++, matrixMap[name]);
-		cov_1eev4y3nr6.s[34]++;
+		var matrixMapDefinedName = (cov_pwh1274lb.s[33]++, matrixMap[name]);
+		cov_pwh1274lb.s[34]++;
 		if (!matrixMapDefinedName) {
-			cov_1eev4y3nr6.b[2][0]++;
-			cov_1eev4y3nr6.s[35]++;
+			cov_pwh1274lb.b[3][0]++;
+			cov_pwh1274lb.s[35]++;
 
 			(0, _log.warn)('invalid named range [' + name + ']');
-			cov_1eev4y3nr6.s[36]++;
-			continue;
+			cov_pwh1274lb.s[36]++;
+			return;
 		} else {
-			cov_1eev4y3nr6.b[2][1]++;
+			cov_pwh1274lb.b[3][1]++;
 		}
-		cov_1eev4y3nr6.s[37]++;
+		cov_pwh1274lb.s[37]++;
 		if (!matrixMapDefinedName.sheets) {
-			cov_1eev4y3nr6.b[3][0]++;
-			cov_1eev4y3nr6.s[38]++;
+			cov_pwh1274lb.b[4][0]++;
+			cov_pwh1274lb.s[38]++;
 
 			(0, _log.warn)('invalid named range sheets [' + name + ']');
-			cov_1eev4y3nr6.s[39]++;
-			continue;
+			cov_pwh1274lb.s[39]++;
+			return;
 		} else {
-			cov_1eev4y3nr6.b[3][1]++;
+			cov_pwh1274lb.b[4][1]++;
 		}
-		var matrixMapDefinedNamesSheetKeys = (cov_1eev4y3nr6.s[40]++, Object.keys(matrixMapDefinedName.sheets));
-		cov_1eev4y3nr6.s[41]++;
+		var matrixMapDefinedNamesSheetKeys = (cov_pwh1274lb.s[40]++, Object.keys(matrixMapDefinedName.sheets));
+		cov_pwh1274lb.s[41]++;
 		if (matrixMapDefinedNamesSheetKeys.length > 1) {
-			cov_1eev4y3nr6.b[4][0]++;
-			cov_1eev4y3nr6.s[42]++;
+			cov_pwh1274lb.b[5][0]++;
+			cov_pwh1274lb.s[42]++;
 
 			(0, _log.warn)('invalid named range sheet count [' + name + ']');
-			cov_1eev4y3nr6.s[43]++;
-			continue;
+			cov_pwh1274lb.s[43]++;
+			return;
 		} else {
-			cov_1eev4y3nr6.b[4][1]++;
+			cov_pwh1274lb.b[5][1]++;
 		}
-		var sheetName = (cov_1eev4y3nr6.s[44]++, matrixMapDefinedNamesSheetKeys[0]);
-		cov_1eev4y3nr6.s[45]++;
+		var sheetName = (cov_pwh1274lb.s[44]++, matrixMapDefinedNamesSheetKeys[0]);
+		cov_pwh1274lb.s[45]++;
 		names[name] = {
 			name: name,
 			sheet: wb.getWorksheet(sheetName),
 			ranges: matrixMapDefinedName.sheets[sheetName]
 		};
-	}
-	cov_1eev4y3nr6.s[46]++;
+	});
+	cov_pwh1274lb.s[46]++;
 	return names;
 };
 
-cov_1eev4y3nr6.s[47]++;
+cov_pwh1274lb.s[47]++;
 var readFunction = function readFunction(wb) {
-	cov_1eev4y3nr6.f[5]++;
+	cov_pwh1274lb.f[6]++;
 
-	var matrix = (cov_1eev4y3nr6.s[48]++, {});
-	var definedNames = (cov_1eev4y3nr6.s[49]++, getDefinedNames(wb));
-	cov_1eev4y3nr6.s[50]++;
-	for (var definedName in definedNames) {
-		var range = (cov_1eev4y3nr6.s[51]++, definedNames[definedName]);
-		var bounds = (cov_1eev4y3nr6.s[52]++, findStart(range));
-		var yasNames = (cov_1eev4y3nr6.s[53]++, findYasNames(range, bounds));
-		var xasValues = (cov_1eev4y3nr6.s[54]++, findXasValues(range, yasNames, bounds));
-		var sorted = (cov_1eev4y3nr6.s[55]++, []);
-		cov_1eev4y3nr6.s[56]++;
-		for (var key in xasValues) {
-			cov_1eev4y3nr6.s[57]++;
-			sorted.push(key);
-		}cov_1eev4y3nr6.s[58]++;
+	var matrix = (cov_pwh1274lb.s[48]++, {});
+	var definedNames = (cov_pwh1274lb.s[49]++, getDefinedNames(wb));
+	cov_pwh1274lb.s[50]++;
+	Object.keys(definedNames).forEach(function (definedName) {
+		cov_pwh1274lb.f[7]++;
+
+		var range = (cov_pwh1274lb.s[51]++, definedNames[definedName]);
+		var bounds = (cov_pwh1274lb.s[52]++, findStart(range));
+		var yasNames = (cov_pwh1274lb.s[53]++, findYasNames(range, bounds));
+		var xasValues = (cov_pwh1274lb.s[54]++, findXasValues(range, yasNames, bounds));
+		var sorted = (cov_pwh1274lb.s[55]++, []);
+		cov_pwh1274lb.s[56]++;
+		Object.keys(xasValues).forEach(function (key) {
+			cov_pwh1274lb.f[8]++;
+			cov_pwh1274lb.s[57]++;
+			return sorted.push(key);
+		});
+		cov_pwh1274lb.s[58]++;
 		matrix[definedName] = {
 			name: range.name,
 			table: {},
 			bounds: bounds, yasNames: yasNames, x_sort: sorted, xasValues: xasValues
 		};
-		cov_1eev4y3nr6.s[59]++;
-		for (var xas_key in xasValues) {
-			cov_1eev4y3nr6.s[60]++;
+		cov_pwh1274lb.s[59]++;
+		Object.keys(xasValues).forEach(function (xas_key) {
+			cov_pwh1274lb.f[9]++;
+			cov_pwh1274lb.s[60]++;
 
 			matrix[definedName].x = [];
-			cov_1eev4y3nr6.s[61]++;
-			for (var keyX in xasValues[xas_key]) {
-				cov_1eev4y3nr6.s[62]++;
-				matrix[definedName].x.push(keyX);
-			}
-		}
-	}
+			cov_pwh1274lb.s[61]++;
+			Object.keys(xasValues[xas_key]).forEach(function (keyX) {
+				cov_pwh1274lb.f[10]++;
+				cov_pwh1274lb.s[62]++;
+				return matrix[definedName].x.push(keyX);
+			});
+		});
+	});
 	// use workbook
 	// This variable should be available in the client.
-	cov_1eev4y3nr6.s[63]++;
+	cov_pwh1274lb.s[63]++;
 	return matrix;
 };
 
 var ExcelConnect = function () {
 	function ExcelConnect() {
 		(0, _classCallCheck3.default)(this, ExcelConnect);
-		cov_1eev4y3nr6.f[6]++;
-		cov_1eev4y3nr6.s[64]++;
+		cov_pwh1274lb.f[11]++;
+		cov_pwh1274lb.s[64]++;
 
 		this.name = 'xlsx-lookup';
-		cov_1eev4y3nr6.s[65]++;
+		cov_pwh1274lb.s[65]++;
 		this.entries = {};
 	}
 
 	(0, _createClass3.default)(ExcelConnect, [{
 		key: 'loadExcelFile',
 		value: function loadExcelFile(excelFileName) {
-			var folder = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (cov_1eev4y3nr6.b[5][0]++, default_resources_map);
-			cov_1eev4y3nr6.f[7]++;
-			cov_1eev4y3nr6.s[66]++;
+			var folder = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (cov_pwh1274lb.b[6][0]++, default_resources_map);
+			cov_pwh1274lb.f[12]++;
+			cov_pwh1274lb.s[66]++;
 
 			return new _promise2.default(function (success, fail) {
-				cov_1eev4y3nr6.f[8]++;
+				cov_pwh1274lb.f[13]++;
 
 				//check if an file exists
-				var files = (cov_1eev4y3nr6.s[67]++, _fs2.default.readdirSync(folder));
-				var fileNames = (cov_1eev4y3nr6.s[68]++, []);
-				cov_1eev4y3nr6.s[69]++;
+				var files = (cov_pwh1274lb.s[67]++, _fs2.default.readdirSync(folder));
+				var fileNames = (cov_pwh1274lb.s[68]++, []);
+				cov_pwh1274lb.s[69]++;
 				files.forEach(function (file) {
-					cov_1eev4y3nr6.f[9]++;
+					cov_pwh1274lb.f[14]++;
 
-					var full_path = (cov_1eev4y3nr6.s[70]++, _path2.default.resolve(_path2.default.join(folder, file)));
-					var filename = (cov_1eev4y3nr6.s[71]++, full_path.replace(/\(\w+\)/gmi, ''));
-					var file_information = (cov_1eev4y3nr6.s[72]++, _path2.default.parse(filename));
-					cov_1eev4y3nr6.s[73]++;
-					if ((cov_1eev4y3nr6.b[7][0]++, file_information.ext === '.xlsx') && (cov_1eev4y3nr6.b[7][1]++, file_information.name === excelFileName)) {
-						cov_1eev4y3nr6.b[6][0]++;
-						cov_1eev4y3nr6.s[74]++;
+					var full_path = (cov_pwh1274lb.s[70]++, _path2.default.resolve(_path2.default.join(folder, file)));
+					var filename = (cov_pwh1274lb.s[71]++, full_path.replace(/\(\w+\)/gmi, ''));
+					var file_information = (cov_pwh1274lb.s[72]++, _path2.default.parse(filename));
+					cov_pwh1274lb.s[73]++;
+					if ((cov_pwh1274lb.b[8][0]++, file_information.ext === '.xlsx') && (cov_pwh1274lb.b[8][1]++, file_information.name === excelFileName)) {
+						cov_pwh1274lb.b[7][0]++;
+						cov_pwh1274lb.s[74]++;
 
 						fileNames.push(full_path);
-						cov_1eev4y3nr6.s[75]++;
+						cov_pwh1274lb.s[75]++;
 						if (_log.DEBUG) {
-								cov_1eev4y3nr6.b[8][0]++;
-								cov_1eev4y3nr6.s[76]++;
+								cov_pwh1274lb.b[9][0]++;
+								cov_pwh1274lb.s[76]++;
 								(0, _log.debug)('Found excel file: ', full_path);
 							} else {
-							cov_1eev4y3nr6.b[8][1]++;
+							cov_pwh1274lb.b[9][1]++;
 						}
 					} else {
-						cov_1eev4y3nr6.b[6][1]++;
+						cov_pwh1274lb.b[7][1]++;
 					}
 				});
-				cov_1eev4y3nr6.s[77]++;
+				cov_pwh1274lb.s[77]++;
 				_promise2.default.all(fileNames.map(function (filename) {
-					cov_1eev4y3nr6.f[10]++;
-					cov_1eev4y3nr6.s[78]++;
+					cov_pwh1274lb.f[15]++;
+					cov_pwh1274lb.s[78]++;
 
 					return new _promise2.default(function (success, fail) {
-						cov_1eev4y3nr6.f[11]++;
-						cov_1eev4y3nr6.s[79]++;
+						cov_pwh1274lb.f[16]++;
+						cov_pwh1274lb.s[79]++;
 
-						new _exceljs2.default.Workbook().xlsx.readFile(filename).then(function (data) {
-							cov_1eev4y3nr6.f[12]++;
-							cov_1eev4y3nr6.s[80]++;
+						new Excel.Workbook().xlsx.readFile(filename).then(function (data) {
+							cov_pwh1274lb.f[17]++;
+							cov_pwh1274lb.s[80]++;
 
 							success(readFunction(data));
 						}).catch(function (err) {
-							cov_1eev4y3nr6.f[13]++;
-							cov_1eev4y3nr6.s[81]++;
+							cov_pwh1274lb.f[18]++;
+							cov_pwh1274lb.s[81]++;
 							return fail('Error reading XLSX ' + filename + ' for ' + excelFileName, err.toString());
 						});
 					});
 				})).then(function (excel_files) {
-					cov_1eev4y3nr6.f[14]++;
+					cov_pwh1274lb.f[19]++;
 
-					var totalMatrix = (cov_1eev4y3nr6.s[82]++, {});
-					cov_1eev4y3nr6.s[83]++;
+					var totalMatrix = (cov_pwh1274lb.s[82]++, {});
+					cov_pwh1274lb.s[83]++;
 					excel_files.forEach(function (excel_file) {
-						cov_1eev4y3nr6.f[15]++;
-						cov_1eev4y3nr6.s[84]++;
+						cov_pwh1274lb.f[20]++;
+						cov_pwh1274lb.s[84]++;
 						return Object.keys(excel_file).forEach(function (tableName) {
-							cov_1eev4y3nr6.f[16]++;
-							cov_1eev4y3nr6.s[85]++;
+							cov_pwh1274lb.f[21]++;
+							cov_pwh1274lb.s[85]++;
 
 							if (totalMatrix[tableName] != null) {
-									cov_1eev4y3nr6.b[9][0]++;
-									cov_1eev4y3nr6.s[86]++;
+									cov_pwh1274lb.b[10][0]++;
+									cov_pwh1274lb.s[86]++;
 									(0, _log.debug)('Duplicate table \'' + tableName + '\' found while accumulating excel-sheets into one, last found named table will be used.');
 								} else {
-								cov_1eev4y3nr6.b[9][1]++;
-							}cov_1eev4y3nr6.s[87]++;
+								cov_pwh1274lb.b[10][1]++;
+							}cov_pwh1274lb.s[87]++;
 							totalMatrix[tableName] = excel_file[tableName];
 						});
 					});
-					cov_1eev4y3nr6.s[88]++;
+					cov_pwh1274lb.s[88]++;
 					success(totalMatrix);
 				}).catch(function (err) {
-					cov_1eev4y3nr6.f[17]++;
-					cov_1eev4y3nr6.s[89]++;
+					cov_pwh1274lb.f[22]++;
+					cov_pwh1274lb.s[89]++;
 					return fail(err);
 				});
 			});

@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1g45s2iebf = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\YAxis.js',
-	    hash = '777840e5521ee152bef4d2d7d6813b5096fb5d13',
+var cov_1m16qsgt43 = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\YAxis.js',
+	    hash = '130c3ff96868f0c763294d69acfc34acffe60da4',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\YAxis.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\YAxis.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1935,15 +1935,15 @@ var _log2 = _interopRequireDefault(_log);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var INSTANCES_PER_TUPLE = (cov_1g45s2iebf.s[0]++, 32);
-var BITS_PER_TUPLE = (cov_1g45s2iebf.s[1]++, 6);
-var FIRST__TUPLE_START_BIT = (cov_1g45s2iebf.s[2]++, 10);
-var SECOND_TUPLE_START_BIT = (cov_1g45s2iebf.s[3]++, FIRST__TUPLE_START_BIT + 1 * BITS_PER_TUPLE);
-var THIRD__TUPLE_START_BIT = (cov_1g45s2iebf.s[4]++, FIRST__TUPLE_START_BIT + 2 * BITS_PER_TUPLE);
+var INSTANCES_PER_TUPLE = (cov_1m16qsgt43.s[0]++, 32);
+var BITS_PER_TUPLE = (cov_1m16qsgt43.s[1]++, 6);
+var FIRST__TUPLE_START_BIT = (cov_1m16qsgt43.s[2]++, 10);
+var SECOND_TUPLE_START_BIT = (cov_1m16qsgt43.s[3]++, FIRST__TUPLE_START_BIT + 1 * BITS_PER_TUPLE);
+var THIRD__TUPLE_START_BIT = (cov_1m16qsgt43.s[4]++, FIRST__TUPLE_START_BIT + 2 * BITS_PER_TUPLE);
 
-var FIRST__LEVEL_TUPLE = (cov_1g45s2iebf.s[5]++, 1 << FIRST__TUPLE_START_BIT);
-var SECOND_LEVEL_TUPLE = (cov_1g45s2iebf.s[6]++, 1 << SECOND_TUPLE_START_BIT);
-var THIRD__LEVEL_TUPLE = (cov_1g45s2iebf.s[7]++, 1 << THIRD__TUPLE_START_BIT);
+var FIRST__LEVEL_TUPLE = (cov_1m16qsgt43.s[5]++, 1 << FIRST__TUPLE_START_BIT);
+var SECOND_LEVEL_TUPLE = (cov_1m16qsgt43.s[6]++, 1 << SECOND_TUPLE_START_BIT);
+var THIRD__LEVEL_TUPLE = (cov_1m16qsgt43.s[7]++, 1 << THIRD__TUPLE_START_BIT);
 /*
  * These bitmasks are used to extract the bits for a given n-Tuple (0011***)
  * e.g.
@@ -1952,32 +1952,32 @@ var THIRD__LEVEL_TUPLE = (cov_1g45s2iebf.s[7]++, 1 << THIRD__TUPLE_START_BIT);
  *
  * so: (0011000 & 011001) >> 3 = (HEX)3
  */
-var FIRST__LEVEL_BITMASK = (cov_1g45s2iebf.s[8]++, parseInt('0000000000001111110000000000', 2)); //000129024
-cov_1g45s2iebf.s[9]++;
+var FIRST__LEVEL_BITMASK = (cov_1m16qsgt43.s[8]++, parseInt('0000000000001111110000000000', 2)); //000129024
+cov_1m16qsgt43.s[9]++;
 (0, _assert2.default)(parseInt('0000000000001111110000000000', 2) === 64512);
-var SECOND_LEVEL_BITMASK = (cov_1g45s2iebf.s[10]++, parseInt('0000001111110000000000000000', 2)); //008257536
-cov_1g45s2iebf.s[11]++;
+var SECOND_LEVEL_BITMASK = (cov_1m16qsgt43.s[10]++, parseInt('0000001111110000000000000000', 2)); //008257536
+cov_1m16qsgt43.s[11]++;
 (0, _assert2.default)(parseInt('0000001111110000000000000000', 2) === 4128768);
-var THIRD__LEVEL_BITMASK = (cov_1g45s2iebf.s[12]++, parseInt('1111110000000000000000000000', 2)); //528482304
-cov_1g45s2iebf.s[13]++;
+var THIRD__LEVEL_BITMASK = (cov_1m16qsgt43.s[12]++, parseInt('1111110000000000000000000000', 2)); //528482304
+cov_1m16qsgt43.s[13]++;
 (0, _assert2.default)(parseInt('1111110000000000000000000000', 2) === 264241152);
-var FOURTH_LEVEL_BITMASK = (cov_1g45s2iebf.s[14]++, parseInt('1111110000000000000000000000000000', 2)); //528482304
+var FOURTH_LEVEL_BITMASK = (cov_1m16qsgt43.s[14]++, parseInt('1111110000000000000000000000000000', 2)); //528482304
 //assert(parseInt("1111110000000000000000000000000000", 2) == 264241152)
 
-var indexes = (cov_1g45s2iebf.s[15]++, []);
-cov_1g45s2iebf.s[16]++;
+var indexes = (cov_1m16qsgt43.s[15]++, []);
+cov_1m16qsgt43.s[16]++;
 for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
-	cov_1g45s2iebf.s[17]++;
+	cov_1m16qsgt43.s[17]++;
 
 	indexes[first] = [];
-	cov_1g45s2iebf.s[18]++;
+	cov_1m16qsgt43.s[18]++;
 	for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
-		cov_1g45s2iebf.s[19]++;
+		cov_1m16qsgt43.s[19]++;
 
 		indexes[first][second] = [];
-		cov_1g45s2iebf.s[20]++;
+		cov_1m16qsgt43.s[20]++;
 		for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
-			cov_1g45s2iebf.s[21]++;
+			cov_1m16qsgt43.s[21]++;
 
 			indexes[first][second][third] = FIRST__LEVEL_TUPLE * first + SECOND_LEVEL_TUPLE * second + THIRD__LEVEL_TUPLE * third;
 		}
@@ -1986,19 +1986,19 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
 /*
  * Check if values are valid
  */
-cov_1g45s2iebf.s[22]++;
+cov_1m16qsgt43.s[22]++;
 for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
-	cov_1g45s2iebf.s[23]++;
+	cov_1m16qsgt43.s[23]++;
 
 	for (var j = 0; j < INSTANCES_PER_TUPLE; j++) {
-		cov_1g45s2iebf.s[24]++;
+		cov_1m16qsgt43.s[24]++;
 
 		for (var k = 0; k < INSTANCES_PER_TUPLE; k++) {
-			var index = (cov_1g45s2iebf.s[25]++, indexes[i][j][k]);
+			var index = (cov_1m16qsgt43.s[25]++, indexes[i][j][k]);
 			// log.info(((index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT) + ',' + ((index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT) + ',' + (index >> THIRD__TUPLE_START_BIT))
-			cov_1g45s2iebf.s[26]++;
+			cov_1m16qsgt43.s[26]++;
 			_assert2.default.equal(index >> SECOND_TUPLE_START_BIT >> BITS_PER_TUPLE, index >> THIRD__TUPLE_START_BIT);
-			cov_1g45s2iebf.s[27]++;
+			cov_1m16qsgt43.s[27]++;
 			_assert2.default.equal(index >> SECOND_TUPLE_START_BIT >> BITS_PER_TUPLE, index >> FIRST__TUPLE_START_BIT >> BITS_PER_TUPLE >> BITS_PER_TUPLE);
 		}
 	}
@@ -2019,24 +2019,24 @@ for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
  * om te achterhalen of een index op interessant is voor een bepaalde tuple
  * voor 0,0,1 is matching 1,1,0 nodig. omdat  0,0,0 niet werkt met de & operator, dus inverse van zichzelf
  */
-var matchings = (cov_1g45s2iebf.s[28]++, []);
-var MAX_INVERSE_INT32 = (cov_1g45s2iebf.s[29]++, (1 << 20) - 1 << FIRST__TUPLE_START_BIT); //2147481600 , 111111111111111111100000000000
-cov_1g45s2iebf.s[30]++;
+var matchings = (cov_1m16qsgt43.s[28]++, []);
+var MAX_INVERSE_INT32 = (cov_1m16qsgt43.s[29]++, (1 << 20) - 1 << FIRST__TUPLE_START_BIT); //2147481600 , 111111111111111111100000000000
+cov_1m16qsgt43.s[30]++;
 (0, _assert2.default)(parseInt('111111111111111111110000000000', 2) == (1 << 20) - 1 << FIRST__TUPLE_START_BIT);
 
-cov_1g45s2iebf.s[31]++;
+cov_1m16qsgt43.s[31]++;
 for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
-	cov_1g45s2iebf.s[32]++;
+	cov_1m16qsgt43.s[32]++;
 
 	matchings[first] = [];
-	cov_1g45s2iebf.s[33]++;
+	cov_1m16qsgt43.s[33]++;
 	for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
-		cov_1g45s2iebf.s[34]++;
+		cov_1m16qsgt43.s[34]++;
 
 		matchings[first][second] = [];
-		cov_1g45s2iebf.s[35]++;
+		cov_1m16qsgt43.s[35]++;
 		for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
-			cov_1g45s2iebf.s[36]++;
+			cov_1m16qsgt43.s[36]++;
 
 			matchings[first][second][third] = MAX_INVERSE_INT32 - indexes[first][second][third];
 		}
@@ -2048,34 +2048,34 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
  *1101 :13
  *maar zou 121311xxx,
  */
-cov_1g45s2iebf.s[37]++;
+cov_1m16qsgt43.s[37]++;
 for (var i = 0; i < INSTANCES_PER_TUPLE; i++) {
-	cov_1g45s2iebf.s[38]++;
+	cov_1m16qsgt43.s[38]++;
 
 	for (var j = 0; j < INSTANCES_PER_TUPLE; j++) {
-		cov_1g45s2iebf.s[39]++;
+		cov_1m16qsgt43.s[39]++;
 
 		for (var k = 0; k < INSTANCES_PER_TUPLE; k++) {
-			var _index = (cov_1g45s2iebf.s[40]++, indexes[i][j][k]);
-			var m = (cov_1g45s2iebf.s[41]++, matchings[i][j][k]);
-			cov_1g45s2iebf.s[42]++;
+			var _index = (cov_1m16qsgt43.s[40]++, indexes[i][j][k]);
+			var m = (cov_1m16qsgt43.s[41]++, matchings[i][j][k]);
+			cov_1m16qsgt43.s[42]++;
 			_assert2.default.equal(_index + Math.round(Math.random() * 100) & MAX_INVERSE_INT32, _index, 'index: ' + _index.toString(2) + ' does not match ' + m.toString(2) + '::' + [i, j, k].toString());
 		}
 	}
 }
 
 function pad(n, width, z) {
-	cov_1g45s2iebf.f[0]++;
-	cov_1g45s2iebf.s[43]++;
+	cov_1m16qsgt43.f[0]++;
+	cov_1m16qsgt43.s[43]++;
 
-	z = (cov_1g45s2iebf.b[0][0]++, z) || (cov_1g45s2iebf.b[0][1]++, '0');
-	cov_1g45s2iebf.s[44]++;
+	z = (cov_1m16qsgt43.b[0][0]++, z) || (cov_1m16qsgt43.b[0][1]++, '0');
+	cov_1m16qsgt43.s[44]++;
 	n = n + '';
-	cov_1g45s2iebf.s[45]++;
-	return n.length >= width ? (cov_1g45s2iebf.b[1][0]++, n) : (cov_1g45s2iebf.b[1][1]++, new Array(width - n.length + 1).join(z) + n);
+	cov_1m16qsgt43.s[45]++;
+	return n.length >= width ? (cov_1m16qsgt43.b[1][0]++, n) : (cov_1m16qsgt43.b[1][1]++, new Array(width - n.length + 1).join(z) + n);
 }
 
-var start = (cov_1g45s2iebf.s[46]++, {
+var start = (cov_1m16qsgt43.s[46]++, {
 	bitmask: FIRST__LEVEL_BITMASK,
 	start_bit: FIRST__TUPLE_START_BIT,
 	hash: 0,
@@ -2090,15 +2090,15 @@ var start = (cov_1g45s2iebf.s[46]++, {
 	depth: 0,
 	deeper: []
 });
-cov_1g45s2iebf.s[47]++;
+cov_1m16qsgt43.s[47]++;
 start.base = start;
 //p is the Jump from Tuple to Tuple
-cov_1g45s2iebf.s[48]++;
+cov_1m16qsgt43.s[48]++;
 start.p = [start, start, start];
 
-cov_1g45s2iebf.s[49]++;
+cov_1m16qsgt43.s[49]++;
 for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
-	cov_1g45s2iebf.s[50]++;
+	cov_1m16qsgt43.s[50]++;
 
 	start.deeper[first] = {
 		bitmask: SECOND_LEVEL_BITMASK,
@@ -2115,25 +2115,25 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
 		deeper: [],
 		parent: start
 		//p is the Jump from Tuple to Tuple
-	};cov_1g45s2iebf.s[51]++;
+	};cov_1m16qsgt43.s[51]++;
 	start.deeper[first].p = [start, start.deeper[first], start.deeper[first], start.deeper[first]];
-	cov_1g45s2iebf.s[52]++;
+	cov_1m16qsgt43.s[52]++;
 	if (first > 0) {
-			cov_1g45s2iebf.b[2][0]++;
-			cov_1g45s2iebf.s[53]++;
+			cov_1m16qsgt43.b[2][0]++;
+			cov_1m16qsgt43.s[53]++;
 			start.deeper[first].previous = start.deeper[first - 1];
 		} else {
-		cov_1g45s2iebf.b[2][1]++;
-	}cov_1g45s2iebf.s[54]++;
+		cov_1m16qsgt43.b[2][1]++;
+	}cov_1m16qsgt43.s[54]++;
 	if (first > 0) {
-			cov_1g45s2iebf.b[3][0]++;
-			cov_1g45s2iebf.s[55]++;
+			cov_1m16qsgt43.b[3][0]++;
+			cov_1m16qsgt43.s[55]++;
 			start.deeper[first - 1].next = start.deeper[first];
 		} else {
-		cov_1g45s2iebf.b[3][1]++;
-	}cov_1g45s2iebf.s[56]++;
+		cov_1m16qsgt43.b[3][1]++;
+	}cov_1m16qsgt43.s[56]++;
 	for (var second = 0; second < INSTANCES_PER_TUPLE; second++) {
-		cov_1g45s2iebf.s[57]++;
+		cov_1m16qsgt43.s[57]++;
 
 		start.deeper[first].deeper[second] = {
 			base: start,
@@ -2150,26 +2150,26 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
 			deeper: [],
 			parent: start.deeper[first]
 			//p is the Jump from Tuple to Tuple
-		};cov_1g45s2iebf.s[58]++;
+		};cov_1m16qsgt43.s[58]++;
 		start.deeper[first].deeper[second].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second]];
-		cov_1g45s2iebf.s[59]++;
+		cov_1m16qsgt43.s[59]++;
 		if (second > 0) {
-				cov_1g45s2iebf.b[4][0]++;
-				cov_1g45s2iebf.s[60]++;
+				cov_1m16qsgt43.b[4][0]++;
+				cov_1m16qsgt43.s[60]++;
 				start.deeper[first].deeper[second].previous = start.deeper[first].deeper[second - 1];
 			} else {
-			cov_1g45s2iebf.b[4][1]++;
-		}cov_1g45s2iebf.s[61]++;
+			cov_1m16qsgt43.b[4][1]++;
+		}cov_1m16qsgt43.s[61]++;
 		if (second > 0) {
-				cov_1g45s2iebf.b[5][0]++;
-				cov_1g45s2iebf.s[62]++;
+				cov_1m16qsgt43.b[5][0]++;
+				cov_1m16qsgt43.s[62]++;
 				start.deeper[first].deeper[second - 1].next = start.deeper[first].deeper[second];
 			} else {
-			cov_1g45s2iebf.b[5][1]++;
+			cov_1m16qsgt43.b[5][1]++;
 		} //this level is only used to set values, not to resolve them,
-		cov_1g45s2iebf.s[63]++;
+		cov_1m16qsgt43.s[63]++;
 		for (var third = 0; third < INSTANCES_PER_TUPLE; third++) {
-			cov_1g45s2iebf.s[64]++;
+			cov_1m16qsgt43.s[64]++;
 
 			start.deeper[first].deeper[second].deeper[third] = {
 				base: start,
@@ -2186,23 +2186,23 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
 				deeper: [],
 				parent: start.deeper[first].deeper[second]
 				//p is the Jump from Tuple to Tuple
-			};cov_1g45s2iebf.s[65]++;
+			};cov_1m16qsgt43.s[65]++;
 			start.deeper[first].deeper[second].deeper[third].p = [start, start.deeper[first], start.deeper[first].deeper[second], start.deeper[first].deeper[second].deeper[third]];
 
-			cov_1g45s2iebf.s[66]++;
+			cov_1m16qsgt43.s[66]++;
 			if (third > 0) {
-					cov_1g45s2iebf.b[6][0]++;
-					cov_1g45s2iebf.s[67]++;
+					cov_1m16qsgt43.b[6][0]++;
+					cov_1m16qsgt43.s[67]++;
 					start.deeper[first].deeper[second].deeper[third].previous = start.deeper[first].deeper[second].deeper[third - 1];
 				} else {
-				cov_1g45s2iebf.b[6][1]++;
-			}cov_1g45s2iebf.s[68]++;
+				cov_1m16qsgt43.b[6][1]++;
+			}cov_1m16qsgt43.s[68]++;
 			if (third > 0) {
-					cov_1g45s2iebf.b[7][0]++;
-					cov_1g45s2iebf.s[69]++;
+					cov_1m16qsgt43.b[7][0]++;
+					cov_1m16qsgt43.s[69]++;
 					start.deeper[first].deeper[second].deeper[third - 1].next = start.deeper[first].deeper[second].deeper[third];
 				} else {
-				cov_1g45s2iebf.b[7][1]++;
+				cov_1m16qsgt43.b[7][1]++;
 			}
 		}
 	}
@@ -2214,16 +2214,16 @@ for (var first = 0; first < INSTANCES_PER_TUPLE; first++) {
  * It would be nice to use the null-tuple(0instance) T(0,{*,}) as base
  * Since else we could only query 0,..* in this method.
  */
-cov_1g45s2iebf.s[70]++;
+cov_1m16qsgt43.s[70]++;
 global.TVALUES = function (fIds, func, fId, x, y, z, v, m) {
-	cov_1g45s2iebf.f[1]++;
+	cov_1m16qsgt43.f[1]++;
 
-	var current = (cov_1g45s2iebf.s[71]++, y),
-	    returnValue = (cov_1g45s2iebf.s[72]++, []);
-	var tinstancecount = (cov_1g45s2iebf.s[73]++, TINSTANCECOUNT(fIds, v, y));
-	cov_1g45s2iebf.s[74]++;
+	var current = (cov_1m16qsgt43.s[71]++, y),
+	    returnValue = (cov_1m16qsgt43.s[72]++, []);
+	var tinstancecount = (cov_1m16qsgt43.s[73]++, TINSTANCECOUNT(fIds, v, y));
+	cov_1m16qsgt43.s[74]++;
 	for (var i = 0; i <= tinstancecount; i++) {
-		cov_1g45s2iebf.s[75]++;
+		cov_1m16qsgt43.s[75]++;
 
 		returnValue.push(func(fId, x, y.deeper[i], z, v, m));
 	}
@@ -2232,51 +2232,51 @@ global.TVALUES = function (fIds, func, fId, x, y, z, v, m) {
   returnValue.push(tempValue);
   current = current.next;
   }*/
-	cov_1g45s2iebf.s[76]++;
+	cov_1m16qsgt43.s[76]++;
 	return returnValue;
 };
 /**
  * TINSTANCECOUNT is 0 based. TCOUNT is the friendly 1based version
  */
-cov_1g45s2iebf.s[77]++;
+cov_1m16qsgt43.s[77]++;
 global.TCOUNT = function (fIds, func, fId, x, y, z, v) {
-	cov_1g45s2iebf.f[2]++;
-	cov_1g45s2iebf.s[78]++;
+	cov_1m16qsgt43.f[2]++;
+	cov_1m16qsgt43.s[78]++;
 
 	return TINSTANCECOUNT(fIds, v, y) + 1;
 };
-cov_1g45s2iebf.s[79]++;
+cov_1m16qsgt43.s[79]++;
 global.REVERSEYAXIS = function (index, y) {
-	cov_1g45s2iebf.f[3]++;
-	cov_1g45s2iebf.s[80]++;
+	cov_1m16qsgt43.f[3]++;
+	cov_1m16qsgt43.s[80]++;
 
 	return (y.bitmask & index) >> y.start_bit;
 };
 
 function indexToArray(index, y) {
-	cov_1g45s2iebf.f[4]++;
+	cov_1m16qsgt43.f[4]++;
 
-	var repre = (cov_1g45s2iebf.s[81]++, [(index & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT]);
-	var match = (cov_1g45s2iebf.s[82]++, [(y.m & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (y.m & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (y.m & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT]);
-	cov_1g45s2iebf.s[83]++;
+	var repre = (cov_1m16qsgt43.s[81]++, [(index & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (index & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (index & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT]);
+	var match = (cov_1m16qsgt43.s[82]++, [(y.m & THIRD__LEVEL_BITMASK) >> THIRD__TUPLE_START_BIT, (y.m & SECOND_LEVEL_BITMASK) >> SECOND_TUPLE_START_BIT, (y.m & FIRST__LEVEL_BITMASK) >> FIRST__TUPLE_START_BIT]);
+	cov_1m16qsgt43.s[83]++;
 	_log2.default.info('input:' + repre + ' filter with : ' + (y.f >> 10).toString(2) + ' {' + match + '(' + y.depth + ',' + y.index + ')}' + ' gives:' + ((y.bitmask & index) >> y.start_bit));
 }
 
 //return tuplecount, get max tuple index given a (y) context.
 //Conceptually, if a value exists in a given range. There is an Tuple-Instance
 //Nested tuples start hash 0,0,0  So there is a Tuple instance on start three dimensions when a value is entered in the deepest level.
-cov_1g45s2iebf.s[84]++;
+cov_1m16qsgt43.s[84]++;
 global.TINSTANCECOUNT = function (fIds, v, y) {
-	cov_1g45s2iebf.f[5]++;
+	cov_1m16qsgt43.f[5]++;
 
-	var max = (cov_1g45s2iebf.s[85]++, -1);
+	var max = (cov_1m16qsgt43.s[85]++, -1);
 	//consider transforming into a bin-tree
 	//Since the dimensions are Infinite, indexing becomes complex.
-	cov_1g45s2iebf.s[86]++;
+	cov_1m16qsgt43.s[86]++;
 	for (var fid = 0; fid < fIds.length; fid++) {
-		var fId = (cov_1g45s2iebf.s[87]++, fIds[fid]);
-		var tempkeys = (cov_1g45s2iebf.s[88]++, []);
-		var keys = (cov_1g45s2iebf.s[89]++, Object.keys(v[fId]));
+		var fId = (cov_1m16qsgt43.s[87]++, fIds[fid]);
+		var tempkeys = (cov_1m16qsgt43.s[88]++, []);
+		var keys = (cov_1m16qsgt43.s[89]++, Object.keys(v[fId]));
 		//quick-fix remove NULL values..
 		//when looking for the instance-count with Y provided we also have to filter keys that are in other contexts.
 		//TODO: step1 ake key filter, with the bit-mask on y. context. rest keys are not interesting.
@@ -2290,10 +2290,10 @@ global.TINSTANCECOUNT = function (fIds, v, y) {
 		//So 0 is allowed when a Key has this prefix.
 		//the .root affix is strange there just should be a value on the corresponding tuple range to confirm its existence
 
-		cov_1g45s2iebf.s[90]++;
+		cov_1m16qsgt43.s[90]++;
 		for (var i = 0; i < keys.length; i++) {
-			var obj = (cov_1g45s2iebf.s[91]++, keys[i]);
-			var userKey = (cov_1g45s2iebf.s[92]++, parseInt(obj));
+			var obj = (cov_1m16qsgt43.s[91]++, keys[i]);
+			var userKey = (cov_1m16qsgt43.s[92]++, parseInt(obj));
 			// the found value should have a meaning, should have a value in the tuple-range and should match parent mask
 			//Why should it have a value in the Tuple-Range?
 			//Is this the same as living in the Parent-Context..
@@ -2310,45 +2310,45 @@ global.TINSTANCECOUNT = function (fIds, v, y) {
 			//010 match  010 no match
 			//first level just matching everything that does not have 2-tuple or 3-tuple keys
 			//second level match everything on 1-tuple index. But should not have anything on the 3-tuple
-			cov_1g45s2iebf.s[93]++;
-			if ((cov_1g45s2iebf.b[9][0]++, v[fId][obj] != null) && (cov_1g45s2iebf.b[9][1]++, (userKey & y.f) == y.m)) {
-				cov_1g45s2iebf.b[8][0]++;
-				cov_1g45s2iebf.s[94]++;
+			cov_1m16qsgt43.s[93]++;
+			if ((cov_1m16qsgt43.b[9][0]++, v[fId][obj] != null) && (cov_1m16qsgt43.b[9][1]++, (userKey & y.f) == y.m)) {
+				cov_1m16qsgt43.b[8][0]++;
+				cov_1m16qsgt43.s[94]++;
 
 				if (_log2.default.DEBUG) {
-						cov_1g45s2iebf.b[10][0]++;
-						cov_1g45s2iebf.s[95]++;
+						cov_1m16qsgt43.b[10][0]++;
+						cov_1m16qsgt43.s[95]++;
 						indexToArray(userKey, y);
 					} else {
-					cov_1g45s2iebf.b[10][1]++;
-				}cov_1g45s2iebf.s[96]++;
+					cov_1m16qsgt43.b[10][1]++;
+				}cov_1m16qsgt43.s[96]++;
 				tempkeys.push(userKey);
 			} else {
-				cov_1g45s2iebf.b[8][1]++;
+				cov_1m16qsgt43.b[8][1]++;
 			}
 		}
 
-		cov_1g45s2iebf.s[97]++;
+		cov_1m16qsgt43.s[97]++;
 		if (tempkeys.length == 0) {
-			cov_1g45s2iebf.b[11][0]++;
-			cov_1g45s2iebf.s[98]++;
+			cov_1m16qsgt43.b[11][0]++;
+			cov_1m16qsgt43.s[98]++;
 
 			continue;
 		} else {
-				cov_1g45s2iebf.b[11][1]++;
-				cov_1g45s2iebf.s[99]++;
+				cov_1m16qsgt43.b[11][1]++;
+				cov_1m16qsgt43.s[99]++;
 				if (tempkeys.length == 1) {
-					cov_1g45s2iebf.b[12][0]++;
-					cov_1g45s2iebf.s[100]++;
+					cov_1m16qsgt43.b[12][0]++;
+					cov_1m16qsgt43.s[100]++;
 
 					max = Math.max(max, (y.bitmask & tempkeys[0]) >> y.start_bit);
 				} else {
-					cov_1g45s2iebf.b[12][1]++;
-					cov_1g45s2iebf.s[101]++;
+					cov_1m16qsgt43.b[12][1]++;
+					cov_1m16qsgt43.s[101]++;
 
 					max = Math.max(max, tempkeys.reduce(function (a1, b1) {
-						cov_1g45s2iebf.f[6]++;
-						cov_1g45s2iebf.s[102]++;
+						cov_1m16qsgt43.f[6]++;
+						cov_1m16qsgt43.s[102]++;
 
 						//filter bits  y.start_bit find highest tuple count identified with y.bitmask
 						//look for start values and obtain tuple instance value
@@ -2358,7 +2358,7 @@ global.TINSTANCECOUNT = function (fIds, v, y) {
 				}
 			}
 	}
-	cov_1g45s2iebf.s[103]++;
+	cov_1m16qsgt43.s[103]++;
 	return max;
 };
 /*
@@ -2375,7 +2375,7 @@ global.TINSTANCECOUNT = function (fIds, v, y) {
  * The match means the tuple context
  */
 //er is geen wens om 1*1 te testen, er word nooit gevraagd van hoeveeel tuples bijvoorbeeld 3tuples hebben.
-var combine = (cov_1g45s2iebf.s[104]++, [{
+var combine = (cov_1m16qsgt43.s[104]++, [{
 	reg: '000**', match: '00000', filter: '11100',
 	fit: ['00010', '00011', '00001', '00000'],
 	nofit: ['00110', '01110', '11110', '10110', '10010']
@@ -2405,16 +2405,16 @@ var combine = (cov_1g45s2iebf.s[104]++, [{
 	reg: '1****', match: '10000', filter: '10000',
 	fit: ['10101'], nofit: ['01000']
 }]);
-cov_1g45s2iebf.s[105]++;
+cov_1m16qsgt43.s[105]++;
 for (var testIndex = 0; testIndex < combine.length; testIndex++) {
-	var test = (cov_1g45s2iebf.s[106]++, combine[testIndex]);
-	cov_1g45s2iebf.s[107]++;
+	var test = (cov_1m16qsgt43.s[106]++, combine[testIndex]);
+	cov_1m16qsgt43.s[107]++;
 	for (var i = 0; i < test.fit.length; i++) {
-		cov_1g45s2iebf.s[108]++;
+		cov_1m16qsgt43.s[108]++;
 		(0, _assert2.default)((parseInt(test.fit[i], 2) & parseInt(test.filter, 2)) == parseInt(test.match, 2));
-	}cov_1g45s2iebf.s[109]++;
+	}cov_1m16qsgt43.s[109]++;
 	for (var i = 0; i < test.nofit.length; i++) {
-		cov_1g45s2iebf.s[110]++;
+		cov_1m16qsgt43.s[110]++;
 		(0, _assert2.default)((parseInt(test.nofit[i], 2) & parseInt(test.filter, 2)) != parseInt(test.match, 2));
 	}
 }

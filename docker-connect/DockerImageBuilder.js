@@ -1,10 +1,10 @@
-import { WebpackCompiler }                                from './WebpackCompiler'
-import path                                               from 'path'
-import uuid4                                              from 'uuid4'
-import MemoryFS                                           from 'memory-fs'
-import { createReadStream, createWriteStream, mkdirSync } from 'fs'
-import { error, info }                                    from 'log6'
-import { exec }                                           from 'child-process-promise'
+import { WebpackCompiler }                                            from './WebpackCompiler'
+import path                                                           from 'path'
+import uuid4                                                          from 'uuid4'
+import MemoryFS                                                       from 'memory-fs'
+import { createReadStream, createWriteStream, existsSync, mkdirSync } from 'fs'
+import { error, info }                                                from 'log6'
+import { exec }                                                       from 'child-process-promise'
 
 const params = process.env.MODEL || 'MVO'
 
@@ -55,6 +55,7 @@ const package_template = {
 	'devDependencies': {},
 	'license'        : 'MIT'
 }
+const temp_dir_name = 'temp'
 
 class DockerImageBuilder {
 	constructor(fflModel, story, matrix, model_name, model_version) {
@@ -72,6 +73,7 @@ class DockerImageBuilder {
 	}
 
 	async buildDockerFile(path_info) {
+		if (!existsSync(temp_dir_name)) mkdirSync(temp_dir_name)
 		mkdirSync(this.new_folder)
 		mkdirSync(this.resources_folder)
 		await this.compileRestApiCode(path_info)
@@ -82,9 +84,10 @@ class DockerImageBuilder {
 
 	async compileRestApiCode(path_info) {
 		const memory_fs = new MemoryFS()
-		const base_dir = `${__dirname}/dist`
-		const stats = await new WebpackCompiler({ memory_fs }).buildProductionFile(path_info)
-		await memory_fs.createReadStream(path.resolve(base_dir, this.entry_code_path)).pipe(createWriteStream(path.join(this.new_folder, this.entry_code_path)))
+		await new WebpackCompiler({ memory_fs }).buildProductionFile(path_info)
+		const readStream = memory_fs.createReadStream(path.join(__dirname, this.entry_code_path))
+		const writeStream = createWriteStream(path.join(this.new_folder, this.entry_code_path))
+		await readStream.pipe(writeStream)
 	}
 
 	async copyFFLModelFile(modelName) {
@@ -99,11 +102,15 @@ class DockerImageBuilder {
 	}
 
 	async start() {
-		const command = `cd ${this.new_folder} && docker build . --build-arg ENABLED_MODELS=${this.model_name} -t=${this.docker_tag}`
-		info(`Start build image \n"${command}"`)
+		try {
+			const command = `cd ${this.new_folder} && docker build . --build-arg ENABLED_MODELS=${this.model_name} -t=${this.docker_tag}`
+			info(`Start build image \n"${command}"`)
+			const build_output = await exec(command)
+			this.print_result(build_output)
 
-		const build_output = await exec(command)
-		this.print_result(build_output)
+		} catch (err) {
+			console.error(err)
+		}
 
 		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p 8085:8085 --name ${this.docker_model_name}_${this.model_version} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
 		const run_output = await exec(start_command)
@@ -120,15 +127,3 @@ class DockerImageBuilder {
 }
 
 export { DockerImageBuilder }
-
-async function gogo() {
-	const builder = new DockerImageBuilder('KSP2', undefined, undefined, 'KSP2', 18)
-	await builder.buildDockerFile('../lme-data-api/lme-data-app.js')
-	builder.start()
-}
-
-gogo().then(() => {
-
-}).catch((err) => {
-	error(err)
-})

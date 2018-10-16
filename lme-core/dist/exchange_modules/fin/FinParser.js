@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_rirrqgig0 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\fin\\FinParser.js',
-	    hash = 'a4af803dfa5d17302a67c0b10a6322c05c1de149',
+var cov_asv4n5uf8 = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\fin\\FinParser.js',
+	    hash = '608853edc8afcfad795e846decf7b04eb303b574',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\fin\\FinParser.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\fin\\FinParser.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1946,265 +1946,265 @@ var _log2 = _interopRequireDefault(_log);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //FIN->JavaScript
-var parser = (cov_rirrqgig0.s[0]++, {
+var parser = (cov_asv4n5uf8.s[0]++, {
 	name: 'fin',
 	parse: function parse(data) {
-		cov_rirrqgig0.f[0]++;
+		cov_asv4n5uf8.f[0]++;
 
 		//should return a parseResult
 		//.with a .valid
 		var solution;
-		var parseResult = (cov_rirrqgig0.s[1]++, _FinToJSON2.default.parse(data));
-		cov_rirrqgig0.s[2]++;
+		var parseResult = (cov_asv4n5uf8.s[1]++, _FinToJSON2.default.parse(data));
+		cov_asv4n5uf8.s[2]++;
 		if (!parseResult.valid) {
-			cov_rirrqgig0.b[0][0]++;
-			cov_rirrqgig0.s[3]++;
+			cov_asv4n5uf8.b[0][0]++;
+			cov_asv4n5uf8.s[3]++;
 
 			solution = _PropertiesAssembler2.default.create();
 		} else {
-			cov_rirrqgig0.b[0][1]++;
-			cov_rirrqgig0.s[4]++;
+			cov_asv4n5uf8.b[0][1]++;
+			cov_asv4n5uf8.s[4]++;
 
 			solution = _PropertiesAssembler2.default.create(parseResult.solutionName);
 
 			//at some lines we need to remember some state, f.e. if it were Trend formula or Visible formula
-			var finVariables = (cov_rirrqgig0.s[5]++, parseResult.orderedByType.variables);
+			var finVariables = (cov_asv4n5uf8.s[5]++, parseResult.orderedByType.variables);
 
-			cov_rirrqgig0.s[6]++;
+			cov_asv4n5uf8.s[6]++;
 			createVariableTree(finVariables, solution);
 			//add all Formula Groups, Choices, Trend, NoTrend, Hint, Title
-			cov_rirrqgig0.s[7]++;
+			cov_asv4n5uf8.s[7]++;
 			createFormulaGroupsSafe(solution, parseResult.orderedByType.formulas);
 		}
-		cov_rirrqgig0.s[8]++;
+		cov_asv4n5uf8.s[8]++;
 		return solution;
 	},
 	deParse: function deParse(rowId) {
-		cov_rirrqgig0.f[1]++;
+		cov_asv4n5uf8.f[1]++;
 
-		var finExport = (cov_rirrqgig0.s[9]++, _PropertiesAssembler2.default.create());
-		var exportString = (cov_rirrqgig0.s[10]++, '');
+		var finExport = (cov_asv4n5uf8.s[9]++, _PropertiesAssembler2.default.create());
+		var exportString = (cov_asv4n5uf8.s[10]++, '');
 		//= finExport.getName() + "\n\n";
 		//exportString += ".Variables\n.Variables\n";
-		var formulasString = (cov_rirrqgig0.s[11]++, {});
-		cov_rirrqgig0.s[12]++;
+		var formulasString = (cov_asv4n5uf8.s[11]++, {});
+		cov_asv4n5uf8.s[12]++;
 		if (rowId) {
-			cov_rirrqgig0.b[1][0]++;
+			cov_asv4n5uf8.b[1][0]++;
 
 			var startuielem; // = PropertiesAssembler.getOrCreateProperty(rowId, 'value')
 		} else {
-			cov_rirrqgig0.b[1][1]++;
+			cov_asv4n5uf8.b[1][1]++;
 		}
 
-		cov_rirrqgig0.s[13]++;
+		cov_asv4n5uf8.s[13]++;
 		_PropertiesAssembler2.default.visit(startuielem, function (node, depth) {
-			cov_rirrqgig0.f[2]++;
+			cov_asv4n5uf8.f[2]++;
 
-			var formulaProperties = (cov_rirrqgig0.s[14]++, finExport.gatherFormulaProperties(_ValueFacade2.default.getFormula, _ValueFacade2.default.properties, node.rowId));
+			var formulaProperties = (cov_asv4n5uf8.s[14]++, finExport.gatherFormulaProperties(_ValueFacade2.default.getFormula, _ValueFacade2.default.properties, node.rowId));
 			// exportString += createFinVariableRow(node, formulaProperties['title'] || '');
-			cov_rirrqgig0.s[15]++;
+			cov_asv4n5uf8.s[15]++;
 			for (var key in formulaProperties) {
-				cov_rirrqgig0.s[16]++;
+				cov_asv4n5uf8.s[16]++;
 
 				if (formulasString[key] === undefined) {
-					cov_rirrqgig0.b[2][0]++;
-					cov_rirrqgig0.s[17]++;
+					cov_asv4n5uf8.b[2][0]++;
+					cov_asv4n5uf8.s[17]++;
 
 					formulasString[key] = '';
 				} else {
-					cov_rirrqgig0.b[2][1]++;
+					cov_asv4n5uf8.b[2][1]++;
 				}
-				cov_rirrqgig0.s[18]++;
+				cov_asv4n5uf8.s[18]++;
 				if (formulaProperties[key] !== 'undefined') {
-					cov_rirrqgig0.b[3][0]++;
-					cov_rirrqgig0.s[19]++;
+					cov_asv4n5uf8.b[3][0]++;
+					cov_asv4n5uf8.s[19]++;
 
 					formulasString[key] = formulasString[key] + createFinFormulaRow(key, node, formulaProperties[key]);
 				} else {
-					cov_rirrqgig0.b[3][1]++;
+					cov_asv4n5uf8.b[3][1]++;
 				}
 			}
 		});
 
-		cov_rirrqgig0.s[20]++;
+		cov_asv4n5uf8.s[20]++;
 		for (var key in formulasString) {
-			cov_rirrqgig0.s[21]++;
+			cov_asv4n5uf8.s[21]++;
 
 			if (key !== 'title') {
-				cov_rirrqgig0.b[4][0]++;
-				cov_rirrqgig0.s[22]++;
+				cov_asv4n5uf8.b[4][0]++;
+				cov_asv4n5uf8.s[22]++;
 
 				exportString += '\n.Formulas ' + key + '\n' + formulasString[key];
 			} else {
-				cov_rirrqgig0.b[4][1]++;
+				cov_asv4n5uf8.b[4][1]++;
 			}
 		}
-		cov_rirrqgig0.s[23]++;
+		cov_asv4n5uf8.s[23]++;
 		return exportString;
 		//+ '\n.Quit';
 	}
 });
 
 function createVariableTree(variables, solution) {
-	cov_rirrqgig0.f[3]++;
-	cov_rirrqgig0.s[24]++;
+	cov_asv4n5uf8.f[3]++;
+	cov_asv4n5uf8.s[24]++;
 
 	if (variables.length == 0) {
-		cov_rirrqgig0.b[5][0]++;
-		cov_rirrqgig0.s[25]++;
+		cov_asv4n5uf8.b[5][0]++;
+		cov_asv4n5uf8.s[25]++;
 
 		//nothing to do
 		return;
 	} else {
-		cov_rirrqgig0.b[5][1]++;
+		cov_asv4n5uf8.b[5][1]++;
 	}
-	var cache = (cov_rirrqgig0.s[26]++, {});
-	var stack = (cov_rirrqgig0.s[27]++, new _stackAdt2.default());
+	var cache = (cov_asv4n5uf8.s[26]++, {});
+	var stack = (cov_asv4n5uf8.s[27]++, new _stackAdt2.default());
 
-	var rootVariable = (cov_rirrqgig0.s[28]++, variables[0]);
-	var root = (cov_rirrqgig0.s[29]++, rootVariable);
-	cov_rirrqgig0.s[30]++;
+	var rootVariable = (cov_asv4n5uf8.s[28]++, variables[0]);
+	var root = (cov_asv4n5uf8.s[29]++, rootVariable);
+	cov_asv4n5uf8.s[30]++;
 	stack.push(root);
-	cov_rirrqgig0.s[31]++;
+	cov_asv4n5uf8.s[31]++;
 	addNode(solution, rootVariable, undefined);
 	//this algorithm required to know the last added variable for a parent.
-	cov_rirrqgig0.s[32]++;
+	cov_asv4n5uf8.s[32]++;
 	cache[stack.peek().name] = rootVariable;
-	var delta = (cov_rirrqgig0.s[33]++, 0);
-	var count = (cov_rirrqgig0.s[34]++, 0);
+	var delta = (cov_asv4n5uf8.s[33]++, 0);
+	var count = (cov_asv4n5uf8.s[34]++, 0);
 
 	//FIN contains duplicate variables, we have to do something fun with it later on
-	var allreadyAddedVariables = (cov_rirrqgig0.s[35]++, {});
-	cov_rirrqgig0.s[36]++;
+	var allreadyAddedVariables = (cov_asv4n5uf8.s[35]++, {});
+	cov_asv4n5uf8.s[36]++;
 	for (var i = 1; i < variables.length; i++) {
-		var variable = (cov_rirrqgig0.s[37]++, variables[i]);
-		cov_rirrqgig0.s[38]++;
+		var variable = (cov_asv4n5uf8.s[37]++, variables[i]);
+		cov_asv4n5uf8.s[38]++;
 		if (allreadyAddedVariables[variable.name]) {
-			cov_rirrqgig0.b[6][0]++;
-			cov_rirrqgig0.s[39]++;
+			cov_asv4n5uf8.b[6][0]++;
+			cov_asv4n5uf8.s[39]++;
 
 			variable.name = variable.name + count++;
 		} else {
-			cov_rirrqgig0.b[6][1]++;
+			cov_asv4n5uf8.b[6][1]++;
 		}
-		cov_rirrqgig0.s[40]++;
+		cov_asv4n5uf8.s[40]++;
 		allreadyAddedVariables[variable.name] = true;
-		cov_rirrqgig0.s[41]++;
+		cov_asv4n5uf8.s[41]++;
 		delta = variable._depth - (stack.size() - 1);
-		cov_rirrqgig0.s[42]++;
+		cov_asv4n5uf8.s[42]++;
 		if (delta > 0) {
-			cov_rirrqgig0.b[7][0]++;
-			cov_rirrqgig0.s[43]++;
+			cov_asv4n5uf8.b[7][0]++;
+			cov_asv4n5uf8.s[43]++;
 
 			_assert2.default.equal(delta, 1);
-			cov_rirrqgig0.s[44]++;
+			cov_asv4n5uf8.s[44]++;
 			stack.push(cache[stack.peek().name]);
 		} else {
-			cov_rirrqgig0.b[7][1]++;
+			cov_asv4n5uf8.b[7][1]++;
 		}
-		cov_rirrqgig0.s[45]++;
+		cov_asv4n5uf8.s[45]++;
 		while (delta < 0) {
-			cov_rirrqgig0.s[46]++;
+			cov_asv4n5uf8.s[46]++;
 
 			stack.pop();
-			cov_rirrqgig0.s[47]++;
+			cov_asv4n5uf8.s[47]++;
 			delta++;
 		}
-		cov_rirrqgig0.s[48]++;
+		cov_asv4n5uf8.s[48]++;
 		cache[stack.peek().name] = variable;
-		cov_rirrqgig0.s[49]++;
+		cov_asv4n5uf8.s[49]++;
 		addNode(solution, variable, stack.peek());
 	}
 }
 
 function createFormulaGroupsSafe(solution, formulas) {
-	cov_rirrqgig0.f[4]++;
-	cov_rirrqgig0.s[50]++;
+	cov_asv4n5uf8.f[4]++;
+	cov_asv4n5uf8.s[50]++;
 
 	for (var i = 0; i < formulas.length; i++) {
-		cov_rirrqgig0.s[51]++;
+		cov_asv4n5uf8.s[51]++;
 
 		createFormulaSafe(solution, formulas[i]);
 	}
 }
 
 function createFormulaSafe(solution, formula) {
-	cov_rirrqgig0.f[5]++;
+	cov_asv4n5uf8.f[5]++;
 
-	var code = (cov_rirrqgig0.s[52]++, formula.formula);
+	var code = (cov_asv4n5uf8.s[52]++, formula.formula);
 	var ast;
 	//we open a try-catch literally everything could be in there that could make no sense at all, model builder mistake etc..
-	cov_rirrqgig0.s[53]++;
+	cov_asv4n5uf8.s[53]++;
 	if (ASTCache[code]) {
-		cov_rirrqgig0.b[8][0]++;
-		cov_rirrqgig0.s[54]++;
+		cov_asv4n5uf8.b[8][0]++;
+		cov_asv4n5uf8.s[54]++;
 
 		ast = ASTCache[code]();
 	} else {
-		cov_rirrqgig0.b[8][1]++;
-		cov_rirrqgig0.s[55]++;
+		cov_asv4n5uf8.b[8][1]++;
+		cov_asv4n5uf8.s[55]++;
 
 
 		try {
-			cov_rirrqgig0.s[56]++;
+			cov_asv4n5uf8.s[56]++;
 
 			//so this can fail easy, impossible to fix, external managed etc.
 			ast = _esprima2.default.parse(code).body[0].expression;
 		} catch (e) {
-			cov_rirrqgig0.s[57]++;
+			cov_asv4n5uf8.s[57]++;
 
 			_log2.default.log('cannot parse: ' + JSON.stringify(formula));
 			//just add the formula as String value.. maybe it makes sence ..
-			cov_rirrqgig0.s[58]++;
+			cov_asv4n5uf8.s[58]++;
 			ast = _astNodeUtils.ast.STRING(code);
 		}
 	}
 	//var uiNode = SolutionFacade.createUIFormulaLink(solution, formula.name, formula.property, ast, formula.displayAs)
-	cov_rirrqgig0.s[59]++;
+	cov_asv4n5uf8.s[59]++;
 	if (formula._delegate) {
-		cov_rirrqgig0.b[9][0]++;
-		cov_rirrqgig0.s[60]++;
+		cov_asv4n5uf8.b[9][0]++;
+		cov_asv4n5uf8.s[60]++;
 
 		throw Error('refactored');
 		//solution.setDelegate(uiNode, formula._delegate);
 		//solution.setParentName(uiNode, formula.parentName);
 	} else {
-		cov_rirrqgig0.b[9][1]++;
+		cov_asv4n5uf8.b[9][1]++;
 	}
 }
 
 function createFinVariableRow(variable, title) {
-	cov_rirrqgig0.f[6]++;
+	cov_asv4n5uf8.f[6]++;
 
-	var str = (cov_rirrqgig0.s[61]++, title);
-	var pad = (cov_rirrqgig0.s[62]++, '                                                                                    ');
-	var and = (cov_rirrqgig0.s[63]++, str + pad.substring(0, pad.length - str.length));
+	var str = (cov_asv4n5uf8.s[61]++, title);
+	var pad = (cov_asv4n5uf8.s[62]++, '                                                                                    ');
+	var and = (cov_asv4n5uf8.s[63]++, str + pad.substring(0, pad.length - str.length));
 
-	cov_rirrqgig0.s[64]++;
+	cov_asv4n5uf8.s[64]++;
 	return 'PPP      X     ' + variable._depth + '          ' + and.substring(0, 81) + '\\' + variable.rowId + '\n';
 }
 
 function createFinFormulaRow(key, variable, formula) {
-	cov_rirrqgig0.f[7]++;
+	cov_asv4n5uf8.f[7]++;
 
-	var str = (cov_rirrqgig0.s[65]++, variable.rowId);
-	var pad = (cov_rirrqgig0.s[66]++, '                                      ');
-	var and = (cov_rirrqgig0.s[67]++, str + pad.substring(0, pad.length - str.length));
-	var deparsed = (cov_rirrqgig0.s[68]++, _FinFormula2.default.javaScriptToFinGeneric(formula));
+	var str = (cov_asv4n5uf8.s[65]++, variable.rowId);
+	var pad = (cov_asv4n5uf8.s[66]++, '                                      ');
+	var and = (cov_asv4n5uf8.s[67]++, str + pad.substring(0, pad.length - str.length));
+	var deparsed = (cov_asv4n5uf8.s[68]++, _FinFormula2.default.javaScriptToFinGeneric(formula));
 	var formattedFormula;
-	cov_rirrqgig0.s[69]++;
+	cov_asv4n5uf8.s[69]++;
 	try {
-		cov_rirrqgig0.s[70]++;
+		cov_asv4n5uf8.s[70]++;
 
 		formattedFormula = excelFormulaUtilities.formatFormula(deparsed, {});
 	} catch (e) {
-		cov_rirrqgig0.s[71]++;
+		cov_asv4n5uf8.s[71]++;
 
 		_log2.default.log('Unable to prettyfy:' + e);
-		cov_rirrqgig0.s[72]++;
+		cov_asv4n5uf8.s[72]++;
 		formattedFormula = deparsed;
 	}
-	cov_rirrqgig0.s[73]++;
+	cov_asv4n5uf8.s[73]++;
 	return and + ' = ' + formattedFormula + '\n';
 }
 
@@ -2217,7 +2217,7 @@ function createFinFormulaRow(key, variable, formula) {
  'I': Integer variable. The format code in column 7 is normally zero. A positive format code specifies the with of the number, zero's are added before the number in order to reach the width.
  'M': Memo = memoscreen. Memos per period are possible.
  */
-var displayAsMapping = (cov_rirrqgig0.s[74]++, {
+var displayAsMapping = (cov_asv4n5uf8.s[74]++, {
 	C: 'select',
 	T: 'select',
 	' ': 'StringAnswerType',
@@ -2231,7 +2231,7 @@ var displayAsMapping = (cov_rirrqgig0.s[74]++, {
 	'%': 'PercentageAnswerType',
 	M: 'MemoAnswerType'
 });
-var ASTCache = (cov_rirrqgig0.s[75]++, {
+var ASTCache = (cov_asv4n5uf8.s[75]++, {
 	'undefined': _astNodeUtils.ast.UNDEFINED,
 	'On': _astNodeUtils.ast.TRUE,
 	'No': _astNodeUtils.ast.FALSE,
@@ -2263,43 +2263,43 @@ var ASTCache = (cov_rirrqgig0.s[75]++, {
   'X': hidden, underlying level is hidden as well.
   'N': data is hidden, but underlying level can be reached. It is a node.
   */
-});var protection = (cov_rirrqgig0.s[76]++, {
+});var protection = (cov_asv4n5uf8.s[76]++, {
 	' ': false,
 	'I': false,
 	'P': true
 });
 
 function addNode(solution, node, parentId) {
-	cov_rirrqgig0.f[8]++;
+	cov_asv4n5uf8.f[8]++;
 
-	var rowId = (cov_rirrqgig0.s[77]++, node.name);
-	cov_rirrqgig0.s[78]++;
+	var rowId = (cov_asv4n5uf8.s[77]++, node.name);
+	cov_asv4n5uf8.s[78]++;
 	if (rowId === 'root') {
-		cov_rirrqgig0.b[10][0]++;
-		cov_rirrqgig0.s[79]++;
+		cov_asv4n5uf8.b[10][0]++;
+		cov_asv4n5uf8.s[79]++;
 
 		return;
 	} else {
-		cov_rirrqgig0.b[10][1]++;
+		cov_asv4n5uf8.b[10][1]++;
 	}
 
-	cov_rirrqgig0.s[80]++;
+	cov_asv4n5uf8.s[80]++;
 	throw Error('refactored');
 	// if (solution.hasNode(rowId)) {
 	//     logger.info('Dupe..')
 	// }
 	var parentName;
-	cov_rirrqgig0.s[81]++;
-	if ((cov_rirrqgig0.b[12][0]++, parentId !== undefined) && (cov_rirrqgig0.b[12][1]++, parentId !== null)) {
-		cov_rirrqgig0.b[11][0]++;
-		cov_rirrqgig0.s[82]++;
+	cov_asv4n5uf8.s[81]++;
+	if ((cov_asv4n5uf8.b[12][0]++, parentId !== undefined) && (cov_asv4n5uf8.b[12][1]++, parentId !== null)) {
+		cov_asv4n5uf8.b[11][0]++;
+		cov_asv4n5uf8.s[82]++;
 
 		parentName = parentId.name;
 	} else {
-		cov_rirrqgig0.b[11][1]++;
+		cov_asv4n5uf8.b[11][1]++;
 	}
 
-	cov_rirrqgig0.s[83]++;
+	cov_asv4n5uf8.s[83]++;
 	createFormulaSafe(solution, {
 		_delegate: node,
 		parentName: parentName,
@@ -2308,43 +2308,43 @@ function addNode(solution, node, parentId) {
 		property: 'value',
 		formula: 'undefined'
 	});
-	cov_rirrqgig0.s[84]++;
+	cov_asv4n5uf8.s[84]++;
 	createFormulaSafe(solution, { name: rowId, property: 'title', formula: node.title });
 
 	//locked and visibility
-	cov_rirrqgig0.s[85]++;
+	cov_asv4n5uf8.s[85]++;
 	if (node.protection === 'I') {
 		//SolutionFacade.createUIFormulaLink(solution, rowId, 'locked', AST.TRUE())
 
-		cov_rirrqgig0.b[13][0]++;
+		cov_asv4n5uf8.b[13][0]++;
 	} else {
-			cov_rirrqgig0.b[13][1]++;
-			cov_rirrqgig0.s[86]++;
-			if ((cov_rirrqgig0.b[15][0]++, node.protection === 'X') || (cov_rirrqgig0.b[15][1]++, node.protection === ' ') || (cov_rirrqgig0.b[15][2]++, node.protection === 'N')) {
+			cov_asv4n5uf8.b[13][1]++;
+			cov_asv4n5uf8.s[86]++;
+			if ((cov_asv4n5uf8.b[15][0]++, node.protection === 'X') || (cov_asv4n5uf8.b[15][1]++, node.protection === ' ') || (cov_asv4n5uf8.b[15][2]++, node.protection === 'N')) {
 				//    SolutionFacade.createUIFormulaLink(solution, rowId, 'visible', AST.FALSE())
 
-				cov_rirrqgig0.b[14][0]++;
+				cov_asv4n5uf8.b[14][0]++;
 			} else {
-				cov_rirrqgig0.b[14][1]++;
+				cov_asv4n5uf8.b[14][1]++;
 			}
-		}cov_rirrqgig0.s[87]++;
-	if ((cov_rirrqgig0.b[17][0]++, node.required === '+') || (cov_rirrqgig0.b[17][1]++, node.required === 'R')) {
+		}cov_asv4n5uf8.s[87]++;
+	if ((cov_asv4n5uf8.b[17][0]++, node.required === '+') || (cov_asv4n5uf8.b[17][1]++, node.required === 'R')) {
 		// SolutionFacade.createUIFormulaLink(solution, rowId, 'required', AST.TRUE())
 
-		cov_rirrqgig0.b[16][0]++;
+		cov_asv4n5uf8.b[16][0]++;
 	} else {
-		cov_rirrqgig0.b[16][1]++;
+		cov_asv4n5uf8.b[16][1]++;
 	}
 
-	cov_rirrqgig0.s[88]++;
+	cov_asv4n5uf8.s[88]++;
 	if (node.hint.trim().length > 0) {
 		//   SolutionFacade.createUIFormulaLink(solution, rowId, 'hint', AST.STRING(node.hint))
 
-		cov_rirrqgig0.b[18][0]++;
+		cov_asv4n5uf8.b[18][0]++;
 	} else {
-		cov_rirrqgig0.b[18][1]++;
+		cov_asv4n5uf8.b[18][1]++;
 	}
 }
 
-cov_rirrqgig0.s[89]++;
+cov_asv4n5uf8.s[89]++;
 _SolutionFacade2.default.addParser(parser);

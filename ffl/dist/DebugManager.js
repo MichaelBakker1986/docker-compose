@@ -5,9 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DebugManager = undefined;
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _index = require('../lme-core/index');
 
 var _log = require('log6');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function DebugManager(register, audit_trail) {
 	this.stack = [];
@@ -69,16 +75,16 @@ DebugManager.prototype.validateImportedSolution = function (modelName) {
 		succes: [],
 		error: []
 	};
-	for (var _name2 in names) {
-		try {
-			for (var _property in context.propertyDefaults) {
-				wb.get(_name2, _property, 0, wb.resolveY(0));
-				validateResponse.succes.push(_name2);
+	(0, _keys2.default)(names).forEach(function (name) {
+		for (var property in context.propertyDefaults) {
+			try {
+				wb.get(name, property, 0, wb.resolveY(0));
+				validateResponse.succes.push(name);
+			} catch (err) {
+				(0, _log.error)('Error while trying:' + name + '.' + property + ' in model ' + modelName, err);
 			}
-		} catch (err) {
-			(0, _log.error)('Error while trying:' + _name2 + '.' + property + ' in model ' + modelName, err);
 		}
-	}
+	});
 	var errors = this.audittrail.distinctArr(this.audittrail.find('level', 'ERROR', start), ['name', 'property']);
 	if (errors.length > 0) {
 		(0, _log.info)('Trying to fix : \n' + this.audittrail.printArr(errors, [6, 30, 10, 10, 10, 10, 40, 140, 8]).join('\n'));

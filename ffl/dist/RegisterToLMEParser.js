@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _esprima = require('esprima');
 
-var _esprima2 = _interopRequireDefault(_esprima);
+var esprima = _interopRequireWildcard(_esprima);
 
 var _log = require('log6');
 
@@ -23,6 +23,8 @@ var _FinFormula2 = _interopRequireDefault(_FinFormula);
 var _index = require('../lme-core/index');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function RegisterToLMEParser() {}
 
@@ -224,7 +226,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function (indexer, formula, node
 	fin_parse = indexer.translateKeys(fin_parse);
 	var formulaReturn = 'undefined';
 	try {
-		formulaReturn = _esprima2.default.parse(fin_parse).body[0].expression;
+		formulaReturn = esprima.parse(fin_parse).body[0].expression;
 	} catch (e) {
 		if (_log.DEBUG) (0, _log.debug)('unable to parse [' + fin_parse + '] returning it as String value [' + nodeName + '] : ' + col, e);
 		formulaReturn = _astNodeUtils.AST.STRING(fin_parse);
