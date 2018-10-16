@@ -8,6 +8,8 @@ demo-apps/Binance
 package-lock.json
 restapi/dbSettings.js
 
+docker-connect/temp/**
+docker-connect/temp/*
 *package-lock.json
 *.scssc
 *.cert
