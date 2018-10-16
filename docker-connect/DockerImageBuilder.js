@@ -7,6 +7,7 @@ import { error, info }                                                from 'log6
 import { exec }                                                       from 'child-process-promise'
 
 const params = process.env.MODEL || 'MVO'
+const DEVICE_HOST_PORT = 10000
 
 const package_template = {
 	'name'           : 'ksp',
@@ -112,7 +113,7 @@ class DockerImageBuilder {
 			console.error(err)
 		}
 
-		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p 8085:8085 --name ${this.docker_model_name}_${this.model_version} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p ${DEVICE_HOST_PORT}:8085 --name ${this.docker_model_name}_${this.model_version} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
 		const run_output = await exec(start_command)
 		this.print_result(run_output)
 	}
