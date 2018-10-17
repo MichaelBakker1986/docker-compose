@@ -37,14 +37,6 @@ import SolutionFacade      from '../../src/SolutionFacade'
 import PropertiesAssembler from '../../src/PropertiesAssembler'
 
 /**
- * Parser object
- */
-function WebExportParser() {
-	this.name = 'webexport'
-	this.headername = 'Native Object Web Presentation'
-}
-
-/**
  * LMETree is a array-based representation of the internal data-structure
  * Easy to manipulate with Tuples,
  *  - First-level caching. (SetValue will increment all getters to just retrieve the values once)
@@ -102,10 +94,9 @@ LMETree.prototype.sortRows = function() {
 }
 LMETree.prototype.findScorecardTypes = function() {
 	const scorecards = []
-	for (let name in this.no) {
-		const row_element = this.no[name]
+	Object.keys(this.no).forEach(row_element => {
 		if (row_element.type === 'scorecard' || row_element.display_options === 'scorecard') scorecards.push(row_element)
-	}
+	})
 	return scorecards
 }
 
@@ -346,39 +337,46 @@ LMETree.prototype.addWebNode = function(node, treePath, index, yas, treeDepth) {
 	this.no[rowId] = rv
 	this.rows.push(rv)
 }
-WebExportParser.prototype.parseData = (webExport, workbook) => SolutionFacade.createSolution(workbook.modelName)
 
-WebExportParser.prototype.deParse = function(rowId, workbook) {
-	const modelName = workbook.getSolutionName()
-	const lmeTree = new LMETree(modelName, workbook)
-	PropertiesAssembler.findAllInSolution(modelName, (node) => lmeTree.names[node.rowId] = true)
-	const treePath = []
-	let currentDepth = 0
-	const indexPath = []
-	//make the walk here,
-	const rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName)
-	PropertiesAssembler.indexProperties(modelName)
+/**
+ * Parser object
+ */
+const WebExportParser = {
+	name      : 'webexport',
+	headername: 'Native Object Web Presentation',
+	parseData : (webExport, workbook) => SolutionFacade.createSolution(workbook.modelName),
+	deParse   : function(rowId, workbook) {
+		const modelName = workbook.getSolutionName()
+		const lmeTree = new LMETree(modelName, workbook)
+		PropertiesAssembler.findAllInSolution(modelName, (node) => lmeTree.names[node.rowId] = true)
+		const treePath = []
+		let currentDepth = 0
+		const indexPath = []
+		//make the walk here,
+		const rootNode = workbook.fetchSolutionNode(rowId, 'value') || workbook.getRootSolutionProperty(modelName)
+		PropertiesAssembler.indexProperties(modelName)
 
-	workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
-		if (node && node.rowId !== 'root') {
-			if (treeDepth > currentDepth) {
-				treePath.push(node.parentrowId)
-				indexPath.push(-1)
-				currentDepth = treeDepth
-			} else if (treeDepth < currentDepth) {
-				treePath.length = treeDepth
-				indexPath.length = treeDepth
-				currentDepth = treeDepth
+		workbook.walkProperties(rootNode, function(node, yas, treeDepth, y) {
+			if (node && node.rowId !== 'root') {
+				if (treeDepth > currentDepth) {
+					treePath.push(node.parentrowId)
+					indexPath.push(-1)
+					currentDepth = treeDepth
+				} else if (treeDepth < currentDepth) {
+					treePath.length = treeDepth
+					indexPath.length = treeDepth
+					currentDepth = treeDepth
+				}
+				const index = indexPath[indexPath.length - 1] + 1
+				indexPath[indexPath.length - 1] = index
+				if (yas === 'new') {
+					lmeTree.addTupleNode(node, treePath, index, y, treeDepth)
+				} else {
+					lmeTree.addWebNode(node, treePath, index, y, treeDepth)
+				}
 			}
-			const index = indexPath[indexPath.length - 1] + 1
-			indexPath[indexPath.length - 1] = index
-			if (yas === 'new') {
-				lmeTree.addTupleNode(node, treePath, index, y, treeDepth)
-			} else {
-				lmeTree.addWebNode(node, treePath, index, y, treeDepth)
-			}
-		}
-	}, workbook.resolveY(0).parent, null, 0)
-	return lmeTree
+		}, workbook.resolveY(0).parent, null, 0)
+		return lmeTree
+	}
 }
-export default new WebExportParser()
+export default WebExportParser

@@ -33,15 +33,19 @@ import fs, { readFileSync }                    from 'fs'
  *  will become x_root_version = a
  */
 function ModelStorage() {
+	assembler.then(({ getFFLModelPropertyChanges, insertProperties }) => {
+		this.getFFLModelPropertyChanges = getFFLModelPropertyChanges
+		this.insertProperties = insertProperties
+	})
 }
 
 ModelStorage.prototype.getHistory = function(name) {
-	return assembler.getFFLModelPropertyChanges(name).then(function(ok) {
+	return this.getFFLModelPropertyChanges(name).then(function(ok) {
 		log.info(ok)
 		return ok
 	}).catch(function(err) {
 		log.error(err)
-		throw Error(`Unable to get history for model with name ${name}`, err)
+		throw Error(`Unable to get history for model with name ${name}\m${err.stack}`)
 	})
 }
 /**
@@ -76,7 +80,7 @@ ModelStorage.prototype.saveDelta = function(name, data) {
 			const update = compareResults.compare.deletes[i]
 			dbEntries.push([hash, create_time, relativeFFLPath, name, update[1], update[2], null])
 		}
-		assembler.insertProperties(dbEntries).then(function(ok) {
+		this.insertProperties(dbEntries).then(function(ok) {
 			log.info(ok)
 		}).catch(err => {
 			if (log.DEBUG) log.error(err)

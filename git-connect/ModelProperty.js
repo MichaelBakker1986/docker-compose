@@ -2,8 +2,8 @@ import orm from 'orm'
 import log from 'log6'
 
 const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@localhost:5432/lme'
-export const ORM = Promise.all([
-	//acquireTimeout: 1000000
+export const ORM = new Promise((accept, reject) => {
+
 	orm.connectAsync(dbConnectString).then(async (db) => {
 		db.use(require('orm-timestamps'), {
 			createdProperty : 'created_at',
@@ -69,29 +69,28 @@ export const ORM = Promise.all([
 			timestamp: true
 		})
 
-		exports.ModelProperty = new ModelProperty()
-		return db.sync(async (err, other) => {
+		const modelProperty = new ModelProperty()
+		db.sync(async (err) => {
 			if (err) throw err
-			const dbSchema = {
-				model_property: ['uuid', 'create_time', 'model_path', 'model_name', 'var', 'col', 'val']
-			}
+			const dbSchema = { model_property: ['uuid', 'create_time', 'model_path', 'model_name', 'var', 'col', 'val'] }
 			//create indexes on psql databases
 			if (db.driver.dialect !== 'mysql') {
 				for (let table in dbSchema) {
 					for (let i = 0; i < dbSchema[table].length; i++) {
 						const column = dbSchema[table][i]
 						const sql = `CREATE INDEX IF NOT EXISTS idx_${table}_${column} ON ${table} (${column});`
-						db.driver.execQuery(sql, [], function(err, result) {
+						db.driver.execQuery(sql, [], function(err) {
 							if (err) throw err
 						})
 					}
 				}
 			}
-			return await ''
 		})
+
+		accept({ ModelProperty: modelProperty })
+		
 	}).catch((err) => {
 		log.error(err)
+		reject(err)
 	})
-]).catch((err) => {
-	log.error(err)
 })
