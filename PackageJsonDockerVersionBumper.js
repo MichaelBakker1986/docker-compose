@@ -1,7 +1,6 @@
 /**
  * @DEPRECATED
  */
-import browserify      from 'browserify'
 import { error, info } from 'log6'
 import fs              from 'fs'
 import cp              from 'child-process-es6-promise'
@@ -13,19 +12,10 @@ packageInfo.version = String(parseInt(packageInfo.version.split('.')[0]) + 1) + 
 const module_tag_name = `${packageInfo.author.split('@')[0].replace(/\W/g, '').toLowerCase()}/${packageInfo.name}:${packageInfo.version}`
 
 fs.writeFileSync('./package.json', JSON.stringify(packageInfo, null, 2), 'utf8')
-const REQUIRE_FILES = [`${__dirname}/${packageInfo.main}`]
-const b = browserify([], {
-	insertGlobalVars: true,
-	insertGlobals   : true,
-	detectGlobals   : false,
-	bare            : true,
-	standalone      : packageInfo.name,
-	node            : true
-}).ignore('fsevents').external(`${__dirname}/node_modules/browserify/index.js`).external('browserify').external(`${__dirname}/node_modules/browserify-middleware/index.js`).external('browserify-middleware')
 
-for (let i = 0; i < REQUIRE_FILES.length; i++) b.require(REQUIRE_FILES[i], { expose: REQUIRE_FILES[i] })
+const r_file = `${__dirname}/${packageInfo.main}`
+b.require(r_file, { expose: r_file })
 const res = fs.createWriteStream(`${__dirname}/dist/${(packageInfo.name).replace(/\W/gmi, '_').toLowerCase()}.js`)
-b.bundle().pipe(res)
 
 function revertUpdate(message) {
 	error(message)
@@ -35,7 +25,6 @@ function revertUpdate(message) {
 
 res.on('finish', () => {
 	info(`Done browserfiy module ${module_tag_name}`)
-	return
 	const command = `build . -t=${module_tag_name}`
 	cp.spawn('docker', command.split(' '), { stdio: 'inherit' }).then(result => {
 		if (result.code === 0) {

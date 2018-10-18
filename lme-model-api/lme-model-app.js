@@ -16,19 +16,18 @@ import compression                   from 'compression'
 import path                          from 'path'
 import { setup }                     from './api-def'
 import cors                          from 'cors'
-
-import IDECodeBuilder from './src/IDE_code_builder'
+import IDECodeBuilder                from './src/IDE_code_builder'
 
 const DBModel = {}
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const port = 8080
-const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
+//const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
 const app = express()
 //app.use(express_favicon())
-app.use('/id/:id/transformFFL_LME/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, {}))
-app.use('/resources/', expressStaticGzip(`${__dirname}/../git-connect/resources/`))
-app.use(expressStaticGzip(`${__dirname}/../git-connect/resources/`))
+app.use('/id/:id/transformFFL_LME/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
+app.use('/resources/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
+app.use(expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
 app.use(compression())
 app.use(cors())
 app.set('port', port)
@@ -149,7 +148,7 @@ app.get('*/tmp_model/:model', async (req, res) => {
 app.use(fileUpload())
 app.get('*/excel/:model', async (req, res) => {
 	const modelName = req.params.model
-	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result, err) => {
+	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result) => {
 		const targetFilePath = `${__dirname}/../git-connect/resources/${modelName}.xlsx`
 		const sampleFilePath = `${__dirname}/../git-connect/SAMPLE.xlsx`
 		if (!result) {
@@ -181,9 +180,9 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 
-	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(data => {
+	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(() => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
-			stash.commit(user_id, model_name, req.body.fflData, null).then(data => {
+			stash.commit(user_id, model_name, req.body.fflData, null).then(() => {
 				new DockerImageBuilder(model_name, null, null, null, req.body.model_version).buildDockerImage()
 				return res.json({
 					version   : 1,
@@ -232,8 +231,7 @@ app.get('/ide.js', browserify(__dirname + '/src/ide.js', {
 	debug        : false
 }))
 setup(app)
-app.listen(port, (application) => {
-
+app.listen(port, () => {
 	//talk with the proxy
 	const routes = ['*/model-docs*', '*/ide.js']
 	app._router.stack.forEach(r => {

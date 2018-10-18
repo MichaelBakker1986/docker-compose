@@ -13,6 +13,7 @@ const run_prom = async (command) => {
 		info(stdout)
 		return stderr ? stderr : stdout
 	} catch (err) {
+		error(err.stack)
 		return err.stack
 	}
 }
@@ -23,7 +24,7 @@ async function startPlatform_build() {
 	info(platform_result)
 	const platform_build_result = await run_prom(`docker build . -t=${version}`)
 	info(platform_build_result)
-	const platform_run_result = await run_prom(`docker run -p 8080:7081 --name lme_platform -e ENABLED_MODELS=KSP2 ${version}`)
+	const platform_run_result = await run_prom(`docker run -t -i -d -p 8080:7081 --name lme_platform -e ENABLED_MODELS=KSP2 ${version}`)
 	info(platform_run_result)
 }
 

@@ -4,27 +4,29 @@
  * There is a need to store/retrieve values entered by the client
  */
 // || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
-import { Figure }      from './Figure'
-import uuid            from 'uuid4'
-import log             from 'log6'
-import { MatrixStore } from '../MatrixStore'
+import { Figure }             from './Figure'
+import uuid                   from 'uuid4'
+import { debug, DEBUG, warn } from 'log6'
+import { MatrixStore }        from '../MatrixStore'
 
 const dbConnectString = process.env.FIGURE_DB_STRING
 
 export function setup(app) {
 	if (!dbConnectString) return//early exit (no db)
 	const ds = new MatrixStore()
+
 	/**
 	 * Retrieve entered values supplied by the client
 	 */
-	Figure.then((data) => {
+	let FinancialFigures
+	Figure.then(({ Figures }) => {
+		FinancialFigures = Figures
 	}).catch((err) => {
-		throw Error('Fail db initializeFFlModelData', err)
+		throw Error(`Fail db initializeFFlModelData ${err.stack}`)
 	})
-
 	function fetchDatabaseFigures(promise, req, res) {
 		//TODO: move logic to the matrixStore, not pairing with rest-api now
-		promise.then(function(dbData) {
+		promise.then((dbData) => {
 			//TODO: use array.map....
 			const values = {}
 			for (let i = 0; i < dbData[0].length; i++) {
@@ -50,7 +52,7 @@ export function setup(app) {
 				values : values
 			})
 		}).catch((err) => {
-			if (log.DEBUG) log.warn('error while resolving figures:', err)
+			if (DEBUG) warn('error while resolving figures:', err)
 			req.json({
 				id     : req.params.id,
 				status : 'fail',
@@ -61,13 +63,13 @@ export function setup(app) {
 	}
 
 	app.get('*/scenario/:ids', function(req, res) {
-		fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.ids.split(',')), req, res)
+		fetchDatabaseFigures(new FinancialFigures().getScenarioFigures(req.params.ids.split(',')), req, res)
 	})
 	app.get('*/id/:userId/data/:id', function(req, res) {
 		if (req.params.id.indexOf(',') > -1) {
-			fetchDatabaseFigures(new Figure.Figures().getScenarioFigures(req.params.id.split(',')), req, res)
+			fetchDatabaseFigures(new FinancialFigures().getScenarioFigures(req.params.id.split(',')), req, res)
 		} else {
-			fetchDatabaseFigures(new Figure.Figures().getFigures(req.params.id), req, res)
+			fetchDatabaseFigures(new FinancialFigures().getFigures(req.params.id), req, res)
 		}
 	})
 	/**
@@ -87,11 +89,11 @@ export function setup(app) {
 		const newChildId = uuid()
 		const parentUuid = req.params.token
 		const dbData = []
-		for (var i = 0; i < req.body.data.length; i++) {
-			var entry = req.body.data[i]
+		for (let i = 0; i < req.body.data.length; i++) {
+			const entry = req.body.data[i]
 			dbData.push([newChildId, entry.varName, entry.colId, entry.value])
 		}
-		new Figure.Figures().insertFigures(parentUuid, newChildId, dbData, now).then(function(data) {
+		new FinancialFigures().insertFigures(parentUuid, newChildId, dbData, now).then(function(data) {
 			//tell the response a new hash should be added to the current user calling this method.
 			res.set('x-auth-id', newChildId)
 			res.json({
@@ -99,7 +101,7 @@ export function setup(app) {
 				saveToken: newChildId
 			})
 		}).catch((err) => {
-			if (log.DEBUG) log.warn('Error while inserting figures:', err)
+			if (DEBUG) warn('Error while inserting figures:', err)
 			res.json({
 				status : 'fail',
 				message: err.toString()

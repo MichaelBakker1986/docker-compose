@@ -160,7 +160,7 @@
                     <ul class="treeview-menu" style="display: block;" ng-init="closed_nodes={}">
                         <li ng-repeat="node in LME_MODEL | toArray | pick:'children.length > 0 && treeDepth < 3' | orderBy : 'order_id'" class="treeview model-tree-{{node.treeDepth}} menu-open"
                             ng-if="isOpen(node,closed_nodes)">
-                            <a ng-click="showNode(node)" href="">
+                            <a ng-click="" href="">
                                 <i class="fa fa-circle-o"></i> {{node.id}} ({{node.children.length}})
                                 <span ng-click="closed_nodes[node.id] = !closed_nodes[node.id]" ng-if="node.treeDepth < 2" class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
@@ -183,9 +183,9 @@
                     </a>
                     <ul class="treeview-menu" style="display: block;">
                         <li ng-repeat="matrix_table in matrix_tables" title="{{matrix_table}}">
-                            <a href="">
+                            <!--<a href="">
                                 <i class="fa fa-table"></i> {{matrix_table.name}}
-                            </a>
+                            </a>-->
                         </li>
                     </ul>
                 </li>

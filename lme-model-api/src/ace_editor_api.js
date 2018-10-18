@@ -122,7 +122,7 @@ AceEditor.prototype.setParsedValue = function(fflModel) {
 	this.fflModel = fflModel
 
 	this.setValue(fflModel)
-	console.info(`Response text: ${this.getValue()}`)
+	console.info(`Response text_size: ${this.getValue().length}`)
 }
 AceEditor.prototype.setValue = function(value) {
 	this.aceEditor.session.setValue(value)
