@@ -82,7 +82,7 @@ simplified.AnyDataAvailable = (formulaInfo, node) => {
 	if (refFormula.ref === undefined) return log.warn(`Can't find a variableReference for ${regenerate(node)} ${formulaInfo.name}:${formulaInfo.original}`)
 
 	node.type = 'Identifier'
-	node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0'
+	node.name = `Object.keys(v[${refFormula.ref}]).length>0`
 	delete node.refn
 	delete node.arguments
 	delete node.callee
@@ -91,7 +91,7 @@ simplified.TitleEntered = (formulaInfo, node) => {
 	const refFormula = addFormulaDependency(formulaInfo, node.arguments[0].name, 'title')
 	if (refFormula.ref === undefined) return log.warn(`Can't find a variableReference for ${regenerate(node)} ${formulaInfo.name}:${formulaInfo.original}`)
 	node.type = 'Identifier'
-	node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0'
+	node.name = `Object.keys(v[${refFormula.ref}]).length>0`
 	delete node.refn
 	delete node.arguments
 	delete node.callee

@@ -11,8 +11,8 @@ import fs                                                                       
 import log                                                                                  from 'log6'
 import excel_connect
                                                                                             from '../../excel-connect/excel-connect'
-import { DebugManager ,RegisterPlainFFLDecorator}                                                                     from '../../ffl/index'
-import  '../../lme-core/exchange_modules/presentation/webexport'
+import { DebugManager, RegisterPlainFFLDecorator }                                          from '../../ffl/index'
+import '../../lme-core/exchange_modules/presentation/webexport'
 import '../../lme-core/exchange_modules/lme/lmeparser'
 import * as fflMath                                                                         from '../../math/ffl-math'
 
@@ -35,7 +35,7 @@ for (let i = 0; i < fflTestModels.length; i++) {
 		register: register,
 		raw     : data
 	}, 'ffl')
-	var validate = debug_manager.monteCarlo(fflModelName)
+	const validate = debug_manager.monteCarlo(fflModelName)
 	assert.ok(validate.valid)
 	var screendefExport = wb.export('webexport')
 	var allnodes = screendefExport.nodes
@@ -50,19 +50,19 @@ for (let i = 0; i < fflTestModels.length; i++) {
 
 	wb.visitProperties(wb.getSolutionNode('KSP_root'), function(child) {
 		graphvizModelTree += createRow(child.rowId)
-		graphvizModelTree += '\r\n' + child.parentrowId + ' -> ' + child.rowId + ';'
+		graphvizModelTree += `\r\n${child.parentrowId} -> ${child.rowId};`
 	}, 0)
 
 	var variableNames = new Set()
 
 	wb.solution.formulas.forEach(function(formulaId) {
-		var formula = SolutionFacade.fetchFormulaByIndex(formulaId)
+		const formula = SolutionFacade.fetchFormulaByIndex(formulaId)
 		if (Object.keys(formula.deps).length > 0) {
 			variableNames.add(correctFileName(formula.name))
 		}
-		for (var dep in formula.deps) {
-			depVariableNames_with_formulas += '\r\n' + correctFileName(formula.name) + ' -> ' + correctFileName(dep) + '[label="' + formula.original + '"];'
-			depVariableNames += '\r\n' + correctFileName(formula.name) + ' -> ' + correctFileName(dep) + ';'
+		for (let dep in formula.deps) {
+			depVariableNames_with_formulas += `\r\n${correctFileName(formula.name)} -> ${correctFileName(dep)}[label="${formula.original}"];`
+			depVariableNames += `\r\n${correctFileName(formula.name)} -> ${correctFileName(dep)};`
 		}
 	})
 	variableNames.forEach(function(name) {

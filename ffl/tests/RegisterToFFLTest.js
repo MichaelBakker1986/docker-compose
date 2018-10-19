@@ -1,6 +1,6 @@
 import { FFLToRegister, RegisterToFFL } from '../index.js'
-import { Register }                     from 'lme-core'
-import { source_ffl, target_ffl }       from './Util'
+import { Register }                     from '../../lme-core/index'
+import { source_ffl, target_ffl }       from './FFLTestCasesUtil'
 import { debug }                        from 'log6'
 
 const base_register = new Register, target_register = new Register

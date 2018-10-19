@@ -333,14 +333,14 @@ function ViewModes(data) {
 			}
 		}
 	}
-	if (DEBUG) debug('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ')
+	if (DEBUG) debug(`Created Xaxis for ${data.time.columnSize} columns on ${timelineSize} timelines `)
 	/**     * Assign references to the infinit column     */
 	infinitColumn.doc = entree.doc
 }
 
 ViewModes.prototype.toString = function() {
 	const self = this
-	return Object.keys(this.viewmodes).map(function(mode, idx) {
+	return Object.keys(this.viewmodes).map(function(mode) {
 		return [mode, '(', self.viewmodes[mode].cols.length, ')'].join('')
 	})
 }

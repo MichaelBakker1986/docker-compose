@@ -94,7 +94,8 @@ LMETree.prototype.sortRows = function() {
 }
 LMETree.prototype.findScorecardTypes = function() {
 	const scorecards = []
-	Object.keys(this.no).forEach(row_element => {
+	Object.keys(this.no).forEach(row_element_name => {
+		const row_element = this.no[row_element_name]
 		if (row_element.type === 'scorecard' || row_element.display_options === 'scorecard') scorecards.push(row_element)
 	})
 	return scorecards

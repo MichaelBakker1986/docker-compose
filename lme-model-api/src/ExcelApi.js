@@ -1,6 +1,5 @@
-import Connect                 from '../excel-connect/excel-connect'
-import api, { SolutionFacade } from '../lme-core/index'
-import excelPlugin             from 'excel-connect/excel-connect'
+import Connect                 from '../../excel-connect/excel-connect'
+import api, { SolutionFacade } from '../../lme-core/index'
 
 /*
  Helper class for test-purposes
@@ -15,5 +14,5 @@ class ExcelApi {
 	}
 }
 
-api.addFunctions(excelPlugin)
+api.addFunctions(Connect)
 export default ExcelApi

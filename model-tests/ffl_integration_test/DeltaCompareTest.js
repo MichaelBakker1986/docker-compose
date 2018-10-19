@@ -1,6 +1,6 @@
 import { DeltaCompareRegister, FFLToRegister } from '../../ffl/index'
 import { equal }                               from 'assert'
-import { source_ffl, target_ffl }              from '../../ffl/tests/Util'
+import { source_ffl, target_ffl }              from '../../ffl/tests/FFLTestCasesUtil'
 import { Register }                            from '../../lme-core/index'
 
 const base_register = new FFLToRegister(new Register, source_ffl).parseProperties(true)

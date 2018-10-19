@@ -8,9 +8,14 @@ const entries = {}
 const name = 'formulaJs'
 
 Object.keys(formulaJs).forEach(functionName => {
-	if (functionName === 'NA') if (DEBUG) return debug('FFL parser uses this function to be a VARIABLE 1e-10')
-	else if (global.hasOwnProperty(functionName)) if (DEBUG) debug(`global function already used : [${functionName}]`)
-	else entries[functionName] = formulaJs[functionName]
+	if (functionName === 'NA') {
+		if (DEBUG) return debug('FFL parser uses this function to be a VARIABLE 1e-10')
+	}
+	else if (global.hasOwnProperty(functionName)) {
+		if (DEBUG) debug(`global function already used : [${functionName}]`)
+	} else {
+		entries[functionName] = formulaJs[functionName]
+	}
 })
 export { name, entries }
 export default { name, entries }
