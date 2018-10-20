@@ -1,5 +1,6 @@
-var dependencyInfo = require('./../resources/V05_dependencies.json');
-var graph = require('ngraph.graph')();
+import dependencyInfo from './../resources/V05_dependencies.json'
+
+const graph = require('ngraph.graph')();
 graph.beginUpdate();
 function modelVariableName(name) {
     return name;// name.replace(/(^KSP_)/gmi, '').replace(/(_value$|_locked$|_visible$|_title$|_choices$)/gmi, '');

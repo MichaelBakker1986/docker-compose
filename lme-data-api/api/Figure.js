@@ -19,7 +19,7 @@ import orm       from 'orm'
 import { error } from 'log6'
 
 const dbConnectString = process.env.FIGURE_DB_STRING
-const Figure = Promise.all([
+const Figure = new Promise((accept, reject) => {
 	orm.connectAsync(dbConnectString).then(async (db) => {
 
 		db.use(require('orm-timestamps'), {
@@ -32,7 +32,7 @@ const Figure = Promise.all([
 			},
 			persist         : true
 		})
-		var Figures = db.define('figure', {
+		const Figures = db.define('figure', {
 			uuid: String,
 			var : String,
 			col : String,
@@ -118,11 +118,10 @@ const Figure = Promise.all([
 			create_time: { type: 'date', time: true }
 		})
 
-		exports.Figures = Figures
 		exports.FigureCommit = FigureCommit
 		exports.FigureTree = FigureTree
 
-		return db.sync(async (err, other) => {
+		db.sync(async (err) => {
 			if (err) throw err
 			const dbSchema = {
 				figure       : ['uuid', 'var', 'col', 'val'],
@@ -143,7 +142,9 @@ const Figure = Promise.all([
 			}
 			return await ''
 		})
-	}).catch((err) => error(err))
-]).catch((err) => error(err))
+		accept({ Figures, FigureCommit, FigureTree })
+
+	}).catch((err) => reject(err))
+}).catch((err) => error(err))
 
 export { Figure }

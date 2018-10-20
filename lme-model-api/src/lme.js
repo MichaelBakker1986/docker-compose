@@ -14,7 +14,7 @@ import fflMath   from '../../math/ffl-math'
 
 const DEFAULT_MODELNAME = 'SCORECARDTESTMODEL'
 api.registerParser(RegisterPlainFFLDecorator, JSONParser, LMEParser, WebExportParser)
-api.addFunctions(fflMath, formulaJs)
+api.addFunctions(formulaJs, fflMath)
 
 function LmeAPI(TimeModel, Ctx, interval, options) {
 	//TODO: the TimeModel is part of the Context object.

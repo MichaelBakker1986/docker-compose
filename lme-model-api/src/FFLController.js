@@ -3,6 +3,7 @@ import EconomicEditorView               from '../../model-tests/EconomicEditorVi
 import $                                from 'jquery'
 import { FFLToRegister, ScorecardTool } from '../../ffl/index'
 
+const economicEditorView = new EconomicEditorView()
 const newModelTemplate =
 	      'model $1 uses BaseModel\n' +
 	      '{\n' +
@@ -88,7 +89,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	}
 	$scope.toggleWrapLines = () => $scope.toggleFormatter()
 	$scope.toggleProperties = function() {
-		EconomicEditorView.properties = !EconomicEditorView.properties
+		economicEditorView.properties = !economicEditorView.properties
 		fflEditor.setParsedValue(user_session.fflModel)
 		fflEditor.scrollTop()
 	}
@@ -100,7 +101,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	}
 	$scope.toggleAceEditorMode = function() {
 		$scope.fflmode = !$scope.fflmode
-		EconomicEditorView.on = !EconomicEditorView.on
+		economicEditorView.on = !economicEditorView.on
 		fflEditor.setParsedValue(user_session.fflModel)
 	}
 	fflEditor.aceEditor.on('change', function(e) {

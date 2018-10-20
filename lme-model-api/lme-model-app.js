@@ -1,33 +1,33 @@
-import { exec }                 from 'child-process-promise'
-import log                      from 'log6'
-import browserify               from 'browserify-middleware'
-import babelify                 from 'babelify'
-import bodyParser               from 'body-parser'
-import expressStaticGzip        from 'express-static-gzip'
-import fs, { createReadStream } from 'fs'
-import ExcelConnect             from '../excel-connect/excel-connect'
-import fileUpload               from 'express-fileupload'
-import { started as DBModel }   from '../git-connect/ModelAssembler'
-import { Stash as stash }       from './src/stash'
-import { DockerImageBuilder }   from '../docker-connect/DockerImageBuilder'
-import request                  from 'request-promise-json'
-import express                  from 'express'
-import compression              from 'compression'
-import path                     from 'path'
-import { setup }                from './api-def'
-import cors                     from 'cors'
+import { exec }                      from 'child-process-promise'
+import { debug, DEBUG, error, info } from 'log6'
+import browserify                    from 'browserify-middleware'
+import babelify                      from 'babelify'
+import bodyParser                    from 'body-parser'
+import expressStaticGzip             from 'express-static-gzip'
+import fs, { createReadStream }      from 'fs'
+import ExcelConnect                  from '../excel-connect/excel-connect'
+import fileUpload                    from 'express-fileupload'
+import assembler                     from '../git-connect/ModelAssembler'
+import { Stash as stash }            from './src/stash'
+import { DockerImageBuilder }        from '../docker-connect/DockerImageBuilder'
+import request                       from 'request-promise-json'
+import express                       from 'express'
+import compression                   from 'compression'
+import path                          from 'path'
+import { setup }                     from './api-def'
+import cors                          from 'cors'
+import IDECodeBuilder                from './src/IDE_code_builder'
 
-import IDECodeBuilder from './src/IDE_code_builder'
-
+const DBModel = {}
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const port = 8080
-const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
+//const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
 const app = express()
 //app.use(express_favicon())
-app.use('/id/:id/transformFFL_LME/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, {}))
-app.use('/resources/', expressStaticGzip(`${__dirname}/../git-connect/resources/`))
-app.use(expressStaticGzip(`${__dirname}/../git-connect/resources/`))
+app.use('/id/:id/transformFFL_LME/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
+app.use('/resources/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
+app.use(expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
 app.use(compression())
 app.use(cors())
 app.set('port', port)
@@ -70,16 +70,21 @@ app.post('*/:user_id/preview/:model_name', async (req, res) => {
 		res.set('x-auth-id', data + '.ffl')
 		res.json({ status: 'ok', link: data })
 	}).catch(err => {
-		log.debug('Failed to write ' + model_name + '.ffl file.', err)
+		debug('Failed to write ' + model_name + '.ffl file.', err)
 		res.json({ status: 'fail', reason: err.toString() })
 	})
+})
+assembler.then(db_methods => {
+	Object.assign(DBModel, db_methods)
+}).catch(err => {
+	error(err.stack)
 })
 app.get('*/model', async (req, res) => {
 	const name = req.query.model
 	DBModel.getModel(name).then((data) => {
 		res.json({ status: 'success', data: data })
 	}).catch(err => {
-		log.debug('Failed to fetch model from database', err)
+		debug('Failed to fetch model from database', err)
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
@@ -88,7 +93,7 @@ app.get('*/modelChanges/:model_name', async (req, res) => {
 	DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
 		res.json({ status: 'success', data: data })
 	}).catch((err) => {
-		log.debug('Failed to fetch model changes from database', err)
+		debug('Failed to fetch model changes from database', err)
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
@@ -98,7 +103,7 @@ app.post('*/:user_id/saveFFLModel/:model_name', async (req, res) => {
 	stash.commit(user_id, model_name, req.body.data, req.body.type).then((data) => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
-		log.debug('Failed to write ' + model_name + '.ffl file.', err)
+		debug('Failed to write ' + model_name + '.ffl file.', err)
 		res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
 	})
 })
@@ -108,7 +113,7 @@ app.post('*/:user_id/saveJBehaveStory/:model_name', async (req, res) => {
 	stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then((data) => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
-		log.debug('Failed to write ' + model_name + '.ffl file.', err)
+		debug('Failed to write ' + model_name + '.ffl file.', err)
 		res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
 	})
 })
@@ -117,7 +122,7 @@ app.get('*/branches', async (req, res) => {
 	stash.branches().then(data => {
 		res.json(data)
 	}).catch(err => {
-		log.debug(`Failed to lookup branches:[${err}]`)
+		debug(`Failed to lookup branches:[${err}]`)
 		res.json([])
 	})
 })
@@ -143,7 +148,7 @@ app.get('*/tmp_model/:model', async (req, res) => {
 app.use(fileUpload())
 app.get('*/excel/:model', async (req, res) => {
 	const modelName = req.params.model
-	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result, err) => {
+	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result) => {
 		const targetFilePath = `${__dirname}/../git-connect/resources/${modelName}.xlsx`
 		const sampleFilePath = `${__dirname}/../git-connect/SAMPLE.xlsx`
 		if (!result) {
@@ -154,7 +159,7 @@ app.get('*/excel/:model', async (req, res) => {
 	})
 })
 app.post('*/upload', async (req, res) => {
-	log.info('upload')
+	info('upload')
 	res.status(200).json({ status: 'ok' })
 })
 
@@ -175,9 +180,9 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 
-	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(data => {
+	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(() => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
-			stash.commit(user_id, model_name, req.body.fflData, null).then(data => {
+			stash.commit(user_id, model_name, req.body.fflData, null).then(() => {
 				new DockerImageBuilder(model_name, null, null, null, req.body.model_version).buildDockerImage()
 				return res.json({
 					version   : 1,
@@ -185,7 +190,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 					model_name: model_name
 				})
 			}).catch((err) => {
-				log.debug(`Failed to write ${model_name}.ffl file.`, err)
+				debug(`Failed to write ${model_name}.ffl file.`, err)
 				return res.json({
 					status : 'fail',
 					message: `Failed to write ${model_name}.ffl`,
@@ -196,7 +201,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 			return res.status(400).json({ status: 'fail', reason: err.toString() })
 		})
 	}).catch((err) => {
-		log.debug('Failed to write ' + model_name + '.ffl file.', err.toString())
+		debug('Failed to write ' + model_name + '.ffl file.', err.toString())
 		return res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
 	})
 })
@@ -204,7 +209,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 app.post('*/excel/:model', async function(req, res) {
 	const modelName = req.params.model
 	if (!req.files) {
-		log.debug(`Failed to write ${modelName}.xlsx file.`)
+		debug(`Failed to write ${modelName}.xlsx file.`)
 		return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
 	}
 
@@ -214,7 +219,7 @@ app.post('*/excel/:model', async function(req, res) {
 	// Use the mv() method to place the file somewhere on your server
 	excelfile.mv(__dirname + '/../git-connect/resources/' + modelName + '.xlsx', err => {
 		if (err) {
-			log.debug('Failed to write ' + modelName + '.xlsx file.', err)
+			debug('Failed to write ' + modelName + '.xlsx file.', err)
 			return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
 		}
 		res.json({ status: 'ok' })
@@ -226,8 +231,7 @@ app.get('/ide.js', browserify(__dirname + '/src/ide.js', {
 	debug        : false
 }))
 setup(app)
-app.listen(port, (application) => {
-
+app.listen(port, () => {
 	//talk with the proxy
 	const routes = ['*/model-docs*', '*/ide.js']
 	app._router.stack.forEach(r => {
@@ -236,6 +240,6 @@ app.listen(port, (application) => {
 		}
 	})
 	request.get(`http://${host}:${internal_proxy_port}/register/service/model-api/${host}/${port}/${routes.join(',')}`).then(data => {
-		if (log.DEBUG) log.debug(`${JSON.stringify(routes)} ${data}`)
-	}).catch(err => log.error('Failed to register ', err))
+		if (DEBUG) debug(`${JSON.stringify(routes)} ${data}`)
+	}).catch(err => error('Failed to register ', err))
 })

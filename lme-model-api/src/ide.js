@@ -9,7 +9,10 @@ import { LocalStorage }                                            from './Local
 import { JBehaveController }                                       from './JBehaveController'
 import MatrixManager                                               from '../../excel-connect/MatrixManager'
 import api, { Register, WebExportParser }                          from '../../lme-core/index'
+import fflMath                                                     from '../../math/ffl-math'
+import formulaJs                                                   from '../../formulajs-connect/formulajs'
 
+api.addFunctions(fflMath, formulaJs)
 api.registerParser(RegisterPlainFFLDecorator, WebExportParser)
 let params = window.location.href.split('#')
 if (params.length === 1) window.location.href = '#SCORECARDTESTMODEL&DEMO&6'

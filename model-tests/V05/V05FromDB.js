@@ -1,22 +1,20 @@
-require('../../lme-core/exchange_modules/ffl/RegisterToLMEParser')
-require('../../lme-core/exchange_modules/presentation/webexport')
-require('../../math')
+import fflMath                       from '../../math/ffl-math'
+import api, { WebExportParser }      from '../../lme-core/index'
+import { RegisterPlainFFLDecorator } from '../../ffl/index'
+import excel_plugin                  from '../../excel-connect/excel-connect'
+import assembler                     from '../../git-connect/ModelAssembler'
+import ExcelApi                      from '../excel-api'
+import { error, info }               from 'log6'
 
-const Register    = require('../../lme-core/exchange_modules/ffl/Register'),
-      excelplugin = require('../../excel-connect'),
-      assembler   = require('../../git-connect/ModelAssembler'),
-      JSWorkbook  = require('../../lme-core/src/JSWorkBook'),
-      Context     = require('../../lme-core/src/Context'),
-      log         = require('log6'),
-      LME         = require('../../lme-model-api/src/lme'),
-      lmeModel    = new LME()
+api.registerParser(WebExportParser, RegisterPlainFFLDecorator)
+api.addFunctions(fflMath, excel_plugin)
 
-lmeModel.addFunctions(excelplugin)
-Promise.all([assembler.started, excelplugin.loadExcelFile]).then(() => {
-    assembler.getModel("V05").then((modelData) => {
-        process.exit(0);
-    }).catch((err) => {
-        log.error(err)
-        process.exit(1);
-    })
-});
+Promise.all([assembler, ExcelApi.loadExcelFile('V05')]).then(([{ getModel }]) => {
+	getModel('V05').then((modelData) => {
+		info(modelData)
+		process.exit(0)
+	}).catch((err) => {
+		error(err)
+		process.exit(1)
+	})
+})
