@@ -1,6 +1,6 @@
 model BLG uses BaseModel
 {
- version: "1.0";
+ version: "1.1";
  variable BLG
  {
   variable Q_ROOT
