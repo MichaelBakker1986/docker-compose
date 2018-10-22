@@ -88,7 +88,7 @@ export const ORM = new Promise((accept, reject) => {
 		})
 
 		accept({ ModelProperty: modelProperty })
-		
+
 	}).catch((err) => {
 		log.error(err)
 		reject(err)

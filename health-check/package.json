@@ -28,6 +28,7 @@
     "pug": "2.0.0-beta11",
     "rethinkdbdash": "^2.3.31",
     "right-pad": "^1.0.1",
-    "speedtest-net": "^1.4.3"
+    "speedtest-net": "^1.4.3",
+    "xml2js": "^0.4.19"
   }
 }

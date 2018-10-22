@@ -63,6 +63,7 @@ class Stash {
 		})
 	}
 
+	//git clone ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
 	//TODO: backup file, on fail restore old file
 	commit(user_id, name, data, type) {
 		/*
@@ -89,9 +90,9 @@ class Stash {
 				let command = `git pull &&  git commit -a -m "Model update [${name}] by ${user_id}@${host}" && git push && git rev-parse HEAD`
 				return exec(command).then((ok) => {
 					const output = ok.stdout.split('\n')
-					const stashCommit = '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>'
+					const stashCommit = `<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/${output[output.length - 2]}"> DIFF </a>`
 
-					console.info('<a href="http://' + domain + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + '@' + host + '</span>')
+					console.info(`<a href="http://${domain}#${name}&${userID}"> ${name} </a><span> Updated </span>${stashCommit}<span> By ${user_id}@${host}</span>`)
 				}).catch((err) => {
 					const errorData = err.toString()
 					if (errorData.includes('No changes detected')) {
