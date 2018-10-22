@@ -8,6 +8,8 @@ package-lock.json
 restapi/dbSettings.js
 *package-lock.json
 *.scssc
+financialmodel/
+financialmodel/*
 git-connect/resources/_tmp_*
 git-connect/CODELISTS/**.pom
 git-connect/CODELISTS/*.pom
