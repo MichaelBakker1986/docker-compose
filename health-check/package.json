@@ -1,0 +1,33 @@
+{
+  "name": "lme-health-check",
+  "version": "0.0.2",
+  "repository": {},
+  "description": "lme-health-check",
+  "license": "ISC",
+  "main": "start_appication",
+  "scripts": {
+    "start": "node ./dist/start_application",
+    "build": "babel ./app.js . bin/www --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "express-no-favicons": "0.0.1",
+    "highcharts": "^6.2.0",
+    "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "lme-webpack": "^0.0.3",
+    "log6": "^2.0.16",
+    "memory-fs": "^0.4.1",
+    "moment": "^2.22.2",
+    "morgan": "~1.9.0",
+    "public-ip": "^2.4.0",
+    "pug": "2.0.0-beta11",
+    "rethinkdbdash": "^2.3.31",
+    "right-pad": "^1.0.1",
+    "speedtest-net": "^1.4.3"
+  }
+}
