@@ -40,6 +40,7 @@
     "passport-facebook": "^2.1.1",
     "performance-now": "^2.1.0",
     "regression": "^2.0.1",
+    "rethinkdbdash": "^2.3.31",
     "xhr2": "^0.1.4"
   },
   "devDependencies": {

@@ -16,7 +16,7 @@ export class CodeBuilder {
 		return new Promise((accept, reject) => {
 			compiler.run((err, stats) => {
 				if (err) reject(err)
-				else accept(memory_fs.readFileSync(__dirname + '/dist/' + basename, 'utf8'))
+				else accept(memory_fs.readFileSync(`${__dirname}/dist/${basename}`, 'utf8'))
 			})
 		})
 	}
