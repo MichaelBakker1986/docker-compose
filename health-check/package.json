@@ -1,0 +1,18 @@
+{
+  "name": "health-check",
+  "version": "1.0.0",
+  "description": "BE AWARE webpack does not allow default ERROR-handlers",
+  "main": "Build_Deploy.js",
+  "scripts": {
+    "build": "babel . --ignore node_modules,dist,tests -d dist/",
+    "prepare": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "speedtest-net": "^1.4.3",
+    "xml2js": "^0.4.19"
+  }
+}
