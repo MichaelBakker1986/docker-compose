@@ -1,5 +1,5 @@
 {
-  "name": "docker-compose",
+  "name": "michaelbakker_docker-compose",
   "version": "0.9.1",
   "main": "index.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "eslint": "./node_modules/.bin/eslint ."
   },
   "repository": {
-    "url": "git@github.com:PDMLab/docker-compose.git"
+    "url": "git@github.com:MichaelBakker1986/docker-compose.git"
   },
   "keywords": [
     "devops",
@@ -17,10 +17,13 @@
     "test",
     "test-tools"
   ],
-  "author": "Alexander Zeitler <alexander.zeitler@pdmlab.com>",
+  "author": "Michael bakker",
   "contributors": [
     {
       "name": "Ignatiev Mikhail"
+    },
+    {
+      "name": "Alexander Zeitler"
     },
     {
       "name": "Ezekiel Warren"
