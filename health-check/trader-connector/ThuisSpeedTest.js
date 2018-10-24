@@ -15,7 +15,7 @@ async function redoTheTest({}) {
 	})
 }
 
-function printResultsAndRedoTest({ client, server, speeds }) {
+function printResultsAndRedoTest({ client = {}, server = {}, speeds = {} }) {
 	const now = moment()
 	const { ping = 999.999 } = server
 	const { download = 0, upload = 0 } = speeds
@@ -37,4 +37,3 @@ v4().then(ip_address => {
 	interval = 10000
 	redoTheTest({}).then(() => {}).catch(() => {})
 })
-

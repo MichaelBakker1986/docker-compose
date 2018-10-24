@@ -3,13 +3,31 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./dist/www",
+    "build": "babel src --ignore node_modules,dist,tests -d dist/ --copy-files",
+    "prepare": "npm run build"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "composefile": "^0.3.0",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "express-no-favicons": "0.0.1",
     "http-errors": "~1.6.2",
-    "morgan": "~1.9.0"
+    "log6": "^2.0.16",
+    "michaelbakker_docker-compose": "^0.9.1",
+    "morgan": "~1.9.0",
+    "read-yaml": "^1.1.0",
+    "uuid4": "^1.1.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0.20",
+    "babel-loader": "^6.0.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack": "2.2.0"
   }
 }

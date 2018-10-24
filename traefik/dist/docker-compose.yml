@@ -1,0 +1,15 @@
+version: '2'
+services:
+  reverse-proxy:
+    image: traefik
+    command: '--api --docker'
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+  whoami:
+    image: emilevauge/whoami
+    labels:
+      - 'traefik.frontend.rule=Host:lme.appmodel.org'
+      - 'traefik.frontend.rule=Path:/test'
