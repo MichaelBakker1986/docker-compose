@@ -24,6 +24,9 @@ logLevel = "DEBUG"
     entryPoint = "http"
   onHostRule = true
   onDemand = false
+  [[acme.domains]]
+    main = "appmodel.org"
+    sans = ["lme.appmodel.org"]
 
 [api]
   # Name of the related entry point

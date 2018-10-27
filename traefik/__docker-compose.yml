@@ -1,7 +1,0 @@
-version: '3'
-
-services:
-  docker_build:
-    image: testtraefik:0.0.5
-    volumes:
-    - '/var/run/docker.sock:/var/run/docker.sock'
