@@ -1,9 +1,25 @@
 version: '3'
-
 services:
-  docker_build:
-    image: testtraefik:latest
+  traefik:
+    image: traefik
+    container_name: traefik
+    command:
+    - --api
+    - --docker
+    - --docker.watch
+    ports:
+    - '80:80'
+    - '443:443'
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
-    ports:
-    - '3001:80'
+    - 'c:/Users/michael/Documents/lme/traefik/traefik.toml:/traefik.toml'
+    labels:
+    - 'traefik.enable=true'
+    - 'traefik.port=8080'
+    - 'traefik.frontend.rule=Host:appmodel.org'
+    networks:
+    - proxy
+
+networks:
+  proxy:
+    external: true

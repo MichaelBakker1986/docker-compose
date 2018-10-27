@@ -2,7 +2,7 @@
 
 var cov_1gxjlwjhjq = function () {
 	var path = 'C:\\Users\\michael\\Documents\\lme\\traefik\\src\\DockerInstanceManager.js',
-	    hash = 'faa7b35a0d275769ec4625c2afeaf983c8dcba9b',
+	    hash = '2b7d86f0584d6f33227ed1cc04028947cabccfb9',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -11,67 +11,67 @@ var cov_1gxjlwjhjq = function () {
 		statementMap: {
 			'0': {
 				start: {
-					line: 10,
+					line: 9,
 					column: 2
 				},
 				end: {
-					line: 10,
+					line: 9,
 					column: 21
 				}
 			},
 			'1': {
 				start: {
-					line: 11,
+					line: 10,
 					column: 17
 				},
 				end: {
-					line: 11,
+					line: 10,
 					column: 69
 				}
 			},
 			'2': {
 				start: {
-					line: 13,
+					line: 12,
 					column: 2
 				},
 				end: {
-					line: 13,
+					line: 12,
 					column: 39
 				}
 			},
 			'3': {
 				start: {
-					line: 14,
+					line: 13,
 					column: 2
 				},
 				end: {
-					line: 14,
+					line: 13,
 					column: 40
 				}
 			},
 			'4': {
 				start: {
-					line: 15,
+					line: 14,
 					column: 2
 				},
 				end: {
-					line: 15,
+					line: 14,
 					column: 22
 				}
 			},
 			'5': {
 				start: {
-					line: 19,
+					line: 18,
 					column: 2
 				},
 				end: {
-					line: 19,
-					column: 27
+					line: 18,
+					column: 52
 				}
 			},
 			'6': {
 				start: {
-					line: 23,
+					line: 22,
 					column: 2
 				},
 				end: {
@@ -81,25 +81,45 @@ var cov_1gxjlwjhjq = function () {
 			},
 			'7': {
 				start: {
-					line: 25,
+					line: 23,
 					column: 3
 				},
 				end: {
-					line: 25,
+					line: 23,
 					column: 32
 				}
 			},
 			'8': {
 				start: {
-					line: 26,
+					line: 24,
 					column: 3
 				},
 				end: {
-					line: 32,
+					line: 30,
 					column: 4
 				}
 			},
 			'9': {
+				start: {
+					line: 31,
+					column: 3
+				},
+				end: {
+					line: 31,
+					column: 24
+				}
+			},
+			'10': {
+				start: {
+					line: 32,
+					column: 3
+				},
+				end: {
+					line: 32,
+					column: 25
+				}
+			},
+			'11': {
 				start: {
 					line: 34,
 					column: 3
@@ -109,7 +129,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 35
 				}
 			},
-			'10': {
+			'12': {
 				start: {
 					line: 39,
 					column: 2
@@ -119,7 +139,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 58
 				}
 			},
-			'11': {
+			'13': {
 				start: {
 					line: 39,
 					column: 36
@@ -129,7 +149,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 55
 				}
 			},
-			'12': {
+			'14': {
 				start: {
 					line: 43,
 					column: 2
@@ -139,7 +159,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 3
 				}
 			},
-			'13': {
+			'15': {
 				start: {
 					line: 45,
 					column: 11
@@ -149,7 +169,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 30
 				}
 			},
-			'14': {
+			'16': {
 				start: {
 					line: 46,
 					column: 12
@@ -159,7 +179,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 61
 				}
 			},
-			'15': {
+			'17': {
 				start: {
 					line: 51,
 					column: 2
@@ -169,7 +189,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 4
 				}
 			},
-			'16': {
+			'18': {
 				start: {
 					line: 52,
 					column: 3
@@ -179,7 +199,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 4
 				}
 			},
-			'17': {
+			'19': {
 				start: {
 					line: 54,
 					column: 12
@@ -189,7 +209,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 31
 				}
 			},
-			'18': {
+			'20': {
 				start: {
 					line: 55,
 					column: 13
@@ -199,7 +219,7 @@ var cov_1gxjlwjhjq = function () {
 					column: 62
 				}
 			},
-			'19': {
+			'21': {
 				start: {
 					line: 58,
 					column: 2
@@ -215,73 +235,73 @@ var cov_1gxjlwjhjq = function () {
 				name: '(anonymous_0)',
 				decl: {
 					start: {
-						line: 9,
+						line: 8,
 						column: 1
 					},
 					end: {
-						line: 9,
+						line: 8,
 						column: 2
 					}
 				},
 				loc: {
 					start: {
-						line: 9,
+						line: 8,
 						column: 15
 					},
 					end: {
-						line: 16,
+						line: 15,
 						column: 2
 					}
 				},
-				line: 9
+				line: 8
 			},
 			'1': {
 				name: '(anonymous_1)',
 				decl: {
 					start: {
-						line: 18,
+						line: 17,
 						column: 1
 					},
 					end: {
-						line: 18,
+						line: 17,
 						column: 2
 					}
 				},
 				loc: {
 					start: {
-						line: 18,
+						line: 17,
 						column: 20
 					},
 					end: {
-						line: 20,
+						line: 19,
 						column: 2
 					}
 				},
-				line: 18
+				line: 17
 			},
 			'2': {
 				name: '(anonymous_2)',
 				decl: {
 					start: {
-						line: 22,
+						line: 21,
 						column: 1
 					},
 					end: {
-						line: 22,
+						line: 21,
 						column: 2
 					}
 				},
 				loc: {
 					start: {
-						line: 22,
-						column: 23
+						line: 21,
+						column: 38
 					},
 					end: {
 						line: 36,
 						column: 2
 					}
 				},
-				line: 22
+				line: 21
 			},
 			'3': {
 				name: '(anonymous_3)',
@@ -504,7 +524,7 @@ var cov_1gxjlwjhjq = function () {
 			'0': {
 				loc: {
 					start: {
-						line: 23,
+						line: 22,
 						column: 2
 					},
 					end: {
@@ -515,7 +535,7 @@ var cov_1gxjlwjhjq = function () {
 				type: 'if',
 				locations: [{
 					start: {
-						line: 23,
+						line: 22,
 						column: 2
 					},
 					end: {
@@ -524,7 +544,7 @@ var cov_1gxjlwjhjq = function () {
 					}
 				}, {
 					start: {
-						line: 23,
+						line: 22,
 						column: 2
 					},
 					end: {
@@ -532,7 +552,40 @@ var cov_1gxjlwjhjq = function () {
 						column: 3
 					}
 				}],
-				line: 23
+				line: 22
+			},
+			'1': {
+				loc: {
+					start: {
+						line: 25,
+						column: 17
+					},
+					end: {
+						line: 25,
+						column: 44
+					}
+				},
+				type: 'binary-expr',
+				locations: [{
+					start: {
+						line: 25,
+						column: 17
+					},
+					end: {
+						line: 25,
+						column: 21
+					}
+				}, {
+					start: {
+						line: 25,
+						column: 25
+					},
+					end: {
+						line: 25,
+						column: 44
+					}
+				}],
+				line: 25
 			}
 		},
 		s: {
@@ -555,7 +608,9 @@ var cov_1gxjlwjhjq = function () {
 			'16': 0,
 			'17': 0,
 			'18': 0,
-			'19': 0
+			'19': 0,
+			'20': 0,
+			'21': 0
 		},
 		f: {
 			'0': 0,
@@ -572,7 +627,8 @@ var cov_1gxjlwjhjq = function () {
 			'11': 0
 		},
 		b: {
-			'0': [0, 0]
+			'0': [0, 0],
+			'1': [0, 0]
 		},
 		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
 	},
@@ -611,10 +667,6 @@ var _path = require('path');
 
 var _index = require('../docker-compose/index');
 
-var _uuid = require('uuid4');
-
-var _uuid2 = _interopRequireDefault(_uuid);
-
 var _log = require('log6');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -642,11 +694,11 @@ var EndpointCreator = function () {
 			cov_1gxjlwjhjq.f[1]++;
 			cov_1gxjlwjhjq.s[5]++;
 
-			this.addEndPoint((0, _uuid2.default)());
+			this.addEndPoint('whoami', 'latest', 'emilevauge');
 		}
 	}, {
 		key: 'addEndPoint',
-		value: function addEndPoint(endpoint) {
+		value: function addEndPoint(endpoint, version, name) {
 			cov_1gxjlwjhjq.f[2]++;
 			cov_1gxjlwjhjq.s[6]++;
 
@@ -654,16 +706,19 @@ var EndpointCreator = function () {
 				cov_1gxjlwjhjq.b[0][0]++;
 				cov_1gxjlwjhjq.s[7]++;
 
-
 				this.endpoints.push(endpoint);
 				cov_1gxjlwjhjq.s[8]++;
 				this.config.services[endpoint] = {
-					'image': 'emilevauge/whoami',
-					'labels': ['traefik.frontend.rule=Host:lme.appmodel.org', 'traefik.frontend.rule=Path:/' + endpoint]
+					'image': ((cov_1gxjlwjhjq.b[1][0]++, name) || (cov_1gxjlwjhjq.b[1][1]++, 'michaelbakker1986')) + '/' + endpoint + ':' + version,
+					'labels': ['traefik.frontend.rule=Host:lme.appmodel.org', 'traefik.frontend.rule=Path:/' + endpoint + '/' + version]
 				};
+				cov_1gxjlwjhjq.s[9]++;
+				this.buildEndpoints();
+				cov_1gxjlwjhjq.s[10]++;
+				this.bringServicesUp();
 			} else {
 				cov_1gxjlwjhjq.b[0][1]++;
-				cov_1gxjlwjhjq.s[9]++;
+				cov_1gxjlwjhjq.s[11]++;
 
 				(0, _log.error)('Endpoint already exists');
 			}
@@ -672,11 +727,11 @@ var EndpointCreator = function () {
 		key: 'buildEndpoints',
 		value: function buildEndpoints() {
 			cov_1gxjlwjhjq.f[3]++;
-			cov_1gxjlwjhjq.s[10]++;
+			cov_1gxjlwjhjq.s[12]++;
 
 			(0, _composefile2.default)(this.config, function (err) {
 				cov_1gxjlwjhjq.f[4]++;
-				cov_1gxjlwjhjq.s[11]++;
+				cov_1gxjlwjhjq.s[13]++;
 				console.log('done');
 			});
 		}
@@ -684,15 +739,15 @@ var EndpointCreator = function () {
 		key: 'bringServicesUp',
 		value: function bringServicesUp() {
 			cov_1gxjlwjhjq.f[5]++;
-			cov_1gxjlwjhjq.s[12]++;
+			cov_1gxjlwjhjq.s[14]++;
 
 			(0, _index.upAll)({ cwd: (0, _path.join)(__dirname), log: true }).then(function () {
 				cov_1gxjlwjhjq.f[6]++;
-				cov_1gxjlwjhjq.s[13]++;
+				cov_1gxjlwjhjq.s[15]++;
 				console.log('done');
 			}, function (err) {
 				cov_1gxjlwjhjq.f[7]++;
-				cov_1gxjlwjhjq.s[14]++;
+				cov_1gxjlwjhjq.s[16]++;
 				console.log('something went wrong:', err.message);
 			});
 		}
@@ -700,23 +755,23 @@ var EndpointCreator = function () {
 		key: 'killAll',
 		value: function killAll() {
 			cov_1gxjlwjhjq.f[8]++;
-			cov_1gxjlwjhjq.s[15]++;
+			cov_1gxjlwjhjq.s[17]++;
 
 			this.endpoints.forEach(function (point) {
 				cov_1gxjlwjhjq.f[9]++;
-				cov_1gxjlwjhjq.s[16]++;
+				cov_1gxjlwjhjq.s[18]++;
 
 				(0, _index.stopOne)(point, { cwd: (0, _path.join)(__dirname), log: true }).then(function () {
 					cov_1gxjlwjhjq.f[10]++;
-					cov_1gxjlwjhjq.s[17]++;
+					cov_1gxjlwjhjq.s[19]++;
 					console.log('done');
 				}, function (err) {
 					cov_1gxjlwjhjq.f[11]++;
-					cov_1gxjlwjhjq.s[18]++;
+					cov_1gxjlwjhjq.s[20]++;
 					console.log('something went wrong:', err.message);
 				});
 			});
-			cov_1gxjlwjhjq.s[19]++;
+			cov_1gxjlwjhjq.s[21]++;
 			this.endpoints.length = 0;
 		}
 	}]);

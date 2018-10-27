@@ -1,0 +1,75 @@
+# API definition
+# Warning: Enabling API will expose Traefik's configuration.
+# It is not recommended in production,
+# unless secured by authentication and authorizations
+defaultEntryPoints = ["http", "https"]
+logLevel = "DEBUG"
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+  [entryPoints.api]
+  address=":8686"
+
+[acme]
+  email = "michael.bakker1986@gmail.com"
+  storage = "acme.json"
+  entryPoint = "https"
+  [acme.httpChallenge]
+    entryPoint = "http"
+  onHostRule = true
+  onDemand = false
+
+[api]
+  # Name of the related entry point
+  #
+  # Optional
+  # Default: "traefik"
+  entryPoint="api"
+  # Enable Dashboard
+  #
+  # Optional
+  # Default: true
+  dashboard = false
+
+  # Enable debug mode.
+  # This will install HTTP handlers to expose Go expvars under /debug/vars and
+  # pprof profiling data under /debug/pprof/.
+  # Additionally, the log level will be set to DEBUG.
+  #
+  # Optional
+  # Default: false
+  debug = true
+  
+[retry]
+  # Number of attempts
+  #
+  # Optional
+  # Default: (number servers in backend) -1
+  attempts = 3
+  
+[docker]
+  # Optional
+  # Default: false
+  watch = true
+  # Optional
+  # Default: true
+  exposedByDefault = true
+  # Use the IP address from the binded port instead of the inner network one.
+  #
+  # In case no IP address is attached to the binded port (or in case
+  # there is no bind), the inner network one will be used as a fallback.
+  #
+  # Optional
+  # Default: false
+  #
+  usebindportip = true
+  # Define a default docker network to use for connections to all containers.
+  # Can be overridden by the traefik.docker.network label.
+  # Optional
+  # network = "web"

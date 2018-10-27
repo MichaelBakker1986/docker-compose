@@ -1,0 +1,8 @@
+version: '2'
+services:
+  whoami:
+    image: 'emilevauge/whoami:latest'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.frontend.rule=Host:appmodel.org'
+      - 'traefik.frontend.rule=Path:/whoami2'

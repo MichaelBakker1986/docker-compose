@@ -6,8 +6,6 @@ const router = express.Router()
 
 let endpointCreator = new EndpointCreator()
 endpointCreator.addDummyEndpoint()
-endpointCreator.buildEndpoints()
-endpointCreator.bringServicesUp()
 
 router.get('/add/:endpoint', async (req, res) => {
 	try {

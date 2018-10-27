@@ -1,20 +1,56 @@
-version: '2'
+version: '3.5'
 services:
   reverse-proxy:
     image: traefik
-    command: '--api --docker'
+    command:
+      --api
+      --logLevel=DEBUG
+    container_name: proxy
     ports:
-      - '80:80'
-      - '8080:8080'
+    - '80:80'
+    - '8080:8080'
+    - '443:443'
+    networks:
+    - webgateway
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
+    - '/var/run/docker.sock:/var/run/docker.sock'
+    - 'c:/Users/michael/Documents/lme/traefik/traefik.toml:/etc/traefik/traefik.toml'
   whoami:
     image: 'emilevauge/whoami:latest'
+    container_name: one1
     labels:
-      - 'traefik.frontend.rule=Host:lme.appmodel.org'
-      - 'traefik.frontend.rule=Path:/whoami/latest'
-  ksp:
-    image: 'michaelbakker1986/ksp:0.17'
-    labels:
-      - 'traefik.frontend.rule=Host:lme.appmodel.org'
-      - 'traefik.frontend.rule=Path:/ksp/0.17'
+    - 'traefik.enable=true'
+    - 'traefik.frontend.rule=Host:appmodel.org'
+    - 'traefik.frontend.rule=Path:/whoami6'
+
+  traefik:
+    #image: traefik:1.6.0
+    image: traefik:webui
+    command:
+      --docker
+      --docker.watch
+      --logLevel=DEBUG
+    volumes:
+    - ./rules/:/etc/traefik/rules/
+    - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+    - webgateway
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.docker.network: "webgateway"
+        traefik.backend: "proxy"
+        traefik.port: "8080"
+        traefik.frontend.rule: "Host:docker.local;PathPrefixStrip:/proxy;PathPrefix:/proxy"
+        traefik.weight: 100
+      replicas: 1
+      placement:
+        constraints:
+        - node.role == manager
+      #replicas: 3
+      restart_policy:
+        condition: any
+
+networks:
+  webgateway:
+    external: true
