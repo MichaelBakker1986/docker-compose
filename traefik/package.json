@@ -1,7 +1,7 @@
 {
-  "name": "traefik",
-  "version": "0.0.0",
-  "private": true,
+  "name": "lme-traefik",
+  "version": "0.0.1",
+  "main": "dist/index",
   "scripts": {
     "start": "node ./dist/www",
     "build": "babel src --ignore node_modules,dist,tests -d dist/ --copy-files",

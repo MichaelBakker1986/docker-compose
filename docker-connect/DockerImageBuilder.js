@@ -6,6 +6,8 @@ import { createReadStream, createWriteStream, existsSync, mkdirSync } from 'fs'
 import { error, info }                                                from 'log6'
 import { exec }                                                       from 'child-process-promise'
 
+import { Readable } from 'stream'
+
 const package_template = {
 	'name'           : 'ksp',
 	'description'    : 'REST api for lme',
@@ -15,7 +17,7 @@ const package_template = {
 		'url' : 'ssh://git@stash.topicus.nl:7999/ff/fesjs.git'
 	},
 	'main'           : 'rest-api-backend.js',
-	'version'        : '0.0.20',
+	'version'        : '0.0.3',
 	'scripts'        : {
 		'start': 'node --no-deprecation rest-api-backend.js'
 	},
@@ -61,11 +63,26 @@ const package_template = {
 const temp_dir_name = 'temp'
 
 class DockerImageBuilder {
-	constructor(fflModel, story, matrix, model_name, model_version, postfix = '', path_info) {
+	constructor({
+		            story, matrix, model_name, model_version, postfix = '', path_info = '../lme-data-api/lme-data-app.js',
+		            resource: {
+			            fflModel,
+			            ffl_model_file_read_stream
+		            }
+	            }) {
 		if (model_name == null) throw Error(`Invalid model name ${model_name}`)
+		if ((fflModel == null) === (ffl_model_file_read_stream == null)) throw Error('Invalid parameters, only required parameter and only one type of resource possible')
+		if (fflModel) {
+			//convert the string to stream
+			ffl_model_file_read_stream = new Readable()
+			ffl_model_file_read_stream._read = () => {}
+			ffl_model_file_read_stream.push(fflModel)
+			ffl_model_file_read_stream.push(null)
+
+		}
+		this.ffl_model_file_read_stream = ffl_model_file_read_stream
 		this.path_info = path_info
 		this.postfix = postfix //modelname-IDE or modelname-BACKEND
-		this.fflModel = fflModel
 		this.entry_code_path = 'rest-api-backend.js'
 		this.story = story
 		this.matrix = matrix
@@ -75,15 +92,15 @@ class DockerImageBuilder {
 		this.new_folder = path.join(__dirname, this.folder_id)
 		this.resources_folder = path.join(this.new_folder, 'resources')
 		this.docker_model_name = this.model_name.toLowerCase()
-		this.docker_tag = `michaelbakker1986/${this.docker_model_name}${this.postfix}:0.${this.model_version}`
+		this.docker_tag = `michaelbakker1986/${this.docker_model_name}${this.postfix}:${this.model_version}`
 	}
 
-	async buildDockerFile() {
+	async prepareDockerFile() {
 		if (!existsSync(temp_dir_name)) mkdirSync(temp_dir_name)
 		mkdirSync(this.new_folder)
 		mkdirSync(this.resources_folder)
 		await this.compileRestApiCode()
-		await this.copyFFLModelFile(this.model_name)
+		await this.copyFFLModelFile()
 		await this.copy_package_information(package_template)
 		await this.copy_Dockerfile()
 	}
@@ -102,8 +119,8 @@ class DockerImageBuilder {
 		}
 	}
 
-	async copyFFLModelFile(modelName) {
-		const read_stream = createReadStream(`../model-tests/${this.model_name}/${modelName}.ffl`)
+	async copyFFLModelFile() {
+		const read_stream = this.ffl_model_file_read_stream
 		const write_stream = createWriteStream(path.join(this.resources_folder, `${this.model_name}.ffl`))
 		read_stream.pipe(write_stream)
 	}
@@ -113,13 +130,12 @@ class DockerImageBuilder {
 		info(stdout)
 	}
 
-	async start() {
+	async buildDockerImage() {
 		try {
 			const command = `cd ${this.new_folder} && docker build . --build-arg ENABLED_MODELS=${this.model_name} -t=${this.docker_tag}`
 			info(`Start build image \n"${command}"`)
 			const build_output = await exec(command)
 			this.print_result(build_output)
-
 		} catch (err) {
 			error(err)
 		}
@@ -127,8 +143,9 @@ class DockerImageBuilder {
 
 	async buildAndDeploy() {
 		const docker_name = `${this.docker_model_name}_${this.model_version}`
-		await this.start()
-		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p 9991:80 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+		await this.buildDockerImage()
+		//const start_command = `docker run -d -t -i -p 9991:80 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+		const start_command = `docker run -d -t -i -p --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
 		const run_output = await exec(start_command)
 		this.print_result(run_output)
 	}

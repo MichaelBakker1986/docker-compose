@@ -7,46 +7,46 @@ import path            from 'path'
  */
 
 const compilers = {}
-const nodeModules = {}
 
-const resolveCompiler = (memory_fs, filename) => {
+const resolveCompiler = (memory_fs, filename, nodeModules) => {
 	let compiler = compilers[filename]
-	if (!compiler) {
-		compiler = webpack({
-			entry    : [path.resolve(__dirname, filename)],
-			mode     : 'development',
-			target   : 'node',
-			node     : {},
-			output   : {
-				path    : __dirname,
-				filename: 'rest-api-backend.js'
-			},
-			module   : {
-				rules: [{
-					test   : /\.js$/,
-					include: [path.join(__dirname, 'client')],
-					loader : 'babel-loader'
-				}]
-			},
-			plugins  : [
-				new webpack.NamedModulesPlugin(),
-				new webpack.NoEmitOnErrorsPlugin(),
-				new webpack.BannerPlugin(
-					{ raw: true, entryOnly: false, banner: 'require("source-map-support").install();' }
-				)
-			],
-			devtool  : 'sourcemap',
-			externals: nodeModules
-		})
-		compiler.outputFileSystem = memory_fs
-		compilers[filename] = compiler
-	}
+	//f (!compiler) {
+	compiler = webpack({
+		entry    : [path.resolve(__dirname, filename)],
+		mode     : 'development',
+		target   : 'node',
+		node     : {},
+		output   : {
+			path    : __dirname,
+			filename: 'rest-api-backend.js'
+		},
+		module   : {
+			rules: [{
+				test   : /\.js$/,
+				include: [path.join(__dirname, 'client')],
+				loader : 'babel-loader'
+			}]
+		},
+		plugins  : [
+			new webpack.NamedModulesPlugin(),
+			new webpack.NoEmitOnErrorsPlugin(),
+			new webpack.BannerPlugin(
+				{ raw: true, entryOnly: false, banner: 'require("source-map-support").install();' }
+			)
+		],
+		devtool  : 'sourcemap',
+		externals: nodeModules
+	})
+	compiler.outputFileSystem = memory_fs
+	compilers[filename] = compiler
+	//}
 	return compilers[filename]
 }
 
 export class WebpackCompiler {
 	constructor({ memory_fs }) {
 		this.memory_fs = memory_fs
+		const nodeModules = {}
 		readdirSync(path.join(__dirname, '../node_modules'))
 		.filter((x) => ['.bin'].indexOf(x) === -1)
 		.forEach(mod => nodeModules[mod] = `commonjs ${mod}`)
@@ -54,11 +54,12 @@ export class WebpackCompiler {
 		readdirSync(path.join(__dirname, '../lme-data-api/node_modules'))
 		.filter((x) => ['.bin'].indexOf(x) === -1)
 		.forEach(mod => nodeModules[mod] = `commonjs ${mod}`)
+		this.nodeModules = nodeModules
 	}
 
 	async buildProductionFile(filename) {
 		const memory_fs = this.memory_fs
-		const compiler = resolveCompiler(memory_fs, filename)
+		const compiler = resolveCompiler(memory_fs, filename, this.nodeModules)
 		return new Promise((accept, reject) => {
 			try {
 				compiler.run((err, stats) => {

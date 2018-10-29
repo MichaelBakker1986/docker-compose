@@ -8,6 +8,7 @@ import fileUpload                    from 'express-fileupload'
 import assembler                     from '../git-connect/ModelAssembler'
 import { Stash as stash }            from './src/stash'
 import { DockerImageBuilder }        from '../docker-connect/DockerImageBuilder'
+import { EndpointCreator }           from '../traefik/src/index'
 import express                       from 'express'
 import compression                   from 'compression'
 import path                          from 'path'
@@ -15,6 +16,9 @@ import { setup }                     from './api-def'
 import cors                          from 'cors'
 import IDECodeBuilder                from './src/IDE_code_builder'
 import request                       from 'request-promise-json'
+import { FFLToRegister }             from '../ffl/FFLToRegister'
+import { Register }                  from '../lme-core/src/Register'
+import { RegisterToFFL }             from '../ffl/RegisterToFFL'
 
 const DBModel = {}
 const host = process.env.HOST || '127.0.0.1'
@@ -40,10 +44,10 @@ app.post('*/:user_id/preview/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
 	stash.preview(user_id, model_name, req.body.data).then((data) => {
-		res.set('x-auth-id', data + '.ffl')
+		res.set('x-auth-id', `${data}.ffl`)
 		res.json({ status: 'ok', link: data })
 	}).catch(err => {
-		debug('Failed to write ' + model_name + '.ffl file.', err)
+		debug(`Failed to write ${model_name}.ffl file.`, err)
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
@@ -73,7 +77,7 @@ app.get('*/modelChanges/:model_name', async (req, res) => {
 app.post('*/:user_id/saveFFLModel/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
-	stash.commit(user_id, model_name, req.body.data, req.body.type).then((data) => {
+	stash.commit(user_id, model_name, req.body.data, req.body.type).then(() => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
 		debug('Failed to write ' + model_name + '.ffl file.', err)
@@ -83,11 +87,11 @@ app.post('*/:user_id/saveFFLModel/:model_name', async (req, res) => {
 app.post('*/:user_id/saveJBehaveStory/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
-	stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then((data) => {
+	stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then(() => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
-		debug('Failed to write ' + model_name + '.ffl file.', err)
-		res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
+		debug(`Failed to write ${model_name}.ffl file.`, err)
+		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
 	})
 })
 
@@ -142,6 +146,19 @@ app.get('*/readExcel/:model', async function(req, res) {
 		res.json(matrix)
 	}).catch(err => res.status(400).json({ status: 'fail', reason: err.toString() }))
 })
+
+function bumbVersion(data) {
+	let register = new Register(['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'tree_index', 'children', 'valid', 'title', 'type', 'parent_name', 'locked', 'frequency', 'displaytype', 'formula', 'required', 'ffl_version'])
+	new FFLToRegister(register, data).parseProperties()
+	let new_version = Number(register.getValue('root', 'ffl_version') || 0) + 1
+	register.setValue('root', 'ffl_version', new_version)
+	console.info(register.getValue('root', 'ffl_version'))
+	return {
+		version: new_version,
+		ffl    : new RegisterToFFL(register).toGeneratedFFL({ auto_join: true })
+	}
+}
+
 /**
  * Test the distribution
  * Stash all given data.
@@ -149,40 +166,48 @@ app.get('*/readExcel/:model', async function(req, res) {
  * Build image
  * Publish to nexus
  */
-app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
+app.post('*/:user_id/publishDockerImage/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
-
 	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(() => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
-			stash.commit(user_id, model_name, req.body.fflData, null).then(async () => {
-				const dockerImageBuilder = new DockerImageBuilder('KSP2', undefined, undefined, 'KSP2', 20, '', '../lme-data-api/lme-data-app.js')
+			const { ffl, version } = bumbVersion(req.body.fflData)
 
-				//	let dockerImageBuilder = new DockerImageBuilder(model_name, null, null, model_name, req.body.model_version, '', path.join(__dirname, '../../lme-data-api/lme-data-app.js'))
+			stash.commit(user_id, model_name, ffl, null).then(async () => {
+				const model_version = `0.${version}`
+				const dockerImageBuilder = new DockerImageBuilder({
+					model_name,
+					model_version,
+					resource: {
+						fflModel: ffl
+					}
+				})
 				try {
-					await dockerImageBuilder.buildDockerFile()
-					await dockerImageBuilder.buildAndDeploy()
+					await dockerImageBuilder.prepareDockerFile()
+					await dockerImageBuilder.buildDockerImage()
+					new EndpointCreator().addEndPoint({ endpoint_name: model_name, model_version, host })
 				} catch (er) {
-					error(er)
+					error(er.stack)
 				}
 				return res.json({
-					version   : 1,
-					status    : 'ok',
-					model_name: model_name
+					version: model_version,
+					status : 'ok',
+					model_name
 				})
 			}).catch((err) => {
-				debug(`Failed to write ${model_name}.ffl file.`, err)
+				if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, err)
 				return res.json({
 					status : 'fail',
 					message: `Failed to write ${model_name}.ffl`,
 					reason : err.toString()
 				})
 			})
-		}).catch(function(err) {
-			return res.status(400).json({ status: 'fail', reason: err.toString() })
+		}).catch((err) => {
+			if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, err.stack)
+			res.status(400).json({ status: 'fail', reason: err.toString() })
 		})
 	}).catch((err) => {
-		debug(`Failed to write ${model_name}.ffl file.`, err.toString())
+		if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, err.toString())
 		return res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
 	})
 })

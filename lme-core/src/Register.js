@@ -87,6 +87,16 @@ class Register {
 		this.i[idx][this.schemaIndexes[key]] = value
 	}
 
+	setValue(name, key, value) {
+		let row_index = this.getNames()[name][this.schemaIndexes.index]
+		this.i[row_index][this.schema.indexOf(key)] = value
+	}
+
+	getValue(name, key) {
+		let row_index = this.getNames()[name][this.schemaIndexes.index]
+		return this.i[row_index][this.schema.indexOf(key)]
+	}
+
 	findStream(key, value, start) {
 		return this.find(key, value, this.mark)
 	}

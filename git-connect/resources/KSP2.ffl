@@ -1,5 +1,7 @@
 model KSP2 uses BaseModel
 {
+ title: KSP2;
+ ffl_version: 9;
  variable KSP2
  {
   variable Q_ROOT
@@ -28,7 +30,7 @@ model KSP2 uses BaseModel
       locked: 1;
       frequency: document;
       displaytype: currency;
-      }
+     }
      variable MonthlyIncomeParent01
      {
       title: "Gross monthly income of 1st parent_test";
@@ -42,8 +44,8 @@ model KSP2 uses BaseModel
      {
       title: "Extra month of 1st parent";
       frequency: document;
-      formula: 0;
       displaytype: select;
+      formula: 0;
       required: 1;
       choices: "0:Nee|1:Ja";
      }
@@ -52,11 +54,11 @@ model KSP2 uses BaseModel
       title: "ValueExtraMonth of 1st parent";
       locked: 1;
       frequency: document;
-      formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
       displaytype: currency;
-      visible: 0;
+      formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
       required: 1;
       fixed_decimals: 2;
+      visible: 0;
      }
      variable YearlyIncomeParent01
      {
@@ -64,9 +66,9 @@ model KSP2 uses BaseModel
       locked: 1;
       frequency: document;
       formula: OnER(((MonthlyIncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
-      visible: 1;
       required: 1;
       fixed_decimals: 2;
+      visible: 1;
      }
      variable WeeklyWorkingHoursParent01
      {
@@ -99,8 +101,8 @@ model KSP2 uses BaseModel
      {
       title: "Extra month of 2nd parent";
       frequency: document;
-      formula: 0;
       displaytype: select;
+      formula: 0;
       required: 1;
       choices: "0:Nee|1:Ja";
      }
@@ -110,9 +112,9 @@ model KSP2 uses BaseModel
       locked: 1;
       frequency: document;
       formula: Case(ExtraMonthParent02,[0:0|1:MonthlyIncomeParent02]);
-      visible: 0;
       required: 1;
       fixed_decimals: 2;
+      visible: 0;
      }
      variable YearlyIncomeParent02
      {
@@ -120,9 +122,9 @@ model KSP2 uses BaseModel
       locked: 1;
       frequency: document;
       formula: OnER(((MonthlyIncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
-      visible: 1;
       required: 1;
       fixed_decimals: 2;
+      visible: 1;
      }
      variable WeeklyWorkingHoursParent02
      {
@@ -135,9 +137,9 @@ model KSP2 uses BaseModel
      variable WorkingHoursWeeklyOfLeastWorkingParent
      {
       title: "Working hours (weekly) of least working Parent";
+      locked: 1;
       frequency: document;
       formula: If(SecondWorkingParent=1,Min(WeeklyWorkingHoursParent01,WeeklyWorkingHoursParent02),WeeklyWorkingHoursParent01);
-      locked: 1;
       required: 1;
       fixed_decimals: 1;
      }
@@ -145,8 +147,8 @@ model KSP2 uses BaseModel
      {
       title: "Parental contribution primary education";
       frequency: document;
-      formula: 30;
       displaytype: number;
+      formula: 30;
       fixed_decimals: 2;
      }
      variable CostsUnspecified
@@ -154,16 +156,16 @@ model KSP2 uses BaseModel
       title: "Costs unspecified per month";
       locked: 1;
       frequency: document;
-      visible: 0;
       formula: 50;
       fixed_decimals: 1;
+      visible: 0;
      }
      variable SecondaryEducationProfile
      {
       title: "secondary education (profile)";
       frequency: document;
-      formula: 1;
       displaytype: select;
+      formula: 1;
       required: 1;
       fixed_decimals: 1;
       choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
@@ -204,11 +206,11 @@ model KSP2 uses BaseModel
       frequency: document;
       displaytype: select;
       formula: 0;
-      datatype: string;
       required: 1;
       fixed_decimals: 0;
       choices: "0:Boy|1:Girl";
-      hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\'n 18 euro per maand.";
+      datatype: string;
+      hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\\\\\\\\\\\\\\\\'n 18 euro per maand.";
      }
      variable NrOfHoursChildcareWeek
      {
@@ -237,8 +239,8 @@ model KSP2 uses BaseModel
      {
       title: "Nr. of hours out-of-school care per week";
       frequency: document;
-      formula: 0;
       displaytype: number;
+      formula: 0;
       required: 1;
       fixed_decimals: 1;
      }
@@ -254,8 +256,8 @@ model KSP2 uses BaseModel
       title: "Nr. of hours out-of-school care per month";
       locked: 1;
       frequency: document;
-      formula: NrOfHoursOutOfSchoolCareWeek*4.333;
       displaytype: number;
+      formula: NrOfHoursOutOfSchoolCareWeek*4.333;
       fixed_decimals: 2;
      }
     }
@@ -292,8 +294,8 @@ model KSP2 uses BaseModel
       title: "Multiplier daycare";
       locked: 1;
       frequency: document;
-      formula: 1.4;
       displaytype: percentage;
+      formula: 1.4;
       fixed_decimals: 1;
      }
      variable MultiplierOutOfSchoolCare
@@ -301,8 +303,8 @@ model KSP2 uses BaseModel
       title: "Multiplier out-of-school care";
       locked: 1;
       frequency: document;
-      formula: 0.7;
       displaytype: percentage;
+      formula: 0.7;
       fixed_decimals: 1;
      }
      variable MaxHourlyRateChildcare
@@ -365,8 +367,8 @@ model KSP2 uses BaseModel
       title: "Combination Discount Percentage";
       locked: 1;
       frequency: document;
-      formula: 0.06159;
       displaytype: percentage;
+      formula: 0.06159;
       fixed_decimals: 5;
      }
      variable MaximumDiscount
@@ -421,8 +423,8 @@ model KSP2 uses BaseModel
       title: "Decreasing Percentage";
       locked: 1;
       frequency: document;
-      formula: 0.0675;
       displaytype: percentage;
+      formula: 0.0675;
       fixed_decimals: 4;
      }
     }
@@ -437,17 +439,17 @@ model KSP2 uses BaseModel
       title: "Max. nr of compensated hours childcare ";
       locked: 1;
       frequency: document;
-      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
       displaytype: currency;
-      }
+      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
+     }
      variable MaxNrCompensatedHoursOutofSchoolCare
      {
       title: "Max. nr of compensated hours out-of-school care ";
       locked: 1;
       frequency: document;
-      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
       displaytype: currency;
-      }
+      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
+     }
      variable FeesSub3
      {
       locked: 1;
@@ -458,17 +460,17 @@ model KSP2 uses BaseModel
       title: "Nr. of compensated hours childcare ";
       locked: 1;
       frequency: document;
-      formula: OnER(Min(NrOfHoursChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
       displaytype: currency;
-      }
+      formula: OnER(Min(NrOfHoursChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
+     }
      variable NrCompensatedHoursOutofSchoolCare
      {
       title: "Nr. of compensated hours out-of-school care ";
       locked: 1;
       frequency: document;
-      formula: OnER(Min(NrOfHoursOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
       displaytype: currency;
-      }
+      formula: OnER(Min(NrOfHoursOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
+     }
      variable FeesSub6
      {
       locked: 1;
@@ -500,16 +502,16 @@ model KSP2 uses BaseModel
       title: "Total Income";
       locked: 1;
       frequency: document;
-      formula: OnER(YearlyIncomeParent01+YearlyIncomeParent02,NA);
       displaytype: currency;
-      }
+      formula: OnER(YearlyIncomeParent01+YearlyIncomeParent02,NA);
+     }
      variable PercentagePremiumFirstChild
      {
       title: "Percentage premium first child ";
       locked: 1;
       frequency: document;
-      formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
       displaytype: percentage;
+      formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
       fixed_decimals: 4;
      }
      variable FeesSub12
@@ -569,15 +571,15 @@ model KSP2 uses BaseModel
       locked: 1;
       frequency: document;
       displaytype: currency;
-      }
+     }
      variable ChildRelatedBudgetDecrease
      {
       title: "Decrease";
       locked: 1;
       frequency: document;
-      formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
       displaytype: currency;
-      }
+      formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
+     }
      variable ChildRelatedBudgetUpToTwelve
      {
       title: "Childrelated budget (per month, up to yr 12)";
@@ -638,30 +640,30 @@ model KSP2 uses BaseModel
      title: "Leeftijd kind";
      frequency: document;
      formula: 17;
-     }
+    }
     variable SavedMoney
     {
      title: "Al gespaard voor kind";
      frequency: document;
-     formula: 100;
      displaytype: currency;
+     formula: 100;
      datatype: currency;
     }
     variable MonthlyIncomeBijBaan
     {
      title: "Bijbaantje tijdens studie. Gemiddeld € 409 p/m";
      frequency: document;
-     formula: 409;
      displaytype: currency;
-     }
+     formula: 409;
+    }
     variable MonthlyDUOLoan
     {
      title: "Geld lenen bij DUO";
      frequency: document;
-     formula: 559;
      displaytype: currency;
+     formula: 559;
      datatype: currency;
-     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
+     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\\\\\\\\\\\\\\\\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
     }
     variable AantalMaandenTeSparen
     {
@@ -669,7 +671,7 @@ model KSP2 uses BaseModel
      locked: 1;
      frequency: document;
      formula: (18-EducationAgeChild) * 12;
-     }
+    }
     variable RentePerJaar
     {
      title: "Jaarlijkse rente";
@@ -683,10 +685,10 @@ model KSP2 uses BaseModel
      title: "Spaar dit bedrag om je spaardoel te bereiken:";
      locked: 1;
      frequency: document;
-     formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(70000 - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
      displaytype: currency;
-     datatype: currency;
+     formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(70000 - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
      fixed_decimals: 0;
+     datatype: currency;
      hint: "per maand";
     }
    }
@@ -695,7 +697,7 @@ model KSP2 uses BaseModel
     title: "Your Personal situation";
     locked: 1;
     frequency: document;
-    displaytype:Output;
+    displaytype: Output;
     choices: "0:Complete|1:Incomplete";
     variable PersonalSituation
     {
@@ -741,8 +743,8 @@ model KSP2 uses BaseModel
      variable ActualDiapers
      {
       title: "Diapers";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Diapers",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -750,8 +752,8 @@ model KSP2 uses BaseModel
      variable ActualFood
      {
       title: "Food";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup(null,"YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
       fixed_decimals: 2;
       aggregation: flow;
@@ -759,8 +761,8 @@ model KSP2 uses BaseModel
      variable ActualClothingCosts
      {
       title: "Clothing";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -768,8 +770,8 @@ model KSP2 uses BaseModel
      variable ActualPersonalCareCosts
      {
       title: "PersonalCare";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -777,8 +779,8 @@ model KSP2 uses BaseModel
      variable Hairdresser
      {
       title: "Hairdresser";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -786,8 +788,8 @@ model KSP2 uses BaseModel
      variable Inventory
      {
       title: "Inventory";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Inventory",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -795,8 +797,8 @@ model KSP2 uses BaseModel
      variable Allowance
      {
       title: "Allowance";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Allowance",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -804,8 +806,8 @@ model KSP2 uses BaseModel
      variable Contributions
      {
       title: "Contributions";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Contributions",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -813,8 +815,8 @@ model KSP2 uses BaseModel
      variable Transport
      {
       title: "Transport";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","Transport",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -822,8 +824,8 @@ model KSP2 uses BaseModel
      variable MobilePhone
      {
       title: "MobilePhone";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -831,8 +833,8 @@ model KSP2 uses BaseModel
      variable DrivingLicense
      {
       title: "DrivingLicense";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",ChildAgeInTime);
       fixed_decimals: 2;
       aggregation: flow;
@@ -840,8 +842,8 @@ model KSP2 uses BaseModel
      variable CostsForOutOfSchoolCare
      {
       title: "Kosten BSO";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,0);
       fixed_decimals: 2;
       aggregation: flow;
@@ -849,8 +851,8 @@ model KSP2 uses BaseModel
      variable CostsForPrimaryEducation
      {
       title: "Costs for Primary Education";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
       fixed_decimals: 2;
       aggregation: flow;
@@ -858,8 +860,8 @@ model KSP2 uses BaseModel
      variable CostsForSecondaryEducation
      {
       title: "Costs for Secondary Education";
-      frequency: column;
       locked: 1;
+      frequency: column;
       formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
       fixed_decimals: 2;
       aggregation: flow;

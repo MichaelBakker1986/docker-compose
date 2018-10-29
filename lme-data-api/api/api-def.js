@@ -2,8 +2,8 @@ import { APIDefinition } from '../resources/AuthenticatedSwaggerDefinition'
 
 export function setup(app) {
 	app.get('*/data-api-docs', (req, res) => {
-		APIDefinition.basePath = '/ksp2/0.20/'
-		APIDefinition.host = 'appmodel.org'
+		APIDefinition.basePath = app.get('basePath')
+		APIDefinition.host = req.headers.host
 		res.json(APIDefinition)
 	})
 }

@@ -7,13 +7,17 @@ import { setup as apiDefinitionSetup } from './api/api-def'
 import logger                          from 'morgan'
 
 const port = process.env.DATA_API_PORT || 8085
-const model = String(process.env.ENABLED_MODELS || 'KSP2')
+const model = String(process.env.ENABLED_MODELS || 'KSP')
 const model_version = String(process.env.MODEL_VERSION || '0.19')
 const host = process.env.HOST || '127.0.0.1:8085'
-const domain = process.env.DOMAIN || (`${host}/${model.toLowerCase()}/${model_version}`)
+const domain = process.env.DOMAIN || (`${host}/${model}/${model_version}`)
+const basePath = `/${model}/${model_version}/`
+
+console.info('ENABLED MODELS ' + model)
 const app = express()
 
 app.use(logger('dev'))
+app.set('basePath', basePath)
 app.set('port', port)
 app.set('host', host)
 app.set('domain', domain)
@@ -27,7 +31,5 @@ valueSetup(app)
 apiDefinitionSetup(app)
 
 app.listen(port, () => {
-	console.info(`Listening port is ${port}`)
-	console.info(`<span>Swagger: </span><a href="https://${host}/swagger/">swagger</a>\n`)
-	console.info(`<span>LME DATA: </span><a href="https://${domain}">data-api</a>\n`)
+	console.info(`<span>Swagger: </span><a href="https://${host}/${basePath}/data-api-docs">data-api-docs</a>\n`)
 })
