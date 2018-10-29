@@ -10,4 +10,4 @@ COPY . .
 
 RUN npm install --unsafe-perm --allow-root --no-optional
 CMD npm start
-EXPOSE 8085
+EXPOSE 80

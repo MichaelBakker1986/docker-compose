@@ -25,6 +25,7 @@ const user_session = {
 	fflModel            : '',
 	column_size         : 6,
 	version             : '0.0.8',
+	model_version       : '0.20',
 	author              : 'topicus.nl',
 	user                : {
 		name: params[1] || 'DEMO'
@@ -42,7 +43,7 @@ global['session'] = new LocalStorage(user_session)
 angular.module('lmeapp', ['angular.filter'])
 .controller('ideController', function($scope, $http, $timeout) {
 
-	const modelEngine = new LmeAPI()
+	const modelEngine = new LmeAPI(undefined, undefined, undefined, { user_session: user_session })
 	$scope.LMEMETA = modelEngine
 	global.LME = modelEngine
 	modelEngine.loadData(function(response) {

@@ -6,9 +6,6 @@ import { createReadStream, createWriteStream, existsSync, mkdirSync } from 'fs'
 import { error, info }                                                from 'log6'
 import { exec }                                                       from 'child-process-promise'
 
-const params = process.env.MODEL || 'MVO'
-const DEVICE_HOST_PORT = 10000
-
 const package_template = {
 	'name'           : 'ksp',
 	'description'    : 'REST api for lme',
@@ -20,36 +17,41 @@ const package_template = {
 	'main'           : 'rest-api-backend.js',
 	'version'        : '0.0.20',
 	'scripts'        : {
-		'start': 'node rest-api-backend.js'
+		'start': 'node --no-deprecation rest-api-backend.js'
 	},
 	'dependencies'   : {
+		'acorn'                    : '^6.0.2',
+		'acorn-node'               : '^1.6.2',
 		'escodegen'                : '^1.11.0',
 		'babel-runtime'            : '^6.22.0',
 		'source-map-support'       : '^0.5.9',
 		'body-parser'              : '^1.18.3',
-		'browserify'               : '^16.2.3',
 		'child-process-es6-promise': '^1.2.0',
 		'child-process-promise'    : '^2.2.1',
 		'cors'                     : '^2.8.4',
+		'chalk'                    : '^2.4.1',
 		'express'                  : '^4.16.4',
 		'express-prettify'         : '0.0.9',
 		'express-test'             : '^0.1.2',
 		'ffl-math'                 : '^1.0.17',
 		'flatten-object'           : '^1.2.0',
 		'formulajs-connect'        : '^1.0.6',
+		'function-bind'            : '^1.1.1',
 		'glob'                     : '^7.1.3',
-		'http-proxy-middleware'    : '^0.17.4',
+		'is-promise'               : '^2.1.0',
+		'json-parse-better-errors' : '^1.0.2',
 		'log6'                     : '^2.0.16',
 		'morgan'                   : '^1.9.1',
 		'mysql'                    : '^2.16.0',
-		'orm'                      : '^4.0.1',
+		'orm'                      : '^5.0.2',
 		'orm-timestamps'           : '^0.5.2',
+		'pako'                     : '^1.0.6',
 		'performance-now'          : '^2.1.0',
 		'pg'                       : '^7.5.0',
 		'promise'                  : '^7.1.1',
 		'request-promise-json'     : '^1.0.4',
 		'swagger-jsdoc'            : '^1.10.3',
-		'swaggerize-ui'            : '^1.0.1',
+		'strip-ansi'               : '^5.0.0',
 		'uuid4'                    : '^1.1.4',
 		'xhr2'                     : '^0.1.4'
 	},
@@ -59,7 +61,10 @@ const package_template = {
 const temp_dir_name = 'temp'
 
 class DockerImageBuilder {
-	constructor(fflModel, story, matrix, model_name, model_version) {
+	constructor(fflModel, story, matrix, model_name, model_version, postfix = '', path_info) {
+		if (model_name == null) throw Error(`Invalid model name ${model_name}`)
+		this.path_info = path_info
+		this.postfix = postfix //modelname-IDE or modelname-BACKEND
 		this.fflModel = fflModel
 		this.entry_code_path = 'rest-api-backend.js'
 		this.story = story
@@ -70,25 +75,31 @@ class DockerImageBuilder {
 		this.new_folder = path.join(__dirname, this.folder_id)
 		this.resources_folder = path.join(this.new_folder, 'resources')
 		this.docker_model_name = this.model_name.toLowerCase()
-		this.docker_tag = `michaelbakker1986/${this.docker_model_name}:0.${this.model_version}`
+		this.docker_tag = `michaelbakker1986/${this.docker_model_name}${this.postfix}:0.${this.model_version}`
 	}
 
-	async buildDockerFile(path_info) {
+	async buildDockerFile() {
 		if (!existsSync(temp_dir_name)) mkdirSync(temp_dir_name)
 		mkdirSync(this.new_folder)
 		mkdirSync(this.resources_folder)
-		await this.compileRestApiCode(path_info)
+		await this.compileRestApiCode()
 		await this.copyFFLModelFile(this.model_name)
 		await this.copy_package_information(package_template)
 		await this.copy_Dockerfile()
 	}
 
-	async compileRestApiCode(path_info) {
+	async compileRestApiCode() {
+		const path_info = this.path_info
 		const memory_fs = new MemoryFS()
 		await new WebpackCompiler({ memory_fs }).buildProductionFile(path_info)
-		const readStream = memory_fs.createReadStream(path.join(__dirname, this.entry_code_path))
-		const writeStream = createWriteStream(path.join(this.new_folder, this.entry_code_path))
-		await readStream.pipe(writeStream)
+		try {
+			const readStream = memory_fs.createReadStream(path.join(__dirname, this.entry_code_path))
+			const writeStream = createWriteStream(path.join(this.new_folder, this.entry_code_path))
+			await readStream.pipe(writeStream)
+		} catch (err) {
+			error(' trying to enter: ' + this.entry_code_path)
+			error(err)
+		}
 	}
 
 	async copyFFLModelFile(modelName) {
@@ -103,8 +114,6 @@ class DockerImageBuilder {
 	}
 
 	async start() {
-		const docker_name = `${this.docker_model_name}_${this.model_version}`
-
 		try {
 			const command = `cd ${this.new_folder} && docker build . --build-arg ENABLED_MODELS=${this.model_name} -t=${this.docker_tag}`
 			info(`Start build image \n"${command}"`)
@@ -112,10 +121,14 @@ class DockerImageBuilder {
 			this.print_result(build_output)
 
 		} catch (err) {
-			console.error(err)
+			error(err)
 		}
+	}
 
-		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p 9991:8085 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+	async buildAndDeploy() {
+		const docker_name = `${this.docker_model_name}_${this.model_version}`
+		await this.start()
+		const start_command = `cd ${this.new_folder} && docker run -d -t -i -p 9991:80 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
 		const run_output = await exec(start_command)
 		this.print_result(run_output)
 	}

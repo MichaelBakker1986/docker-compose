@@ -14,9 +14,10 @@ services:
     - '/var/run/docker.sock:/var/run/docker.sock'
     - 'c:/Users/michael/Documents/lme/traefik/traefik.toml:/traefik.toml'
     labels:
-    - 'traefik.enable=true'
-    - 'traefik.port=8080'
-    - 'traefik.frontend.rule=Host:appmodel.org'
+      traefik.backend: "traefik"
+      traefik.enable: true
+      traefik.port: 8080
+      traefik.frontend.rule: "Host:appmodel.org"
     networks:
     - proxy
 

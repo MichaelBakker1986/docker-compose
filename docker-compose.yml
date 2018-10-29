@@ -3,33 +3,33 @@
 version: '2.1'
 
 services:
-    db:
-        image: postgres
-        restart: always
-        environment:
-            DB_HOST: 127.0.0.1
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: lme
-        ports:
-            - 5432:5432
-        expose:
-            - 5432
-    lme:
-        links:
-            - db
-        environment:
-                EXPOSED_AUTHENTICATION_PORT: 8091
-                INTERNAL_PROXY_PORT: 7081
-                DOMAIN: kspapp.local.com
-                ENV: info
-                ENABLED_MODELS: 'KSP'
-                FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
-                HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
-        build: .
-        image: lme:00.14
-        restart: always
-        ports:
-            - 80:8091
-        expose:
-            - 80
+  db:
+    image: postgres
+    restart: always
+    environment:
+      DB_HOST: 127.0.0.1
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lme
+    ports:
+    - 5432:5432
+    expose:
+    - 5432
+  lme:
+    links:
+    - db
+    environment:
+      EXPOSED_AUTHENTICATION_PORT: 8091
+      INTERNAL_PROXY_PORT: 7081
+      DOMAIN: kspapp.local.com
+      ENV: info
+      ENABLED_MODELS: 'KSP'
+      FIGURE_DB_STRING: postgresql://postgres:postgres@db:5432/lme
+      HIPCHAT_API_KEY: Y9wJuWSkGbOJb5eMiT7GhCtchoQIsjSY9XRF1voW
+    build: .
+    image: lme:00.14
+    restart: always
+    ports:
+    - 80:8091
+    expose:
+    - 80

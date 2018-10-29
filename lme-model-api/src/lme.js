@@ -80,10 +80,10 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 	const columnSize = parseInt(params.length > 2 ? (params[2] || '6') : '6')
 	self.modelName = params[0] || DEFAULT_MODELNAME
 	const userID = (params[1] || 'DEMO')
-
+	const model_version = this.user_session ? (this.user_session.model_version || '0.20') : '0.20'
 	self.lme.context.saveToken = userID
 	const http = new XMLHttpRequest()
-	const url = `${self.urlPrefix}data/${id || userID}`
+	const url = `/${self.modelName}/${model_version}/data/${id || userID}`
 	http.open('GET', url, true)
 	http.setRequestHeader('Content-type', 'application/json')
 	http.onreadystatechange = function() {//Call a function when the state changes.
@@ -100,7 +100,11 @@ LmeAPI.prototype.loadData = function(callBack, id) {
 		self.lme.context.calc_count++
 		callBack(http.responseText)
 	}
-	http.send()
+	try {
+		http.send()
+	} catch (err) {
+		console.error(err)
+	}
 	return http
 }
 
@@ -113,8 +117,10 @@ LmeAPI.prototype.persistData = function(callBack) {
 	const userID = params[1] || 'DEMO'
 	const columnSize = parseInt(params.length > 1 ? (params[2] || '6') : '6')
 	self.lme.context.saveToken = userID
+	const model_version = this.user_session ? (this.user_session.model_version || '0.20') : '0.20'
+	const model_name = this.user_session ? (this.user_session.fflModelPath || 'KSP2') : 'KSP2'
 	const http = new XMLHttpRequest()
-	http.open('POST', `saveUserData/${self.lme.context.saveToken}`, true)
+	http.open('POST', `/${model_name}/${model_version}/saveUserData/${self.lme.context.saveToken}`, true)
 	http.setRequestHeader('Content-Type', 'application/json')
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if (http.readyState === 4 && http.status === 200) {

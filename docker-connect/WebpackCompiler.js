@@ -1,8 +1,6 @@
 import webpack         from 'webpack'
 import { readdirSync } from 'fs'
 import path            from 'path'
-import MemoryFS        from 'memory-fs'
-import { error }       from 'log6'
 
 /**
  * Combine workspace into a REST-API js
@@ -86,6 +84,6 @@ export class WebpackCompiler {
 }
 
 /*new WebpackCompiler({ memory_fs: new MemoryFS }).readProductionFile('../lme-data-api/lme-data-app.js').then((source) => {
-		console.info(source)
-	}
-).catch((er) => error('err', er))*/
+ console.info(source)
+ }
+ ).catch((er) => error('err', er))*/

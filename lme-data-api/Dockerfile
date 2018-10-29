@@ -11,6 +11,8 @@ COPY resources resources
 COPY dist .
 
 #browserify cannot be browseried..
-RUN npm install --unsafe-perm --allow-root --production browserify-middleware
+RUN npm install --unsafe-perm --allow-root --production
 CMD npm start
 EXPOSE 80
+
+

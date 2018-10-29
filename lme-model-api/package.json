@@ -7,9 +7,13 @@
   "main": "index.js",
   "author": "michael.bakker1986@gmail.com",
   "scripts": {
+    "build": "babel . --ignore node_modules,dist,tests,test -d dist/",
+    "prepare": "npm run build",
     "test": "node -r babel-register test/TESTMODEL.js"
   },
   "dependencies": {
+    "acorn": "^6.0.2",
+    "acorn-node": "^1.6.2",
     "angular": "^1.7.5",
     "babel-plugin-inline-json-import": "^0.3.1",
     "babel-plugin-istanbul": "^5.0.1",
@@ -18,9 +22,6 @@
     "babel-preset-stage-2": "^6.24.1",
     "babelify": "^8.0.0",
     "body-parser": "^1.18.3",
-    "browserify": "^14.4.0",
-    "browserify-fastjson": "^1.2.1",
-    "browserify-middleware": "^7.1.0",
     "child-process-promise": "^2.2.1",
     "compression": "^1.7.3",
     "cookie-parser": "~1.4.3",

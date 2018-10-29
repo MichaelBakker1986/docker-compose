@@ -1,7 +1,7 @@
 import regression                           from 'regression'
 import ema                                  from 'exponential-moving-average'
 import Solver                               from 'js-solver'
-import { DEBUG, debug, trace, TRACE, warn } from 'log6'
+import { DEBUG, debug, TRACE, trace, warn } from 'log6'
 import * as jStat                           from 'jStat'
 import jsMath                               from './jsMath.json'
 
@@ -257,7 +257,7 @@ global.HVALUES = (values, start, end) => {
 }
 const checkIntegrity = (result) => {
 	const set = new Set(result.map(el => typeof el))
-	debug(`Data types in ${Array.from(set.keys()).toString()}`)
+	if (TRACE) trace(`Data types in ${Array.from(set.keys()).toString()}`)
 }
 global.VALUES = function(func, fId, x, y, z, v, m) {
 	const result = []

@@ -1,7 +1,5 @@
 import { exec }                      from 'child-process-promise'
 import { debug, DEBUG, error, info } from 'log6'
-import browserify                    from 'browserify-middleware'
-import babelify                      from 'babelify'
 import bodyParser                    from 'body-parser'
 import expressStaticGzip             from 'express-static-gzip'
 import fs, { createReadStream }      from 'fs'
@@ -10,13 +8,13 @@ import fileUpload                    from 'express-fileupload'
 import assembler                     from '../git-connect/ModelAssembler'
 import { Stash as stash }            from './src/stash'
 import { DockerImageBuilder }        from '../docker-connect/DockerImageBuilder'
-import request                       from 'request-promise-json'
 import express                       from 'express'
 import compression                   from 'compression'
 import path                          from 'path'
 import { setup }                     from './api-def'
 import cors                          from 'cors'
 import IDECodeBuilder                from './src/IDE_code_builder'
+import request                       from 'request-promise-json'
 
 const DBModel = {}
 const host = process.env.HOST || '127.0.0.1'
@@ -37,32 +35,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	extended: true,
 	limit   : '50mb'
 }))
-app.use('/src', IDECodeBuilder)
-browserify.settings({
-	transform: [
-		/*	require('browserify-fastjson'),*/
-		[babelify, {
-			presets: ['env', 'stage-0'], 'plugins': [
-				'transform-runtime',
-				'transform-class-properties',
-				'transform-decorators-legacy'
-			]
-		}]
-	]
-})
-app.get('*/excelide.js', browserify(__dirname + '/src/excelide.js', {
-	cache        : true,
-	gzip         : true,
-	insertGlobals: true,
-	debug        : false,
-	minify       : true,
-	precompile   : true
-}))
-app.get('*/ui_showcase.js', browserify(__dirname + '/src/uishowcase.js', {
-	gzip         : true,
-	insertGlobals: true,
-	debug        : false
-}))
+app.use('*/src', IDECodeBuilder)
 app.post('*/:user_id/preview/:model_name', async (req, res) => {
 	const model_name = req.params.model_name
 	const user_id = req.params.user_id
@@ -182,8 +155,16 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 
 	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(() => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
-			stash.commit(user_id, model_name, req.body.fflData, null).then(() => {
-				new DockerImageBuilder(model_name, null, null, null, req.body.model_version).buildDockerImage()
+			stash.commit(user_id, model_name, req.body.fflData, null).then(async () => {
+				const dockerImageBuilder = new DockerImageBuilder('KSP2', undefined, undefined, 'KSP2', 20, '', '../lme-data-api/lme-data-app.js')
+
+				//	let dockerImageBuilder = new DockerImageBuilder(model_name, null, null, model_name, req.body.model_version, '', path.join(__dirname, '../../lme-data-api/lme-data-app.js'))
+				try {
+					await dockerImageBuilder.buildDockerFile()
+					await dockerImageBuilder.buildAndDeploy()
+				} catch (er) {
+					error(er)
+				}
 				return res.json({
 					version   : 1,
 					status    : 'ok',
@@ -201,8 +182,8 @@ app.post('*/:user_id/publishDockerImage/:model_name', async function(req, res) {
 			return res.status(400).json({ status: 'fail', reason: err.toString() })
 		})
 	}).catch((err) => {
-		debug('Failed to write ' + model_name + '.ffl file.', err.toString())
-		return res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
+		debug(`Failed to write ${model_name}.ffl file.`, err.toString())
+		return res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
 	})
 })
 /** * TODO: add commit to stash */
@@ -217,23 +198,18 @@ app.post('*/excel/:model', async function(req, res) {
 	let excelfile = req.files.excelfile
 
 	// Use the mv() method to place the file somewhere on your server
-	excelfile.mv(__dirname + '/../git-connect/resources/' + modelName + '.xlsx', err => {
+	excelfile.mv(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, err => {
 		if (err) {
-			debug('Failed to write ' + modelName + '.xlsx file.', err)
+			debug(`Failed to write ${modelName}.xlsx file.`, err)
 			return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
 		}
 		res.json({ status: 'ok' })
 	})
 })
-app.get('/ide.js', browserify(__dirname + '/src/ide.js', {
-	insertGlobals: true,
-	precompile   : true,
-	debug        : false
-}))
 setup(app)
 app.listen(port, () => {
 	//talk with the proxy
-	const routes = ['*/model-docs*', '*/ide.js']
+	const routes = ['*/model-docs*', '*/src/ide.js']
 	app._router.stack.forEach(r => {
 		if (r.route && r.route.path) {
 			routes.push(r.route.path)

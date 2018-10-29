@@ -1,10 +1,11 @@
 import orm from 'orm'
 import log from 'log6'
 
-const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@localhost:5432/lme'
+const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@database:5432/lme'
 export const ORM = new Promise((accept, reject) => {
 
 	orm.connectAsync(dbConnectString).then(async (db) => {
+		console.info(`Connected with database ${db}`)
 		db.use(require('orm-timestamps'), {
 			createdProperty : 'created_at',
 			modifiedProperty: 'modified_at',

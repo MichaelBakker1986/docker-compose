@@ -1,5 +1,8 @@
-const browserify  = require('browserify'),
-      log         = require('log6'),
+/**
+ * @Deprecated
+ * @type {{DEBUG, INFO, TRACE, WARN, info, error, trace, warn, debug}|*}
+ */
+const log         = require('log6'),
       fs          = require('fs'),
       cp          = require('child-process-es6-promise'),
       packageInfo = require('./package.json')
@@ -11,17 +14,7 @@ packageInfo.version = `${String(parseInt(packageInfo.version.split('.')[0]) + 1)
 const module_tag_name = `${packageInfo.author.split('@')[0].replace(/\W/g, '').toLowerCase()}/${packageInfo.name}:${packageInfo.version}`
 
 fs.writeFileSync('./package.json', JSON.stringify(packageInfo, null, 2), 'utf8')
-const REQUIRE_FILES = [`${__dirname}/${packageInfo.main}`]
-const b = browserify([], {
-	insertGlobalVars: true,
-	insertGlobals   : true,
-	detectGlobals   : false,
-	bare            : true,
-	standalone      : packageInfo.name,
-	node            : true
-}).ignore('fsevents').external(__dirname + '/node_modules/browserify/index.js').external('browserify').external(__dirname + '/node_modules/browserify-middleware/index.js').external('browserify-middleware')
 
-for (var i = 0; i < REQUIRE_FILES.length; i++) b.require(REQUIRE_FILES[i], { expose: REQUIRE_FILES[i] })
 const res = fs.createWriteStream(__dirname + '/dist/' + (packageInfo.name) + '.js')
 b.bundle().pipe(res)
 

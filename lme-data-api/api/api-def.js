@@ -1,21 +1,9 @@
-import swaggerUi         from 'swaggerize-ui'
 import { APIDefinition } from '../resources/AuthenticatedSwaggerDefinition'
 
-/**
- * Dynamic Swagger definition route
- */
 export function setup(app) {
-	const port = app.get('port')
-	const host = app.get('host')
-	const domain = app.get('domain')
-
-	app.use('*/data-docs', swaggerUi({
-		docs: '/data-api-docs'
-	}))
-	app.get('*/data-api-docs', function(req, res) {
-		//TODO: check authorization role for fire-grained definiton. For now privacy > rest
-		//maybe via filename, maybe life-generated.
-		APIDefinition.host = req.headers['x-forwarded-host']
+	app.get('*/data-api-docs', (req, res) => {
+		APIDefinition.basePath = '/ksp2/0.20/'
+		APIDefinition.host = 'appmodel.org'
 		res.json(APIDefinition)
 	})
 }

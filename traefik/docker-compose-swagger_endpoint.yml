@@ -1,0 +1,22 @@
+version: '3'
+services:
+  swagger:
+    image: swaggerapi/swagger-ui
+    container_name: swagger
+    environment:
+      BASE_URL: /swagger
+    labels:
+      traefik.enable: true
+      traefik.backend: swagger
+      traefik.frontend.rule: Host:appmodel.org;PathPrefix:/swagger
+      traefik.docker.network: proxy
+      traefik.port: 8080
+    networks:
+    - internal
+    - proxy
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false

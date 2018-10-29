@@ -1,0 +1,985 @@
+model KSP2 uses BaseModel
+{
+ variable KSP2
+ {
+  variable Q_ROOT
+  {
+   title: "Costs of child raising (v1.32)";
+   frequency: document;
+   displaytype: scorecard;
+   choices: "0:Complete|1:Incomplete";
+   hint: "This module enables you to gain insight in the costs involved for raising a child";
+   variable KinderSpaarPlan
+   {
+    title: "Input";
+    frequency: document;
+    displaytype: Input;
+    required: MonthlyIncomeParent01.required and MonthlyIncomeParent02.required and WeeklyWorkingHoursParent01.required and WeeklyWorkingHoursParent02.required and WorkingHoursWeeklyOfLeastWorkingParent.required and Gender.required and NrOfHoursChildcareWeek.required and NrOfHoursOutOfSchoolCareWeek.required and SecondaryEducationProfile.required;
+    choices: "0:Complete|1:Incomplete";
+    variable Parents
+    {
+     title: "Parents";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable ParentalIncomes
+     {
+      title: "Parental incomes";
+      locked: 1;
+      frequency: document;
+      displaytype: currency;
+      }
+     variable MonthlyIncomeParent01
+     {
+      title: "Gross monthly income of 1st parent_test";
+      frequency: document;
+      displaytype: currency;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable ExtraMonthParent01
+     {
+      title: "Extra month of 1st parent";
+      frequency: document;
+      formula: 0;
+      displaytype: select;
+      required: 1;
+      choices: "0:Nee|1:Ja";
+     }
+     variable ValueExtraMonthParent01
+     {
+      title: "ValueExtraMonth of 1st parent";
+      locked: 1;
+      frequency: document;
+      formula: Number(Case(ExtraMonthParent01,[0:0|1:MonthlyIncomeParent01]));
+      displaytype: currency;
+      visible: 0;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable YearlyIncomeParent01
+     {
+      title: "Gross yearly income of 1st parent including vacation allowance";
+      locked: 1;
+      frequency: document;
+      formula: OnER(((MonthlyIncomeParent01)*12*1.08)+ValueExtraMonthParent01,NA);
+      visible: 1;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable WeeklyWorkingHoursParent01
+     {
+      title: "Working hours of 1st parent";
+      frequency: document;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable SecondWorkingParent
+     {
+      title: "Child has 2nd working parent";
+      frequency: document;
+      displaytype: select;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 0;
+      choices: "0:Nee|1:Ja";
+     }
+     variable MonthlyIncomeParent02
+     {
+      title: "Gross monthly income of 2nd parent";
+      frequency: document;
+      displaytype: currency;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable ExtraMonthParent02
+     {
+      title: "Extra month of 2nd parent";
+      frequency: document;
+      formula: 0;
+      displaytype: select;
+      required: 1;
+      choices: "0:Nee|1:Ja";
+     }
+     variable ValueExtraMonthParent02
+     {
+      title: "ValueExtraMonth of 2nd parent";
+      locked: 1;
+      frequency: document;
+      formula: Case(ExtraMonthParent02,[0:0|1:MonthlyIncomeParent02]);
+      visible: 0;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable YearlyIncomeParent02
+     {
+      title: "Gross yearly income of 2nd parent including vacation allowance";
+      locked: 1;
+      frequency: document;
+      formula: OnER(((MonthlyIncomeParent02)*12*1.08)+parseInt(ValueExtraMonthParent02),NA);
+      visible: 1;
+      required: 1;
+      fixed_decimals: 2;
+     }
+     variable WeeklyWorkingHoursParent02
+     {
+      title: "Working hours of 2nd parent";
+      frequency: document;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable WorkingHoursWeeklyOfLeastWorkingParent
+     {
+      title: "Working hours (weekly) of least working Parent";
+      frequency: document;
+      formula: If(SecondWorkingParent=1,Min(WeeklyWorkingHoursParent01,WeeklyWorkingHoursParent02),WeeklyWorkingHoursParent01);
+      locked: 1;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable ParentalContributionPrimaryEducation
+     {
+      title: "Parental contribution primary education";
+      frequency: document;
+      formula: 30;
+      displaytype: number;
+      fixed_decimals: 2;
+     }
+     variable CostsUnspecified
+     {
+      title: "Costs unspecified per month";
+      locked: 1;
+      frequency: document;
+      visible: 0;
+      formula: 50;
+      fixed_decimals: 1;
+     }
+     variable SecondaryEducationProfile
+     {
+      title: "secondary education (profile)";
+      frequency: document;
+      formula: 1;
+      displaytype: select;
+      required: 1;
+      fixed_decimals: 1;
+      choices: "0:VWO|1:VMBO-MBO|2:VMBO-HAVO|3:HAVO";
+     }
+     variable TotalYearlyCostsChild
+     {
+      title: "Total (yearly) costs regarding child";
+      locked: 1;
+      frequency: column;
+      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+    }
+    variable Child
+    {
+     locked: 1;
+     variable ChildAge
+     {
+      title: "ChildAge";
+      frequency: document;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 0;
+     }
+     variable ChildAgeInTime
+     {
+      title: "Age";
+      locked: 1;
+      frequency: column;
+      formula: ValueT(T);
+      fixed_decimals: 0;
+      aggregation: flow;
+     }
+     variable Gender
+     {
+      title: "Gender";
+      frequency: document;
+      displaytype: select;
+      formula: 0;
+      datatype: string;
+      required: 1;
+      fixed_decimals: 0;
+      choices: "0:Boy|1:Girl";
+      hint: "Weetje. jongens zijn vanaf hun 14e jaar 58 cent per dag duurder omdat ze meer gaan eten. Ja echt. Scheelt zo\'n 18 euro per maand.";
+     }
+     variable NrOfHoursChildcareWeek
+     {
+      title: "Nr. of hours childcare per week";
+      frequency: document;
+      formula: 0;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable HourlyFeeChildCare
+     {
+      title: "Hourly fee child daycare";
+      frequency: document;
+      formula: 7.18;
+      fixed_decimals: 2;
+     }
+     variable NrOfHoursChildcareMonth
+     {
+      title: "Nr. of hours childcare per month";
+      locked: 1;
+      frequency: document;
+      formula: OnER(NrOfHoursChildcareWeek*4.333,NA);
+      fixed_decimals: 2;
+     }
+     variable NrOfHoursOutOfSchoolCareWeek
+     {
+      title: "Nr. of hours out-of-school care per week";
+      frequency: document;
+      formula: 0;
+      displaytype: number;
+      required: 1;
+      fixed_decimals: 1;
+     }
+     variable HourlyFeeOutOfSchoolCare
+     {
+      title: "Hourly fee out-of-school daycare";
+      frequency: document;
+      formula: 6.69;
+      fixed_decimals: 2;
+     }
+     variable NrOfHoursOutOfSchoolCareMonth
+     {
+      title: "Nr. of hours out-of-school care per month";
+      locked: 1;
+      frequency: document;
+      formula: NrOfHoursOutOfSchoolCareWeek*4.333;
+      displaytype: number;
+      fixed_decimals: 2;
+     }
+    }
+   }
+   variable Q_MAP02
+   {
+    title: "Calculations childcare allowances";
+    locked: 1;
+    frequency: document;
+    displaytype: select;
+    choices: "0:Complete|1:Incomplete";
+    variable FiscalParameters
+    {
+     title: "Fiscal parameters";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable ChildcareContribution
+     {
+      title: "Childcare Contribution";
+      locked: 1;
+      datatype: none;
+     }
+     variable MaximumNrOfHoursOfChildcareAllowancePerMonth
+     {
+      title: "Maximum nr of hours of childcare allowance per month";
+      locked: 1;
+      frequency: document;
+      formula: 230;
+      fixed_decimals: 1;
+     }
+     variable MultiplierDaycare
+     {
+      title: "Multiplier daycare";
+      locked: 1;
+      frequency: document;
+      formula: 1.4;
+      displaytype: percentage;
+      fixed_decimals: 1;
+     }
+     variable MultiplierOutOfSchoolCare
+     {
+      title: "Multiplier out-of-school care";
+      locked: 1;
+      frequency: document;
+      formula: 0.7;
+      displaytype: percentage;
+      fixed_decimals: 1;
+     }
+     variable MaxHourlyRateChildcare
+     {
+      title: "Max. hourly rate childcare";
+      locked: 1;
+      frequency: document;
+      formula: 7.18;
+      fixed_decimals: 2;
+     }
+     variable MaxHourlyRateOutOfSchoolCare
+     {
+      title: "Max. hourly rate out-of-school care";
+      locked: 1;
+      frequency: document;
+      formula: 6.69;
+      fixed_decimals: 2;
+     }
+     variable MaxHourlyRateGuestParent
+     {
+      title: "Max. hourly rate guest parent";
+      locked: 1;
+      frequency: document;
+      formula: 5.75;
+      fixed_decimals: 2;
+     }
+     variable MaxHourlyRateGuestParentOutOfSchoolCare
+     {
+      title: "Max. hourly rate guest parent out-of-school care";
+      locked: 1;
+      frequency: document;
+      formula: 5.75;
+      fixed_decimals: 2;
+     }
+    }
+    variable CombinationDiscount
+    {
+     title: "Combination Discount";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable LowerBoundaryIncome
+     {
+      title: "Lower boundary Income";
+      locked: 1;
+      frequency: document;
+      formula: 4895;
+      fixed_decimals: 1;
+     }
+     variable Base
+     {
+      title: "Base";
+      locked: 1;
+      frequency: document;
+      formula: 1043;
+      fixed_decimals: 1;
+     }
+     variable CombinationDiscountPercentage
+     {
+      title: "Combination Discount Percentage";
+      locked: 1;
+      frequency: document;
+      formula: 0.06159;
+      displaytype: percentage;
+      fixed_decimals: 5;
+     }
+     variable MaximumDiscount
+     {
+      title: "Maximum Discount";
+      locked: 1;
+      frequency: document;
+      formula: 2778;
+      fixed_decimals: 1;
+     }
+    }
+    variable ChildRelatedBudget
+    {
+     title: "Child-related budget 1 child";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable MaxBudgetOneToTwelveYears
+     {
+      title: "Max Budget (1 - 12 yrs)";
+      locked: 1;
+      frequency: document;
+      formula: 1142;
+      fixed_decimals: 1;
+     }
+     variable MaxBudgetTwelveToFifteenYears
+     {
+      title: "Max Budget (12 - 15 yrs)";
+      locked: 1;
+      frequency: document;
+      formula: 1376;
+      fixed_decimals: 1;
+     }
+     variable MaxBudgetSixteenToSeventeenYears
+     {
+      title: "Max Budget (16 - 17 yrs)";
+      locked: 1;
+      frequency: document;
+      formula: 1559;
+      fixed_decimals: 1;
+     }
+     variable UpperBoundaryIncome
+     {
+      title: "Upper boundary Income";
+      locked: 1;
+      frequency: document;
+      formula: 20109;
+      fixed_decimals: 1;
+     }
+     variable DecreasingPercentage
+     {
+      title: "Decreasing Percentage";
+      locked: 1;
+      frequency: document;
+      formula: 0.0675;
+      displaytype: percentage;
+      fixed_decimals: 4;
+     }
+    }
+    variable Fees
+    {
+     title: "Fees";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable MaxNrCompensatedHoursChildcare
+     {
+      title: "Max. nr of compensated hours childcare ";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierDaycare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
+      displaytype: currency;
+      }
+     variable MaxNrCompensatedHoursOutofSchoolCare
+     {
+      title: "Max. nr of compensated hours out-of-school care ";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(Round(WorkingHoursWeeklyOfLeastWorkingParent*MultiplierOutOfSchoolCare*(52/12),0),MaximumNrOfHoursOfChildcareAllowancePerMonth),NA);
+      displaytype: currency;
+      }
+     variable FeesSub3
+     {
+      locked: 1;
+      datatype: none;
+     }
+     variable NrCompensatedHoursChildcare
+     {
+      title: "Nr. of compensated hours childcare ";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(NrOfHoursChildcareMonth,MaxNrCompensatedHoursChildcare),NA);
+      displaytype: currency;
+      }
+     variable NrCompensatedHoursOutofSchoolCare
+     {
+      title: "Nr. of compensated hours out-of-school care ";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(NrOfHoursOutOfSchoolCareMonth,MaxNrCompensatedHoursOutofSchoolCare),NA);
+      displaytype: currency;
+      }
+     variable FeesSub6
+     {
+      locked: 1;
+      datatype: none;
+     }
+     variable MaxCompensatedAmountChildcare
+     {
+      title: "Max. compensated amount childcare";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(HourlyFeeChildCare,MaxHourlyRateChildcare),NA);
+      fixed_decimals: 2;
+     }
+     variable MaxCompensatedAmountOutofSchoolCare
+     {
+      title: "Max. compensated amount out-of-school care ";
+      locked: 1;
+      frequency: document;
+      formula: OnER(Min(HourlyFeeOutOfSchoolCare,MaxHourlyRateOutOfSchoolCare),NA);
+      fixed_decimals: 2;
+     }
+     variable FeesSub9
+     {
+      locked: 1;
+      datatype: none;
+     }
+     variable TotalIncome
+     {
+      title: "Total Income";
+      locked: 1;
+      frequency: document;
+      formula: OnER(YearlyIncomeParent01+YearlyIncomeParent02,NA);
+      displaytype: currency;
+      }
+     variable PercentagePremiumFirstChild
+     {
+      title: "Percentage premium first child ";
+      locked: 1;
+      frequency: document;
+      formula: MatrixLookup(null,"PremiumOutOfSchoolCare",TotalIncome,1);
+      displaytype: percentage;
+      fixed_decimals: 4;
+     }
+     variable FeesSub12
+     {
+      locked: 1;
+      datatype: none;
+     }
+     variable PremiumForChildcare
+     {
+      title: "Premium for childcare";
+      locked: 1;
+      frequency: document;
+      formula: NrCompensatedHoursChildcare*MaxCompensatedAmountChildcare*PercentagePremiumFirstChild;
+      fixed_decimals: 2;
+     }
+     variable PremiumForOutofSchoolCare
+     {
+      title: "Premium for out-of-school care";
+      locked: 1;
+      frequency: document;
+      formula: NrCompensatedHoursOutofSchoolCare*MaxCompensatedAmountOutofSchoolCare*PercentagePremiumFirstChild;
+      fixed_decimals: 2;
+     }
+    }
+    variable CostsSecondaryEducation
+    {
+     title: "Costs (Secondary Education)";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable CostsYearOneFour
+     {
+      title: "Costs year 1 - 4";
+      locked: 1;
+      frequency: document;
+      formula: Case(SecondaryEducationProfile,[0: 576 | 1: 394 | 2: 394 | 3: 535]);
+      fixed_decimals: 2;
+     }
+     variable CostsYearFiveSixSeven
+     {
+      title: "Costs year 5, 6, 7";
+      locked: 1;
+      frequency: document;
+      formula: Case(SecondaryEducationProfile,[0:576|1:906|2:535|3:535]);
+      fixed_decimals: 2;
+     }
+    }
+    variable Q_MAP02SUB10
+    {
+     title: "Budget";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable Q_MAP02SUB10SUB1 refers to TotalIncome
+     {
+      title: "Income";
+      locked: 1;
+      frequency: document;
+      displaytype: currency;
+      }
+     variable ChildRelatedBudgetDecrease
+     {
+      title: "Decrease";
+      locked: 1;
+      frequency: document;
+      formula: Max(0,DecreasingPercentage*(TotalIncome-UpperBoundaryIncome));
+      displaytype: currency;
+      }
+     variable ChildRelatedBudgetUpToTwelve
+     {
+      title: "Childrelated budget (per month, up to yr 12)";
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetOneToTwelveYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+     }
+     variable ChildRelatedBudgetTwelveUpToAndInclFifteen
+     {
+      title: "Childrelated budget (per month, 12 up to and incl yr 15)";
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetTwelveToFifteenYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+     }
+     variable ChildRelatedBudgetSixteenUpToAndIncSeventeen
+     {
+      title: "Childrelated budget (per month, 16 up to and incl yr 17)";
+      locked: 1;
+      frequency: document;
+      formula: Max(0,MaxBudgetSixteenToSeventeenYears-ChildRelatedBudgetDecrease)/12;
+      fixed_decimals: 2;
+     }
+    }
+    variable Q_MAP02SUB11
+    {
+     title: "Combination Discount";
+     locked: 1;
+     frequency: document;
+     displaytype: currency;
+     variable CombinationDiscountLowestIncome
+     {
+      title: "LowestIncome";
+      locked: 1;
+      frequency: document;
+      formula: Min(YearlyIncomeParent01,YearlyIncomeParent02);
+      fixed_decimals: 2;
+     }
+     variable CombinationDiscountTotal
+     {
+      title: "CombinationDiscountTotal";
+      locked: 1;
+      frequency: document;
+      formula: If(CombinationDiscountLowestIncome>=LowerBoundaryIncome,Min(MaximumDiscount,Base+(CombinationDiscountPercentage*(CombinationDiscountLowestIncome-LowerBoundaryIncome))),0);
+      fixed_decimals: 2;
+     }
+    }
+   }
+   variable Q_MAP_STUDIEKOSTEN
+   {
+    title: "Hoeveel kost een studie voor mijn kind?";
+    frequency: document;
+    displaytype: string;
+    hint: "Studiekosten";
+    variable EducationAgeChild
+    {
+     title: "Leeftijd kind";
+     frequency: document;
+     formula: 17;
+     }
+    variable SavedMoney
+    {
+     title: "Al gespaard voor kind";
+     frequency: document;
+     formula: 100;
+     displaytype: currency;
+     datatype: currency;
+    }
+    variable MonthlyIncomeBijBaan
+    {
+     title: "Bijbaantje tijdens studie. Gemiddeld € 409 p/m";
+     frequency: document;
+     formula: 409;
+     displaytype: currency;
+     }
+    variable MonthlyDUOLoan
+    {
+     title: "Geld lenen bij DUO";
+     frequency: document;
+     formula: 559;
+     displaytype: currency;
+     datatype: currency;
+     hint: "De gemiddelde HBO of universitaire student leent nu ongeveer € 26.830,- gedurende hun studie wat neerkomt op zo\'n € 559,- per maand. In 2017 gemiddeld € 559 p/m";
+    }
+    variable AantalMaandenTeSparen
+    {
+     title: "Aantal maanden in tot einde opleiding";
+     locked: 1;
+     frequency: document;
+     formula: (18-EducationAgeChild) * 12;
+     }
+    variable RentePerJaar
+    {
+     title: "Jaarlijkse rente";
+     locked: 1;
+     frequency: document;
+     formula: 2.75;
+     datatype: currency;
+    }
+    variable MonthlySavingGoal
+    {
+     title: "Spaar dit bedrag om je spaardoel te bereiken:";
+     locked: 1;
+     frequency: document;
+     formula: OnNA(Max(0, PPMT(RentePerJaar/1200,1,AantalMaandenTeSparen,-(70000 - (SavedMoney + (MonthlyIncomeBijBaan*48)+(MonthlyDUOLoan*48))))),0);
+     displaytype: currency;
+     datatype: currency;
+     fixed_decimals: 0;
+     hint: "per maand";
+    }
+   }
+   variable Q_MAP06
+   {
+    title: "Your Personal situation";
+    locked: 1;
+    frequency: document;
+    displaytype:Output;
+    choices: "0:Complete|1:Incomplete";
+    variable PersonalSituation
+    {
+     title: "Your Personal Situation";
+     locked: 1;
+     frequency: column;
+     variable TotalNetCosts
+     {
+      title: "Total Net Costs";
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyBalance;
+      fixed_decimals: 2;
+      aggregation: balance;
+     }
+     variable Age
+     {
+      title: "Age";
+      locked: 1;
+      frequency: column;
+      formula: ChildAgeInTime-1;
+      fixed_decimals: 0;
+      aggregation: flow;
+     }
+     variable Furniture
+     {
+      title: "Furniture";
+      locked: 1;
+      frequency: column;
+      formula: If(ChildAgeInTime=1,1800,0);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable ActualChildCareCosts
+     {
+      title: "Childcare costs";
+      locked: 1;
+      frequency: column;
+      formula: If((Age<=3),(HourlyFeeChildCare*NrOfHoursChildcareMonth)*12, 0);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable ActualDiapers
+     {
+      title: "Diapers";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Diapers",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable ActualFood
+     {
+      title: "Food";
+      frequency: column;
+      locked: 1;
+      formula: If(Gender=0,MatrixLookup(null,"YearlyChildCosts","FoodCostsBoy",ChildAgeInTime),MatrixLookup(null,"YearlyChildCosts","FoodCostsGirl",ChildAgeInTime));
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable ActualClothingCosts
+     {
+      title: "Clothing";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","ClothingCosts",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable ActualPersonalCareCosts
+     {
+      title: "PersonalCare";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","PersonalCare",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable Hairdresser
+     {
+      title: "Hairdresser";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Hairdresser",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable Inventory
+     {
+      title: "Inventory";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Inventory",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable Allowance
+     {
+      title: "Allowance";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Allowance",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable Contributions
+     {
+      title: "Contributions";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Contributions",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable Transport
+     {
+      title: "Transport";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","Transport",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable MobilePhone
+     {
+      title: "MobilePhone";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","MobilePhone",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable DrivingLicense
+     {
+      title: "DrivingLicense";
+      frequency: column;
+      locked: 1;
+      formula: MatrixLookup(null,"YearlyChildCosts","DrivingLicense",ChildAgeInTime);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable CostsForOutOfSchoolCare
+     {
+      title: "Kosten BSO";
+      frequency: column;
+      locked: 1;
+      formula: If((Age>=4)and(Age<11),(HourlyFeeOutOfSchoolCare*NrOfHoursOutOfSchoolCareMonth)*12,0);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable CostsForPrimaryEducation
+     {
+      title: "Costs for Primary Education";
+      frequency: column;
+      locked: 1;
+      formula: If((Age>=4)and(Age<=11),ParentalContributionPrimaryEducation,0);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable CostsForSecondaryEducation
+     {
+      title: "Costs for Secondary Education";
+      frequency: column;
+      locked: 1;
+      formula: If((Age>=12)and(Age<16),CostsYearOneFour,If(Age>=16,CostsYearFiveSixSeven,0));
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable CostsUnspecifiedPerYear
+     {
+      title: "Costs unspecified per year";
+      locked: 1;
+      frequency: column;
+      formula: CostsUnspecified*12;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable TotalYearlyCosts
+     {
+      title: "Total (yearly) costs";
+      locked: 1;
+      frequency: column;
+      formula: Furniture+ActualChildCareCosts+ActualDiapers+ActualFood+ActualClothingCosts+ActualPersonalCareCosts+Hairdresser+Inventory+Allowance+Contributions+Transport+MobilePhone+DrivingLicense+CostsForOutOfSchoolCare+CostsForPrimaryEducation+CostsForSecondaryEducation+CostsUnspecifiedPerYear;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable TotalMonthlyCosts
+     {
+      title: "Total (monthly) costs";
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyCosts/12;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable TotalYearlyAllowancePoint refers to TotalYearlyAllowance
+     {
+      title: "Child-related Income";
+      locked: 1;
+      frequency: column;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable +ChildBenefits
+     {
+      title: "Child benefits";
+      locked: 1;
+      frequency: column;
+      formula: If((Age<=5),200.59*4,If((Age>=6) and (Age<=11),243.57*4,286.55*4));
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable +ChildCarePremiumOverview
+     {
+      title: "Childcare premium";
+      locked: 1;
+      frequency: column;
+      formula: If(Age<4,(PremiumForChildcare*12),If(Age<11,(PremiumForOutofSchoolCare*12),0));
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable +ChildcareBudgetOverview
+     {
+      title: "Childcare budget";
+      locked: 1;
+      frequency: column;
+      formula: If(Age<12,ChildRelatedBudgetUpToTwelve*12,If(Age<16,ChildRelatedBudgetTwelveUpToAndInclFifteen*12,If(Age<18,ChildRelatedBudgetSixteenUpToAndIncSeventeen*12,0)));
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable +CombinationDiscountOverview
+     {
+      title: "Combination Discount";
+      locked: 1;
+      frequency: column;
+      formula: If(Age<12,CombinationDiscountTotal,0);
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable =TotalYearlyAllowance
+     {
+      title: "Total (yearly) allowance";
+      locked: 1;
+      frequency: column;
+      formula: ChildBenefits+ChildCarePremiumOverview+ChildcareBudgetOverview+CombinationDiscountOverview;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable TotalYearlyBalance
+     {
+      title: "Total Net Costs";
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyCosts-TotalYearlyAllowance;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+     variable TotalMonthlyBalanceAverage
+     {
+      title: "Total monthly Net Costs, monthly()";
+      locked: 1;
+      frequency: column;
+      formula: TotalYearlyBalance/12;
+      fixed_decimals: 2;
+      aggregation: flow;
+     }
+    }
+    variable TotalGrossCostsChildTillEighteen
+    {
+     title: "Total Gross costs of a child from 0 to 18 years old";
+     locked: 1;
+     frequency: document;
+     formula: HSUM(TotalYearlyCosts[all],0,17);
+     fixed_decimals: 2;
+    }
+    variable TotalNettCostsChildTillEighteen
+    {
+     title: "Total Gross costs of a child from 0 to 18 years old";
+     locked: 1;
+     frequency: document;
+     formula: HSUM(TotalYearlyBalance[all],0,17);
+     fixed_decimals: 2;
+    }
+   }
+  }
+ }
+}

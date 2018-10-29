@@ -44,7 +44,7 @@ export function setup(app) {
 				const body = req.body
 
 				let result
-				var context = ds.getOrCreate(req.params.id)
+				const context = ds.getOrCreate(req.params.id)
 				const url = req.originalUrl
 				const outputNodeName = req.params.figureName
 				const version = req.params.version || ''
@@ -68,6 +68,9 @@ export function setup(app) {
 				case 'KinderSpaarPlan':
 					modelPrefix = 'KSP'
 					break
+				case 'Q_MAP06':
+					modelPrefix = 'KSP2'
+					break
 				default:
 					modelPrefix = outputNodeName
 				}
@@ -88,6 +91,7 @@ export function setup(app) {
 				else if (outputNodeName === 'FyndooCreditRating') context.columns = 1
 				else if (outputNodeName === 'TupleRestModel') context.columns = 1
 				else if (outputNodeName === 'KinderSpaarPlan') context.columns = 17
+				else if (outputNodeName === 'Q_MAP06') context.columns = 17
 				else warn('Invalid rest api call ' + url)
 				result = LMEFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined)
 

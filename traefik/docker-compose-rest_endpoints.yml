@@ -1,0 +1,15 @@
+version: '3'
+services:
+  whoami:
+    image: 'emilevauge/whoami:latest'
+    labels:
+      traefik.backend: whoami
+      traefik.frontend.rule: Host:appmodel.org;Path:/whoami
+      traefik.docker.network: proxy
+      traefik.port: 80
+    networks:
+    - proxy
+
+networks:
+  proxy:
+    external: true

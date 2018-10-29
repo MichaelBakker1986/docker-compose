@@ -22,6 +22,8 @@ import { VALUE }                           from './Constants'
 //get(rowId <,property> <,context>) : Object; has the range from a char or PDF base64String till any possible Object with functions
 // --optional property (default=VALUE)
 // --optional context Time/FormulaSet -Matrix (default=0)
+const default_view_mode = new By()
+
 function JSWorkBook(context, XAxis, interval, opts) {
 	this.indexer = null//preserved to store the indexer
 	this.context = context
@@ -38,7 +40,7 @@ function JSWorkBook(context, XAxis, interval, opts) {
 		this.viewmodes = XAxis
 		this.xaxis = this.viewmodes.viewmodes[interval || 'bkyr'].columns[0]
 	} else {
-		this.viewmodes = new By()
+		this.viewmodes = default_view_mode
 		this.xaxis = this.viewmodes.viewmodes['bkyr'].columns[0]
 	}
 	Object.assign(this, opts)
