@@ -4,9 +4,14 @@ services:
     image: traefik
     container_name: traefik
     command:
+    #- --defaultentrypoints=['http','https']
     - --api
+    #- --api.entrypoint="api"
+    - --api.dashboard=true
+    - --debug=true
     - --docker
     - --docker.watch
+    - --retry.attempts=3
     ports:
     - '80:80'
     - '443:443'
