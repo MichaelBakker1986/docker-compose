@@ -30,48 +30,18 @@ logLevel = "DEBUG"
     main = "appmodel.org"
 
 [api]
-  # Name of the related entry point
-  #
-  # Optional
-  # Default: "traefik"
   entryPoint="api"
-  # Enable Dashboard
-  #
-  # Optional
-  # Default: true
-  dashboard = false
-
-  # Enable debug mode.
-  # This will install HTTP handlers to expose Go expvars under /debug/vars and
-  # pprof profiling data under /debug/pprof/.
-  # Additionally, the log level will be set to DEBUG.
-  #
-  # Optional
-  # Default: false
-  debug = true
+  #dashboard = false
+  #debug = true
   
-[retry]
-  # Number of attempts
-  #
-  # Optional
-  # Default: (number servers in backend) -1
-  attempts = 3
+#[retry]
+  #attempts = 3
   
 [docker]
   # Optional
   # Default: false
   watch = true
-  # Optional
-  # Default: true
   exposedByDefault = true
-  # Use the IP address from the binded port instead of the inner network one.
-  #
-  # In case no IP address is attached to the binded port (or in case
-  # there is no bind), the inner network one will be used as a fallback.
-  #
-  # Optional
-  # Default: false
-  #
   usebindportip = true
   # Define a default docker network to use for connections to all containers.
   # Can be overridden by the traefik.docker.network label.
