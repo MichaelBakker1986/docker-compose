@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1c58l2irt7 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\hipchat\\Hipchat-connect.js',
-	    hash = '9e5faf6102d434717fea63d8848fa2c35dbdca26',
+var cov_yb7xiktub = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\hipchat\\Hipchat-connect.js',
+	    hash = 'c891b5f1beda368d4f8dd7a2eb0316d92a9560b2',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\hipchat\\Hipchat-connect.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\hipchat\\Hipchat-connect.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -607,79 +607,79 @@ var _log = require('log6');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var host_environment_variable = (cov_1c58l2irt7.s[0]++, process.env.HOST);
-var host = (cov_1c58l2irt7.s[1]++, (cov_1c58l2irt7.b[0][0]++, host_environment_variable) || (cov_1c58l2irt7.b[0][1]++, '127.0.0.1'));
-var domain = (cov_1c58l2irt7.s[2]++, process.env.DOMAIN);
-var hipchat_api_key = (cov_1c58l2irt7.s[3]++, process.env.HIPCHAT_API_KEY);
-var hipchat_endpoint = (cov_1c58l2irt7.s[4]++, 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + hipchat_api_key);
-var developer = (cov_1c58l2irt7.s[5]++, host === 'localhost');
+var host_environment_variable = (cov_yb7xiktub.s[0]++, process.env.HOST);
+var host = (cov_yb7xiktub.s[1]++, (cov_yb7xiktub.b[0][0]++, host_environment_variable) || (cov_yb7xiktub.b[0][1]++, '127.0.0.1'));
+var domain = (cov_yb7xiktub.s[2]++, process.env.DOMAIN);
+var hipchat_api_key = (cov_yb7xiktub.s[3]++, process.env.HIPCHAT_API_KEY);
+var hipchat_endpoint = (cov_yb7xiktub.s[4]++, 'https://topicus.hipchat.com/v2/room/4235024/notification?auth_token=' + hipchat_api_key);
+var developer = (cov_yb7xiktub.s[5]++, host === 'localhost');
 
 var HipchatConnect = function () {
 	function HipchatConnect() {
 		(0, _classCallCheck3.default)(this, HipchatConnect);
-		cov_1c58l2irt7.f[0]++;
-		cov_1c58l2irt7.s[6]++;
+		cov_yb7xiktub.f[0]++;
+		cov_yb7xiktub.s[6]++;
 
 		if (!hipchat_api_key) {
-				cov_1c58l2irt7.b[1][0]++;
-				cov_1c58l2irt7.s[7]++;
+				cov_yb7xiktub.b[1][0]++;
+				cov_yb7xiktub.s[7]++;
 				(0, _log.warn)('No communication with the HipChat server is possible, because environment variable HIPCHAT_API_KEY is not set.');
 			} else {
-			cov_1c58l2irt7.b[1][1]++;
-		}cov_1c58l2irt7.s[8]++;
+			cov_yb7xiktub.b[1][1]++;
+		}cov_yb7xiktub.s[8]++;
 		if (!host_environment_variable) {
-				cov_1c58l2irt7.b[2][0]++;
-				cov_1c58l2irt7.s[9]++;
+				cov_yb7xiktub.b[2][0]++;
+				cov_yb7xiktub.s[9]++;
 				(0, _log.info)('Not communicating with the HipChat server, because environment variable HOST is not set. Assume developer build.');
 			} else {
-			cov_1c58l2irt7.b[2][1]++;
+			cov_yb7xiktub.b[2][1]++;
 		}
 	}
 
 	(0, _createClass3.default)(HipchatConnect, [{
 		key: 'send',
 		value: function send(text, level) {
-			cov_1c58l2irt7.f[1]++;
-			cov_1c58l2irt7.s[10]++;
+			cov_yb7xiktub.f[1]++;
+			cov_yb7xiktub.s[10]++;
 
 			_request2.default.post({
 				url: hipchat_endpoint,
 				json: { 'color': level, 'message': '[' + domain + '] ' + text }
 			}, function (err) {
-				cov_1c58l2irt7.f[2]++;
-				cov_1c58l2irt7.s[11]++;
+				cov_yb7xiktub.f[2]++;
+				cov_yb7xiktub.s[11]++;
 
-				if ((cov_1c58l2irt7.b[4][0]++, err) && (cov_1c58l2irt7.b[4][1]++, _log.DEBUG)) {
-						cov_1c58l2irt7.b[3][0]++;
-						cov_1c58l2irt7.s[12]++;
+				if ((cov_yb7xiktub.b[4][0]++, err) && (cov_yb7xiktub.b[4][1]++, _log.DEBUG)) {
+						cov_yb7xiktub.b[3][0]++;
+						cov_yb7xiktub.s[12]++;
 						(0, _log.debug)(err.toString());
 					} else {
-					cov_1c58l2irt7.b[3][1]++;
+					cov_yb7xiktub.b[3][1]++;
 				}
 			});
 		}
 	}, {
 		key: 'log',
 		value: function log(message, levelArg) {
-			cov_1c58l2irt7.f[3]++;
-			cov_1c58l2irt7.s[13]++;
+			cov_yb7xiktub.f[3]++;
+			cov_yb7xiktub.s[13]++;
 
-			if ((cov_1c58l2irt7.b[6][0]++, message) && (cov_1c58l2irt7.b[6][1]++, !developer)) {
-				cov_1c58l2irt7.b[5][0]++;
-				cov_1c58l2irt7.s[14]++;
+			if ((cov_yb7xiktub.b[6][0]++, message) && (cov_yb7xiktub.b[6][1]++, !developer)) {
+				cov_yb7xiktub.b[5][0]++;
+				cov_yb7xiktub.s[14]++;
 
-				this.send(message, (cov_1c58l2irt7.b[7][0]++, levelArg) || (cov_1c58l2irt7.b[7][1]++, 'green'));
+				this.send(message, (cov_yb7xiktub.b[7][0]++, levelArg) || (cov_yb7xiktub.b[7][1]++, 'green'));
 			} else {
-				cov_1c58l2irt7.b[5][1]++;
+				cov_yb7xiktub.b[5][1]++;
 			}
-			cov_1c58l2irt7.s[15]++;
+			cov_yb7xiktub.s[15]++;
 			(0, _log.info)(message);
 		}
 	}]);
 	return HipchatConnect;
 }();
 
-cov_1c58l2irt7.s[16]++;
+cov_yb7xiktub.s[16]++;
 
 
 module.exports = new HipchatConnect();

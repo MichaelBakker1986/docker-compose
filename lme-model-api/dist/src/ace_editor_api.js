@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1a7mclfesc = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\ace_editor_api.js',
-	    hash = 'ca772a948d3dad21bf7ecf1ea3597511d5f42279',
+var cov_eatucspwg = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\ace_editor_api.js',
+	    hash = '0d26f255c7ae9dc22112dcd652b5b320018230e8',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\ace_editor_api.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\ace_editor_api.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2097,305 +2097,305 @@ var _index = require('../../ffl/index');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function AceEditor(id, opts) {
-	cov_1a7mclfesc.f[0]++;
-	cov_1a7mclfesc.s[0]++;
+	cov_eatucspwg.f[0]++;
+	cov_eatucspwg.s[0]++;
 
-	opts = (cov_1a7mclfesc.b[0][0]++, opts) || (cov_1a7mclfesc.b[0][1]++, {});
-	cov_1a7mclfesc.s[1]++;
+	opts = (cov_eatucspwg.b[0][0]++, opts) || (cov_eatucspwg.b[0][1]++, {});
+	cov_eatucspwg.s[1]++;
 	this.fflModel = '';
-	cov_1a7mclfesc.s[2]++;
+	cov_eatucspwg.s[2]++;
 	this.halfHeight = false;
-	cov_1a7mclfesc.s[3]++;
+	cov_eatucspwg.s[3]++;
 	if (opts.halfHeight) {
-			cov_1a7mclfesc.b[1][0]++;
-			cov_1a7mclfesc.s[4]++;
+			cov_eatucspwg.b[1][0]++;
+			cov_eatucspwg.s[4]++;
 			this.halfHeight = opts.halfHeight;
 		} else {
-		cov_1a7mclfesc.b[1][1]++;
-	}var aceEditor = (cov_1a7mclfesc.s[5]++, ace.edit(id));
-	cov_1a7mclfesc.s[6]++;
+		cov_eatucspwg.b[1][1]++;
+	}var aceEditor = (cov_eatucspwg.s[5]++, ace.edit(id));
+	cov_eatucspwg.s[6]++;
 	global.edit = aceEditor; //quick response front-end
-	var langTools = (cov_1a7mclfesc.s[7]++, ace.require('ace/ext/language_tools'));
-	cov_1a7mclfesc.s[8]++;
+	var langTools = (cov_eatucspwg.s[7]++, ace.require('ace/ext/language_tools'));
+	cov_eatucspwg.s[8]++;
 	this.langTools = langTools;
-	var FFLMode = (cov_1a7mclfesc.s[9]++, ace.require('ace/mode/ffl').Mode);
-	cov_1a7mclfesc.s[10]++;
+	var FFLMode = (cov_eatucspwg.s[9]++, ace.require('ace/mode/ffl').Mode);
+	cov_eatucspwg.s[10]++;
 	aceEditor.session.setMode(new FFLMode(_FormulaInformationManager2.default.highlights));
 
-	cov_1a7mclfesc.s[11]++;
+	cov_eatucspwg.s[11]++;
 	aceEditor.setTheme('ace/theme/tomorrow');
-	cov_1a7mclfesc.s[12]++;
+	cov_eatucspwg.s[12]++;
 	aceEditor.setBehavioursEnabled(true);
 	// enable autocompletion and snippets
-	cov_1a7mclfesc.s[13]++;
+	cov_eatucspwg.s[13]++;
 	aceEditor.setOptions({
 		enableBasicAutocompletion: true,
 		enableLiveAutocompletion: true,
 		enableSnippets: true,
 		showFoldWidgets: true
 	});
-	cov_1a7mclfesc.s[14]++;
+	cov_eatucspwg.s[14]++;
 	aceEditor.setAutoScrollEditorIntoView(true);
-	cov_1a7mclfesc.s[15]++;
+	cov_eatucspwg.s[15]++;
 	aceEditor.$blockScrolling = Infinity;
 
-	cov_1a7mclfesc.s[16]++;
+	cov_eatucspwg.s[16]++;
 	aceEditor.setOption('minLines', 1);
-	cov_1a7mclfesc.s[17]++;
+	cov_eatucspwg.s[17]++;
 	aceEditor.setOption('maxLines', 1);
-	cov_1a7mclfesc.s[18]++;
+	cov_eatucspwg.s[18]++;
 	aceEditor.resize();
-	cov_1a7mclfesc.s[19]++;
+	cov_eatucspwg.s[19]++;
 	aceEditor.resize(true);
 
-	cov_1a7mclfesc.s[20]++;
+	cov_eatucspwg.s[20]++;
 	this.aceEditor = aceEditor;
-	var wordMap = (cov_1a7mclfesc.s[21]++, [{
+	var wordMap = (cov_eatucspwg.s[21]++, [{
 		'word': 'model {model_name} uses BaseModel \n' + '{\n' + '\n' + '}\n'
 	}, {
 		'word': 'When {variable_name}(tuple) is set to {value}\n'
 	}]);
 
-	cov_1a7mclfesc.s[22]++;
+	cov_eatucspwg.s[22]++;
 	this.addCompleter(function (editor, session, pos, prefix, callback) {
-		cov_1a7mclfesc.f[1]++;
-		cov_1a7mclfesc.s[23]++;
+		cov_eatucspwg.f[1]++;
+		cov_eatucspwg.s[23]++;
 
 		if (prefix.length === 0) {
-			cov_1a7mclfesc.b[2][0]++;
-			cov_1a7mclfesc.s[24]++;
+			cov_eatucspwg.b[2][0]++;
+			cov_eatucspwg.s[24]++;
 
 			callback(null, []);
-			cov_1a7mclfesc.s[25]++;
+			cov_eatucspwg.s[25]++;
 			return;
 		} else {
-			cov_1a7mclfesc.b[2][1]++;
+			cov_eatucspwg.b[2][1]++;
 		}
-		cov_1a7mclfesc.s[26]++;
+		cov_eatucspwg.s[26]++;
 		callback(null, wordMap.map(function (ea) {
-			cov_1a7mclfesc.f[2]++;
-			cov_1a7mclfesc.s[27]++;
+			cov_eatucspwg.f[2]++;
+			cov_eatucspwg.s[27]++;
 
 			return { name: ea.word, value: ea.word, meta: 'optional text' };
 		}));
 	});
 }
 
-cov_1a7mclfesc.s[28]++;
+cov_eatucspwg.s[28]++;
 AceEditor.prototype.initResize = function () {
-	cov_1a7mclfesc.f[3]++;
+	cov_eatucspwg.f[3]++;
 
 
-	var editor = (cov_1a7mclfesc.s[29]++, this.aceEditor);
-	var split_vertically = (cov_1a7mclfesc.s[30]++, this.halfHeight);
-	cov_1a7mclfesc.s[31]++;
+	var editor = (cov_eatucspwg.s[29]++, this.aceEditor);
+	var split_vertically = (cov_eatucspwg.s[30]++, this.halfHeight);
+	cov_eatucspwg.s[31]++;
 	var heightUpdateFunction = function heightUpdateFunction() {
-		cov_1a7mclfesc.f[4]++;
+		cov_eatucspwg.f[4]++;
 
 
 		// http://stackoverflow.com/questions/11584061/
-		var newHeight = (cov_1a7mclfesc.s[32]++, editor.getSession().getScreenLength() * editor.renderer.lineHeight + editor.renderer.scrollBar.getWidth());
-		var editor_height = (cov_1a7mclfesc.s[33]++, $('.content-wrapper').height() - (split_vertically ? (cov_1a7mclfesc.b[3][0]++, 20) : (cov_1a7mclfesc.b[3][1]++, 10)));
-		var lines = (cov_1a7mclfesc.s[34]++, (editor_height - editor.renderer.scrollBar.getWidth()) / editor.renderer.lineHeight);
-		cov_1a7mclfesc.s[35]++;
-		editor.setOption('maxLines', Math.max(lines, 2) / (split_vertically ? (cov_1a7mclfesc.b[4][0]++, 2.0) : (cov_1a7mclfesc.b[4][1]++, 1.0)));
-		cov_1a7mclfesc.s[36]++;
-		editor.setOption('minLines', Math.max(lines, 1) / ((split_vertically ? (cov_1a7mclfesc.b[5][0]++, 2.0) : (cov_1a7mclfesc.b[5][1]++, 1.0)) / 2.0));
-		cov_1a7mclfesc.s[37]++;
+		var newHeight = (cov_eatucspwg.s[32]++, editor.getSession().getScreenLength() * editor.renderer.lineHeight + editor.renderer.scrollBar.getWidth());
+		var editor_height = (cov_eatucspwg.s[33]++, $('.content-wrapper').height() - (split_vertically ? (cov_eatucspwg.b[3][0]++, 20) : (cov_eatucspwg.b[3][1]++, 10)));
+		var lines = (cov_eatucspwg.s[34]++, (editor_height - editor.renderer.scrollBar.getWidth()) / editor.renderer.lineHeight);
+		cov_eatucspwg.s[35]++;
+		editor.setOption('maxLines', Math.max(lines, 2) / (split_vertically ? (cov_eatucspwg.b[4][0]++, 2.0) : (cov_eatucspwg.b[4][1]++, 1.0)));
+		cov_eatucspwg.s[36]++;
+		editor.setOption('minLines', Math.max(lines, 1) / ((split_vertically ? (cov_eatucspwg.b[5][0]++, 2.0) : (cov_eatucspwg.b[5][1]++, 1.0)) / 2.0));
+		cov_eatucspwg.s[37]++;
 		editor.resize();
 	};
 	// Set initial size to match initial content
-	cov_1a7mclfesc.s[38]++;
+	cov_eatucspwg.s[38]++;
 	heightUpdateFunction();
 
 	// Whenever a change happens inside the ACE editor, update
 	// the size again
-	cov_1a7mclfesc.s[39]++;
+	cov_eatucspwg.s[39]++;
 	editor.getSession().on('change', heightUpdateFunction);
 
-	cov_1a7mclfesc.s[40]++;
+	cov_eatucspwg.s[40]++;
 	$(window).resize(function () {
-		cov_1a7mclfesc.f[5]++;
-		cov_1a7mclfesc.s[41]++;
+		cov_eatucspwg.f[5]++;
+		cov_eatucspwg.s[41]++;
 
 		$(window).trigger('zoom');
 	});
-	cov_1a7mclfesc.s[42]++;
+	cov_eatucspwg.s[42]++;
 	$(window).on('zoom', function () {
-		cov_1a7mclfesc.f[6]++;
-		cov_1a7mclfesc.s[43]++;
+		cov_eatucspwg.f[6]++;
+		cov_eatucspwg.s[43]++;
 
 		console.log('zoom', window.devicePixelRatio);
-		cov_1a7mclfesc.s[44]++;
+		cov_eatucspwg.s[44]++;
 		heightUpdateFunction();
 	});
 	var resizeTO = void 0;
-	cov_1a7mclfesc.s[45]++;
+	cov_eatucspwg.s[45]++;
 	$(window).resize(function () {
-		cov_1a7mclfesc.f[7]++;
-		cov_1a7mclfesc.s[46]++;
+		cov_eatucspwg.f[7]++;
+		cov_eatucspwg.s[46]++;
 
 		if (resizeTO) {
-				cov_1a7mclfesc.b[6][0]++;
-				cov_1a7mclfesc.s[47]++;
+				cov_eatucspwg.b[6][0]++;
+				cov_eatucspwg.s[47]++;
 				clearTimeout(resizeTO);
 			} else {
-			cov_1a7mclfesc.b[6][1]++;
-		}cov_1a7mclfesc.s[48]++;
+			cov_eatucspwg.b[6][1]++;
+		}cov_eatucspwg.s[48]++;
 		resizeTO = setTimeout(function () {
-			cov_1a7mclfesc.f[8]++;
-			cov_1a7mclfesc.s[49]++;
+			cov_eatucspwg.f[8]++;
+			cov_eatucspwg.s[49]++;
 
 			$(this).trigger('resizeEnd');
 		}, 200);
 	});
-	cov_1a7mclfesc.s[50]++;
+	cov_eatucspwg.s[50]++;
 	$(window).bind('resizeEnd', heightUpdateFunction);
 };
-cov_1a7mclfesc.s[51]++;
+cov_eatucspwg.s[51]++;
 AceEditor.prototype.getCursor = function () {
-	cov_1a7mclfesc.f[9]++;
-	cov_1a7mclfesc.s[52]++;
+	cov_eatucspwg.f[9]++;
+	cov_eatucspwg.s[52]++;
 
 	return this.aceEditor.selection.getCursor();
 };
-cov_1a7mclfesc.s[53]++;
+cov_eatucspwg.s[53]++;
 AceEditor.prototype.addCompleter = function (callback) {
-	cov_1a7mclfesc.f[10]++;
+	cov_eatucspwg.f[10]++;
 
-	var modelNamesCompleter = (cov_1a7mclfesc.s[54]++, {
+	var modelNamesCompleter = (cov_eatucspwg.s[54]++, {
 		getCompletions: callback
 	});
-	cov_1a7mclfesc.s[55]++;
+	cov_eatucspwg.s[55]++;
 	this.langTools.addCompleter(modelNamesCompleter);
 };
-cov_1a7mclfesc.s[56]++;
+cov_eatucspwg.s[56]++;
 AceEditor.prototype.setAnnotations = function (annotations) {
-	cov_1a7mclfesc.f[11]++;
-	cov_1a7mclfesc.s[57]++;
+	cov_eatucspwg.f[11]++;
+	cov_eatucspwg.s[57]++;
 
 	this.aceEditor.session.setAnnotations(annotations);
 };
-cov_1a7mclfesc.s[58]++;
+cov_eatucspwg.s[58]++;
 AceEditor.prototype.setParsedValue = function (fflModel) {
-	cov_1a7mclfesc.f[12]++;
-	cov_1a7mclfesc.s[59]++;
+	cov_eatucspwg.f[12]++;
+	cov_eatucspwg.s[59]++;
 
 	if (_ConvertEvaluateAsString.ConvertEvaluateAsString.on) {
-			cov_1a7mclfesc.b[7][0]++;
-			cov_1a7mclfesc.s[60]++;
+			cov_eatucspwg.b[7][0]++;
+			cov_eatucspwg.s[60]++;
 			fflModel = _ConvertEvaluateAsString.ConvertEvaluateAsString.parse(fflModel);
 		} else {
-		cov_1a7mclfesc.b[7][1]++;
-	}cov_1a7mclfesc.s[61]++;
+		cov_eatucspwg.b[7][1]++;
+	}cov_eatucspwg.s[61]++;
 	if (_AmpersandConverter.AmpersandConverter.on) {
-			cov_1a7mclfesc.b[8][0]++;
-			cov_1a7mclfesc.s[62]++;
+			cov_eatucspwg.b[8][0]++;
+			cov_eatucspwg.s[62]++;
 			fflModel = _AmpersandConverter.AmpersandConverter.parse(fflModel);
 		} else {
-		cov_1a7mclfesc.b[8][1]++;
-	}cov_1a7mclfesc.s[63]++;
+		cov_eatucspwg.b[8][1]++;
+	}cov_eatucspwg.s[63]++;
 	if (_ScorecardQ_caseFix.ScorecardQCaseFix.on) {
-			cov_1a7mclfesc.b[9][0]++;
-			cov_1a7mclfesc.s[64]++;
+			cov_eatucspwg.b[9][0]++;
+			cov_eatucspwg.s[64]++;
 			fflModel = _ScorecardQ_caseFix.ScorecardQCaseFix.parse(fflModel);
 		} else {
-		cov_1a7mclfesc.b[9][1]++;
-	}cov_1a7mclfesc.s[65]++;
+		cov_eatucspwg.b[9][1]++;
+	}cov_eatucspwg.s[65]++;
 	if (_V05CaseFix.V05CaseFix.on) {
-			cov_1a7mclfesc.b[10][0]++;
-			cov_1a7mclfesc.s[66]++;
+			cov_eatucspwg.b[10][0]++;
+			cov_eatucspwg.s[66]++;
 			fflModel = _V05CaseFix.V05CaseFix.parse(fflModel);
 		} else {
-		cov_1a7mclfesc.b[10][1]++;
-	}cov_1a7mclfesc.s[67]++;
+		cov_eatucspwg.b[10][1]++;
+	}cov_eatucspwg.s[67]++;
 	if (_EconomicEditorView2.default.on) {
-			cov_1a7mclfesc.b[11][0]++;
-			cov_1a7mclfesc.s[68]++;
+			cov_eatucspwg.b[11][0]++;
+			cov_eatucspwg.s[68]++;
 			fflModel = _EconomicEditorView2.default.parse(fflModel);
 		} else {
-		cov_1a7mclfesc.b[11][1]++;
-	}cov_1a7mclfesc.s[69]++;
+		cov_eatucspwg.b[11][1]++;
+	}cov_eatucspwg.s[69]++;
 	this.fflModel = fflModel;
 
-	cov_1a7mclfesc.s[70]++;
+	cov_eatucspwg.s[70]++;
 	this.setValue(fflModel);
-	cov_1a7mclfesc.s[71]++;
+	cov_eatucspwg.s[71]++;
 	console.info('Response text_size: ' + this.getValue().length);
 };
-cov_1a7mclfesc.s[72]++;
+cov_eatucspwg.s[72]++;
 AceEditor.prototype.setValue = function (value) {
-	cov_1a7mclfesc.f[13]++;
-	cov_1a7mclfesc.s[73]++;
+	cov_eatucspwg.f[13]++;
+	cov_eatucspwg.s[73]++;
 
 	this.aceEditor.session.setValue(value);
 };
-cov_1a7mclfesc.s[74]++;
+cov_eatucspwg.s[74]++;
 AceEditor.prototype.getCurrentLine = function () {
-	cov_1a7mclfesc.f[14]++;
-	cov_1a7mclfesc.s[75]++;
+	cov_eatucspwg.f[14]++;
+	cov_eatucspwg.s[75]++;
 
 	return this.aceEditor.session.getLine(this.getCursor().row);
 };
-cov_1a7mclfesc.s[76]++;
+cov_eatucspwg.s[76]++;
 AceEditor.prototype.getNextLine = function () {
-	cov_1a7mclfesc.f[15]++;
-	cov_1a7mclfesc.s[77]++;
+	cov_eatucspwg.f[15]++;
+	cov_eatucspwg.s[77]++;
 
 	return this.aceEditor.session.getLine(this.getCursor().row + 1);
 };
-cov_1a7mclfesc.s[78]++;
+cov_eatucspwg.s[78]++;
 AceEditor.prototype.getValue = function () {
-	cov_1a7mclfesc.f[16]++;
-	cov_1a7mclfesc.s[79]++;
+	cov_eatucspwg.f[16]++;
+	cov_eatucspwg.s[79]++;
 
 	return this.aceEditor.session.getValue();
 };
-cov_1a7mclfesc.s[80]++;
+cov_eatucspwg.s[80]++;
 AceEditor.prototype.scrollTop = function () {
-	cov_1a7mclfesc.f[17]++;
-	cov_1a7mclfesc.s[81]++;
+	cov_eatucspwg.f[17]++;
+	cov_eatucspwg.s[81]++;
 
 
 	this.aceEditor.scrollToLine(1, true, true, function () {
-		cov_1a7mclfesc.f[18]++;
+		cov_eatucspwg.f[18]++;
 	});
-	cov_1a7mclfesc.s[82]++;
+	cov_eatucspwg.s[82]++;
 	this.aceEditor.gotoLine(1, 1, true);
-	cov_1a7mclfesc.s[83]++;
+	cov_eatucspwg.s[83]++;
 	this.aceEditor.selection.moveTo(0, 0);
 };
-cov_1a7mclfesc.s[84]++;
+cov_eatucspwg.s[84]++;
 AceEditor.prototype.registerEditorToClickNames = function (selected_editor, fflEditor, user_session, register, workbook) {
-	cov_1a7mclfesc.f[19]++;
+	cov_eatucspwg.f[19]++;
 
-	var HoverLink = (cov_1a7mclfesc.s[85]++, ace.require('hoverlink').HoverLink);
-	var TokenTooltip = (cov_1a7mclfesc.s[86]++, ace.require('token_tooltip').TokenTooltip);
+	var HoverLink = (cov_eatucspwg.s[85]++, ace.require('hoverlink').HoverLink);
+	var TokenTooltip = (cov_eatucspwg.s[86]++, ace.require('token_tooltip').TokenTooltip);
 
-	cov_1a7mclfesc.s[87]++;
+	cov_eatucspwg.s[87]++;
 	selected_editor.aceEditor.hoverLink = new HoverLink(selected_editor.aceEditor, register, workbook);
-	cov_1a7mclfesc.s[88]++;
+	cov_eatucspwg.s[88]++;
 	selected_editor.aceEditor.hoverLink.on('open', function (link) {
-		cov_1a7mclfesc.f[20]++;
+		cov_eatucspwg.f[20]++;
 
-		var startLookIndex = (cov_1a7mclfesc.s[89]++, user_session.fflModel.search(new RegExp('(variable|tuple)\\s*\\+?\\-?\\=?' + link.value + '\s*$', 'gmi')));
+		var startLookIndex = (cov_eatucspwg.s[89]++, user_session.fflModel.search(new RegExp('(variable|tuple)\\s*\\+?\\-?\\=?' + link.value + '\s*$', 'gmi')));
 		//(!) its the real LineNumber - Delta on page
-		var lineNumber = (cov_1a7mclfesc.s[90]++, user_session.fflModel.substring(0, startLookIndex).split('\n').length);
-		cov_1a7mclfesc.s[91]++;
+		var lineNumber = (cov_eatucspwg.s[90]++, user_session.fflModel.substring(0, startLookIndex).split('\n').length);
+		cov_eatucspwg.s[91]++;
 		fflEditor.scrollToLine(lineNumber);
 	});
-	cov_1a7mclfesc.s[92]++;
+	cov_eatucspwg.s[92]++;
 	selected_editor.aceEditor.TokenTooltip = new TokenTooltip(selected_editor.aceEditor, register, workbook, _FormulaInformationManager2.default, _index.RegisterFormulaBuilder);
 };
-cov_1a7mclfesc.s[93]++;
+cov_eatucspwg.s[93]++;
 AceEditor.prototype.scrollToLine = function (lineNumber) {
-	cov_1a7mclfesc.f[21]++;
-	cov_1a7mclfesc.s[94]++;
+	cov_eatucspwg.f[21]++;
+	cov_eatucspwg.s[94]++;
 
 	this.aceEditor.scrollToLine(lineNumber, true, true, function () {
-		cov_1a7mclfesc.f[22]++;
+		cov_eatucspwg.f[22]++;
 	});
-	cov_1a7mclfesc.s[95]++;
+	cov_eatucspwg.s[95]++;
 	this.aceEditor.gotoLine(lineNumber, 20, true);
 };
 exports.AceEditor = AceEditor;

@@ -8,7 +8,7 @@ services:
     labels:
       traefik.enable: true
       traefik.backend: swagger
-      traefik.frontend.rule: Host:appmodel.org;PathPrefix:/swagger
+      traefik.frontend.rule: Host:lvh.me;PathPrefix:/swagger
       traefik.docker.network: proxy
       traefik.port: 8080
     networks:

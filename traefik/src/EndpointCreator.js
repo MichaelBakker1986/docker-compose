@@ -1,6 +1,6 @@
 import composefile                                                    from 'composefile'
 import { join }                                                       from 'path'
-import { stopOne, upAll }                                             from '../docker-compose/index'
+import { stopOne, upAll }                                             from 'michaelbakker_docker-compose'
 import { readYamlConfigurationFile, REST_API_ENDPOINT_CONFIGURATION } from '../../git-connect/index'
 import { error, info }                                                from 'log6'
 
@@ -34,13 +34,13 @@ class EndpointCreator {
 		endpoint.environment['ENABLED_MODELS'] = endpoint_name
 		endpoint.environment['MODEL_VERSION'] = model_version
 		const strip = `/${endpoint_name}/${model_version}/`
-		endpoint.labels['traefik.frontend.rule'] = `Host:appmodel.org;PathPrefix:${strip};PathPrefixStrip:${strip}`
+		endpoint.labels['traefik.frontend.rule'] = `Host:${host};PathPrefix:${strip};PathPrefixStrip:${strip}`
 		this.buildEndpoints()
 		this.bringServicesUp()
 	}
 
 	buildEndpoints() {
-		composefile(this.config, err => { info('done') })
+		composefile(this.config, () => { info('done') })
 	}
 
 	bringServicesUp() {

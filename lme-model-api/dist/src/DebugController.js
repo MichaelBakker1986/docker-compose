@@ -1,13 +1,13 @@
 "use strict";
 
-var cov_21crtg8goz = function () {
-    var path = "C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\DebugController.js",
-        hash = "313a501c08a26aadcb3dec95a32bcf43a15291a2",
+var cov_1vtcqoaa40 = function () {
+    var path = "C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\DebugController.js",
+        hash = "e15ba6f180f4e918a60221b7749a6cb64cdaee11",
         Function = function () {}.constructor,
         global = new Function('return this')(),
         gcv = "__coverage__",
         coverageData = {
-        path: "C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\DebugController.js",
+        path: "C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\DebugController.js",
         statementMap: {
             "0": {
                 start: {
@@ -124,11 +124,11 @@ $scope.callDebug = function() {
  * END DEBUG FUNCTIONALITY
  */
 function DebugController($scope, $http) {
-    cov_21crtg8goz.f[0]++;
-    cov_21crtg8goz.s[0]++;
+    cov_1vtcqoaa40.f[0]++;
+    cov_1vtcqoaa40.s[0]++;
 
     this.$scope = $scope;
 }
 
-cov_21crtg8goz.s[1]++;
+cov_1vtcqoaa40.s[1]++;
 module.exports = DebugController;

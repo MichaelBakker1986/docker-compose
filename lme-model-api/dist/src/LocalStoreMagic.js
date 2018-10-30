@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_b4rhyn1pt = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\LocalStoreMagic.js',
-	    hash = '4fcd2801563d4ba6cc7fae1610872cd7fbfa3e65',
+var cov_1bgw42715k = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\LocalStoreMagic.js',
+	    hash = 'deff4419794f537a12d6b30d2b97f19610beda02',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\LocalStoreMagic.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\LocalStoreMagic.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -721,29 +721,29 @@ var _localStorage2 = _interopRequireDefault(_localStorage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-cov_b4rhyn1pt.s[0]++;
+cov_1bgw42715k.s[0]++;
 
 
 var define_property = function define_property(user_session, key) {
-	cov_b4rhyn1pt.f[0]++;
-	cov_b4rhyn1pt.s[1]++;
+	cov_1bgw42715k.f[0]++;
+	cov_1bgw42715k.s[1]++;
 
 	Object.defineProperty(user_session, key, function () {
-		cov_b4rhyn1pt.f[1]++;
+		cov_1bgw42715k.f[1]++;
 
-		var akey = (cov_b4rhyn1pt.s[2]++, key);
-		cov_b4rhyn1pt.s[3]++;
-		_localStorage2.default.set(key, (cov_b4rhyn1pt.b[0][0]++, _localStorage2.default.get(akey)) || (cov_b4rhyn1pt.b[0][1]++, user_session[akey]));
-		cov_b4rhyn1pt.s[4]++;
+		var akey = (cov_1bgw42715k.s[2]++, key);
+		cov_1bgw42715k.s[3]++;
+		_localStorage2.default.set(key, (cov_1bgw42715k.b[0][0]++, _localStorage2.default.get(akey)) || (cov_1bgw42715k.b[0][1]++, user_session[akey]));
+		cov_1bgw42715k.s[4]++;
 		return {
 			get: function get() {
-				cov_b4rhyn1pt.f[2]++;
-				cov_b4rhyn1pt.s[5]++;
+				cov_1bgw42715k.f[2]++;
+				cov_1bgw42715k.s[5]++;
 				return _localStorage2.default.get(akey);
 			},
 			set: function set(v) {
-				cov_b4rhyn1pt.f[3]++;
-				cov_b4rhyn1pt.s[6]++;
+				cov_1bgw42715k.f[3]++;
+				cov_1bgw42715k.s[6]++;
 				return _localStorage2.default.set(akey, v);
 			}
 		};
@@ -751,74 +751,74 @@ var define_property = function define_property(user_session, key) {
 };
 
 function LocalStorage(user_session) {
-	cov_b4rhyn1pt.f[4]++;
-	cov_b4rhyn1pt.s[7]++;
+	cov_1bgw42715k.f[4]++;
+	cov_1bgw42715k.s[7]++;
 
 
 	for (var key in user_session) {
-		cov_b4rhyn1pt.s[8]++;
+		cov_1bgw42715k.s[8]++;
 
 		if ((0, _typeof3.default)(user_session[key]) === 'object') {
-				cov_b4rhyn1pt.b[1][0]++;
-				cov_b4rhyn1pt.s[9]++;
+				cov_1bgw42715k.b[1][0]++;
+				cov_1bgw42715k.s[9]++;
 				continue;
 			} else {
-			cov_b4rhyn1pt.b[1][1]++;
+			cov_1bgw42715k.b[1][1]++;
 		} //not interested
-		cov_b4rhyn1pt.s[10]++;
+		cov_1bgw42715k.s[10]++;
 		if (typeof user_session[key] === 'function') {
-			cov_b4rhyn1pt.b[2][0]++;
-			cov_b4rhyn1pt.s[11]++;
+			cov_1bgw42715k.b[2][0]++;
+			cov_1bgw42715k.s[11]++;
 
 
 			if (typeof user_session[key].then === 'function') {
-				cov_b4rhyn1pt.b[3][0]++;
-				cov_b4rhyn1pt.s[12]++;
+				cov_1bgw42715k.b[3][0]++;
+				cov_1bgw42715k.s[12]++;
 
 				user_session[key].then(function (ok) {
-					cov_b4rhyn1pt.f[5]++;
+					cov_1bgw42715k.f[5]++;
 
-					var value = (cov_b4rhyn1pt.s[13]++, ok);
-					cov_b4rhyn1pt.s[14]++;
+					var value = (cov_1bgw42715k.s[13]++, ok);
+					cov_1bgw42715k.s[14]++;
 					if (value !== '_=_') {
-							cov_b4rhyn1pt.b[4][0]++;
-							cov_b4rhyn1pt.s[15]++;
+							cov_1bgw42715k.b[4][0]++;
+							cov_1bgw42715k.s[15]++;
 							_localStorage2.default.set(key, value);
 						} else {
-						cov_b4rhyn1pt.b[4][1]++;
-					}cov_b4rhyn1pt.s[16]++;
+						cov_1bgw42715k.b[4][1]++;
+					}cov_1bgw42715k.s[16]++;
 					define_property(user_session, key);
 				});
 			} else {
-				cov_b4rhyn1pt.b[3][1]++;
+				cov_1bgw42715k.b[3][1]++;
 
-				var vv = (cov_b4rhyn1pt.s[17]++, user_session[key]());
-				cov_b4rhyn1pt.s[18]++;
+				var vv = (cov_1bgw42715k.s[17]++, user_session[key]());
+				cov_1bgw42715k.s[18]++;
 				if (vv !== '_=_') {
-						cov_b4rhyn1pt.b[5][0]++;
-						cov_b4rhyn1pt.s[19]++;
+						cov_1bgw42715k.b[5][0]++;
+						cov_1bgw42715k.s[19]++;
 						_localStorage2.default.set(key, vv);
 					} else {
-					cov_b4rhyn1pt.b[5][1]++;
-				}cov_b4rhyn1pt.s[20]++;
+					cov_1bgw42715k.b[5][1]++;
+				}cov_1bgw42715k.s[20]++;
 				define_property(user_session, key);
 			}
 		} else {
-			cov_b4rhyn1pt.b[2][1]++;
+			cov_1bgw42715k.b[2][1]++;
 
-			var value = (cov_b4rhyn1pt.s[21]++, user_session[key]);
-			cov_b4rhyn1pt.s[22]++;
+			var value = (cov_1bgw42715k.s[21]++, user_session[key]);
+			cov_1bgw42715k.s[22]++;
 			if (value !== '_=_') {
-					cov_b4rhyn1pt.b[6][0]++;
-					cov_b4rhyn1pt.s[23]++;
+					cov_1bgw42715k.b[6][0]++;
+					cov_1bgw42715k.s[23]++;
 					_localStorage2.default.set(key, value);
 				} else {
-				cov_b4rhyn1pt.b[6][1]++;
-			}cov_b4rhyn1pt.s[24]++;
+				cov_1bgw42715k.b[6][1]++;
+			}cov_1bgw42715k.s[24]++;
 			define_property(user_session, key);
 		}
 	}
-	cov_b4rhyn1pt.s[25]++;
+	cov_1bgw42715k.s[25]++;
 	return user_session;
 }
 

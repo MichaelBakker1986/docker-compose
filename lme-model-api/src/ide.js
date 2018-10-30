@@ -177,13 +177,13 @@ angular.module('lmeapp', ['angular.filter'])
 		})
 	}
 
-	$scope.previewRestApi = function() {
+	$scope.previewRestApi = () => {
 		$scope.reloadFFL()
-		Pace.track(function() {
+		Pace.track(() => {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
-			}, function(data) {
-				window.open('data-docs/?url=%2Fdata-api-docs#!/default/' + $scope.session.fflModelPath)
+			}, () => {
+				window.open(`/swagger/?url=/${$scope.session.fflModelPath}/${$scope.session.model_version}/data-api-docs`)
 			})
 		})
 	}

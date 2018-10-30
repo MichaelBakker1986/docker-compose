@@ -5,8 +5,8 @@
   "main": "dist/",
   "source": "index.js",
   "scripts": {
-    "build": "babel . --ignore node_modules,dist,tests -d dist/",
-    "prepare": "npm run test && npm run build",
+    "build": "echo all in prepare",
+    "prepare": "babel . --ignore node_modules,dist,tests -d dist/",
     "test": "node -r babel-register tests",
     "source": "sh ./node_modules/.bin/esdoc"
   },

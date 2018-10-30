@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_27zmzsia0m = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\FFLWebpackConverter.js',
-	    hash = '6a42e0868a03b71d9a96e94cd6dd1b670142084a',
+var cov_11znzxxrt3 = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\FFLWebpackConverter.js',
+	    hash = 'f92c1d689101dfcd44ee22a601d8682b51283425',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\FFLWebpackConverter.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\FFLWebpackConverter.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -994,28 +994,28 @@ var _Constants = require('../../lme-core/src/Constants');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /** Combine workspace into a REST-API js **/
-var fileType = (cov_27zmzsia0m.s[0]++, '.ffl');
-var compilers = (cov_27zmzsia0m.s[1]++, {});
-var javascript_filename = (cov_27zmzsia0m.s[2]++, 'frontend.js');
-var resources_folder = (cov_27zmzsia0m.s[3]++, _path2.default.join(__dirname, '/../../git-connect/resources/'));
-var modelName = (cov_27zmzsia0m.s[4]++, (cov_27zmzsia0m.b[0][0]++, process.argv[2]) || (cov_27zmzsia0m.b[0][1]++, 'KSP'));
-cov_27zmzsia0m.s[5]++;
+var fileType = (cov_11znzxxrt3.s[0]++, '.ffl');
+var compilers = (cov_11znzxxrt3.s[1]++, {});
+var javascript_filename = (cov_11znzxxrt3.s[2]++, 'frontend.js');
+var resources_folder = (cov_11znzxxrt3.s[3]++, _path2.default.join(__dirname, '/../../git-connect/resources/'));
+var modelName = (cov_11znzxxrt3.s[4]++, (cov_11znzxxrt3.b[0][0]++, process.argv[2]) || (cov_11znzxxrt3.b[0][1]++, 'KSP'));
+cov_11znzxxrt3.s[5]++;
 var excel_file_name_quick_fix = function excel_file_name_quick_fix(modelName) {
-	cov_27zmzsia0m.f[0]++;
-	cov_27zmzsia0m.s[6]++;
-	return modelName.startsWith('_tmp_') ? (cov_27zmzsia0m.b[1][0]++, modelName.split('_').slice(-1)[0]) : (cov_27zmzsia0m.b[1][1]++, modelName);
+	cov_11znzxxrt3.f[0]++;
+	cov_11znzxxrt3.s[6]++;
+	return modelName.startsWith('_tmp_') ? (cov_11znzxxrt3.b[1][0]++, modelName.split('_').slice(-1)[0]) : (cov_11znzxxrt3.b[1][1]++, modelName);
 };
-var xlsx_name = (cov_27zmzsia0m.s[7]++, excel_file_name_quick_fix(modelName));
+var xlsx_name = (cov_11znzxxrt3.s[7]++, excel_file_name_quick_fix(modelName));
 
-cov_27zmzsia0m.s[8]++;
+cov_11znzxxrt3.s[8]++;
 var resolveCompiler = function resolveCompiler(memory_fs, filename, json_data) {
-	cov_27zmzsia0m.f[1]++;
+	cov_11znzxxrt3.f[1]++;
 
-	var compiler = (cov_27zmzsia0m.s[9]++, compilers[filename]);
-	cov_27zmzsia0m.s[10]++;
+	var compiler = (cov_11znzxxrt3.s[9]++, compilers[filename]);
+	cov_11znzxxrt3.s[10]++;
 	if (!compiler) {
-		cov_27zmzsia0m.b[2][0]++;
-		cov_27zmzsia0m.s[11]++;
+		cov_11znzxxrt3.b[2][0]++;
+		cov_11znzxxrt3.s[11]++;
 
 		compiler = (0, _webpack2.default)({
 			entry: [_path2.default.resolve(__dirname, filename)],
@@ -1041,14 +1041,14 @@ var resolveCompiler = function resolveCompiler(memory_fs, filename, json_data) {
 			})],
 			devtool: 'inline-source-map'
 		});
-		cov_27zmzsia0m.s[12]++;
+		cov_11znzxxrt3.s[12]++;
 		compiler.outputFileSystem = memory_fs;
-		cov_27zmzsia0m.s[13]++;
+		cov_11znzxxrt3.s[13]++;
 		compilers[filename] = compiler;
 	} else {
-		cov_27zmzsia0m.b[2][1]++;
+		cov_11znzxxrt3.b[2][1]++;
 	}
-	cov_27zmzsia0m.s[14]++;
+	cov_11znzxxrt3.s[14]++;
 	return compilers[filename];
 };
 
@@ -1057,11 +1057,11 @@ var FFLWebpackCompiler = exports.FFLWebpackCompiler = function () {
 		var memory_fs = _ref.memory_fs,
 		    json_data = _ref.json_data;
 		(0, _classCallCheck3.default)(this, FFLWebpackCompiler);
-		cov_27zmzsia0m.f[2]++;
-		cov_27zmzsia0m.s[15]++;
+		cov_11znzxxrt3.f[2]++;
+		cov_11znzxxrt3.s[15]++;
 
 		this.memory_fs = memory_fs;
-		cov_27zmzsia0m.s[16]++;
+		cov_11znzxxrt3.s[16]++;
 		this.json_data = json_data;
 	}
 
@@ -1074,28 +1074,28 @@ var FFLWebpackCompiler = exports.FFLWebpackCompiler = function () {
 					while (1) {
 						switch (_context.prev = _context.next) {
 							case 0:
-								cov_27zmzsia0m.f[3]++;
-								memory_fs = (cov_27zmzsia0m.s[17]++, this.memory_fs);
-								compiler = (cov_27zmzsia0m.s[18]++, resolveCompiler(memory_fs, filename, this.json_data));
-								cov_27zmzsia0m.s[19]++;
+								cov_11znzxxrt3.f[3]++;
+								memory_fs = (cov_11znzxxrt3.s[17]++, this.memory_fs);
+								compiler = (cov_11znzxxrt3.s[18]++, resolveCompiler(memory_fs, filename, this.json_data));
+								cov_11znzxxrt3.s[19]++;
 								return _context.abrupt('return', new Promise(function (accept, reject) {
-									cov_27zmzsia0m.f[4]++;
-									cov_27zmzsia0m.s[20]++;
+									cov_11znzxxrt3.f[4]++;
+									cov_11znzxxrt3.s[20]++;
 
 									try {
-										cov_27zmzsia0m.s[21]++;
+										cov_11znzxxrt3.s[21]++;
 
 										compiler.run(function (err, stats) {
-											cov_27zmzsia0m.f[5]++;
-											cov_27zmzsia0m.s[22]++;
+											cov_11znzxxrt3.f[5]++;
+											cov_11znzxxrt3.s[22]++;
 
 											if (err) {
-													cov_27zmzsia0m.b[3][0]++;
-													cov_27zmzsia0m.s[23]++;
+													cov_11znzxxrt3.b[3][0]++;
+													cov_11znzxxrt3.s[23]++;
 													reject(err);
 												} else {
-												cov_27zmzsia0m.b[3][1]++;
-											}cov_27zmzsia0m.s[24]++;
+												cov_11znzxxrt3.b[3][1]++;
+											}cov_11znzxxrt3.s[24]++;
 											accept(stats.toString({
 												aggregateTimeout: 300,
 												poll: undefined,
@@ -1104,7 +1104,7 @@ var FFLWebpackCompiler = exports.FFLWebpackCompiler = function () {
 											}));
 										});
 									} catch (err) {
-										cov_27zmzsia0m.s[25]++;
+										cov_11znzxxrt3.s[25]++;
 
 										reject(err);
 									}
@@ -1133,19 +1133,19 @@ var FFLWebpackCompiler = exports.FFLWebpackCompiler = function () {
 					while (1) {
 						switch (_context2.prev = _context2.next) {
 							case 0:
-								cov_27zmzsia0m.f[6]++;
-								memory_fs = (cov_27zmzsia0m.s[26]++, new _memoryFs2.default());
-								webpackCompiler = (cov_27zmzsia0m.s[27]++, new FFLWebpackCompiler({ memory_fs: memory_fs, json_data: json_data }));
-								cov_27zmzsia0m.s[28]++;
+								cov_11znzxxrt3.f[6]++;
+								memory_fs = (cov_11znzxxrt3.s[26]++, new _memoryFs2.default());
+								webpackCompiler = (cov_11znzxxrt3.s[27]++, new FFLWebpackCompiler({ memory_fs: memory_fs, json_data: json_data }));
+								cov_11znzxxrt3.s[28]++;
 								_context2.next = 6;
 								return webpackCompiler.buildProductionFile(filename);
 
 							case 6:
 								stats = _context2.sent;
-								cov_27zmzsia0m.s[29]++;
+								cov_11znzxxrt3.s[29]++;
 
 								console.info(stats);
-								cov_27zmzsia0m.s[30]++;
+								cov_11znzxxrt3.s[30]++;
 								return _context2.abrupt('return', memory_fs.readFileSync(_path2.default.join(__dirname, javascript_filename), _Constants.ENCODING));
 
 							case 11:
@@ -1166,44 +1166,44 @@ var FFLWebpackCompiler = exports.FFLWebpackCompiler = function () {
 	return FFLWebpackCompiler;
 }();
 
-cov_27zmzsia0m.s[31]++;
+cov_11znzxxrt3.s[31]++;
 
 
 _ExcelApi2.default.loadExcelFile(xlsx_name).then(function (matrix) {
-	cov_27zmzsia0m.f[7]++;
-	cov_27zmzsia0m.s[32]++;
+	cov_11znzxxrt3.f[7]++;
+	cov_11znzxxrt3.s[32]++;
 
 	_SolutionFacade2.default.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }]);
 	var LME = void 0;
-	cov_27zmzsia0m.s[33]++;
+	cov_11znzxxrt3.s[33]++;
 	if (modelName.includes('SCORECARDTESTMODEL')) {
-		cov_27zmzsia0m.b[4][0]++;
-		cov_27zmzsia0m.s[34]++;
+		cov_11znzxxrt3.b[4][0]++;
+		cov_11znzxxrt3.s[34]++;
 
 		LME = new _lme.LmeAPI(_CustomImport2.default, new _Context.Context({ modelName: modelName }), _Constants.DETAIL_INTERVAL);
 	} else {
-		cov_27zmzsia0m.b[4][1]++;
-		cov_27zmzsia0m.s[35]++;
+		cov_11znzxxrt3.b[4][1]++;
+		cov_11znzxxrt3.s[35]++;
 
 		LME = new _lme.LmeAPI(null, new _Context.Context({ modelName: modelName }), null);
 	}
-	var rawData = (cov_27zmzsia0m.s[36]++, (0, _fs.readFileSync)('' + resources_folder + modelName + fileType, _Constants.ENCODING));
-	cov_27zmzsia0m.s[37]++;
+	var rawData = (cov_11znzxxrt3.s[36]++, (0, _fs.readFileSync)('' + resources_folder + modelName + fileType, _Constants.ENCODING));
+	cov_11znzxxrt3.s[37]++;
 	LME.importFFL(rawData);
-	var json_data = (cov_27zmzsia0m.s[38]++, LME.exportLME());
+	var json_data = (cov_11znzxxrt3.s[38]++, LME.exportLME());
 
-	cov_27zmzsia0m.s[39]++;
+	cov_11znzxxrt3.s[39]++;
 	FFLWebpackCompiler.readProductionFile('./lmeAPIWrapper.js', json_data).then(function (source) {
-		cov_27zmzsia0m.f[8]++;
+		cov_11znzxxrt3.f[8]++;
 
-		var destination_path = (cov_27zmzsia0m.s[40]++, _path2.default.join(resources_folder, modelName + '.js'));
-		cov_27zmzsia0m.s[41]++;
+		var destination_path = (cov_11znzxxrt3.s[40]++, _path2.default.join(resources_folder, modelName + '.js'));
+		cov_11znzxxrt3.s[41]++;
 		(0, _fs.createWriteStream)(destination_path).write(source);
-		cov_27zmzsia0m.s[42]++;
+		cov_11znzxxrt3.s[42]++;
 		(0, _log.info)('Done writing executable file to ' + destination_path + ' size: ' + source.length + ' ');
 	}).catch(function (err) {
-		cov_27zmzsia0m.f[9]++;
-		cov_27zmzsia0m.s[43]++;
+		cov_11znzxxrt3.f[9]++;
+		cov_11znzxxrt3.s[43]++;
 		return (0, _log.error)(err.stack);
 	});
 });

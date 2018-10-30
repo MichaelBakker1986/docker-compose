@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2bk5catymb = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\traefik\\src\\app.js',
-	    hash = 'fe1f75282b922d6cf4fef371d2a408ad4e68bbd0',
+var cov_14yo3gecak = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\traefik\\src\\app.js',
+	    hash = 'e57c6b740818cdb1e047f006e0c56934ce2be4f6',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\traefik\\src\\app.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\traefik\\src\\app.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -345,47 +345,47 @@ var _expressNoFavicons2 = _interopRequireDefault(_expressNoFavicons);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (cov_2bk5catymb.s[0]++, (0, _express2.default)());
+var app = (cov_14yo3gecak.s[0]++, (0, _express2.default)());
 
-cov_2bk5catymb.s[1]++;
+cov_14yo3gecak.s[1]++;
 app.use((0, _morgan2.default)('dev'));
-cov_2bk5catymb.s[2]++;
+cov_14yo3gecak.s[2]++;
 app.use((0, _cors2.default)());
-cov_2bk5catymb.s[3]++;
+cov_14yo3gecak.s[3]++;
 app.use(_express2.default.json());
-cov_2bk5catymb.s[4]++;
+cov_14yo3gecak.s[4]++;
 app.use(_express2.default.urlencoded({ extended: false }));
-cov_2bk5catymb.s[5]++;
+cov_14yo3gecak.s[5]++;
 app.use((0, _cookieParser2.default)());
-cov_2bk5catymb.s[6]++;
+cov_14yo3gecak.s[6]++;
 app.use((0, _expressNoFavicons2.default)());
 
-cov_2bk5catymb.s[7]++;
+cov_14yo3gecak.s[7]++;
 app.use('/', _index2.default);
 
 // catch 404 and forward to error handler
-cov_2bk5catymb.s[8]++;
+cov_14yo3gecak.s[8]++;
 app.use(function (req, res, next) {
-	cov_2bk5catymb.f[0]++;
-	cov_2bk5catymb.s[9]++;
+	cov_14yo3gecak.f[0]++;
+	cov_14yo3gecak.s[9]++;
 	next(createError(404));
 });
 
 // error handler
-cov_2bk5catymb.s[10]++;
+cov_14yo3gecak.s[10]++;
 app.use(function (err, req, res, next) {
-	cov_2bk5catymb.f[1]++;
-	cov_2bk5catymb.s[11]++;
+	cov_14yo3gecak.f[1]++;
+	cov_14yo3gecak.s[11]++;
 
 	// set locals, only providing error in development
 	res.locals.message = err.message;
-	cov_2bk5catymb.s[12]++;
-	res.locals.error = req.app.get('env') === 'development' ? (cov_2bk5catymb.b[0][0]++, err) : (cov_2bk5catymb.b[0][1]++, {});
+	cov_14yo3gecak.s[12]++;
+	res.locals.error = req.app.get('env') === 'development' ? (cov_14yo3gecak.b[0][0]++, err) : (cov_14yo3gecak.b[0][1]++, {});
 
 	// render the error page
-	cov_2bk5catymb.s[13]++;
-	res.status((cov_2bk5catymb.b[1][0]++, err.status) || (cov_2bk5catymb.b[1][1]++, 500));
-	cov_2bk5catymb.s[14]++;
+	cov_14yo3gecak.s[13]++;
+	res.status((cov_14yo3gecak.b[1][0]++, err.status) || (cov_14yo3gecak.b[1][1]++, 500));
+	cov_14yo3gecak.s[14]++;
 	res.end('error');
 });
 

@@ -1,28 +1,26 @@
 version: '2'
 services:
-  reverse-proxy:
-    image: traefik
-    command: '--api --docker'
-    ports:
-      - '80:80'
-      - '8080:8080'
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
+  KSP2-0.9:
+    image: 'michaelbakker1986/ksp2:0.9'
+    container_name: KSP2-0.9
+    environment:
+      ENV: debug
+      ENABLED_MODELS: KSP2
+      FIGURE_DB_STRING: 'postgresql://postgres:postgres@database:5432/lme'
+      HOST: 127.0.0.1
+      RESOURCES_PATH: resources
+      MODEL_VERSION: '0.9'
+      DATA_API_PORT: 80
     labels:
-    - 'traefik.enable=true'
-    - 'traefik.port=8080'
-    - 'traefik.frontend.rule=Host:appmodel.org'
-    - 'traefik.frontend.rule=Path:/dashboard'
-  whoami:
-    image: 'emilevauge/whoami:latest'
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.frontend.rule=Host:appmodel.org'
-      - 'traefik.frontend.rule=Path:/whoami/latest'
-  ksp:
-    image: 'michaelbakker1986/ksp:0.17'
-    labels:
-      - 'traefik.enable=true'
-      - 'traefik.port=8085'
-      - 'traefik.frontend.rule=Host:appmodel.org'
-      - 'traefik.frontend.rule=Path:/ksp/0.17'
+      traefik.enable: true
+      traefik.frontend.rule: 'Host:appmodel.org;PathPrefix:/KSP2/0.9/;PathPrefixStrip:/KSP2/0.9/'
+      traefik.docker.network: proxy
+      traefik.port: 80
+    networks:
+      - internal
+      - proxy
+networks:
+  proxy:
+    external: true
+  internal:
+    external: false

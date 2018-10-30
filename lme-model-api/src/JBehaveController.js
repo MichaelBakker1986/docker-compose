@@ -1,4 +1,4 @@
-import { StoryParser } from '../../model-tests/StoryParser'
+import { StoryParser } from './StoryParser'
 
 const newStoryTemplate =
 	      '{model_name} Score Basic\n' +
@@ -19,16 +19,16 @@ function JBehaveController($scope, $http, modelEngine, right_editor, user_sessio
 	$scope.saveJBehaveStory = function() {
 		const type = '.story'
 		Pace.track(function() {
-			$scope.saveFeedback = 'Saving story ' + $scope.session.fflModelPath + '… '
+			$scope.saveFeedback = `Saving story ${$scope.session.fflModelPath}… `
 			$scope.saveFeedbackTitle = 'Working on it... '
 			var data = right_editor.getValue()
-			$.post('saveJBehaveStory/' + $scope.session.fflModelPath, {
+			$.post(`saveJBehaveStory/${$scope.session.fflModelPath}`, {
 				data: data,
 				type: type
 			}, function(data) {
 				$scope.$apply(function() {
 					$scope.saveFeedbackTitle = 'Finished'
-					$scope.saveFeedback = data.status == 'fail' ? 'Failed saving story :' + data.reason : 'Done work.'
+					$scope.saveFeedback = data.status === 'fail' ? 'Failed saving story :' + data.reason : 'Done work.'
 					$scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.story'
 					$scope.session.disablePreviewButton = false
 					if (data.status === 'success') {
@@ -38,24 +38,24 @@ function JBehaveController($scope, $http, modelEngine, right_editor, user_sessio
 			})
 		})
 	}
-	$('.data-story').click(function(e) {
+	$('.data-story').click(() => {
 		self.updateStory(self.user_session.fflModelPath)
 	})
 	$scope.runJBehaveTest = function() {
-		var annotations = []
+		const annotations = []
 		const workbook = modelEngine.lme
 		workbook.clearValues()//Quick-fix to clear state, we should just create a copy of the current one.
-		var storyParser = new StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', workbook)
+		const storyParser = new StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', workbook)
 		storyParser.message = function(event) {
 			annotations.push({
 				row   : event.line - 1,
 				column: 0,
 				text  : event.result.message, // Or the Json reply from the parser
-				type  : event.result.status == 'fail' || event.result.status == 'error' ? 'error' : 'info' // also warning and information
+				type  : event.result.status === 'fail' || event.result.status === 'error' ? 'error' : 'info' // also warning and information
 			})
 			right_editor.setAnnotations(annotations)
 		}
-		storyParser.then = function(event) {
+		storyParser.then = function() {
 			$scope.session.messages.data.push({
 				text: 'jBehave tests done ' + storyParser.results.rate().toFixed(1) + '% passed'
 			})

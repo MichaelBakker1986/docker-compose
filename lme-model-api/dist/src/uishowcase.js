@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_18wrl2hfi2 = function () {
-    var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\uishowcase.js',
-        hash = '3772651a4f2e1dfd1682aec6b652ce8a8803155d',
+var cov_1pxvepa8jn = function () {
+    var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\uishowcase.js',
+        hash = '8b82fd4ef41b88dc1fc888972a7dc59147d69803',
         Function = function () {}.constructor,
         global = new Function('return this')(),
         gcv = '__coverage__',
         coverageData = {
-        path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\uishowcase.js',
+        path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\uishowcase.js',
         statementMap: {
             '0': {
                 start: {
@@ -562,18 +562,18 @@ var cov_18wrl2hfi2 = function () {
     return coverage[path] = coverageData;
 }();
 
-var params = (cov_18wrl2hfi2.s[0]++, window.location.href.split('#'));
-cov_18wrl2hfi2.s[1]++;
+var params = (cov_1pxvepa8jn.s[0]++, window.location.href.split('#'));
+cov_1pxvepa8jn.s[1]++;
 if (params.length == 1) {
-        cov_18wrl2hfi2.b[0][0]++;
-        cov_18wrl2hfi2.s[2]++;
+        cov_1pxvepa8jn.b[0][0]++;
+        cov_1pxvepa8jn.s[2]++;
         window.location.href = '#DEMO&DEMO';
     } else {
-    cov_18wrl2hfi2.b[0][1]++;
-}cov_18wrl2hfi2.s[3]++;
+    cov_1pxvepa8jn.b[0][1]++;
+}cov_1pxvepa8jn.s[3]++;
 angular.module('angapp', ["highcharts-ng"]).controller('lmeController', function ($scope, $http, $rootScope) {
-    cov_18wrl2hfi2.f[0]++;
-    cov_18wrl2hfi2.s[4]++;
+    cov_1pxvepa8jn.f[0]++;
+    cov_1pxvepa8jn.s[4]++;
 
     $scope.demos = [{
         name: "Formula example",
@@ -597,64 +597,64 @@ angular.module('angapp', ["highcharts-ng"]).controller('lmeController', function
         name: "Behaviors",
         ffl: "variable BEHAVIORS\n" + "{\n" + " title: \"Lease contract\";\n" + " datatype: string;\n" + " visible: 1;\n" + " locked: 1;\n" + " inputRequired: 1;\n" + " displaytype: memo;\n" + "}"
     }];
-    cov_18wrl2hfi2.s[5]++;
+    cov_1pxvepa8jn.s[5]++;
     $scope.loadFFL = function (ffl) {
-        cov_18wrl2hfi2.f[1]++;
-        cov_18wrl2hfi2.s[6]++;
+        cov_1pxvepa8jn.f[1]++;
+        cov_1pxvepa8jn.s[6]++;
 
         LMEMETA.importFFL("\nmodel TEST uses BaseModel\n{\nroot\n{\n" + ffl + "\n}\n}");
-        var webModel = (cov_18wrl2hfi2.s[7]++, LMEMETA.exportWebModel());
-        cov_18wrl2hfi2.s[8]++;
+        var webModel = (cov_1pxvepa8jn.s[7]++, LMEMETA.exportWebModel());
+        cov_1pxvepa8jn.s[8]++;
         for (var key in webModel.nodes) {
-            cov_18wrl2hfi2.s[9]++;
+            cov_1pxvepa8jn.s[9]++;
 
             $scope[key] = webModel.nodes[key];
         }
-        cov_18wrl2hfi2.s[10]++;
+        cov_1pxvepa8jn.s[10]++;
         LMEMETA.loadData(function (response) {
-            cov_18wrl2hfi2.f[2]++;
-            cov_18wrl2hfi2.s[11]++;
+            cov_1pxvepa8jn.f[2]++;
+            cov_1pxvepa8jn.s[11]++;
 
             $scope.$digest();
         });
     };
-    cov_18wrl2hfi2.s[12]++;
+    cov_1pxvepa8jn.s[12]++;
     $(window).bind('keydown', function (event) {
-        cov_18wrl2hfi2.f[3]++;
-        cov_18wrl2hfi2.s[13]++;
+        cov_1pxvepa8jn.f[3]++;
+        cov_1pxvepa8jn.s[13]++;
 
-        if ((cov_18wrl2hfi2.b[2][0]++, event.ctrlKey) || (cov_18wrl2hfi2.b[2][1]++, event.metaKey)) {
-            cov_18wrl2hfi2.b[1][0]++;
-            cov_18wrl2hfi2.s[14]++;
+        if ((cov_1pxvepa8jn.b[2][0]++, event.ctrlKey) || (cov_1pxvepa8jn.b[2][1]++, event.metaKey)) {
+            cov_1pxvepa8jn.b[1][0]++;
+            cov_1pxvepa8jn.s[14]++;
 
             switch (String.fromCharCode(event.which).toLowerCase()) {
                 case 's':
-                    cov_18wrl2hfi2.b[3][0]++;
-                    cov_18wrl2hfi2.s[15]++;
+                    cov_1pxvepa8jn.b[3][0]++;
+                    cov_1pxvepa8jn.s[15]++;
 
                     event.preventDefault();
-                    cov_18wrl2hfi2.s[16]++;
+                    cov_1pxvepa8jn.s[16]++;
                     $scope.saveData();
-                    cov_18wrl2hfi2.s[17]++;
+                    cov_1pxvepa8jn.s[17]++;
                     break;
             }
         } else {
-            cov_18wrl2hfi2.b[1][1]++;
+            cov_1pxvepa8jn.b[1][1]++;
         }
     });
-    cov_18wrl2hfi2.s[18]++;
+    cov_1pxvepa8jn.s[18]++;
     $scope.saveData = function () {
-        cov_18wrl2hfi2.f[4]++;
-        cov_18wrl2hfi2.s[19]++;
+        cov_1pxvepa8jn.f[4]++;
+        cov_1pxvepa8jn.s[19]++;
 
         Pace.start();
-        cov_18wrl2hfi2.s[20]++;
+        cov_1pxvepa8jn.s[20]++;
         LMEMETA.persistData(function (response) {
-            cov_18wrl2hfi2.f[5]++;
-            cov_18wrl2hfi2.s[21]++;
+            cov_1pxvepa8jn.f[5]++;
+            cov_1pxvepa8jn.s[21]++;
 
             $scope.$broadcast('someEvent', [1, 2, 3]);
-            cov_18wrl2hfi2.s[22]++;
+            cov_1pxvepa8jn.s[22]++;
             $scope.$digest();
         });
     };

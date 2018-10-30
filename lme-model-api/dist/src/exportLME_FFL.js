@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_dwhpvrzpt = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\exportLME_FFL.js',
-	    hash = '717e25fdf2cf3d4b4402c10cbd826978cd53a8cb',
+var cov_smy8yzqxg = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\exportLME_FFL.js',
+	    hash = '11ace9096b77c086483dee7b952e081491c0c972',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\exportLME_FFL.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\exportLME_FFL.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -603,83 +603,83 @@ var _ExcelApi2 = _interopRequireDefault(_ExcelApi);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var modelName = (cov_dwhpvrzpt.s[0]++, process.argv[2]);
-var fileType = (cov_dwhpvrzpt.s[1]++, '.ffl');
+var modelName = (cov_smy8yzqxg.s[0]++, process.argv[2]);
+var fileType = (cov_smy8yzqxg.s[1]++, '.ffl');
 
-cov_dwhpvrzpt.s[2]++;
+cov_smy8yzqxg.s[2]++;
 _index2.default.registerParser(_index3.RegisterPlainFFLDecorator);
 
 //quick-fix resolve XSLX modelName
-cov_dwhpvrzpt.s[3]++;
+cov_smy8yzqxg.s[3]++;
 if (!'_tmp_'.startsWith('_tmp_')) {
-		cov_dwhpvrzpt.b[0][0]++;
-		cov_dwhpvrzpt.s[4]++;
+		cov_smy8yzqxg.b[0][0]++;
+		cov_smy8yzqxg.s[4]++;
 		throw Error('error');
 	} else {
-	cov_dwhpvrzpt.b[0][1]++;
-}cov_dwhpvrzpt.s[5]++;
+	cov_smy8yzqxg.b[0][1]++;
+}cov_smy8yzqxg.s[5]++;
 var excel_file_name_quick_fix = function excel_file_name_quick_fix(modelName) {
-	cov_dwhpvrzpt.f[0]++;
-	cov_dwhpvrzpt.s[6]++;
-	return modelName.startsWith('_tmp_') ? (cov_dwhpvrzpt.b[1][0]++, modelName.split('_').slice(-1)[0]) : (cov_dwhpvrzpt.b[1][1]++, modelName);
+	cov_smy8yzqxg.f[0]++;
+	cov_smy8yzqxg.s[6]++;
+	return modelName.startsWith('_tmp_') ? (cov_smy8yzqxg.b[1][0]++, modelName.split('_').slice(-1)[0]) : (cov_smy8yzqxg.b[1][1]++, modelName);
 };
-var xlsx_name = (cov_dwhpvrzpt.s[7]++, excel_file_name_quick_fix(modelName));
+var xlsx_name = (cov_smy8yzqxg.s[7]++, excel_file_name_quick_fix(modelName));
 
-cov_dwhpvrzpt.s[8]++;
+cov_smy8yzqxg.s[8]++;
 _ExcelApi2.default.loadExcelFile(xlsx_name).then(function (matrix) {
-	cov_dwhpvrzpt.f[1]++;
-	cov_dwhpvrzpt.s[9]++;
+	cov_smy8yzqxg.f[1]++;
+	cov_smy8yzqxg.s[9]++;
 
 	_index.SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }]);
 	var LME = void 0;
-	cov_dwhpvrzpt.s[10]++;
+	cov_smy8yzqxg.s[10]++;
 	if (modelName.includes('SCORECARDTESTMODEL')) {
-		cov_dwhpvrzpt.b[2][0]++;
-		cov_dwhpvrzpt.s[11]++;
+		cov_smy8yzqxg.b[2][0]++;
+		cov_smy8yzqxg.s[11]++;
 
 		LME = new _lme.LmeAPI(_CustomImport2.default, new _index.Context({ modelName: modelName }), _index.DETAIL_INTERVAL);
 	} else {
-		cov_dwhpvrzpt.b[2][1]++;
-		cov_dwhpvrzpt.s[12]++;
+		cov_smy8yzqxg.b[2][1]++;
+		cov_smy8yzqxg.s[12]++;
 
 		LME = new _lme.LmeAPI(null, new _index.Context({ modelName: modelName }), null);
 	}
-	var rawData = (cov_dwhpvrzpt.s[13]++, (0, _fs.readFileSync)(__dirname + '/../../git-connect/resources/' + modelName + fileType, _index.ENCODING));
-	cov_dwhpvrzpt.s[14]++;
+	var rawData = (cov_smy8yzqxg.s[13]++, (0, _fs.readFileSync)(__dirname + '/../../git-connect/resources/' + modelName + fileType, _index.ENCODING));
+	cov_smy8yzqxg.s[14]++;
 	LME.importFFL(rawData);
-	var lmeExport = (cov_dwhpvrzpt.s[15]++, LME.exportLME());
-	var options = (cov_dwhpvrzpt.s[16]++, {
+	var lmeExport = (cov_smy8yzqxg.s[15]++, LME.exportLME());
+	var options = (cov_smy8yzqxg.s[16]++, {
 		insertGlobals: true,
 		insertGlobalVars: {
 			JSON_MODEL: function JSON_MODEL(file, dir) {
-				cov_dwhpvrzpt.f[2]++;
-				cov_dwhpvrzpt.s[17]++;
+				cov_smy8yzqxg.f[2]++;
+				cov_smy8yzqxg.s[17]++;
 
-				return file.endsWith('lmeAPIWrapper.js') ? (cov_dwhpvrzpt.b[3][0]++, lmeExport) : (cov_dwhpvrzpt.b[3][1]++, 'undefined');
+				return file.endsWith('lmeAPIWrapper.js') ? (cov_smy8yzqxg.b[3][0]++, lmeExport) : (cov_smy8yzqxg.b[3][1]++, 'undefined');
 			}
 		},
 		gzip: true,
 		minify: true,
 		debug: false
 	});
-	var b = (cov_dwhpvrzpt.s[18]++, (0, _browserify2.default)(options).ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*'));
-	cov_dwhpvrzpt.s[19]++;
+	var b = (cov_smy8yzqxg.s[18]++, (0, _browserify2.default)(options).ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*'));
+	cov_smy8yzqxg.s[19]++;
 	b.add(__dirname + '/../../lme-core/exchange_modules/presentation/webexport.js');
-	cov_dwhpvrzpt.s[20]++;
+	cov_smy8yzqxg.s[20]++;
 	b.add(__dirname + '/lmeAPIWrapper.js');
 
-	cov_dwhpvrzpt.s[21]++;
+	cov_smy8yzqxg.s[21]++;
 	b.transform(_babelify2.default, { presets: ['env'] });
-	cov_dwhpvrzpt.s[22]++;
+	cov_smy8yzqxg.s[22]++;
 	b.transform(_browserifyFastjson2.default);
-	var res = (cov_dwhpvrzpt.s[23]++, (0, _fs.createWriteStream)(__dirname + '/../../git-connect/resources/' + modelName + '.js'));
-	cov_dwhpvrzpt.s[24]++;
+	var res = (cov_smy8yzqxg.s[23]++, (0, _fs.createWriteStream)(__dirname + '/../../git-connect/resources/' + modelName + '.js'));
+	cov_smy8yzqxg.s[24]++;
 	b.bundle().pipe(res);
 }).catch(function (err) {
-	cov_dwhpvrzpt.f[3]++;
-	cov_dwhpvrzpt.s[25]++;
+	cov_smy8yzqxg.f[3]++;
+	cov_smy8yzqxg.s[25]++;
 
 	(0, _log.error)(err);
-	cov_dwhpvrzpt.s[26]++;
+	cov_smy8yzqxg.s[26]++;
 	process.exit(1);
 });

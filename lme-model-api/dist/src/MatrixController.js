@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2ffz6851wv = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\MatrixController.js',
-	    hash = 'a306cd10611ca367bad3a3b560ca5c61f016d7a1',
+var cov_ue73mbxvc = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\MatrixController.js',
+	    hash = '00258357ef4966a1b05e29864e439a4f79534ca4',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\MatrixController.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\MatrixController.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -444,72 +444,72 @@ exports.MatrixController = undefined;
 var _ace_editor_api = require('./ace_editor_api');
 
 function MatrixController($scope, $http, matrixManager, opts) {
-	cov_2ffz6851wv.f[0]++;
-	cov_2ffz6851wv.s[0]++;
+	cov_ue73mbxvc.f[0]++;
+	cov_ue73mbxvc.s[0]++;
 
 	this.$scope = $scope;
-	cov_2ffz6851wv.s[1]++;
+	cov_ue73mbxvc.s[1]++;
 	this.$http = $http;
-	cov_2ffz6851wv.s[2]++;
+	cov_ue73mbxvc.s[2]++;
 	this.matrixManager = matrixManager;
-	cov_2ffz6851wv.s[3]++;
+	cov_ue73mbxvc.s[3]++;
 	$scope.matrix_tables = matrixManager.matrix;
-	cov_2ffz6851wv.s[4]++;
+	cov_ue73mbxvc.s[4]++;
 	this.matrix_editor = new _ace_editor_api.AceEditor('matrix_editor', opts);
 }
 
-cov_2ffz6851wv.s[5]++;
+cov_ue73mbxvc.s[5]++;
 MatrixController.prototype.registerEditorToClickNames = function (fflEditor, user_session, register, workbook) {
-	cov_2ffz6851wv.f[1]++;
-	cov_2ffz6851wv.s[6]++;
+	cov_ue73mbxvc.f[1]++;
+	cov_ue73mbxvc.s[6]++;
 
 	this.matrix_editor.registerEditorToClickNames(this.matrix_editor, fflEditor, user_session, register, workbook);
 };
-cov_2ffz6851wv.s[7]++;
+cov_ue73mbxvc.s[7]++;
 MatrixController.prototype.refresh = function () {
-	cov_2ffz6851wv.f[2]++;
+	cov_ue73mbxvc.f[2]++;
 
-	var annotations = (cov_2ffz6851wv.s[8]++, []);
-	cov_2ffz6851wv.s[9]++;
+	var annotations = (cov_ue73mbxvc.s[8]++, []);
+	cov_ue73mbxvc.s[9]++;
 	annotations.push({
 		row: 0,
 		column: 0,
 		text: 'Named tables found in matrix file', // Or the Json reply from the parser
 		type: 'info'
 	});
-	cov_2ffz6851wv.s[10]++;
+	cov_ue73mbxvc.s[10]++;
 	this.matrix_editor.setAnnotations(annotations);
 };
-cov_2ffz6851wv.s[11]++;
+cov_ue73mbxvc.s[11]++;
 MatrixController.prototype.updateMatrix = function (model_name) {
-	cov_2ffz6851wv.f[3]++;
+	cov_ue73mbxvc.f[3]++;
 
 	/**
   * Excel file->json via server
   */
-	var self = (cov_2ffz6851wv.s[12]++, this);
-	var $scope = (cov_2ffz6851wv.s[13]++, this.$scope);
-	cov_2ffz6851wv.s[14]++;
+	var self = (cov_ue73mbxvc.s[12]++, this);
+	var $scope = (cov_ue73mbxvc.s[13]++, this.$scope);
+	cov_ue73mbxvc.s[14]++;
 	$.getJSON('readExcel/' + model_name, function (data) {
-		cov_2ffz6851wv.f[4]++;
-		cov_2ffz6851wv.s[15]++;
+		cov_ue73mbxvc.f[4]++;
+		cov_ue73mbxvc.s[15]++;
 
 		//TODO: change to default funtions in the FunctionMap
 		global.MATRIX_VALUES = data;
-		cov_2ffz6851wv.s[16]++;
+		cov_ue73mbxvc.s[16]++;
 		self.matrixManager.setMatrices(data);
-		cov_2ffz6851wv.s[17]++;
+		cov_ue73mbxvc.s[17]++;
 		$scope.$apply(function () {
-			cov_2ffz6851wv.f[5]++;
-			cov_2ffz6851wv.s[18]++;
+			cov_ue73mbxvc.f[5]++;
+			cov_ue73mbxvc.s[18]++;
 
 			self.matrix_editor.aceEditor.setValue(self.matrixManager.toFatrix());
-			cov_2ffz6851wv.s[19]++;
+			cov_ue73mbxvc.s[19]++;
 			self.matrix_editor.scrollTop();
 		});
 	}).fail(function (err) {
-		cov_2ffz6851wv.f[6]++;
-		cov_2ffz6851wv.s[20]++;
+		cov_ue73mbxvc.f[6]++;
+		cov_ue73mbxvc.s[20]++;
 
 		console.error('Error reading excel file ' + model_name, err);
 	});

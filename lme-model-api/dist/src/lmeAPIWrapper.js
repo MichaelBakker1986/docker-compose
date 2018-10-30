@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1ba1mdvxtz = function () {
-  var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\lmeAPIWrapper.js',
-      hash = 'eff3d8a5929a06282b823b58b30c6f24d0692467',
+var cov_wab1x7da1 = function () {
+  var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\lmeAPIWrapper.js',
+      hash = '8feb84817e24e8b808d48b89b3d2ed5bb6c69b16',
       Function = function () {}.constructor,
       global = new Function('return this')(),
       gcv = '__coverage__',
       coverageData = {
-    path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\lmeAPIWrapper.js',
+    path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\lmeAPIWrapper.js',
     statementMap: {
       '0': {
         start: {
@@ -96,17 +96,17 @@ var cov_1ba1mdvxtz = function () {
 
 var _lme = require('./lme');
 
-cov_1ba1mdvxtz.s[0]++;
+cov_wab1x7da1.s[0]++;
 
 
 window.log = {};
-var LMEMETA = (cov_1ba1mdvxtz.s[1]++, new _lme.LmeAPI(undefined, undefined, undefined, undefined));
+var LMEMETA = (cov_wab1x7da1.s[1]++, new _lme.LmeAPI(undefined, undefined, undefined, undefined));
 
-cov_1ba1mdvxtz.s[2]++;
+cov_wab1x7da1.s[2]++;
 LMEMETA.importLME(global.JSON_MODEL); //JSON_MODEL is injected by browserify
-cov_1ba1mdvxtz.s[3]++;
+cov_wab1x7da1.s[3]++;
 window.LME = LMEMETA.exportWebModel();
-cov_1ba1mdvxtz.s[4]++;
+cov_wab1x7da1.s[4]++;
 window['LMEMETA'] = LMEMETA;
-cov_1ba1mdvxtz.s[5]++;
+cov_wab1x7da1.s[5]++;
 global['LMEMETA'] = LMEMETA;

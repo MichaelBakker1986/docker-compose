@@ -1,0 +1,32 @@
+version: '2'
+services:
+  reverse-proxy:
+    image: traefik
+    command: '--api --docker'
+    ports:
+    - '80:80'
+    - '8080:8080'
+    volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+    labels:
+    - 'traefik.enable=true'
+    - 'traefik.port=8080'
+    - 'traefik.frontend.rule=Host:lvh.me'
+    - 'traefik.frontend.rule=Path:/dashboard'
+  docker_build:
+    image: 'compose_manager:0.0.6'
+    labels:
+    - 'traefik.enable=true'
+    - 'traefik.port=3000'
+    - 'traefik.frontend.rule=Host:lvh.me'
+    - 'traefik.frontend.rule=Path:/apis'
+    ports:
+    - 3000:80
+    environment:
+    - DOMAIN_ROOT='lvh.me'
+    - PORT=3000
+  whoami:
+    image: 'emilevauge/whoami:latest'
+    labels:
+    - 'traefik.frontend.rule=Host:lvh.me'
+    - 'traefik.frontend.rule=Path:/whoami/latest'

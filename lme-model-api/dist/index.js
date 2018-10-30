@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_voirihup3 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\index.js',
-	    hash = '0311da39c48511cb266df1ec33837fc00fa4fc56',
+var cov_2be0d32h2r = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\index.js',
+	    hash = 'db8b9149e5ff9d5aa75d7a4193e602632f00d77c',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\index.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\index.js',
 		statementMap: {},
 		fnMap: {},
 		branchMap: {},

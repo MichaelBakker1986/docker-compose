@@ -12,12 +12,12 @@ services:
     - '443:443'
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
-    - 'c:/Users/michael/Documents/lme/traefik/traefik.toml:/traefik.toml'
+    - './traefik.toml:/traefik.toml'
     labels:
       traefik.backend: "traefik"
       traefik.enable: true
       traefik.port: 8080
-      traefik.frontend.rule: "Host:appmodel.org"
+      traefik.frontend.rule: "Host:lvh.me"
     networks:
     - proxy
 

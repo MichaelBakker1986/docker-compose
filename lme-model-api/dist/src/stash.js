@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1gvvbtr22u = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\stash.js',
-	    hash = 'b43e08e6369f90770ef7b2d7f8b4baa6cf3d2241',
+var cov_11gg38n0u4 = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\stash.js',
+	    hash = '271c7e62c0023e47dbda8088f14b0a9d8fb6f3bc',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\stash.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\stash.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2217,65 +2217,65 @@ var _path2 = _interopRequireDefault(_path);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var host = (cov_1gvvbtr22u.s[0]++, (cov_1gvvbtr22u.b[0][0]++, process.env.HOST) || (cov_1gvvbtr22u.b[0][1]++, '127.0.0.1'));
-var internal_proxy_port = (cov_1gvvbtr22u.s[1]++, (cov_1gvvbtr22u.b[1][0]++, process.env.INTERNAL_PROXY_PORT) || (cov_1gvvbtr22u.b[1][1]++, 7081));
-var domain = (cov_1gvvbtr22u.s[2]++, (cov_1gvvbtr22u.b[2][0]++, process.env.DOMAIN) || (cov_1gvvbtr22u.b[2][1]++, host + ':' + internal_proxy_port + '/id/guest'));
+var host = (cov_11gg38n0u4.s[0]++, (cov_11gg38n0u4.b[0][0]++, process.env.HOST) || (cov_11gg38n0u4.b[0][1]++, '127.0.0.1'));
+var internal_proxy_port = (cov_11gg38n0u4.s[1]++, (cov_11gg38n0u4.b[1][0]++, process.env.INTERNAL_PROXY_PORT) || (cov_11gg38n0u4.b[1][1]++, 7081));
+var domain = (cov_11gg38n0u4.s[2]++, (cov_11gg38n0u4.b[2][0]++, process.env.DOMAIN) || (cov_11gg38n0u4.b[2][1]++, host + ':' + internal_proxy_port + '/id/guest'));
 
-var develop = (cov_1gvvbtr22u.s[3]++, !process.env.DOMAIN);
+var develop = (cov_11gg38n0u4.s[3]++, !process.env.DOMAIN);
 
 //make git ls-files-root alias
-cov_1gvvbtr22u.s[4]++;
+cov_11gg38n0u4.s[4]++;
 (0, _childProcessPromise.exec)('git config --global alias.ls-files-root "! git ls-files"').then(function () {
-	cov_1gvvbtr22u.f[0]++;
-	cov_1gvvbtr22u.s[5]++;
+	cov_11gg38n0u4.f[0]++;
+	cov_11gg38n0u4.s[5]++;
 	return (0, _log.debug)('Added "git ls-files"');
 }).catch(function () {
-	cov_1gvvbtr22u.f[1]++;
-	cov_1gvvbtr22u.s[6]++;
+	cov_11gg38n0u4.f[1]++;
+	cov_11gg38n0u4.s[6]++;
 	return (0, _log.error)('Cannot symlink "git ls-files"');
 });
 
 var Stash = function () {
 	function Stash() {
 		(0, _classCallCheck3.default)(this, Stash);
-		cov_1gvvbtr22u.f[2]++;
+		cov_11gg38n0u4.f[2]++;
 	}
 
 	(0, _createClass3.default)(Stash, [{
 		key: 'preview',
 		value: function preview(user_id, name, data) {
-			cov_1gvvbtr22u.f[3]++;
+			cov_11gg38n0u4.f[3]++;
 
-			var tempHash = (cov_1gvvbtr22u.s[7]++, '_tmp_' + (0, _uuid2.default)() + '_' + name);
-			cov_1gvvbtr22u.s[8]++;
+			var tempHash = (cov_11gg38n0u4.s[7]++, '_tmp_' + (0, _uuid2.default)() + '_' + name);
+			cov_11gg38n0u4.s[8]++;
 			return (0, _nodeFsWritefilePromise2.default)(_path2.default.join(__dirname, '/../../git-connect/resources/' + tempHash + '.ffl'), data).then(function () {
-				cov_1gvvbtr22u.f[4]++;
-				cov_1gvvbtr22u.s[9]++;
+				cov_11gg38n0u4.f[4]++;
+				cov_11gg38n0u4.s[9]++;
 
 				return (0, _childProcessPromise.exec)('node -r babel-register ' + __dirname + '/FFLWebpackConverter.js ' + tempHash).then(function (result) {
-					cov_1gvvbtr22u.f[5]++;
-					cov_1gvvbtr22u.s[10]++;
+					cov_11gg38n0u4.f[5]++;
+					cov_11gg38n0u4.s[10]++;
 
 					if (result.stderr) {
-							cov_1gvvbtr22u.b[3][0]++;
-							cov_1gvvbtr22u.s[11]++;
+							cov_11gg38n0u4.b[3][0]++;
+							cov_11gg38n0u4.s[11]++;
 							throw Error(result.stderr);
 						} else {
-						cov_1gvvbtr22u.b[3][1]++;
-					}var userID = (cov_1gvvbtr22u.s[12]++, (0, _uuid2.default)());
-					cov_1gvvbtr22u.s[13]++;
+						cov_11gg38n0u4.b[3][1]++;
+					}var userID = (cov_11gg38n0u4.s[12]++, (0, _uuid2.default)());
+					cov_11gg38n0u4.s[13]++;
 					console.info('<span>Temporary model update:</span><a href="http://' + domain + '/scorecard.html#' + tempHash + '&' + userID + '">' + name + '</a><span></span>');
-					cov_1gvvbtr22u.s[14]++;
+					cov_11gg38n0u4.s[14]++;
 					return tempHash;
 				}).catch(function (err) {
-					cov_1gvvbtr22u.f[6]++;
-					cov_1gvvbtr22u.s[15]++;
+					cov_11gg38n0u4.f[6]++;
+					cov_11gg38n0u4.s[15]++;
 
 					throw Error('Failed to write or compile javascript\n ' + err.toString());
 				});
 			}).catch(function (err) {
-				cov_1gvvbtr22u.f[7]++;
-				cov_1gvvbtr22u.s[16]++;
+				cov_11gg38n0u4.f[7]++;
+				cov_11gg38n0u4.s[16]++;
 
 				throw Error('Failed to write file to resources folder ' + err.stack);
 			});
@@ -2283,53 +2283,53 @@ var Stash = function () {
 	}, {
 		key: 'commitJBehaveFile',
 		value: function commitJBehaveFile(user_id, name, data) {
-			cov_1gvvbtr22u.f[8]++;
-			cov_1gvvbtr22u.s[17]++;
+			cov_11gg38n0u4.f[8]++;
+			cov_11gg38n0u4.s[17]++;
 
 			return (0, _nodeFsWritefilePromise2.default)(__dirname + '/../../git-connect/resources/' + name + '.story', data).then(function () {
-				cov_1gvvbtr22u.f[9]++;
+				cov_11gg38n0u4.f[9]++;
 
-				var userID = (cov_1gvvbtr22u.s[18]++, (0, _uuid2.default)());
-				cov_1gvvbtr22u.s[19]++;
+				var userID = (cov_11gg38n0u4.s[18]++, (0, _uuid2.default)());
+				cov_11gg38n0u4.s[19]++;
 				if (develop) {
-					cov_1gvvbtr22u.b[4][0]++;
-					cov_1gvvbtr22u.s[20]++;
+					cov_11gg38n0u4.b[4][0]++;
+					cov_11gg38n0u4.s[20]++;
 
 					console.info('<span>Story update:</span><a href="http://' + domain + 'ide.html#' + name + '&' + userID + '">' + name + '</a><span></span>');
-					cov_1gvvbtr22u.s[21]++;
+					cov_11gg38n0u4.s[21]++;
 					return 'Done';
 				} else {
-					cov_1gvvbtr22u.b[4][1]++;
+					cov_11gg38n0u4.b[4][1]++;
 				}
-				var command = (cov_1gvvbtr22u.s[22]++, 'git pull &&  git commit -a -m "Story update [' + name + '] by ' + user_id + '@' + host + '" && git push && git rev-parse HEAD');
-				cov_1gvvbtr22u.s[23]++;
+				var command = (cov_11gg38n0u4.s[22]++, 'git pull &&  git commit -a -m "Story update [' + name + '] by ' + user_id + '@' + host + '" && git push && git rev-parse HEAD');
+				cov_11gg38n0u4.s[23]++;
 				return (0, _childProcessPromise.exec)(command).then(function (ok) {
-					cov_1gvvbtr22u.f[10]++;
+					cov_11gg38n0u4.f[10]++;
 
-					var output = (cov_1gvvbtr22u.s[24]++, ok.stdout.split('\n'));
-					var stashCommit = (cov_1gvvbtr22u.s[25]++, '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>');
-					cov_1gvvbtr22u.s[26]++;
+					var output = (cov_11gg38n0u4.s[24]++, ok.stdout.split('\n'));
+					var stashCommit = (cov_11gg38n0u4.s[25]++, '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>');
+					cov_11gg38n0u4.s[26]++;
 					console.info('<a href="http://' + domain + 'ide.html#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + '@' + host + '</span>');
 				}).catch(function (err) {
-					cov_1gvvbtr22u.f[11]++;
+					cov_11gg38n0u4.f[11]++;
 
-					var errorData = (cov_1gvvbtr22u.s[27]++, err.toString());
-					cov_1gvvbtr22u.s[28]++;
+					var errorData = (cov_11gg38n0u4.s[27]++, err.toString());
+					cov_11gg38n0u4.s[28]++;
 					if (errorData.indexOf('No changes detected') > -1) {
-						cov_1gvvbtr22u.b[5][0]++;
-						cov_1gvvbtr22u.s[29]++;
+						cov_11gg38n0u4.b[5][0]++;
+						cov_11gg38n0u4.s[29]++;
 
 						return 'No changes detected in file.';
 					} else {
-						cov_1gvvbtr22u.b[5][1]++;
-						cov_1gvvbtr22u.s[30]++;
+						cov_11gg38n0u4.b[5][1]++;
+						cov_11gg38n0u4.s[30]++;
 
 						throw Error('GIT commit failed while pushing file to repository:[' + errorData + ']');
 					}
 				});
 			}).catch(function (err) {
-				cov_1gvvbtr22u.f[12]++;
-				cov_1gvvbtr22u.s[31]++;
+				cov_11gg38n0u4.f[12]++;
+				cov_11gg38n0u4.s[31]++;
 
 				throw Error('Failed to write file to resources folder. [' + err.toString() + ']');
 			});
@@ -2341,8 +2341,8 @@ var Stash = function () {
 	}, {
 		key: 'commit',
 		value: function commit(user_id, name, data, type) {
-			cov_1gvvbtr22u.f[13]++;
-			cov_1gvvbtr22u.s[32]++;
+			cov_11gg38n0u4.f[13]++;
+			cov_11gg38n0u4.s[32]++;
 
 			/*
     * Save delta's to the DB to keep track of history.
@@ -2350,80 +2350,80 @@ var Stash = function () {
     * The FFL file will always be pushed to master also
     */
 			try {
-				cov_1gvvbtr22u.s[33]++;
+				cov_11gg38n0u4.s[33]++;
 
 				_ModelStorage.ModelStorage.saveDelta(name, data);
 			} catch (err) {
-				cov_1gvvbtr22u.s[34]++;
+				cov_11gg38n0u4.s[34]++;
 
 				(0, _log.warn)('Failed saving delta to DB', err);
 			}
 			//transform ffl to JSON canvas file
-			cov_1gvvbtr22u.s[35]++;
-			return Promise.all([(0, _nodeFsWritefilePromise2.default)(__dirname + '/../../git-connect/resources/' + name + ((cov_1gvvbtr22u.b[6][0]++, type) || (cov_1gvvbtr22u.b[6][1]++, '.ffl')), data)]).then(function () {
-				cov_1gvvbtr22u.f[14]++;
-				cov_1gvvbtr22u.s[36]++;
+			cov_11gg38n0u4.s[35]++;
+			return Promise.all([(0, _nodeFsWritefilePromise2.default)(__dirname + '/../../git-connect/resources/' + name + ((cov_11gg38n0u4.b[6][0]++, type) || (cov_11gg38n0u4.b[6][1]++, '.ffl')), data)]).then(function () {
+				cov_11gg38n0u4.f[14]++;
+				cov_11gg38n0u4.s[36]++;
 
-				return Promise.all([(0, _childProcessPromise.exec)('node -r babel-register ' + __dirname + '/FFLWebpackConverter.js ' + name + ' ' + (type === '.ffl' ? (cov_1gvvbtr22u.b[7][0]++, 'FFL2') : (cov_1gvvbtr22u.b[7][1]++, 'FFL')))]).then(function (result) {
-					cov_1gvvbtr22u.f[15]++;
-					cov_1gvvbtr22u.s[37]++;
+				return Promise.all([(0, _childProcessPromise.exec)('node -r babel-register ' + __dirname + '/FFLWebpackConverter.js ' + name + ' ' + (type === '.ffl' ? (cov_11gg38n0u4.b[7][0]++, 'FFL2') : (cov_11gg38n0u4.b[7][1]++, 'FFL')))]).then(function (result) {
+					cov_11gg38n0u4.f[15]++;
+					cov_11gg38n0u4.s[37]++;
 
 					if (result[0].stderr) {
-							cov_1gvvbtr22u.b[8][0]++;
-							cov_1gvvbtr22u.s[38]++;
+							cov_11gg38n0u4.b[8][0]++;
+							cov_11gg38n0u4.s[38]++;
 							throw Error(result[0].stderr);
 						} else {
-						cov_1gvvbtr22u.b[8][1]++;
-					}var userID = (cov_1gvvbtr22u.s[39]++, (0, _uuid2.default)());
-					cov_1gvvbtr22u.s[40]++;
+						cov_11gg38n0u4.b[8][1]++;
+					}var userID = (cov_11gg38n0u4.s[39]++, (0, _uuid2.default)());
+					cov_11gg38n0u4.s[40]++;
 					if (develop) {
-						cov_1gvvbtr22u.b[9][0]++;
-						cov_1gvvbtr22u.s[41]++;
+						cov_11gg38n0u4.b[9][0]++;
+						cov_11gg38n0u4.s[41]++;
 
 						console.info('<span>ffl model update:</span><a href="http://' + domain + '/#' + name + '&' + userID + '">' + name + '</a><span></span>');
-						cov_1gvvbtr22u.s[42]++;
+						cov_11gg38n0u4.s[42]++;
 						(0, _log.info)('[' + user_id + '] modified model file: [' + name + ']. Begin pushing to repository.'); //=> '/tmp/foo'
-						cov_1gvvbtr22u.s[43]++;
+						cov_11gg38n0u4.s[43]++;
 						return 'develop mode';
 					} else {
-						cov_1gvvbtr22u.b[9][1]++;
+						cov_11gg38n0u4.b[9][1]++;
 					}
-					var command = (cov_1gvvbtr22u.s[44]++, 'git pull &&  git commit -a -m "Model update [' + name + '] by ' + user_id + '@' + host + '" && git push && git rev-parse HEAD');
-					cov_1gvvbtr22u.s[45]++;
+					var command = (cov_11gg38n0u4.s[44]++, 'git pull &&  git commit -a -m "Model update [' + name + '] by ' + user_id + '@' + host + '" && git push && git rev-parse HEAD');
+					cov_11gg38n0u4.s[45]++;
 					return (0, _childProcessPromise.exec)(command).then(function (ok) {
-						cov_1gvvbtr22u.f[16]++;
+						cov_11gg38n0u4.f[16]++;
 
-						var output = (cov_1gvvbtr22u.s[46]++, ok.stdout.split('\n'));
-						var stashCommit = (cov_1gvvbtr22u.s[47]++, '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>');
+						var output = (cov_11gg38n0u4.s[46]++, ok.stdout.split('\n'));
+						var stashCommit = (cov_11gg38n0u4.s[47]++, '<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/' + output[output.length - 2] + '"> DIFF </a>');
 
-						cov_1gvvbtr22u.s[48]++;
+						cov_11gg38n0u4.s[48]++;
 						console.info('<a href="http://' + domain + '#' + name + '&' + userID + '"> ' + name + ' </a><span> Updated </span>' + stashCommit + '<span> By ' + user_id + '@' + host + '</span>');
 					}).catch(function (err) {
-						cov_1gvvbtr22u.f[17]++;
+						cov_11gg38n0u4.f[17]++;
 
-						var errorData = (cov_1gvvbtr22u.s[49]++, err.toString());
-						cov_1gvvbtr22u.s[50]++;
+						var errorData = (cov_11gg38n0u4.s[49]++, err.toString());
+						cov_11gg38n0u4.s[50]++;
 						if (errorData.includes('No changes detected')) {
-							cov_1gvvbtr22u.b[10][0]++;
-							cov_1gvvbtr22u.s[51]++;
+							cov_11gg38n0u4.b[10][0]++;
+							cov_11gg38n0u4.s[51]++;
 
 							return 'No changes detected in file.';
 						} else {
-							cov_1gvvbtr22u.b[10][1]++;
-							cov_1gvvbtr22u.s[52]++;
+							cov_11gg38n0u4.b[10][1]++;
+							cov_11gg38n0u4.s[52]++;
 
 							throw Error('GIT commit failed while pushing file to repository:[' + errorData + ']');
 						}
 					});
 				}).catch(function (err) {
-					cov_1gvvbtr22u.f[18]++;
-					cov_1gvvbtr22u.s[53]++;
+					cov_11gg38n0u4.f[18]++;
+					cov_11gg38n0u4.s[53]++;
 
 					throw Error('Failed to write or compile javascript. [' + err.toString() + ']');
 				});
 			}).catch(function (err) {
-				cov_1gvvbtr22u.f[19]++;
-				cov_1gvvbtr22u.s[54]++;
+				cov_11gg38n0u4.f[19]++;
+				cov_11gg38n0u4.s[54]++;
 
 				throw Error('Failed to write file to resources folder. [' + err.toString() + ']');
 			});
@@ -2431,44 +2431,44 @@ var Stash = function () {
 	}, {
 		key: 'models',
 		value: function models(branch, path) {
-			cov_1gvvbtr22u.f[20]++;
+			cov_11gg38n0u4.f[20]++;
 
-			var command = (cov_1gvvbtr22u.s[55]++, 'git ls-files-root *.' + path);
-			cov_1gvvbtr22u.s[56]++;
+			var command = (cov_11gg38n0u4.s[55]++, 'git ls-files-root *.' + path);
+			cov_11gg38n0u4.s[56]++;
 			return (0, _childProcessPromise.exec)(command).then(function (result) {
-				cov_1gvvbtr22u.f[21]++;
-				cov_1gvvbtr22u.s[57]++;
+				cov_11gg38n0u4.f[21]++;
+				cov_11gg38n0u4.s[57]++;
 
 				return result.stdout.replace(/.*[\/\\](.*)\.ffl/gmi, '$1').split('\n');
 			}).catch(function (err) {
-				cov_1gvvbtr22u.f[22]++;
-				cov_1gvvbtr22u.s[58]++;
+				cov_11gg38n0u4.f[22]++;
+				cov_11gg38n0u4.s[58]++;
 
 				if (err.code === 1) {
-					cov_1gvvbtr22u.b[11][0]++;
-					cov_1gvvbtr22u.s[59]++;
+					cov_11gg38n0u4.b[11][0]++;
+					cov_11gg38n0u4.s[59]++;
 
 					if (_log.DEBUG) {
-							cov_1gvvbtr22u.b[12][0]++;
-							cov_1gvvbtr22u.s[60]++;
+							cov_11gg38n0u4.b[12][0]++;
+							cov_11gg38n0u4.s[60]++;
 							(0, _log.debug)('while requesting ffl-models, cannot connect to remote git, falling back to local');
 						} else {
-						cov_1gvvbtr22u.b[12][1]++;
-					}cov_1gvvbtr22u.s[61]++;
+						cov_11gg38n0u4.b[12][1]++;
+					}cov_11gg38n0u4.s[61]++;
 					return (0, _childProcessPromise.exec)('git ls-files-root *.' + path).then(function (result) {
-						cov_1gvvbtr22u.f[23]++;
-						cov_1gvvbtr22u.s[62]++;
+						cov_11gg38n0u4.f[23]++;
+						cov_11gg38n0u4.s[62]++;
 
 						return result.stdout.replace(/.*[\/\\](.*)\.ffl/gmi, '$1').split('\n');
 					}).catch(function (err) {
-						cov_1gvvbtr22u.f[24]++;
-						cov_1gvvbtr22u.s[63]++;
+						cov_11gg38n0u4.f[24]++;
+						cov_11gg38n0u4.s[63]++;
 
 						throw Error('Cannot list files at all ' + err.stack);
 					});
 				} else {
-					cov_1gvvbtr22u.b[11][1]++;
-					cov_1gvvbtr22u.s[64]++;
+					cov_11gg38n0u4.b[11][1]++;
+					cov_11gg38n0u4.s[64]++;
 
 					throw Error('Failed to read local models. ' + err.stack);
 				}
@@ -2477,50 +2477,50 @@ var Stash = function () {
 	}, {
 		key: 'branches',
 		value: function branches() {
-			cov_1gvvbtr22u.f[25]++;
+			cov_11gg38n0u4.f[25]++;
 
-			var command = (cov_1gvvbtr22u.s[65]++, develop ? (cov_1gvvbtr22u.b[13][0]++, 'git branch') : (cov_1gvvbtr22u.b[13][1]++, 'git ls-remote --heads'));
-			cov_1gvvbtr22u.s[66]++;
+			var command = (cov_11gg38n0u4.s[65]++, develop ? (cov_11gg38n0u4.b[13][0]++, 'git branch') : (cov_11gg38n0u4.b[13][1]++, 'git ls-remote --heads'));
+			cov_11gg38n0u4.s[66]++;
 			return (0, _childProcessPromise.exec)(command).then(function (result) {
-				cov_1gvvbtr22u.f[26]++;
-				cov_1gvvbtr22u.s[67]++;
+				cov_11gg38n0u4.f[26]++;
+				cov_11gg38n0u4.s[67]++;
 
 				//split results with tabs and newlines, extract only the branch names
 				return result.stdout.split(/[\t\n]/).filter(function (element, index) {
-					cov_1gvvbtr22u.f[27]++;
-					cov_1gvvbtr22u.s[68]++;
+					cov_11gg38n0u4.f[27]++;
+					cov_11gg38n0u4.s[68]++;
 
 					return index % 2 !== 0;
 				});
 			}).catch(function (err) {
-				cov_1gvvbtr22u.f[28]++;
-				cov_1gvvbtr22u.s[69]++;
+				cov_11gg38n0u4.f[28]++;
+				cov_11gg38n0u4.s[69]++;
 
 				if (err.code === 128) {
-					cov_1gvvbtr22u.b[14][0]++;
-					cov_1gvvbtr22u.s[70]++;
+					cov_11gg38n0u4.b[14][0]++;
+					cov_11gg38n0u4.s[70]++;
 
 					(0, _log.debug)('while requesting remote branches, cannot connect to remote git, falling back to local');
-					cov_1gvvbtr22u.s[71]++;
+					cov_11gg38n0u4.s[71]++;
 					return (0, _childProcessPromise.exec)('git branch').then(function (result) {
-						cov_1gvvbtr22u.f[29]++;
-						cov_1gvvbtr22u.s[72]++;
+						cov_11gg38n0u4.f[29]++;
+						cov_11gg38n0u4.s[72]++;
 
 						return result.stdout.split(/[\t\n]/).filter(function (element, index) {
-							cov_1gvvbtr22u.f[30]++;
-							cov_1gvvbtr22u.s[73]++;
+							cov_11gg38n0u4.f[30]++;
+							cov_11gg38n0u4.s[73]++;
 
 							return index % 2 === 0;
 						});
 					}).catch(function (err) {
-						cov_1gvvbtr22u.f[31]++;
-						cov_1gvvbtr22u.s[74]++;
+						cov_11gg38n0u4.f[31]++;
+						cov_11gg38n0u4.s[74]++;
 
 						throw Error('Cannot resolve branches at all ' + err.stack);
 					});
 				} else {
-					cov_1gvvbtr22u.b[14][1]++;
-					cov_1gvvbtr22u.s[75]++;
+					cov_11gg38n0u4.b[14][1]++;
+					cov_11gg38n0u4.s[75]++;
 
 					throw Error('Failed to resolve branches.\n' + err.toString());
 				}
@@ -2530,7 +2530,7 @@ var Stash = function () {
 	return Stash;
 }();
 
-cov_1gvvbtr22u.s[76]++;
+cov_11gg38n0u4.s[76]++;
 
 
 exports.Stash = new Stash();

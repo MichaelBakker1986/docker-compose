@@ -1,5 +1,5 @@
 //just an dummy-template to quickly create a model
-import EconomicEditorView               from '../../model-tests/EconomicEditorView'
+import { EconomicEditorView }           from '../../lme-model-api/index'
 import $                                from 'jquery'
 import { FFLToRegister, ScorecardTool } from '../../ffl/index'
 

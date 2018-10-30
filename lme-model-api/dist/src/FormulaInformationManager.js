@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_p80wpaeg3 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\FormulaInformationManager.js',
-	    hash = 'f4c4921fea8ca2dfcff774bfc9f0561b956f2825',
+var cov_1qor954ulh = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\FormulaInformationManager.js',
+	    hash = 'be4180d0ced14ff1e4e90ae6393d48d13c140b79',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\FormulaInformationManager.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\FormulaInformationManager.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1405,7 +1405,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _FinFormula = require('../../ffl/FinFormula');
 
-var info = (cov_p80wpaeg3.s[0]++, {
+var info = (cov_1qor954ulh.s[0]++, {
 	NA: 1e-100,
 	'\\(': 'Open tag',
 	link: '(not documented yet) Links a variable to another',
@@ -1500,7 +1500,7 @@ var info = (cov_p80wpaeg3.s[0]++, {
 	display_options: 'Example: scorecard|displayAsSummation',
 	displayAsSummation: 'Display current variable as Total. Implied with "="modifier'
 });
-var functions = (cov_p80wpaeg3.s[1]++, {
+var functions = (cov_1qor954ulh.s[1]++, {
 	'addmonth': 'AddMonth(DMYtoDate(3,2,2006),11)|This function adds a number of months to a date.',
 	'afterstr': 'AfterStr(\'abc\',\'123abc567abc890\')=\'567\'|Not available',
 	'beforestr': 'BeforeStr(\'abc\',\'123abc567abc890\')=\'123\'|Returns the part of the text that comes before the given characters.',
@@ -1657,7 +1657,7 @@ var functions = (cov_p80wpaeg3.s[1]++, {
   return b.length - a.length;
   });*/
 	//func_names.join('|') + "|
-});var highlights = (cov_p80wpaeg3.s[2]++, {
+});var highlights = (cov_1qor954ulh.s[2]++, {
 	'variable.language': 'Exp|Output|RoundUp|DateToMonth|DateToYear|OnNeg|CumNormal|InvNormal|unscalable|scorecard|model|matrix|boolean|radio|Input|paragraph|root|uses|refers|to|date|On|Off|fileupload|displayAsSummation|percentage|average|document|column|flow|balance|select|number|invisible|currency|AMMOUNT|memo|SumFor|MinMax|Now|Round|HSUM|DateToDay|Val|OnNA|SubStr|TupleMax|String|ForAll|TupleSum|If|Pos|Length|EvaluateAsString|Str|MatrixLookup|GetValue|OnER|Min|AddMonth|ValueT|Count|SelectDescendants|TSUM|DMYtoDate|DataAvailable|InputRequired|Max|Case',
 	'keyword': 'Implies|top_separator|options_trend|BaseModel|options_notrend|link|bottom_separator|required|display_options|fixed_decimals|aggregation|formula|formula_notrend|formula_trend|datatype|choices|locked|visible|title|data_options|pattern|range|frequency|datatype|displaytype|options|options_title|top_blanklines|ffl_version|version|valid|hint',
 	'comment': '#|variable|tuple',
@@ -1666,30 +1666,30 @@ var functions = (cov_p80wpaeg3.s[1]++, {
 	'constant.language': 'NA|TupleIndex|T|TsY|X|YearInT'
 });
 
-cov_p80wpaeg3.s[3]++;
+cov_1qor954ulh.s[3]++;
 info.or = info.Or;
-cov_p80wpaeg3.s[4]++;
+cov_1qor954ulh.s[4]++;
 info.Max = info.MAX;
-cov_p80wpaeg3.s[5]++;
+cov_1qor954ulh.s[5]++;
 info.Min = info.MIN;
-cov_p80wpaeg3.s[6]++;
+cov_1qor954ulh.s[6]++;
 info.and = info.And;
 
 function FormulaInformationManager() {
-	cov_p80wpaeg3.f[0]++;
+	cov_1qor954ulh.f[0]++;
 
 
-	var definitions = (cov_p80wpaeg3.s[7]++, Object.keys(info));
-	cov_p80wpaeg3.s[8]++;
+	var definitions = (cov_1qor954ulh.s[7]++, Object.keys(info));
+	cov_1qor954ulh.s[8]++;
 	definitions.sort(function (a, b) {
-		cov_p80wpaeg3.f[1]++;
-		cov_p80wpaeg3.s[9]++;
+		cov_1qor954ulh.f[1]++;
+		cov_1qor954ulh.s[9]++;
 
 		// ASC  -> a.length - b.length
 		// DESC -> b.length - a.length
 		return b.length - a.length;
 	});
-	cov_p80wpaeg3.s[10]++;
+	cov_1qor954ulh.s[10]++;
 	this.definitions = definitions;
 }
 
@@ -1697,108 +1697,108 @@ function FormulaInformationManager() {
  * Easier than using esprima to parse...
  * Allow FIN language parsing. (not valid JavaScript)
  */
-cov_p80wpaeg3.s[11]++;
+cov_1qor954ulh.s[11]++;
 FormulaInformationManager.prototype.lookupFunction = function (name, line, offset) {
-	cov_p80wpaeg3.f[2]++;
-	cov_p80wpaeg3.s[12]++;
+	cov_1qor954ulh.f[2]++;
+	cov_1qor954ulh.s[12]++;
 
 	if (functions[name.toLowerCase()]) {
-		cov_p80wpaeg3.b[0][0]++;
+		cov_1qor954ulh.b[0][0]++;
 
-		var interesting_part = (cov_p80wpaeg3.s[13]++, line.substring(offset));
+		var interesting_part = (cov_1qor954ulh.s[13]++, line.substring(offset));
 		//lookup closing )
 		//extract "" Strings..
 		//fill in first_level_parameters
-		var open = (cov_p80wpaeg3.s[14]++, 0);
-		var first_open = (cov_p80wpaeg3.s[15]++, line.indexOf('(', offset));
-		var lastopen = (cov_p80wpaeg3.s[16]++, first_open);
-		var lastopen_part = (cov_p80wpaeg3.s[17]++, line.substring(lastopen));
-		var parts = (cov_p80wpaeg3.s[18]++, []);
-		var lastChar = (cov_p80wpaeg3.s[19]++, line.length);
+		var open = (cov_1qor954ulh.s[14]++, 0);
+		var first_open = (cov_1qor954ulh.s[15]++, line.indexOf('(', offset));
+		var lastopen = (cov_1qor954ulh.s[16]++, first_open);
+		var lastopen_part = (cov_1qor954ulh.s[17]++, line.substring(lastopen));
+		var parts = (cov_1qor954ulh.s[18]++, []);
+		var lastChar = (cov_1qor954ulh.s[19]++, line.length);
 		//assume first character is (
-		cov_p80wpaeg3.s[20]++;
+		cov_1qor954ulh.s[20]++;
 		if (line.charAt(lastopen) !== '(') {
-				cov_p80wpaeg3.b[1][0]++;
-				cov_p80wpaeg3.s[21]++;
+				cov_1qor954ulh.b[1][0]++;
+				cov_1qor954ulh.s[21]++;
 				throw Error('first char must be (');
 			} else {
-			cov_p80wpaeg3.b[1][1]++;
-		}cov_p80wpaeg3.s[22]++;
+			cov_1qor954ulh.b[1][1]++;
+		}cov_1qor954ulh.s[22]++;
 		for (var i = lastopen; i < line.length; i++) {
-			var c = (cov_p80wpaeg3.s[23]++, line[i]);
-			cov_p80wpaeg3.s[24]++;
+			var c = (cov_1qor954ulh.s[23]++, line[i]);
+			cov_1qor954ulh.s[24]++;
 			if (c === '(') {
-					cov_p80wpaeg3.b[2][0]++;
-					cov_p80wpaeg3.s[25]++;
+					cov_1qor954ulh.b[2][0]++;
+					cov_1qor954ulh.s[25]++;
 					open++;
 				} else {
-					cov_p80wpaeg3.b[2][1]++;
-					cov_p80wpaeg3.s[26]++;
+					cov_1qor954ulh.b[2][1]++;
+					cov_1qor954ulh.s[26]++;
 					if (c === ')') {
-						cov_p80wpaeg3.b[3][0]++;
-						cov_p80wpaeg3.s[27]++;
+						cov_1qor954ulh.b[3][0]++;
+						cov_1qor954ulh.s[27]++;
 
 						open--;
 						//last part
-						cov_p80wpaeg3.s[28]++;
+						cov_1qor954ulh.s[28]++;
 						if (open === 0) {
-							cov_p80wpaeg3.b[4][0]++;
-							cov_p80wpaeg3.s[29]++;
+							cov_1qor954ulh.b[4][0]++;
+							cov_1qor954ulh.s[29]++;
 
 							parts.push(line.substring(lastopen + 1, i));
-							cov_p80wpaeg3.s[30]++;
+							cov_1qor954ulh.s[30]++;
 							lastChar = i + 1;
-							cov_p80wpaeg3.s[31]++;
+							cov_1qor954ulh.s[31]++;
 							break;
 						} else {
-							cov_p80wpaeg3.b[4][1]++;
+							cov_1qor954ulh.b[4][1]++;
 						}
 					} else {
-							cov_p80wpaeg3.b[3][1]++;
-							cov_p80wpaeg3.s[32]++;
+							cov_1qor954ulh.b[3][1]++;
+							cov_1qor954ulh.s[32]++;
 							if (c === ',') {
-								cov_p80wpaeg3.b[5][0]++;
-								cov_p80wpaeg3.s[33]++;
+								cov_1qor954ulh.b[5][0]++;
+								cov_1qor954ulh.s[33]++;
 
 								if (open === 1) {
-									cov_p80wpaeg3.b[6][0]++;
-									cov_p80wpaeg3.s[34]++;
+									cov_1qor954ulh.b[6][0]++;
+									cov_1qor954ulh.s[34]++;
 
 									parts.push(line.substring(lastopen + 1, i));
-									cov_p80wpaeg3.s[35]++;
+									cov_1qor954ulh.s[35]++;
 									lastopen = i;
 								} else {
-									cov_p80wpaeg3.b[6][1]++;
+									cov_1qor954ulh.b[6][1]++;
 								}
 							} else {
-								cov_p80wpaeg3.b[5][1]++;
+								cov_1qor954ulh.b[5][1]++;
 							}
 						}
-				}cov_p80wpaeg3.s[36]++;
-			if ((cov_p80wpaeg3.b[8][0]++, open < 0) || (cov_p80wpaeg3.b[8][1]++, c === ';')) {
-				cov_p80wpaeg3.b[7][0]++;
-				cov_p80wpaeg3.s[37]++;
+				}cov_1qor954ulh.s[36]++;
+			if ((cov_1qor954ulh.b[8][0]++, open < 0) || (cov_1qor954ulh.b[8][1]++, c === ';')) {
+				cov_1qor954ulh.b[7][0]++;
+				cov_1qor954ulh.s[37]++;
 
 				lastChar = i;
-				cov_p80wpaeg3.s[38]++;
+				cov_1qor954ulh.s[38]++;
 				break;
 			} else {
-				cov_p80wpaeg3.b[7][1]++;
+				cov_1qor954ulh.b[7][1]++;
 			}
 		}
-		cov_p80wpaeg3.s[39]++;
+		cov_1qor954ulh.s[39]++;
 		parts.splice(0, 0, name + line.substring(first_open, lastChar));
 
-		var lines = (cov_p80wpaeg3.s[40]++, [name, functions[name.toLowerCase()]]);
-		cov_p80wpaeg3.s[41]++;
+		var lines = (cov_1qor954ulh.s[40]++, [name, functions[name.toLowerCase()]]);
+		cov_1qor954ulh.s[41]++;
 		return {
 			first_open: first_open,
 			parts: parts,
 			lines: lines
 		};
 	} else {
-		cov_p80wpaeg3.b[0][1]++;
-		cov_p80wpaeg3.s[42]++;
+		cov_1qor954ulh.b[0][1]++;
+		cov_1qor954ulh.s[42]++;
 
 		return {
 			first_open: 0,
@@ -1807,67 +1807,67 @@ FormulaInformationManager.prototype.lookupFunction = function (name, line, offse
 		};
 	}
 };
-cov_p80wpaeg3.s[43]++;
+cov_1qor954ulh.s[43]++;
 FormulaInformationManager.prototype.extractParts = function (workbook, info) {
-	cov_p80wpaeg3.f[3]++;
-	cov_p80wpaeg3.s[44]++;
+	cov_1qor954ulh.f[3]++;
+	cov_1qor954ulh.s[44]++;
 
 	return info.parts.map(function (formulaAsString, idx) {
-		cov_p80wpaeg3.f[4]++;
-		cov_p80wpaeg3.s[45]++;
+		cov_1qor954ulh.f[4]++;
+		cov_1qor954ulh.s[45]++;
 
 		workbook.createFormula(new _FinFormula.FinFormula().parseFormula(formulaAsString), '__SMT', 'a' + idx, false, 'document', 'object', null);
-		var e_value = (cov_p80wpaeg3.s[46]++, OnNA(workbook.get('__SMT', 'a' + idx), 'NA'));
+		var e_value = (cov_1qor954ulh.s[46]++, OnNA(workbook.get('__SMT', 'a' + idx), 'NA'));
 
-		var dependencies = (cov_p80wpaeg3.s[47]++, workbook.getDependencies('__SMT', 'a' + idx));
-		var prefix = (cov_p80wpaeg3.s[48]++, []);
-		var deplength = (cov_p80wpaeg3.s[49]++, 60);
-		var dep_ammount_in_row = (cov_p80wpaeg3.s[50]++, 2);
-		var real_dep = (cov_p80wpaeg3.s[51]++, dependencies[1]);
-		var asstring = (cov_p80wpaeg3.s[52]++, real_dep.filter(function (el) {
-			cov_p80wpaeg3.f[5]++;
-			cov_p80wpaeg3.s[53]++;
+		var dependencies = (cov_1qor954ulh.s[47]++, workbook.getDependencies('__SMT', 'a' + idx));
+		var prefix = (cov_1qor954ulh.s[48]++, []);
+		var deplength = (cov_1qor954ulh.s[49]++, 60);
+		var dep_ammount_in_row = (cov_1qor954ulh.s[50]++, 2);
+		var real_dep = (cov_1qor954ulh.s[51]++, dependencies[1]);
+		var asstring = (cov_1qor954ulh.s[52]++, real_dep.filter(function (el) {
+			cov_1qor954ulh.f[5]++;
+			cov_1qor954ulh.s[53]++;
 
 			return el.indexOf('__SMT') === -1;
 		}).map(function (el, idx2) {
-			cov_p80wpaeg3.f[6]++;
+			cov_1qor954ulh.f[6]++;
 
-			var parts = (cov_p80wpaeg3.s[54]++, el.split('_').slice(1));
-			var lastpart = (cov_p80wpaeg3.s[55]++, parts.pop());
+			var parts = (cov_1qor954ulh.s[54]++, el.split('_').slice(1));
+			var lastpart = (cov_1qor954ulh.s[55]++, parts.pop());
 
-			var dep_var_name = (cov_p80wpaeg3.s[56]++, parts.join('_'));
+			var dep_var_name = (cov_1qor954ulh.s[56]++, parts.join('_'));
 			var dep_value;
-			cov_p80wpaeg3.s[57]++;
+			cov_1qor954ulh.s[57]++;
 			try {
-				var entered = (cov_p80wpaeg3.s[58]++, workbook.get(dep_var_name, 'entered'));
-				cov_p80wpaeg3.s[59]++;
-				dep_value = (entered ? (cov_p80wpaeg3.b[9][0]++, '!') : (cov_p80wpaeg3.b[9][1]++, '')) + OnNAIfNumber(workbook.get(dep_var_name, lastpart), 'NA');
+				var entered = (cov_1qor954ulh.s[58]++, workbook.get(dep_var_name, 'entered'));
+				cov_1qor954ulh.s[59]++;
+				dep_value = (entered ? (cov_1qor954ulh.b[9][0]++, '!') : (cov_1qor954ulh.b[9][1]++, '')) + OnNAIfNumber(workbook.get(dep_var_name, lastpart), 'NA');
 			} catch (err) {
-				cov_p80wpaeg3.s[60]++;
+				cov_1qor954ulh.s[60]++;
 
 				dep_value = 'ERR:' + err.toString();
 			}
-			var total = (cov_p80wpaeg3.s[61]++, dep_var_name + (lastpart === 'value' ? (cov_p80wpaeg3.b[10][0]++, '') : (cov_p80wpaeg3.b[10][1]++, '.' + lastpart)) + '=' + dep_value);
-			cov_p80wpaeg3.s[62]++;
+			var total = (cov_1qor954ulh.s[61]++, dep_var_name + (lastpart === 'value' ? (cov_1qor954ulh.b[10][0]++, '') : (cov_1qor954ulh.b[10][1]++, '.' + lastpart)) + '=' + dep_value);
+			cov_1qor954ulh.s[62]++;
 			prefix.length = Math.max(deplength - String(total).length, 0);
-			cov_p80wpaeg3.s[63]++;
-			return String(total).slice(0, deplength - 1) + prefix.join(' ') + ((idx2 + 1) % dep_ammount_in_row === 0 ? (cov_p80wpaeg3.b[11][0]++, '\n') : (cov_p80wpaeg3.b[11][1]++, ''));
+			cov_1qor954ulh.s[63]++;
+			return String(total).slice(0, deplength - 1) + prefix.join(' ') + ((idx2 + 1) % dep_ammount_in_row === 0 ? (cov_1qor954ulh.b[11][0]++, '\n') : (cov_1qor954ulh.b[11][1]++, ''));
 		}).join(''));
 
-		cov_p80wpaeg3.s[64]++;
+		cov_1qor954ulh.s[64]++;
 		return [e_value, formulaAsString].join('=') + '\n' + asstring;
 	});
 };
-cov_p80wpaeg3.s[65]++;
+cov_1qor954ulh.s[65]++;
 FormulaInformationManager.prototype.mathDefinitions = function () {
-	cov_p80wpaeg3.f[7]++;
-	cov_p80wpaeg3.s[66]++;
+	cov_1qor954ulh.f[7]++;
+	cov_1qor954ulh.s[66]++;
 
 	return this.definitions;
 };
-cov_p80wpaeg3.s[67]++;
+cov_1qor954ulh.s[67]++;
 FormulaInformationManager.prototype.highlights = highlights;
-cov_p80wpaeg3.s[68]++;
+cov_1qor954ulh.s[68]++;
 FormulaInformationManager.prototype.info = info;
 
 exports.default = new FormulaInformationManager();

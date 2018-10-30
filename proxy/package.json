@@ -29,7 +29,7 @@
     "http-proxy": "^1.17.0",
     "http-proxy-middleware": "^0.17.4",
     "ip": "^1.1.5",
-    "log6": "^2.0.15",
+    "log6": "^2.0.16",
     "logstash-client": "^1.1.1",
     "method-override": "^2.3.10",
     "morgan": "^1.9.1",

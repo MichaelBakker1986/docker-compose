@@ -1,58 +1,53 @@
-import { MatrixStore } from '../MatrixStore'
-import { error, warn } from 'log6'
-import ModelLoader     from '../FinancialModelLoader'
+import { MatrixStore }      from '../MatrixStore'
+import { error, warn }      from 'log6'
+import ModelLoader          from '../FinancialModelLoader'
+import { getModelAsString } from '../../git-connect/ResourceManager'
 
 const LMEFacade = ModelLoader.LMEFacade
 
 export function setup(app) {
 	const ds = new MatrixStore()
 
-	function defaultResponse(req, res) {
+	function defaultResponse({ params }, res) {
+		const { columncontext, figureName, value, id } = params
 		//handle request Async by default, create Promise, result when done.
-		new Promise(function(success, fail) {
+		new Promise((success, fail) => {
 			try {
-				const context = ds.getOrCreate(req.params.id)
-				const columncontext = parseInt(req.params.columncontext || '0')
-				const variablename = req.params.figureName === '{variable}' ? undefined : req.params.figureName
-				const value = isNaN(req.params.value) ? req.params.value : parseFloat(req.params.value)
+				const context = ds.getOrCreate(id)
+				const column_context = parseInt(columncontext || '0')
+				const variablename = figureName === '{variable}' ? undefined : figureName
+				const value = isNaN(value) ? value : parseFloat(value)
 
-				success(LMEFacade.getValue(context, variablename, columncontext, value, undefined))
+				success(LMEFacade.getValue(context, variablename, column_context, value, undefined))
 			} catch (err) {
 				fail(err)
 			}
-		}).then(function(answer) {
-			res.json(answer)
-		}).catch(function(err) {
-			error(err)
-		})
+		}).then((answer) => res.json(answer))
+		.catch((err) => error(err))
 	}
 
-	function flatten(keyvalue, object) {
-		for (var key in object) {
-			if (typeof(object[key]) === 'object') flatten(keyvalue, object[key])
+	function flatten(key_value, object) {
+		for (let key in object) {
+			if (typeof(object[key]) === 'object') flatten(key_value, object[key])
 			else {
-				if (keyvalue[key] != null) throw Error('Duplicate value input')
-				keyvalue[key] = object[key]
+				if (key_value[key] != null) throw Error('Duplicate value input')
+				key_value[key] = object[key]
 			}
 		}
 	}
 
-	function defaultPostResponse(req, res) {
+	function defaultPostResponse({ params, body, originalUrl }, res) {
+		const { figureName, version = '', id } = params
 		//handle request Async by default, create Promise, result when done.
 		new Promise(function(success, fail) {
 			try {
-				const body = req.body
-
 				let result
-				const context = ds.getOrCreate(req.params.id)
-				const url = req.originalUrl
-				const outputNodeName = req.params.figureName
-				const version = req.params.version || ''
+				const context = ds.getOrCreate(id)
 				/**
 				 * TODO: find generic way to map the Output node to the model name
 				 */
 				let modelPrefix = ''
-				switch (outputNodeName) {
+				switch (figureName) {
 				case 'PRESCAN':
 					modelPrefix = 'PRESCAN'
 					break
@@ -72,9 +67,9 @@ export function setup(app) {
 					modelPrefix = 'KSP2'
 					break
 				default:
-					modelPrefix = outputNodeName
+					modelPrefix = figureName
 				}
-				modelPrefix = modelPrefix.toUpperCase() + '_'
+				modelPrefix = `${modelPrefix.toUpperCase()}_`
 
 				//This is very very basic, rewrite required.
 
@@ -86,29 +81,26 @@ export function setup(app) {
 				/**
 				 * TODO: find generic way to map the Output node to the model name
 				 */
-				if (outputNodeName === 'LGDCalculationOutputContainer') context.columns = 1
-				else if (outputNodeName === 'PRESCAN') context.columns = 1
-				else if (outputNodeName === 'FyndooCreditRating') context.columns = 1
-				else if (outputNodeName === 'TupleRestModel') context.columns = 1
-				else if (outputNodeName === 'KinderSpaarPlan') context.columns = 17
-				else if (outputNodeName === 'Q_MAP06') context.columns = 17
-				else warn('Invalid rest api call ' + url)
-				result = LMEFacade.getObjectValues(context, modelPrefix + outputNodeName, undefined)
+				if (figureName === 'LGDCalculationOutputContainer') context.columns = 1
+				else if (figureName === 'PRESCAN') context.columns = 1
+				else if (figureName === 'FyndooCreditRating') context.columns = 1
+				else if (figureName === 'TupleRestModel') context.columns = 1
+				else if (figureName === 'KinderSpaarPlan') context.columns = 17
+				else if (figureName === 'Q_MAP06') context.columns = 17
+				else warn(`Invalid rest api call ${originalUrl}`)
+				result = LMEFacade.getObjectValues(context, modelPrefix + figureName, undefined)
 
 				if (!result) result = { status: 'failed ' }
 				success(result)
 			} catch (err) {
 				fail(err)
 			}
-		}).then(function(answer) {
-			res.json(answer)
-		}).catch(function(err) {
-			res.json(err.toString())
-		})
+		}).then((answer) => res.json(answer))
+		.catch((err) => res.json(err.toString()))
 	}
 
-	app.get('*/id/:id/newModel', function(req, res) {
-		ModelLoader.ModelLoader.onNewModel(require('fs').readFileSync(__dirname + '/../../git-connect/resources/LGD.ffl', 'utf8'), __dirname + '/../../git-connect/resources/LGD.ffl')
+	app.get('*/id/:id/newModel', (req, res) => {
+		ModelLoader.ModelLoader.onNewModel(getModelAsString('LGD'), `/LGD.ffl`)
 		res.json({ 'status': 'ok' })
 	})
 	/**

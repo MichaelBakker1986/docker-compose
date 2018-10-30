@@ -1,56 +1,58 @@
-model SCORECARDTESTMODEL uses BaseModel 
+model SCORECARDTESTMODEL uses BaseModel
 {
+ title: SCORECARDTESTMODEL;
+ ffl_version: 2;
  variable SCORECARDTESTMODEL
  {
   datatype: none;
   variable FES_LAYOUTNR
   {
+   title: "Layout";
+   locked: On;
    frequency: document;
    formula: If(Pos("IFRS-EU" , FES_LAYOUT)>0,1,If(Pos("IFRS-PL" , FES_LAYOUT)>0,48,If(Pos("IFRS-Intl" , FES_LAYOUT)>0,2,0)));
-   title: "Layout";
    choices: "0: NA|1: IFRS-EU|2:IFRS|48:Polish";
-   locked: On;
    options_title: locked;
   }
   variable FES_EXCHANGE_RATES
   {
-   datatype: string;
    title: "Exchange Rates";
    options_title: locked;
+   datatype: string;
    aggregation: balance;
   }
   variable FES_LAYOUT
   {
-   datatype: string;
-   frequency: document;
    title: "Layout name";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FES_FLATINPUT
   {
-   frequency: document;
    title: "Is flat input used? (1=yes1)";
+   frequency: document;
    options_title: locked;
    fixed_decimals: 0;
   }
   variable FES_PROJECTION_PROFILE
   {
-   frequency: document;
    title: "Projection Profile";
+   frequency: document;
    options_title: locked;
    fixed_decimals: 0;
   }
   variable FES_COLUMN_ORDER
   {
-   frequency: document;
    title: "Column order";
+   frequency: document;
    options_title: locked;
    fixed_decimals: 0;
   }
   variable FES_COLUMN_VISIBLE
   {
-   formula: 1;
    title: "Column visible";
+   formula: 1;
    options_title: locked;
    aggregation: balance;
    fixed_decimals: 0;
@@ -95,238 +97,238 @@ model SCORECARDTESTMODEL uses BaseModel
  }
  variable RootSub2
  {
+  title: "General variables for FPS database";
+  options_title: locked, invisible;
   datatype: none;
   data_options: unscalable;
-  title: "General variables for FPS database";
   visible: 0;
-  options_title: locked, invisible;
   options_notrend: locked, invisible;
   options_trend: locked, invisible;
   variable FPS_VAR_Naam
   {
-   datatype: string;
-   frequency: document;
    title: "NAME";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Relatienummer
   {
-   datatype: string;
-   frequency: document;
    title: "CUSTOMERNUMBER";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_KVKnr
   {
-   datatype: string;
-   frequency: document;
    title: "CHAMBEROFCOMMERCENUMBER";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Rechtsvorm_nr
   {
-   datatype: string;
-   frequency: document;
    title: "LEGALSTATUSCODE";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Rechtsvorm_omschr
   {
-   datatype: string;
-   frequency: document;
    title: "LEGALSTATUSDESCRIPTION";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_BIK_CODE
   {
-   datatype: string;
-   frequency: document;
    title: "SECTOROFINDUSTRYCODE";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_BIK_Omschr
   {
-   datatype: string;
-   frequency: document;
    title: "SECTOROFINDUSTRYDESCRIPTION";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_GridId
   {
-   datatype: string;
-   frequency: document;
    title: "GRIDID";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Accountmanager
   {
-   datatype: string;
-   frequency: document;
    title: "ACCOUNTMANAGER";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Kantoor
   {
-   datatype: string;
-   frequency: document;
    title: "OFFICENUMBER";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Straat
   {
-   datatype: string;
-   frequency: document;
    title: "STREET";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Housenumber
   {
-   datatype: string;
-   frequency: document;
    title: "HOUSENUMBER";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Postcode
   {
-   datatype: string;
-   frequency: document;
    title: "ZIPCODE";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Woonplaats
   {
-   datatype: string;
-   frequency: document;
    title: "CITY";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Provincie
   {
-   datatype: string;
-   frequency: document;
    title: "STATEORPROVINCE";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Land
   {
-   datatype: string;
-   frequency: document;
    title: "COUNTRY";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_BvDID
   {
-   datatype: string;
-   frequency: document;
    title: "Bureau van Dijk ID";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Telefoon
   {
-   datatype: string;
-   frequency: document;
    title: "Telefoonnummer";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable FPS_VAR_Emailadres
   {
-   datatype: string;
-   frequency: document;
    title: "Emailadres";
+   frequency: document;
    options_title: locked;
+   datatype: string;
    variable FPS_FINAN_USER_ROLES
    {
-    datatype: string;
-    frequency: document;
     title: "FPS_FINAN_USER_ROLES";
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable FPS_FINAN_USER
    {
-    datatype: string;
-    frequency: document;
     title: "FPS_FINAN_USER";
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
   }
  }
  variable Q_ROOT
  {
-  frequency: document;
-  formula: AMMOUNT(Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG15.required and Q_MAP01_VRAAG15.entered,Q_MAP01_VRAAG16.required and Q_MAP01_VRAAG16.entered,Q_MAP01_VRAAG17.required and Q_MAP01_VRAAG17.entered,Q_MAP01_VRAAG18.required and Q_MAP01_VRAAG18.entered,Q_MAP01_VRAAG21.required and Q_MAP01_VRAAG21.entered,Q_MAP01_VRAAG22.required and Q_MAP01_VRAAG22.entered,Q_MAP01_VRAAG23.required and Q_MAP01_VRAAG23.entered,Q_MAP01_VRAAG24.required and Q_MAP01_VRAAG24.entered,Q_MAP01_VRAAG25.required and Q_MAP01_VRAAG25.entered,Q_MAP01_VRAAG26.required and Q_MAP01_VRAAG26.entered,Q_MAP01_VRAAG27.required and Q_MAP01_VRAAG27.entered,Q_MAP01_VRAAG28.required and Q_MAP01_VRAAG28.entered,Q_MAP05_VRAAG01.required and Q_MAP05_VRAAG01.entered,Q_MAP06_P02VRAAG01.required and Q_MAP06_P02VRAAG01.entered,Q_MAP06_P02VRAAG02.required and Q_MAP06_P02VRAAG02.entered,Q_MAP06_P02VRAAG03.required and Q_MAP06_P02VRAAG03.entered,Q_MAP06_P02VRAAG04.required and Q_MAP06_P02VRAAG04.entered,Q_MAP06_P02VRAAG05.required and Q_MAP06_P02VRAAG05.entered) = AMMOUNT(Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG15.required,Q_MAP01_VRAAG16.required,Q_MAP01_VRAAG17.required,Q_MAP01_VRAAG18.required,Q_MAP01_VRAAG21.required,Q_MAP01_VRAAG22.required,Q_MAP01_VRAAG23.required,Q_MAP01_VRAAG24.required,Q_MAP01_VRAAG25.required,Q_MAP01_VRAAG26.required,Q_MAP01_VRAAG27.required,Q_MAP01_VRAAG28.required,Q_MAP05_VRAAG01.required,Q_MAP06_P02VRAAG01.required,Q_MAP06_P02VRAAG02.required,Q_MAP06_P02VRAAG03.required,Q_MAP06_P02VRAAG04.required,Q_MAP06_P02VRAAG05.required);
-  data_options: unscalable;
   title: "ScorecardTestModel";
-  displaytype: select;
-  display_options: scorecard;
-  choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
   locked: On;
+  frequency: document;
+  displaytype: select;
+  formula: AMMOUNT(Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG15.required and Q_MAP01_VRAAG15.entered,Q_MAP01_VRAAG16.required and Q_MAP01_VRAAG16.entered,Q_MAP01_VRAAG17.required and Q_MAP01_VRAAG17.entered,Q_MAP01_VRAAG18.required and Q_MAP01_VRAAG18.entered,Q_MAP01_VRAAG21.required and Q_MAP01_VRAAG21.entered,Q_MAP01_VRAAG22.required and Q_MAP01_VRAAG22.entered,Q_MAP01_VRAAG23.required and Q_MAP01_VRAAG23.entered,Q_MAP01_VRAAG24.required and Q_MAP01_VRAAG24.entered,Q_MAP01_VRAAG25.required and Q_MAP01_VRAAG25.entered,Q_MAP01_VRAAG26.required and Q_MAP01_VRAAG26.entered,Q_MAP01_VRAAG27.required and Q_MAP01_VRAAG27.entered,Q_MAP01_VRAAG28.required and Q_MAP01_VRAAG28.entered,Q_MAP05_VRAAG01.required and Q_MAP05_VRAAG01.entered,Q_MAP06_P02VRAAG01.required and Q_MAP06_P02VRAAG01.entered,Q_MAP06_P02VRAAG02.required and Q_MAP06_P02VRAAG02.entered,Q_MAP06_P02VRAAG03.required and Q_MAP06_P02VRAAG03.entered,Q_MAP06_P02VRAAG04.required and Q_MAP06_P02VRAAG04.entered,Q_MAP06_P02VRAAG05.required and Q_MAP06_P02VRAAG05.entered) = AMMOUNT(Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG15.required,Q_MAP01_VRAAG16.required,Q_MAP01_VRAAG17.required,Q_MAP01_VRAAG18.required,Q_MAP01_VRAAG21.required,Q_MAP01_VRAAG22.required,Q_MAP01_VRAAG23.required,Q_MAP01_VRAAG24.required,Q_MAP01_VRAAG25.required,Q_MAP01_VRAAG26.required,Q_MAP01_VRAAG27.required,Q_MAP01_VRAAG28.required,Q_MAP05_VRAAG01.required,Q_MAP06_P02VRAAG01.required,Q_MAP06_P02VRAAG02.required,Q_MAP06_P02VRAAG03.required,Q_MAP06_P02VRAAG04.required,Q_MAP06_P02VRAAG05.required);
+  choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
   options_title: locked;
+  data_options: unscalable;
   hint: "Dit is een model om de scorecard applicatie te testen.";
+  display_options: scorecard;
   variable Q_MAP01
   {
    valid: [AMMOUNT(Q_MAP01_VRAAG11.required and Q_MAP01_VRAAG11.entered,Q_MAP01_VRAAG12.required and Q_MAP01_VRAAG12.entered,Q_MAP01_VRAAG13.required and Q_MAP01_VRAAG13.entered,Q_MAP01_VRAAG14.required and Q_MAP01_VRAAG14.entered,Q_MAP01_VRAAG15.required and Q_MAP01_VRAAG15.entered,Q_MAP01_VRAAG16.required and Q_MAP01_VRAAG16.entered,Q_MAP01_VRAAG17.required and Q_MAP01_VRAAG17.entered,Q_MAP01_VRAAG18.required and Q_MAP01_VRAAG18.entered,Q_MAP01_VRAAG21.required and Q_MAP01_VRAAG21.entered,Q_MAP01_VRAAG22.required and Q_MAP01_VRAAG22.entered,Q_MAP01_VRAAG23.required and Q_MAP01_VRAAG23.entered,Q_MAP01_VRAAG24.required and Q_MAP01_VRAAG24.entered,Q_MAP01_VRAAG25.required and Q_MAP01_VRAAG25.entered,Q_MAP01_VRAAG26.required and Q_MAP01_VRAAG26.entered,Q_MAP01_VRAAG27.required and Q_MAP01_VRAAG27.entered,Q_MAP01_VRAAG28.required and Q_MAP01_VRAAG28.entered),AMMOUNT(Q_MAP01_VRAAG11.required,Q_MAP01_VRAAG12.required,Q_MAP01_VRAAG13.required,Q_MAP01_VRAAG14.required,Q_MAP01_VRAAG15.required,Q_MAP01_VRAAG16.required,Q_MAP01_VRAAG17.required,Q_MAP01_VRAAG18.required,Q_MAP01_VRAAG21.required,Q_MAP01_VRAAG22.required,Q_MAP01_VRAAG23.required,Q_MAP01_VRAAG24.required,Q_MAP01_VRAAG25.required,Q_MAP01_VRAAG26.required,Q_MAP01_VRAAG27.required,Q_MAP01_VRAAG28.required)];
+   title: "Map 1";
+   locked: On;
    frequency: document;
    formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
-   title: "Map 1";
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
-   locked: On;
    options_title: locked;
    hint: "ScorecardTestModel";
    variable Q_MAP01_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 1";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP01_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP01=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 1";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP01=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP01_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 1";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP01_HINT
    {
-    datatype: string;
-    frequency: document;
-    formula: "";
     title: "Hinttekst stap 1";
     locked: On;
+    frequency: document;
+    formula: "";
     options_title: locked;
+    datatype: string;
     hint: "Dit is de hinttekst van de variable (DEZE REGEL WORDT NIET GEBRUIKT!)";
    }
    variable Q_MAP01_PARAGRAAF01
    {
-    frequency: document;
     title: "Paragraaf 1";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     hint: "Hinttekst voor paragraaf 1";
     variable Q_MAP01_VRAAG01
     {
-     datatype: string;
-     frequency: document;
      title: "Vraag 1 (String)";
+     frequency: document;
      options_title: locked;
+     datatype: string;
      hint: "Hinttekst voor vraag 1";
     }
     variable Q_MAP01_VRAAG02
     {
-     frequency: document;
      title: "Vraag 2 (Bedrag)";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      fixed_decimals: 0;
@@ -334,16 +336,16 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP01_VRAAG03
     {
-     frequency: document;
      title: "Vraag 3 (Getal, dus geen bedrag)";
+     frequency: document;
      options_title: locked;
      fixed_decimals: 0;
      hint: "Hinttekst voor vraag 3";
     }
     variable Q_MAP01_VRAAG04
     {
-     frequency: document;
      title: "Vraag 4 (Keuzelijst)";
+     frequency: document;
      displaytype: select;
      choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
      options_title: locked;
@@ -351,309 +353,309 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP01_VRAAG05
     {
-     frequency: document;
      title: "Vraag 5 (Keuzelijst J/N)";
+     frequency: document;
      displaytype: select;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
     variable Q_MAP01_VRAAG06
     {
-     frequency: document;
      title: "Vraag 6 (Percentage)";
+     frequency: document;
      displaytype: percentage;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP01_VRAAG07
     {
-     frequency: document;
      title: "Vraag 7 (Datumveld)";
+     frequency: document;
      displaytype: date;
      choices: "dd/MM/yyyy";
      options_title: locked;
     }
     variable Q_MAP01_VRAAG08
     {
-     datatype: string;
-     frequency: document;
-     formula: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
      title: "Vraag 8 (Memoveld)";
+     frequency: document;
      displaytype: memo;
+     formula: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP01_VRAAG09
     {
-     datatype: string;
-     frequency: document;
      title: "Vraag 9 (Image)";
+     frequency: document;
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP01_PARAGRAAF02
    {
-    frequency: document;
     title: "Paragraaf 2";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     hint: "Alle vragen in deze paragraaf zijn verplicht afhankelijk van onderstaande schakelaar.";
     variable Q_MAP01_VERPLICHT
     {
-     frequency: document;
-     formula: 1;
      title: "Zijn de vragen in deze paragraaf verplicht?";
+     frequency: document;
      displaytype: select;
+     formula: 1;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
     variable Q_MAP01_VRAAG11
     {
-     datatype: string;
-     frequency: document;
      title: "Vraag 11 (String) Hele lange title tekst waardoor wrapping kapot kan gaat word hier mee getest";
-     options_title: locked;
-     hint: "http://www.topicus.nl Verplicht veld";
+     frequency: document;
      required: (Q_MAP01_VERPLICHT=1);
+     options_title: locked;
+     datatype: string;
+     hint: "http://www.topicus.nl Verplicht veld";
     }
     variable Q_MAP01_VRAAG12
     {
-     frequency: document;
      title: "Vraag 12 (Bedrag)";
+     frequency: document;
      displaytype: currency;
+     required: (Q_MAP01_VERPLICHT=1);
      options_title: locked;
      fixed_decimals: 0;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG13
     {
-     frequency: document;
      title: "Vraag 13 (Getal, dus geen bedrag)";
+     frequency: document;
+     required: (Q_MAP01_VERPLICHT=1);
      options_title: locked;
      fixed_decimals: 0;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG14
     {
-     frequency: document;
      title: "Vraag 14 (Keuzelijst)";
+     frequency: document;
      displaytype: select;
+     required: (Q_MAP01_VERPLICHT=1);
      choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
      options_title: locked;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG15
     {
-     frequency: document;
      title: "Vraag 15 (Keuzelijst J/N)";
+     frequency: document;
      displaytype: select;
+     required: (Q_MAP01_VERPLICHT=1);
      choices: "0:Nee|1:Ja";
      options_title: locked;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG16
     {
-     frequency: document;
      title: "Vraag 16 (Percentage)";
+     frequency: document;
      displaytype: percentage;
+     required: (Q_MAP01_VERPLICHT=1);
      options_title: locked;
      fixed_decimals: 0;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG17
     {
-     frequency: document;
      title: "Vraag 17 (Datumveld)";
+     frequency: document;
      displaytype: date;
+     required: (Q_MAP01_VERPLICHT=1);
      choices: "dd/MM/yyyy";
      options_title: locked;
      hint: "http://www.topicus.nl Verplicht veld";
-     required: (Q_MAP01_VERPLICHT=1);
     }
     variable Q_MAP01_VRAAG18
     {
-     datatype: string;
-     frequency: document;
      title: "Vraag 18 (Memoveld)";
+     frequency: document;
      displaytype: memo;
-     options_title: locked;
-     hint: "http://www.topicus.nl Verplicht veld";
      required: (Q_MAP01_VERPLICHT=1);
+     options_title: locked;
+     datatype: string;
+     hint: "http://www.topicus.nl Verplicht veld";
     }
    }
    variable Q_MAP01_PARAGRAAF03
    {
-    frequency: document;
     title: "Paragraaf 3";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     hint: "Alle vragen in deze paragraaf zijn verplicht.[br][/br]Echter alle velden bevatten al een default waarde.";
     variable Q_MAP01_VRAAG21
     {
-     datatype: string;
+     title: "Vraag 1 (String)";
      frequency: document;
      formula: "1";
-     title: "Vraag 1 (String)";
-     options_title: locked;
-     hint: "Verplicht veld";
      required: 1;
+     options_title: locked;
+     datatype: string;
+     hint: "Verplicht veld";
     }
     variable Q_MAP01_VRAAG22
     {
-     frequency: document;
-     formula: 1;
      title: "Vraag 2 (Bedrag)";
+     frequency: document;
      displaytype: currency;
+     formula: 1;
+     required: 1;
      options_title: locked;
      fixed_decimals: 0;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG23
     {
+     title: "Vraag 3 (Getal, dus geen bedrag)";
      frequency: document;
      formula: 1;
-     title: "Vraag 3 (Getal, dus geen bedrag)";
+     required: 1;
      options_title: locked;
      fixed_decimals: 0;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG24
     {
-     frequency: document;
-     formula: 1;
      title: "Vraag 4 (Keuzelijst)";
+     frequency: document;
      displaytype: select;
+     formula: 1;
+     required: 1;
      choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
      options_title: locked;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG25
     {
-     frequency: document;
-     formula: 1;
      title: "Vraag 5 (Keuzelijst J/N)";
+     frequency: document;
      displaytype: select;
+     formula: 1;
+     required: 1;
      choices: "0:Nee|1:Ja";
      options_title: locked;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG26
     {
-     frequency: document;
-     formula: 1;
      title: "Vraag 6 (Percentage)";
+     frequency: document;
      displaytype: percentage;
+     formula: 1;
+     required: 1;
      options_title: locked;
      fixed_decimals: 0;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG27
     {
-     frequency: document;
-     formula: DMYtoDate(23,8,1974);
      title: "Vraag 7 (Datumveld)";
+     frequency: document;
      displaytype: date;
+     formula: DMYtoDate(23,8,1974);
+     required: 1;
      choices: "dd/MM/yyyy";
      options_title: locked;
      hint: "Verplicht veld";
-     required: 1;
     }
     variable Q_MAP01_VRAAG28
     {
-     datatype: string;
-     frequency: document;
-     formula: "Vraag 8 (Memoveld)";
      title: "Vraag 8 (Memoveld)";
+     frequency: document;
      displaytype: memo;
-     options_title: locked;
-     hint: "Verplicht veld";
+     formula: "Vraag 8 (Memoveld)";
      required: 1;
+     options_title: locked;
+     datatype: string;
+     hint: "Verplicht veld";
     }
    }
    variable Q_MAP01_PARAGRAAF03_2
    {
-    frequency: document;
     title: "Paragraaf 3 (deel 2)";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     hint: "Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]";
     variable Q_MAP01_PARAGRAAF03_2SUB1 refers to Q_MAP01_VRAAG28
     {
      title: "Vraag 8 (Memoveld) (Copy en ReadOnly)";
-     displaytype: memo;
      locked: 0;
+     displaytype: memo;
      options_title: locked;
      hint: "Dit is een paragraaf om de BBcodes te testen[br][/br]Hier onder een opsomming van stijlen:[br][/br][b]bolded text[/b][br][/br][i]italicized text[/i][br][/br][u]underlined text[/u][br][/br][url=http://www.finan.nl]Website FINAN[/url][br][/br][p]paragraph[/p][br][/br]";
     }
     variable Q_MAP01_PARAGRAAF03_2SUB2 refers to Q_MAP01_VRAAG28
     {
      title: "Dit is een vraag om de BBcodes ";
-     displaytype: memo;
      locked: 0;
+     displaytype: memo;
      options_title: locked;
      hint: "Verplicht veld";
     }
    }
    variable Q_MAP01_PARAGRAAF04
    {
-    frequency: document;
     title: "Paragraaf 4 (Locked)";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP01_VRAAG04COPY refers to Q_MAP01_VRAAG04
     {
      title: "Kopie van vraag 4 (alleen readonly)";
+     locked: On;
      displaytype: select;
      choices: "1:ADO Den Haag|2:Ajax|3:AZ|4:De Graafschap|5:Excelsior|6:Feyenoord|7:Groningen|8:Heerenveen|9:Heracles|10:NAC Breda|11:NEC|12:PSV|13:RKC Waalwijk|14:Roda JC|15:Twente|16:Utrecht|17:Vitesse|18:VVV";
-     locked: On;
      options_title: locked;
      hint: "http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl";
     }
     variable Q_MAP01_VRAAG07COPY refers to Q_MAP01_VRAAG07
     {
      title: "Kopie van vraag 7 (alleen readonly)";
+     locked: 1;
      displaytype: date;
      choices: "dd/MM/yyyy";
-     locked: 1;
      options_title: locked;
     }
     variable Q_MAP01_PARAGRAAF04SUB3
     {
      title: "Numerieke waarde van vraag 4 (alleen readonly)";
+     locked: On;
      frequency: document;
      formula: Q_MAP01_VRAAG04;
-     locked: On;
      fixed_decimals: 0;
      hint: "http://www.finan.nl Hinttekst voor vraag 4. Inclusief een URL naar www.finan.nl";
     }
     variable Q_MAP01_VRAAG04TEKST
     {
-     datatype: string;
-     frequency: document;
-     formula: String(Case(Q_MAP01_VRAAG04,[=1:"ADO Den Haag"|=2:"Ajax"|=3:"AZ"|=4:"De Graafschap"|=5:"Excelsior"|=6:"Feyenoord"|=7:"Groningen"|=8:"Heerenveen"|=9:"Heracles"|=10:"NAC Breda"|=11:"NEC"|=12:"PSV"|=13:"RKC Waalwijk"|=14:"Roda JC"|=15:"Twente"|=16:"Utrecht"|=17:"Vitesse"|=18:"VVV"]));
      title: "Alfanumerieke waarde van vraag 4 (alleen readonly)";
      locked: On;
+     frequency: document;
+     formula: String(Case(Q_MAP01_VRAAG04,[=1:"ADO Den Haag"|=2:"Ajax"|=3:"AZ"|=4:"De Graafschap"|=5:"Excelsior"|=6:"Feyenoord"|=7:"Groningen"|=8:"Heerenveen"|=9:"Heracles"|=10:"NAC Breda"|=11:"NEC"|=12:"PSV"|=13:"RKC Waalwijk"|=14:"Roda JC"|=15:"Twente"|=16:"Utrecht"|=17:"Vitesse"|=18:"VVV"]));
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP01_PARAGRAAF04SUB5 refers to Q_STATUS_STARTED_ON
     {
      title: "Aangemaakt op:";
+     locked: On;
      displaytype: date;
      choices: "dd/MM/yyyy";
-     locked: On;
      options_title: locked;
     }
     variable Q_MAP01_PARAGRAAF04SUB6 refers to Q_STATUS_STARTED_BY
@@ -671,9 +673,9 @@ model SCORECARDTESTMODEL uses BaseModel
     variable Q_MAP01_PARAGRAAF04SUB8 refers to Q_STATUS_FINAL_ON
     {
      title: "Definitief gemaakt op:";
+     locked: On;
      displaytype: date;
      choices: "dd/MM/yyyy";
-     locked: On;
      options_title: locked;
     }
     variable Q_MAP01_PARAGRAAF04SUB9 refers to Q_STATUS_FINAL_BY
@@ -703,10 +705,10 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP01_PARAGRAAF05
    {
-    frequency: document;
     title: "Paragraaf 5: Model info";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP01_PARAGRAAF05SUB1 refers to ModelVersion
     {
@@ -716,40 +718,40 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable WindowsUserName
     {
-     datatype: string;
-     frequency: document;
-     formula: "r.vanaalderen";
      title: "Gemaakt door";
      locked: On;
+     frequency: document;
+     formula: "r.vanaalderen";
      options_title: locked;
+     datatype: string;
     }
     variable CurrentDate
     {
-     frequency: document;
-     formula: 42529.979103461;
      title: "Gemaakt op";
-     displaytype: date;
-     choices: "dd/MM/yyyy";
      locked: On;
+     frequency: document;
+     displaytype: date;
+     formula: 42529.979103461;
+     choices: "dd/MM/yyyy";
      options_title: locked;
     }
     variable FinanFullVersion
     {
-     datatype: string;
-     frequency: document;
-     formula: "03.02.055.001";
      title: "Gemaakt met FINAN versie";
      locked: On;
+     frequency: document;
+     formula: "03.02.055.001";
      options_title: locked;
+     datatype: string;
     }
     variable ModelCode
     {
-     datatype: string;
-     frequency: document;
-     formula: "SCORECARDTESTMODEL";
      title: "Modelcode";
      locked: On;
+     frequency: document;
+     formula: "SCORECARDTESTMODEL";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP01_PARAGRAAF05SUB6 refers to MatrixVersion
     {
@@ -760,20 +762,20 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP01_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP01_STATUS
     {
-     frequency: document;
-     formula: Q_MAP01;
      title: "Status van de stap";
-     displaytype: select;
-     choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
      locked: On;
+     frequency: document;
+     displaytype: select;
+     formula: Q_MAP01;
+     choices: "0:Deze stap is volledig ingevuld (vinkje aanwezig)|1:Deze stap is NIET volledig ingevuld (geen vinkje aanwezig)";
      options_title: locked;
     }
     variable Q_MAP01_PARAGRAAF09SUB2 refers to Q_MAP01_WARNING
@@ -811,29 +813,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP01_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP01_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (1)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP01_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (1)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP01, Q_MAP01_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -841,66 +843,66 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP02
   {
-   frequency: document;
-   formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
    title: "Map 2";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP02_ENTEREDREQUIREDVARS=Q_MAP02_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP02_WARNING
    {
-    datatype: string;
+    title: "Warning voor map 2";
     frequency: document;
     formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
-    title: "Warning voor map 2";
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP02_INFO
    {
-    datatype: string;
+    title: "Info bij stap 2";
     frequency: document;
     formula: String(If(Q_MAP02=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
-    title: "Info bij stap 2";
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP02_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 2";
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP02_PARAGRAAF01
    {
-    frequency: document;
     title: "Paragraaf 1";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     hint: "Flipflop voorbeeld. A+B=C[br][/br]Wanneer een waarde wordt ingevuld in C, dan wordt de waarde in B verwijderd. B rekent vervolgens de waarde (C-A = B) uit. De opteling blijft correct.";
     variable Q_MAP02_A
     {
-     frequency: document;
      title: "A";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
     }
     variable Q_MAP02_B
     {
-     frequency: document;
-     formula: If( DataEntered(Q_MAP02_C), Q_MAP02_C - Q_MAP02_A, NA);
      title: "B";
+     frequency: document;
      displaytype: currency;
+     formula: If( DataEntered(Q_MAP02_C), Q_MAP02_C - Q_MAP02_A, NA);
      options_title: locked;
      flipflop_notrend: Q_MAP02_C;
     }
     variable Q_MAP02_C
     {
-     frequency: document;
-     formula: Q_MAP02_A + Q_MAP02_B;
      title: "C";
+     frequency: document;
      displaytype: currency;
+     formula: Q_MAP02_A + Q_MAP02_B;
      options_title: locked;
      flipflop_notrend: Q_MAP02_B;
     }
@@ -921,9 +923,9 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP02_Y
     {
-     formula: If( DataEntered(Q_MAP02_Z), Q_MAP02_Z - Q_MAP02_X, NA);
      title: "Y";
      displaytype: currency;
+     formula: If( DataEntered(Q_MAP02_Z), Q_MAP02_Z - Q_MAP02_X, NA);
      options_title: locked;
      aggregation: flow;
      flipflop_notrend: Q_MAP02_Z;
@@ -931,9 +933,9 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP02_Z
     {
-     formula: Q_MAP02_X + Q_MAP02_Y;
      title: "Z";
      displaytype: currency;
+     formula: Q_MAP02_X + Q_MAP02_Y;
      options_title: locked;
      aggregation: flow;
      flipflop_notrend: Q_MAP02_Y;
@@ -965,12 +967,12 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP02_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP02_PARAGRAAF09SUB1 refers to Q_MAP02_WARNING
     {
      title: "Warning voor map 2";
@@ -1006,29 +1008,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP02_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP02_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (2)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP02_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (2)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP02, Q_MAP02_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -1036,38 +1038,38 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP03
   {
-   frequency: document;
-   formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
    title: "Map 3 (Jaarrekening)";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP03_ENTEREDREQUIREDVARS=Q_MAP03_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP03_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 3";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP03_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP03=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 3";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP03=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP03_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 3";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP03_PARAGRAAF01
    {
@@ -1077,9 +1079,9 @@ model SCORECARDTESTMODEL uses BaseModel
     aggregation: balance;
     variable +HeaderExtra
     {
-     formula: String(If(ValueT(T)=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))) , "1e Progn" , "!= 1e Progn"));
      title: "Extra info";
      displaytype: currency;
+     formula: String(If(ValueT(T)=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))) , "1e Progn" , "!= 1e Progn"));
      options_title: locked;
      aggregation: average;
     }
@@ -1177,9 +1179,9 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable ValCheck
     {
-     formula: Abs(TotalAssets2-TotalEquityAndLiabilities);
      title: "Balans uitevenwicht?";
      displaytype: currency;
+     formula: Abs(TotalAssets2-TotalEquityAndLiabilities);
      options_title: locked;
      aggregation: maximum;
     }
@@ -1249,22 +1251,22 @@ model SCORECARDTESTMODEL uses BaseModel
     {
      title: "Netto omzet";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
     variable -Q_MAP03_PARAGRAAF04SUB2 refers to CostOfSales
     {
      title: "Inkoopwaarde";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
     variable Q_MAP03_PARAGRAAF04SUB3 refers to GrossProfit
     {
      title: "Bruto winst";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
    }
    variable Q_MAP03_PARAGRAAF041
@@ -1272,28 +1274,28 @@ model SCORECARDTESTMODEL uses BaseModel
     title: "Paragraaf 4 (alleen historische kolommen incl. header)";
     displaytype: currency;
     options_title: locked;
-    options_trend: locked, invisible;
     aggregation: flow;
+    options_trend: locked, invisible;
     variable +Q_MAP03_PARAGRAAF041SUB1 refers to NetSales
     {
      title: "Netto omzet";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
     variable -Q_MAP03_PARAGRAAF041SUB2 refers to CostOfSales
     {
      title: "Inkoopwaarde";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
     variable Q_MAP03_PARAGRAAF041SUB3 refers to GrossProfit
     {
      title: "Bruto winst";
      options_title: locked;
-     options_trend: locked, invisible;
      fixed_decimals: 0;
+     options_trend: locked, invisible;
     }
    }
    variable Q_MAP03_PARAGRAAF05
@@ -1306,22 +1308,22 @@ model SCORECARDTESTMODEL uses BaseModel
     {
      title: "Netto omzet";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
     variable -Q_MAP03_PARAGRAAF05SUB2 refers to CostOfSales
     {
      title: "Inkoopwaarde";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
     variable Q_MAP03_PARAGRAAF05SUB3 refers to GrossProfit
     {
      title: "Bruto winst";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
    }
    variable Q_MAP03_PARAGRAAF051
@@ -1329,28 +1331,28 @@ model SCORECARDTESTMODEL uses BaseModel
     title: "Paragraaf 5 (alleen prognose kolommen incl. header)";
     displaytype: currency;
     options_title: locked;
-    options_notrend: locked, invisible;
     aggregation: flow;
+    options_notrend: locked, invisible;
     variable +Q_MAP03_PARAGRAAF051SUB1 refers to NetSales
     {
      title: "Netto omzet";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
     variable -Q_MAP03_PARAGRAAF051SUB2 refers to CostOfSales
     {
      title: "Inkoopwaarde";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
     variable Q_MAP03_PARAGRAAF051SUB3 refers to GrossProfit
     {
      title: "Bruto winst";
      options_title: locked;
-     options_notrend: locked, invisible;
      fixed_decimals: 0;
+     options_notrend: locked, invisible;
     }
    }
    variable Q_MAP03_PARAGRAAF06
@@ -1363,25 +1365,25 @@ model SCORECARDTESTMODEL uses BaseModel
     {
      title: "Netto omzet";
      options_title: locked;
+     fixed_decimals: 0;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
-     fixed_decimals: 0;
     }
     variable -Q_MAP03_PARAGRAAF06SUB2 refers to CostOfSales
     {
      title: "Inkoopwaarde";
      options_title: locked;
+     fixed_decimals: 0;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
-     fixed_decimals: 0;
     }
     variable Q_MAP03_PARAGRAAF06SUB3 refers to GrossProfit
     {
      title: "Bruto winst";
      options_title: locked;
+     fixed_decimals: 0;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
-     fixed_decimals: 0;
     }
    }
    variable Q_MAP03_PARAGRAAF07
@@ -1437,12 +1439,12 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP03_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: Off;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: Off;
     variable Q_MAP03_PARAGRAAF09SUB1 refers to Q_MAP03_WARNING
     {
      title: "Warning voor map 3";
@@ -1478,29 +1480,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP03_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP03_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (3)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP03_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (3)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP03, Q_MAP03_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -1508,163 +1510,163 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP04
   {
-   frequency: document;
-   formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
    title: "Map 4 Locking / Visible en Type variabelen";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP04_ENTEREDREQUIREDVARS=Q_MAP04_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP04_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 4";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP04_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP04=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 4";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(If(Q_MAP04=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP04_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 4";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP04_PARAGRAAF01
    {
-    frequency: document;
     title: "Paragraaf 1";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP04_VRAAG01
     {
-     frequency: document;
-     formula: 0;
      title: "Lock variabel Map 5 Vraag 1";
+     frequency: document;
      displaytype: select;
+     formula: 0;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
     variable Q_MAP04_VRAAG02
     {
-     frequency: document;
-     formula: 1;
      title: "Laat variabel Map 5 Vraag 2 zien";
+     frequency: document;
      displaytype: select;
+     formula: 1;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
     variable Q_MAP04_VRAAG03
     {
-     frequency: document;
-     formula: 1;
      title: "Laat paragraaf Map 5 Paragraaf 1 zien";
+     frequency: document;
      displaytype: select;
+     formula: 1;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
     variable Q_MAP04_VRAAG04
     {
-     frequency: document;
-     formula: 1;
      title: "Laat Map 5 zien";
+     frequency: document;
      displaytype: select;
+     formula: 1;
      choices: "0:Nee|1:Ja";
      options_title: locked;
     }
    }
    variable Q_MAP04_PARAGRAAF03
    {
-    frequency: document;
     title: "Sting types";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable StringInputpattern
     {
-     datatype: string;
-     frequency: document;
      title: "Alleen getallen";
+     frequency: document;
      options_title: locked;
+     datatype: string;
      hint: "Een tekstveld waarin alleen numerieke waarden ingevuld mogen worden Pattern=([0-9]*)";
      pattern: "^[0-9]*$";
     }
     variable StringInputmax
     {
-     datatype: string;
-     frequency: document;
      title: "Maximaal 10 karakters";
+     frequency: document;
      options_title: locked;
+     datatype: string;
      hint: "Maximaal 10 karakters MaxLength=10";
      length: < 11;
     }
     variable StringInputmin
     {
-     datatype: string;
-     frequency: document;
      title: "Minimaal 5 karakters";
+     frequency: document;
      options_title: locked;
+     datatype: string;
      hint: "Minimaal 5 karakters (incl 5 MinLength=5";
      length: > 4;
     }
     variable EmailAdres
     {
-     datatype: string;
-     frequency: document;
      title: "Email adres";
+     frequency: document;
      options_title: locked;
+     datatype: string;
      hint: "Door middel van een reguliere expressie wordt gecontroleerd of het ingevuld veld een emailadres is. ^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
      pattern: "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
     }
    }
    variable Q_MAP04_PARAGRAAF04
    {
-    frequency: document;
     title: "Currency types";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable InputminInclInputMaxIncl
     {
-     frequency: document;
      title: "Vul een getal in tussen >=5 en <=10";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      range: >= 5.0 and <= 10.0;
     }
     variable InputminExclInputMaxExcl
     {
-     frequency: document;
      title: "Vul een getal in tussen > 5 en < 10";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      range: > 5.0 and < 10.0;
     }
     variable InputminInclInputMaxExcl
     {
-     frequency: document;
      title: "Vul een getal in tussen >=5 en < 10";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      range: >= 5.0 and < 10.0;
     }
     variable InputminExclInputMaxIncl
     {
-     frequency: document;
      title: "Vul een getal in tussen > 5 en <=10";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      range: > 5.0 and <= 10.0;
@@ -1672,42 +1674,42 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP04_PARAGRAAF05
    {
-    frequency: document;
     title: "Foto type";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable PhotoUpload
     {
-     datatype: string;
-     frequency: document;
      title: "PhotoUpload";
+     frequency: document;
      displaytype: photoupload;
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP04_PARAGRAAF06
    {
-    frequency: document;
     title: "File upload type";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable FileUpload
     {
-     datatype: string;
-     frequency: document;
      title: "Upload een file";
+     frequency: document;
      displaytype: fileupload;
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP04_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP04_PARAGRAAF09SUB1 refers to Q_MAP04_WARNING
     {
      title: "Warning voor map 4";
@@ -1743,29 +1745,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP04_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP04_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (4)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP04_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (4)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP04, Q_MAP04_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -1774,174 +1776,174 @@ model SCORECARDTESTMODEL uses BaseModel
   variable Q_MAP05
   {
    valid: [AMMOUNT(Q_MAP05_VRAAG01.required and Q_MAP05_VRAAG01.entered),AMMOUNT(Q_MAP05_VRAAG01.required)];
-   frequency: document;
-   formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
    title: "Map 5 Tuples";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
-   visible: (Q_MAP04_VRAAG04=1);
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP05_ENTEREDREQUIREDVARS=Q_MAP05_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
+   visible: (Q_MAP04_VRAAG04=1);
    variable Q_MAP05_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 5";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP05_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP05=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 5";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP05=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP05_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 5";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP05_PARAGRAAF01
    {
-    frequency: document;
     title: "Paragraaf 1";
-    displaytype: currency;
     locked: On;
-    visible: (Q_MAP04_VRAAG03=1);
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: (Q_MAP04_VRAAG03=1);
     hint: "De invoer bij vraag 2 wordt automatisch ook ingevuld bij vraag 1.";
     variable Q_MAP05_VRAAG01
     {
-     frequency: document;
      title: "Vraag 1";
      locked: (Q_STATUS=1) or (Q_MAP04_VRAAG01=1);
+     frequency: document;
+     required: (Visible(Q_MAP05_VRAAG01));
      options_title: locked;
      fixed_decimals: 0;
-     required: (Visible(Q_MAP05_VRAAG01));
     }
     variable Q_MAP05_VRAAG02
     {
-     frequency: document;
      title: "Vraag 2";
-     visible: (Q_MAP04_VRAAG02=1);
+     frequency: document;
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP04_VRAAG02=1);
     }
     variable Q_MAP05_VRAAG03
     {
-     datatype: string;
-     frequency: document;
      title: "Vraag 3";
+     frequency: document;
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP05_PARAGRAAF03
    {
-    frequency: document;
     title: "Lijstje";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     hint: "Hieronder wordt een lijstje getoond. Vul één regel in automatisch verschijnt er een nieuwe regel getoond. Je kunt de omschrijving aanpassen door op het pennetje te klikken.";
     variable Q_MAP05_LIJST01
     {
-     frequency: document;
      title: "Omschrijving";
+     frequency: document;
      fixed_decimals: 0;
     }
     variable Q_MAP05_LIJST02
     {
-     frequency: document;
      title: "Omschrijving";
-     visible: DataEntered(Q_MAP05_LIJST01,1);
+     frequency: document;
      fixed_decimals: 0;
+     visible: DataEntered(Q_MAP05_LIJST01,1);
     }
     variable Q_MAP05_LIJST03
     {
-     frequency: document;
      title: "Omschrijving";
-     visible: DataEntered(Q_MAP05_LIJST02,1);
+     frequency: document;
      fixed_decimals: 0;
+     visible: DataEntered(Q_MAP05_LIJST02,1);
     }
     variable Q_MAP05_LIJSTTOTAAL
     {
-     frequency: document;
-     formula: Q_MAP05_LIJST01+Q_MAP05_LIJST02+Q_MAP05_LIJST03;
      title: "Totaal";
      locked: On;
+     frequency: document;
+     formula: Q_MAP05_LIJST01+Q_MAP05_LIJST02+Q_MAP05_LIJST03;
      options_title: locked;
-     top_separator: 2;
      fixed_decimals: 0;
+     top_separator: 2;
     }
    }
    variable Q_MAP05_PARAGRAAF04
    {
-    frequency: document;
     title: "asdas";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable OnroerendGoedTupleSum
     {
-     frequency: document;
-     formula: TupleSum(OnroerendGoed_tpAanschafwaarde);
      title: "TupleSum Aanschafwaarde";
-     displaytype: currency;
      locked: On;
+     frequency: document;
+     displaytype: currency;
+     formula: TupleSum(OnroerendGoed_tpAanschafwaarde);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable OnroerendGoedTupleMin
     {
-     frequency: document;
-     formula: TupleMin(OnroerendGoed_tpAanschafwaarde);
      title: "TupleMin Aanschafwaarde";
-     displaytype: currency;
      locked: On;
+     frequency: document;
+     displaytype: currency;
+     formula: TupleMin(OnroerendGoed_tpAanschafwaarde);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable OnroerendGoedTupleMax
     {
-     frequency: document;
-     formula: TupleMax(OnroerendGoed_tpAanschafwaarde);
      title: "TupleMax Aanschafwaarde";
-     displaytype: currency;
      locked: On;
+     frequency: document;
+     displaytype: currency;
+     formula: TupleMax(OnroerendGoed_tpAanschafwaarde);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable OnroerendGoedTupleSumVerschil
     {
-     frequency: document;
-     formula: TupleSum(OnroerendGoed_tpVerschil);
      title: "variable OnroerendGoedTupleSumVerschil";
-     displaytype: currency;
      locked: On;
+     frequency: document;
+     displaytype: currency;
+     formula: TupleSum(OnroerendGoed_tpVerschil);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable OnroerendGoedTupleSumGroter0
     {
-     frequency: document;
-     formula: TupleSum(OnroerendGoed_tpGroter0);
      title: "OnroerendGoedTupleSumGroter0";
      locked: On;
+     frequency: document;
+     formula: TupleSum(OnroerendGoed_tpGroter0);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable OnroerendGoedTupleSumJonger6Mnd
     {
-     frequency: document;
-     formula: TupleSum(OnroerendGoed_tpJonger6Mnd);
      title: "OnroerendGoedTupleSumJonger6Mnd";
      locked: On;
+     frequency: document;
+     formula: TupleSum(OnroerendGoed_tpJonger6Mnd);
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -1951,30 +1953,30 @@ model SCORECARDTESTMODEL uses BaseModel
      options_title: locked;
      variable OnroerendGoed_tpRegistratienummer
      {
-      datatype: string;
-      frequency: document;
       title: "Registernummer";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable OnroerendGoed_tpAanschafwaarde
      {
-      frequency: document;
       title: "Aanschafwaarde registergoed";
+      frequency: document;
       displaytype: currency;
       options_title: locked;
       fixed_decimals: 0;
      }
      variable OnroerendGoed_tpAanschafjaar
      {
-      datatype: string;
-      frequency: document;
       title: "Aanschafjaar registergoed";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable OnroerendGoed_tpWOZwaarde
      {
-      frequency: document;
       title: "WOZ-waarde registergoed";
+      frequency: document;
       displaytype: currency;
       options_title: locked;
       fixed_decimals: 0;
@@ -1982,51 +1984,51 @@ model SCORECARDTESTMODEL uses BaseModel
      }
      variable OnroerendGoed_tpWOZwaardeDatum
      {
-      frequency: document;
       title: "Datum vaststelling WOZ-waarde registergoed";
+      frequency: document;
       displaytype: date;
       choices: "dd/MM/yyyy";
       options_title: locked;
      }
      variable OnroerendGoed_tpBoekwaarde
      {
-      frequency: document;
       title: "Boekwaarde registergoed";
+      frequency: document;
       displaytype: currency;
       options_title: locked;
       fixed_decimals: 0;
      }
      variable OnroerendGoed_tpAfschrijvingsmethode
      {
-      datatype: string;
-      frequency: document;
       title: "Afschrijvingsmethode registergoed";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable OnroerendGoed_tpVerschil
      {
-      frequency: document;
-      formula: (OnroerendGoed_tpAanschafwaarde - OnroerendGoed_tpWOZwaarde);
       title: "Verschil aanschafwaarde <> WOZ ";
+      frequency: document;
       displaytype: currency;
+      formula: (OnroerendGoed_tpAanschafwaarde - OnroerendGoed_tpWOZwaarde);
       options_title: locked;
       fixed_decimals: 0;
      }
      variable OnroerendGoed_tpGroter0
      {
-      frequency: document;
-      formula: If(OnroerendGoed_tpAanschafwaarde>0,1,0);
       title: "Aanschafwaarde registergoed > 0 euro?";
+      frequency: document;
       displaytype: select;
+      formula: If(OnroerendGoed_tpAanschafwaarde>0,1,0);
       choices: "0:Nee|1:Ja";
       options_title: locked;
      }
      variable OnroerendGoed_tpJonger6Mnd
      {
-      frequency: document;
-      formula: If( (OnNA(Q_STATUS_FINAL_ON,Now) - (365/2)) > OnroerendGoed_tpWOZwaardeDatum ,0,1);
       title: "Datum vaststelling WOZ jonger dan 6 maand?";
+      frequency: document;
       displaytype: select;
+      formula: If( (OnNA(Q_STATUS_FINAL_ON,Now) - (365/2)) > OnroerendGoed_tpWOZwaardeDatum ,0,1);
       choices: "0:Nee|1:Ja";
       options_title: locked;
      }
@@ -2034,8 +2036,8 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_PARAGRAAF05
    {
-    frequency: document;
     title: "Tuple Omzetgroep";
+    frequency: document;
     displaytype: paragraph;
     options_title: locked;
     tuple OmzetGroep
@@ -2044,10 +2046,10 @@ model SCORECARDTESTMODEL uses BaseModel
      options_title: locked;
      variable Omzetgroep_tpNaam
      {
-      datatype: string;
-      frequency: document;
       title: "Naam";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable +Omzetgroep_tpOmzet
      {
@@ -2073,38 +2075,38 @@ model SCORECARDTESTMODEL uses BaseModel
      }
      variable Omzetgroep_tpBrutomarge
      {
-      formula: OnEr((Omzetgroep_tpOmzet - Omzetgroep_tpInkoop) / Omzetgroep_tpOmzet ,NA);
-      data_options: calculateAggregation, unscalable;
       title: "Brutomarge";
       displaytype: percentage;
+      formula: OnEr((Omzetgroep_tpOmzet - Omzetgroep_tpInkoop) / Omzetgroep_tpOmzet ,NA);
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
+      data_options: calculateAggregation, unscalable;
      }
     }
     variable SOMOmzetgroepOmzet
     {
-     formula: TupleSum(Omzetgroep_tpOmzet);
      title: "SOM: Omzet";
      displaytype: currency;
+     formula: TupleSum(Omzetgroep_tpOmzet);
      options_title: locked;
      aggregation: flow;
     }
     variable SOMOmzetgroepBrutowinst
     {
-     formula: TupleSum(Omzetgroep_tpBrutowinst);
      title: "SOM: Brutowinst";
      displaytype: currency;
+     formula: TupleSum(Omzetgroep_tpBrutowinst);
      options_title: locked;
      aggregation: flow;
     }
    }
    variable Q_MAP05_PARAGRAAF06
    {
-    frequency: document;
     title: "Overeenkomst (Tuple in Tuple in Tuple)";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     tuple OVK
     {
@@ -2112,18 +2114,18 @@ model SCORECARDTESTMODEL uses BaseModel
      options_title: locked;
      variable OVK_tpID
      {
-      datatype: string;
-      frequency: document;
       title: "ID";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable OVK_tpNaam
      {
-      datatype: string;
+      title: "Naam";
       frequency: document;
       formula: "Naam";
-      title: "Naam";
       options_title: locked;
+      datatype: string;
      }
      tuple OVK_Lening
      {
@@ -2131,52 +2133,52 @@ model SCORECARDTESTMODEL uses BaseModel
       options_title: locked;
       variable OVK_Lening_tpID
       {
-       datatype: string;
-       frequency: document;
        title: "ID";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable OVK_Lening_tpNummer
       {
-       datatype: string;
+       title: "Rekeningnummer";
        frequency: document;
        formula: String("OVK_Lening_tpNummer");
-       title: "Rekeningnummer";
        options_title: locked;
+       datatype: string;
       }
       variable OVK_Lening_tpHoofdsom
       {
-       frequency: document;
        title: "Hoofdsom";
+       frequency: document;
        displaytype: currency;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable OVK_Lening_tpDetails
       {
-       datatype: string;
-       frequency: document;
        title: "Details";
+       frequency: document;
        options_title: locked;
+       datatype: string;
        variable OVK_Lening_tpRenteProduct
        {
-        datatype: string;
-        frequency: document;
         title: "Rente Product";
+        frequency: document;
         options_title: locked;
+        datatype: string;
        }
        variable OVK_Lening_tpRentepercentage
        {
-        frequency: document;
         title: "Rente percentage";
+        frequency: document;
         displaytype: percentage;
         options_title: locked;
         fixed_decimals: 2;
        }
        variable +OVK_Lening_tpLooptijd
        {
-        frequency: document;
         title: "Looptijd";
+        frequency: document;
         options_title: locked;
         fixed_decimals: 0;
        }
@@ -2187,65 +2189,65 @@ model SCORECARDTESTMODEL uses BaseModel
        options_title: locked;
        variable OVK_Lening_Zekerheid_tpID
        {
-        datatype: string;
-        frequency: document;
         title: "ID";
+        frequency: document;
         options_title: locked;
+        datatype: string;
        }
        variable OVK_Lening_Zekerheid_tpNaam
        {
-        datatype: string;
-        frequency: document;
         title: "Omschrijving";
+        frequency: document;
         options_title: locked;
+        datatype: string;
        }
        variable OVK_Lening_Zekerheid_tpWaarde
        {
-        frequency: document;
         title: "Waarde";
+        frequency: document;
         displaytype: currency;
         options_title: locked;
         fixed_decimals: 0;
        }
        variable OVK_Lening_Zekerheid_tpType
        {
-        frequency: document;
         title: "Soort";
+        frequency: document;
         displaytype: select;
         choices: "1:Onroerend Goed|2:Inventaris|3:Bankgarantie";
         options_title: locked;
        }
        variable OVK_Lening_Zekerheid_tpDekkingsPercentage
        {
-        frequency: document;
-        formula: If(OVK_Lening_Zekerheid_tpType=1,0.90,If(OVK_Lening_Zekerheid_tpType=2,0.40,If(OVK_Lening_Zekerheid_tpType=1,1,NA)));
         title: "Dekkingspercentage percentage";
+        frequency: document;
         displaytype: percentage;
+        formula: If(OVK_Lening_Zekerheid_tpType=1,0.90,If(OVK_Lening_Zekerheid_tpType=2,0.40,If(OVK_Lening_Zekerheid_tpType=1,1,NA)));
         options_title: locked;
         fixed_decimals: 2;
        }
        variable OVK_Lening_Zekerheid_tpAllocatiePercentage
        {
-        frequency: document;
-        formula: 1;
         title: "Allocatie percentage";
+        frequency: document;
         displaytype: percentage;
+        formula: 1;
         options_title: locked;
         fixed_decimals: 2;
        }
        variable OVK_Lening_Zekerheid_tpDekkingsWaarde
        {
-        frequency: document;
-        formula: OVK_Lening_Zekerheid_tpDekkingsPercentage*OVK_Lening_Zekerheid_tpAllocatiePercentage*OVK_Lening_Zekerheid_tpWaarde;
         title: "Dekkingswaarde";
+        frequency: document;
         displaytype: currency;
+        formula: OVK_Lening_Zekerheid_tpDekkingsPercentage*OVK_Lening_Zekerheid_tpAllocatiePercentage*OVK_Lening_Zekerheid_tpWaarde;
         options_title: locked;
         fixed_decimals: 0;
        }
        variable =OVK_Lening_Zekerheid_tpLooptijdLening
        {
-        frequency: document;
         title: "De looptijd van de onderliggende lening is";
+        frequency: document;
         options_title: locked;
         fixed_decimals: 0;
         hint: "Controle om gegevens op te vragen vanuit bovenliggende tuple";
@@ -2253,35 +2255,35 @@ model SCORECARDTESTMODEL uses BaseModel
       }
       variable OVK_Lening_tpZekerheidGealloceerdTotaal
       {
-       frequency: document;
-       formula: TupleSum(OVK_Lening_Zekerheid_tpDekkingsWaarde);
        title: "Totaal Zekerheid (T) (Gealloceerd)";
+       frequency: document;
        displaytype: currency;
+       formula: TupleSum(OVK_Lening_Zekerheid_tpDekkingsWaarde);
        options_title: locked;
       }
       variable OVK_Lening_tpZekerheidNietGealloceerd
       {
-       frequency: document;
        title: "Zekerheid (Niet Gealloceerd)";
+       frequency: document;
        displaytype: currency;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable OVK_Lening_tpZekerheidTotaal
       {
-       frequency: document;
-       formula: OVK_Lening_tpZekerheidGealloceerdTotaal + OVK_Lening_tpZekerheidNietGealloceerd;
        title: "Totale dekkingswaarde zekerheden";
+       frequency: document;
        displaytype: currency;
+       formula: OVK_Lening_tpZekerheidGealloceerdTotaal + OVK_Lening_tpZekerheidNietGealloceerd;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable OVK_Lening_tpTotaleDekkinngsPercentage
       {
-       frequency: document;
-       formula: OnER(OVK_Lening_tpZekerheidTotaal/OVK_Lening_tpHoofdsom,NA);
        title: "Totale dekkingspercentage";
+       frequency: document;
        displaytype: currency;
+       formula: OnER(OVK_Lening_tpZekerheidTotaal/OVK_Lening_tpHoofdsom,NA);
        options_title: locked;
        fixed_decimals: 0;
       }
@@ -2289,25 +2291,25 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable OVK_LeningHoofdsomSum
     {
-     frequency: document;
-     formula: TupleSum(OVK_Lening_tpHoofdsom);
      title: "Totaal leningen";
+     frequency: document;
      displaytype: currency;
+     formula: TupleSum(OVK_Lening_tpHoofdsom);
      options_title: locked;
      fixed_decimals: 0;
     }
    }
    variable Q_MAP05_PARAGRAAF07
    {
-    frequency: document;
     title: "(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [READONLY]";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     tuple Q_MAP05_PARAGRAAF07SUB1
     {
-     frequency: none;
      title: String(OVK_tpNaam);
+     frequency: none;
      displaytype: paragraph;
      options_title: locked;
      variable Q_MAP05_PARAGRAAF07SUB1SUB1 refers to OVK_tpID
@@ -2385,24 +2387,24 @@ model SCORECARDTESTMODEL uses BaseModel
        variable Q_MAP05_PARAGRAAF07SUB1SUB3SUB4SUB3 refers to OVK_Lening_Zekerheid_tpType
        {
         title: "Soort";
+        locked: On;
         displaytype: select;
         choices: "1:Onroerend Goed|2:Inventaris|3:Bankgarantie";
-        locked: On;
         options_title: locked;
        }
        variable Q_MAP05_PARAGRAAF07SUB1SUB3SUB4SUB4 refers to OVK_Lening_Zekerheid_tpDekkingsPercentage
        {
         title: "Dekkingspercentage percentage";
-        displaytype: percentage;
         locked: On;
+        displaytype: percentage;
         options_title: locked;
         fixed_decimals: 2;
        }
        variable Q_MAP05_PARAGRAAF07SUB1SUB3SUB4SUB5 refers to OVK_Lening_Zekerheid_tpAllocatiePercentage
        {
         title: "Allocatie percentage";
-        displaytype: percentage;
         locked: On;
+        displaytype: percentage;
         options_title: locked;
         fixed_decimals: 2;
        }
@@ -2445,8 +2447,8 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_PARAGRAAF08
    {
-    frequency: document;
     title: "(KOPIE) Overeenkomst (Tuple in Tuple in Tuple) [NIET READONLY]";
+    frequency: document;
     displaytype: paragraph;
     tuple Q_MAP05_PARAGRAAF08SUB1
     {
@@ -2468,8 +2470,8 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_PARAGRAAFXX
    {
-    frequency: document;
     title: "Zekerheid";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     tuple Zekerheid
@@ -2478,45 +2480,45 @@ model SCORECARDTESTMODEL uses BaseModel
      options_title: locked;
      variable Zekerheid_tpID
      {
-      datatype: string;
-      frequency: document;
       title: "ID";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable Zekerheid_tpType
      {
-      datatype: string;
-      frequency: document;
       title: "Type";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable Zekerheid_tpBeschrijving
      {
-      datatype: string;
+      title: "Beschrijving";
       frequency: document;
       formula: "Beschrijving";
-      title: "Beschrijving";
       options_title: locked;
+      datatype: string;
      }
      variable Zekerheid_tpStatus
      {
-      datatype: string;
-      frequency: document;
       title: "Status";
+      frequency: document;
       options_title: locked;
+      datatype: string;
      }
      variable Zekerheid_tpWaarde
      {
-      frequency: document;
       title: "Waarde";
+      frequency: document;
       displaytype: currency;
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Zekerheid_tpDekkingswaarde
      {
-      frequency: document;
       title: "Dekkingswaarde";
+      frequency: document;
       displaytype: currency;
       options_title: locked;
       fixed_decimals: 0;
@@ -2527,93 +2529,93 @@ model SCORECARDTESTMODEL uses BaseModel
       options_title: locked;
       variable Zekerheid_OR_tpID
       {
-       datatype: string;
-       frequency: document;
        title: "ID";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_OR_tpSoort
       {
-       datatype: string;
-       frequency: document;
        title: "Soort";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_OR_tpVervallen
       {
-       datatype: string;
-       frequency: document;
        title: "Vervallen";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_OR_tpTaxateur
       {
-       datatype: string;
-       frequency: document;
        title: "Taxateur";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_OR_tpTaxatiedatum
       {
-       frequency: document;
        title: "Taxatiedatum";
+       frequency: document;
        displaytype: date;
        choices: "dd/MM/yyyy";
        options_title: locked;
       }
       variable Zekerheid_OR_tpVrijeVerkoopwaarde
       {
-       frequency: document;
        title: "Vrije verkoopwaarde";
+       frequency: document;
        displaytype: currency;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Zekerheid_OR_tpExecutiewaarde
       {
-       frequency: document;
        title: "Executiewaarde";
+       frequency: document;
        displaytype: currency;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Zekerheid_OR_tpBoekwaarde
       {
-       frequency: document;
        title: "Boekwaarde";
+       frequency: document;
        displaytype: currency;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Zekerheid_OR_tpEinddatumJaarrapport
       {
-       frequency: document;
        title: "Einddatum jaarrapport";
+       frequency: document;
        displaytype: date;
        choices: "dd/MM/yyyy";
        options_title: locked;
       }
       variable Zekerheid_OR_tpWOZwaarde
       {
-       frequency: document;
        title: "WOZ waarde";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Zekerheid_OR_tpWOZwaardepeildatum
       {
-       frequency: document;
        title: "WOZ waardepeildatum";
+       frequency: document;
        displaytype: date;
        choices: "dd/MM/yyyy";
        options_title: locked;
       }
       variable Zekerheid_OR_tpOmschrijving
       {
-       datatype: string;
-       frequency: document;
        title: "Vrije tekst";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
      }
      tuple Zekerheid_Party
@@ -2622,39 +2624,39 @@ model SCORECARDTESTMODEL uses BaseModel
       options_title: locked;
       variable Zekerheid_Party_tpID
       {
-       datatype: string;
-       frequency: document;
        title: "ID";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_Party_tpSoort
       {
-       datatype: string;
+       title: "Soort";
        frequency: document;
        formula: "Option";
-       title: "Soort";
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_Party_tpRelatienaam
       {
-       datatype: string;
-       frequency: document;
        title: "Relatienaam";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
       variable Zekerheid_Party_tpRelatienummer
       {
-       datatype: string;
-       frequency: document;
        title: "Relatienummer";
+       frequency: document;
        options_title: locked;
+       datatype: string;
       }
      }
     }
     variable Zekerheid_TotaalDekkingswaarde
     {
-     frequency: document;
      title: "Totaal dekkingswaarde";
+     frequency: document;
      displaytype: currency;
      options_title: locked;
      fixed_decimals: 0;
@@ -2662,17 +2664,17 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_PARAGRAAFXXX
    {
-    frequency: document;
     title: "Zekerheid (READONLY)";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable Q_MAP05_PARAGRAAFXXXSUB1
     {
-     datatype: string;
-     frequency: document;
      title: "Zekerheden";
      locked: On;
+     frequency: document;
      options_title: locked;
+     datatype: string;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
     }
@@ -2752,9 +2754,9 @@ model SCORECARDTESTMODEL uses BaseModel
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB5 refers to Zekerheid_OR_tpTaxatiedatum
       {
        title: "Taxatiedatum";
+       locked: On;
        displaytype: date;
        choices: "dd/MM/yyyy";
-       locked: On;
        options_title: locked;
       }
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB6 refers to Zekerheid_OR_tpVrijeVerkoopwaarde
@@ -2781,9 +2783,9 @@ model SCORECARDTESTMODEL uses BaseModel
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB9 refers to Zekerheid_OR_tpEinddatumJaarrapport
       {
        title: "Einddatum jaarrapport";
+       locked: On;
        displaytype: date;
        choices: "dd/MM/yyyy";
-       locked: On;
        options_title: locked;
       }
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB10 refers to Zekerheid_OR_tpWOZwaarde
@@ -2796,9 +2798,9 @@ model SCORECARDTESTMODEL uses BaseModel
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB11 refers to Zekerheid_OR_tpWOZwaardepeildatum
       {
        title: "WOZ waardepeildatum";
+       locked: On;
        displaytype: date;
        choices: "dd/MM/yyyy";
-       locked: On;
        options_title: locked;
       }
       variable Q_MAP05_PARAGRAAFXXXSUB2SUB7SUB12 refers to Zekerheid_OR_tpOmschrijving
@@ -2841,108 +2843,108 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_PARAGRAAF08A
    {
-    frequency: document;
     title: "MatrixLookup (numeriek)";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP05_A_XLS
     {
-     datatype: string;
+     title: "XLS name";
      frequency: document;
      formula: "ScorecardTestModel.xls";
-     title: "XLS name";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP05_A_RANGE
     {
-     datatype: string;
+     title: "Range name";
      frequency: document;
      formula: "ZoekenNumeriek";
-     title: "Range name";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP05_A_SEARCHKEY
     {
+     title: "Search key (numeriek)";
      frequency: document;
      formula: 2;
-     title: "Search key (numeriek)";
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP05_A_COLINDEX
     {
+     title: "Col index";
      frequency: document;
      formula: 1;
-     title: "Col index";
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP05_A_MatrixLookupRESULT
     {
-     datatype: string;
+     title: "Result";
      frequency: document;
      formula: String(MatrixLookup ( Q_MAP05_A_XLS , Q_MAP05_A_RANGE,Q_MAP05_A_SEARCHKEY,Q_MAP05_A_COLINDEX));
-     title: "Result";
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP05_PARAGRAAF08B
    {
-    frequency: document;
     title: "MatrixLookup (alfanumeriek)";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP05_B_XLS
     {
-     datatype: string;
+     title: "XLS name";
      frequency: document;
      formula: "ScorecardTestModel.xls";
-     title: "XLS name";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP05_B_RANGE
     {
-     datatype: string;
+     title: "Range name";
      frequency: document;
      formula: "ZoekenAlfanumeriek";
-     title: "Range name";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP05_B_SEARCHKEY
     {
-     datatype: string;
+     title: "Search key (alfanumeriek)";
      frequency: document;
      formula: "twee";
-     title: "Search key (alfanumeriek)";
      options_title: locked;
+     datatype: string;
     }
     variable Q_MAP05_B_COLINDEX
     {
+     title: "Col index";
      frequency: document;
      formula: 1;
-     title: "Col index";
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP05_B_MatrixLookupRESULT
     {
-     datatype: string;
+     title: "Result";
      frequency: document;
      formula: String(MatrixLookup ( Q_MAP05_B_XLS , Q_MAP05_B_RANGE,Q_MAP05_B_SEARCHKEY,Q_MAP05_B_COLINDEX));
-     title: "Result";
      options_title: locked;
+     datatype: string;
     }
    }
    variable Q_MAP05_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP05_PARAGRAAF09SUB1 refers to Q_MAP05_WARNING
     {
      title: "Warning voor map 5";
@@ -2978,29 +2980,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP05_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP05_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (5)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP05_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (5)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP05, Q_MAP05_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -3009,60 +3011,60 @@ model SCORECARDTESTMODEL uses BaseModel
   variable Q_MAP06
   {
    valid: [AMMOUNT(Q_MAP06_P02VRAAG01.required and Q_MAP06_P02VRAAG01.entered,Q_MAP06_P02VRAAG02.required and Q_MAP06_P02VRAAG02.entered,Q_MAP06_P02VRAAG03.required and Q_MAP06_P02VRAAG03.entered,Q_MAP06_P02VRAAG04.required and Q_MAP06_P02VRAAG04.entered,Q_MAP06_P02VRAAG05.required and Q_MAP06_P02VRAAG05.entered),AMMOUNT(Q_MAP06_P02VRAAG01.required,Q_MAP06_P02VRAAG02.required,Q_MAP06_P02VRAAG03.required,Q_MAP06_P02VRAAG04.required,Q_MAP06_P02VRAAG05.required)];
-   frequency: document;
-   formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
    title: "Map 6";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP06_ENTEREDREQUIREDVARS=Q_MAP06_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP06_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 6";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP06_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP06=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 6";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(If(Q_MAP06=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP06_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 6";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP06_PARAGRAAF01
    {
-    frequency: document;
     title: "Paragraaf 1: Restrictie en Knockout";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP06_VRAAG01
     {
-     frequency: document;
      title: "Vraag 1: Vul een getal tussen -10 en 10 in.";
+     frequency: document;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP06_VRAAG02
     {
-     frequency: document;
      title: "Vraag 2: Is er een knockout van toepassing?";
+     frequency: document;
      displaytype: select;
      choices: "0:Nee|1:Ja";
      options_title: locked;
@@ -3070,70 +3072,70 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP06_PARAGRAAF02
    {
-    frequency: document;
     title: "Paragraaf 2:Visibility en Required";
-    displaytype: currency;
     locked: On;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
     variable Q_MAP06_P02VRAAG01
     {
-     frequency: document;
      title: "Vraag 1: Naar volgende vraag?";
+     frequency: document;
      displaytype: select;
-     choices: "0:Nee|1:Ja";
-     visible: InputRequired(Q_MAP06_P02VRAAG01);
-     options_title: locked;
      required: 1;
+     choices: "0:Nee|1:Ja";
+     options_title: locked;
+     visible: InputRequired(Q_MAP06_P02VRAAG01);
     }
     variable Q_MAP06_P02VRAAG02
     {
-     frequency: document;
      title: "Vraag 2: Naar volgende vraag?";
+     frequency: document;
      displaytype: select;
-     choices: "0:Nee|1:Ja";
-     visible: InputRequired(Q_MAP06_P02VRAAG02);
-     options_title: locked;
      required: (Q_MAP06_P02VRAAG01=1);
+     choices: "0:Nee|1:Ja";
+     options_title: locked;
+     visible: InputRequired(Q_MAP06_P02VRAAG02);
     }
     variable Q_MAP06_P02VRAAG03
     {
-     frequency: document;
      title: "Vraag 3: Naar volgende vraag?";
+     frequency: document;
      displaytype: select;
-     choices: "0:Nee|1:Ja";
-     visible: InputRequired(Q_MAP06_P02VRAAG03);
-     options_title: locked;
      required: (Q_MAP06_P02VRAAG02=1);
+     choices: "0:Nee|1:Ja";
+     options_title: locked;
+     visible: InputRequired(Q_MAP06_P02VRAAG03);
     }
     variable Q_MAP06_P02VRAAG04
     {
-     frequency: document;
      title: "Vraag 4: Naar volgende vraag?";
+     frequency: document;
      displaytype: select;
-     choices: "0:Nee|1:Ja";
-     visible: InputRequired(Q_MAP06_P02VRAAG04);
-     options_title: locked;
      required: (Q_MAP06_P02VRAAG03=1);
+     choices: "0:Nee|1:Ja";
+     options_title: locked;
+     visible: InputRequired(Q_MAP06_P02VRAAG04);
     }
     variable Q_MAP06_P02VRAAG05
     {
-     frequency: document;
      title: "Vraag 5: Naar volgende vraag?";
+     frequency: document;
      displaytype: select;
-     choices: "0:Nee|1:Ja";
-     visible: InputRequired(Q_MAP06_P02VRAAG05);
-     options_title: locked;
      required: (Q_MAP06_P02VRAAG04=1);
+     choices: "0:Nee|1:Ja";
+     options_title: locked;
+     visible: InputRequired(Q_MAP06_P02VRAAG05);
     }
    }
    variable Q_MAP06_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP06_PARAGRAAF09SUB1 refers to Q_MAP06_WARNING
     {
      title: "Warning voor map 6";
@@ -3157,45 +3159,45 @@ model SCORECARDTESTMODEL uses BaseModel
      title: "Aantal verplichte velden (6)";
      locked: On;
      options_title: locked, invisible;
+     fixed_decimals: 0;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
-     fixed_decimals: 0;
     }
     variable Q_MAP06_PARAGRAAF09SUB5 refers to Q_MAP06_ENTEREDREQUIREDVARS
     {
      title: "Aantal ingevulde verplichte velden (6)";
      locked: On;
      options_title: locked, invisible;
+     fixed_decimals: 0;
      options_notrend: locked, invisible;
      options_trend: locked, invisible;
-     fixed_decimals: 0;
     }
    }
    variable Q_MAP06_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP06_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (6)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP06_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (6)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP06, Q_MAP06_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -3203,180 +3205,180 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP07
   {
-   frequency: document;
-   formula: (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS);
    title: "Map 7: Rapportage";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP07_ENTEREDREQUIREDVARS=Q_MAP07_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP07_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 7";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP07_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP07=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 7";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(If(Q_MAP07=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP07_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 7";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP07_PARAGRAAF01
    {
-    frequency: document;
     title: "Layout";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable Q_MAP07_KEUZE
     {
-     frequency: document;
-     formula: 1;
      title: "Welke regels tonen?";
+     frequency: document;
      displaytype: select;
+     formula: 1;
      choices: "0:Alle regels|1:Oneven regels|2:Even regels";
      options_title: locked;
     }
    }
    variable Q_MAP07_PARAGRAAF02
    {
-    frequency: document;
     title: "Eénkolomsvariabelen";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable Q_MAP07_PAR01
     {
+     title: "Paragraaf 1";
      frequency: document;
      formula: 111;
-     title: "Paragraaf 1";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR01_VR01
      {
+      title: "Paragraaf 1 - Vraag 1";
       frequency: document;
       formula: 111;
-      title: "Paragraaf 1 - Vraag 1";
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR01_VR02
      {
+      title: "Paragraaf 1 - Vraag 2";
       frequency: document;
       formula: 111;
-      title: "Paragraaf 1 - Vraag 2";
       options_title: locked;
       fixed_decimals: 0;
      }
     }
     variable Q_MAP07_PAR02
     {
+     title: "Paragraaf 2";
      frequency: document;
      formula: 222;
-     title: "Paragraaf 2";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR02_VR01
      {
+      title: "Paragraaf 2 - Vraag 1";
       frequency: document;
       formula: 222;
-      title: "Paragraaf 2 - Vraag 1";
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR02_VR02
      {
+      title: "Paragraaf 2 - Vraag 2";
       frequency: document;
       formula: 222;
-      title: "Paragraaf 2 - Vraag 2";
       options_title: locked;
       fixed_decimals: 0;
      }
     }
     variable Q_MAP07_PAR03
     {
+     title: "Paragraaf 3";
      frequency: document;
      formula: 333;
-     title: "Paragraaf 3";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR03_VR01
      {
+      title: "Paragraaf 3 - Vraag 1";
       frequency: document;
       formula: 333;
-      title: "Paragraaf 3 - Vraag 1";
       options_title: locked;
       fixed_decimals: 0;
       variable Q_MAP07_PAR03_VR01_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR03_VR01_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR03_VR01_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR03_VR01_SUB1+Q_MAP07_PAR03_VR01_SUB2;
        title: "Paragraaf 3 - Vraag 1 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR03_VR01_SUB1+Q_MAP07_PAR03_VR01_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
      }
      variable Q_MAP07_PAR03_VR02
      {
+      title: "Paragraaf 3 - Vraag 2";
       frequency: document;
       formula: 333;
-      title: "Paragraaf 3 - Vraag 2";
       options_title: locked;
       fixed_decimals: 0;
       variable Q_MAP07_PAR03_VR02_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 2 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR03_VR02_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 2 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR03_VR02_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR03_VR02_SUB1+Q_MAP07_PAR03_VR02_SUB2;
        title: "Paragraaf 3 - Vraag 2 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR03_VR02_SUB1+Q_MAP07_PAR03_VR02_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
@@ -3384,94 +3386,94 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP07_PAR04
     {
+     title: "Paragraaf 4";
      frequency: document;
      formula: 444;
-     title: "Paragraaf 4";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR04_VR01
      {
+      title: "Paragraaf 4 - Vraag 1";
       frequency: document;
       formula: 444;
-      title: "Paragraaf 4 - Vraag 1";
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR04_VR02
      {
+      title: "Paragraaf 4 - Vraag 2";
       frequency: document;
       formula: 444;
-      title: "Paragraaf 4 - Vraag 2";
       options_title: locked;
       fixed_decimals: 0;
      }
     }
     variable Q_MAP07_PAR05
     {
+     title: "Paragraaf 5";
      frequency: document;
      formula: 555;
-     title: "Paragraaf 5";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR05_VR01
      {
+      title: "Paragraaf 5 - Vraag 1";
       frequency: document;
       formula: 555;
-      title: "Paragraaf 5 - Vraag 1";
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR05_VR02
      {
+      title: "Paragraaf 5 - Vraag 2";
       frequency: document;
       formula: 555;
-      title: "Paragraaf 5 - Vraag 2";
       options_title: locked;
       fixed_decimals: 0;
      }
     }
     variable Q_MAP07_PAR06
     {
-     frequency: document;
      title: "Paragraaf 6 (leeg)";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
+     frequency: document;
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR06_VR01
      {
-      frequency: document;
       title: "Paragraaf 6 - Vraag 1";
+      frequency: document;
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR06_VR02
      {
-      frequency: document;
       title: "Paragraaf 6 - Vraag 2";
+      frequency: document;
       options_title: locked;
       fixed_decimals: 0;
      }
     }
     variable Q_MAP07_PAR07
     {
-     frequency: document;
      title: "Paragraaf 7 (leeg)";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+     frequency: document;
      options_title: locked;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR07_VR01
      {
-      frequency: document;
       title: "Paragraaf 7 - Vraag 1";
+      frequency: document;
       options_title: locked;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR07_VR02
      {
-      frequency: document;
       title: "Paragraaf 7 - Vraag 2";
+      frequency: document;
       options_title: locked;
       fixed_decimals: 0;
      }
@@ -3485,24 +3487,24 @@ model SCORECARDTESTMODEL uses BaseModel
     aggregation: balance;
     variable Q_MAP07_PAR11
     {
-     formula: 111;
      title: "Paragraaf 1";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+     formula: 111;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR11_VR01
      {
-      formula: 111;
       title: "Paragraaf 1 - Vraag 1";
+      formula: 111;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR11_VR02
      {
-      formula: 111;
       title: "Paragraaf 1 - Vraag 2";
+      formula: 111;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
@@ -3510,24 +3512,24 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP07_PAR12
     {
-     formula: 222;
      title: "Paragraaf 2";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
+     formula: 222;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR12_VR01
      {
-      formula: 222;
       title: "Paragraaf 2 - Vraag 1";
+      formula: 222;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR12_VR02
      {
-      formula: 222;
       title: "Paragraaf 2 - Vraag 2";
+      formula: 222;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
@@ -3535,72 +3537,72 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP07_PAR13
     {
-     formula: 333;
      title: "Paragraaf 3";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+     formula: 333;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR13_VR01
      {
-      formula: 333;
       title: "Paragraaf 3 - Vraag 1";
-      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+      formula: 333;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
+      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
       variable Q_MAP07_PAR13_VR01_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR13_VR01_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR13_VR01_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR13_VR01_SUB1+Q_MAP07_PAR13_VR01_SUB2;
        title: "Paragraaf 3 - Vraag 1 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR13_VR01_SUB1+Q_MAP07_PAR13_VR01_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
      }
      variable Q_MAP07_PAR13_VR02
      {
-      formula: 333;
       title: "Paragraaf 3 - Vraag 2";
-      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+      formula: 333;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
+      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
       variable Q_MAP07_PAR13_VR02_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR13_VR02_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR13_VR02_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR13_VR02_SUB1+Q_MAP07_PAR13_VR02_SUB2;
        title: "Paragraaf 3 - Vraag 1 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR13_VR02_SUB1+Q_MAP07_PAR13_VR02_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
@@ -3608,72 +3610,72 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP07_PAR14
     {
-     formula: 444;
      title: "Paragraaf 4";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
+     formula: 444;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR14_VR01
      {
-      formula: 444;
       title: "Paragraaf 4 - Vraag 1";
-      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
+      formula: 444;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
+      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
       variable Q_MAP07_PAR14_VR01_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR14_VR01_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR14_VR01_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR14_VR01_SUB1+Q_MAP07_PAR14_VR01_SUB2;
        title: "Paragraaf 3 - Vraag 1 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR14_VR01_SUB1+Q_MAP07_PAR14_VR01_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
      }
      variable Q_MAP07_PAR14_VR02
      {
-      formula: 444;
       title: "Paragraaf 4 - Vraag 2";
-      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
+      formula: 444;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
+      visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
       variable Q_MAP07_PAR14_VR02_SUB1
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 1";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR14_VR02_SUB2
       {
-       frequency: document;
        title: "Paragraaf 3 - Vraag 1 - Sub 2";
+       frequency: document;
        options_title: locked;
        fixed_decimals: 0;
       }
       variable Q_MAP07_PAR14_VR02_TOTAAL
       {
-       frequency: document;
-       formula: Q_MAP07_PAR14_VR02_SUB1+Q_MAP07_PAR14_VR02_SUB2;
        title: "Paragraaf 3 - Vraag 1 - Totaal";
        locked: On;
+       frequency: document;
+       formula: Q_MAP07_PAR14_VR02_SUB1+Q_MAP07_PAR14_VR02_SUB2;
        options_title: locked;
        fixed_decimals: 0;
       }
@@ -3681,24 +3683,24 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable Q_MAP07_PAR15
     {
-     formula: 555;
      title: "Paragraaf 5";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
+     formula: 555;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR15_VR01
      {
-      formula: 555;
       title: "Paragraaf 5 - Vraag 1";
+      formula: 555;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
      }
      variable Q_MAP07_PAR15_VR02
      {
-      formula: 555;
       title: "Paragraaf 5 - Vraag 2";
+      formula: 555;
       options_title: locked;
       aggregation: balance;
       fixed_decimals: 0;
@@ -3707,10 +3709,10 @@ model SCORECARDTESTMODEL uses BaseModel
     variable Q_MAP07_PAR16
     {
      title: "Paragraaf 6 (leeg)";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=2);
      variable Q_MAP07_PAR16_VR01
      {
       title: "Paragraaf 6 (leeg) - Vraag 1";
@@ -3729,10 +3731,10 @@ model SCORECARDTESTMODEL uses BaseModel
     variable Q_MAP07_PAR17
     {
      title: "Paragraaf 7 (leeg)";
-     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
+     visible: (Q_MAP07_KEUZE=0) or (Q_MAP07_KEUZE=1);
      variable Q_MAP07_PAR17_VR01
      {
       title: "Paragraaf 7 (leeg) - Vraag 1";
@@ -3751,12 +3753,12 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP07_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP07_PARAGRAAF09SUB1 refers to Q_MAP07_WARNING
     {
      title: "Warning voor map 7";
@@ -3792,29 +3794,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP07_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP07_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (7)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP07_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (7)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP07, Q_MAP07_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -3822,38 +3824,38 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP09
   {
-   frequency: document;
-   formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS);
    title: "Map 7,5 Includefiles EJS";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP09_ENTEREDREQUIREDVARS=Q_MAP09_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP09_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 9";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP09_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP09=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 9";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP09=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP09_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 9";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable TestChoiceVars
    {
@@ -3863,8 +3865,8 @@ model SCORECARDTESTMODEL uses BaseModel
     aggregation: balance;
     variable tcvTest1
     {
-     frequency: document;
      title: "Test 1: Choice (zero[br]one[br]two[br]three[br]four)";
+     frequency: document;
      displaytype: select;
      choices: "zero|one|two|three|four";
      options_title: locked;
@@ -3878,16 +3880,16 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable tcvTest2String
     {
-     datatype: string;
+     title: "Test 2: Enter a choice string here";
      frequency: document;
      formula: "zero[br]one[br]two[br]three[br]four";
-     title: "Test 2: Enter a choice string here";
      options_title: locked;
+     datatype: string;
     }
     variable tcvTest2
     {
-     frequency: document;
      title: "Test 2: Make your choice";
+     frequency: document;
      displaytype: select;
      choices: "zero|one|two|three|four";
      options_title: locked;
@@ -3901,8 +3903,8 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable tcvTest3
     {
-     frequency: document;
      title: "Test 3: Choice (zero[br]one[br][br][br]four)";
+     frequency: document;
      displaytype: select;
      choices: "zero|one|||four";
      options_title: locked;
@@ -3916,16 +3918,16 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable tcvTest4Country
     {
-     frequency: document;
      title: "Test 4: Choice step 1 Country";
+     frequency: document;
      displaytype: select;
      choices: "Unknown|Netherlands|Germany";
      options_title: locked;
     }
     variable tcvTest4City
     {
-     frequency: document;
      title: "Test 4: Choice step 2 City depends on country";
+     frequency: document;
      displaytype: select;
      choices: "Unknown|Hamburg|Berlin";
      options_title: locked;
@@ -3946,8 +3948,8 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable tcvTest5
     {
-     frequency: document;
      title: "Test 5: Choice (0:zero[br]10:ten[br]11:eleven[br]20:twenty)";
+     frequency: document;
      displaytype: select;
      choices: "0:zero|10:ten|11:eleven|20:twenty";
      options_title: locked;
@@ -3968,87 +3970,87 @@ model SCORECARDTESTMODEL uses BaseModel
     aggregation: balance;
     variable tplT
     {
-     formula: ValueT(T);
      title: "ValueT(T)";
+     formula: ValueT(T);
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tplTsY
     {
-     formula: 1;
      title: "TsY(T)";
+     formula: 1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tplMaxT
     {
-     frequency: document;
-     formula: ValueT(MaxT);
      title: "MaxT";
      locked: On;
+     frequency: document;
+     formula: ValueT(MaxT);
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplFirstTInFormaSetNoTrend
     {
-     frequency: document;
-     formula: ValueT(FirstTInFormulaSet(NoTrend,MainPeriod));
      title: "FirstTInFormulaSet(NoTrend,MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: ValueT(FirstTInFormulaSet(NoTrend,MainPeriod));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplLastTInFormaSetNoTrend
     {
-     frequency: document;
-     formula: ValueT(LastTInFormulaSet(NoTrend,MainPeriod));
      title: "LastTInFormulaSet(NoTrend,MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: ValueT(LastTInFormulaSet(NoTrend,MainPeriod));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplFirstTInFormaSetTrend
     {
-     frequency: document;
-     formula: ValueT(FirstTInFormulaSet(Trend,MainPeriod));
      title: "FirstTInFormulaSet(Trend,MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: ValueT(FirstTInFormulaSet(Trend,MainPeriod));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplLastTInFormaSetTrend
     {
-     frequency: document;
-     formula: ValueT(LastTInFormulaSet(Trend,MainPeriod));
      title: "LastTInFormulaSet(Trend,MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: ValueT(LastTInFormulaSet(Trend,MainPeriod));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplFirstTInPeriod
     {
-     frequency: document;
-     formula: 1;
      title: "FirstTInPeriod(MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplLastTInPeriod
     {
-     frequency: document;
-     formula: 1;
      title: "LastTInPeriod(MainPeriod)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplLastTinYear
     {
-     formula: 1;
      title: "LastTinYear";
+     formula: 1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
@@ -4062,32 +4064,32 @@ model SCORECARDTESTMODEL uses BaseModel
     }
     variable tplFirstT
     {
+     title: "FirstT";
      frequency: document;
      formula: ValueT(1);
-     title: "FirstT";
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplLastT
     {
+     title: "LastT";
      frequency: document;
      formula: ValueT(MaxT);
-     title: "LastT";
      options_title: locked;
      fixed_decimals: 0;
     }
     variable tplFirstValueT
     {
-     formula: 1;
      title: "FirstValueT(Values,FirstT,LastT)";
+     formula: 1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tplLastValueT
     {
-     formula: 1;
      title: "LastValueT(Values,FirstT,LastT)";
+     formula: 1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
@@ -4101,143 +4103,143 @@ model SCORECARDTESTMODEL uses BaseModel
     aggregation: balance;
     variable tclTestA
     {
-     formula: 0;
      title: "Value 0 (unlock expected)";
+     formula: 0;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestB
     {
-     formula: 1;
      title: "Value 1 (lock expected)";
      locked: 1;
+     formula: 1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestC
     {
-     formula: ValueT(T)=3;
      title: "T=3";
      locked: ValueT(T)=3;
+     formula: ValueT(T)=3;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestD
     {
-     formula: ValueT(T)<=3;
      title: "T<=3";
      locked: ValueT(T)<=3;
+     formula: ValueT(T)<=3;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestE
     {
-     formula: ValueT(T)=1;
      title: "T=1";
      locked: ValueT(T)=1;
+     formula: ValueT(T)=1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestF
     {
-     formula: ValueT(T)=2;
      title: "T=2";
      locked: ValueT(T)=2;
+     formula: ValueT(T)=2;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestG
     {
-     formula: ValueT(T)=3;
      title: "T=3";
      locked: ValueT(T)=3;
+     formula: ValueT(T)=3;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestH
     {
-     formula: ValueT(T)=4;
      title: "T=4";
      locked: ValueT(T)=4;
+     formula: ValueT(T)=4;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestI
     {
-     formula: ValueT(T)<>1;
      title: "T<>1";
      locked: ValueT(T)<>1;
+     formula: ValueT(T)<>1;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestJ
     {
-     formula: ValueT(T)<>2;
      title: "T<>2";
      locked: ValueT(T)<>2;
+     formula: ValueT(T)<>2;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestK
     {
-     formula: ValueT(T)<>3;
      title: "T<>3";
      locked: ValueT(T)<>3;
+     formula: ValueT(T)<>3;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestL
     {
-     formula: ValueT(T)<>4;
      title: "T<>4";
      locked: ValueT(T)<>4;
+     formula: ValueT(T)<>4;
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestM
     {
-     formula: ValueT(T)<=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod)));
      title: "T<=LastTinYear(FirstTinFormulaSet(Trend,MainPeriod))";
      locked: ValueT(T)<=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod)));
+     formula: ValueT(T)<=ValueT(LastTinYear(FirstTinFormulaSet(Trend,MainPeriod)));
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestN
     {
-     formula: ValueT(T)=ValueT(LastTinFormulaSet(Trend,MainPeriod));
      title: "T=LastTinFormulaSet(Trend,MainPeriod)";
      locked: ValueT(T)=ValueT(LastTinFormulaSet(Trend,MainPeriod));
+     formula: ValueT(T)=ValueT(LastTinFormulaSet(Trend,MainPeriod));
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestO
     {
-     formula: ValueT(T)<>ValueT(LastTinFormulaSet(Trend,MainPeriod));
      title: "T<>LastTinFormulaSet(Trend,MainPeriod)";
      locked: ValueT(T)<>ValueT(LastTinFormulaSet(Trend,MainPeriod));
+     formula: ValueT(T)<>ValueT(LastTinFormulaSet(Trend,MainPeriod));
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
     }
     variable tclTestP
     {
-     formula: ValueT(T)<ValueT(LastTinFormulaSet(Trend,MainPeriod));
      title: "T<LastTinFormulaSet(Trend,MainPeriod)";
      locked: ValueT(T)<ValueT(LastTinFormulaSet(Trend,MainPeriod));
+     formula: ValueT(T)<ValueT(LastTinFormulaSet(Trend,MainPeriod));
      options_title: locked;
      aggregation: balance;
      fixed_decimals: 0;
@@ -4245,29 +4247,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP09_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP09_REQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X));
      title: "Aantal verplichte velden (x)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X));
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP09_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      title: "Aantal ingevulde verplichte velden (x)";
      locked: On;
+     frequency: document;
+     formula: Count(X,SelectDescendants(Q_MAP09, Q_MAP09_HULPVARIABELEN),InputRequired(X) And DataAvailable(X));
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -4275,43 +4277,43 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP08
   {
-   frequency: document;
-   formula: (Q_MAP08_ENTEREDREQUIREDVARS=Q_MAP08_REQUIREDVARS);
    title: "Map 8 knopppen";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP08_ENTEREDREQUIREDVARS=Q_MAP08_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP08_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 8";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP08_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP08=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 8";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP08=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP08_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 8";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP08_PARAGRAAF03
    {
-    frequency: document;
     title: "Knoppen";
+    frequency: document;
     displaytype: currency;
     options_title: locked;
     variable Q_MAP08_PARAGRAAF03SUB1 refers to Q_PREVIOUS_BUTTON_VISIBLE
@@ -4352,12 +4354,12 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP08_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP08_PARAGRAAF09SUB1 refers to Q_MAP08_WARNING
     {
      title: "Warning voor map 8";
@@ -4393,29 +4395,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP08_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP08_REQUIREDVARS
     {
-     frequency: document;
-     formula: 1;
      title: "Aantal verplichte velden (8)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP08_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: 1;
      title: "Aantal ingevulde verplichte velden (8)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -4423,84 +4425,84 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_MAP0A
   {
-   frequency: document;
-   formula: (Q_MAP0A_ENTEREDREQUIREDVARS=Q_MAP0A_REQUIREDVARS);
    title: "Map 10: Grafieken";
-   displaytype: select;
-   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    locked: On;
+   frequency: document;
+   displaytype: select;
+   formula: (Q_MAP0A_ENTEREDREQUIREDVARS=Q_MAP0A_REQUIREDVARS);
+   choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
    variable Q_MAP0A_WARNING
    {
-    datatype: string;
-    frequency: document;
-    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     title: "Warning voor map 8";
     locked: On;
+    frequency: document;
+    formula: String(Q_RESTRICTIES&Q_WARNING_GLOBAL);
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP0A_INFO
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If(Q_MAP0A=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     title: "Info bij stap 8";
     locked: On;
+    frequency: document;
+    formula: String(If(Q_MAP0A=0 , "Nog niet alle verplichte vragen zijn ingevuld." , ""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_MAP0A_VALIDATION
    {
-    datatype: string;
-    frequency: document;
     title: "Validatie stap 8";
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable GraphResRek
    {
-    datatype: matrix;
-    frequency: none;
-    formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
     title: "Netto omzet";
+    frequency: none;
     displaytype: piechart;
+    formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
     options_title: locked;
+    datatype: matrix;
    }
    variable GraphResRek2
    {
-    datatype: matrix;
-    frequency: none;
-    formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
     title: "Inkoopwaarde";
+    frequency: none;
     displaytype: piechart;
+    formula: [[1,1],[2,2],[3,3],[4,5],[6,7]];
     options_title: locked;
+    datatype: matrix;
    }
    variable Q_MAP0A_PARAGRAAF09
    {
-    frequency: document;
     title: "Eigenschappen van de stap";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked;
+    visible: 0;
     variable Q_MAP0A_PARAGRAAF09SUB1 refers to Q_MAP0A_WARNING
     {
      title: "Warning voor map 8";
-     displaytype: memo;
      locked: On;
+     displaytype: memo;
      options_title: locked;
     }
     variable Q_MAP0A_PARAGRAAF09SUB2 refers to Q_MAP0A_INFO
     {
      title: "Info bij stap 8";
-     displaytype: memo;
      locked: On;
+     displaytype: memo;
      options_title: locked;
     }
     variable Q_MAP0A_PARAGRAAF09SUB3 refers to Q_MAP0A_VALIDATION
     {
      title: "Validatie stap 8";
-     displaytype: memo;
      locked: On;
+     displaytype: memo;
      options_title: locked;
     }
     variable Q_MAP0A_PARAGRAAF09SUB4 refers to Q_MAP0A_REQUIREDVARS
@@ -4520,29 +4522,29 @@ model SCORECARDTESTMODEL uses BaseModel
    }
    variable Q_MAP0A_HULPVARIABELEN
    {
-    frequency: document;
     title: "Hulpvariabelen";
-    displaytype: currency;
     locked: On;
-    visible: 0;
+    frequency: document;
+    displaytype: currency;
     options_title: locked, invisible;
+    visible: 0;
     options_notrend: locked, invisible;
     options_trend: locked, invisible;
     variable Q_MAP0A_REQUIREDVARS
     {
-     frequency: document;
-     formula: 1;
      title: "Aantal verplichte velden (8)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
     variable Q_MAP0A_ENTEREDREQUIREDVARS
     {
-     frequency: document;
-     formula: 1;
      title: "Aantal ingevulde verplichte velden (8)";
      locked: On;
+     frequency: document;
+     formula: 1;
      options_title: locked;
      fixed_decimals: 0;
     }
@@ -4550,12 +4552,12 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_RESULT
   {
-   datatype: string;
-   frequency: document;
-   formula: String(If(Q_ROOT=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES&Q_WARNING_GLOBAL);
    title: "Resultaat";
    locked: On;
+   frequency: document;
+   formula: String(If(Q_ROOT=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES&Q_WARNING_GLOBAL);
    options_title: locked;
+   datatype: string;
    variable Q_RESULTSUB1 refers to Q_RESULT
    {
     title: "Resultaat";
@@ -4565,17 +4567,17 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_STATUS
   {
-   frequency: document;
-   formula: 0;
    title: "Status";
+   frequency: document;
    displaytype: select;
+   formula: 0;
    choices: "0:Actief|1:Defintief";
    options_title: locked;
   }
   variable Q_STATUS_FINAL_ON
   {
-   frequency: document;
    title: "Definitief gemaakt op:";
+   frequency: document;
    displaytype: date;
    choices: "dd/MM/yyyy";
    options_title: locked;
@@ -4583,186 +4585,186 @@ model SCORECARDTESTMODEL uses BaseModel
   }
   variable Q_STATUS_FINAL_BY
   {
-   datatype: string;
-   frequency: document;
    title: "Definitief gemaakt door (gebruikersnaam):";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable Q_STATUS_FINAL_BY_NAME
   {
-   datatype: string;
-   frequency: document;
    title: "Definitief gemaakt door (volledige naam):";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable Q_STATUS_STARTED_ON
   {
-   frequency: document;
    title: "Aangemaakt op:";
+   frequency: document;
    displaytype: date;
    choices: "dd/MM/yyyy";
    options_title: locked;
   }
   variable Q_STATUS_STARTED_BY
   {
-   datatype: string;
-   frequency: document;
    title: "Aangemaakt door (gebruikersnaam):";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable Q_STATUS_STARTED_BY_NAME
   {
-   datatype: string;
-   frequency: document;
    title: "Aangemaakt door (volledige naam):";
+   frequency: document;
    options_title: locked;
+   datatype: string;
   }
   variable ModelVersion
   {
-   datatype: string;
-   frequency: document;
-   formula: "01.19.000.000";
-   data_options: saveCalculatedValue, unscalable;
    title: "Modelversie";
    locked: On;
+   frequency: document;
+   formula: "01.19.000.000";
    options_title: locked;
+   datatype: string;
+   data_options: saveCalculatedValue, unscalable;
   }
   variable ModelType
   {
-   datatype: string;
-   frequency: document;
-   formula: "TEST";
-   data_options: saveCalculatedValue, unscalable;
    title: "Modeltype";
    locked: On;
+   frequency: document;
+   formula: "TEST";
    options_title: locked;
+   datatype: string;
+   data_options: saveCalculatedValue, unscalable;
   }
   variable MatrixVersion
   {
-   datatype: string;
+   title: "Parametersversie";
    frequency: document;
    formula: String(MatrixLookup("ScorecardTestModel.xls","Version",1,3));
-   data_options: saveCalculatedValue, unscalable;
-   title: "Parametersversie";
    options_title: locked;
+   datatype: string;
+   data_options: saveCalculatedValue, unscalable;
    hint: "MatrixVersion";
   }
   variable Q_PREVIOUS_BUTTON_VISIBLE
   {
-   frequency: document;
-   formula: 2;
    title: "Vorige";
+   frequency: document;
    displaytype: select;
+   formula: 2;
    choices: "0:Nooit|2:Altijd";
    options_title: locked;
   }
   variable Q_NEXT_BUTTON_VISIBLE
   {
-   frequency: document;
-   formula: 2;
    title: "Volgende";
+   frequency: document;
    displaytype: select;
+   formula: 2;
    choices: "0:Nooit|1:Alleen wanneer stap volledig is|2:Altijd";
    options_title: locked;
   }
   variable Q_CONCEPT_REPORT_VISIBLE
   {
-   frequency: document;
-   formula: 1;
    title: "Concept rapport";
+   frequency: document;
    displaytype: select;
+   formula: 1;
    choices: "0:Nee|1:Ja";
    options_title: locked;
   }
   variable Q_MAKE_FINAL_VISIBLE
   {
-   frequency: document;
-   formula: 1;
    title: "Definitief maken";
+   frequency: document;
    displaytype: select;
+   formula: 1;
    choices: "0:Nee|1:Ja";
    options_title: locked;
   }
   variable Q_FINAL_REPORT_VISIBLE
   {
-   frequency: document;
-   formula: 1;
    title: "Definitief rapport";
+   frequency: document;
    displaytype: select;
+   formula: 1;
    choices: "0:Nee|1:Ja";
    options_title: locked;
   }
  }
  variable HULPVARS
  {
-  datatype: string;
-  frequency: document;
-  data_options: unscalable;
   title: "Hulpvariabelen";
   locked: On;
+  frequency: document;
   options_title: locked;
+  datatype: string;
+  data_options: unscalable;
   variable Q_WARNING_GLOBAL
   {
-   datatype: string;
-   frequency: document;
-   formula: String(If( Length ( Q_WARNING_GLOBALTXT)>0 , "[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT , ""));
    title: "Knock-out(s)?";
-   displaytype: memo;
    locked: On;
+   frequency: document;
+   displaytype: memo;
+   formula: String(If( Length ( Q_WARNING_GLOBALTXT)>0 , "[br][/br]Er zijn knockouts van toepassing:"&Q_WARNING_GLOBALTXT , ""));
    options_title: locked;
+   datatype: string;
    variable Q_WARNING_01
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If( Q_MAP06_VRAAG02=1,"- Map6 - Vraag 2: Is er een knockout van toepassing? JA",""));
     title: "Map6 - Vraag 6";
     locked: On;
+    frequency: document;
+    formula: String(If( Q_MAP06_VRAAG02=1,"- Map6 - Vraag 2: Is er een knockout van toepassing? JA",""));
     options_title: locked;
+    datatype: string;
    }
    variable Q_WARNING_GLOBALTXT
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If( Length ( Q_WARNING_01)>0 , "[br][/br]"&Q_WARNING_01,""));
     title: "Knock-out tekst";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(If( Length ( Q_WARNING_01)>0 , "[br][/br]"&Q_WARNING_01,""));
     options_title: locked;
+    datatype: string;
    }
   }
   variable Q_RESTRICTIES
   {
-   datatype: string;
-   frequency: document;
-   formula: String(If( Length ( Q_RESTRICTIESTXT)>0 , "[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT , ""));
    title: "Restricties";
-   displaytype: memo;
    locked: On;
+   frequency: document;
+   displaytype: memo;
+   formula: String(If( Length ( Q_RESTRICTIESTXT)>0 , "[br][/br]De volgende variabelen zijn niet correct gevuld:"&Q_RESTRICTIESTXT , ""));
    options_title: locked;
+   datatype: string;
    variable Q_RESTRICTIES_01
    {
-    datatype: string;
+    locked: On;
     frequency: document;
     formula: String(If( (Q_MAP06_VRAAG01>=-10) And (Q_MAP06_VRAAG01<=10),"","- Getal van [url=Q_MAP06_VRAAG01] Map 6 Vraag 1[/url] ligt niet tussen -10 en 10"));
-    locked: On;
     options_title: locked;
+    datatype: string;
    }
    variable Q_RESTRICTIES_02
    {
-    datatype: string;
-    frequency: document;
     locked: On;
+    frequency: document;
     options_title: locked;
+    datatype: string;
    }
    variable Q_RESTRICTIESTXT
    {
-    datatype: string;
-    frequency: document;
-    formula: String(If( Length ( Q_RESTRICTIES_01)>0 , "[br][/br]"&Q_RESTRICTIES_01,""));
     title: "Restricties tekst";
-    displaytype: memo;
     locked: On;
+    frequency: document;
+    displaytype: memo;
+    formula: String(If( Length ( Q_RESTRICTIES_01)>0 , "[br][/br]"&Q_RESTRICTIES_01,""));
     options_title: locked;
+    datatype: string;
    }
   }
  }

@@ -2,7 +2,7 @@
 
 var cov_n6eqzb7og = function () {
 	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\XAxis.js',
-	    hash = '54a2d5595c59a71a397d74e2b7432b2eda364e08',
+	    hash = '9f893db2fd31ad00fc58b194204b65619e4f3e4d',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -1616,7 +1616,7 @@ var cov_n6eqzb7og = function () {
 				},
 				end: {
 					line: 336,
-					column: 110
+					column: 100
 				}
 			},
 			'161': {
@@ -1626,7 +1626,7 @@ var cov_n6eqzb7og = function () {
 				},
 				end: {
 					line: 336,
-					column: 110
+					column: 100
 				}
 			},
 			'162': {
@@ -1912,7 +1912,7 @@ var cov_n6eqzb7og = function () {
 				loc: {
 					start: {
 						line: 343,
-						column: 60
+						column: 55
 					},
 					end: {
 						line: 345,
@@ -2624,7 +2624,7 @@ var cov_n6eqzb7og = function () {
 					},
 					end: {
 						line: 336,
-						column: 110
+						column: 100
 					}
 				},
 				type: 'if',
@@ -2635,7 +2635,7 @@ var cov_n6eqzb7og = function () {
 					},
 					end: {
 						line: 336,
-						column: 110
+						column: 100
 					}
 				}, {
 					start: {
@@ -2644,7 +2644,7 @@ var cov_n6eqzb7og = function () {
 					},
 					end: {
 						line: 336,
-						column: 110
+						column: 100
 					}
 				}],
 				line: 336
@@ -3390,7 +3390,7 @@ ViewModes.prototype.toString = function () {
 
 	var self = (cov_n6eqzb7og.s[164]++, this);
 	cov_n6eqzb7og.s[165]++;
-	return Object.keys(this.viewmodes).map(function (mode, idx) {
+	return Object.keys(this.viewmodes).map(function (mode) {
 		cov_n6eqzb7og.f[9]++;
 		cov_n6eqzb7og.s[166]++;
 

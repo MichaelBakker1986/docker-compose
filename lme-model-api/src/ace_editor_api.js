@@ -1,10 +1,12 @@
-import EconomicEditorView                          from '../../model-tests/EconomicEditorView'
-import { ConvertEvaluateAsString }                 from '../../model-tests/plugins/ConvertEvaluateAsString'
-import { AmpersandConverter }                      from '../../model-tests/plugins/AmpersandConverter'
-import { ScorecardQCaseFix as ScorecardQ_caseFix } from '../../model-tests/plugins/ScorecardQ_caseFix'
-import { V05CaseFix }                              from '../../model-tests/plugins/V05CaseFix'
-import FormulaInformationManager                   from './FormulaInformationManager'
-import { RegisterFormulaBuilder }                  from '../../ffl/index'
+import {
+	AmpersandConverter,
+	ConvertEvaluateAsString,
+	EconomicEditorView,
+	ScorecardQCaseFix,
+	V05CaseFix
+}                                 from '../../lme-model-api/index'
+import FormulaInformationManager  from './FormulaInformationManager'
+import { RegisterFormulaBuilder } from '../../ffl/index'
 
 function AceEditor(id, opts) {
 	opts = opts || {}
@@ -116,7 +118,7 @@ AceEditor.prototype.setAnnotations = function(annotations) {
 AceEditor.prototype.setParsedValue = function(fflModel) {
 	if (ConvertEvaluateAsString.on) fflModel = ConvertEvaluateAsString.parse(fflModel)
 	if (AmpersandConverter.on) fflModel = AmpersandConverter.parse(fflModel)
-	if (ScorecardQ_caseFix.on) fflModel = ScorecardQ_caseFix.parse(fflModel)
+	if (ScorecardQCaseFix.on) fflModel = ScorecardQCaseFix.parse(fflModel)
 	if (V05CaseFix.on) fflModel = V05CaseFix.parse(fflModel)
 	if (EconomicEditorView.on) fflModel = EconomicEditorView.parse(fflModel)
 	this.fflModel = fflModel

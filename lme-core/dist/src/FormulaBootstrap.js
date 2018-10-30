@@ -2,7 +2,7 @@
 
 var cov_1qai6jtbpd = function () {
 	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FormulaBootstrap.js',
-	    hash = 'fc472225eb36e5234c848436383f7a486b0e2583',
+	    hash = 'd9c968109154faa69ed9d4a84fd9be99a95f08a0',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -206,7 +206,7 @@ var cov_1qai6jtbpd = function () {
 				},
 				end: {
 					line: 85,
-					column: 62
+					column: 57
 				}
 			},
 			'20': {
@@ -296,7 +296,7 @@ var cov_1qai6jtbpd = function () {
 				},
 				end: {
 					line: 94,
-					column: 62
+					column: 57
 				}
 			},
 			'29': {

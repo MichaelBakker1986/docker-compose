@@ -18,6 +18,7 @@
     "child-process-es6-promise": "^1.2.0",
     "child-process-promise": "^2.2.1",
     "cors": "^2.8.4",
+    "exceljs": "^1.6.2",
     "express": "^4.16.4",
     "express-prettify": "0.0.9",
     "express-test": "^0.1.2",

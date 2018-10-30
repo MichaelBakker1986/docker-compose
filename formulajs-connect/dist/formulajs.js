@@ -2,7 +2,7 @@
 
 var cov_1axbif5cdy = function () {
 	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\formulajs-connect\\formulajs.js',
-	    hash = '2b5d6b76fa053940bae86cd23d467f590bd145ab',
+	    hash = '65ed38e70d854970477bd7c61789ea18f25b108c',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
@@ -35,7 +35,7 @@ var cov_1axbif5cdy = function () {
 					column: 0
 				},
 				end: {
-					line: 14,
+					line: 19,
 					column: 2
 				}
 			},
@@ -45,68 +45,68 @@ var cov_1axbif5cdy = function () {
 					column: 1
 				},
 				end: {
-					line: 13,
-					column: 53
+					line: 18,
+					column: 2
 				}
 			},
 			'4': {
 				start: {
-					line: 11,
-					column: 28
+					line: 12,
+					column: 2
 				},
 				end: {
-					line: 13,
-					column: 53
+					line: 12,
+					column: 81
 				}
 			},
 			'5': {
 				start: {
-					line: 11,
-					column: 39
+					line: 12,
+					column: 13
 				},
 				end: {
-					line: 11,
-					column: 107
+					line: 12,
+					column: 81
 				}
 			},
 			'6': {
 				start: {
-					line: 12,
+					line: 14,
 					column: 6
 				},
 				end: {
-					line: 13,
-					column: 53
+					line: 18,
+					column: 2
 				}
 			},
 			'7': {
 				start: {
-					line: 12,
-					column: 47
+					line: 15,
+					column: 2
 				},
 				end: {
-					line: 13,
-					column: 53
+					line: 15,
+					column: 70
 				}
 			},
 			'8': {
 				start: {
-					line: 12,
-					column: 58
+					line: 15,
+					column: 13
 				},
 				end: {
-					line: 12,
-					column: 115
+					line: 15,
+					column: 70
 				}
 			},
 			'9': {
 				start: {
-					line: 13,
-					column: 6
+					line: 17,
+					column: 2
 				},
 				end: {
-					line: 13,
-					column: 53
+					line: 17,
+					column: 49
 				}
 			}
 		},
@@ -129,7 +129,7 @@ var cov_1axbif5cdy = function () {
 						column: 47
 					},
 					end: {
-						line: 14,
+						line: 19,
 						column: 1
 					}
 				},
@@ -144,8 +144,8 @@ var cov_1axbif5cdy = function () {
 						column: 1
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				},
 				type: 'if',
@@ -155,8 +155,8 @@ var cov_1axbif5cdy = function () {
 						column: 1
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				}, {
 					start: {
@@ -164,8 +164,8 @@ var cov_1axbif5cdy = function () {
 						column: 1
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				}],
 				line: 11
@@ -173,101 +173,101 @@ var cov_1axbif5cdy = function () {
 			'1': {
 				loc: {
 					start: {
-						line: 11,
-						column: 28
+						line: 12,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 12,
+						column: 81
 					}
 				},
 				type: 'if',
 				locations: [{
 					start: {
-						line: 11,
-						column: 28
+						line: 12,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 12,
+						column: 81
 					}
 				}, {
 					start: {
-						line: 11,
-						column: 28
+						line: 12,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 12,
+						column: 81
 					}
 				}],
-				line: 11
+				line: 12
 			},
 			'2': {
 				loc: {
 					start: {
-						line: 12,
+						line: 14,
 						column: 6
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				},
 				type: 'if',
 				locations: [{
 					start: {
-						line: 12,
+						line: 14,
 						column: 6
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				}, {
 					start: {
-						line: 12,
+						line: 14,
 						column: 6
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 18,
+						column: 2
 					}
 				}],
-				line: 12
+				line: 14
 			},
 			'3': {
 				loc: {
 					start: {
-						line: 12,
-						column: 47
+						line: 15,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 15,
+						column: 70
 					}
 				},
 				type: 'if',
 				locations: [{
 					start: {
-						line: 12,
-						column: 47
+						line: 15,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 15,
+						column: 70
 					}
 				}, {
 					start: {
-						line: 12,
-						column: 47
+						line: 15,
+						column: 2
 					},
 					end: {
-						line: 13,
-						column: 53
+						line: 15,
+						column: 70
 					}
 				}],
-				line: 12
+				line: 15
 			}
 		},
 		s: {
@@ -328,34 +328,37 @@ Object.keys(formulaJs).forEach(function (functionName) {
 	cov_1axbif5cdy.s[3]++;
 
 	if (functionName === 'NA') {
-			cov_1axbif5cdy.b[0][0]++;
-			cov_1axbif5cdy.s[4]++;
-			if (_log.DEBUG) {
-					cov_1axbif5cdy.b[1][0]++;
-					cov_1axbif5cdy.s[5]++;
-					return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
-				} else {
-					cov_1axbif5cdy.b[1][1]++;
-					cov_1axbif5cdy.s[6]++;
-					if (global.hasOwnProperty(functionName)) {
-							cov_1axbif5cdy.b[2][0]++;
-							cov_1axbif5cdy.s[7]++;
-							if (_log.DEBUG) {
-									cov_1axbif5cdy.b[3][0]++;
-									cov_1axbif5cdy.s[8]++;
-									(0, _log.debug)('global function already used : [' + functionName + ']');
-								} else {
-									cov_1axbif5cdy.b[3][1]++;
-									cov_1axbif5cdy.s[9]++;
-									entries[functionName] = formulaJs[functionName];
-								}
-						} else {
-						cov_1axbif5cdy.b[2][1]++;
-					}
+		cov_1axbif5cdy.b[0][0]++;
+		cov_1axbif5cdy.s[4]++;
+
+		if (_log.DEBUG) {
+				cov_1axbif5cdy.b[1][0]++;
+				cov_1axbif5cdy.s[5]++;
+				return (0, _log.debug)('FFL parser uses this function to be a VARIABLE 1e-10');
+			} else {
+			cov_1axbif5cdy.b[1][1]++;
+		}
+	} else {
+			cov_1axbif5cdy.b[0][1]++;
+			cov_1axbif5cdy.s[6]++;
+			if (global.hasOwnProperty(functionName)) {
+				cov_1axbif5cdy.b[2][0]++;
+				cov_1axbif5cdy.s[7]++;
+
+				if (_log.DEBUG) {
+						cov_1axbif5cdy.b[3][0]++;
+						cov_1axbif5cdy.s[8]++;
+						(0, _log.debug)('global function already used : [' + functionName + ']');
+					} else {
+					cov_1axbif5cdy.b[3][1]++;
 				}
-		} else {
-		cov_1axbif5cdy.b[0][1]++;
-	}
+			} else {
+				cov_1axbif5cdy.b[2][1]++;
+				cov_1axbif5cdy.s[9]++;
+
+				entries[functionName] = formulaJs[functionName];
+			}
+		}
 });
 exports.name = name;
 exports.entries = entries;

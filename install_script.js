@@ -4,7 +4,7 @@
 
 import main                                                from 'michaelbakker196_concurrently'
 import { existsSync, readdirSync, readFileSync, statSync } from 'fs'
-import { info }                                            from 'log6'
+import { error, info }                                     from 'log6'
 import path                                                from 'path'
 import { exec }                                            from 'child-process-promise'
 
@@ -34,8 +34,8 @@ async function getModules() {
 }
 
 Promise.all([
-	exec('cd model-tests && npm link ../math --no-update-notifier').then(({ stdout }) => info(stdout)),
-	exec('cd model-tests && npm link ../excel-connect --no-update-notifier').then(({ stdout }) => info(stdout)),
+	exec('cd model-tests && npm link ../math --no-update-notifier').then(({ stdout }) => info(stdout)).catch(err => { error(err)}),
+	exec('cd model-tests && npm link ../excel-connect --no-update-notifier').then(({ stdout }) => info(stdout)).catch(err => { error(err)}),
 	getModules()
 ])
 .catch(err => {console.error(err)}).then(([link_math, link_excel_connect, modules]) => {

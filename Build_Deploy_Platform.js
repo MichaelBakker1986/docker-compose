@@ -29,7 +29,7 @@ const run_prom = async (name, command) => {
 }
 
 async function startPlatform_build() {
-	const version = 'michaelbakker1986/lme_platform:0.1.2'
+	const version = 'michaelbakker1986/lme_platform:0.1.15'
 	await run_prom('docker build', `docker build . -t=${version}`)
 //	info(platform_build_result)
 	//await run_prom('start', `docker run -t -i -d -p 8080:7081 --name lme_platform -e ENABLED_MODELS=KSP2 ${version}`)

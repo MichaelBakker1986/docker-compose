@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1fila61n0x = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\excelide.js',
-	    hash = 'dd111db6a1379dfa626575577303b6b4e81891ab',
+var cov_2g7rb1ie8e = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\excelide.js',
+	    hash = 'e8d7484f3d17173f746e415cd49b0954a8b02062',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\excelide.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\excelide.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1210,139 +1210,139 @@ var _lme = require('./lme');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var modelengine = (cov_1fila61n0x.s[0]++, new _lme.LmeAPI());
-cov_1fila61n0x.s[1]++;
+var modelengine = (cov_2g7rb1ie8e.s[0]++, new _lme.LmeAPI());
+cov_2g7rb1ie8e.s[1]++;
 DEBUG = true;
-var counter = (cov_1fila61n0x.s[2]++, 0);
+var counter = (cov_2g7rb1ie8e.s[2]++, 0);
 
 function prox(row, column, value) {
-	cov_1fila61n0x.f[0]++;
-	cov_1fila61n0x.s[3]++;
+	cov_2g7rb1ie8e.f[0]++;
+	cov_2g7rb1ie8e.s[3]++;
 
 	if (column.name === 'name') {
-		cov_1fila61n0x.b[0][0]++;
-		cov_1fila61n0x.s[4]++;
+		cov_2g7rb1ie8e.b[0][0]++;
+		cov_2g7rb1ie8e.s[4]++;
 
 		row[column.name] = value;
-		cov_1fila61n0x.s[5]++;
+		cov_2g7rb1ie8e.s[5]++;
 		return;
 	} else {
-		cov_1fila61n0x.b[0][1]++;
+		cov_2g7rb1ie8e.b[0][1]++;
 	}
-	var icount = (cov_1fila61n0x.s[6]++, -1);
+	var icount = (cov_2g7rb1ie8e.s[6]++, -1);
 	var rval;
-	cov_1fila61n0x.s[7]++;
+	cov_2g7rb1ie8e.s[7]++;
 	Object.defineProperty(row, column.name, {
 		get: function get() {
-			cov_1fila61n0x.f[1]++;
-			cov_1fila61n0x.s[8]++;
+			cov_2g7rb1ie8e.f[1]++;
+			cov_2g7rb1ie8e.s[8]++;
 
 			if (DEBUG) {
-				cov_1fila61n0x.b[1][0]++;
-				cov_1fila61n0x.s[9]++;
+				cov_2g7rb1ie8e.b[1][0]++;
+				cov_2g7rb1ie8e.s[9]++;
 
 				return value;
 			} else {
-				cov_1fila61n0x.b[1][1]++;
+				cov_2g7rb1ie8e.b[1][1]++;
 			}
-			cov_1fila61n0x.s[10]++;
+			cov_2g7rb1ie8e.s[10]++;
 			if (icount !== counter) {
-				cov_1fila61n0x.b[2][0]++;
-				cov_1fila61n0x.s[11]++;
+				cov_2g7rb1ie8e.b[2][0]++;
+				cov_2g7rb1ie8e.s[11]++;
 
 				icount = counter;
-				cov_1fila61n0x.s[12]++;
+				cov_2g7rb1ie8e.s[12]++;
 				rval = modelengine.lme.get(row.name, column.name, 0, 0);
-				cov_1fila61n0x.s[13]++;
+				cov_2g7rb1ie8e.s[13]++;
 				if ((typeof rval === 'undefined' ? 'undefined' : (0, _typeof3.default)(rval)) === 'object') {
-					cov_1fila61n0x.b[3][0]++;
-					cov_1fila61n0x.s[14]++;
+					cov_2g7rb1ie8e.b[3][0]++;
+					cov_2g7rb1ie8e.s[14]++;
 
 					rval = 1;
 				} else {
-					cov_1fila61n0x.b[3][1]++;
+					cov_2g7rb1ie8e.b[3][1]++;
 				}
 			} else {
-				cov_1fila61n0x.b[2][1]++;
+				cov_2g7rb1ie8e.b[2][1]++;
 			}
-			cov_1fila61n0x.s[15]++;
+			cov_2g7rb1ie8e.s[15]++;
 			return rval;
 		},
 		set: function set(v) {
-			cov_1fila61n0x.f[2]++;
-			cov_1fila61n0x.s[16]++;
+			cov_2g7rb1ie8e.f[2]++;
+			cov_2g7rb1ie8e.s[16]++;
 
 			counter++;
-			cov_1fila61n0x.s[17]++;
+			cov_2g7rb1ie8e.s[17]++;
 			value = v;
 		}
 	});
 }
 
 function demo() {
-	cov_1fila61n0x.f[3]++;
+	cov_2g7rb1ie8e.f[3]++;
 
 
-	var typeMap = (cov_1fila61n0x.s[18]++, {
+	var typeMap = (cov_2g7rb1ie8e.s[18]++, {
 		'text': 'string',
 		'money': 'number',
 		'number': 'number'
 	});
 
 	function isNoiseData(name) {
-		cov_1fila61n0x.f[4]++;
-		cov_1fila61n0x.s[19]++;
+		cov_2g7rb1ie8e.f[4]++;
+		cov_2g7rb1ie8e.s[19]++;
 
 		return ['choices', 'visible'].indexOf(name) !== -1;
 	}
 
 	function parseOpenData(openData) {
-		cov_1fila61n0x.f[5]++;
+		cov_2g7rb1ie8e.f[5]++;
 
 		var data,
-		    schema = (cov_1fila61n0x.s[20]++, []);
-		cov_1fila61n0x.s[21]++;
+		    schema = (cov_2g7rb1ie8e.s[20]++, []);
+		cov_2g7rb1ie8e.s[21]++;
 		openData.meta.view.columns.forEach(function (column) {
-			cov_1fila61n0x.f[6]++;
-			cov_1fila61n0x.s[22]++;
+			cov_2g7rb1ie8e.f[6]++;
+			cov_2g7rb1ie8e.s[22]++;
 
 			if (isNoiseData(column.name)) {
-				cov_1fila61n0x.b[4][0]++;
-				cov_1fila61n0x.s[23]++;
+				cov_2g7rb1ie8e.b[4][0]++;
+				cov_2g7rb1ie8e.s[23]++;
 
 				column.hidden = true;
 			} else {
-				cov_1fila61n0x.b[4][1]++;
+				cov_2g7rb1ie8e.b[4][1]++;
 			}
-			cov_1fila61n0x.s[24]++;
-			column.type = (cov_1fila61n0x.b[5][0]++, typeMap[column.dataTypeName]) || (cov_1fila61n0x.b[5][1]++, 'string');
-			cov_1fila61n0x.s[25]++;
+			cov_2g7rb1ie8e.s[24]++;
+			column.type = (cov_2g7rb1ie8e.b[5][0]++, typeMap[column.dataTypeName]) || (cov_2g7rb1ie8e.b[5][1]++, 'string');
+			cov_2g7rb1ie8e.s[25]++;
 			schema.push(column);
 		});
 
-		cov_1fila61n0x.s[26]++;
+		cov_2g7rb1ie8e.s[26]++;
 		data = openData.data.map(function (row) {
-			cov_1fila61n0x.f[7]++;
+			cov_2g7rb1ie8e.f[7]++;
 
-			var r = (cov_1fila61n0x.s[27]++, {});
-			cov_1fila61n0x.s[28]++;
+			var r = (cov_2g7rb1ie8e.s[27]++, {});
+			cov_2g7rb1ie8e.s[28]++;
 			schema.forEach(function (column, index) {
-				cov_1fila61n0x.f[8]++;
-				cov_1fila61n0x.s[29]++;
+				cov_2g7rb1ie8e.f[8]++;
+				cov_2g7rb1ie8e.s[29]++;
 
 				prox(r, column, row[index]);
 			});
-			cov_1fila61n0x.s[30]++;
+			cov_2g7rb1ie8e.s[30]++;
 			return r;
 		});
-		cov_1fila61n0x.s[31]++;
+		cov_2g7rb1ie8e.s[31]++;
 		return {
 			data: data,
 			schema: schema
 		};
 	}
 
-	cov_1fila61n0x.s[32]++;
+	cov_2g7rb1ie8e.s[32]++;
 	global.Xgrid = canvasDatagrid({
 		tree: true,
 		parentNode: document.getElementById('grid'),
@@ -1350,54 +1350,54 @@ function demo() {
 		allowMovingSelection: true,
 		columnHeaderClickBehavior: 'select'
 	});
-	var Xgrid = (cov_1fila61n0x.s[33]++, global.Xgrid);
-	var xhr = (cov_1fila61n0x.s[34]++, new XMLHttpRequest());
-	cov_1fila61n0x.s[35]++;
+	var Xgrid = (cov_2g7rb1ie8e.s[33]++, global.Xgrid);
+	var xhr = (cov_2g7rb1ie8e.s[34]++, new XMLHttpRequest());
+	cov_2g7rb1ie8e.s[35]++;
 	xhr.addEventListener('progress', function (e) {
-		cov_1fila61n0x.f[9]++;
-		cov_1fila61n0x.s[36]++;
+		cov_2g7rb1ie8e.f[9]++;
+		cov_2g7rb1ie8e.s[36]++;
 
-		Xgrid.data = [{ status: 'Loading data: ' + e.loaded + ' of ' + ((cov_1fila61n0x.b[6][0]++, e.total) || (cov_1fila61n0x.b[6][1]++, 'unknown')) + ' bytes...' }];
+		Xgrid.data = [{ status: 'Loading data: ' + e.loaded + ' of ' + ((cov_2g7rb1ie8e.b[6][0]++, e.total) || (cov_2g7rb1ie8e.b[6][1]++, 'unknown')) + ' bytes...' }];
 	});
-	cov_1fila61n0x.s[37]++;
+	cov_2g7rb1ie8e.s[37]++;
 	xhr.addEventListener('load', function (e) {
-		cov_1fila61n0x.f[10]++;
-		cov_1fila61n0x.s[38]++;
+		cov_2g7rb1ie8e.f[10]++;
+		cov_2g7rb1ie8e.s[38]++;
 
 		Xgrid.data = [{ status: 'Loading data ' + e.loaded + '...' }];
-		var returnData = (cov_1fila61n0x.s[39]++, JSON.parse(this.responseText));
-		var openData = (cov_1fila61n0x.s[40]++, parseOpenData(returnData));
-		cov_1fila61n0x.s[41]++;
+		var returnData = (cov_2g7rb1ie8e.s[39]++, JSON.parse(this.responseText));
+		var openData = (cov_2g7rb1ie8e.s[40]++, parseOpenData(returnData));
+		cov_2g7rb1ie8e.s[41]++;
 		Xgrid.schema = openData.schema;
-		cov_1fila61n0x.s[42]++;
+		cov_2g7rb1ie8e.s[42]++;
 		Xgrid.data = openData.data;
 
-		cov_1fila61n0x.s[43]++;
+		cov_2g7rb1ie8e.s[43]++;
 		modelengine.importLME(returnData);
 		//modelengine.fixProblemsInImportedSolution();
 	});
-	var modelName = (cov_1fila61n0x.s[44]++, (cov_1fila61n0x.b[7][0]++, window.location.search.split('model=')[1]) || (cov_1fila61n0x.b[7][1]++, 'V05'));
-	cov_1fila61n0x.s[45]++;
+	var modelName = (cov_2g7rb1ie8e.s[44]++, (cov_2g7rb1ie8e.b[7][0]++, window.location.search.split('model=')[1]) || (cov_2g7rb1ie8e.b[7][1]++, 'V05'));
+	cov_2g7rb1ie8e.s[45]++;
 	xhr.open('GET', 'resources/' + modelName + '_canvas.json');
-	cov_1fila61n0x.s[46]++;
+	cov_2g7rb1ie8e.s[46]++;
 	xhr.send();
 }
 
-cov_1fila61n0x.s[47]++;
+cov_2g7rb1ie8e.s[47]++;
 if (document.addEventListener) {
-	cov_1fila61n0x.b[8][0]++;
-	cov_1fila61n0x.s[48]++;
+	cov_2g7rb1ie8e.b[8][0]++;
+	cov_2g7rb1ie8e.s[48]++;
 
 	document.addEventListener('DOMContentLoaded', demo);
 } else {
-	cov_1fila61n0x.b[8][1]++;
-	cov_1fila61n0x.s[49]++;
+	cov_2g7rb1ie8e.b[8][1]++;
+	cov_2g7rb1ie8e.s[49]++;
 
 	setTimeout(function () {
 		'use strict';
 
-		cov_1fila61n0x.f[11]++;
-		cov_1fila61n0x.s[50]++;
+		cov_2g7rb1ie8e.f[11]++;
+		cov_2g7rb1ie8e.s[50]++;
 		demo();
 	}, 500);
 }

@@ -7,8 +7,8 @@
   "main": "index.js",
   "author": "michael.bakker1986@gmail.com",
   "scripts": {
-    "build": "babel . --ignore node_modules,dist,tests,test -d dist/",
-    "prepare": "npm run build",
+    "build": "echo no build. All in prepare",
+    "prepare": "babel . --ignore node_modules,dist,tests,test -d dist/",
     "test": "node -r babel-register test/TESTMODEL.js"
   },
   "dependencies": {

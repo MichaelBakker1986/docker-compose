@@ -32,14 +32,17 @@ const package_template = {
 		'child-process-promise'    : '^2.2.1',
 		'cors'                     : '^2.8.4',
 		'chalk'                    : '^2.4.1',
+		'composefile'              : '^0.3.0',
 		'express'                  : '^4.16.4',
 		'express-prettify'         : '0.0.9',
+		'exceljs'                  : '^1.6.2',
 		'express-test'             : '^0.1.2',
 		'ffl-math'                 : '^1.0.17',
 		'flatten-object'           : '^1.2.0',
 		'formulajs-connect'        : '^1.0.6',
 		'function-bind'            : '^1.1.1',
 		'glob'                     : '^7.1.3',
+		'http-proxy'               : '^1.17.0',
 		'is-promise'               : '^2.1.0',
 		'json-parse-better-errors' : '^1.0.2',
 		'log6'                     : '^2.0.16',
@@ -60,7 +63,7 @@ const package_template = {
 	'devDependencies': {},
 	'license'        : 'MIT'
 }
-const temp_dir_name = 'temp'
+const temp_dir_name = path.join(__dirname, 'build_folder')
 
 class DockerImageBuilder {
 	constructor({
@@ -88,15 +91,19 @@ class DockerImageBuilder {
 		this.matrix = matrix
 		this.model_name = model_name
 		this.model_version = model_version
-		this.folder_id = path.join('temp', uuid4())
-		this.new_folder = path.join(__dirname, this.folder_id)
+		this.folder_id = uuid4()
+		this.new_folder = path.join(temp_dir_name, this.folder_id)
 		this.resources_folder = path.join(this.new_folder, 'resources')
 		this.docker_model_name = this.model_name.toLowerCase()
 		this.docker_tag = `michaelbakker1986/${this.docker_model_name}${this.postfix}:${this.model_version}`
 	}
 
 	async prepareDockerFile() {
-		if (!existsSync(temp_dir_name)) mkdirSync(temp_dir_name)
+		if (!existsSync(temp_dir_name)) {
+			info(`Creating build folder ${temp_dir_name}`)
+			mkdirSync(temp_dir_name)
+		}
+		info(`Current folder ${__dirname} new_folder ${this.new_folder}`)
 		mkdirSync(this.new_folder)
 		mkdirSync(this.resources_folder)
 		await this.compileRestApiCode()

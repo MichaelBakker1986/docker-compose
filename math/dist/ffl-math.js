@@ -645,7 +645,7 @@ var checkIntegrity = function checkIntegrity(result) {
 	var set = new Set(result.map(function (el) {
 		return typeof el === 'undefined' ? 'undefined' : (0, _typeof3.default)(el);
 	}));
-	(0, _log.debug)('Data types in ' + Array.from(set.keys()).toString());
+	if (_log.TRACE) (0, _log.trace)('Data types in ' + Array.from(set.keys()).toString());
 };
 global.VALUES = function (func, fId, x, y, z, v, m) {
 	var result = [];

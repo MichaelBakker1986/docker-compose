@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_67fn5e0a1 = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\JBehaveController.js',
-	    hash = '6a56d8a6e48406f30179db762fd1618ac6322a15',
+var cov_27cos8ll8z = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\JBehaveController.js',
+	    hash = 'de22d3d627ea730953dc6dd118a1cab13f34d348',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\JBehaveController.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\JBehaveController.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -971,138 +971,138 @@ exports.JBehaveController = undefined;
 
 var _StoryParser = require('../../model-tests/StoryParser');
 
-var newStoryTemplate = (cov_67fn5e0a1.s[0]++, '{model_name} Score Basic\n' + '@Author {author_name}\n' + '@themes {model_name} Score basic\n' + '\n' + 'Scenario: Verify {model_name} Score calculations\n' + 'Given a document of the model type {model_name}');
+var newStoryTemplate = (cov_27cos8ll8z.s[0]++, '{model_name} Score Basic\n' + '@Author {author_name}\n' + '@themes {model_name} Score basic\n' + '\n' + 'Scenario: Verify {model_name} Score calculations\n' + 'Given a document of the model type {model_name}');
 
 function JBehaveController($scope, $http, modelEngine, right_editor, user_session) {
-	cov_67fn5e0a1.f[0]++;
-	cov_67fn5e0a1.s[1]++;
+	cov_27cos8ll8z.f[0]++;
+	cov_27cos8ll8z.s[1]++;
 
 	this.$scope = $scope;
-	cov_67fn5e0a1.s[2]++;
+	cov_27cos8ll8z.s[2]++;
 	this.$http = $http;
-	cov_67fn5e0a1.s[3]++;
+	cov_27cos8ll8z.s[3]++;
 	this.user_session = user_session;
-	cov_67fn5e0a1.s[4]++;
+	cov_27cos8ll8z.s[4]++;
 	this.modelEngine = modelEngine;
-	var self = (cov_67fn5e0a1.s[5]++, this);
-	cov_67fn5e0a1.s[6]++;
+	var self = (cov_27cos8ll8z.s[5]++, this);
+	cov_27cos8ll8z.s[6]++;
 	this.right_editor = right_editor;
 
-	cov_67fn5e0a1.s[7]++;
+	cov_27cos8ll8z.s[7]++;
 	$scope.saveJBehaveStory = function () {
-		cov_67fn5e0a1.f[1]++;
+		cov_27cos8ll8z.f[1]++;
 
-		var type = (cov_67fn5e0a1.s[8]++, '.story');
-		cov_67fn5e0a1.s[9]++;
+		var type = (cov_27cos8ll8z.s[8]++, '.story');
+		cov_27cos8ll8z.s[9]++;
 		Pace.track(function () {
-			cov_67fn5e0a1.f[2]++;
-			cov_67fn5e0a1.s[10]++;
+			cov_27cos8ll8z.f[2]++;
+			cov_27cos8ll8z.s[10]++;
 
 			$scope.saveFeedback = 'Saving story ' + $scope.session.fflModelPath + '… ';
-			cov_67fn5e0a1.s[11]++;
+			cov_27cos8ll8z.s[11]++;
 			$scope.saveFeedbackTitle = 'Working on it... ';
-			var data = (cov_67fn5e0a1.s[12]++, right_editor.getValue());
-			cov_67fn5e0a1.s[13]++;
+			var data = (cov_27cos8ll8z.s[12]++, right_editor.getValue());
+			cov_27cos8ll8z.s[13]++;
 			$.post('saveJBehaveStory/' + $scope.session.fflModelPath, {
 				data: data,
 				type: type
 			}, function (data) {
-				cov_67fn5e0a1.f[3]++;
-				cov_67fn5e0a1.s[14]++;
+				cov_27cos8ll8z.f[3]++;
+				cov_27cos8ll8z.s[14]++;
 
 				$scope.$apply(function () {
-					cov_67fn5e0a1.f[4]++;
-					cov_67fn5e0a1.s[15]++;
+					cov_27cos8ll8z.f[4]++;
+					cov_27cos8ll8z.s[15]++;
 
 					$scope.saveFeedbackTitle = 'Finished';
-					cov_67fn5e0a1.s[16]++;
-					$scope.saveFeedback = data.status == 'fail' ? (cov_67fn5e0a1.b[0][0]++, 'Failed saving story :' + data.reason) : (cov_67fn5e0a1.b[0][1]++, 'Done work.');
-					cov_67fn5e0a1.s[17]++;
+					cov_27cos8ll8z.s[16]++;
+					$scope.saveFeedback = data.status == 'fail' ? (cov_27cos8ll8z.b[0][0]++, 'Failed saving story :' + data.reason) : (cov_27cos8ll8z.b[0][1]++, 'Done work.');
+					cov_27cos8ll8z.s[17]++;
 					$scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.story';
-					cov_67fn5e0a1.s[18]++;
+					cov_27cos8ll8z.s[18]++;
 					$scope.session.disablePreviewButton = false;
-					cov_67fn5e0a1.s[19]++;
+					cov_27cos8ll8z.s[19]++;
 					if (data.status === 'success') {
-						cov_67fn5e0a1.b[1][0]++;
-						cov_67fn5e0a1.s[20]++;
+						cov_27cos8ll8z.b[1][0]++;
+						cov_27cos8ll8z.s[20]++;
 
 						$('#modal-success').modal('hide');
 					} else {
-						cov_67fn5e0a1.b[1][1]++;
+						cov_27cos8ll8z.b[1][1]++;
 					}
 				});
 			});
 		});
 	};
-	cov_67fn5e0a1.s[21]++;
+	cov_27cos8ll8z.s[21]++;
 	$('.data-story').click(function (e) {
-		cov_67fn5e0a1.f[5]++;
-		cov_67fn5e0a1.s[22]++;
+		cov_27cos8ll8z.f[5]++;
+		cov_27cos8ll8z.s[22]++;
 
 		self.updateStory(self.user_session.fflModelPath);
 	});
-	cov_67fn5e0a1.s[23]++;
+	cov_27cos8ll8z.s[23]++;
 	$scope.runJBehaveTest = function () {
-		cov_67fn5e0a1.f[6]++;
+		cov_27cos8ll8z.f[6]++;
 
-		var annotations = (cov_67fn5e0a1.s[24]++, []);
-		var workbook = (cov_67fn5e0a1.s[25]++, modelEngine.lme);
-		cov_67fn5e0a1.s[26]++;
+		var annotations = (cov_27cos8ll8z.s[24]++, []);
+		var workbook = (cov_27cos8ll8z.s[25]++, modelEngine.lme);
+		cov_27cos8ll8z.s[26]++;
 		workbook.clearValues(); //Quick-fix to clear state, we should just create a copy of the current one.
-		var storyParser = (cov_67fn5e0a1.s[27]++, new _StoryParser.StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', workbook));
-		cov_67fn5e0a1.s[28]++;
+		var storyParser = (cov_27cos8ll8z.s[27]++, new _StoryParser.StoryParser(self.right_editor.getValue(), self.user_session.fflModelPath + '.story', workbook));
+		cov_27cos8ll8z.s[28]++;
 		storyParser.message = function (event) {
-			cov_67fn5e0a1.f[7]++;
-			cov_67fn5e0a1.s[29]++;
+			cov_27cos8ll8z.f[7]++;
+			cov_27cos8ll8z.s[29]++;
 
 			annotations.push({
 				row: event.line - 1,
 				column: 0,
 				text: event.result.message, // Or the Json reply from the parser
-				type: (cov_67fn5e0a1.b[3][0]++, event.result.status == 'fail') || (cov_67fn5e0a1.b[3][1]++, event.result.status == 'error') ? (cov_67fn5e0a1.b[2][0]++, 'error') : (cov_67fn5e0a1.b[2][1]++, 'info') // also warning and information
+				type: (cov_27cos8ll8z.b[3][0]++, event.result.status == 'fail') || (cov_27cos8ll8z.b[3][1]++, event.result.status == 'error') ? (cov_27cos8ll8z.b[2][0]++, 'error') : (cov_27cos8ll8z.b[2][1]++, 'info') // also warning and information
 			});
-			cov_67fn5e0a1.s[30]++;
+			cov_27cos8ll8z.s[30]++;
 			right_editor.setAnnotations(annotations);
 		};
-		cov_67fn5e0a1.s[31]++;
+		cov_27cos8ll8z.s[31]++;
 		storyParser.then = function (event) {
-			cov_67fn5e0a1.f[8]++;
-			cov_67fn5e0a1.s[32]++;
+			cov_27cos8ll8z.f[8]++;
+			cov_27cos8ll8z.s[32]++;
 
 			$scope.session.messages.data.push({
 				text: 'jBehave tests done ' + storyParser.results.rate().toFixed(1) + '% passed'
 			});
 		};
-		cov_67fn5e0a1.s[33]++;
+		cov_27cos8ll8z.s[33]++;
 		storyParser.start();
-		cov_67fn5e0a1.s[34]++;
+		cov_27cos8ll8z.s[34]++;
 		storyParser.call();
 	};
 }
 
-cov_67fn5e0a1.s[35]++;
+cov_27cos8ll8z.s[35]++;
 JBehaveController.prototype.updateStory = function (model_name) {
-	cov_67fn5e0a1.f[9]++;
+	cov_27cos8ll8z.f[9]++;
 
-	var self = (cov_67fn5e0a1.s[36]++, this);
-	cov_67fn5e0a1.s[37]++;
+	var self = (cov_27cos8ll8z.s[36]++, this);
+	cov_27cos8ll8z.s[37]++;
 	$.get('resources/' + model_name + '.story', function (data, status, xhr) {
-		cov_67fn5e0a1.f[10]++;
-		cov_67fn5e0a1.s[38]++;
+		cov_27cos8ll8z.f[10]++;
+		cov_27cos8ll8z.s[38]++;
 
 		self.right_editor.setValue(data);
 	}).fail(function (err) {
-		cov_67fn5e0a1.f[11]++;
-		cov_67fn5e0a1.s[39]++;
+		cov_27cos8ll8z.f[11]++;
+		cov_27cos8ll8z.s[39]++;
 
 		if (err.status == 404) {
-			cov_67fn5e0a1.b[4][0]++;
-			cov_67fn5e0a1.s[40]++;
+			cov_27cos8ll8z.b[4][0]++;
+			cov_27cos8ll8z.s[40]++;
 
 			self.right_editor.setValue(newStoryTemplate.replace(/{model_name}/g, model_name).replace(/{author_name}/g, self.user_session.user.name));
 		} else {
-			cov_67fn5e0a1.b[4][1]++;
-			cov_67fn5e0a1.s[41]++;
+			cov_27cos8ll8z.b[4][1]++;
+			cov_27cos8ll8z.s[41]++;
 
 			self.right_editor.setValue(err.statusText);
 		}

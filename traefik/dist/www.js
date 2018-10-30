@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
-var cov_1g9k1jrvjl = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\traefik\\src\\www.js',
-	    hash = 'e09c57f341f6bc0272b589dc8ace3718d5bde3a0',
+var cov_2ovi9pnuvc = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\traefik\\src\\www.js',
+	    hash = 'fe52d25a2e2427d0559fa143057f2fabbe630a83',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\traefik\\src\\www.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\traefik\\src\\www.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -671,28 +671,28 @@ var _debug2 = _interopRequireDefault(_debug);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var debug = (cov_1g9k1jrvjl.s[0]++, (0, _debug2.default)('health-check:server'));
+var debug = (cov_2ovi9pnuvc.s[0]++, (0, _debug2.default)('health-check:server'));
 /**
  * Get port from environment and store in Express.
  */
-var port = (cov_1g9k1jrvjl.s[1]++, normalizePort((cov_1g9k1jrvjl.b[0][0]++, process.env.PORT) || (cov_1g9k1jrvjl.b[0][1]++, '3000')));
-cov_1g9k1jrvjl.s[2]++;
+var port = (cov_2ovi9pnuvc.s[1]++, normalizePort((cov_2ovi9pnuvc.b[0][0]++, process.env.PORT) || (cov_2ovi9pnuvc.b[0][1]++, '3000')));
+cov_2ovi9pnuvc.s[2]++;
 _app2.default.set('port', port);
 
 /**
  * Create HTTP server.
  */
-var server = (cov_1g9k1jrvjl.s[3]++, _http2.default.createServer(_app2.default));
+var server = (cov_2ovi9pnuvc.s[3]++, _http2.default.createServer(_app2.default));
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-cov_1g9k1jrvjl.s[4]++;
+cov_2ovi9pnuvc.s[4]++;
 server.listen(port);
-cov_1g9k1jrvjl.s[5]++;
+cov_2ovi9pnuvc.s[5]++;
 server.on('error', onError);
-cov_1g9k1jrvjl.s[6]++;
+cov_2ovi9pnuvc.s[6]++;
 server.on('listening', onListening);
 
 /**
@@ -700,33 +700,33 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-	cov_1g9k1jrvjl.f[0]++;
+	cov_2ovi9pnuvc.f[0]++;
 
-	var port = (cov_1g9k1jrvjl.s[7]++, parseInt(val, 10));
+	var port = (cov_2ovi9pnuvc.s[7]++, parseInt(val, 10));
 
-	cov_1g9k1jrvjl.s[8]++;
+	cov_2ovi9pnuvc.s[8]++;
 	if (isNaN(port)) {
-		cov_1g9k1jrvjl.b[1][0]++;
-		cov_1g9k1jrvjl.s[9]++;
+		cov_2ovi9pnuvc.b[1][0]++;
+		cov_2ovi9pnuvc.s[9]++;
 
 		// named pipe
 		return val;
 	} else {
-		cov_1g9k1jrvjl.b[1][1]++;
+		cov_2ovi9pnuvc.b[1][1]++;
 	}
 
-	cov_1g9k1jrvjl.s[10]++;
+	cov_2ovi9pnuvc.s[10]++;
 	if (port >= 0) {
-		cov_1g9k1jrvjl.b[2][0]++;
-		cov_1g9k1jrvjl.s[11]++;
+		cov_2ovi9pnuvc.b[2][0]++;
+		cov_2ovi9pnuvc.s[11]++;
 
 		// port number
 		return port;
 	} else {
-		cov_1g9k1jrvjl.b[2][1]++;
+		cov_2ovi9pnuvc.b[2][1]++;
 	}
 
-	cov_1g9k1jrvjl.s[12]++;
+	cov_2ovi9pnuvc.s[12]++;
 	return false;
 }
 
@@ -735,44 +735,44 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-	cov_1g9k1jrvjl.f[1]++;
-	cov_1g9k1jrvjl.s[13]++;
+	cov_2ovi9pnuvc.f[1]++;
+	cov_2ovi9pnuvc.s[13]++;
 
 	if (error.syscall !== 'listen') {
-		cov_1g9k1jrvjl.b[3][0]++;
-		cov_1g9k1jrvjl.s[14]++;
+		cov_2ovi9pnuvc.b[3][0]++;
+		cov_2ovi9pnuvc.s[14]++;
 
 		throw error;
 	} else {
-		cov_1g9k1jrvjl.b[3][1]++;
+		cov_2ovi9pnuvc.b[3][1]++;
 	}
 
-	var bind = (cov_1g9k1jrvjl.s[15]++, typeof port === 'string' ? (cov_1g9k1jrvjl.b[4][0]++, 'Pipe ' + port) : (cov_1g9k1jrvjl.b[4][1]++, 'Port ' + port));
+	var bind = (cov_2ovi9pnuvc.s[15]++, typeof port === 'string' ? (cov_2ovi9pnuvc.b[4][0]++, 'Pipe ' + port) : (cov_2ovi9pnuvc.b[4][1]++, 'Port ' + port));
 
 	// handle specific listen errors with friendly messages
-	cov_1g9k1jrvjl.s[16]++;
+	cov_2ovi9pnuvc.s[16]++;
 	switch (error.code) {
 		case 'EACCES':
-			cov_1g9k1jrvjl.b[5][0]++;
-			cov_1g9k1jrvjl.s[17]++;
+			cov_2ovi9pnuvc.b[5][0]++;
+			cov_2ovi9pnuvc.s[17]++;
 
 			console.error(bind + ' requires elevated privileges');
-			cov_1g9k1jrvjl.s[18]++;
+			cov_2ovi9pnuvc.s[18]++;
 			process.exit(1);
-			cov_1g9k1jrvjl.s[19]++;
+			cov_2ovi9pnuvc.s[19]++;
 			break;
 		case 'EADDRINUSE':
-			cov_1g9k1jrvjl.b[5][1]++;
-			cov_1g9k1jrvjl.s[20]++;
+			cov_2ovi9pnuvc.b[5][1]++;
+			cov_2ovi9pnuvc.s[20]++;
 
 			console.error(bind + ' is already in use');
-			cov_1g9k1jrvjl.s[21]++;
+			cov_2ovi9pnuvc.s[21]++;
 			process.exit(1);
-			cov_1g9k1jrvjl.s[22]++;
+			cov_2ovi9pnuvc.s[22]++;
 			break;
 		default:
-			cov_1g9k1jrvjl.b[5][2]++;
-			cov_1g9k1jrvjl.s[23]++;
+			cov_2ovi9pnuvc.b[5][2]++;
+			cov_2ovi9pnuvc.s[23]++;
 
 			throw error;
 	}
@@ -783,10 +783,10 @@ function onError(error) {
  */
 
 function onListening() {
-	cov_1g9k1jrvjl.f[2]++;
+	cov_2ovi9pnuvc.f[2]++;
 
-	var addr = (cov_1g9k1jrvjl.s[24]++, server.address());
-	var bind = (cov_1g9k1jrvjl.s[25]++, typeof addr === 'string' ? (cov_1g9k1jrvjl.b[6][0]++, 'pipe ' + addr) : (cov_1g9k1jrvjl.b[6][1]++, 'port ' + addr.port));
-	cov_1g9k1jrvjl.s[26]++;
+	var addr = (cov_2ovi9pnuvc.s[24]++, server.address());
+	var bind = (cov_2ovi9pnuvc.s[25]++, typeof addr === 'string' ? (cov_2ovi9pnuvc.b[6][0]++, 'pipe ' + addr) : (cov_2ovi9pnuvc.b[6][1]++, 'port ' + addr.port));
+	cov_2ovi9pnuvc.s[26]++;
 	debug('Listening on ' + bind);
 }
