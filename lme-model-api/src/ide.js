@@ -59,28 +59,29 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.model_history = []
 
 	$scope.updateModelChanges = function() {
-		$.get(`modelChanges/${user_session.fflModelPath}`, function(data) {
+		$.get(`modelChanges/${user_session.fflModelPath}`, (data) => {
 			const history = []
 			const hashes = {}
-			for (let i = 0; i < data.data.length; i++) {
-				const obj = data.data[i]
-				obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
+			if (data.data) {
+				for (let i = 0; i < data.data.length; i++) {
+					const obj = data.data[i]
+					obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
 
-				if (hashes[obj.uuid]) {
-					hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
-					continue
+					if (hashes[obj.uuid]) {
+						hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
+						continue
+					}
+					hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
+					history.push({
+						create_time: obj.create_time,
+						data       : hashes[obj.uuid]
+					})
 				}
-				hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
-				history.push({
-					create_time: obj.create_time,
-					data       : hashes[obj.uuid]
+				history.reverse()
+				$scope.$apply(function() {
+					$scope.model_history = history
 				})
 			}
-			history.reverse()
-			$scope.$apply(function() {
-				$scope.model_history = history
-			})
-
 		}).fail((err) => {
 			console.error(`Error while reading model changes. ${err}`)
 		})

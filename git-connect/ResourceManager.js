@@ -29,7 +29,11 @@ export const getExcelSheetPath = ({ model_name, version }) => joinResource(model
 export const getModelPath = ({ model_path, version }) => joinResource(basename(model_path), undefined, version)
 
 export const commit_resources = async (message) => {
-	let command = `cd ${resources_map} && git pull &&  git commit -a -m "${message}" && git push && git rev-parse HEAD`
+	let command = `cd ${resources_map} && git config core.autocrlf false &&  git commit -a -m "${message}" && git pull && git push && git rev-parse HEAD`
+	return exec(command)
+}
+export const clean_resources_workspace = async () => {
+	let command = `cd ${resources_map} && git stash && git pull`
 	return exec(command)
 }
 export const REST_API_ENDPOINT_CONFIGURATION = 'docker-compose-rest-api-endpoint.yml'

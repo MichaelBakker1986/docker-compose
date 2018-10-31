@@ -14,8 +14,9 @@
  #   [entryPoints.https.tls]
   [entryPoints.api]
   address=":8686"
- #     [entryPoints.api.auth.basic]
-  #    users = ["admin:$apr1$8ARUAqfe$/yw6ZI.2MN8M1/IXM7X4y/"]
+    [entryPoints.api.auth]
+      [entryPoints.api.auth.basic]
+        users = ["admin:$apr1$8ARUAqfe$/yw6ZI.2MN8M1/IXM7X4y/"]
 
 [acme]
   #mail = "michael.bakker1986@gmail.com"

@@ -54,7 +54,8 @@ const resolveCompiler = (memory_fs, filename, json_data) => {
 				/*new webpack.IgnorePlugin(/escodegen/),*/
 				/*new webpack.IgnorePlugin(/log6/)*/
 			],
-			devtool: 'inline-source-map'
+			//devtool: 'inline-source-map'
+			devtool: 'none'
 		})
 		compiler.outputFileSystem = memory_fs
 		compilers[filename] = compiler

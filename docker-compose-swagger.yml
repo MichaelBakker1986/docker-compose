@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   swagger:
     image: swaggerapi/swagger-ui
@@ -19,5 +19,4 @@ networks:
   proxy:
     external: true
   internal:
-    driver: bridge
     external: false

@@ -11,6 +11,7 @@ ADD /id_rsa.pub /root/.ssh/id_rsa.pub
 RUN  chmod 700 /root/.ssh/id_rsa.pub
 RUN echo "Host stash.topicus.nl\n\tStrictHostKeyChecking no\n" >> root/.ssh/config
 RUN git clone --progress ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
+RUN cd financialmodel &&  git config core.autocrlf true && git config user.email "lme_platform@topicus.com" && git config user.name "Lme Platform" && git config push.default matching && cd ..
 
 COPY --from=library/docker:latest /usr/local/bin/docker /usr/bin/docker
 COPY --from=docker/compose:1.23.0-rc3 /usr/local/bin/docker-compose /usr/bin/docker-compose

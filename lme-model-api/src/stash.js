@@ -3,6 +3,7 @@ import { DEBUG, debug, error, info, warn } from 'log6'
 import ModelStorage                        from './ModelStorage'
 import uuid                                from 'uuid4'
 import {
+	clean_resources_workspace,
 	commit_resources,
 	FILE_SYSTEM_RESOURCES_PATH,
 	writeJBehaveAsString,
@@ -76,44 +77,56 @@ class Stash {
 		 * Later this will be used to resolve the FFL
 		 * The FFL file will always be pushed to master also
 		 */
+		let delta_result = {}
+		let method_result = {}
 		try {
-			ModelStorage.saveDelta(model_name, data)
+			delta_result = ModelStorage.saveDelta(model_name, data)
 		} catch (err) {
 			warn('Failed saving delta to DB', err)
 		}
 		try {
+			await clean_resources_workspace()
 			await writeModelAsString({ model_name, data })
 			try {
-				//const executable =
 				const result = await exec(`node -r babel-register ${__dirname}/FFLWebpackConverter.js ${model_name} ${type === '.ffl' ? 'FFL2' : 'FFL'}`)
-				if (result.stderr) throw Error(result.stderr)
-				let userID = uuid()
-				if (develop) {
-					console.info(`<span>ffl model update:</span><a href="http://${domain}/#${model_name}&${userID}">${model_name}</a><span></span>`)
-					info(`[${user_id}] modified model file: [${model_name}]. Begin pushing to repository.`) //=> '/tmp/foo'
-					//return 'develop mode'
-				}
-				try {
-					const ok = await commit_resources(`Model update [${model_name}] by ${user_id}@${host}`)
-					const output = ok.stdout.split('\n')
-					const stashCommit = `<a href="https://stash.topicus.nl/projects/FF/repos/financialmodel/commits/${output[output.length - 2]}"> DIFF </a>`
-					console.info(`<a href="http://${domain}#${model_name}&${userID}"> ${model_name} </a><span> Updated </span>${stashCommit}<span> By ${user_id}@${host}</span>`)
-				}
-				catch (err) {
-					const errorData = err.toString()
-					if (errorData.includes('No changes detected')) {
-						return 'No changes detected in file.'
+				if (result.stderr) {
+					error(result.stderr)
+					method_result = { fail: true, message: `Failed to compile javascript because: ${result.stderr}` }
+				} else {
+					let userID = uuid()
+					if (develop && false) {
+						console.info(`<span>ffl model update:</span><a href="http://${domain}/#${model_name}&${userID}">${model_name}</a><span></span>`)
+						info(`[${user_id}] modified model file: [${model_name}]. Begin pushing to repository.`) //=> '/tmp/foo'
+						method_result = { fail: false, message: 'develop mode' }
 					} else {
-						throw Error(`GIT commit failed while pushing file to repository:[${errorData}]`)
+						try {
+							const ok = await commit_resources(`Model update [${model_name}] by ${user_id}@${host}`)
+							const output = ok.stdout.split('\n')
+							const stashCommit = `<a href="https://stash.topicus.nl/projects/FF/repos/financialmodel/commits/${output[output.length - 2]}"> DIFF </a>`
+							console.info(`<a href="http://${domain}#${model_name}&${userID}"> ${model_name} </a><span> Updated </span>${stashCommit}<span> By ${user_id}@${host}</span>`)
+							method_result = { fail: false, changes: delta_result }
+						} catch (err) {
+							error(err)
+							const errorData = err.toString()
+							if (errorData.includes('No changes detected')) {
+								return { fail: true, message: 'No changes detected in file.' }
+							} else {
+								method_result = {
+									fail   : true,
+									message: `GIT commit failed while pushing file to repository:[${errorData}]`
+								}
+							}
+						}
 					}
 				}
 			}
 			catch (err) {
-				throw Error(`Failed to write or compile javascript. [${err.toString()}]`)
+				method_result = { fail: true, message: `Failed to write or compile javascript. [${err.toString()}]` }
 			}
 		} catch (err) {
-			throw Error(`Failed to write file to resources folder. [${err.toString()}]`)
+			method_result = { fail: true, message: `Failed to write file to resources folder. [${err.toString()}]` }
 		}
+		return method_result
 	}
 
 	async models(branch, path) {
@@ -138,4 +151,4 @@ class Stash {
 	}
 }
 
-exports.Stash = new Stash()
+export default new Stash()

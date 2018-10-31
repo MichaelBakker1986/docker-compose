@@ -7,7 +7,7 @@ import ExcelConnect                                                        from 
 import fileUpload                                                          from 'express-fileupload'
 import assembler                                                           from '../git-connect/ModelAssembler'
 import { existsExcelSheet, FILE_SYSTEM_RESOURCES_PATH, getExcelSheetPath } from '../git-connect/index'
-import { Stash as stash }                                                  from './src/stash'
+import stash                                                               from './src/stash'
 import { DockerImageBuilder }                                              from '../docker-connect/DockerImageBuilder'
 import { EndpointCreator }                                                 from '../traefik/src/index'
 import express                                                             from 'express'
@@ -54,6 +54,8 @@ app.post('*/:user_id/preview/:model_name', async ({ body, params }, res) => {
 assembler.then(db_methods => {
 	Object.assign(DBModel, db_methods)
 }).catch(err => {
+	DBModel.getModel = () => {}
+	DBModel.getFFLModelPropertyChanges = () => {}
 	error(err.stack)
 })
 app.get('*/model', async (req, res) => {
@@ -65,24 +67,25 @@ app.get('*/model', async (req, res) => {
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
-app.get('*/modelChanges/:model_name', async (req, res) => {
-	const model_name = req.params.model_name
-	DBModel.getFFLModelPropertyChanges(model_name).then((data) => {
+app.get('*/modelChanges/:model_name', async ({ params }, res) => {
+	const model_name = params.model_name
+	try {
+		const data = DBModel.getFFLModelPropertyChanges(model_name)
 		res.json({ status: 'success', data: data })
-	}).catch((err) => {
+	} catch (err) {
 		debug('Failed to fetch model changes from database', err)
 		res.json({ status: 'fail', reason: err.toString() })
-	})
+	}
 })
 app.post('*/:user_id/saveFFLModel/:model_name', async ({ body, params }, res) => {
 	const { model_name, user_id } = params
-	try {
-		const { ffl, version } = bumbVersion(body.data)
-		await stash.commit(user_id, model_name, ffl, body.type)
-		res.json({ status: 'ok', version })
-	} catch (err) {
-		debug('Failed to write ' + model_name + '.ffl file.', err)
-		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
+	const { ffl, version } = bumbVersion(body.data)
+	const { fail, changes, message } = await stash.commit(user_id, model_name, ffl, body.type)
+	if (fail) {
+		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: message })
+	} else {
+		if (DEBUG) debug('Failed to write ' + model_name + '.ffl file.', message)
+		res.json({ status: 'ok', version, changes })
 	}
 })
 app.post('*/:user_id/saveJBehaveStory/:model_name', async ({ body, params }, res) => {
@@ -139,7 +142,6 @@ function bumbVersion(data) {
 	new FFLToRegister(register, data).parseProperties()
 	let new_version = Number(register.getValue('root', FFL_VERSION_PROPERTY_NAME) || 0) + 1
 	register.setValue('root', FFL_VERSION_PROPERTY_NAME, new_version)
-	console.info(register.getValue('root', FFL_VERSION_PROPERTY_NAME))
 	return {
 		version: new_version,
 		ffl    : new RegisterToFFL(register).toGeneratedFFL({ auto_join: true })
