@@ -3,6 +3,15 @@ FROM node:10.11.0
 MAINTAINER Michael Bakker "michaelbakker1986@gmail.com"
 USER root
 
+RUN npm install -g concurrently babel-cli babel-core
+RUN mkdir /root/.ssh/
+ADD /id_rsa /root/.ssh/id_rsa
+RUN  chmod 700 /root/.ssh/id_rsa
+ADD /id_rsa.pub /root/.ssh/id_rsa.pub
+RUN  chmod 700 /root/.ssh/id_rsa.pub
+RUN echo "Host stash.topicus.nl\n\tStrictHostKeyChecking no\n" >> root/.ssh/config
+RUN git clone --progress ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
+
 COPY --from=library/docker:latest /usr/local/bin/docker /usr/bin/docker
 COPY --from=docker/compose:1.23.0-rc3 /usr/local/bin/docker-compose /usr/bin/docker-compose
 
@@ -10,7 +19,7 @@ ADD /package.json /package.json
 ADD /.babelrc /.babelrc
 ADD /.gitignore /.gitignore
 ADD /install_script.js /install_script.js
-ADD /Developer_Run.js /Developer_Run.js
+ADD /Production_Run.js /Production_Run.js
 
 ADD /demo-apps /demo-apps
 ADD /docker-connect /docker-connect
@@ -24,17 +33,7 @@ ADD /lme-data-api /lme-data-api
 ADD /math /math
 ADD /proxy /proxy
 ADD /traefik /traefik
-#RUN apt-get update
-#RUN apt-get install git apt-utils -y
-RUN mkdir /root/.ssh/
-ADD /id_rsa /root/.ssh/id_rsa
-RUN  chmod 700 /root/.ssh/id_rsa
-ADD /id_rsa.pub /root/.ssh/id_rsa.pub
-RUN  chmod 700 /root/.ssh/id_rsa.pub
-RUN echo "Host stash.topicus.nl\n\tStrictHostKeyChecking no\n" >> root/.ssh/config
-RUN git clone --progress ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
 
-RUN npm install -g concurrently babel-cli babel-core
 RUN npm install --unsafe-perm --allow-root
-CMD node -r babel-register Developer_Run.js
+CMD node -r babel-register Production_Run.js
 EXPOSE 7081

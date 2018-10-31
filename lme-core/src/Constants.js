@@ -1,11 +1,35 @@
-const DOCUMENT = 'document', VALUE = 'value', VISIBLE = 'visible',LOCKED='locked', DETAIL_INTERVAL = 'detl', NUMBER = 'number',
-      STRING_TYPE = 'string',
-      COLUMN                                                                                        = 'column',
-      TITLE                                                                                         = 'title',
-      OBJECT_TYPE                                                                                   = 'object',
-      FUNCTION_TYPE                                                                                 = 'function',
-      ENCODING                                                                                      = 'utf8'
+const DOCUMENT                  = 'document',
+      VALUE                     = 'value',
+      VISIBLE                   = 'visible',
+      LOCKED                    = 'locked',
+      DETAIL_INTERVAL           = 'detl',
+      NUMBER                    = 'number',
+      STRING_TYPE               = 'string',
+      COLUMN                    = 'column',
+      TITLE                     = 'title',
+      OBJECT_TYPE               = 'object',
+      FUNCTION_TYPE             = 'function',
+      OUTPUT_NODE_TYPE          = 'Output',
+      INPUT_NODE_TYPE           = 'Input',
+      DISPLAY_TYPE              = 'displaytype',
+      FFL_VERSION_PROPERTY_NAME = 'ffl_version',
+      ENCODING                  = 'utf8'
 
 export {
-	DOCUMENT, VALUE, VISIBLE,LOCKED, DETAIL_INTERVAL, NUMBER, COLUMN, TITLE, OBJECT_TYPE, STRING_TYPE, FUNCTION_TYPE, ENCODING
+	DOCUMENT,
+	VALUE,
+	VISIBLE,
+	FFL_VERSION_PROPERTY_NAME,
+	DISPLAY_TYPE,
+	LOCKED,
+	DETAIL_INTERVAL,
+	NUMBER,
+	COLUMN,
+	TITLE,
+	OBJECT_TYPE,
+	STRING_TYPE,
+	FUNCTION_TYPE,
+	ENCODING,
+	OUTPUT_NODE_TYPE,
+	INPUT_NODE_TYPE
 }

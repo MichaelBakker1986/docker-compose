@@ -15,10 +15,12 @@
  * dev1   |usr2
  */
 // || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
-import orm       from 'orm'
-import { error } from 'log6'
+import orm                     from 'orm'
+import { DEBUG, debug, error } from 'log6'
 
-const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@database:5432/lme'
+const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@127.0.0.1:5432/lme'
+if (DEBUG) debug(`connecting to ${dbConnectString}`)
+
 const Figure = new Promise((accept, reject) => {
 	orm.connectAsync(dbConnectString).then(async (db) => {
 
@@ -27,9 +29,7 @@ const Figure = new Promise((accept, reject) => {
 			modifiedProperty: 'modified_at',
 			expireProperty  : false,
 			dbtype          : { type: 'date', time: true },
-			now             : function() {
-				return new Date()
-			},
+			now             : () => new Date(),
 			persist         : true
 		})
 		const Figures = db.define('figure', {

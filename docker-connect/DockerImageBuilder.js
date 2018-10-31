@@ -148,14 +148,14 @@ class DockerImageBuilder {
 		}
 	}
 
-	async buildAndDeploy() {
-		const docker_name = `${this.docker_model_name}_${this.model_version}`
-		await this.buildDockerImage()
-		//const start_command = `docker run -d -t -i -p 9991:80 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
-		const start_command = `docker run -d -t -i -p --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
-		const run_output = await exec(start_command)
-		this.print_result(run_output)
-	}
+	/*	async buildAndDeploy() {
+	 const docker_name = `${this.docker_model_name}_${this.model_version}`
+	 await this.buildDockerImage()
+	 //const start_command = `docker run -d -t -i -p 9991:80 --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+	 const start_command = `docker run -d -t -i -p --name ${docker_name} -e RESOURCES_PATH=resources -e ENABLED_MODELS=${this.model_name} -e ENV=debug ${this.docker_tag}`
+	 const run_output = await exec(start_command)
+	 this.print_result(run_output)
+	 }*/
 
 	async copy_package_information(package_template) {
 		await createWriteStream(path.join(this.new_folder, 'package.json')).write(JSON.stringify(package_template, null, 2))

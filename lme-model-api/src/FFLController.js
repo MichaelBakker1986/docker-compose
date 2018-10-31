@@ -1,5 +1,6 @@
 //just an dummy-template to quickly create a model
 import { EconomicEditorView }           from '../../lme-model-api/index'
+import { FFL_VERSION_PROPERTY_NAME }    from '../../lme-core/index'
 import $                                from 'jquery'
 import { FFLToRegister, ScorecardTool } from '../../ffl/index'
 
@@ -18,7 +19,7 @@ const newModelTemplate =
 	      '   hint: "Informatie over de stap";\n' +
 	      '   variable Q_MAP01_VRAAG0\n' +
 	      '   {\n' +
-	      '    title: "TestVraag";\n' +
+	      '    title: "TestVraag";\n' +                         
 	      '    frequency: document;\n' +
 	      '    datatype: number;\n' +
 	      '    formula: 100+100;\n' +
@@ -62,19 +63,20 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	$scope.saveFFLModel = function() {
 		const type = '.ffl'
 		Pace.track(function() {
-			$scope.saveFeedback = 'Customizing ' + $scope.session.fflModelPath + '… '
+			$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
 			$scope.saveFeedbackTitle = 'Working on it... '
 			const data = fflEditor.getValue()
-			$.post('saveFFLModel/' + $scope.session.fflModelPath, {
+			$.post(`saveFFLModel/${$scope.session.fflModelPath}`, {
 				data, type
 			}, function(data) {
 				$scope.$apply(function() {
+					const { session } = $scope
 					$scope.saveFeedbackTitle = 'Finished'
-					$scope.saveFeedback = data.status === 'fail' ? 'Failed compiling model:' + data.reason : 'Done work.'
-					$scope.downloadJsLink = 'resources/' + $scope.session.fflModelPath + '.js'
-					$scope.session.disablePreviewButton = false
+					$scope.saveFeedback = data.status === 'fail' ? `Failed compiling model:${data.reason}` : 'Done work.'
+					$scope.downloadJsLink = `resources/${session.fflModelPath}.js`
+					session.disablePreviewButton = false
 					if (data.status === 'success') {
-						window.open(`${$scope.session.page}.html#${$scope.session.fflModelPath}&${$scope.session.userID}`)
+						window.open(`${session.page}.html#${session.fflModelPath}&${session.userID}`)
 						$('#modal-success').modal('hide')
 					}
 				})
@@ -128,13 +130,11 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 		'overwrite'/*INSERT*/, 'gotowordright', 'gotowordleft', 'copy', 'selectright', 'selectleft',
 		'replace', 'find', 'addCursorAbove', 'selectup', 'selectdown', 'scrollup', 'scrolldown', 'golinedown', 'golineup',
 		'selectwordright', 'gotoleft', 'singleSelection', 'selectMoreAfter', 'selectMoreBefore', 'golineup', 'gotoright'
-	].forEach(function(el) {
-		silent_ace_commands.add(el)
-	})
+	].forEach((el) => silent_ace_commands.add(el))
+
 	const changing_ace_commands = new Set();
-	['movelinesdown', 'backspace', 'undo', 'insertstring', 'removeline'].forEach(function(el) {
-		changing_ace_commands.add(el)
-	})
+	['movelinesdown', 'backspace', 'undo', 'insertstring', 'removeline'].forEach((el) => changing_ace_commands.add(el))
+
 	fflEditor.aceEditor.commands.on('afterExec', function(e) {
 		let changingValue = false
 		$scope.changeView('FFLModelEditorView')
@@ -186,26 +186,29 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 
 FFLController.prototype.updateFFLModel = function(model_name) {
 	const self = this
+	const { register, user_session } = this
 	Pace.track(function() {
-		window.location.href = `#${model_name}&${self.user_session.user.name}&6`
-		var xhr = new XMLHttpRequest()
+		window.location.href = `#${model_name}&${user_session.user.name}&6`
+		const xhr = new XMLHttpRequest()
 		xhr.addEventListener('progress', function(e) {
 			const load_data_information = `Loading data: ${e.loaded} of ` + (e.total || 'unknown') + ' bytes...'
 			console.info(load_data_information)
 			self.fflEditor.setValue(load_data_information)
 		})
-		xhr.addEventListener('load', function(e) {
+		xhr.addEventListener('load', function() {
 			if (this.responseText.startsWith('<!DOCTYPE html>')) {
-				self.user_session.fflModel = newModelTemplate.replace('$1', model_name)
+				user_session.fflModel = newModelTemplate.replace('$1', model_name)
 			} else {
-				self.user_session.fflModel = this.responseText
+				user_session.fflModel = this.responseText
 			}
 
-			self.fflEditor.setParsedValue(self.user_session.fflModel)
+			self.fflEditor.setParsedValue(user_session.fflModel)
 			self.changeManager.setModelChanged()
-			self.register.clean()
-			const formatter = new FFLToRegister(self.register, self.user_session.fflModel)
+			register.clean()
+			const formatter = new FFLToRegister(register, user_session.fflModel)
 			formatter.parseProperties()
+
+			user_session.model_version = Number(register.getValue('root', FFL_VERSION_PROPERTY_NAME))
 
 			self.fflEditor.scrollTop()
 		})

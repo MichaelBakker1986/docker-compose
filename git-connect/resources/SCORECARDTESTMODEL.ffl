@@ -1,7 +1,7 @@
 model SCORECARDTESTMODEL uses BaseModel
 {
  title: SCORECARDTESTMODEL;
- ffl_version: 2;
+ ffl_version: 5;
  variable SCORECARDTESTMODEL
  {
   datatype: none;
@@ -273,6 +273,7 @@ model SCORECARDTESTMODEL uses BaseModel
    formula: (Q_MAP01_ENTEREDREQUIREDVARS=Q_MAP01_REQUIREDVARS);
    choices: "0:Onvolledig ingevuld.|1:Volledig ingevuld.";
    options_title: locked;
+   data_options: Input;
    hint: "ScorecardTestModel";
    variable Q_MAP01_WARNING
    {
@@ -4558,11 +4559,13 @@ model SCORECARDTESTMODEL uses BaseModel
    formula: String(If(Q_ROOT=0 , "Nog niet alle vragen zijn ingevuld.[br][/br]" , "Deze vragenlijst is definitief gemaakt.[br][/br]")&Q_RESTRICTIES&Q_WARNING_GLOBAL);
    options_title: locked;
    datatype: string;
+   data_options: Output;
    variable Q_RESULTSUB1 refers to Q_RESULT
    {
     title: "Resultaat";
     locked: On;
     options_title: locked;
+    data_options: None;
    }
   }
   variable Q_STATUS

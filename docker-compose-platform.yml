@@ -1,15 +1,15 @@
 version: '3'
 services:
   ide:
-    image: michaelbakker1986/lme_platform:0.1.15
+    image: michaelbakker1986/lme_platform:0.1.22
     container_name: lme_platform
     environment:
-      HOST: lvh.me
-      FIGURE_DB_STRING: postgresql://postgres:postgres@database:5432/lme
+      HOST: appmodel.org
+      FIGURE_DB_STRING: postgresql://postgres:postgres@127.0.0.1:5432/lme
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
     labels:
-      traefik.frontend.rule: Host:lvh.me;PathPrefix:/ide/0.1.2/;PathPrefixStrip:/ide/0.1.2/
+      traefik.frontend.rule: PathPrefix:/ide/0.1.2/;PathPrefixStrip:/ide/0.1.2/
       traefik.docker.network: proxy
       traefik.port: 7081
     networks:
@@ -20,4 +20,5 @@ networks:
   proxy:
     external: true
   internal:
+    driver: bridge
     external: false

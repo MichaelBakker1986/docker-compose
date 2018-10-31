@@ -1,9 +1,9 @@
 import { APIDefinition } from '../resources/AuthenticatedSwaggerDefinition'
 
 export function setup(app) {
-	app.get(['*/data-api-docs', '/'], (req, res) => {
-		APIDefinition.basePath = app.get('basePath')
-		APIDefinition.host = req.headers.host
+	app.get(['*/:model_name/:model_version/data-api-docs', '^/:model_name/:model_version/$'], ({ headers, params }, res) => {
+		APIDefinition.basePath = app.get('basePath') || `/${params.model_name}/${params.model_version}/`
+		APIDefinition.host = headers.host
 		res.json(APIDefinition)
 	})
 }

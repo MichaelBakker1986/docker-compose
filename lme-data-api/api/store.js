@@ -4,10 +4,10 @@
  * There is a need to store/retrieve values entered by the client
  */
 // || "postgresql://postgres:postgres@127.0.0.1:5432/lme";
-import { Figure }             from './Figure'
-import uuid                   from 'uuid4'
-import { debug, DEBUG, warn } from 'log6'
-import { MatrixStore }        from '../MatrixStore'
+import { Figure }      from './Figure'
+import uuid            from 'uuid4'
+import { DEBUG, warn } from 'log6'
+import { MatrixStore } from '../MatrixStore'
 
 const dbConnectString = process.env.FIGURE_DB_STRING
 
@@ -24,6 +24,7 @@ export function setup(app) {
 	}).catch((err) => {
 		throw Error(`Fail db initializeFFlModelData ${err.stack}`)
 	})
+
 	function fetchDatabaseFigures(promise, req, res) {
 		//TODO: move logic to the matrixStore, not pairing with rest-api now
 		promise.then((dbData) => {

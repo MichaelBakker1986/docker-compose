@@ -5,7 +5,7 @@ import { setup as storeSetup }         from './api/store'
 import { setup as valueSetup }         from './api/value'
 import { setup as apiDefinitionSetup } from './api/api-def'
 import logger                          from 'morgan'
-import { info }                        from 'log6'
+import { debug, DEBUG }                from 'log6'
 
 const port = process.env.DATA_API_PORT || 8085
 const model = String(process.env.ENABLED_MODELS || 'KSP')
@@ -14,13 +14,12 @@ const host = process.env.HOST || '127.0.0.1:8085'
 const domain = process.env.DOMAIN || (`${host}/${model}/${model_version}`)
 const basePath = `/${model}/${model_version}/`
 
-info(`Starting up application given ENABLED MODELS=${model}`)
+if (DEBUG) debug(`Starting up application given ENABLED MODELS=${model}`)
 const app = express()
 
 app.use(logger('dev'))
 app.set('basePath', basePath)
 app.set('port', port)
-app.set('host', host)
 app.set('domain', domain)
 app.use(cors())
 app.use(bodyParser.json({ limit: '50mb' }))

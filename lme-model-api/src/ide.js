@@ -1,17 +1,17 @@
-import { AceEditor }                                               from './ace_editor_api'
-import { ChangeManager, RegisterPlainFFLDecorator, RegisterToFFL } from '../../ffl/index'
-import { LmeAPI }                                                  from './lme'
-import FFLController                                               from './FFLController'
-import DebugController                                             from './DebugController'
-import { MatrixController }                                        from './MatrixController'
+import { AceEditor }                                                 from './ace_editor_api'
+import { ChangeManager, RegisterPlainFFLDecorator, RegisterToFFL }   from '../../ffl/index'
+import { LmeAPI }                                                    from './lme'
+import FFLController                                                 from './FFLController'
+import DebugController                                               from './DebugController'
+import { MatrixController }                                          from './MatrixController'
 /** * editor variable is set to the window. */
-import { LocalStorage }                                            from './LocalStoreMagic'
-import { JBehaveController }                                       from './JBehaveController'
-import MatrixManager                                               from '../../excel-connect/MatrixManager'
-import api, { Register, WebExportParser }                          from '../../lme-core/index'
-import fflMath                                                     from '../../math/ffl-math'
-import formulaJs                                                   from '../../formulajs-connect/formulajs'
-
+import { LocalStorage }                                              from './LocalStoreMagic'
+import { JBehaveController }                                         from './JBehaveController'
+import MatrixManager                                                 from '../../excel-connect/MatrixManager'
+import api, { FFL_VERSION_PROPERTY_NAME, Register, WebExportParser } from '../../lme-core/index'
+import fflMath                                                       from '../../math/ffl-math'
+import formulaJs                                                     from '../../formulajs-connect/formulajs'
+ 
 api.addFunctions(fflMath, formulaJs)
 api.registerParser(RegisterPlainFFLDecorator, WebExportParser)
 let params = window.location.href.split('#')
@@ -25,7 +25,7 @@ const user_session = {
 	fflModel            : '',
 	column_size         : 6,
 	version             : '0.0.8',
-	model_version       : '0.20',
+	model_version       : '0.1',
 	author              : 'topicus.nl',
 	user                : {
 		name: params[1] || 'DEMO'
@@ -41,13 +41,12 @@ const user_session = {
 global['session'] = new LocalStorage(user_session)
 
 angular.module('lmeapp', ['angular.filter'])
-.controller('ideController', function($scope, $http, $timeout) {
+.controller('ideController', function($scope, $http) {
 
 	const modelEngine = new LmeAPI(undefined, undefined, undefined, { user_session: user_session })
 	$scope.LMEMETA = modelEngine
 	global.LME = modelEngine
-	modelEngine.loadData(function(response) {
-	})
+	modelEngine.loadData((response) => {})
 	const matrixManager = new MatrixManager()
 	const matrixController = new MatrixController($scope, $http, matrixManager, { halfHeight: true })
 	const debugController = new DebugController($scope, $http)
@@ -60,11 +59,11 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.model_history = []
 
 	$scope.updateModelChanges = function() {
-		$.get(`modelChanges/${user_session.fflModelPath}`, function(data, status, xhr) {
+		$.get(`modelChanges/${user_session.fflModelPath}`, function(data) {
 			const history = []
 			const hashes = {}
-			for (var i = 0; i < data.data.length; i++) {
-				var obj = data.data[i]
+			for (let i = 0; i < data.data.length; i++) {
+				const obj = data.data[i]
 				obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
 
 				if (hashes[obj.uuid]) {
@@ -82,8 +81,8 @@ angular.module('lmeapp', ['angular.filter'])
 				$scope.model_history = history
 			})
 
-		}).fail(function(err) {
-			console.error('Error while reading modelchanges.', err)
+		}).fail((err) => {
+			console.error(`Error while reading model changes. ${err}`)
 		})
 	}
 	const register = new Register()
@@ -135,7 +134,7 @@ angular.module('lmeapp', ['angular.filter'])
 			$('#sidebar').toggleClass('control-sidebar')
 		} else {
 			if (sidebaropen && open) return
-			if ($scope.activeVariable.length == 0 && !sidebaropen) return
+			if ($scope.activeVariable.length === 0 && !sidebaropen) return
 			sidebaropen = !sidebaropen
 			$('#pagewrapper').toggleClass('control-sidebar-open')
 			$('#sidebar').toggleClass('control-sidebar')
@@ -146,9 +145,8 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.dbModelConvert = function() {
 		$scope.fflType = '.ffl'
 		Pace.track(function() {
-			$.getJSON('model?model=' + user_session.fflModelPath, function(data) {
+			$.getJSON(`model?model=${user_session.fflModelPath}`, function() {
 				currentIndexer = new RegisterToFFL(register)
-				currentIndexer.indexProperties()
 				const lines = currentIndexer.toGeneratedCommaSeperated()
 				fflEditor.setValue(lines)
 			}).fail(function() {
@@ -163,7 +161,7 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.goToPreviewPage = function() {
 		$scope.session.disablePreviewButton = true
 		$scope.downloadJsLink = null
-		window.open($scope.session.page + '.html#' + $scope.session.fflModelPath + '&' + user_session.user.name + '&' + user_session.column_size)
+		window.open(`${$scope.session.page}.html#${$scope.session.fflModelPath}&${user_session.user.name}&${user_session.column_size}`)
 		$('#modal-success').modal('toggle')
 	}
 
@@ -171,19 +169,20 @@ angular.module('lmeapp', ['angular.filter'])
 		Pace.track(function() {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
-			}, function(data) {
-				window.open($scope.session.page + '.html#' + data.link + '&' + user_session.user.name + '&' + user_session.column_size)
+			}, (data) => {
+				window.open(`${$scope.session.page}.html#${data.link}&${user_session.user.name}&${user_session.column_size}`)
 			})
 		})
 	}
 
 	$scope.previewRestApi = () => {
 		$scope.reloadFFL()
+		const model_version = register.getValue('root', FFL_VERSION_PROPERTY_NAME)
 		Pace.track(() => {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
 			}, () => {
-				window.open(`/swagger/?url=/${$scope.session.fflModelPath}/${$scope.session.model_version}/data-api-docs`)
+				window.open(`/swagger/?url=/${$scope.session.fflModelPath}/0.${model_version}/`)
 			})
 		})
 	}
@@ -201,22 +200,24 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.gotoUpdateScreen = function() {
 		$scope.changeView('updateView')
 	}
-	$scope.update = function(hasUpdates) {
-		$http.get('hasUpdates').then(function(data) {
-			$scope.hasChanges = data.data.hasChanges
-			$scope.changes = data.data.changes
+	$scope.update = async () => {
+		try {
+			const { data } = await $http.get('hasUpdates')
+			$scope.hasChanges = data.hasChanges
+			$scope.changes = data.changes
 			if ($scope.hasChanges) {
-				$http.get('/update/git/notifyCommit').then(function(data) {
+				try {
+					await $http.get('/update/git/notifyCommit')
 					location.reload()
-				}).catch(function(err) {
+				} catch (err) {
 					$scope.changes = err.toString()
 					location.reload()
-				})
+				}
 			}
-		}).catch(function(err) {
+		} catch (err) {
 			$scope.changes = err.toString()
 			location.reload()
-		})
+		}
 	}
 	/*** Auto-complete for JBehave view **/
 	$scope.changedView = function() {
@@ -274,7 +275,7 @@ angular.module('lmeapp', ['angular.filter'])
 		})
 	})
 	$('#models').keydown(function(event) {
-		if (event.keyCode == 13) {
+		if (event.keyCode === 13) {
 			event.preventDefault()
 			handleModelChange()
 			return false
@@ -331,9 +332,7 @@ angular.module('lmeapp', ['angular.filter'])
 		}
 	}
 	/*** Every keystroke from the JBehaveView will pass here */
-	right_editor.aceEditor.commands.on('afterExec', function(e) {
-		return $scope.runJBehaveTest()
-	})
+	right_editor.aceEditor.commands.on('afterExec', () => $scope.runJBehaveTest())
 	window.addEventListener('keydown', function(e) {
 		if (e.ctrlKey && e.shiftKey) return
 		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
@@ -367,8 +366,9 @@ angular.module('lmeapp', ['angular.filter'])
 			switch (evt.keyCode) {
 			case 117://F6
 				evt.preventDefault()
-				$('#models').select()
-				$('#models').focus()
+				const model_field = $('#models')
+				model_field.select()
+				model_field.focus()
 				break
 			}
 		}

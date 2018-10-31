@@ -1,29 +1,30 @@
-import { exec }                      from 'child-process-promise'
-import { debug, DEBUG, error, info } from 'log6'
-import bodyParser                    from 'body-parser'
-import expressStaticGzip             from 'express-static-gzip'
-import fs, { createReadStream }      from 'fs'
-import ExcelConnect                  from '../excel-connect/excel-connect'
-import fileUpload                    from 'express-fileupload'
-import assembler                     from '../git-connect/ModelAssembler'
-import { Stash as stash }            from './src/stash'
-import { DockerImageBuilder }        from '../docker-connect/DockerImageBuilder'
-import { EndpointCreator }           from '../traefik/src/index'
-import express                       from 'express'
-import compression                   from 'compression'
-import path                          from 'path'
-import { setup }                     from './api-def'
-import cors                          from 'cors'
-import IDECodeBuilder                from './src/IDE_code_builder'
-import request                       from 'request-promise-json'
-import { FFLToRegister }             from '../ffl/FFLToRegister'
-import { Register }                  from '../lme-core/src/Register'
-import { RegisterToFFL }             from '../ffl/RegisterToFFL'
+import { exec }                                from 'child-process-promise'
+import { debug, DEBUG, error, info }           from 'log6'
+import bodyParser                              from 'body-parser'
+import expressStaticGzip                       from 'express-static-gzip'
+import fs, { createReadStream }                from 'fs'
+import ExcelConnect                            from '../excel-connect/excel-connect'
+import fileUpload                              from 'express-fileupload'
+import assembler                               from '../git-connect/ModelAssembler'
+import { Stash as stash }                      from './src/stash'
+import { DockerImageBuilder }                  from '../docker-connect/DockerImageBuilder'
+import { EndpointCreator }                     from '../traefik/src/index'
+import express                                 from 'express'
+import compression                             from 'compression'
+import path                                    from 'path'
+import { setup }                               from './api-def'
+import cors                                    from 'cors'
+import IDECodeBuilder                          from './src/IDE_code_builder'
+import request                                 from 'request-promise-json'
+import { FFLToRegister }                       from '../ffl/FFLToRegister'
+import { FFL_VERSION_PROPERTY_NAME, Register } from '../lme-core/index'
+import { RegisterToFFL }                       from '../ffl/RegisterToFFL'
 
 const DBModel = {}
-const host = process.env.HOST || '127.0.0.1'
+const host = process.env.INTERNAL_HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const port = 8080
+const isDebug = process.env.ENV === 'debug'
 //const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
 const app = express()
 //app.use(express_favicon())
@@ -142,17 +143,17 @@ app.post('*/upload', async (req, res) => {
 
 app.get('*/readExcel/:model', async function(req, res) {
 	const modelName = req.params.model
-	ExcelConnect.loadExcelFile(modelName).then(function(matrix) {
-		res.json(matrix)
-	}).catch(err => res.status(400).json({ status: 'fail', reason: err.toString() }))
+	ExcelConnect.loadExcelFile(modelName)
+	.then(matrix => res.json(matrix))
+	.catch(err => res.status(400).json({ status: 'fail', reason: err.toString() }))
 })
 
 function bumbVersion(data) {
-	let register = new Register(['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'tree_index', 'children', 'valid', 'title', 'type', 'parent_name', 'locked', 'frequency', 'displaytype', 'formula', 'required', 'ffl_version'])
+	let register = new Register(['desc', 'start', 'end', 'name', 'index', 'modifier', 'parentId', 'tuple', 'refersto', 'tree_index', 'children', 'valid', 'title', 'type', 'parent_name', 'locked', 'frequency', 'displaytype', 'formula', 'required', FFL_VERSION_PROPERTY_NAME])
 	new FFLToRegister(register, data).parseProperties()
-	let new_version = Number(register.getValue('root', 'ffl_version') || 0) + 1
-	register.setValue('root', 'ffl_version', new_version)
-	console.info(register.getValue('root', 'ffl_version'))
+	let new_version = Number(register.getValue('root', FFL_VERSION_PROPERTY_NAME) || 0) + 1
+	register.setValue('root', FFL_VERSION_PROPERTY_NAME, new_version)
+	console.info(register.getValue('root', FFL_VERSION_PROPERTY_NAME))
 	return {
 		version: new_version,
 		ffl    : new RegisterToFFL(register).toGeneratedFFL({ auto_join: true })
@@ -185,7 +186,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', async (req, res) => {
 				try {
 					await dockerImageBuilder.prepareDockerFile()
 					await dockerImageBuilder.buildDockerImage()
-					new EndpointCreator().addEndPoint({ endpoint_name: model_name, model_version, host })
+					new EndpointCreator().addEndPoint({ endpoint_name: model_name, model_version, host, debug: isDebug })
 				} catch (er) {
 					error(er.stack)
 				}

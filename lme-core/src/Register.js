@@ -46,9 +46,20 @@ class Register {
 		return this.getIndex('name')
 	}
 
+	getIndexNames() {
+		return this.getNames()
+	}
+
 	getIndex(name) {
 		if (!this[name]) this.createIndex(name)
 		return this[name]
+	}
+
+	humanNode(row) {
+		return row.reduce((acc, cur, i) => {
+			acc[this.schema[i]] = cur
+			return acc
+		}, {})
 	}
 
 	lastRowIndex() {

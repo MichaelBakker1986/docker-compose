@@ -1,9 +1,7 @@
-import { MatrixStore }      from '../MatrixStore'
-import { error, warn }      from 'log6'
-import ModelLoader          from '../FinancialModelLoader'
-import { getModelAsString } from '../../git-connect/ResourceManager'
-
-const LMEFacade = ModelLoader.LMEFacade
+import { MatrixStore }            from '../MatrixStore'
+import { error }                  from 'log6'
+import { LMEFacade, ModelLoader } from '../FinancialModelLoader'
+import { getModelAsString }       from '../../git-connect/ResourceManager'
 
 export function setup(app) {
 	const ds = new MatrixStore()
@@ -15,10 +13,10 @@ export function setup(app) {
 			try {
 				const context = ds.getOrCreate(id)
 				const column_context = parseInt(columncontext || '0')
-				const variablename = figureName === '{variable}' ? undefined : figureName
+				const variable_name = figureName === '{variable}' ? undefined : figureName
 				const value = isNaN(value) ? value : parseFloat(value)
 
-				success(LMEFacade.getValue(context, variablename, column_context, value, undefined))
+				success(LMEFacade.getValue(context, variable_name, column_context, value, undefined))
 			} catch (err) {
 				fail(err)
 			}
@@ -27,68 +25,64 @@ export function setup(app) {
 	}
 
 	function flatten(key_value, object) {
-		for (let key in object) {
+		Object.keys(object).forEach(key => {
 			if (typeof(object[key]) === 'object') flatten(key_value, object[key])
 			else {
 				if (key_value[key] != null) throw Error('Duplicate value input')
 				key_value[key] = object[key]
 			}
-		}
+		})
 	}
 
 	function defaultPostResponse({ params, body, originalUrl }, res) {
-		const { figureName, version = '', id } = params
+		const { figureName, id, model_name } = params
 		//handle request Async by default, create Promise, result when done.
-		new Promise(function(success, fail) {
+		new Promise((success, fail) => {
 			try {
 				let result
 				const context = ds.getOrCreate(id)
-				/**
-				 * TODO: find generic way to map the Output node to the model name
-				 */
+
 				let modelPrefix = ''
-				switch (figureName) {
-				case 'PRESCAN':
-					modelPrefix = 'PRESCAN'
-					break
-				case 'FyndooCreditRating':
-					modelPrefix = 'FyndooCreditRating'
-					break
-				case 'TupleRestModel':
-					modelPrefix = 'TupleRestModel'
-					break
-				case 'LGDCalculationOutputContainer':
-					modelPrefix = 'LGD'
-					break
-				case 'KinderSpaarPlan':
-					modelPrefix = 'KSP'
-					break
-				case 'Q_MAP06':
-					modelPrefix = 'KSP2'
-					break
-				default:
-					modelPrefix = figureName
+				if (!model_name) {
+					switch (figureName) {
+					case 'PRESCAN':
+						modelPrefix = 'PRESCAN'
+						break
+					case 'FyndooCreditRating':
+						modelPrefix = 'FyndooCreditRating'
+						break
+					case 'TupleRestModel':
+						modelPrefix = 'TupleRestModel'
+						break
+					case 'LGDCalculationOutputContainer':
+						modelPrefix = 'LGD'
+						break
+					case 'KinderSpaarPlan':
+						modelPrefix = 'KSP'
+						break
+					case 'Q_MAP06':
+						modelPrefix = 'KSP2'
+						break
+					default:
+						modelPrefix = figureName
+					}
+				} else {
+					modelPrefix = model_name
 				}
 				modelPrefix = `${modelPrefix.toUpperCase()}_`
 
-				//This is very very basic, rewrite required.
-
 				const keyValue = {}
 				flatten(keyValue, body)
-				for (let key in keyValue) {
-					LMEFacade.getValue(context, modelPrefix + key, 0, keyValue[key], undefined)
-				}
-				/**
-				 * TODO: find generic way to map the Output node to the model name
-				 */
+				Object.keys(keyValue).forEach(key => LMEFacade.getValue(context, modelPrefix + key, 0, keyValue[key], undefined))
+
 				if (figureName === 'LGDCalculationOutputContainer') context.columns = 1
 				else if (figureName === 'PRESCAN') context.columns = 1
 				else if (figureName === 'FyndooCreditRating') context.columns = 1
 				else if (figureName === 'TupleRestModel') context.columns = 1
 				else if (figureName === 'KinderSpaarPlan') context.columns = 17
 				else if (figureName === 'Q_MAP06') context.columns = 17
-				else warn(`Invalid rest api call ${originalUrl}`)
-				result = LMEFacade.getObjectValues(context, modelPrefix + figureName, undefined)
+				else context.columns = 17
+				result = LMEFacade.getObjectValues(context, `${modelPrefix}${figureName}`, undefined)
 
 				if (!result) result = { status: 'failed ' }
 				success(result)
@@ -100,7 +94,7 @@ export function setup(app) {
 	}
 
 	app.get('*/id/:id/newModel', (req, res) => {
-		ModelLoader.ModelLoader.onNewModel(getModelAsString('LGD'), `/LGD.ffl`)
+		ModelLoader.onNewModel(getModelAsString('LGD'), `/LGD.ffl`)
 		res.json({ 'status': 'ok' })
 	})
 	/**
@@ -116,6 +110,7 @@ export function setup(app) {
 
 	app.post('*/id/:id/figure/:figureName/:version', defaultPostResponse)
 	app.post('*/id/:id/figure/:figureName', defaultPostResponse)
+	app.post('*/:model_name/:version/figure/:figureName', defaultPostResponse)
 	app.post('*/figure/:figureName', defaultPostResponse)
 	app.post('*/figure/:figureName/:version', defaultPostResponse)
 }

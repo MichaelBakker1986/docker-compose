@@ -9,7 +9,7 @@ import cors                from 'cors'
 
 const port = 8083
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
-const host = process.env.HOST || '127.0.0.1'
+const host = process.env.INTERNAL_HOST || '127.0.0.1'
 const domain = process.env.DOMAIN || (`${host}:${internal_proxy_port}/id/guest`)
 const app = express()
 app.use(express_no_favIcons())

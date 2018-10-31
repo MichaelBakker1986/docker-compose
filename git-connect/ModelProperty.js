@@ -1,7 +1,7 @@
 import orm from 'orm'
 import log from 'log6'
 
-const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@database:5432/lme'
+const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@127.0.0.1:5432/lme'
 export const ORM = new Promise((accept, reject) => {
 
 	orm.connectAsync(dbConnectString).then(async (db) => {

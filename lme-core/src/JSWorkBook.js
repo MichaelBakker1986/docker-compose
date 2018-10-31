@@ -147,8 +147,11 @@ function fixForReferenceError(variableName, workbook, formulaInfo, e) {
 JSWorkBook.prototype.visitSolutionFormulas = function(visitor) {
 	return this.solution.formulas.forEach(visitor)
 }
-JSWorkBook.prototype.exportWebModel = function(rowId) {
-	return this.export('webexport', rowId)
+JSWorkBook.prototype.exportWebModel = function(options) {
+	return this.export('webexport', options)
+}
+JSWorkBook.prototype.exportSwagger = function(options) {
+	return this.export('swagger', options)
 }
 JSWorkBook.prototype.export = function(parserType, rowId) {
 	return SolutionFacade.exportSolution(parserType, rowId, this)

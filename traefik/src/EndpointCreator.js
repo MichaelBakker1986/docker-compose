@@ -17,7 +17,7 @@ class EndpointCreator {
 		this.addEndPoint({ endpoint_name: 'whoami', model_version: 'latest', author: 'emilevauge' })
 	}
 
-	addEndPoint({ author = 'michaelbakker1986', endpoint_name, model_version, host = 'appmodel.org' }) {
+	addEndPoint({ author = 'michaelbakker1986', endpoint_name, model_version, host = 'appmodel.org', debug = false }) {
 		if (this.endpoints.includes(endpoint_name)) {
 			warn('Endpoint already exists, restarting ' + endpoint_name)
 		}
@@ -31,10 +31,11 @@ class EndpointCreator {
 		endpoint.image = `${author}/${endpoint_name}:${model_version}`.toLowerCase()
 		endpoint.container_name = container_name
 		endpoint.environment['HOST'] = host
+		if (debug) endpoint.environment['ENV'] = 'debug'
 		endpoint.environment['ENABLED_MODELS'] = endpoint_name
 		endpoint.environment['MODEL_VERSION'] = model_version
 		const strip = `/${endpoint_name}/${model_version}/`
-		endpoint.labels['traefik.frontend.rule'] = `Host:${host};PathPrefix:${strip};PathPrefixStrip:${strip}`
+		endpoint.labels['traefik.frontend.rule'] = `PathPrefix:${strip};PathPrefixStrip:${strip}`
 		this.buildEndpoints()
 		this.bringServicesUp()
 	}
