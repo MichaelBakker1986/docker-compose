@@ -42,13 +42,14 @@ app.use(bodyParser.urlencoded({
 app.use('*/src', IDECodeBuilder)
 app.post('*/:user_id/preview/:model_name', async ({ body, params }, res) => {
 	const { model_name, user_id } = params
-	stash.preview(user_id, model_name, body.data).then((data) => {
-		res.set('x-auth-id', `${data}.ffl`)
-		res.json({ status: 'ok', link: data })
-	}).catch(err => {
-		if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, err)
-		res.json({ status: 'fail', reason: err.toString() })
-	})
+	const { fail, hash, message } = await stash.preview(user_id, model_name, body.data)
+	if (fail) {
+		if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, message)
+		res.json({ status: 'fail', reason: message })
+	} else {
+		res.set('x-auth-id', `${hash}.ffl`)
+		res.json({ status: 'ok', link: hash })
+	}
 })
 assembler.then(db_methods => {
 	Object.assign(DBModel, db_methods)
@@ -75,12 +76,14 @@ app.get('*/modelChanges/:model_name', async (req, res) => {
 })
 app.post('*/:user_id/saveFFLModel/:model_name', async ({ body, params }, res) => {
 	const { model_name, user_id } = params
-	stash.commit(user_id, model_name, body.data, body.type).then(() => {
-		res.json({ status: 'ok' })
-	}).catch((err) => {
+	try {
+		const { ffl, version } = bumbVersion(body.data)
+		await stash.commit(user_id, model_name, ffl, body.type)
+		res.json({ status: 'ok', version })
+	} catch (err) {
 		debug('Failed to write ' + model_name + '.ffl file.', err)
 		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
-	})
+	}
 })
 app.post('*/:user_id/saveJBehaveStory/:model_name', async ({ body, params }, res) => {
 	const { model_name, user_id } = params
@@ -92,21 +95,14 @@ app.post('*/:user_id/saveJBehaveStory/:model_name', async ({ body, params }, res
 	})
 })
 
-app.get('*/branches', async (req, res) => {
-	stash.branches().then(data => {
-		res.json(data)
-	}).catch(err => {
-		debug(`Failed to lookup branches:[${err}]`)
-		res.json([])
-	})
-})
 app.get('*/models', async (req, res) => {
-	stash.models('master', 'ffl').then((data) => {
+	try {
+		const data = await stash.models('master', 'ffl')
 		res.json(data)
-	}).catch((err) => {
-		//res.json({status: 'fail', reason: err.toString()});
+	}
+	catch (err) {
 		res.status(500).send(err.toString())
-	})
+	}
 })
 app.get('*/tmp_model/:model', async ({ params }, res) => {
 	const name = params.model

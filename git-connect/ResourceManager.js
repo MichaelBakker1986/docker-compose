@@ -28,7 +28,7 @@ export const readExcelSheetAsStream = ({ model_name, version }) => createReadStr
 export const getExcelSheetPath = ({ model_name, version }) => joinResource(model_name, EXCEL_FILE_EXTENSION, version)
 export const getModelPath = ({ model_path, version }) => joinResource(basename(model_path), undefined, version)
 
-export const commit = async (message) => {
+export const commit_resources = async (message) => {
 	let command = `cd ${resources_map} && git pull &&  git commit -a -m "${message}" && git push && git rev-parse HEAD`
 	return exec(command)
 }
