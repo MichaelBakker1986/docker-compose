@@ -3,16 +3,17 @@
  * Match them with a *.ffl model-file
  * Call the JBehaveStoryParser to execute vs Financial Model File
  */
-import Walker          from '../../git-connect/FileWalker'
-import fs              from 'fs'
-import path            from 'path'
-import { error, info } from 'log6'
+import { FILE_SYSTEM_RESOURCES_PATH, FileWalker } from '../../git-connect/index'
+import fs                                         from 'fs'
+import path                                       from 'path'
+import { error, info }                            from 'log6'
 
 import { exec } from 'child-process-promise'
 
-const modelTests = new Walker(__dirname + '/../', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
-const coreTests = new Walker(__dirname + '/../../lme-core/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
-new Walker(__dirname + '/../../git-connect/', ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+const modelTests = new FileWalker(path.join(__dirname, '/../'), ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+const coreTests = new FileWalker(path.join(__dirname, `/../../lme-core/`), ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+new FileWalker(FILE_SYSTEM_RESOURCES_PATH, ['*', '*/*', '*/*/*', '*/*/*/*', '*/*/*/*'], '.story')
+
 const visit = (file) => {
 	fs.exists(file.replace(/(\(\w+\))?\.story/gm, '.ffl'), async (exists) => {
 			if (exists) {

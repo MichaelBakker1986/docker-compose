@@ -21,5 +21,4 @@ router.get('/', async (req, res) => {
 	endpointCreator.killAll()
 	res.json({})
 })
-
 export default router

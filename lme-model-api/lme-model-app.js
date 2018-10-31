@@ -1,54 +1,52 @@
-import { exec }                                from 'child-process-promise'
-import { debug, DEBUG, error, info }           from 'log6'
-import bodyParser                              from 'body-parser'
-import expressStaticGzip                       from 'express-static-gzip'
-import fs, { createReadStream }                from 'fs'
-import ExcelConnect                            from '../excel-connect/excel-connect'
-import fileUpload                              from 'express-fileupload'
-import assembler                               from '../git-connect/ModelAssembler'
-import { Stash as stash }                      from './src/stash'
-import { DockerImageBuilder }                  from '../docker-connect/DockerImageBuilder'
-import { EndpointCreator }                     from '../traefik/src/index'
-import express                                 from 'express'
-import compression                             from 'compression'
-import path                                    from 'path'
-import { setup }                               from './api-def'
-import cors                                    from 'cors'
-import IDECodeBuilder                          from './src/IDE_code_builder'
-import request                                 from 'request-promise-json'
-import { FFLToRegister }                       from '../ffl/FFLToRegister'
-import { FFL_VERSION_PROPERTY_NAME, Register } from '../lme-core/index'
-import { RegisterToFFL }                       from '../ffl/RegisterToFFL'
+import { exec }                                                            from 'child-process-promise'
+import { debug, DEBUG, error, info }                                       from 'log6'
+import bodyParser                                                          from 'body-parser'
+import expressStaticGzip                                                   from 'express-static-gzip'
+import { createReadStream }                                                from 'fs'
+import ExcelConnect                                                        from '../excel-connect/excel-connect'
+import fileUpload                                                          from 'express-fileupload'
+import assembler                                                           from '../git-connect/ModelAssembler'
+import { existsExcelSheet, FILE_SYSTEM_RESOURCES_PATH, getExcelSheetPath } from '../git-connect/index'
+import { Stash as stash }                                                  from './src/stash'
+import { DockerImageBuilder }                                              from '../docker-connect/DockerImageBuilder'
+import { EndpointCreator }                                                 from '../traefik/src/index'
+import express                                                             from 'express'
+import compression                                                         from 'compression'
+import { join }                                                            from 'path'
+import { setup }                                                           from './api-def'
+import cors                                                                from 'cors'
+import IDECodeBuilder                                                      from './src/IDE_code_builder'
+import request                                                             from 'request-promise-json'
+import { FFLToRegister }                                                   from '../ffl/FFLToRegister'
+import { FFL_VERSION_PROPERTY_NAME, Register }                             from '../lme-core/index'
+import { RegisterToFFL }                                                   from '../ffl/RegisterToFFL'
 
 const DBModel = {}
 const host = process.env.INTERNAL_HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const port = 8080
 const isDebug = process.env.ENV === 'debug'
-//const domain = process.env.INTERNAL_PROXY_PORT || (`http://${host}:${internal_proxy_port}/id/guest`)
 const app = express()
-//app.use(express_favicon())
-app.use('/id/:id/transformFFL_LME/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
-app.use('/resources/', expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
-app.use(expressStaticGzip(`${__dirname}/../git-connect/resources/`, undefined))
+app.use('/id/:id/transformFFL_LME/', expressStaticGzip(FILE_SYSTEM_RESOURCES_PATH, undefined))
+app.use('/resources/', expressStaticGzip(FILE_SYSTEM_RESOURCES_PATH, undefined))
+app.use(expressStaticGzip(FILE_SYSTEM_RESOURCES_PATH, undefined))
 app.use(compression())
 app.use(cors())
 app.set('port', port)
 app.set('host', host)
-app.use(bodyParser.json({ limit: '50mb' }))       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({
 	extended: true,
 	limit   : '50mb'
 }))
 app.use('*/src', IDECodeBuilder)
-app.post('*/:user_id/preview/:model_name', async (req, res) => {
-	const model_name = req.params.model_name
-	const user_id = req.params.user_id
-	stash.preview(user_id, model_name, req.body.data).then((data) => {
+app.post('*/:user_id/preview/:model_name', async ({ body, params }, res) => {
+	const { model_name, user_id } = params
+	stash.preview(user_id, model_name, body.data).then((data) => {
 		res.set('x-auth-id', `${data}.ffl`)
 		res.json({ status: 'ok', link: data })
 	}).catch(err => {
-		debug(`Failed to write ${model_name}.ffl file.`, err)
+		if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, err)
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
@@ -75,20 +73,18 @@ app.get('*/modelChanges/:model_name', async (req, res) => {
 		res.json({ status: 'fail', reason: err.toString() })
 	})
 })
-app.post('*/:user_id/saveFFLModel/:model_name', async (req, res) => {
-	const model_name = req.params.model_name
-	const user_id = req.params.user_id
-	stash.commit(user_id, model_name, req.body.data, req.body.type).then(() => {
+app.post('*/:user_id/saveFFLModel/:model_name', async ({ body, params }, res) => {
+	const { model_name, user_id } = params
+	stash.commit(user_id, model_name, body.data, body.type).then(() => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
 		debug('Failed to write ' + model_name + '.ffl file.', err)
-		res.json({ status: 'fail', message: 'Failed to write ' + model_name + '.ffl', reason: err.toString() })
+		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
 	})
 })
-app.post('*/:user_id/saveJBehaveStory/:model_name', async (req, res) => {
-	const model_name = req.params.model_name
-	const user_id = req.params.user_id
-	stash.commitJBehaveFile(user_id, model_name, req.body.data, req.body.type).then(() => {
+app.post('*/:user_id/saveJBehaveStory/:model_name', async ({ body, params }, res) => {
+	const { model_name, user_id } = params
+	stash.commitJBehaveFile(user_id, model_name, body.data, body.type).then(() => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
 		debug(`Failed to write ${model_name}.ffl file.`, err)
@@ -112,11 +108,10 @@ app.get('*/models', async (req, res) => {
 		res.status(500).send(err.toString())
 	})
 })
-app.get('*/tmp_model/:model', async (req, res) => {
-	const name = req.params.model
-	return exec(`node ${__dirname}/src/exportLME_FFL.js ${name}`).then(() => {
-		const readStream = createReadStream(`${__dirname}/../git-connect/resources/${name}.js`)
-		readStream.pipe(res)
+app.get('*/tmp_model/:model', async ({ params }, res) => {
+	const name = params.model
+	return exec(`node ${join(__dirname, '/src/exportLME_FFL.js')} ${name}`).then(() => {
+		createReadStream(join(FILE_SYSTEM_RESOURCES_PATH, `${name}.js`)).pipe(res)
 	}).catch((err) => {
 		res.status(500).send(err.toString())
 	})
@@ -124,28 +119,23 @@ app.get('*/tmp_model/:model', async (req, res) => {
 
 // default options
 app.use(fileUpload())
-app.get('*/excel/:model', async (req, res) => {
-	const modelName = req.params.model
-	fs.exists(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, (result) => {
-		const targetFilePath = `${__dirname}/../git-connect/resources/${modelName}.xlsx`
-		const sampleFilePath = `${__dirname}/../git-connect/SAMPLE.xlsx`
-		if (!result) {
-			res.sendFile(path.resolve(sampleFilePath))
-		} else {
-			res.sendFile(path.resolve(targetFilePath))
-		}
-	})
+app.get('*/excel/:model.xlsx', async ({ params }, res) => {
+	const { model_name } = params
+	const result = await existsExcelSheet({ model_name })
+	const excelSheetPath = getExcelSheetPath({ model_name: result ? model_name : 'SAMPLE' })
+	res.sendFile(excelSheetPath)
 })
 app.post('*/upload', async (req, res) => {
 	info('upload')
 	res.status(200).json({ status: 'ok' })
 })
 
-app.get('*/readExcel/:model', async function(req, res) {
-	const modelName = req.params.model
-	ExcelConnect.loadExcelFile(modelName)
-	.then(matrix => res.json(matrix))
-	.catch(err => res.status(400).json({ status: 'fail', reason: err.toString() }))
+app.get('*/readExcel/:model', async ({ params }, res) => {
+	try {
+		res.json(await ExcelConnect.loadExcelFile(params.model))
+	} catch (err) {
+		res.status(400).json({ status: 'fail', reason: err.toString() })
+	}
 })
 
 function bumbVersion(data) {
@@ -167,12 +157,12 @@ function bumbVersion(data) {
  * Build image
  * Publish to nexus
  */
-app.post('*/:user_id/publishDockerImage/:model_name', async (req, res) => {
-	const model_name = req.params.model_name
-	const user_id = req.params.user_id
-	stash.commitJBehaveFile(user_id, model_name, req.body.story, null).then(() => {
+app.post('*/:user_id/publishDockerImage/:model_name', async ({ body, params }, res) => {
+	const { model_name, user_id } = params
+
+	stash.commitJBehaveFile(user_id, model_name, body.story, null).then(() => {
 		ExcelConnect.loadExcelFile(model_name).then(() => {
-			const { ffl, version } = bumbVersion(req.body.fflData)
+			const { ffl, version } = bumbVersion(body.fflData)
 
 			stash.commit(user_id, model_name, ffl, null).then(async () => {
 				const model_version = `0.${version}`
@@ -213,23 +203,21 @@ app.post('*/:user_id/publishDockerImage/:model_name', async (req, res) => {
 	})
 })
 /** * TODO: add commit to stash */
-app.post('*/excel/:model', async function(req, res) {
+app.post('*/excel/:model', async (req, res) => {
 	const modelName = req.params.model
 	if (!req.files) {
 		debug(`Failed to write ${modelName}.xlsx file.`)
 		return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
 	}
-
-	// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-	let excelfile = req.files.excelfile
-
-	// Use the mv() method to place the file somewhere on your server
-	excelfile.mv(`${__dirname}/../git-connect/resources/${modelName}.xlsx`, err => {
+	const excel_file = req.files.excelfile
+	excel_file.mv(getExcelSheetPath(modelName), err => {
 		if (err) {
-			debug(`Failed to write ${modelName}.xlsx file.`, err)
-			return res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
+			if (DEBUG) debug(`Failed to write ${modelName}.xlsx file.`, err)
+			res.status(400).json({ status: 'fail', reason: 'No files were uploaded.' })
+		} else {
+			if (DEBUG) debug(`Success write new excel sheet from user upload. ${modelName}`)
+			res.json({ status: 'ok', modelName })
 		}
-		res.json({ status: 'ok' })
 	})
 })
 setup(app)

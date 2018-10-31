@@ -1,9 +1,9 @@
-import { exec }                            from 'child-process-promise'
-import { DEBUG, debug, error, info, warn } from 'log6'
-import write                               from 'node-fs-writefile-promise'
-import { ModelStorage as modelStorage }    from './ModelStorage'
-import uuid                                from 'uuid4'
-import path                                from 'path'
+import { exec }                                     from 'child-process-promise'
+import { DEBUG, debug, error, info, warn }          from 'log6'
+import write                                        from 'node-fs-writefile-promise'
+import ModelStorage                                 from './ModelStorage'
+import uuid                                         from 'uuid4'
+import { writeJBehaveAsString, writeModelAsString } from '../../git-connect/ResourceManager'
 
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -22,7 +22,7 @@ class Stash {
 
 	preview(user_id, name, data) {
 		const tempHash = `_tmp_${uuid()}_${name}`
-		return write(path.join(__dirname, `/../../git-connect/resources/${tempHash}.ffl`), data)
+		return writeModelAsString({ model_name: tempHash, data })
 		.then(() => {
 			return exec(`node -r babel-register ${__dirname}/FFLWebpackConverter.js ${tempHash}`).then((result) => {
 				if (result.stderr) throw Error(result.stderr)
@@ -38,7 +38,7 @@ class Stash {
 	}
 
 	commitJBehaveFile(user_id, name, data) {
-		return write(`${__dirname}/../../git-connect/resources/${name}.story`, data)
+		return writeJBehaveAsString({ name, data })
 		.then(function() {
 			let userID = uuid()
 			if (develop) {
@@ -72,7 +72,7 @@ class Stash {
 		 * The FFL file will always be pushed to master also
 		 */
 		try {
-			modelStorage.saveDelta(name, data)
+			ModelStorage.saveDelta(name, data)
 		} catch (err) {
 			warn('Failed saving delta to DB', err)
 		}

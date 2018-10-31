@@ -1,10 +1,11 @@
-import { Register }                            from '../../lme-core/index'
-import { DeltaCompareRegister, FFLToRegister } from '../../ffl/index'
-import uuid                                    from 'uuid4'
-import log                                     from 'log6'
-import path                                    from 'path'
-import assembler                               from '../../git-connect/ModelAssembler'
-import fs, { readFileSync }                    from 'fs'
+import { Register }                                                                 from '../../lme-core/index'
+import { DeltaCompareRegister, FFLToRegister }                                      from '../../ffl/index'
+import uuid                                                                         from 'uuid4'
+import { DEBUG, error, info, TRACE, trace }                                         from 'log6'
+import path                                                                         from 'path'
+import assembler
+                                                                                    from '../../git-connect/ModelAssembler'
+import { existsModel, FILE_SYSTEM_RESOURCES_PATH, getModelPath, readModelAsString } from '../../git-connect/index'
 
 /**
  * A data-state contains
@@ -39,12 +40,12 @@ function ModelStorage() {
 	})
 }
 
-ModelStorage.prototype.getHistory = function(name) {
-	return this.getFFLModelPropertyChanges(name).then(function(ok) {
-		log.info(ok)
+ModelStorage.prototype.getHistory = (name) => {
+	return this.getFFLModelPropertyChanges(name).then((ok) => {
+		info(ok)
 		return ok
-	}).catch(function(err) {
-		log.error(err)
+	}).catch((err) => {
+		error(err)
 		throw Error(`Unable to get history for model with name ${name}\m${err.stack}`)
 	})
 }
@@ -59,51 +60,51 @@ ModelStorage.prototype.getHistory = function(name) {
  * document_title: 'Hoi';
  *   column_title: 'Other';
  */
-ModelStorage.prototype.saveDelta = function(name, data) {
-	const fflPath = path.resolve(`${__dirname}/../../git-connect/resources/${name}.ffl`)
-	const compareResults = this.doDeltaCompare(name, fflPath, data)
+ModelStorage.prototype.saveDelta = function(model_name, data) {
+	const fflPath = getModelPath(model_name)
+	const compareResults = this.doDeltaCompare(model_name, data)
 	if (compareResults.status === 'ok' && compareResults.changes > 0) {
 		let i
-		const relativeFFLPath = path.relative(`${__dirname}/../../git-connect/resources/`, fflPath)
+		const relativeFFLPath = path.relative(FILE_SYSTEM_RESOURCES_PATH, fflPath)
 		const dbEntries = []
 		const create_time = new Date().toUTCString()
 		const hash = uuid()
 		for (i = 0; i < compareResults.compare.updates.length; i++) {
 			const update = compareResults.compare.updates[i]
-			dbEntries.push([hash, create_time, relativeFFLPath, name, update[1], update[2], update[3]])
+			dbEntries.push([hash, create_time, relativeFFLPath, model_name, update[1], update[2], update[3]])
 		}
 		for (i = 0; i < compareResults.compare.inserts.length; i++) {
 			const update = compareResults.compare.inserts[i]
-			dbEntries.push([hash, create_time, relativeFFLPath, name, update[1], update[2], update[3]])
+			dbEntries.push([hash, create_time, relativeFFLPath, model_name, update[1], update[2], update[3]])
 		}
 		for (i = 0; i < compareResults.compare.deletes.length; i++) {
 			const update = compareResults.compare.deletes[i]
-			dbEntries.push([hash, create_time, relativeFFLPath, name, update[1], update[2], null])
+			dbEntries.push([hash, create_time, relativeFFLPath, model_name, update[1], update[2], null])
 		}
-		this.insertProperties(dbEntries).then(function(ok) {
-			log.info(ok)
+		this.insertProperties(dbEntries).then((ok) => {
+			info(ok)
 		}).catch(err => {
-			if (log.DEBUG) log.error(err)
+			if (DEBUG) error(err)
 		})
 		return hash
 	}
 }
-ModelStorage.prototype.doDeltaCompare = function(name, fflPath, data) {
+ModelStorage.prototype.doDeltaCompare = function(model_name, data) {
 	const result = { status: 'fail', changes: 0 }
-	if (fs.existsSync(fflPath)) {
-		const modelRegister = new Register()
-		const fflformat = new FFLToRegister(modelRegister, readFileSync(fflPath, 'utf8'))
-		fflformat.parseProperties()
-		const otherModelRegister = new Register()
+	if (existsModel(model_name)) {
+		const modelRegister = new Register
+		const ffl_format = new FFLToRegister(modelRegister, readModelAsString({ model_name }))
+		ffl_format.parseProperties()
+		const otherModelRegister = new Register
 		const otherFFLFormat = new FFLToRegister(otherModelRegister, data)
 		otherFFLFormat.parseProperties()
-		const dcompare = new DeltaCompareRegister(modelRegister, otherModelRegister)
-		const compareResults = dcompare.compare()
-		if (log.TRACE) log.trace(compareResults.toString())
+		const delta_compare = new DeltaCompareRegister(modelRegister, otherModelRegister)
+		const compareResults = delta_compare.compare()
+		if (TRACE) trace(compareResults.toString())
 		result.status = 'ok'
 		result.changes = compareResults.changes
 		result.compare = compareResults
 	}
 	return result
 }
-exports.ModelStorage = new ModelStorage()
+export default new ModelStorage()

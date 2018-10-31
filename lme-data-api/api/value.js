@@ -1,7 +1,7 @@
 import { MatrixStore }            from '../MatrixStore'
 import { error }                  from 'log6'
 import { LMEFacade, ModelLoader } from '../FinancialModelLoader'
-import { getModelAsString }       from '../../git-connect/ResourceManager'
+import { readModelAsString }      from '../../git-connect/ResourceManager'
 
 export function setup(app) {
 	const ds = new MatrixStore()
@@ -94,7 +94,7 @@ export function setup(app) {
 	}
 
 	app.get('*/id/:id/newModel', (req, res) => {
-		ModelLoader.onNewModel(getModelAsString('LGD'), `/LGD.ffl`)
+		ModelLoader.onNewModel(readModelAsString({ model_name: 'LGD' }), `/LGD.ffl`)
 		res.json({ 'status': 'ok' })
 	})
 	/**

@@ -1,6 +1,6 @@
 import { error }              from 'log6'
 import { DockerImageBuilder } from './DockerImageBuilder'
-import { getModelAsStream }   from '../git-connect/ResourceManager'
+import { readModelAsStream }  from '../git-connect/ResourceManager'
 
 async function gogo() {
 	const model_name = 'KSP2'
@@ -8,7 +8,7 @@ async function gogo() {
 		model_name,
 		model_version: 20,
 		resource     : {
-			ffl_model_file_read_stream: getModelAsStream({ model_name })
+			ffl_model_file_read_stream: readModelAsStream({ model_name })
 		}
 	})
 	await builder.prepareDockerFile()

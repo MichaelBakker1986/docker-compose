@@ -11,7 +11,7 @@ import MatrixManager                                                 from '../..
 import api, { FFL_VERSION_PROPERTY_NAME, Register, WebExportParser } from '../../lme-core/index'
 import fflMath                                                       from '../../math/ffl-math'
 import formulaJs                                                     from '../../formulajs-connect/formulajs'
- 
+
 api.addFunctions(fflMath, formulaJs)
 api.registerParser(RegisterPlainFFLDecorator, WebExportParser)
 let params = window.location.href.split('#')
@@ -169,9 +169,7 @@ angular.module('lmeapp', ['angular.filter'])
 		Pace.track(function() {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
-			}, (data) => {
-				window.open(`${$scope.session.page}.html#${data.link}&${user_session.user.name}&${user_session.column_size}`)
-			})
+			}, (data) => window.open(`${$scope.session.page}.html#${data.link}&${user_session.user.name}&${user_session.column_size}`))
 		})
 	}
 
@@ -181,9 +179,7 @@ angular.module('lmeapp', ['angular.filter'])
 		Pace.track(() => {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
-			}, () => {
-				window.open(`/swagger/?url=/${$scope.session.fflModelPath}/0.${model_version}/`)
-			})
+			}, () => window.open(`/swagger/?url=/${$scope.session.fflModelPath}/0.${model_version}/`))
 		})
 	}
 
@@ -197,9 +193,7 @@ angular.module('lmeapp', ['angular.filter'])
 	 $scope.hasChanges = ''
 	 $scope.changes = undefined
 	 })*/
-	$scope.gotoUpdateScreen = function() {
-		$scope.changeView('updateView')
-	}
+	$scope.gotoUpdateScreen = () => $scope.changeView('updateView')
 	$scope.update = async () => {
 		try {
 			const { data } = await $http.get('hasUpdates')
@@ -235,16 +229,14 @@ angular.module('lmeapp', ['angular.filter'])
 					callback(null, [])
 					return
 				}
-				callback(null, wordMap.map(function(ea) {
-					return { name: ea.word, value: ea.word, meta: 'optional text' }
-				}))
+				callback(null, wordMap.map((ea) => ({ name: ea.word, value: ea.word, meta: 'optional text' })))
 			})
 			$scope.reloadFFL()
 			$scope.runJBehaveTest()
 			matrixController.refresh()
 		}
 	}
-	$('.toggle-expand-btn').click(function(e) {
+	$('.toggle-expand-btn').click(function() {
 		$(this).closest('.content .box').toggleClass('panel-fullscreen')
 	})
 
@@ -259,16 +251,16 @@ angular.module('lmeapp', ['angular.filter'])
 		$('#models').autocomplete({
 			source   : data,
 			autoFocus: true,
-			change   : function() {
+			change   : () => {
 				user_session.fflModelPath = $('#models').val()
 				handleModelChange()
 			}
 		})
-	}).fail(function() {
+	}).fail(() => {
 		$('#models').autocomplete({
 			source   : [],
 			autoFocus: true,
-			change   : function() {
+			change   : () => {
 				user_session.fflModelPath = $('#models').val()
 				handleModelChange()
 			}
