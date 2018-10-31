@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_h175duedg = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ParserService.js',
-	    hash = '639e4565eb14108f8e322b5095954478ec490d67',
+var cov_1hz34kdyd4 = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ParserService.js',
+	    hash = '3d2db3a3b39fa73ff27f09e40d0ddfd5bdebbd43',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\ParserService.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\ParserService.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -360,7 +360,7 @@ var _log = require('log6');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var parsers = (cov_h175duedg.s[0]++, {});
+var parsers = (cov_1hz34kdyd4.s[0]++, {});
 
 var ParserService = function () {
 	function ParserService() {
@@ -370,42 +370,42 @@ var ParserService = function () {
 	(0, _createClass3.default)(ParserService, null, [{
 		key: 'addParser',
 		value: function addParser(parser) {
-			cov_h175duedg.f[0]++;
-			cov_h175duedg.s[1]++;
+			cov_1hz34kdyd4.f[0]++;
+			cov_1hz34kdyd4.s[1]++;
 
-			if ((cov_h175duedg.b[1][0]++, !parser) || (cov_h175duedg.b[1][1]++, !parser.headername)) {
-					cov_h175duedg.b[0][0]++;
-					cov_h175duedg.s[2]++;
+			if ((cov_1hz34kdyd4.b[1][0]++, !parser) || (cov_1hz34kdyd4.b[1][1]++, !parser.headername)) {
+					cov_1hz34kdyd4.b[0][0]++;
+					cov_1hz34kdyd4.s[2]++;
 					throw Error('Invalid parser ' + JSON.stringify(parser));
 				} else {
-				cov_h175duedg.b[0][1]++;
-			}cov_h175duedg.s[3]++;
+				cov_1hz34kdyd4.b[0][1]++;
+			}cov_1hz34kdyd4.s[3]++;
 			if (_log.DEBUG) {
-					cov_h175duedg.b[2][0]++;
-					cov_h175duedg.s[4]++;
+					cov_1hz34kdyd4.b[2][0]++;
+					cov_1hz34kdyd4.s[4]++;
 					(0, _log.debug)('Adding parser ' + parser.headername);
 				} else {
-				cov_h175duedg.b[2][1]++;
-			}cov_h175duedg.s[5]++;
+				cov_1hz34kdyd4.b[2][1]++;
+			}cov_1hz34kdyd4.s[5]++;
 			parsers[parser.name] = parser;
 		}
 	}, {
 		key: 'visitParsers',
 		value: function visitParsers(visitFunction) {
-			cov_h175duedg.f[1]++;
-			cov_h175duedg.s[6]++;
+			cov_1hz34kdyd4.f[1]++;
+			cov_1hz34kdyd4.s[6]++;
 
 			Object.keys(parsers).forEach(function (parser) {
-				cov_h175duedg.f[2]++;
-				cov_h175duedg.s[7]++;
+				cov_1hz34kdyd4.f[2]++;
+				cov_1hz34kdyd4.s[7]++;
 				return visitFunction(parser);
 			});
 		}
 	}, {
 		key: 'findParser',
 		value: function findParser(parserName) {
-			cov_h175duedg.f[3]++;
-			cov_h175duedg.s[8]++;
+			cov_1hz34kdyd4.f[3]++;
+			cov_1hz34kdyd4.s[8]++;
 
 			return parsers[parserName];
 		}

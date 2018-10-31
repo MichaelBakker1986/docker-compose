@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1qai6jtbpd = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FormulaBootstrap.js',
-	    hash = 'd9c968109154faa69ed9d4a84fd9be99a95f08a0',
+var cov_2ewiu7jr44 = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FormulaBootstrap.js',
+	    hash = 'fa561d79c2dad049a0375cb045ba82f44014d4b8',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\FormulaBootstrap.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\FormulaBootstrap.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -6076,11 +6076,11 @@ var _log2 = _interopRequireDefault(_log);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FormulaBootstrap() {
-	cov_1qai6jtbpd.f[0]++;
+	cov_2ewiu7jr44.f[0]++;
 }
 
-var varproperties = (cov_1qai6jtbpd.s[0]++, {});
-var defaultValues = (cov_1qai6jtbpd.s[1]++, {
+var varproperties = (cov_2ewiu7jr44.s[0]++, {});
+var defaultValues = (cov_2ewiu7jr44.s[1]++, {
 	required: false,
 	visible: true,
 	locked: false,
@@ -6092,91 +6092,91 @@ var functions;
 var getOrCreateProperty;
 var addFormulaDependency;
 var properties;
-var propertiesArr = (cov_1qai6jtbpd.s[2]++, ['value', 'visible', 'required', 'locked', 'entered', 'validation', 'title', 'validateInput', 'choices', 'valid', 'hint']);
-var IDENTIFIER = (cov_1qai6jtbpd.s[3]++, 'Identifier');
-var ARRAYEXPRESSION = (cov_1qai6jtbpd.s[4]++, 'ArrayExpression');
+var propertiesArr = (cov_2ewiu7jr44.s[2]++, ['value', 'visible', 'required', 'locked', 'entered', 'validation', 'title', 'validateInput', 'choices', 'valid', 'hint']);
+var IDENTIFIER = (cov_2ewiu7jr44.s[3]++, 'Identifier');
+var ARRAYEXPRESSION = (cov_2ewiu7jr44.s[4]++, 'ArrayExpression');
 //this part is essencial to bind variables, extract support Variable types, supported Column types
 // these variables will be red from the given JSON asap.
 // for now we state them here..
 
 //so it can have a (x,T) parameter
-cov_1qai6jtbpd.s[5]++;
+cov_2ewiu7jr44.s[5]++;
 _ASTPreparser2.default.DataAvailable = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[1]++;
+	cov_2ewiu7jr44.f[1]++;
 
 	//If(DataEntered(TaxOnProfitPsayable&&TaxProfitPaymentCalc!==10),TaxOnProfitsPayable-(TaxOnProfitsCum+TaxOnProfitsAssessment-TaxOnProfitsPaidAccumulated),NA)
 	//be aware here, DataEntered refences to value,trend,notrend formulasets.
 	//idea idea is all formulasets are redirected into one variable ID, so we can use 'notrend,trend,value' to redirect into value
-	var refFormula = (cov_1qai6jtbpd.s[6]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'value'));
-	cov_1qai6jtbpd.s[7]++;
+	var refFormula = (cov_2ewiu7jr44.s[6]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'value'));
+	cov_2ewiu7jr44.s[7]++;
 	if (refFormula.ref === undefined) {
-		cov_1qai6jtbpd.b[0][0]++;
-		cov_1qai6jtbpd.s[8]++;
+		cov_2ewiu7jr44.b[0][0]++;
+		cov_2ewiu7jr44.s[8]++;
 
 		return _log2.default.warn('Can\'t find a variableReference for ' + regenerate(node) + ' ' + formulaInfo.name + ':' + formulaInfo.original);
 	} else {
-		cov_1qai6jtbpd.b[0][1]++;
+		cov_2ewiu7jr44.b[0][1]++;
 	}
-	cov_1qai6jtbpd.s[9]++;
+	cov_2ewiu7jr44.s[9]++;
 	node.type = 'Identifier';
 	// looks like being extracted as object, while has to be array
-	cov_1qai6jtbpd.s[10]++;
+	cov_2ewiu7jr44.s[10]++;
 	node.name = 'v[' + refFormula.ref + '][x.hash + y.hash + z]!=null';
-	cov_1qai6jtbpd.s[11]++;
+	cov_2ewiu7jr44.s[11]++;
 	delete node.refn;
-	cov_1qai6jtbpd.s[12]++;
+	cov_2ewiu7jr44.s[12]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[13]++;
+	cov_2ewiu7jr44.s[13]++;
 	delete node.callee;
 };
 
-cov_1qai6jtbpd.s[14]++;
+cov_2ewiu7jr44.s[14]++;
 _ASTPreparser2.default.AnyDataAvailable = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[2]++;
+	cov_2ewiu7jr44.f[2]++;
 
-	var refFormula = (cov_1qai6jtbpd.s[15]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'value'));
-	cov_1qai6jtbpd.s[16]++;
+	var refFormula = (cov_2ewiu7jr44.s[15]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'value'));
+	cov_2ewiu7jr44.s[16]++;
 	if (refFormula.ref === undefined) {
-			cov_1qai6jtbpd.b[1][0]++;
-			cov_1qai6jtbpd.s[17]++;
+			cov_2ewiu7jr44.b[1][0]++;
+			cov_2ewiu7jr44.s[17]++;
 			return _log2.default.warn('Can\'t find a variableReference for ' + regenerate(node) + ' ' + formulaInfo.name + ':' + formulaInfo.original);
 		} else {
-		cov_1qai6jtbpd.b[1][1]++;
-	}cov_1qai6jtbpd.s[18]++;
+		cov_2ewiu7jr44.b[1][1]++;
+	}cov_2ewiu7jr44.s[18]++;
 	node.type = 'Identifier';
-	cov_1qai6jtbpd.s[19]++;
+	cov_2ewiu7jr44.s[19]++;
 	node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
-	cov_1qai6jtbpd.s[20]++;
+	cov_2ewiu7jr44.s[20]++;
 	delete node.refn;
-	cov_1qai6jtbpd.s[21]++;
+	cov_2ewiu7jr44.s[21]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[22]++;
+	cov_2ewiu7jr44.s[22]++;
 	delete node.callee;
 };
-cov_1qai6jtbpd.s[23]++;
+cov_2ewiu7jr44.s[23]++;
 _ASTPreparser2.default.TitleEntered = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[3]++;
+	cov_2ewiu7jr44.f[3]++;
 
-	var refFormula = (cov_1qai6jtbpd.s[24]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'title'));
-	cov_1qai6jtbpd.s[25]++;
+	var refFormula = (cov_2ewiu7jr44.s[24]++, addFormulaDependency(formulaInfo, node.arguments[0].name, 'title'));
+	cov_2ewiu7jr44.s[25]++;
 	if (refFormula.ref === undefined) {
-			cov_1qai6jtbpd.b[2][0]++;
-			cov_1qai6jtbpd.s[26]++;
+			cov_2ewiu7jr44.b[2][0]++;
+			cov_2ewiu7jr44.s[26]++;
 			return _log2.default.warn('Can\'t find a variableReference for ' + regenerate(node) + ' ' + formulaInfo.name + ':' + formulaInfo.original);
 		} else {
-		cov_1qai6jtbpd.b[2][1]++;
-	}cov_1qai6jtbpd.s[27]++;
+		cov_2ewiu7jr44.b[2][1]++;
+	}cov_2ewiu7jr44.s[27]++;
 	node.type = 'Identifier';
-	cov_1qai6jtbpd.s[28]++;
+	cov_2ewiu7jr44.s[28]++;
 	node.name = 'Object.keys(v[' + refFormula.ref + ']).length>0';
-	cov_1qai6jtbpd.s[29]++;
+	cov_2ewiu7jr44.s[29]++;
 	delete node.refn;
-	cov_1qai6jtbpd.s[30]++;
+	cov_2ewiu7jr44.s[30]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[31]++;
+	cov_2ewiu7jr44.s[31]++;
 	delete node.callee;
 };
-cov_1qai6jtbpd.s[32]++;
+cov_2ewiu7jr44.s[32]++;
 _ASTPreparser2.default.DataEntered = _ASTPreparser2.default.DataAvailable;
 //two members, START and END, will return Array<Variable>
 //so transform into ArrayExpression
@@ -6187,49 +6187,49 @@ _ASTPreparser2.default.DataEntered = _ASTPreparser2.default.DataAvailable;
 //so the result of ForAll(x,SelectDecendants(Q_ROOT),Required(x)) will be Required(Q_MAP01) || Required(Q_MAP02) || Required(Q_MAP03 etc...
 //Its better to also rename the Callee to Something like Lambda(SequenceExpression), or removing the entire CallExpression
 //This must be the most complex seen in a while
-cov_1qai6jtbpd.s[33]++;
+cov_2ewiu7jr44.s[33]++;
 _ASTPreparser2.default.SelectDescendants = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[4]++;
-	cov_1qai6jtbpd.s[34]++;
+	cov_2ewiu7jr44.f[4]++;
+	cov_2ewiu7jr44.s[34]++;
 
 	node.type = ARRAYEXPRESSION;
-	var groupName = (cov_1qai6jtbpd.s[35]++, formulaInfo.name.split('_')[0]);
-	var foundStartUiModel = (cov_1qai6jtbpd.s[36]++, getOrCreateProperty(groupName, node.arguments[0].name, propertiesArr[0]));
+	var groupName = (cov_2ewiu7jr44.s[35]++, formulaInfo.name.split('_')[0]);
+	var foundStartUiModel = (cov_2ewiu7jr44.s[36]++, getOrCreateProperty(groupName, node.arguments[0].name, propertiesArr[0]));
 	var lambda;
 	//get the propertyType
 	//extract lambda
-	cov_1qai6jtbpd.s[37]++;
+	cov_2ewiu7jr44.s[37]++;
 	if (node.arguments.length === 3) {
-		cov_1qai6jtbpd.b[3][0]++;
-		cov_1qai6jtbpd.s[38]++;
+		cov_2ewiu7jr44.b[3][0]++;
+		cov_2ewiu7jr44.s[38]++;
 
 		lambda = node.arguments[2];
-		cov_1qai6jtbpd.s[39]++;
+		cov_2ewiu7jr44.s[39]++;
 		node.arguments.length = 2;
 	} else {
-		cov_1qai6jtbpd.b[3][1]++;
+		cov_2ewiu7jr44.b[3][1]++;
 	}
 	//extract lambda
 	//this can also be the propertyType is variableType empty
 	var foundEndUiModel;
-	cov_1qai6jtbpd.s[40]++;
+	cov_2ewiu7jr44.s[40]++;
 	if (lambda === undefined) {
-		cov_1qai6jtbpd.b[4][0]++;
-		cov_1qai6jtbpd.s[41]++;
+		cov_2ewiu7jr44.b[4][0]++;
+		cov_2ewiu7jr44.s[41]++;
 
 		lambda = _astNodeUtils.ast.IDENTIFIER('X');
-		cov_1qai6jtbpd.s[42]++;
+		cov_2ewiu7jr44.s[42]++;
 		node.arguments.length = 1;
 	} else {
-		cov_1qai6jtbpd.b[4][1]++;
-		cov_1qai6jtbpd.s[43]++;
+		cov_2ewiu7jr44.b[4][1]++;
+		cov_2ewiu7jr44.s[43]++;
 
 		foundEndUiModel = getOrCreateProperty(groupName, node.arguments[1].name, propertiesArr[0]);
 	}
-	cov_1qai6jtbpd.s[44]++;
+	cov_2ewiu7jr44.s[44]++;
 	node.elements = [];
 	//nodes may never be undefined
-	var nodes = (cov_1qai6jtbpd.s[45]++, foundStartUiModel.nodes);
+	var nodes = (cov_2ewiu7jr44.s[45]++, foundStartUiModel.nodes);
 	//now lets create the Nested Logical Expression
 	//var root = AST.OR(AST.MEMBER(AST.IDENTIFIER(nodes[0].rowId), 'value'), AST.MEMBER(AST.IDENTIFIER(nodes[1].rowId), 'value'));
 	/*var ArrayExpression = {
@@ -6237,140 +6237,140 @@ _ASTPreparser2.default.SelectDescendants = function (formulaInfo, node) {
   elements: []
   }*/
 	//first copy has many functions attached. copying it first will loss them, so next iterations can get use of it
-	cov_1qai6jtbpd.s[46]++;
+	cov_2ewiu7jr44.s[46]++;
 	lambda = _astNodeUtils.ast.cloneAST(lambda, null, null);
-	cov_1qai6jtbpd.s[47]++;
+	cov_2ewiu7jr44.s[47]++;
 	for (var i = 0; i < nodes.length; i++) {
-		cov_1qai6jtbpd.s[48]++;
+		cov_2ewiu7jr44.s[48]++;
 
-		if ((cov_1qai6jtbpd.b[6][0]++, foundEndUiModel) && (cov_1qai6jtbpd.b[6][1]++, foundEndUiModel.rowId === nodes[i].rowId)) {
-			cov_1qai6jtbpd.b[5][0]++;
-			cov_1qai6jtbpd.s[49]++;
+		if ((cov_2ewiu7jr44.b[6][0]++, foundEndUiModel) && (cov_2ewiu7jr44.b[6][1]++, foundEndUiModel.rowId === nodes[i].rowId)) {
+			cov_2ewiu7jr44.b[5][0]++;
+			cov_2ewiu7jr44.s[49]++;
 
 			break;
 		} else {
-			cov_1qai6jtbpd.b[5][1]++;
+			cov_2ewiu7jr44.b[5][1]++;
 		}
-		cov_1qai6jtbpd.s[50]++;
+		cov_2ewiu7jr44.s[50]++;
 		walkRecursive(nodes[i], groupName, propertiesArr[0], function (child) {
-			cov_1qai6jtbpd.f[5]++;
-			cov_1qai6jtbpd.s[51]++;
+			cov_2ewiu7jr44.f[5]++;
+			cov_2ewiu7jr44.s[51]++;
 
 			node.elements.push(_astNodeUtils.ast.cloneAST(lambda, 'X', child.rowId));
 		});
 	}
-	cov_1qai6jtbpd.s[52]++;
+	cov_2ewiu7jr44.s[52]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[53]++;
+	cov_2ewiu7jr44.s[53]++;
 	delete node.callee;
 };
 
 function walkRecursive(node, groupName, col, callback) {
-	cov_1qai6jtbpd.f[6]++;
-	cov_1qai6jtbpd.s[54]++;
+	cov_2ewiu7jr44.f[6]++;
+	cov_2ewiu7jr44.s[54]++;
 
 	callback(node);
-	var n = (cov_1qai6jtbpd.s[55]++, getOrCreateProperty(groupName, node.rowId, col));
-	cov_1qai6jtbpd.s[56]++;
+	var n = (cov_2ewiu7jr44.s[55]++, getOrCreateProperty(groupName, node.rowId, col));
+	cov_2ewiu7jr44.s[56]++;
 	if (n.nodes.length) {
-		cov_1qai6jtbpd.b[7][0]++;
-		cov_1qai6jtbpd.s[57]++;
+		cov_2ewiu7jr44.b[7][0]++;
+		cov_2ewiu7jr44.s[57]++;
 
 		for (var i = 0; i < n.nodes.length; i++) {
-			cov_1qai6jtbpd.s[58]++;
+			cov_2ewiu7jr44.s[58]++;
 
 			walkRecursive(n.nodes[i], groupName, col, callback);
 		}
 	} else {
-		cov_1qai6jtbpd.b[7][1]++;
+		cov_2ewiu7jr44.b[7][1]++;
 	}
 }
 
-cov_1qai6jtbpd.s[59]++;
+cov_2ewiu7jr44.s[59]++;
 _ASTPreparser2.default.InputRequired = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[7]++;
-	cov_1qai6jtbpd.s[60]++;
+	cov_2ewiu7jr44.f[7]++;
+	cov_2ewiu7jr44.s[60]++;
 
 	node.type = 'MemberExpression';
-	cov_1qai6jtbpd.s[61]++;
+	cov_2ewiu7jr44.s[61]++;
 	node.computed = false;
-	cov_1qai6jtbpd.s[62]++;
+	cov_2ewiu7jr44.s[62]++;
 	node.object = _astNodeUtils.ast.IDENTIFIER(node.arguments[0].name);
-	cov_1qai6jtbpd.s[63]++;
+	cov_2ewiu7jr44.s[63]++;
 	node.property = _astNodeUtils.ast.IDENTIFIER(propertiesArr[2]);
-	cov_1qai6jtbpd.s[64]++;
+	cov_2ewiu7jr44.s[64]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[65]++;
+	cov_2ewiu7jr44.s[65]++;
 	delete node.callee;
-	cov_1qai6jtbpd.s[66]++;
+	cov_2ewiu7jr44.s[66]++;
 	delete node.refn;
 };
-cov_1qai6jtbpd.s[67]++;
+cov_2ewiu7jr44.s[67]++;
 _ASTPreparser2.default.GetTitle = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[8]++;
-	cov_1qai6jtbpd.s[68]++;
+	cov_2ewiu7jr44.f[8]++;
+	cov_2ewiu7jr44.s[68]++;
 
 	node.type = 'MemberExpression';
-	cov_1qai6jtbpd.s[69]++;
+	cov_2ewiu7jr44.s[69]++;
 	node.computed = false;
-	cov_1qai6jtbpd.s[70]++;
+	cov_2ewiu7jr44.s[70]++;
 	node.object = _astNodeUtils.ast.IDENTIFIER(node.arguments[0].name);
-	cov_1qai6jtbpd.s[71]++;
+	cov_2ewiu7jr44.s[71]++;
 	node.property = _astNodeUtils.ast.IDENTIFIER(propertiesArr[6]);
-	cov_1qai6jtbpd.s[72]++;
+	cov_2ewiu7jr44.s[72]++;
 	delete node.arguments;
-	cov_1qai6jtbpd.s[73]++;
+	cov_2ewiu7jr44.s[73]++;
 	delete node.callee;
-	cov_1qai6jtbpd.s[74]++;
+	cov_2ewiu7jr44.s[74]++;
 	delete node.refn;
 };
-cov_1qai6jtbpd.s[75]++;
+cov_2ewiu7jr44.s[75]++;
 _ASTPreparser2.default.TSUM = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[9]++;
-	cov_1qai6jtbpd.s[76]++;
+	cov_2ewiu7jr44.f[9]++;
+	cov_2ewiu7jr44.s[76]++;
 
 	//all calls into a tuple should return a []
 	//convert TSUM(variableName) into SUM(TVALUES(a123,'123',x,y,z,v))
 	node.callee.name = 'SUM';
-	cov_1qai6jtbpd.s[77]++;
-	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_1qai6jtbpd.b[8][0]++, '.' + node.property.name) : (cov_1qai6jtbpd.b[8][1]++, ''), 'TVALUES');
+	cov_2ewiu7jr44.s[77]++;
+	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_2ewiu7jr44.b[8][0]++, '.' + node.property.name) : (cov_2ewiu7jr44.b[8][1]++, ''), 'TVALUES');
 };
-cov_1qai6jtbpd.s[78]++;
+cov_2ewiu7jr44.s[78]++;
 _ASTPreparser2.default.TupleSum = _ASTPreparser2.default.TSUM;
-cov_1qai6jtbpd.s[79]++;
+cov_2ewiu7jr44.s[79]++;
 _ASTPreparser2.default.TMIN = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[10]++;
-	cov_1qai6jtbpd.s[80]++;
+	cov_2ewiu7jr44.f[10]++;
+	cov_2ewiu7jr44.s[80]++;
 
 	node.callee.name = 'MIN';
-	cov_1qai6jtbpd.s[81]++;
-	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_1qai6jtbpd.b[9][0]++, '.' + node.property.name) : (cov_1qai6jtbpd.b[9][1]++, ''), 'TVALUES');
+	cov_2ewiu7jr44.s[81]++;
+	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_2ewiu7jr44.b[9][0]++, '.' + node.property.name) : (cov_2ewiu7jr44.b[9][1]++, ''), 'TVALUES');
 };
-cov_1qai6jtbpd.s[82]++;
+cov_2ewiu7jr44.s[82]++;
 _ASTPreparser2.default.TupleMin = _ASTPreparser2.default.TMIN;
-cov_1qai6jtbpd.s[83]++;
+cov_2ewiu7jr44.s[83]++;
 _ASTPreparser2.default.TMAX = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[11]++;
-	cov_1qai6jtbpd.s[84]++;
+	cov_2ewiu7jr44.f[11]++;
+	cov_2ewiu7jr44.s[84]++;
 
 	node.callee.name = 'MAX';
-	cov_1qai6jtbpd.s[85]++;
-	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_1qai6jtbpd.b[10][0]++, '.' + node.property.name) : (cov_1qai6jtbpd.b[10][1]++, ''), 'TVALUES');
+	cov_2ewiu7jr44.s[85]++;
+	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_2ewiu7jr44.b[10][0]++, '.' + node.property.name) : (cov_2ewiu7jr44.b[10][1]++, ''), 'TVALUES');
 };
-cov_1qai6jtbpd.s[86]++;
+cov_2ewiu7jr44.s[86]++;
 _ASTPreparser2.default.TupleMax = _ASTPreparser2.default.TMAX;
-cov_1qai6jtbpd.s[87]++;
+cov_2ewiu7jr44.s[87]++;
 _ASTPreparser2.default.TCOUNT = function (formulaInfo, node) {
-	cov_1qai6jtbpd.f[12]++;
-	cov_1qai6jtbpd.s[88]++;
+	cov_2ewiu7jr44.f[12]++;
+	cov_2ewiu7jr44.s[88]++;
 
 	node.callee.name = 'PROXY';
-	cov_1qai6jtbpd.s[89]++;
-	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_1qai6jtbpd.b[11][0]++, '.' + node.property.name) : (cov_1qai6jtbpd.b[11][1]++, ''), 'TCOUNT');
+	cov_2ewiu7jr44.s[89]++;
+	buildFunc(formulaInfo, node.arguments[0], 0, node.arguments[0], node.property ? (cov_2ewiu7jr44.b[11][0]++, '.' + node.property.name) : (cov_2ewiu7jr44.b[11][1]++, ''), 'TCOUNT');
 };
-cov_1qai6jtbpd.s[90]++;
+cov_2ewiu7jr44.s[90]++;
 _ASTPreparser2.default.TupleCount = _ASTPreparser2.default.TCOUNT;
-var escodegenOptions = (cov_1qai6jtbpd.s[91]++, {
+var escodegenOptions = (cov_2ewiu7jr44.s[91]++, {
 	format: {
 		renumber: true,
 		hexadecimal: true,
@@ -6386,112 +6386,112 @@ var escodegenOptions = (cov_1qai6jtbpd.s[91]++, {
   * This method is becoming so complex, its fixing a lot of things :)
   */
 });function buildFunc(formulaInfo, node, property, referenceProperty, xapendix, tupleType) {
-	cov_1qai6jtbpd.f[13]++;
-	cov_1qai6jtbpd.s[92]++;
+	cov_2ewiu7jr44.f[13]++;
+	cov_2ewiu7jr44.s[92]++;
 
-	xapendix = (cov_1qai6jtbpd.b[12][0]++, xapendix) || (cov_1qai6jtbpd.b[12][1]++, '');
-	var referenceProperty = (cov_1qai6jtbpd.s[93]++, addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property == 4 ? (cov_1qai6jtbpd.b[13][0]++, 0) : (cov_1qai6jtbpd.b[13][1]++, property)]));
-	var yAppendix = (cov_1qai6jtbpd.s[94]++, 'y');
-	cov_1qai6jtbpd.s[95]++;
-	if ((cov_1qai6jtbpd.b[15][0]++, xapendix == '') && (cov_1qai6jtbpd.b[15][1]++, referenceProperty.frequency === 'document')) {
-			cov_1qai6jtbpd.b[14][0]++;
-			cov_1qai6jtbpd.s[96]++;
+	xapendix = (cov_2ewiu7jr44.b[12][0]++, xapendix) || (cov_2ewiu7jr44.b[12][1]++, '');
+	var referenceProperty = (cov_2ewiu7jr44.s[93]++, addFormulaDependency(formulaInfo, referenceProperty.name, propertiesArr[property == 4 ? (cov_2ewiu7jr44.b[13][0]++, 0) : (cov_2ewiu7jr44.b[13][1]++, property)]));
+	var yAppendix = (cov_2ewiu7jr44.s[94]++, 'y');
+	cov_2ewiu7jr44.s[95]++;
+	if ((cov_2ewiu7jr44.b[15][0]++, xapendix == '') && (cov_2ewiu7jr44.b[15][1]++, referenceProperty.frequency === 'document')) {
+			cov_2ewiu7jr44.b[14][0]++;
+			cov_2ewiu7jr44.s[96]++;
 			xapendix = '.doc';
 		} else {
-		cov_1qai6jtbpd.b[14][1]++;
-	}cov_1qai6jtbpd.s[97]++;
+		cov_2ewiu7jr44.b[14][1]++;
+	}cov_2ewiu7jr44.s[97]++;
 	delete referenceProperty.refn;
-	var referenceFormulaId = (cov_1qai6jtbpd.s[98]++, referenceProperty.ref);
+	var referenceFormulaId = (cov_2ewiu7jr44.s[98]++, referenceProperty.ref);
 
-	cov_1qai6jtbpd.s[99]++;
+	cov_2ewiu7jr44.s[99]++;
 	if (!referenceProperty.tuple) {
-		cov_1qai6jtbpd.b[16][0]++;
-		cov_1qai6jtbpd.s[100]++;
+		cov_2ewiu7jr44.b[16][0]++;
+		cov_2ewiu7jr44.s[100]++;
 
 		//From y(n) -> y(0) we go y.base
 		yAppendix += '.base';
 	} else {
-		cov_1qai6jtbpd.b[16][1]++;
-		cov_1qai6jtbpd.s[101]++;
+		cov_2ewiu7jr44.b[16][1]++;
+		cov_2ewiu7jr44.s[101]++;
 
 		//Here we want to do y.parent for y(1,2) -> y(1) functions.
 		//Lets be wiser, we can always do a parent-lookup y.one/y.two/y.three
 		yAppendix += '.p[' + referenceProperty.nestedTupleDepth + ']';
 	}
-	cov_1qai6jtbpd.s[102]++;
+	cov_2ewiu7jr44.s[102]++;
 	if (tupleType) {
-		cov_1qai6jtbpd.b[17][0]++;
-		cov_1qai6jtbpd.s[103]++;
+		cov_2ewiu7jr44.b[17][0]++;
+		cov_2ewiu7jr44.s[103]++;
 
 		if (referenceProperty) {
-			cov_1qai6jtbpd.b[18][0]++;
+			cov_2ewiu7jr44.b[18][0]++;
 
-			var groupName = (cov_1qai6jtbpd.s[104]++, formulaInfo.name.split('_')[0]);
-			var foundStartUiModel = (cov_1qai6jtbpd.s[105]++, getOrCreateProperty(groupName, referenceProperty.tupleDefinitionName, propertiesArr[0]));
-			var allrefIdes = (cov_1qai6jtbpd.s[106]++, []);
-			cov_1qai6jtbpd.s[107]++;
+			var groupName = (cov_2ewiu7jr44.s[104]++, formulaInfo.name.split('_')[0]);
+			var foundStartUiModel = (cov_2ewiu7jr44.s[105]++, getOrCreateProperty(groupName, referenceProperty.tupleDefinitionName, propertiesArr[0]));
+			var allrefIdes = (cov_2ewiu7jr44.s[106]++, []);
+			cov_2ewiu7jr44.s[107]++;
 			if (referenceProperty.ref) {
-				cov_1qai6jtbpd.b[19][0]++;
-				cov_1qai6jtbpd.s[108]++;
+				cov_2ewiu7jr44.b[19][0]++;
+				cov_2ewiu7jr44.s[108]++;
 
 				allrefIdes.push('' + referenceProperty.ref);
 			} else {
-				cov_1qai6jtbpd.b[19][1]++;
+				cov_2ewiu7jr44.b[19][1]++;
 			}
-			cov_1qai6jtbpd.s[109]++;
+			cov_2ewiu7jr44.s[109]++;
 			for (var i = 0; i < foundStartUiModel.nodes.length; i++) {
-				var tupleChild = (cov_1qai6jtbpd.s[110]++, foundStartUiModel.nodes[i]);
-				var items = (cov_1qai6jtbpd.s[111]++, getOrCreateProperty(groupName, tupleChild.rowId, propertiesArr[0]).ref);
-				cov_1qai6jtbpd.s[112]++;
+				var tupleChild = (cov_2ewiu7jr44.s[110]++, foundStartUiModel.nodes[i]);
+				var items = (cov_2ewiu7jr44.s[111]++, getOrCreateProperty(groupName, tupleChild.rowId, propertiesArr[0]).ref);
+				cov_2ewiu7jr44.s[112]++;
 				if (items) {
-					cov_1qai6jtbpd.b[20][0]++;
-					cov_1qai6jtbpd.s[113]++;
+					cov_2ewiu7jr44.b[20][0]++;
+					cov_2ewiu7jr44.s[113]++;
 
 					allrefIdes.push('' + items);
 				} else {
-					cov_1qai6jtbpd.b[20][1]++;
+					cov_2ewiu7jr44.b[20][1]++;
 				}
 			}
-			var test = (cov_1qai6jtbpd.s[114]++, '[' + allrefIdes.join(',') + ']');
-			cov_1qai6jtbpd.s[115]++;
+			var test = (cov_2ewiu7jr44.s[114]++, '[' + allrefIdes.join(',') + ']');
+			cov_2ewiu7jr44.s[115]++;
 			node.name = tupleType + '(' + test + ',m[' + referenceFormulaId + '],\'' + referenceFormulaId + '\',x' + xapendix + ',' + yAppendix + ',z,v,m)';
 		} else {
-			cov_1qai6jtbpd.b[18][1]++;
-			cov_1qai6jtbpd.s[116]++;
+			cov_2ewiu7jr44.b[18][1]++;
+			cov_2ewiu7jr44.s[116]++;
 
 			node.name = '[' + defaultValues[propertiesArr[property]] + ']';
 		}
 	} else {
-		cov_1qai6jtbpd.b[17][1]++;
-		cov_1qai6jtbpd.s[117]++;
+		cov_2ewiu7jr44.b[17][1]++;
+		cov_2ewiu7jr44.s[117]++;
 
 		if (referenceProperty.ref === undefined) {
-			cov_1qai6jtbpd.b[21][0]++;
-			cov_1qai6jtbpd.s[118]++;
+			cov_2ewiu7jr44.b[21][0]++;
+			cov_2ewiu7jr44.s[118]++;
 
 			node.name = defaultValues[propertiesArr[property]];
 		} else {
-			cov_1qai6jtbpd.b[21][1]++;
-			cov_1qai6jtbpd.s[119]++;
+			cov_2ewiu7jr44.b[21][1]++;
+			cov_2ewiu7jr44.s[119]++;
 
 			if (property === 4) {
-				cov_1qai6jtbpd.b[22][0]++;
-				cov_1qai6jtbpd.s[120]++;
+				cov_2ewiu7jr44.b[22][0]++;
+				cov_2ewiu7jr44.s[120]++;
 
 				node.name = 'v[' + referenceFormulaId + '][x.hash + y.hash + z] !=null';
 			} else {
-				cov_1qai6jtbpd.b[22][1]++;
-				cov_1qai6jtbpd.s[121]++;
+				cov_2ewiu7jr44.b[22][1]++;
+				cov_2ewiu7jr44.s[121]++;
 
 				if (xapendix === '.all') {
-					cov_1qai6jtbpd.b[23][0]++;
-					cov_1qai6jtbpd.s[122]++;
+					cov_2ewiu7jr44.b[23][0]++;
+					cov_2ewiu7jr44.s[122]++;
 
 					//HSUM = function(fId, func, v, x, y, z, start, end) {
 					node.name = 'VALUES(m[' + referenceFormulaId + '],\'' + referenceFormulaId + '\',x' + xapendix + ',' + yAppendix + ',z,v,m)';
 				} else {
-					cov_1qai6jtbpd.b[23][1]++;
-					cov_1qai6jtbpd.s[123]++;
+					cov_2ewiu7jr44.b[23][1]++;
+					cov_2ewiu7jr44.s[123]++;
 
 					node.name = 'm[' + referenceFormulaId + '](\'' + referenceFormulaId + '\',x' + xapendix + ',' + yAppendix + ',z,v,m)';
 				}
@@ -6500,80 +6500,80 @@ var escodegenOptions = (cov_1qai6jtbpd.s[91]++, {
 	}
 }
 
-cov_1qai6jtbpd.s[124]++;
+cov_2ewiu7jr44.s[124]++;
 var dummy = function dummy(or, parent, node) {
-	cov_1qai6jtbpd.f[14]++;
+	cov_2ewiu7jr44.f[14]++;
 };
-cov_1qai6jtbpd.s[125]++;
+cov_2ewiu7jr44.s[125]++;
 var expression = function expression(or, parent, node) {
-	cov_1qai6jtbpd.f[15]++;
+	cov_2ewiu7jr44.f[15]++;
 
-	var left = (cov_1qai6jtbpd.s[126]++, node.left);
-	cov_1qai6jtbpd.s[127]++;
+	var left = (cov_2ewiu7jr44.s[126]++, node.left);
+	cov_2ewiu7jr44.s[127]++;
 	if (left.refn) {
-		cov_1qai6jtbpd.b[24][0]++;
-		cov_1qai6jtbpd.s[128]++;
+		cov_2ewiu7jr44.b[24][0]++;
+		cov_2ewiu7jr44.s[128]++;
 
 		buildFunc(or, left, 0, left);
 	} else {
-		cov_1qai6jtbpd.b[24][1]++;
+		cov_2ewiu7jr44.b[24][1]++;
 	}
-	var right = (cov_1qai6jtbpd.s[129]++, node.right);
-	cov_1qai6jtbpd.s[130]++;
+	var right = (cov_2ewiu7jr44.s[129]++, node.right);
+	cov_2ewiu7jr44.s[130]++;
 	if (right.refn) {
-		cov_1qai6jtbpd.b[25][0]++;
-		cov_1qai6jtbpd.s[131]++;
+		cov_2ewiu7jr44.b[25][0]++;
+		cov_2ewiu7jr44.s[131]++;
 
 		buildFunc(or, right, 0, right);
 	} else {
-		cov_1qai6jtbpd.b[25][1]++;
+		cov_2ewiu7jr44.b[25][1]++;
 	}
 };
 //the tree, visited Depth First
-var traverseTypes = (cov_1qai6jtbpd.s[132]++, {
+var traverseTypes = (cov_2ewiu7jr44.s[132]++, {
 	//TODO: make one map directly returning the value, for T or variable
 	Identifier: function Identifier(formulaInfo, parent, node) {
-		cov_1qai6jtbpd.f[16]++;
-		cov_1qai6jtbpd.s[133]++;
+		cov_2ewiu7jr44.f[16]++;
+		cov_2ewiu7jr44.s[133]++;
 
 		//variable reference
 		if (variables(node.name)) {
-			cov_1qai6jtbpd.b[26][0]++;
-			cov_1qai6jtbpd.s[134]++;
+			cov_2ewiu7jr44.b[26][0]++;
+			cov_2ewiu7jr44.s[134]++;
 
 			node.refn = node.name;
 		}
 		//var properties are .value .coices .visible etc. NOT t.next....
 		else {
-				cov_1qai6jtbpd.b[26][1]++;
-				cov_1qai6jtbpd.s[135]++;
+				cov_2ewiu7jr44.b[26][1]++;
+				cov_2ewiu7jr44.s[135]++;
 				if (varproperties[node.name] != undefined) {
-					cov_1qai6jtbpd.b[27][0]++;
-					cov_1qai6jtbpd.s[136]++;
+					cov_2ewiu7jr44.b[27][0]++;
+					cov_2ewiu7jr44.s[136]++;
 
 					// inject the T as context.
 					// allow _ references.. is pretty expensive, also runtime, better just create those buildtime
 					node.legacy = node.name.replace(/_/g, '.');
-					cov_1qai6jtbpd.s[137]++;
+					cov_2ewiu7jr44.s[137]++;
 					node.name = node.legacy;
 					//node.name = XDimVariableName + node.legacy;
 				} else {
-					cov_1qai6jtbpd.b[27][1]++;
+					cov_2ewiu7jr44.b[27][1]++;
 				}
 			}
 	},
 	//Don't check the left side of an AssignmentExpression, it would lead into a102('102',x,y,z,v) = 'something'
 	AssignmentExpression: function AssignmentExpression(formulaInfo, parent, node) {
-		cov_1qai6jtbpd.f[17]++;
-		cov_1qai6jtbpd.s[138]++;
+		cov_2ewiu7jr44.f[17]++;
+		cov_2ewiu7jr44.s[138]++;
 
 		if (node.right.refn) {
-			cov_1qai6jtbpd.b[28][0]++;
-			cov_1qai6jtbpd.s[139]++;
+			cov_2ewiu7jr44.b[28][0]++;
+			cov_2ewiu7jr44.s[139]++;
 
 			buildFunc(formulaInfo, node.right, 0, node.right);
 		} else {
-			cov_1qai6jtbpd.b[28][1]++;
+			cov_2ewiu7jr44.b[28][1]++;
 		}
 	},
 	ThisExpression: dummy,
@@ -6583,130 +6583,130 @@ var traverseTypes = (cov_1qai6jtbpd.s[132]++, {
 	Program: dummy,
 	Literal: dummy,
 	ArrayExpression: function ArrayExpression(or, parent, node) {
-		cov_1qai6jtbpd.f[18]++;
-		cov_1qai6jtbpd.s[140]++;
+		cov_2ewiu7jr44.f[18]++;
+		cov_2ewiu7jr44.s[140]++;
 
 		node.elements.forEach(function (el) {
-			cov_1qai6jtbpd.f[19]++;
-			cov_1qai6jtbpd.s[141]++;
+			cov_2ewiu7jr44.f[19]++;
+			cov_2ewiu7jr44.s[141]++;
 
 			if (el.refn) {
-				cov_1qai6jtbpd.b[29][0]++;
-				cov_1qai6jtbpd.s[142]++;
+				cov_2ewiu7jr44.b[29][0]++;
+				cov_2ewiu7jr44.s[142]++;
 
 				//Why is here a new Object created? {}
 				buildFunc(or, el, 0, { name: el.refn });
 			} else {
-				cov_1qai6jtbpd.b[29][1]++;
+				cov_2ewiu7jr44.b[29][1]++;
 			}
 		});
 	},
 	BinaryExpression: expression,
 	LogicalExpression: expression,
 	ExpressionStatement: function ExpressionStatement(orId, parent, node) {
-		cov_1qai6jtbpd.f[20]++;
+		cov_2ewiu7jr44.f[20]++;
 
-		var expression = (cov_1qai6jtbpd.s[143]++, node.expression);
-		cov_1qai6jtbpd.s[144]++;
+		var expression = (cov_2ewiu7jr44.s[143]++, node.expression);
+		cov_2ewiu7jr44.s[144]++;
 		if (expression.refn) {
-			cov_1qai6jtbpd.b[30][0]++;
-			cov_1qai6jtbpd.s[145]++;
+			cov_2ewiu7jr44.b[30][0]++;
+			cov_2ewiu7jr44.s[145]++;
 
 			buildFunc(orId, expression, 0, expression);
 		} else {
-			cov_1qai6jtbpd.b[30][1]++;
+			cov_2ewiu7jr44.b[30][1]++;
 		}
 	},
 	UnaryExpression: function UnaryExpression(orId, parent, node) {
-		cov_1qai6jtbpd.f[21]++;
+		cov_2ewiu7jr44.f[21]++;
 
-		var argument = (cov_1qai6jtbpd.s[146]++, node.argument);
-		cov_1qai6jtbpd.s[147]++;
+		var argument = (cov_2ewiu7jr44.s[146]++, node.argument);
+		cov_2ewiu7jr44.s[147]++;
 		if (argument.refn) {
-			cov_1qai6jtbpd.b[31][0]++;
-			cov_1qai6jtbpd.s[148]++;
+			cov_2ewiu7jr44.b[31][0]++;
+			cov_2ewiu7jr44.s[148]++;
 
 			buildFunc(orId, argument, 0, argument);
 		} else {
-			cov_1qai6jtbpd.b[31][1]++;
+			cov_2ewiu7jr44.b[31][1]++;
 		}
 	},
 	CallExpression: function CallExpression(orId, parent, node) {
-		cov_1qai6jtbpd.f[22]++;
-		cov_1qai6jtbpd.s[149]++;
+		cov_2ewiu7jr44.f[22]++;
+		cov_2ewiu7jr44.s[149]++;
 
 		for (var i = 0, len = node.arguments.length; i < len; i++) {
-			var argument = (cov_1qai6jtbpd.s[150]++, node.arguments[i]);
-			cov_1qai6jtbpd.s[151]++;
+			var argument = (cov_2ewiu7jr44.s[150]++, node.arguments[i]);
+			cov_2ewiu7jr44.s[151]++;
 			if (argument.refn) {
-				cov_1qai6jtbpd.b[32][0]++;
-				cov_1qai6jtbpd.s[152]++;
+				cov_2ewiu7jr44.b[32][0]++;
+				cov_2ewiu7jr44.s[152]++;
 
 				buildFunc(orId, argument, 0, argument);
 			} else {
-				cov_1qai6jtbpd.b[32][1]++;
+				cov_2ewiu7jr44.b[32][1]++;
 			}
 		}
 	},
 	ConditionalExpression: function ConditionalExpression(orId, parent, node) {
-		cov_1qai6jtbpd.f[23]++;
-		cov_1qai6jtbpd.s[153]++;
+		cov_2ewiu7jr44.f[23]++;
+		cov_2ewiu7jr44.s[153]++;
 
 		if (node.test.refn) {
-			cov_1qai6jtbpd.b[33][0]++;
-			cov_1qai6jtbpd.s[154]++;
+			cov_2ewiu7jr44.b[33][0]++;
+			cov_2ewiu7jr44.s[154]++;
 
 			buildFunc(orId, node.test, 0, node.test);
 		} else {
-			cov_1qai6jtbpd.b[33][1]++;
+			cov_2ewiu7jr44.b[33][1]++;
 		}
-		cov_1qai6jtbpd.s[155]++;
+		cov_2ewiu7jr44.s[155]++;
 		if (node.alternate.refn) {
-			cov_1qai6jtbpd.b[34][0]++;
-			cov_1qai6jtbpd.s[156]++;
+			cov_2ewiu7jr44.b[34][0]++;
+			cov_2ewiu7jr44.s[156]++;
 
 			buildFunc(orId, node.alternate, 0, node.alternate);
 		} else {
-			cov_1qai6jtbpd.b[34][1]++;
+			cov_2ewiu7jr44.b[34][1]++;
 		}
-		cov_1qai6jtbpd.s[157]++;
+		cov_2ewiu7jr44.s[157]++;
 		if (node.consequent.refn) {
-			cov_1qai6jtbpd.b[35][0]++;
-			cov_1qai6jtbpd.s[158]++;
+			cov_2ewiu7jr44.b[35][0]++;
+			cov_2ewiu7jr44.s[158]++;
 
 			buildFunc(orId, node.consequent, 0, node.consequent);
 		} else {
-			cov_1qai6jtbpd.b[35][1]++;
+			cov_2ewiu7jr44.b[35][1]++;
 		}
 	},
 	UpdateExpression: function UpdateExpression() {
-		cov_1qai6jtbpd.f[24]++;
+		cov_2ewiu7jr44.f[24]++;
 	},
 	MemberExpression: function MemberExpression(orId, parent, node) {
-		cov_1qai6jtbpd.f[25]++;
+		cov_2ewiu7jr44.f[25]++;
 
-		var object = (cov_1qai6jtbpd.s[159]++, node.object);
-		cov_1qai6jtbpd.s[160]++;
+		var object = (cov_2ewiu7jr44.s[159]++, node.object);
+		cov_2ewiu7jr44.s[160]++;
 		if (object.refn) {
-			cov_1qai6jtbpd.b[36][0]++;
+			cov_2ewiu7jr44.b[36][0]++;
 
-			var property = (cov_1qai6jtbpd.s[161]++, node.property);
-			cov_1qai6jtbpd.s[162]++;
+			var property = (cov_2ewiu7jr44.s[161]++, node.property);
+			cov_2ewiu7jr44.s[162]++;
 			if (property.type === 'Identifier') {
-				cov_1qai6jtbpd.b[37][0]++;
-				cov_1qai6jtbpd.s[163]++;
+				cov_2ewiu7jr44.b[37][0]++;
+				cov_2ewiu7jr44.s[163]++;
 
 				if (node.computed) {
-					cov_1qai6jtbpd.b[38][0]++;
-					cov_1qai6jtbpd.s[164]++;
+					cov_2ewiu7jr44.b[38][0]++;
+					cov_2ewiu7jr44.s[164]++;
 
-					if ((cov_1qai6jtbpd.b[40][0]++, false) && (cov_1qai6jtbpd.b[40][1]++, parent.type === 'MemberExpression')) {
+					if ((cov_2ewiu7jr44.b[40][0]++, false) && (cov_2ewiu7jr44.b[40][1]++, parent.type === 'MemberExpression')) {
 						//throw new Error('Not Supported Yet')
 
-						cov_1qai6jtbpd.b[39][0]++;
+						cov_2ewiu7jr44.b[39][0]++;
 					} else {
-						cov_1qai6jtbpd.b[39][1]++;
-						cov_1qai6jtbpd.s[165]++;
+						cov_2ewiu7jr44.b[39][1]++;
+						cov_2ewiu7jr44.s[165]++;
 
 						//this is presumably were the undefined comes from.
 						//T-1 is a BinaryExpression
@@ -6715,115 +6715,115 @@ var traverseTypes = (cov_1qai6jtbpd.s[132]++, {
 						//variableName[contextReference] , e.g. Balance[prev] or Debit[doc]
 						node.type = 'Identifier';
 						//node.name =
-						cov_1qai6jtbpd.s[166]++;
+						cov_2ewiu7jr44.s[166]++;
 						buildFunc(orId, node, 0, object, '.' + node.property.name);
-						cov_1qai6jtbpd.s[167]++;
+						cov_2ewiu7jr44.s[167]++;
 						delete node.object;
-						cov_1qai6jtbpd.s[168]++;
+						cov_2ewiu7jr44.s[168]++;
 						delete object.refn;
-						cov_1qai6jtbpd.s[169]++;
+						cov_2ewiu7jr44.s[169]++;
 						delete node.callee;
-						cov_1qai6jtbpd.s[170]++;
+						cov_2ewiu7jr44.s[170]++;
 						delete node.property;
-						cov_1qai6jtbpd.s[171]++;
+						cov_2ewiu7jr44.s[171]++;
 						delete node.computed;
 					}
 				} else {
-					cov_1qai6jtbpd.b[38][1]++;
-					cov_1qai6jtbpd.s[172]++;
+					cov_2ewiu7jr44.b[38][1]++;
+					cov_2ewiu7jr44.s[172]++;
 
 					//not computed = .xxxx..
 					//the .choices,.visible,required.title etc.
 					//works partially
 					node.type = IDENTIFIER;
 					//this is very stupid to port it triple time. we will fix this later.
-					cov_1qai6jtbpd.s[173]++;
+					cov_2ewiu7jr44.s[173]++;
 					buildFunc(orId, node, varproperties[node.property.name].f, node.object);
-					cov_1qai6jtbpd.s[174]++;
+					cov_2ewiu7jr44.s[174]++;
 					delete node.property;
-					cov_1qai6jtbpd.s[175]++;
+					cov_2ewiu7jr44.s[175]++;
 					delete node.object;
-					cov_1qai6jtbpd.s[176]++;
+					cov_2ewiu7jr44.s[176]++;
 					delete node.computed;
 				}
 			}
 			//Sequence is XYZ[a,b]... '[x,x] Not implemented this feature yet : ' + orId.original
 			else {
-					cov_1qai6jtbpd.b[37][1]++;
-					cov_1qai6jtbpd.s[177]++;
+					cov_2ewiu7jr44.b[37][1]++;
+					cov_2ewiu7jr44.s[177]++;
 					if (property.type === 'SequenceExpression') {
-						cov_1qai6jtbpd.b[41][0]++;
-						cov_1qai6jtbpd.s[178]++;
+						cov_2ewiu7jr44.b[41][0]++;
+						cov_2ewiu7jr44.s[178]++;
 
 						node.type = IDENTIFIER;
-						cov_1qai6jtbpd.s[179]++;
+						cov_2ewiu7jr44.s[179]++;
 						buildFunc(orId, node, 0, node.object);
-						cov_1qai6jtbpd.s[180]++;
+						cov_2ewiu7jr44.s[180]++;
 						delete node.arguments;
-						cov_1qai6jtbpd.s[181]++;
+						cov_2ewiu7jr44.s[181]++;
 						delete node.object;
-						cov_1qai6jtbpd.s[182]++;
+						cov_2ewiu7jr44.s[182]++;
 						delete node.property;
-						cov_1qai6jtbpd.s[183]++;
+						cov_2ewiu7jr44.s[183]++;
 						delete node.computed;
 					} else {
-						cov_1qai6jtbpd.b[41][1]++;
-						cov_1qai6jtbpd.s[184]++;
+						cov_2ewiu7jr44.b[41][1]++;
+						cov_2ewiu7jr44.s[184]++;
 
 						node.type = IDENTIFIER;
 						//this is where VARIABLE[1], VARIABLE[prev] ends up
 						//for now we will check if the caller, starts with the being called, to avoid loops
-						cov_1qai6jtbpd.s[185]++;
+						cov_2ewiu7jr44.s[185]++;
 						if (orId.tempnaaam === node.object.name) {
-							cov_1qai6jtbpd.b[42][0]++;
-							cov_1qai6jtbpd.s[186]++;
+							cov_2ewiu7jr44.b[42][0]++;
+							cov_2ewiu7jr44.s[186]++;
 
 							//return 1 instead of a Self-reference
 							node.name = '1';
-							cov_1qai6jtbpd.s[187]++;
+							cov_2ewiu7jr44.s[187]++;
 							_log2.default.info('found self reference [%s]', node.object.name);
 						} else {
-							cov_1qai6jtbpd.b[42][1]++;
-							cov_1qai6jtbpd.s[188]++;
+							cov_2ewiu7jr44.b[42][1]++;
+							cov_2ewiu7jr44.s[188]++;
 
 							//else will will what ever just get the onecol value back.
 							buildFunc(orId, node, 0, node.object);
 						}
-						cov_1qai6jtbpd.s[189]++;
+						cov_2ewiu7jr44.s[189]++;
 						delete node.object;
-						cov_1qai6jtbpd.s[190]++;
+						cov_2ewiu7jr44.s[190]++;
 						delete node.property;
-						cov_1qai6jtbpd.s[191]++;
+						cov_2ewiu7jr44.s[191]++;
 						delete node.computed;
 					}
 				}
 		} else {
-			cov_1qai6jtbpd.b[36][1]++;
+			cov_2ewiu7jr44.b[36][1]++;
 		}
 	}
 	//Now
-});cov_1qai6jtbpd.s[192]++;
+});cov_2ewiu7jr44.s[192]++;
 global.ExpandGrowth = function () {
-	cov_1qai6jtbpd.f[26]++;
-	cov_1qai6jtbpd.s[193]++;
+	cov_2ewiu7jr44.f[26]++;
+	cov_2ewiu7jr44.s[193]++;
 	return 0;
 };
-cov_1qai6jtbpd.s[194]++;
+cov_2ewiu7jr44.s[194]++;
 global.Onzero = function () {
-	cov_1qai6jtbpd.f[27]++;
-	cov_1qai6jtbpd.s[195]++;
+	cov_2ewiu7jr44.f[27]++;
+	cov_2ewiu7jr44.s[195]++;
 	return 0;
 };
-cov_1qai6jtbpd.s[196]++;
+cov_2ewiu7jr44.s[196]++;
 global.Hm = function () {
-	cov_1qai6jtbpd.f[28]++;
-	cov_1qai6jtbpd.s[197]++;
+	cov_2ewiu7jr44.f[28]++;
+	cov_2ewiu7jr44.s[197]++;
 	return 0;
 };
 //So firstValueT means:  (FirstValueT(Self,1,MaxT)>0) Give me the First Column Index where the value is not NA
 //So the question here is has[variable]AnyValue in time?
 //recursive walk the formula ast
-var identifier_replace = (cov_1qai6jtbpd.s[198]++, {
+var identifier_replace = (cov_2ewiu7jr44.s[198]++, {
 	TSY: 'x.tsy',
 	T: 'x',
 	MainPeriod: 'z', //zAxis Reference, base period, z.base
@@ -6840,16 +6840,16 @@ var identifier_replace = (cov_1qai6jtbpd.s[198]++, {
 
 });
 
-cov_1qai6jtbpd.s[199]++;
+cov_2ewiu7jr44.s[199]++;
 identifier_replace.Tsy = identifier_replace.TSY;
-cov_1qai6jtbpd.s[200]++;
+cov_2ewiu7jr44.s[200]++;
 identifier_replace.TsY = identifier_replace.TSY;
-cov_1qai6jtbpd.s[201]++;
+cov_2ewiu7jr44.s[201]++;
 identifier_replace.tsy = identifier_replace.TSY;
 
 function buildFormula(formulaInfo, parent, node) {
-	cov_1qai6jtbpd.f[29]++;
-	cov_1qai6jtbpd.s[202]++;
+	cov_2ewiu7jr44.f[29]++;
+	cov_2ewiu7jr44.s[202]++;
 
 	// just simplify some MODEL code, when a CallExpression appears, we might want to modify the structure before
 	// looking at the content, this might cause some overhead because we have to parse more, but it simplifies the code
@@ -6857,159 +6857,159 @@ function buildFormula(formulaInfo, parent, node) {
 	// its only lookAhead
 
 	if (node.type === 'CallExpression') {
-		cov_1qai6jtbpd.b[43][0]++;
-		cov_1qai6jtbpd.s[203]++;
+		cov_2ewiu7jr44.b[43][0]++;
+		cov_2ewiu7jr44.s[203]++;
 
 		//register function
 		functions[node.callee.name] = true;
-		cov_1qai6jtbpd.s[204]++;
+		cov_2ewiu7jr44.s[204]++;
 		if (_log2.default.TRACE) {
-				cov_1qai6jtbpd.b[44][0]++;
-				cov_1qai6jtbpd.s[205]++;
+				cov_2ewiu7jr44.b[44][0]++;
+				cov_2ewiu7jr44.s[205]++;
 				_log2.default.trace('Use function [' + node.callee.name + ']');
 			} else {
-			cov_1qai6jtbpd.b[44][1]++;
-		}cov_1qai6jtbpd.s[206]++;
+			cov_2ewiu7jr44.b[44][1]++;
+		}cov_2ewiu7jr44.s[206]++;
 		if (_ASTPreparser2.default[node.callee.name]) {
-			cov_1qai6jtbpd.b[45][0]++;
-			cov_1qai6jtbpd.s[207]++;
+			cov_2ewiu7jr44.b[45][0]++;
+			cov_2ewiu7jr44.s[207]++;
 
 			_ASTPreparser2.default[node.callee.name](formulaInfo, node);
 		} else {
-			cov_1qai6jtbpd.b[45][1]++;
-			cov_1qai6jtbpd.s[208]++;
+			cov_2ewiu7jr44.b[45][1]++;
+			cov_2ewiu7jr44.s[208]++;
 
 			if (node.callee.name) {
-				cov_1qai6jtbpd.b[46][0]++;
+				cov_2ewiu7jr44.b[46][0]++;
 
 				//be aware since Simplified modifies the Max into Math.max this will be seen as the function Math.max etc..
-				var lme_math = (cov_1qai6jtbpd.s[209]++, node.callee.name.split('.')[0]);
-				cov_1qai6jtbpd.s[210]++;
+				var lme_math = (cov_2ewiu7jr44.s[209]++, node.callee.name.split('.')[0]);
+				cov_2ewiu7jr44.s[210]++;
 				if (global[lme_math] == null) {
-					cov_1qai6jtbpd.b[47][0]++;
+					cov_2ewiu7jr44.b[47][0]++;
 
-					var groupName = (cov_1qai6jtbpd.s[211]++, formulaInfo.name.split('_')[0]);
-					var referenceProperty = (cov_1qai6jtbpd.s[212]++, getOrCreateProperty(groupName, lme_math, 'function'));
-					cov_1qai6jtbpd.s[213]++;
+					var groupName = (cov_2ewiu7jr44.s[211]++, formulaInfo.name.split('_')[0]);
+					var referenceProperty = (cov_2ewiu7jr44.s[212]++, getOrCreateProperty(groupName, lme_math, 'function'));
+					cov_2ewiu7jr44.s[213]++;
 					if (referenceProperty.ref !== undefined) {
-						cov_1qai6jtbpd.b[48][0]++;
-						cov_1qai6jtbpd.s[214]++;
+						cov_2ewiu7jr44.b[48][0]++;
+						cov_2ewiu7jr44.s[214]++;
 
 						addFormulaDependency(formulaInfo, referenceProperty.rowId, 'function');
-						cov_1qai6jtbpd.s[215]++;
+						cov_2ewiu7jr44.s[215]++;
 						node.callee.name = 'm[' + referenceProperty.ref + ']';
 					} else {
-							cov_1qai6jtbpd.b[48][1]++;
-							cov_1qai6jtbpd.s[216]++;
+							cov_2ewiu7jr44.b[48][1]++;
+							cov_2ewiu7jr44.s[216]++;
 							throw Error('invalid call [' + node.callee.name + '] ' + formulaInfo.original);
 						}
 				} else {
-					cov_1qai6jtbpd.b[47][1]++;
+					cov_2ewiu7jr44.b[47][1]++;
 				}
 			} else {
-				cov_1qai6jtbpd.b[46][1]++;
+				cov_2ewiu7jr44.b[46][1]++;
 			}
 		}
 	} else {
-			cov_1qai6jtbpd.b[43][1]++;
-			cov_1qai6jtbpd.s[217]++;
+			cov_2ewiu7jr44.b[43][1]++;
+			cov_2ewiu7jr44.s[217]++;
 			if (node.type === IDENTIFIER) {
-				cov_1qai6jtbpd.b[49][0]++;
+				cov_2ewiu7jr44.b[49][0]++;
 
 				/**
      * TODO: modify these parameters while parsing regex, directly inject the correct parameters
      */
-				var n_name = (cov_1qai6jtbpd.s[218]++, node.name);
-				cov_1qai6jtbpd.s[219]++;
+				var n_name = (cov_2ewiu7jr44.s[218]++, node.name);
+				cov_2ewiu7jr44.s[219]++;
 				if (identifier_replace[n_name]) {
-					cov_1qai6jtbpd.b[50][0]++;
-					cov_1qai6jtbpd.s[220]++;
+					cov_2ewiu7jr44.b[50][0]++;
+					cov_2ewiu7jr44.s[220]++;
 
 					node.name = identifier_replace[n_name];
 				} else {
-						cov_1qai6jtbpd.b[50][1]++;
-						cov_1qai6jtbpd.s[221]++;
-						if ((cov_1qai6jtbpd.b[52][0]++, n_name == 'YearInT') && (cov_1qai6jtbpd.b[52][1]++, parent.callee != node)) {
-							cov_1qai6jtbpd.b[51][0]++;
-							cov_1qai6jtbpd.s[222]++;
+						cov_2ewiu7jr44.b[50][1]++;
+						cov_2ewiu7jr44.s[221]++;
+						if ((cov_2ewiu7jr44.b[52][0]++, n_name == 'YearInT') && (cov_2ewiu7jr44.b[52][1]++, parent.callee != node)) {
+							cov_2ewiu7jr44.b[51][0]++;
+							cov_2ewiu7jr44.s[222]++;
 
 							node.callee = {
 								type: 'Identifier',
 								name: 'YearInT'
 							};
-							cov_1qai6jtbpd.s[223]++;
+							cov_2ewiu7jr44.s[223]++;
 							node.type = 'CallExpression';
-							cov_1qai6jtbpd.s[224]++;
+							cov_2ewiu7jr44.s[224]++;
 							node.arguments = [{
 								type: 'Identifier',
 								name: 'x'
 							}];
-							cov_1qai6jtbpd.s[225]++;
+							cov_2ewiu7jr44.s[225]++;
 							delete node.name;
 							//because we create the CallExpression too late..
-							cov_1qai6jtbpd.s[226]++;
+							cov_2ewiu7jr44.s[226]++;
 							_ASTPreparser2.default['YearInT'](formulaInfo, node);
 						}
 						//xAsReference x.notrend
 						else {
-								cov_1qai6jtbpd.b[51][1]++;
-								cov_1qai6jtbpd.s[227]++;
+								cov_2ewiu7jr44.b[51][1]++;
+								cov_2ewiu7jr44.s[227]++;
 								if (n_name === 'NoTrend') {
-									cov_1qai6jtbpd.b[53][0]++;
-									cov_1qai6jtbpd.s[228]++;
+									cov_2ewiu7jr44.b[53][0]++;
+									cov_2ewiu7jr44.s[228]++;
 
 									node.name = 'x';
 								}
 								//x.trend.lastbkyr
 								else {
-										cov_1qai6jtbpd.b[53][1]++;
-										cov_1qai6jtbpd.s[229]++;
+										cov_2ewiu7jr44.b[53][1]++;
+										cov_2ewiu7jr44.s[229]++;
 										if (n_name === 'LastHistYear') {
-											cov_1qai6jtbpd.b[54][0]++;
-											cov_1qai6jtbpd.s[230]++;
+											cov_2ewiu7jr44.b[54][0]++;
+											cov_2ewiu7jr44.s[230]++;
 
 											node.name = 'x.notrend.first';
 										} else {
-												cov_1qai6jtbpd.b[54][1]++;
-												cov_1qai6jtbpd.s[231]++;
+												cov_2ewiu7jr44.b[54][1]++;
+												cov_2ewiu7jr44.s[231]++;
 												if (n_name === 'LastTinPeriod') {
-													cov_1qai6jtbpd.b[55][0]++;
-													cov_1qai6jtbpd.s[232]++;
+													cov_2ewiu7jr44.b[55][0]++;
+													cov_2ewiu7jr44.s[232]++;
 
 													node.name = 'x.lastinperiod';
 												}
 												//x.trend.lastbkyr
 												else {
-														cov_1qai6jtbpd.b[55][1]++;
-														cov_1qai6jtbpd.s[233]++;
+														cov_2ewiu7jr44.b[55][1]++;
+														cov_2ewiu7jr44.s[233]++;
 														if (n_name === 'LastHistYear') {
-															cov_1qai6jtbpd.b[56][0]++;
-															cov_1qai6jtbpd.s[234]++;
+															cov_2ewiu7jr44.b[56][0]++;
+															cov_2ewiu7jr44.s[234]++;
 
 															node.name = 'x';
 														}
 														//should return the x.index.
 														else {
-																cov_1qai6jtbpd.b[56][1]++;
-																cov_1qai6jtbpd.s[235]++;
+																cov_2ewiu7jr44.b[56][1]++;
+																cov_2ewiu7jr44.s[235]++;
 																if (n_name === 't') {
-																	cov_1qai6jtbpd.b[57][0]++;
-																	cov_1qai6jtbpd.s[236]++;
+																	cov_2ewiu7jr44.b[57][0]++;
+																	cov_2ewiu7jr44.s[236]++;
 
 																	_log2.default.warn('invalid t parsing [%s]', formulaInfo);
 																	//return the hash t.hash or t.index?
-																	cov_1qai6jtbpd.s[237]++;
+																	cov_2ewiu7jr44.s[237]++;
 																	node.name = 'hash';
 																} else {
-																		cov_1qai6jtbpd.b[57][1]++;
-																		cov_1qai6jtbpd.s[238]++;
+																		cov_2ewiu7jr44.b[57][1]++;
+																		cov_2ewiu7jr44.s[238]++;
 																		if (n_name == 'Self') {
-																			cov_1qai6jtbpd.b[58][0]++;
-																			cov_1qai6jtbpd.s[239]++;
+																			cov_2ewiu7jr44.b[58][0]++;
+																			cov_2ewiu7jr44.s[239]++;
 
 																			node.name = formulaInfo.name.split('_').slice(1, -1).join('_');
 																		} else {
-																			cov_1qai6jtbpd.b[58][1]++;
+																			cov_2ewiu7jr44.b[58][1]++;
 																		}
 																	}
 															}
@@ -7019,118 +7019,118 @@ function buildFormula(formulaInfo, parent, node) {
 							}
 					}
 			} else {
-				cov_1qai6jtbpd.b[49][1]++;
+				cov_2ewiu7jr44.b[49][1]++;
 			}
 		} //now we iterate all members, its not required if just use all types, we can skip things like properties etc..
 	//Would be a performance boost, when we need it its going to increase speeds Log(n-1)
-	cov_1qai6jtbpd.s[240]++;
+	cov_2ewiu7jr44.s[240]++;
 	for (var key in node) {
-		cov_1qai6jtbpd.s[241]++;
+		cov_2ewiu7jr44.s[241]++;
 
 		if (node[key]) {
-			cov_1qai6jtbpd.b[59][0]++;
+			cov_2ewiu7jr44.b[59][0]++;
 
-			var child = (cov_1qai6jtbpd.s[242]++, node[key]);
-			cov_1qai6jtbpd.s[243]++;
+			var child = (cov_2ewiu7jr44.s[242]++, node[key]);
+			cov_2ewiu7jr44.s[243]++;
 			if ((typeof child === 'undefined' ? 'undefined' : (0, _typeof3.default)(child)) === 'object') {
-				cov_1qai6jtbpd.b[60][0]++;
-				cov_1qai6jtbpd.s[244]++;
+				cov_2ewiu7jr44.b[60][0]++;
+				cov_2ewiu7jr44.s[244]++;
 
 				if (Array.isArray(child)) {
-					cov_1qai6jtbpd.b[61][0]++;
-					cov_1qai6jtbpd.s[245]++;
+					cov_2ewiu7jr44.b[61][0]++;
+					cov_2ewiu7jr44.s[245]++;
 
 					for (var i = 0, len = child.length; i < len; i++) {
-						cov_1qai6jtbpd.s[246]++;
+						cov_2ewiu7jr44.s[246]++;
 
 						buildFormula(formulaInfo, node, child[i]);
 					}
 				} else {
-					cov_1qai6jtbpd.b[61][1]++;
-					cov_1qai6jtbpd.s[247]++;
+					cov_2ewiu7jr44.b[61][1]++;
+					cov_2ewiu7jr44.s[247]++;
 
 					buildFormula(formulaInfo, node, child);
 				}
 			} else {
-				cov_1qai6jtbpd.b[60][1]++;
+				cov_2ewiu7jr44.b[60][1]++;
 			}
 		} else {
-			cov_1qai6jtbpd.b[59][1]++;
+			cov_2ewiu7jr44.b[59][1]++;
 		}
 	}
-	cov_1qai6jtbpd.s[248]++;
+	cov_2ewiu7jr44.s[248]++;
 	if (!traverseTypes[node.type]) {
-		cov_1qai6jtbpd.b[62][0]++;
-		cov_1qai6jtbpd.s[249]++;
+		cov_2ewiu7jr44.b[62][0]++;
+		cov_2ewiu7jr44.s[249]++;
 
 		_log2.default.error('ERROR: [%s] not registered AST expression [%s]', node.type);
 	} else {
-		cov_1qai6jtbpd.b[62][1]++;
+		cov_2ewiu7jr44.b[62][1]++;
 	}
-	cov_1qai6jtbpd.s[250]++;
+	cov_2ewiu7jr44.s[250]++;
 	traverseTypes[node.type](formulaInfo, parent, node);
 }
 
 function regenerate(body) {
-	cov_1qai6jtbpd.f[30]++;
-	cov_1qai6jtbpd.s[251]++;
+	cov_2ewiu7jr44.f[30]++;
+	cov_2ewiu7jr44.s[251]++;
 
 	return _escodegen2.default.generate(body, escodegenOptions);
 }
 
 //public function, will return the parsed string
 //its getting nasty, with supporting this many options, consider only expecting on valid type either AST or STRING only
-cov_1qai6jtbpd.s[252]++;
+cov_2ewiu7jr44.s[252]++;
 FormulaBootstrap.prototype.parseAsFormula = function (formulaInfo) {
-	cov_1qai6jtbpd.f[31]++;
-	cov_1qai6jtbpd.s[253]++;
+	cov_2ewiu7jr44.f[31]++;
+	cov_2ewiu7jr44.s[253]++;
 
 	(0, _assert.ok)(formulaInfo.parsed === undefined);
 	var ast;
-	cov_1qai6jtbpd.s[254]++;
+	cov_2ewiu7jr44.s[254]++;
 	if ((0, _typeof3.default)(formulaInfo.body) === 'object') {
-		cov_1qai6jtbpd.b[63][0]++;
-		cov_1qai6jtbpd.s[255]++;
+		cov_2ewiu7jr44.b[63][0]++;
+		cov_2ewiu7jr44.s[255]++;
 
 		formulaInfo.original = regenerate(formulaInfo.body);
-		cov_1qai6jtbpd.s[256]++;
+		cov_2ewiu7jr44.s[256]++;
 		ast = formulaInfo.body;
 	} else {
-		cov_1qai6jtbpd.b[63][1]++;
-		cov_1qai6jtbpd.s[257]++;
+		cov_2ewiu7jr44.b[63][1]++;
+		cov_2ewiu7jr44.s[257]++;
 
 		formulaInfo.original = formulaInfo.body;
-		cov_1qai6jtbpd.s[258]++;
+		cov_2ewiu7jr44.s[258]++;
 		ast = _esprima2.default.parse(formulaInfo.body);
 	}
 	// formulaInfo.tempnaaam = formulaInfo.name.replace(/^KSP_/, '').replace(/_value$/g, '');
-	cov_1qai6jtbpd.s[259]++;
+	cov_2ewiu7jr44.s[259]++;
 	buildFormula(formulaInfo, null, ast);
-	var generated = (cov_1qai6jtbpd.s[260]++, regenerate(ast));
-	cov_1qai6jtbpd.s[261]++;
+	var generated = (cov_2ewiu7jr44.s[260]++, regenerate(ast));
+	cov_2ewiu7jr44.s[261]++;
 	formulaInfo.ast = JSON.stringify(ast);
-	cov_1qai6jtbpd.s[262]++;
+	cov_2ewiu7jr44.s[262]++;
 	formulaInfo.parsed = generated;
-	cov_1qai6jtbpd.s[263]++;
+	cov_2ewiu7jr44.s[263]++;
 	formulaInfo.tempnaaam = undefined;
 };
-cov_1qai6jtbpd.s[264]++;
+cov_2ewiu7jr44.s[264]++;
 FormulaBootstrap.prototype.initStateBootstrap = function (configs) {
-	cov_1qai6jtbpd.f[32]++;
-	cov_1qai6jtbpd.s[265]++;
+	cov_2ewiu7jr44.f[32]++;
+	cov_2ewiu7jr44.s[265]++;
 
 	functions = configs.functions;
-	cov_1qai6jtbpd.s[266]++;
+	cov_2ewiu7jr44.s[266]++;
 	variables = configs.contains; //to distinct FesVariable from referencesembler, to do a variable lookup.  We must have knowledge from the PropertyAssembler. To find corresponding referenceId
-	cov_1qai6jtbpd.s[267]++;
+	cov_2ewiu7jr44.s[267]++;
 	addFormulaDependency = configs.addFormulaDependency;
-	cov_1qai6jtbpd.s[268]++;
+	cov_2ewiu7jr44.s[268]++;
 	properties = configs.properties; //to check if we use this property from the model language
-	cov_1qai6jtbpd.s[269]++;
+	cov_2ewiu7jr44.s[269]++;
 	getOrCreateProperty = configs.getOrCreateProperty; //getOrCreateProperty a PropertyAss
-	cov_1qai6jtbpd.s[270]++;
+	cov_2ewiu7jr44.s[270]++;
 	for (var property in properties) {
-		cov_1qai6jtbpd.s[271]++;
+		cov_2ewiu7jr44.s[271]++;
 
 		varproperties[property] = {
 			f: properties[property],

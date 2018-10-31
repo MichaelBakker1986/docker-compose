@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2jq310ber = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\PropertiesAssembler.js',
-	    hash = '98cdd3aac2c9ba25c94e4753c628e183e0d880d5',
+var cov_2km1nkacja = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\PropertiesAssembler.js',
+	    hash = '14aabd9d6879ec22bc21efc63cd640775072c328',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\PropertiesAssembler.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\PropertiesAssembler.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2474,10 +2474,10 @@ var _typeof3 = _interopRequireDefault(_typeof2);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function PropertiesAssembler() {
-	cov_2jq310ber.f[0]++;
+	cov_2km1nkacja.f[0]++;
 }
 
-var PropertiesModel = (cov_2jq310ber.s[0]++, {
+var PropertiesModel = (cov_2km1nkacja.s[0]++, {
 	NEW_root_value: {
 		rowId: 'root',
 		solutionName: 'NEW'
@@ -2485,32 +2485,32 @@ var PropertiesModel = (cov_2jq310ber.s[0]++, {
 	/**
   * Model root nodes
   */
-});var rootNodes = (cov_2jq310ber.s[1]++, {
+});var rootNodes = (cov_2km1nkacja.s[1]++, {
 	NEW: PropertiesModel.NEW_root_value
 });
-var rows = (cov_2jq310ber.s[2]++, new Set());
+var rows = (cov_2km1nkacja.s[2]++, new Set());
 
-cov_2jq310ber.s[3]++;
+cov_2km1nkacja.s[3]++;
 PropertiesAssembler.prototype.contains = function (name) {
-	cov_2jq310ber.f[1]++;
-	cov_2jq310ber.s[4]++;
+	cov_2km1nkacja.f[1]++;
+	cov_2km1nkacja.s[4]++;
 
 	return rows.has(name);
 };
 //Don't call this method directly, business logic is within the Solution and JSWorkBook object
 //NULL is not valid, nor empty string
 function createRootNode(modelName) {
-	cov_2jq310ber.f[2]++;
+	cov_2km1nkacja.f[2]++;
 
 	//when calling with undefined just return a Solution with current modelName
-	var newModelName = (cov_2jq310ber.s[5]++, modelName.toUpperCase());
+	var newModelName = (cov_2km1nkacja.s[5]++, modelName.toUpperCase());
 	//create a root node if not exists
 	//Better to keep a list of existing Solution instead of writing over them
-	var newRootNodeName = (cov_2jq310ber.s[6]++, newModelName + '_root_value');
-	cov_2jq310ber.s[7]++;
+	var newRootNodeName = (cov_2km1nkacja.s[6]++, newModelName + '_root_value');
+	cov_2km1nkacja.s[7]++;
 	if (!rootNodes[newModelName]) {
-		cov_2jq310ber.b[0][0]++;
-		cov_2jq310ber.s[8]++;
+		cov_2km1nkacja.b[0][0]++;
+		cov_2km1nkacja.s[8]++;
 
 		PropertiesModel[newRootNodeName] = {
 			name: newRootNodeName,
@@ -2521,29 +2521,29 @@ function createRootNode(modelName) {
 			displayAs: 'SectionAnswerType',
 			nodes: []
 		};
-		cov_2jq310ber.s[9]++;
+		cov_2km1nkacja.s[9]++;
 		rootNodes[newModelName] = PropertiesModel[newRootNodeName];
 	} else {
-		cov_2jq310ber.b[0][1]++;
+		cov_2km1nkacja.b[0][1]++;
 	}
-	cov_2jq310ber.s[10]++;
+	cov_2km1nkacja.s[10]++;
 	return rootNodes[newModelName];
 }
 
-cov_2jq310ber.s[11]++;
+cov_2km1nkacja.s[11]++;
 PropertiesAssembler.prototype.createRootNode = createRootNode;
 
-cov_2jq310ber.s[12]++;
+cov_2km1nkacja.s[12]++;
 var getOrCreateProperty = function getOrCreateProperty(groupName, row, col) {
-	cov_2jq310ber.f[3]++;
+	cov_2km1nkacja.f[3]++;
 
-	var rowId = (cov_2jq310ber.s[13]++, groupName + '_' + row);
-	var name = (cov_2jq310ber.s[14]++, rowId + '_' + col);
-	var node = (cov_2jq310ber.s[15]++, PropertiesModel[name]);
-	cov_2jq310ber.s[16]++;
+	var rowId = (cov_2km1nkacja.s[13]++, groupName + '_' + row);
+	var name = (cov_2km1nkacja.s[14]++, rowId + '_' + col);
+	var node = (cov_2km1nkacja.s[15]++, PropertiesModel[name]);
+	cov_2km1nkacja.s[16]++;
 	if (node == undefined) {
-		cov_2jq310ber.b[1][0]++;
-		cov_2jq310ber.s[17]++;
+		cov_2km1nkacja.b[1][0]++;
+		cov_2km1nkacja.s[17]++;
 
 		node = {
 			rowId: row,
@@ -2552,67 +2552,67 @@ var getOrCreateProperty = function getOrCreateProperty(groupName, row, col) {
 			name: name,
 			nodes: []
 		};
-		cov_2jq310ber.s[18]++;
+		cov_2km1nkacja.s[18]++;
 		PropertiesModel[name] = node;
-		cov_2jq310ber.s[19]++;
+		cov_2km1nkacja.s[19]++;
 		rows.add(row);
 	} else {
-		cov_2jq310ber.b[1][1]++;
+		cov_2km1nkacja.b[1][1]++;
 	}
-	cov_2jq310ber.s[20]++;
+	cov_2km1nkacja.s[20]++;
 	return node;
 };
 
 function hasChild(children, name) {
-	cov_2jq310ber.f[4]++;
-	cov_2jq310ber.s[21]++;
+	cov_2km1nkacja.f[4]++;
+	cov_2km1nkacja.s[21]++;
 
 	for (var i = 0; i < children.nodes.length; i++) {
-		cov_2jq310ber.s[22]++;
+		cov_2km1nkacja.s[22]++;
 
 		if (children.nodes[i].name === name) {
-				cov_2jq310ber.b[2][0]++;
-				cov_2jq310ber.s[23]++;
+				cov_2km1nkacja.b[2][0]++;
+				cov_2km1nkacja.s[23]++;
 				return true;
 			} else {
-			cov_2jq310ber.b[2][1]++;
+			cov_2km1nkacja.b[2][1]++;
 		}
-	}cov_2jq310ber.s[24]++;
+	}cov_2km1nkacja.s[24]++;
 	return false;
 }
 
 //add element to Solution
 function addProperty(groupName, row, col, item, parentId) {
-	cov_2jq310ber.f[5]++;
+	cov_2km1nkacja.f[5]++;
 
 	//add to map if it not exists, else re-use the entry
-	var property = (cov_2jq310ber.s[25]++, getOrCreateProperty(groupName, row, col));
+	var property = (cov_2km1nkacja.s[25]++, getOrCreateProperty(groupName, row, col));
 
 	//inherit all properties But new allow extended Objects.
 	//Only copy primitive members, and the delegate Object.
-	cov_2jq310ber.s[26]++;
+	cov_2km1nkacja.s[26]++;
 	for (var key in item) {
-		cov_2jq310ber.s[27]++;
+		cov_2km1nkacja.s[27]++;
 
-		if ((cov_2jq310ber.b[4][0]++, property[key] === undefined) && (cov_2jq310ber.b[4][1]++, (0, _typeof3.default)(item[key]) !== 'object')) {
-				cov_2jq310ber.b[3][0]++;
-				cov_2jq310ber.s[28]++;
+		if ((cov_2km1nkacja.b[4][0]++, property[key] === undefined) && (cov_2km1nkacja.b[4][1]++, (0, _typeof3.default)(item[key]) !== 'object')) {
+				cov_2km1nkacja.b[3][0]++;
+				cov_2km1nkacja.s[28]++;
 
 				property[key] = item[key];
 			} else {
-			cov_2jq310ber.b[3][1]++;
+			cov_2km1nkacja.b[3][1]++;
 		}
 	} //add to root if no parent
-	cov_2jq310ber.s[29]++;
+	cov_2km1nkacja.s[29]++;
 	if (parentId) {
-		cov_2jq310ber.b[5][0]++;
+		cov_2km1nkacja.b[5][0]++;
 
 		//else add to PropertiesModel
-		var parentUiModel = (cov_2jq310ber.s[30]++, PropertiesModel[groupName + '_' + parentId]);
-		cov_2jq310ber.s[31]++;
+		var parentUiModel = (cov_2km1nkacja.s[30]++, PropertiesModel[groupName + '_' + parentId]);
+		cov_2km1nkacja.s[31]++;
 		if (!hasChild(parentUiModel, property.name)) {
-			cov_2jq310ber.b[6][0]++;
-			cov_2jq310ber.s[32]++;
+			cov_2km1nkacja.b[6][0]++;
+			cov_2km1nkacja.s[32]++;
 
 			parentUiModel.nodes.push({
 				name: property.name,
@@ -2621,110 +2621,110 @@ function addProperty(groupName, row, col, item, parentId) {
 				identifier: groupName + '_' + parentId
 			});
 		} else {
-			cov_2jq310ber.b[6][1]++;
+			cov_2km1nkacja.b[6][1]++;
 		}
 	} else {
-		cov_2jq310ber.b[5][1]++;
+		cov_2km1nkacja.b[5][1]++;
 	}
 }
 
 //add elements from Solution into Map
-cov_2jq310ber.s[33]++;
+cov_2km1nkacja.s[33]++;
 PropertiesAssembler.prototype.bulkInsert = function (solution) {
-	cov_2jq310ber.f[6]++;
+	cov_2km1nkacja.f[6]++;
 
-	var solutionName = (cov_2jq310ber.s[34]++, solution.name);
-	cov_2jq310ber.s[35]++;
+	var solutionName = (cov_2km1nkacja.s[34]++, solution.name);
+	cov_2km1nkacja.s[35]++;
 	if (!rootNodes[solutionName]) {
-			cov_2jq310ber.b[7][0]++;
-			cov_2jq310ber.s[36]++;
+			cov_2km1nkacja.b[7][0]++;
+			cov_2km1nkacja.s[36]++;
 			createRootNode(solutionName);
 		} else {
-		cov_2jq310ber.b[7][1]++;
-	}var nodes = (cov_2jq310ber.s[37]++, solution.nodes);
-	var leftOver = (cov_2jq310ber.s[38]++, []);
-	var iteration = (cov_2jq310ber.s[39]++, 0);
+		cov_2km1nkacja.b[7][1]++;
+	}var nodes = (cov_2km1nkacja.s[37]++, solution.nodes);
+	var leftOver = (cov_2km1nkacja.s[38]++, []);
+	var iteration = (cov_2km1nkacja.s[39]++, 0);
 
 	//inserting Nodes requires a couple of iterations, parents first
-	cov_2jq310ber.s[40]++;
+	cov_2km1nkacja.s[40]++;
 	while (iteration < 8) {
-		cov_2jq310ber.s[41]++;
+		cov_2km1nkacja.s[41]++;
 
 		for (var i = 0; i < nodes.length; i++) {
-			var node = (cov_2jq310ber.s[42]++, nodes[i]);
-			cov_2jq310ber.s[43]++;
-			if ((cov_2jq310ber.b[9][0]++, !node.parentName) || (cov_2jq310ber.b[9][1]++, PropertiesModel[solutionName + '_' + node.parentName])) {
-				cov_2jq310ber.b[8][0]++;
-				cov_2jq310ber.s[44]++;
+			var node = (cov_2km1nkacja.s[42]++, nodes[i]);
+			cov_2km1nkacja.s[43]++;
+			if ((cov_2km1nkacja.b[9][0]++, !node.parentName) || (cov_2km1nkacja.b[9][1]++, PropertiesModel[solutionName + '_' + node.parentName])) {
+				cov_2km1nkacja.b[8][0]++;
+				cov_2km1nkacja.s[44]++;
 
-				node.ref = (cov_2jq310ber.b[10][0]++, node.formulaId) || (cov_2jq310ber.b[10][1]++, node.ref);
-				cov_2jq310ber.s[45]++;
+				node.ref = (cov_2km1nkacja.b[10][0]++, node.formulaId) || (cov_2km1nkacja.b[10][1]++, node.ref);
+				cov_2km1nkacja.s[45]++;
 				addProperty(solutionName, node.rowId, node.colId, node, node.parentName);
 			} else {
-				cov_2jq310ber.b[8][1]++;
-				cov_2jq310ber.s[46]++;
+				cov_2km1nkacja.b[8][1]++;
+				cov_2km1nkacja.s[46]++;
 
 				leftOver.push(node);
 			}
 		}
-		cov_2jq310ber.s[47]++;
+		cov_2km1nkacja.s[47]++;
 		if (leftOver.length === 0) {
-			cov_2jq310ber.b[11][0]++;
-			cov_2jq310ber.s[48]++;
+			cov_2km1nkacja.b[11][0]++;
+			cov_2km1nkacja.s[48]++;
 
 			nodes = leftOver;
-			cov_2jq310ber.s[49]++;
+			cov_2km1nkacja.s[49]++;
 			break;
 		} else {
-			cov_2jq310ber.b[11][1]++;
+			cov_2km1nkacja.b[11][1]++;
 		}
-		cov_2jq310ber.s[50]++;
+		cov_2km1nkacja.s[50]++;
 		nodes = leftOver;
-		cov_2jq310ber.s[51]++;
+		cov_2km1nkacja.s[51]++;
 		leftOver = [];
-		cov_2jq310ber.s[52]++;
+		cov_2km1nkacja.s[52]++;
 		iteration++;
 	}
-	cov_2jq310ber.s[53]++;
+	cov_2km1nkacja.s[53]++;
 	if (nodes.length !== 0) {
-			cov_2jq310ber.b[12][0]++;
-			cov_2jq310ber.s[54]++;
+			cov_2km1nkacja.b[12][0]++;
+			cov_2km1nkacja.s[54]++;
 			throw Error('after ' + iteration + ' still items left, maybe too deeply nested or recursive.');
 		} else {
-		cov_2jq310ber.b[12][1]++;
+		cov_2km1nkacja.b[12][1]++;
 	}
 };
 
 function getRootNode(modelName) {
-	cov_2jq310ber.f[7]++;
-	cov_2jq310ber.s[55]++;
+	cov_2km1nkacja.f[7]++;
+	cov_2km1nkacja.s[55]++;
 
 	return rootNodes[modelName];
 }
 
-cov_2jq310ber.s[56]++;
+cov_2km1nkacja.s[56]++;
 PropertiesAssembler.prototype.findAllInSolution = function (modelName, visitArg) {
-	cov_2jq310ber.f[8]++;
-	cov_2jq310ber.s[57]++;
+	cov_2km1nkacja.f[8]++;
+	cov_2km1nkacja.s[57]++;
 
 	for (var key in PropertiesModel) {
-		var property = (cov_2jq310ber.s[58]++, PropertiesModel[key]);
-		cov_2jq310ber.s[59]++;
+		var property = (cov_2km1nkacja.s[58]++, PropertiesModel[key]);
+		cov_2km1nkacja.s[59]++;
 		if (property.solutionName === modelName) {
-			cov_2jq310ber.b[13][0]++;
-			cov_2jq310ber.s[60]++;
+			cov_2km1nkacja.b[13][0]++;
+			cov_2km1nkacja.s[60]++;
 
 			visitArg(property);
 		} else {
-			cov_2jq310ber.b[13][1]++;
+			cov_2km1nkacja.b[13][1]++;
 		}
 	}
 };
 //fetchByName (can return undefined)
-cov_2jq310ber.s[61]++;
+cov_2km1nkacja.s[61]++;
 PropertiesAssembler.prototype.fetch = function fetch(name) {
-	cov_2jq310ber.f[9]++;
-	cov_2jq310ber.s[62]++;
+	cov_2km1nkacja.f[9]++;
+	cov_2km1nkacja.s[62]++;
 
 	return PropertiesModel[name];
 };
@@ -2734,144 +2734,144 @@ PropertiesAssembler.prototype.fetch = function fetch(name) {
  * function is not thread safe, add parent and depth to function call instead of altering PropertyNode
  * As expected, problems while recursive calling this method.
  */
-cov_2jq310ber.s[63]++;
+cov_2km1nkacja.s[63]++;
 PropertiesAssembler.prototype.visitProperty = function (node, func, startDepth) {
-	cov_2jq310ber.f[10]++;
+	cov_2km1nkacja.f[10]++;
 
-	var startingNode = (cov_2jq310ber.s[64]++, (cov_2jq310ber.b[14][0]++, node) || (cov_2jq310ber.b[14][1]++, getRootNode('NEW')));
-	cov_2jq310ber.s[65]++;
+	var startingNode = (cov_2km1nkacja.s[64]++, (cov_2km1nkacja.b[14][0]++, node) || (cov_2km1nkacja.b[14][1]++, getRootNode('NEW')));
+	cov_2km1nkacja.s[65]++;
 	if (startingNode) {
-			cov_2jq310ber.b[15][0]++;
-			cov_2jq310ber.s[66]++;
-			visitInternal(startingNode, func, (cov_2jq310ber.b[16][0]++, startDepth) || (cov_2jq310ber.b[16][1]++, 0));
+			cov_2km1nkacja.b[15][0]++;
+			cov_2km1nkacja.s[66]++;
+			visitInternal(startingNode, func, (cov_2km1nkacja.b[16][0]++, startDepth) || (cov_2km1nkacja.b[16][1]++, 0));
 		} else {
-		cov_2jq310ber.b[15][1]++;
+		cov_2km1nkacja.b[15][1]++;
 	}
 };
-cov_2jq310ber.s[67]++;
+cov_2km1nkacja.s[67]++;
 PropertiesAssembler.prototype.visitModel = function (modelName, func, startDepth) {
-	cov_2jq310ber.f[11]++;
-	cov_2jq310ber.s[68]++;
+	cov_2km1nkacja.f[11]++;
+	cov_2km1nkacja.s[68]++;
 
-	visitInternal(getRootNode(modelName), func, (cov_2jq310ber.b[17][0]++, startDepth) || (cov_2jq310ber.b[17][1]++, 0));
+	visitInternal(getRootNode(modelName), func, (cov_2km1nkacja.b[17][0]++, startDepth) || (cov_2km1nkacja.b[17][1]++, 0));
 };
 /*
  * Complex to explain. See {@webexport.js}
  * Its used to provide a sortable id per row when combined with Tuples
  *  [((variableId|tupleDefinitionId),tupleIndex){maxTupleDepth}]
  */
-cov_2jq310ber.s[69]++;
+cov_2km1nkacja.s[69]++;
 PropertiesAssembler.prototype.indexProperties = function (modelName) {
-	cov_2jq310ber.f[12]++;
+	cov_2km1nkacja.f[12]++;
 
-	var counter = (cov_2jq310ber.s[70]++, 0);
-	var padder_prefix = (cov_2jq310ber.s[71]++, pad);
-	cov_2jq310ber.s[72]++;
+	var counter = (cov_2km1nkacja.s[70]++, 0);
+	var padder_prefix = (cov_2km1nkacja.s[71]++, pad);
+	cov_2km1nkacja.s[72]++;
 	visitInternal(getRootNode(modelName), function (node, depth) {
-		cov_2jq310ber.f[13]++;
-		cov_2jq310ber.s[73]++;
+		cov_2km1nkacja.f[13]++;
+		cov_2km1nkacja.s[73]++;
 
 		counter++;
-		cov_2jq310ber.s[74]++;
+		cov_2km1nkacja.s[74]++;
 		node.id = padder_prefix(counter, 5);
-		cov_2jq310ber.s[75]++;
+		cov_2km1nkacja.s[75]++;
 		if (node.tupleProperty) {
-			cov_2jq310ber.b[18][0]++;
+			cov_2km1nkacja.b[18][0]++;
 
-			var tupleDef = (cov_2jq310ber.s[76]++, PropertiesModel[node.solutionName + '_' + node.tupleDefinitionName + '_value']);
-			cov_2jq310ber.s[77]++;
+			var tupleDef = (cov_2km1nkacja.s[76]++, PropertiesModel[node.solutionName + '_' + node.tupleDefinitionName + '_value']);
+			cov_2km1nkacja.s[77]++;
 			if (tupleDef.tupleProperty) {
-				cov_2jq310ber.b[19][0]++;
+				cov_2km1nkacja.b[19][0]++;
 
-				var nestedTupleDef = (cov_2jq310ber.s[78]++, PropertiesModel[node.solutionName + '_' + tupleDef.tupleDefinitionName + '_value']);
-				cov_2jq310ber.s[79]++;
+				var nestedTupleDef = (cov_2km1nkacja.s[78]++, PropertiesModel[node.solutionName + '_' + tupleDef.tupleDefinitionName + '_value']);
+				cov_2km1nkacja.s[79]++;
 				if (nestedTupleDef.tupleProperty) {
-					cov_2jq310ber.b[20][0]++;
+					cov_2km1nkacja.b[20][0]++;
 
-					var douleNestedTupleDef = (cov_2jq310ber.s[80]++, PropertiesModel[node.solutionName + '_' + nestedTupleDef.tupleDefinitionName + '_value']);
-					cov_2jq310ber.s[81]++;
+					var douleNestedTupleDef = (cov_2km1nkacja.s[80]++, PropertiesModel[node.solutionName + '_' + nestedTupleDef.tupleDefinitionName + '_value']);
+					cov_2km1nkacja.s[81]++;
 					node.hash = [douleNestedTupleDef.id, '000', nestedTupleDef.id, '000', tupleDef.id, '000', node.id];
 				} else {
-						cov_2jq310ber.b[20][1]++;
-						cov_2jq310ber.s[82]++;
+						cov_2km1nkacja.b[20][1]++;
+						cov_2km1nkacja.s[82]++;
 						node.hash = [nestedTupleDef.id, '000', tupleDef.id, '000', node.id, '000', node.id];
 					}
 			} else {
-					cov_2jq310ber.b[19][1]++;
-					cov_2jq310ber.s[83]++;
+					cov_2km1nkacja.b[19][1]++;
+					cov_2km1nkacja.s[83]++;
 					node.hash = [tupleDef.id, '000', node.id, '000', node.id, '000', node.id];
 				}
 		} else {
-				cov_2jq310ber.b[18][1]++;
-				cov_2jq310ber.s[84]++;
+				cov_2km1nkacja.b[18][1]++;
+				cov_2km1nkacja.s[84]++;
 				node.hash = [node.id, '000', node.id, '000', node.id, '000', node.id];
 			}
 	}, 0);
 };
 
 function pad(n, width, z) {
-	cov_2jq310ber.f[14]++;
-	cov_2jq310ber.s[85]++;
+	cov_2km1nkacja.f[14]++;
+	cov_2km1nkacja.s[85]++;
 
-	z = (cov_2jq310ber.b[21][0]++, z) || (cov_2jq310ber.b[21][1]++, '0');
-	cov_2jq310ber.s[86]++;
+	z = (cov_2km1nkacja.b[21][0]++, z) || (cov_2km1nkacja.b[21][1]++, '0');
+	cov_2km1nkacja.s[86]++;
 	n = n + '';
-	cov_2jq310ber.s[87]++;
-	return n.length >= width ? (cov_2jq310ber.b[22][0]++, n) : (cov_2jq310ber.b[22][1]++, new Array(width - n.length + 1).join(z) + n);
+	cov_2km1nkacja.s[87]++;
+	return n.length >= width ? (cov_2km1nkacja.b[22][0]++, n) : (cov_2km1nkacja.b[22][1]++, new Array(width - n.length + 1).join(z) + n);
 }
 
 function visitInternal(node, func, depth) {
-	cov_2jq310ber.f[15]++;
-	cov_2jq310ber.s[88]++;
+	cov_2km1nkacja.f[15]++;
+	cov_2km1nkacja.s[88]++;
 
 	func(node, depth);
-	cov_2jq310ber.s[89]++;
+	cov_2km1nkacja.s[89]++;
 	if (func.stop) {
-			cov_2jq310ber.b[23][0]++;
-			cov_2jq310ber.s[90]++;
+			cov_2km1nkacja.b[23][0]++;
+			cov_2km1nkacja.s[90]++;
 			return delete func.stop;
 		} else {
-		cov_2jq310ber.b[23][1]++;
-	}cov_2jq310ber.s[91]++;
+		cov_2km1nkacja.b[23][1]++;
+	}cov_2km1nkacja.s[91]++;
 	if (node.nodes) {
-		cov_2jq310ber.b[24][0]++;
-		cov_2jq310ber.s[92]++;
+		cov_2km1nkacja.b[24][0]++;
+		cov_2km1nkacja.s[92]++;
 
 		for (var i = 0; i < node.nodes.length; i++) {
-			var childNode = (cov_2jq310ber.s[93]++, PropertiesModel[node.nodes[i].name]);
-			cov_2jq310ber.s[94]++;
+			var childNode = (cov_2km1nkacja.s[93]++, PropertiesModel[node.nodes[i].name]);
+			cov_2km1nkacja.s[94]++;
 			childNode.parentrowId = node.rowId; //TODO: remove this (visitor should not modify state)
-			cov_2jq310ber.s[95]++;
+			cov_2km1nkacja.s[95]++;
 			visitInternal(childNode, func, depth + 1);
 		}
 	} else {
-		cov_2jq310ber.b[24][1]++;
+		cov_2km1nkacja.b[24][1]++;
 	}
 }
 
 function visitChildren(node, func, depth) {
-	cov_2jq310ber.f[16]++;
-	cov_2jq310ber.s[96]++;
+	cov_2km1nkacja.f[16]++;
+	cov_2km1nkacja.s[96]++;
 
 	if (node.nodes) {
-		cov_2jq310ber.b[25][0]++;
-		cov_2jq310ber.s[97]++;
+		cov_2km1nkacja.b[25][0]++;
+		cov_2km1nkacja.s[97]++;
 
 		for (var i = 0; i < node.nodes.length; i++) {
-			cov_2jq310ber.s[98]++;
+			cov_2km1nkacja.s[98]++;
 
 			func(node, depth);
-			cov_2jq310ber.s[99]++;
+			cov_2km1nkacja.s[99]++;
 			visitChildren(PropertiesModel[node.nodes[i].name], func, depth + 1);
 		}
 	} else {
-		cov_2jq310ber.b[25][1]++;
+		cov_2km1nkacja.b[25][1]++;
 	}
 }
 
-cov_2jq310ber.s[100]++;
+cov_2km1nkacja.s[100]++;
 PropertiesAssembler.prototype.getRootProperty = getRootNode;
-cov_2jq310ber.s[101]++;
+cov_2km1nkacja.s[101]++;
 PropertiesAssembler.prototype.getOrCreateProperty = getOrCreateProperty;
 
 exports.default = PropertiesAssembler.prototype;

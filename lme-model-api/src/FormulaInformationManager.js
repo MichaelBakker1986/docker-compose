@@ -1,4 +1,4 @@
-import { FinFormula } from '../../ffl/FinFormula'
+import FinFormula from '../../ffl/FinFormula'
 
 const info = {
 	NA                : 1e-100,
@@ -359,7 +359,7 @@ FormulaInformationManager.prototype.lookupFunction = function(name, line, offset
 }
 FormulaInformationManager.prototype.extractParts = function(workbook, info) {
 	return info.parts.map(function(formulaAsString, idx) {
-		workbook.createFormula(new FinFormula().parseFormula(formulaAsString), '__SMT', 'a' + idx, false, 'document', 'object', null)
+		workbook.createFormula(FinFormula.parseFormula(formulaAsString), '__SMT', 'a' + idx, false, 'document', 'object', null)
 		const e_value = OnNA(workbook.get('__SMT', 'a' + idx), 'NA')
 
 		const dependencies = workbook.getDependencies('__SMT', 'a' + idx)

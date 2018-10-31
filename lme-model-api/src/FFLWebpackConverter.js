@@ -1,26 +1,25 @@
-import webpack                             from 'webpack'
-import { createWriteStream, readFileSync } from 'fs'
-import path                                from 'path'
-import MemoryFS                            from 'memory-fs'
-import ExcelApi                            from './ExcelApi'
-import SolutionFacade                      from '../../lme-core/src/SolutionFacade'
-import { LmeAPI }                          from './lme'
-import { error, info }                     from 'log6'
-import timeModel                           from '../../lme-core/resources/CustomImport'
-import { Context }                         from '../../lme-core/src/Context'
-import { DETAIL_INTERVAL, ENCODING }       from '../../lme-core/src/Constants'
+import webpack                                            from 'webpack'
+import path                                               from 'path'
+import MemoryFS                                           from 'memory-fs'
+import ExcelApi                                           from './ExcelApi'
+import SolutionFacade                                     from '../../lme-core/src/SolutionFacade'
+import { LmeAPI }                                         from './lme'
+import { error, info }                                    from 'log6'
+import timeModel                                          from '../../lme-core/resources/CustomImport'
+import { Context }                                        from '../../lme-core/src/Context'
+import { DETAIL_INTERVAL, ENCODING }                      from '../../lme-core/src/Constants'
+import { createJavascriptWriteStream, readModelAsString } from '../../git-connect/ResourceManager'
 
 /** Combine workspace into a REST-API js **/
-const fileType = '.ffl'
 const compilers = {}
 const javascript_filename = 'frontend.js'
-const resources_folder = path.join(__dirname, '/../../git-connect/resources/')
-const modelName = process.argv[2] || 'KSP'
+const model_name = process.argv[2] || 'KSP'
 const excel_file_name_quick_fix = (modelName) => modelName.startsWith('_tmp_') ? modelName.split('_').slice(-1)[0] : modelName
-const xlsx_name = excel_file_name_quick_fix(modelName)
+const xlsx_name = excel_file_name_quick_fix(model_name)
 
 const resolveCompiler = (memory_fs, filename, json_data) => {
 	let compiler = compilers[filename]
+	//let b = browser(options).ignore('escodegen').ignore('esprima').ignore('log6').ignore('tracer').ignore('ast-node-utils').ignore('*ast-node-utils*')
 	if (!compiler) {
 		compiler = webpack({
 			entry  : [path.resolve(__dirname, filename)],
@@ -28,6 +27,9 @@ const resolveCompiler = (memory_fs, filename, json_data) => {
 			target : 'web',
 			node   : {
 				fs           : 'empty',
+				escodegen    : 'empty',
+				log6         : 'empty',
+				esprima      : 'empty',
 				child_process: 'empty'
 			},
 			output : {
@@ -48,6 +50,9 @@ const resolveCompiler = (memory_fs, filename, json_data) => {
 				new webpack.DefinePlugin({
 					'global.JSON_MODEL': json_data
 				})
+				/*new webpack.IgnorePlugin(/esprima/)*/
+				/*new webpack.IgnorePlugin(/escodegen/),*/
+				/*new webpack.IgnorePlugin(/log6/)*/
 			],
 			devtool: 'inline-source-map'
 		})
@@ -86,29 +91,30 @@ export class FFLWebpackCompiler {
 	static async readProductionFile(filename, json_data) {
 		const memory_fs = new MemoryFS
 		const webpackCompiler = new FFLWebpackCompiler({ memory_fs, json_data })
-		const stats = await webpackCompiler.buildProductionFile(filename)
-		console.info(stats)
+		await webpackCompiler.buildProductionFile(filename)
 		return memory_fs.readFileSync(path.join(__dirname, javascript_filename), ENCODING)
 	}
 }
 
-ExcelApi.loadExcelFile(xlsx_name).then((matrix) => {
+ExcelApi.loadExcelFile(xlsx_name).then(async (matrix) => {
 	SolutionFacade.addVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
 	let LME
-	if (modelName.includes('SCORECARDTESTMODEL')) {
-		LME = new LmeAPI(timeModel, new Context({ modelName }), DETAIL_INTERVAL)
+	if (model_name.includes('SCORECARDTESTMODEL')) {
+		LME = new LmeAPI(timeModel, new Context({ modelName: model_name }), DETAIL_INTERVAL)
 	} else {
-		LME = new LmeAPI(null, new Context({ modelName }), null)
+		LME = new LmeAPI(null, new Context({ modelName: model_name }), null)
 	}
-	let rawData = readFileSync(`${resources_folder}${modelName}${fileType}`, ENCODING)
+	const rawData = readModelAsString({ model_name })
 	LME.importFFL(rawData)
 	const json_data = LME.exportLME()
 
-	FFLWebpackCompiler.readProductionFile('./lmeAPIWrapper.js', json_data).then((source) => {
-		const destination_path = path.join(resources_folder, `${modelName}.js`)
-		createWriteStream(destination_path).write(source)
-		info(`Done writing executable file to ${destination_path} size: ${source.length} `)
-	}).catch((err) => error(err.stack))
+	try {
+		const source = await FFLWebpackCompiler.readProductionFile('./lmeAPIWrapper.js', json_data)
+		createJavascriptWriteStream({ model_name }).write(source)
+		info(`Done writing executable file to ${model_name} size: ${source.length} `)
+	} catch (err) {
+		error(err.stack)
+	}
 })
 
 

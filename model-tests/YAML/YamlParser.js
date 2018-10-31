@@ -2,13 +2,13 @@
  * Use yamljs to parse-modify docker-compose files
  * Experimental YML format of FFL
  */
-import YAML                                                         from 'yamljs'
-import { RegisterPlainFFLDecorator, RegisterToFFL }                 from '../../ffl/index'
-import { debug, info }                                              from 'log6'
+import YAML                                               from 'yamljs'
+import { RegisterPlainFFLDecorator, RegisterToFFL }       from '../../ffl/index'
+import { debug, info }                                    from 'log6'
 import 'assert'
-import { LmeAPI }                                                   from '../../lme-model-api/src/lme'
-import api, { Context, ENCODING, NUMBER, Register, VALUE, VISIBLE } from '../../lme-core/index'
-import { readFileSync }                                             from 'fs'
+import { LmeAPI }                                         from '../../lme-model-api/src/lme'
+import api, { Context, NUMBER, Register, VALUE, VISIBLE } from '../../lme-core/index'
+import { readModelAsString }                              from '../../git-connect/ResourceManager'
 
 const context  = new Context({ columnSize: 1, columns: [VALUE, VISIBLE] }),
       wb       = new LmeAPI(null, context),
@@ -20,7 +20,7 @@ debug(
 		null, 2)
 )
 api.registerParser(RegisterPlainFFLDecorator)
-wb.importFFL({ register, raw: readFileSync(__dirname + '/../../git-connect/resources/MVO.ffl', ENCODING) })
+wb.importFFL({ register, raw: readModelAsString({ model_name: 'MVO' }) })
 const workbook = wb.lme
 const root = register.getIndex('name')['root']
 const yawmfll = {}

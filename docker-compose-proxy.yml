@@ -1,17 +1,30 @@
 version: '3'
 services:
   traefik:
-    image: traefik
+    image: traefik:1.7.4
     container_name: traefik
     command:
-    #- --defaultentrypoints=http,https
+    - --logLevel=INFO
+    - --entrypoints=Name:http Address::80 Redirect.EntryPoint:https
+    - --entrypoints=Name:https Address::443 TLS
+    #- --entrypoints=Name:api Address::8686
+    - --defaultentrypoints=http,https
     - --api
-    #- --api.entrypoint="api"
+    #- --api.entrypoint=api
     - --api.dashboard=true
-    - --debug=true
+    - --acme
+    - --acme.email=michael.bakker1986@gmail.com
+    - --acme.storage=acme.json
+    - --acme.entryPoint=https
+    - --acme.httpChallenge.entryPoint=http
+    - --acme.OnHostRule=true
+    - --acme.onDemand=false
+    - --acme.acmeLogging=true
+    - --retry.attempts=3
     - --docker
     - --docker.watch
-    - --retry.attempts=3
+    - --docker.exposedbydefault=true
+    - --docker.usebindportip=true
     ports:
     - '80:80'
     - '443:443'
@@ -21,6 +34,7 @@ services:
     labels:
       traefik.backend: "traefik"
       traefik.enable: true
+      traefik.frontend.rule: "Host:appmodel.org"
       traefik.port: 8080
     networks:
     - proxy

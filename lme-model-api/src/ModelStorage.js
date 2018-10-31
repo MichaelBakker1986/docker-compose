@@ -61,7 +61,7 @@ ModelStorage.prototype.getHistory = (name) => {
  *   column_title: 'Other';
  */
 ModelStorage.prototype.saveDelta = function(model_name, data) {
-	const fflPath = getModelPath(model_name)
+	const fflPath = getModelPath({ model_path: model_name })
 	const compareResults = this.doDeltaCompare(model_name, data)
 	if (compareResults.status === 'ok' && compareResults.changes > 0) {
 		let i

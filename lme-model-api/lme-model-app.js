@@ -164,7 +164,7 @@ app.post('*/:user_id/publishDockerImage/:model_name', async ({ body, params }, r
 		ExcelConnect.loadExcelFile(model_name).then(() => {
 			const { ffl, version } = bumbVersion(body.fflData)
 
-			stash.commit(user_id, model_name, ffl, null).then(async () => {
+			stash.commit(user_id, model_name, ffl, '.ffl').then(async () => {
 				const model_version = `0.${version}`
 				const dockerImageBuilder = new DockerImageBuilder({
 					model_name,

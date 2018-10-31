@@ -2,13 +2,12 @@
  * Bridge between excel files and LME
  * The MatrixLookup function is found in math
  */
-import fs                     from 'fs'
-import { DEBUG, debug, warn } from 'log6'
-import * as Excel             from 'exceljs'
-import Promise                from 'promise'
-import path                   from 'path'
-
-const default_resources_map = path.join(__dirname, process.env.RESOURCES_PATH || '../git-connect/resources/')
+import fs                             from 'fs'
+import { DEBUG, debug, warn }         from 'log6'
+import * as Excel                     from 'exceljs'
+import Promise                        from 'promise'
+import path                           from 'path'
+import { FILE_SYSTEM_RESOURCES_PATH } from '../git-connect/index'
 
 /**
  * Result after excel parsing.
@@ -125,7 +124,7 @@ class ExcelConnect {
 		this.entries = {}
 	}
 
-	loadExcelFile(excelFileName, folder = default_resources_map) {
+	loadExcelFile(excelFileName, folder = FILE_SYSTEM_RESOURCES_PATH) {
 		return new Promise((success, fail) => {
 			//check if an file exists
 			const files = fs.readdirSync(folder)

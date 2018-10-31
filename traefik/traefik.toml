@@ -2,30 +2,29 @@
 # Warning: Enabling API will expose Traefik's configuration.
 # It is not recommended in production,
 # unless secured by authentication and authorizations
-defaultEntryPoints = ["http", "https"]
-logLevel = "DEBUG"
+#defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
-  [entryPoints.http]
-  address = ":80"
-    [entryPoints.http.redirect]
-      entryPoint = "https"
-  [entryPoints.https]
-  address = ":443"
-    [entryPoints.https.tls]
+ # [entryPoints.http]
+ # address = ":80"
+ #   [entryPoints.http.redirect]
+ #    entryPoint = "https"
+ # [entryPoints.https]
+ # address = ":443"
+ #   [entryPoints.https.tls]
   [entryPoints.api]
   address=":8686"
-      [entryPoints.api.auth.basic]
-      users = ["admin:$apr1$8ARUAqfe$/yw6ZI.2MN8M1/IXM7X4y/"]
+ #     [entryPoints.api.auth.basic]
+  #    users = ["admin:$apr1$8ARUAqfe$/yw6ZI.2MN8M1/IXM7X4y/"]
 
 [acme]
-  email = "michael.bakker1986@gmail.com"
-  storage = "acme.json"
-  entryPoint = "https"
-  [acme.httpChallenge]
-    entryPoint = "http"
-  onHostRule = true
-  onDemand = false
+  #mail = "michael.bakker1986@gmail.com"
+  #storage = "acme.json"
+  #entryPoint = "https"
+  #[acme.httpChallenge]
+  #  entryPoint = "http"
+  #onHostRule = true
+  #onDemand = false
   [[acme.domains]]
     main = "appmodel.org"
 
@@ -37,12 +36,12 @@ logLevel = "DEBUG"
 #[retry]
   #attempts = 3
   
-[docker]
+#[docker]
   # Optional
   # Default: false
-  watch = true
-  exposedByDefault = true
-  usebindportip = true
+  #watch = true
+  #exposedByDefault = true
+  #usebindportip = true
   # Define a default docker network to use for connections to all containers.
   # Can be overridden by the traefik.docker.network label.
   # Optional

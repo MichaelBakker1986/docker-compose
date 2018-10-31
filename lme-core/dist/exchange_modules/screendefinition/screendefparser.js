@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_157py4ngwj = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\screendefinition\\screendefparser.js',
-	    hash = '9aa0429aa9a83888c88a4ea2205cbb980155a655',
+var cov_21c2bkyhsg = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\screendefinition\\screendefparser.js',
+	    hash = 'd18ab1acff11f5785eca7685185b644bf2d5a4a6',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\screendefinition\\screendefparser.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\screendefinition\\screendefparser.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -925,108 +925,108 @@ var _FinFormula2 = _interopRequireDefault(_FinFormula);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ScreenDefinitionParser = (cov_157py4ngwj.s[0]++, {
+var ScreenDefinitionParser = (cov_21c2bkyhsg.s[0]++, {
 	headername: 'screendefinition',
 	name: 'screendefinition',
 	//expection json as String for screen definitions
 	parseData: function parseData(json, workbook) {
-		cov_157py4ngwj.f[0]++;
+		cov_21c2bkyhsg.f[0]++;
 
-		var data = (cov_157py4ngwj.s[1]++, JSON.parse(json));
-		var solution = (cov_157py4ngwj.s[2]++, _index.SolutionFacade.createSolution((cov_157py4ngwj.b[0][0]++, data.modelName) || (cov_157py4ngwj.b[0][1]++, workbook.getSolutionName())));
+		var data = (cov_21c2bkyhsg.s[1]++, JSON.parse(json));
+		var solution = (cov_21c2bkyhsg.s[2]++, _index.SolutionFacade.createSolution((cov_21c2bkyhsg.b[0][0]++, data.modelName) || (cov_21c2bkyhsg.b[0][1]++, workbook.getSolutionName())));
 
-		cov_157py4ngwj.s[3]++;
+		cov_21c2bkyhsg.s[3]++;
 		_index.JSVisitor.travelOne(data, null, function (keyArg, node, context) {
-			cov_157py4ngwj.f[1]++;
-			cov_157py4ngwj.s[4]++;
+			cov_21c2bkyhsg.f[1]++;
+			cov_21c2bkyhsg.s[4]++;
 
-			if ((cov_157py4ngwj.b[2][0]++, node !== null) && (cov_157py4ngwj.b[2][1]++, node !== undefined) && (cov_157py4ngwj.b[2][2]++, keyArg !== null) && ((cov_157py4ngwj.b[2][3]++, node.variableName) || (cov_157py4ngwj.b[2][4]++, node.name)) && (cov_157py4ngwj.b[2][5]++, !Array.isArray(node))) {
-				cov_157py4ngwj.b[1][0]++;
+			if ((cov_21c2bkyhsg.b[2][0]++, node !== null) && (cov_21c2bkyhsg.b[2][1]++, node !== undefined) && (cov_21c2bkyhsg.b[2][2]++, keyArg !== null) && ((cov_21c2bkyhsg.b[2][3]++, node.variableName) || (cov_21c2bkyhsg.b[2][4]++, node.name)) && (cov_21c2bkyhsg.b[2][5]++, !Array.isArray(node))) {
+				cov_21c2bkyhsg.b[1][0]++;
 
-				var parent = (cov_157py4ngwj.s[5]++, node._parent);
-				var nodeName = (cov_157py4ngwj.s[6]++, (cov_157py4ngwj.b[3][0]++, node.variableName) || (cov_157py4ngwj.b[3][1]++, node.name));
-				cov_157py4ngwj.s[7]++;
+				var parent = (cov_21c2bkyhsg.s[5]++, node._parent);
+				var nodeName = (cov_21c2bkyhsg.s[6]++, (cov_21c2bkyhsg.b[3][0]++, node.variableName) || (cov_21c2bkyhsg.b[3][1]++, node.name));
+				cov_21c2bkyhsg.s[7]++;
 				if (nodeName) {
-					cov_157py4ngwj.b[4][0]++;
-					cov_157py4ngwj.s[8]++;
+					cov_21c2bkyhsg.b[4][0]++;
+					cov_21c2bkyhsg.s[8]++;
 
-					addnode(solution, nodeName, node, parent ? (cov_157py4ngwj.b[5][0]++, (cov_157py4ngwj.b[6][0]++, parent.variableName) || (cov_157py4ngwj.b[6][1]++, parent.name)) : (cov_157py4ngwj.b[5][1]++, undefined), undefined);
+					addnode(solution, nodeName, node, parent ? (cov_21c2bkyhsg.b[5][0]++, (cov_21c2bkyhsg.b[6][0]++, parent.variableName) || (cov_21c2bkyhsg.b[6][1]++, parent.name)) : (cov_21c2bkyhsg.b[5][1]++, undefined), undefined);
 				} else {
-					cov_157py4ngwj.b[4][1]++;
+					cov_21c2bkyhsg.b[4][1]++;
 				}
 			} else {
-				cov_157py4ngwj.b[1][1]++;
+				cov_21c2bkyhsg.b[1][1]++;
 			}
 		});
-		cov_157py4ngwj.s[9]++;
+		cov_21c2bkyhsg.s[9]++;
 		return solution;
 	},
 	deParse: function deParse(rowId, workbook) {
-		cov_157py4ngwj.f[2]++;
+		cov_21c2bkyhsg.f[2]++;
 
-		var screenSolution = (cov_157py4ngwj.s[10]++, _index.SolutionFacade.createSolution(workbook.getSolutionName()));
-		var rootProperty = (cov_157py4ngwj.s[11]++, _index.PropertiesAssembler.getRootProperty(workbook.getSolutionName()));
-		cov_157py4ngwj.s[12]++;
+		var screenSolution = (cov_21c2bkyhsg.s[10]++, _index.SolutionFacade.createSolution(workbook.getSolutionName()));
+		var rootProperty = (cov_21c2bkyhsg.s[11]++, _index.PropertiesAssembler.getRootProperty(workbook.getSolutionName()));
+		cov_21c2bkyhsg.s[12]++;
 		_index.PropertiesAssembler.visitProperty(rowId, function (elem) {
-			cov_157py4ngwj.f[3]++;
+			cov_21c2bkyhsg.f[3]++;
 
 			//create output node
-			var uielem = (cov_157py4ngwj.s[13]++, {
+			var uielem = (cov_21c2bkyhsg.s[13]++, {
 				name: elem.rowId,
 				displaytype: elem.displaytype,
 				description: elem.title
 			});
-			var formulaProperties = (cov_157py4ngwj.s[14]++, _index.SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId));
-			cov_157py4ngwj.s[15]++;
+			var formulaProperties = (cov_21c2bkyhsg.s[14]++, _index.SolutionFacade.gatherFormulaProperties(workbook.getSolutionName(), workbook.properties, elem.rowId));
+			cov_21c2bkyhsg.s[15]++;
 			for (var key in formulaProperties) {
-				var formula = (cov_157py4ngwj.s[16]++, formulaProperties[key]);
-				var finFormula = (cov_157py4ngwj.s[17]++, _FinFormula2.default.javaScriptToFinGeneric(formula));
-				cov_157py4ngwj.s[18]++;
+				var formula = (cov_21c2bkyhsg.s[16]++, formulaProperties[key]);
+				var finFormula = (cov_21c2bkyhsg.s[17]++, _FinFormula2.default.javaScriptToFinGeneric(formula));
+				cov_21c2bkyhsg.s[18]++;
 				if (finFormula !== 'undefined') {
-						cov_157py4ngwj.b[7][0]++;
-						cov_157py4ngwj.s[19]++;
+						cov_21c2bkyhsg.b[7][0]++;
+						cov_21c2bkyhsg.s[19]++;
 						uielem[key] = finFormula;
 					} else {
-					cov_157py4ngwj.b[7][1]++;
+					cov_21c2bkyhsg.b[7][1]++;
 				}
 			}
 		});
-		cov_157py4ngwj.s[20]++;
+		cov_21c2bkyhsg.s[20]++;
 		screenSolution.root = {
 			modelName: workbook.getSolutionName()
 		};
-		cov_157py4ngwj.s[21]++;
+		cov_21c2bkyhsg.s[21]++;
 		return stringifySolution(screenSolution.root);
 	}
 });
 
 function stringifySolution(root) {
-	cov_157py4ngwj.f[4]++;
-	cov_157py4ngwj.s[22]++;
+	cov_21c2bkyhsg.f[4]++;
+	cov_21c2bkyhsg.s[22]++;
 
 	return JSON.stringify(root, function (key, val) {
-		cov_157py4ngwj.f[5]++;
-		cov_157py4ngwj.s[23]++;
+		cov_21c2bkyhsg.f[5]++;
+		cov_21c2bkyhsg.s[23]++;
 
 		if (key === 'originalproperties') {
-			cov_157py4ngwj.b[8][0]++;
-			cov_157py4ngwj.s[24]++;
+			cov_21c2bkyhsg.b[8][0]++;
+			cov_21c2bkyhsg.s[24]++;
 
 			return undefined;
 		} else {
-			cov_157py4ngwj.b[8][1]++;
+			cov_21c2bkyhsg.b[8][1]++;
 		}
-		cov_157py4ngwj.s[25]++;
+		cov_21c2bkyhsg.s[25]++;
 		return val;
 	}, 2);
 }
 
 function addnode(solution, rowId, node, parentId, referId) {
-	cov_157py4ngwj.f[6]++;
+	cov_21c2bkyhsg.f[6]++;
 
-	var uiNode = (cov_157py4ngwj.s[26]++, _index.SolutionFacade.createUIFormulaLink(solution, rowId, 'value', _astNodeUtils.ast.UNDEFINED(), 'AmountAnswerType', 'document', null, parentId));
-	var titlestring = (cov_157py4ngwj.s[27]++, (cov_157py4ngwj.b[9][0]++, node.name) || (cov_157py4ngwj.b[9][1]++, node.description) || (cov_157py4ngwj.b[9][2]++, rowId));
-	cov_157py4ngwj.s[28]++;
+	var uiNode = (cov_21c2bkyhsg.s[26]++, _index.SolutionFacade.createUIFormulaLink(solution, rowId, 'value', _astNodeUtils.ast.UNDEFINED(), 'AmountAnswerType', 'document', null, parentId));
+	var titlestring = (cov_21c2bkyhsg.s[27]++, (cov_21c2bkyhsg.b[9][0]++, node.name) || (cov_21c2bkyhsg.b[9][1]++, node.description) || (cov_21c2bkyhsg.b[9][2]++, rowId));
+	cov_21c2bkyhsg.s[28]++;
 	_index.SolutionFacade.createUIFormulaLink(solution, rowId, 'title', _astNodeUtils.ast.STRING(titlestring), undefined, 'document');
 }
 exports.default = ScreenDefinitionParser;

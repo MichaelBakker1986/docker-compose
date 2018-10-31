@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_n6eqzb7og = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\XAxis.js',
-	    hash = '9f893db2fd31ad00fc58b194204b65619e4f3e4d',
+var cov_1mywbui34o = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\XAxis.js',
+	    hash = '55b3b716cadb53c9f423695147a5462611c91610',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\XAxis.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\XAxis.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2879,7 +2879,7 @@ var _BookYearTimeModel2 = _interopRequireDefault(_BookYearTimeModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var headers = (cov_n6eqzb7og.s[0]++, {
+var headers = (cov_1mywbui34o.s[0]++, {
 	columns: {
 		title: 'timeline'
 	},
@@ -2898,65 +2898,65 @@ var headers = (cov_n6eqzb7og.s[0]++, {
 });
 
 function ViewModes(data) {
-	cov_n6eqzb7og.f[0]++;
-	cov_n6eqzb7og.s[1]++;
+	cov_1mywbui34o.f[0]++;
+	cov_1mywbui34o.s[1]++;
 
-	data = (cov_n6eqzb7og.b[0][0]++, data) || (cov_n6eqzb7og.b[0][1]++, (0, _BookYearTimeModel2.default)());
-	var formulasets = (cov_n6eqzb7og.s[2]++, data.formulasets);
+	data = (cov_1mywbui34o.b[0][0]++, data) || (cov_1mywbui34o.b[0][1]++, (0, _BookYearTimeModel2.default)());
+	var formulasets = (cov_1mywbui34o.s[2]++, data.formulasets);
 
-	var viewmodes = (cov_n6eqzb7og.s[3]++, {});
-	var NA = (cov_n6eqzb7og.s[4]++, data.navalue);
-	var indexed = (cov_n6eqzb7og.s[5]++, []); // holds a indexed reference for quicked lookup for real-column-contexts/ can be used for the
+	var viewmodes = (cov_1mywbui34o.s[3]++, {});
+	var NA = (cov_1mywbui34o.s[4]++, data.navalue);
+	var indexed = (cov_1mywbui34o.s[5]++, []); // holds a indexed reference for quicked lookup for real-column-contexts/ can be used for the
 	// column variable
-	var templateindexed = (cov_n6eqzb7og.s[6]++, []); // holds a indexed reference for quicked lookup for contexts/ its only for the templates
+	var templateindexed = (cov_1mywbui34o.s[6]++, []); // holds a indexed reference for quicked lookup for contexts/ its only for the templates
 	// and will only be used during build time
-	cov_n6eqzb7og.s[7]++;
+	cov_1mywbui34o.s[7]++;
 	this.viewmodes = viewmodes;
 	// make an array storing the formulaset for all columnentrees, used for quicker lookup later
-	var formulasetLookup = (cov_n6eqzb7og.s[8]++, []); // used to lookup the
+	var formulasetLookup = (cov_1mywbui34o.s[8]++, []); // used to lookup the
 	// we assume they ordered, looping trough the entrees, using the currentPeriod as being used until index had been
 	// reached
-	var periods = (cov_n6eqzb7og.s[9]++, data.layout.period);
-	var currentperiod = (cov_n6eqzb7og.s[10]++, periods[0]);
-	var aggregationformulaset = (cov_n6eqzb7og.s[11]++, formulasets[formulasets.length - 1]);
-	cov_n6eqzb7og.s[12]++;
+	var periods = (cov_1mywbui34o.s[9]++, data.layout.period);
+	var currentperiod = (cov_1mywbui34o.s[10]++, periods[0]);
+	var aggregationformulaset = (cov_1mywbui34o.s[11]++, formulasets[formulasets.length - 1]);
+	cov_1mywbui34o.s[12]++;
 	currentperiod.formulaset = formulasets[currentperiod.formulasetId];
-	cov_n6eqzb7og.s[13]++;
+	cov_1mywbui34o.s[13]++;
 	for (var i = 0; i < data.layout.idx; i++) {
-		cov_n6eqzb7og.s[14]++;
+		cov_1mywbui34o.s[14]++;
 
 		if (i >= currentperiod.idx) {
-			cov_n6eqzb7og.b[1][0]++;
-			cov_n6eqzb7og.s[15]++;
+			cov_1mywbui34o.b[1][0]++;
+			cov_1mywbui34o.s[15]++;
 
 			currentperiod = periods[currentperiod.formulasetId + 1];
 			// assign the formulaset, it was stored as reference
-			cov_n6eqzb7og.s[16]++;
+			cov_1mywbui34o.s[16]++;
 			currentperiod.formulaset = formulasets[currentperiod.formulasetId];
 		} else {
-			cov_n6eqzb7og.b[1][1]++;
+			cov_1mywbui34o.b[1][1]++;
 		}
-		cov_n6eqzb7og.s[17]++;
+		cov_1mywbui34o.s[17]++;
 		formulasetLookup[i] = currentperiod;
 	}
-	cov_n6eqzb7og.s[18]++;
+	cov_1mywbui34o.s[18]++;
 	currentperiod.last = data.layout.idx;
-	var infinitColumn = (cov_n6eqzb7og.s[19]++, {
+	var infinitColumn = (cov_1mywbui34o.s[19]++, {
 		hash: 0,
 		dummy: true
 	});
-	cov_n6eqzb7og.s[20]++;
+	cov_1mywbui34o.s[20]++;
 	infinitColumn.f = 0;
-	cov_n6eqzb7og.s[21]++;
+	cov_1mywbui34o.s[21]++;
 	infinitColumn.prev = infinitColumn;
-	var timelineSize = (cov_n6eqzb7og.s[22]++, data.time.timelineSize);
-	var columnMultiplier = (cov_n6eqzb7og.s[23]++, data.time.columnMultiplier);
+	var timelineSize = (cov_1mywbui34o.s[22]++, data.time.timelineSize);
+	var columnMultiplier = (cov_1mywbui34o.s[23]++, data.time.columnMultiplier);
 	// find out all viewtypes in the document
-	var layout = (cov_n6eqzb7og.s[24]++, data.layout);
+	var layout = (cov_1mywbui34o.s[24]++, data.layout);
 
-	cov_n6eqzb7og.s[25]++;
+	cov_1mywbui34o.s[25]++;
 	while (layout != undefined) {
-		cov_n6eqzb7og.s[26]++;
+		cov_1mywbui34o.s[26]++;
 
 		viewmodes[layout.name] = {
 			//these will be reduced to fixednumber and columns, they all share the same algorithms
@@ -2989,62 +2989,62 @@ function ViewModes(data) {
 			}, { hash: 5, header: headers.matrix }]],
 			cols: []
 		};
-		cov_n6eqzb7og.s[27]++;
+		cov_1mywbui34o.s[27]++;
 		layout = layout.children[0];
 	}
 
 	// tricky recursion here, just debug it.. too many to explain
 	function nestRecursive(parent, object, offset, func) {
-		cov_n6eqzb7og.f[1]++;
-		cov_n6eqzb7og.s[28]++;
+		cov_1mywbui34o.f[1]++;
+		cov_1mywbui34o.s[28]++;
 
 		object.forEach(function (child) {
-			cov_n6eqzb7og.f[2]++;
-			cov_n6eqzb7og.s[29]++;
+			cov_1mywbui34o.f[2]++;
+			cov_1mywbui34o.s[29]++;
 
 			child.parent = parent;
-			var tempincrease = (cov_n6eqzb7og.s[30]++, child.size);
-			var no = (cov_n6eqzb7og.s[31]++, 0);
-			cov_n6eqzb7og.s[32]++;
+			var tempincrease = (cov_1mywbui34o.s[30]++, child.size);
+			var no = (cov_1mywbui34o.s[31]++, 0);
+			cov_1mywbui34o.s[32]++;
 			child.parent.sibling = [];
-			cov_n6eqzb7og.s[33]++;
+			cov_1mywbui34o.s[33]++;
 			while (tempincrease <= parent.size - 1) {
-				cov_n6eqzb7og.s[34]++;
+				cov_1mywbui34o.s[34]++;
 
 				child.idx = offset + tempincrease;
-				cov_n6eqzb7og.s[35]++;
+				cov_1mywbui34o.s[35]++;
 				child.no = no;
-				cov_n6eqzb7og.s[36]++;
+				cov_1mywbui34o.s[36]++;
 				tempincrease += child.size;
-				cov_n6eqzb7og.s[37]++;
+				cov_1mywbui34o.s[37]++;
 				child.parent.sibling.push(offset + child.size * (no + 1));
-				cov_n6eqzb7og.s[38]++;
+				cov_1mywbui34o.s[38]++;
 				nestRecursive(child, child.children, offset + child.size * no, func);
-				cov_n6eqzb7og.s[39]++;
+				cov_1mywbui34o.s[39]++;
 				no++;
 			}
 		});
-		cov_n6eqzb7og.s[40]++;
+		cov_1mywbui34o.s[40]++;
 		func(parent);
 	}
 
 	function extractBaseChildren(child, array) {
-		cov_n6eqzb7og.f[3]++;
-		cov_n6eqzb7og.s[41]++;
+		cov_1mywbui34o.f[3]++;
+		cov_1mywbui34o.s[41]++;
 
 		child.sibling.forEach(function (innerchild) {
-			cov_n6eqzb7og.f[4]++;
+			cov_1mywbui34o.f[4]++;
 
-			var foundChild = (cov_n6eqzb7og.s[42]++, templateindexed[innerchild]);
-			cov_n6eqzb7og.s[43]++;
+			var foundChild = (cov_1mywbui34o.s[42]++, templateindexed[innerchild]);
+			cov_1mywbui34o.s[43]++;
 			if (foundChild.sibling == undefined) {
-				cov_n6eqzb7og.b[2][0]++;
-				cov_n6eqzb7og.s[44]++;
+				cov_1mywbui34o.b[2][0]++;
+				cov_1mywbui34o.s[44]++;
 
 				array.push(innerchild);
 			} else {
-				cov_n6eqzb7og.b[2][1]++;
-				cov_n6eqzb7og.s[45]++;
+				cov_1mywbui34o.b[2][1]++;
+				cov_1mywbui34o.s[45]++;
 
 				extractBaseChildren(foundChild, array);
 			}
@@ -3055,104 +3055,104 @@ function ViewModes(data) {
 	// make new column objects
 	// be aware the values from child in here are temporally from transitive nature. U cannot keep references since
 	// they will change in future. Presumably to the last one...
-	cov_n6eqzb7og.s[46]++;
+	cov_1mywbui34o.s[46]++;
 	nestRecursive(data.layout, data.layout.children, 0, function (child) {
-		cov_n6eqzb7og.f[5]++;
+		cov_1mywbui34o.f[5]++;
 
 		// actual element
-		var newElement = (cov_n6eqzb7og.s[47]++, {
+		var newElement = (cov_1mywbui34o.s[47]++, {
 			// type : child.name,
 			parenttypes: [],
 			hash: child.idx
 			// find out all parents and top
-		});var parent = (cov_n6eqzb7og.s[48]++, child.parent);
-		cov_n6eqzb7og.s[49]++;
+		});var parent = (cov_1mywbui34o.s[48]++, child.parent);
+		cov_1mywbui34o.s[49]++;
 		while (parent != undefined) {
 			// register aggregation type
 			// register all types to the new columnIndex object
-			var previdx = (cov_n6eqzb7og.s[50]++, child.idx - parent.size);
-			cov_n6eqzb7og.s[51]++;
+			var previdx = (cov_1mywbui34o.s[50]++, child.idx - parent.size);
+			cov_1mywbui34o.s[51]++;
 			newElement.parenttypes.push({
 				idx: parent.idx,
 				type: parent.name,
-				prevme: previdx > 0 ? (cov_n6eqzb7og.b[3][0]++, previdx) : (cov_n6eqzb7og.b[3][1]++, undefined)
+				prevme: previdx > 0 ? (cov_1mywbui34o.b[3][0]++, previdx) : (cov_1mywbui34o.b[3][1]++, undefined)
 			});
 			// if the next is undefined, we found top.
-			cov_n6eqzb7og.s[52]++;
+			cov_1mywbui34o.s[52]++;
 			newElement.top = parent.idx;
-			cov_n6eqzb7og.s[53]++;
+			cov_1mywbui34o.s[53]++;
 			parent = parent.parent;
 		}
 		// could be top, of so, we don't need this information
-		cov_n6eqzb7og.s[54]++;
+		cov_1mywbui34o.s[54]++;
 		if (child.parent != undefined) {
-			cov_n6eqzb7og.b[4][0]++;
-			cov_n6eqzb7og.s[55]++;
+			cov_1mywbui34o.b[4][0]++;
+			cov_1mywbui34o.s[55]++;
 
 			newElement.agg = child.parent.idx;
-			cov_n6eqzb7og.s[56]++;
+			cov_1mywbui34o.s[56]++;
 			newElement.period = formulasetLookup[child.idx];
 		} else {
-			cov_n6eqzb7og.b[4][1]++;
+			cov_1mywbui34o.b[4][1]++;
 		}
 		// could be aggregated, we want to know what siblings it had
-		cov_n6eqzb7og.s[57]++;
+		cov_1mywbui34o.s[57]++;
 		if (child.sibling != undefined) {
-			cov_n6eqzb7og.b[5][0]++;
-			cov_n6eqzb7og.s[58]++;
+			cov_1mywbui34o.b[5][0]++;
+			cov_1mywbui34o.s[58]++;
 
 			newElement.sibling = child.sibling.slice();
-			var tarr = (cov_n6eqzb7og.s[59]++, []);
+			var tarr = (cov_1mywbui34o.s[59]++, []);
 			// add the base children aswell for quicker and eaier lookup later
-			cov_n6eqzb7og.s[60]++;
+			cov_1mywbui34o.s[60]++;
 			extractBaseChildren(child, tarr);
-			cov_n6eqzb7og.s[61]++;
+			cov_1mywbui34o.s[61]++;
 			newElement.allchildren = tarr;
 		} else {
-			cov_n6eqzb7og.b[5][1]++;
+			cov_1mywbui34o.b[5][1]++;
 
 			// this is smallest we get
-			var period = (cov_n6eqzb7og.s[62]++, formulasetLookup[child.idx]);
-			cov_n6eqzb7og.s[63]++;
+			var period = (cov_1mywbui34o.s[62]++, formulasetLookup[child.idx]);
+			cov_1mywbui34o.s[63]++;
 			if (period.first == undefined) {
-				cov_n6eqzb7og.b[6][0]++;
-				cov_n6eqzb7og.s[64]++;
+				cov_1mywbui34o.b[6][0]++;
+				cov_1mywbui34o.s[64]++;
 
 				period.first = child.idx;
 			} else {
-				cov_n6eqzb7og.b[6][1]++;
+				cov_1mywbui34o.b[6][1]++;
 			}
-			cov_n6eqzb7og.s[65]++;
+			cov_1mywbui34o.s[65]++;
 			formulasetLookup[child.idx].last = child.idx;
 		}
 		// add elements to the base cols
-		cov_n6eqzb7og.s[66]++;
+		cov_1mywbui34o.s[66]++;
 		viewmodes[child.name].cols.push(newElement);
-		cov_n6eqzb7og.s[67]++;
+		cov_1mywbui34o.s[67]++;
 		templateindexed[newElement.hash] = newElement;
 	});
 
 	// convert template column index into real index
 	function calculateIndex(timelineId, columnId) {
-		cov_n6eqzb7og.f[6]++;
+		cov_1mywbui34o.f[6]++;
 
-		var columnId = (cov_n6eqzb7og.s[68]++, columnId * columnMultiplier);
+		var columnId = (cov_1mywbui34o.s[68]++, columnId * columnMultiplier);
 		// add offset,0 for the titleValue, 1 for dummy cache,we starting from 1 so +1
-		cov_n6eqzb7og.s[69]++;
+		cov_1mywbui34o.s[69]++;
 		columnId++;
-		cov_n6eqzb7og.s[70]++;
+		cov_1mywbui34o.s[70]++;
 		return columnId;
 	}
 
 	// convert meta data in real column object..
 	// don't make references. The values are re-used over timelines
-	cov_n6eqzb7og.s[71]++;
+	cov_1mywbui34o.s[71]++;
 	for (var vmode in this.viewmodes) {
-		cov_n6eqzb7og.s[72]++;
+		cov_1mywbui34o.s[72]++;
 
 		// this loop will be used for all viewmodes when wisely declared.
 		for (var tId = 0; tId < timelineSize; tId++) {
-			cov_n6eqzb7og.s[73]++;
+			cov_1mywbui34o.s[73]++;
 
 			// create new array for the timeline
 			this.viewmodes[vmode].columns[tId] = [];
@@ -3160,33 +3160,33 @@ function ViewModes(data) {
 	}
 	// creat all real objects for all timeslines first, we use the indexes created to lookup the elements while
 	// loooking for references
-	cov_n6eqzb7og.s[74]++;
+	cov_1mywbui34o.s[74]++;
 	for (var tId = 0; tId < timelineSize; tId++) {
-		cov_n6eqzb7og.s[75]++;
+		cov_1mywbui34o.s[75]++;
 
 		for (var vmode in this.viewmodes) {
 			// times multiplier
 			// jsut for quick reference place the array in here;
-			var currentviewmode = (cov_n6eqzb7og.s[76]++, viewmodes[vmode]);
-			var currentviewmodecolumns = (cov_n6eqzb7og.s[77]++, currentviewmode.cols);
-			cov_n6eqzb7og.s[78]++;
+			var currentviewmode = (cov_1mywbui34o.s[76]++, viewmodes[vmode]);
+			var currentviewmodecolumns = (cov_1mywbui34o.s[77]++, currentviewmode.cols);
+			cov_1mywbui34o.s[78]++;
 			for (var cId = 0; cId < currentviewmodecolumns.length; cId++) {
-				var columnEntriesForTimeline = (cov_n6eqzb7og.s[79]++, currentviewmode.columns[tId]);
-				var metadata = (cov_n6eqzb7og.s[80]++, currentviewmode.cols[cId]);
-				var columnId = (cov_n6eqzb7og.s[81]++, calculateIndex(tId, metadata.hash));
-				var previousColumn = (cov_n6eqzb7og.s[82]++, cId == 0 ? (cov_n6eqzb7og.b[7][0]++, infinitColumn) : (cov_n6eqzb7og.b[7][1]++, columnEntriesForTimeline[columnEntriesForTimeline.length - 1]));
-				var columnElement = (cov_n6eqzb7og.s[83]++, {
+				var columnEntriesForTimeline = (cov_1mywbui34o.s[79]++, currentviewmode.columns[tId]);
+				var metadata = (cov_1mywbui34o.s[80]++, currentviewmode.cols[cId]);
+				var columnId = (cov_1mywbui34o.s[81]++, calculateIndex(tId, metadata.hash));
+				var previousColumn = (cov_1mywbui34o.s[82]++, cId == 0 ? (cov_1mywbui34o.b[7][0]++, infinitColumn) : (cov_1mywbui34o.b[7][1]++, columnEntriesForTimeline[columnEntriesForTimeline.length - 1]));
+				var columnElement = (cov_1mywbui34o.s[83]++, {
 					header: headers.columns,
 					hash: columnId,
 					prev: previousColumn
 				});
-				cov_n6eqzb7og.s[84]++;
+				cov_1mywbui34o.s[84]++;
 				indexed[columnId] = columnElement;
 				// add to the stack
-				cov_n6eqzb7og.s[85]++;
+				cov_1mywbui34o.s[85]++;
 				columnEntriesForTimeline.push(columnElement);
 				// we know the first column from this, while being the first we can references it from here
-				cov_n6eqzb7og.s[86]++;
+				cov_1mywbui34o.s[86]++;
 				columnElement.first = columnEntriesForTimeline[0];
 				// we don't knwow the last.. since it could be in the future, we have to add it later
 			}
@@ -3197,174 +3197,174 @@ function ViewModes(data) {
 		// but not about information about those children, since they are not determined yet, they exist, but the
 		// references are not u can however obtain information about the children from the template. And ofc there
 		// should not be a need to ask these kind of information
-		cov_n6eqzb7og.s[87]++;
+		cov_1mywbui34o.s[87]++;
 		for (var vmode in this.viewmodes) {
 			// times multiplier
 			// jsut for quick reference place the array in here;
-			var currentviewmode = (cov_n6eqzb7og.s[88]++, viewmodes[vmode]);
-			var currentviewmodecolumns = (cov_n6eqzb7og.s[89]++, currentviewmode.cols);
-			var columnslength = (cov_n6eqzb7og.s[90]++, currentviewmodecolumns.length);
-			cov_n6eqzb7og.s[91]++;
+			var currentviewmode = (cov_1mywbui34o.s[88]++, viewmodes[vmode]);
+			var currentviewmodecolumns = (cov_1mywbui34o.s[89]++, currentviewmode.cols);
+			var columnslength = (cov_1mywbui34o.s[90]++, currentviewmodecolumns.length);
+			cov_1mywbui34o.s[91]++;
 			for (var cId = 0; cId < columnslength; cId++) {
 				// here all references are made
 				// bky,doc,period,formula,aggregation, top, children.. all
-				var columnEntries = (cov_n6eqzb7og.s[92]++, currentviewmode.columns);
-				var _columnEntriesForTimeline = (cov_n6eqzb7og.s[93]++, columnEntries[tId]);
-				var entree = (cov_n6eqzb7og.s[94]++, currentviewmode.columns[tId][cId]);
-				cov_n6eqzb7og.s[95]++;
+				var columnEntries = (cov_1mywbui34o.s[92]++, currentviewmode.columns);
+				var _columnEntriesForTimeline = (cov_1mywbui34o.s[93]++, columnEntries[tId]);
+				var entree = (cov_1mywbui34o.s[94]++, currentviewmode.columns[tId][cId]);
+				cov_1mywbui34o.s[95]++;
 				entree[vmode] = entree;
-				cov_n6eqzb7og.s[96]++;
+				cov_1mywbui34o.s[96]++;
 				entree.index = cId;
-				cov_n6eqzb7og.s[97]++;
+				cov_1mywbui34o.s[97]++;
 				entree.last = _columnEntriesForTimeline[_columnEntriesForTimeline.length - 1];
-				cov_n6eqzb7og.s[98]++;
+				cov_1mywbui34o.s[98]++;
 				entree.first = _columnEntriesForTimeline[0];
-				cov_n6eqzb7og.s[99]++;
-				entree.next = cId == columnslength - 1 ? (cov_n6eqzb7og.b[8][0]++, infinitColumn) : (cov_n6eqzb7og.b[8][1]++, _columnEntriesForTimeline[cId + 1]);
-				var _metadata = (cov_n6eqzb7og.s[100]++, currentviewmode.cols[cId]);
-				cov_n6eqzb7og.s[101]++;
+				cov_1mywbui34o.s[99]++;
+				entree.next = cId == columnslength - 1 ? (cov_1mywbui34o.b[8][0]++, infinitColumn) : (cov_1mywbui34o.b[8][1]++, _columnEntriesForTimeline[cId + 1]);
+				var _metadata = (cov_1mywbui34o.s[100]++, currentviewmode.cols[cId]);
+				cov_1mywbui34o.s[101]++;
 				entree.formula = _metadata.period;
-				cov_n6eqzb7og.s[102]++;
+				cov_1mywbui34o.s[102]++;
 				if (_metadata.agg != undefined) {
-					cov_n6eqzb7og.b[9][0]++;
+					cov_1mywbui34o.b[9][0]++;
 
-					var aggColumnId = (cov_n6eqzb7og.s[103]++, calculateIndex(tId, _metadata.agg));
-					cov_n6eqzb7og.s[104]++;
+					var aggColumnId = (cov_1mywbui34o.s[103]++, calculateIndex(tId, _metadata.agg));
+					cov_1mywbui34o.s[104]++;
 					entree.agg = indexed[aggColumnId];
 				} else {
-					cov_n6eqzb7og.b[9][1]++;
+					cov_1mywbui34o.b[9][1]++;
 				}
-				cov_n6eqzb7og.s[105]++;
+				cov_1mywbui34o.s[105]++;
 				if (_metadata.sibling != undefined) {
-					cov_n6eqzb7og.b[10][0]++;
-					cov_n6eqzb7og.s[106]++;
+					cov_1mywbui34o.b[10][0]++;
+					cov_1mywbui34o.s[106]++;
 
 					entree.f = aggregationformulaset.formulasetId;
-					cov_n6eqzb7og.s[107]++;
+					cov_1mywbui34o.s[107]++;
 					entree.header = {
 						title: 'timelineAgg'
 					};
-					cov_n6eqzb7og.s[108]++;
+					cov_1mywbui34o.s[108]++;
 					entree.aggcols = [];
-					cov_n6eqzb7og.s[109]++;
+					cov_1mywbui34o.s[109]++;
 					_metadata.sibling.forEach(function (childid) {
-						cov_n6eqzb7og.f[7]++;
+						cov_1mywbui34o.f[7]++;
 
-						var childColId = (cov_n6eqzb7og.s[110]++, calculateIndex(tId, childid));
-						cov_n6eqzb7og.s[111]++;
+						var childColId = (cov_1mywbui34o.s[110]++, calculateIndex(tId, childid));
+						cov_1mywbui34o.s[111]++;
 						entree.aggcols.push(indexed[childColId]);
 					});
-					cov_n6eqzb7og.s[112]++;
+					cov_1mywbui34o.s[112]++;
 					entree.firstchild = indexed[calculateIndex(tId, _metadata.allchildren[0])];
-					cov_n6eqzb7og.s[113]++;
+					cov_1mywbui34o.s[113]++;
 					entree.lastchild = indexed[calculateIndex(tId, _metadata.allchildren[_metadata.allchildren.length - 1])];
 				} else {
-					cov_n6eqzb7og.b[10][1]++;
-					cov_n6eqzb7og.s[114]++;
+					cov_1mywbui34o.b[10][1]++;
+					cov_1mywbui34o.s[114]++;
 
 					entree.f = formulasetLookup[_metadata.hash].formulasetId;
 				}
 				// this will allow document values per timeline, if referring to timeline[0] there will only be one
 				// possible..
-				cov_n6eqzb7og.s[115]++;
+				cov_1mywbui34o.s[115]++;
 				entree.doc = _columnEntriesForTimeline[0]; // there only is one and one only, always correct behavior
 				// entree.period = (cId == 0) ? columnEntriesForTimeline[0] : columnEntriesForTimeline[1];// detail
 				// should refer to corresponding period add all period information
-				cov_n6eqzb7og.s[116]++;
+				cov_1mywbui34o.s[116]++;
 				if (_metadata.period != undefined) {
-					cov_n6eqzb7og.b[11][0]++;
-					cov_n6eqzb7og.s[117]++;
+					cov_1mywbui34o.b[11][0]++;
+					cov_1mywbui34o.s[117]++;
 
 					// now it will be able to aggregate
 					// can't do firstchild in this type.
 					entree.period = _columnEntriesForTimeline[_metadata.period.hash];
-					cov_n6eqzb7og.s[118]++;
+					cov_1mywbui34o.s[118]++;
 					entree.header = {
 						title: 'timeline ' + _metadata.period.formulaset.name
 					};
-					cov_n6eqzb7og.s[119]++;
+					cov_1mywbui34o.s[119]++;
 					entree.firstinperiod = indexed[calculateIndex(tId, _metadata.period.first)];
-					cov_n6eqzb7og.s[120]++;
+					cov_1mywbui34o.s[120]++;
 					entree.lastinperiod = indexed[calculateIndex(tId, _metadata.period.last)];
-					cov_n6eqzb7og.s[121]++;
+					cov_1mywbui34o.s[121]++;
 					for (var pi = 0; pi < periods.length; pi++) {
-						var period = (cov_n6eqzb7og.s[122]++, periods[pi]);
-						var tFirst = (cov_n6eqzb7og.s[123]++, indexed[calculateIndex(tId, period.first)]);
-						var formulaname = (cov_n6eqzb7og.s[124]++, period.formulaset.name);
-						cov_n6eqzb7og.s[125]++;
+						var period = (cov_1mywbui34o.s[122]++, periods[pi]);
+						var tFirst = (cov_1mywbui34o.s[123]++, indexed[calculateIndex(tId, period.first)]);
+						var formulaname = (cov_1mywbui34o.s[124]++, period.formulaset.name);
+						cov_1mywbui34o.s[125]++;
 						entree['first' + formulaname] = tFirst;
-						var tLast = (cov_n6eqzb7og.s[126]++, indexed[calculateIndex(tId, period.last)]);
-						cov_n6eqzb7og.s[127]++;
+						var tLast = (cov_1mywbui34o.s[126]++, indexed[calculateIndex(tId, period.last)]);
+						cov_1mywbui34o.s[127]++;
 						entree['last' + formulaname] = tLast;
-						cov_n6eqzb7og.s[128]++;
+						cov_1mywbui34o.s[128]++;
 						entree['isfirst' + formulaname] = tFirst.hash == entree.hash;
-						cov_n6eqzb7og.s[129]++;
+						cov_1mywbui34o.s[129]++;
 						entree['islast' + formulaname] = tLast.hash == entree.hash;
-						cov_n6eqzb7og.s[130]++;
+						cov_1mywbui34o.s[130]++;
 						entree['is' + formulaname] = period.formulasetId == formulasetLookup[_metadata.hash].formulasetId;
-						cov_n6eqzb7og.s[131]++;
-						entree['isprev' + formulaname] = entree.prev.hash == 0 ? (cov_n6eqzb7og.b[12][0]++, false) : (cov_n6eqzb7og.b[12][1]++, entree.prev['is' + formulaname]);
+						cov_1mywbui34o.s[131]++;
+						entree['isprev' + formulaname] = entree.prev.hash == 0 ? (cov_1mywbui34o.b[12][0]++, false) : (cov_1mywbui34o.b[12][1]++, entree.prev['is' + formulaname]);
 					}
-					cov_n6eqzb7og.s[132]++;
+					cov_1mywbui34o.s[132]++;
 					entree.isfirstinperiod = entree.firstinperiod.hash == entree.hash;
-					cov_n6eqzb7og.s[133]++;
+					cov_1mywbui34o.s[133]++;
 					entree.islastinperiod = entree.lastinperiod.hash == entree.hash;
 				} else {
-					cov_n6eqzb7og.b[11][1]++;
+					cov_1mywbui34o.b[11][1]++;
 				}
-				cov_n6eqzb7og.s[134]++;
+				cov_1mywbui34o.s[134]++;
 				entree.aggregated = _metadata.sibling != undefined;
-				cov_n6eqzb7og.s[135]++;
-				entree.tsy = _metadata.sibling == undefined ? (cov_n6eqzb7og.b[13][0]++, 1) : (cov_n6eqzb7og.b[13][1]++, _metadata.allchildren.length);
-				cov_n6eqzb7og.s[136]++;
+				cov_1mywbui34o.s[135]++;
+				entree.tsy = _metadata.sibling == undefined ? (cov_1mywbui34o.b[13][0]++, 1) : (cov_1mywbui34o.b[13][1]++, _metadata.allchildren.length);
+				cov_1mywbui34o.s[136]++;
 				entree.texceedtsy = _metadata.hash > entree.tsy; // should be infirstbkyr
 				// add all information about aggregation types;bkyr,all are available if not top..
 				// there is no need yet to give aggregated columns information about bookyear etc.. yet
-				cov_n6eqzb7og.s[137]++;
+				cov_1mywbui34o.s[137]++;
 				if (_metadata.sibling == undefined) {
-					cov_n6eqzb7og.b[14][0]++;
-					cov_n6eqzb7og.s[138]++;
+					cov_1mywbui34o.b[14][0]++;
+					cov_1mywbui34o.s[138]++;
 
 					for (var aggi = 0; aggi < _metadata.parenttypes.length; aggi++) {
-						var agg = (cov_n6eqzb7og.s[139]++, _metadata.parenttypes[aggi]);
-						var aggtype = (cov_n6eqzb7og.s[140]++, agg.type);
-						var template = (cov_n6eqzb7og.s[141]++, templateindexed[agg.idx]);
-						var tempatechilds = (cov_n6eqzb7og.s[142]++, template.allchildren);
-						var aggentree = (cov_n6eqzb7og.s[143]++, indexed[calculateIndex(tId, template.hash)]);
-						cov_n6eqzb7og.s[144]++;
+						var agg = (cov_1mywbui34o.s[139]++, _metadata.parenttypes[aggi]);
+						var aggtype = (cov_1mywbui34o.s[140]++, agg.type);
+						var template = (cov_1mywbui34o.s[141]++, templateindexed[agg.idx]);
+						var tempatechilds = (cov_1mywbui34o.s[142]++, template.allchildren);
+						var aggentree = (cov_1mywbui34o.s[143]++, indexed[calculateIndex(tId, template.hash)]);
+						cov_1mywbui34o.s[144]++;
 						entree[aggtype] = aggentree;
-						cov_n6eqzb7og.s[145]++;
-						entree['prev' + aggtype] = aggentree.prev == undefined ? (cov_n6eqzb7og.b[15][0]++, infinitColumn) : (cov_n6eqzb7og.b[15][1]++, aggentree.prev);
-						cov_n6eqzb7og.s[146]++;
-						entree['previn' + aggtype] = agg.prevme == undefined ? (cov_n6eqzb7og.b[16][0]++, infinitColumn) : (cov_n6eqzb7og.b[16][1]++, indexed[calculateIndex(tId, agg.prevme)]);
-						cov_n6eqzb7og.s[147]++;
+						cov_1mywbui34o.s[145]++;
+						entree['prev' + aggtype] = aggentree.prev == undefined ? (cov_1mywbui34o.b[15][0]++, infinitColumn) : (cov_1mywbui34o.b[15][1]++, aggentree.prev);
+						cov_1mywbui34o.s[146]++;
+						entree['previn' + aggtype] = agg.prevme == undefined ? (cov_1mywbui34o.b[16][0]++, infinitColumn) : (cov_1mywbui34o.b[16][1]++, indexed[calculateIndex(tId, agg.prevme)]);
+						cov_1mywbui34o.s[147]++;
 						entree['isinfirst' + aggtype] = agg.prevme == undefined;
-						var prevagg = (cov_n6eqzb7og.s[148]++, aggentree.prev);
-						cov_n6eqzb7og.s[149]++;
-						entree['lastinprev' + aggtype] = prevagg.hash == 0 ? (cov_n6eqzb7og.b[17][0]++, infinitColumn) : (cov_n6eqzb7og.b[17][1]++, prevagg.lastchild);
-						cov_n6eqzb7og.s[150]++;
-						entree['firstinprev' + aggtype] = prevagg.hash == 0 ? (cov_n6eqzb7og.b[18][0]++, infinitColumn) : (cov_n6eqzb7og.b[18][1]++, prevagg.firstchild);
-						cov_n6eqzb7og.s[151]++;
+						var prevagg = (cov_1mywbui34o.s[148]++, aggentree.prev);
+						cov_1mywbui34o.s[149]++;
+						entree['lastinprev' + aggtype] = prevagg.hash == 0 ? (cov_1mywbui34o.b[17][0]++, infinitColumn) : (cov_1mywbui34o.b[17][1]++, prevagg.lastchild);
+						cov_1mywbui34o.s[150]++;
+						entree['firstinprev' + aggtype] = prevagg.hash == 0 ? (cov_1mywbui34o.b[18][0]++, infinitColumn) : (cov_1mywbui34o.b[18][1]++, prevagg.firstchild);
+						cov_1mywbui34o.s[151]++;
 						entree['lastin' + aggtype] = prevagg;
-						var firstEntree = (cov_n6eqzb7og.s[152]++, indexed[calculateIndex(tId, tempatechilds[0])]);
-						cov_n6eqzb7og.s[153]++;
+						var firstEntree = (cov_1mywbui34o.s[152]++, indexed[calculateIndex(tId, tempatechilds[0])]);
+						cov_1mywbui34o.s[153]++;
 						entree['first' + aggtype] = firstEntree;
-						cov_n6eqzb7og.s[154]++;
+						cov_1mywbui34o.s[154]++;
 						entree['isfirst' + aggtype] = firstEntree.hash == entree.hash;
-						var lastEntree = (cov_n6eqzb7og.s[155]++, indexed[calculateIndex(tId, tempatechilds[tempatechilds.length - 1])]);
-						cov_n6eqzb7og.s[156]++;
+						var lastEntree = (cov_1mywbui34o.s[155]++, indexed[calculateIndex(tId, tempatechilds[tempatechilds.length - 1])]);
+						cov_1mywbui34o.s[156]++;
 						entree['last' + aggtype] = lastEntree;
-						cov_n6eqzb7og.s[157]++;
+						cov_1mywbui34o.s[157]++;
 						entree['islast' + aggtype] = lastEntree.hash == entree.hash;
 					}
-					cov_n6eqzb7og.s[158]++;
-					entree.mutcalc = entree.infirstbkyr ? (cov_n6eqzb7og.b[19][0]++, 1) : (cov_n6eqzb7og.b[19][1]++, NA); // information not available in aggcolumns,yet...
+					cov_1mywbui34o.s[158]++;
+					entree.mutcalc = entree.infirstbkyr ? (cov_1mywbui34o.b[19][0]++, 1) : (cov_1mywbui34o.b[19][1]++, NA); // information not available in aggcolumns,yet...
 				} else {
-					cov_n6eqzb7og.b[14][1]++;
+					cov_1mywbui34o.b[14][1]++;
 				}
 				// when period or doc variable refer to Detail Variable, which is kind of strange..
-				cov_n6eqzb7og.s[159]++;
-				entree.detail = cId == 0 ? (cov_n6eqzb7og.b[20][0]++, _columnEntriesForTimeline[0]) : (cov_n6eqzb7og.b[20][1]++, _columnEntriesForTimeline[1]); // period should
+				cov_1mywbui34o.s[159]++;
+				entree.detail = cId == 0 ? (cov_1mywbui34o.b[20][0]++, _columnEntriesForTimeline[0]) : (cov_1mywbui34o.b[20][1]++, _columnEntriesForTimeline[1]); // period should
 				// refer to
 				// first detail
 				// from own
@@ -3372,27 +3372,27 @@ function ViewModes(data) {
 			}
 		}
 	}
-	cov_n6eqzb7og.s[160]++;
+	cov_1mywbui34o.s[160]++;
 	if (_log.DEBUG) {
-			cov_n6eqzb7og.b[21][0]++;
-			cov_n6eqzb7og.s[161]++;
+			cov_1mywbui34o.b[21][0]++;
+			cov_1mywbui34o.s[161]++;
 			(0, _log.debug)('Created Xaxis for ' + data.time.columnSize + ' columns on ' + timelineSize + ' timelines ');
 		} else {
-		cov_n6eqzb7og.b[21][1]++;
+		cov_1mywbui34o.b[21][1]++;
 	} /**     * Assign references to the infinit column     */
-	cov_n6eqzb7og.s[162]++;
+	cov_1mywbui34o.s[162]++;
 	infinitColumn.doc = entree.doc;
 }
 
-cov_n6eqzb7og.s[163]++;
+cov_1mywbui34o.s[163]++;
 ViewModes.prototype.toString = function () {
-	cov_n6eqzb7og.f[8]++;
+	cov_1mywbui34o.f[8]++;
 
-	var self = (cov_n6eqzb7og.s[164]++, this);
-	cov_n6eqzb7og.s[165]++;
+	var self = (cov_1mywbui34o.s[164]++, this);
+	cov_1mywbui34o.s[165]++;
 	return Object.keys(this.viewmodes).map(function (mode) {
-		cov_n6eqzb7og.f[9]++;
-		cov_n6eqzb7og.s[166]++;
+		cov_1mywbui34o.f[9]++;
+		cov_1mywbui34o.s[166]++;
 
 		return [mode, '(', self.viewmodes[mode].cols.length, ')'].join('');
 	});

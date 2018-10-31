@@ -1,11 +1,12 @@
-import request             from 'request-promise-json'
-import log                 from 'log6'
-import compression         from 'compression'
-import expressStaticGzip   from 'express-static-gzip'
-import express             from 'express'
-import browserify          from 'browserify-middleware'
-import express_no_favIcons from 'express-no-favicons'
-import cors                from 'cors'
+import request                        from 'request-promise-json'
+import log                            from 'log6'
+import compression                    from 'compression'
+import expressStaticGzip              from 'express-static-gzip'
+import express                        from 'express'
+import browserify                     from 'browserify-middleware'
+import express_no_favIcons            from 'express-no-favicons'
+import cors                           from 'cors'
+import { FILE_SYSTEM_RESOURCES_PATH } from '../git-connect/index'
 
 const port = 8083
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -34,7 +35,7 @@ app.use('/id/:id/', expressStaticGzip(__dirname + '/node_modules/ace-builds/src-
 app.use('/id/:id/', expressStaticGzip(__dirname + '/node_modules/dc/'))
 
 //proxies
-app.use('/id/:id/resources/', expressStaticGzip(__dirname + '/../git-connect/resources/'))
+app.use('/id/:id/resources/', expressStaticGzip(FILE_SYSTEM_RESOURCES_PATH))
 app.use('/id/:id/', expressStaticGzip(__dirname + '/lme-ide/'))
 app.use('/id/:id/', expressStaticGzip(__dirname + '/lme-ide/dist/'))
 

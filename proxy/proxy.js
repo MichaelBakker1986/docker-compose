@@ -2,13 +2,13 @@
  * JSON parsing does not work here yet, it will modify the proxy requests
  * Just a dynamic reverse proxy
  */
-import Logstash   from 'logstash-client'
-import now        from 'performance-now'
-import log        from 'log6'
-import proxy      from 'http-proxy-middleware'
-import bodyParser from 'body-parser'
-import express    from 'express'
-import cors       from 'cors'
+import Logstash      from 'logstash-client'
+import now           from 'performance-now'
+import log, { info } from 'log6'
+import proxy         from 'http-proxy-middleware'
+import bodyParser    from 'body-parser'
+import express       from 'express'
+import cors          from 'cors'
 
 import method_override from 'method-override'
 
@@ -144,4 +144,4 @@ async function onProxyRes(proxyRes, req, res) {
 	}
 }
 
-app.listen(internal_proxy_port, () => log.info('<a href="http://blfif-cv-lme01.finance.lab:5601"> Kibana logstash</a><span> deployed.</span>'))
+app.listen(internal_proxy_port, () => info(`<a href="http://${host}"> Kibana logstash</a><span> deployed.</span>`))

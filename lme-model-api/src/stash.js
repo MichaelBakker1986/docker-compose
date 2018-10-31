@@ -1,9 +1,8 @@
-import { exec }                                     from 'child-process-promise'
-import { DEBUG, debug, error, info, warn }          from 'log6'
-import write                                        from 'node-fs-writefile-promise'
-import ModelStorage                                 from './ModelStorage'
-import uuid                                         from 'uuid4'
-import { writeJBehaveAsString, writeModelAsString } from '../../git-connect/ResourceManager'
+import { exec }                                             from 'child-process-promise'
+import { DEBUG, debug, error, info, warn }                  from 'log6'
+import ModelStorage                                         from './ModelStorage'
+import uuid                                                 from 'uuid4'
+import { commit, writeJBehaveAsString, writeModelAsString } from '../../git-connect/ResourceManager'
 
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -63,50 +62,51 @@ class Stash {
 		})
 	}
 
-	//git clone ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
 	//TODO: backup file, on fail restore old file
-	commit(user_id, name, data, type) {
+	async commit(user_id, model_name, data, type = '.ffl') {
 		/*
 		 * Save delta's to the DB to keep track of history.
 		 * Later this will be used to resolve the FFL
 		 * The FFL file will always be pushed to master also
 		 */
 		try {
-			ModelStorage.saveDelta(name, data)
+			ModelStorage.saveDelta(model_name, data)
 		} catch (err) {
 			warn('Failed saving delta to DB', err)
 		}
-		//transform ffl to JSON canvas file
-		return Promise.all([write(`${__dirname}/../../git-connect/resources/${name}` + (type || '.ffl'), data)])
-		.then(() => {
-			return Promise.all([exec(`node -r babel-register ${__dirname}/FFLWebpackConverter.js ${name} ${type === '.ffl' ? 'FFL2' : 'FFL'}`)]).then((result) => {
-				if (result[0].stderr) throw Error(result[0].stderr)
+		try {
+			await writeModelAsString({ model_name, data })
+			try {
+				//const executable =
+				const result = await exec(`node -r babel-register ${__dirname}/FFLWebpackConverter.js ${model_name} ${type === '.ffl' ? 'FFL2' : 'FFL'}`)
+				if (result.stderr) throw Error(result.stderr)
 				let userID = uuid()
 				if (develop) {
-					console.info(`<span>ffl model update:</span><a href="http://${domain}/#${name}&${userID}">${name}</a><span></span>`)
-					info(`[${user_id}] modified model file: [${name}]. Begin pushing to repository.`) //=> '/tmp/foo'
+					console.info(`<span>ffl model update:</span><a href="http://${domain}/#${model_name}&${userID}">${model_name}</a><span></span>`)
+					info(`[${user_id}] modified model file: [${model_name}]. Begin pushing to repository.`) //=> '/tmp/foo'
 					return 'develop mode'
 				}
-				let command = `git pull &&  git commit -a -m "Model update [${name}] by ${user_id}@${host}" && git push && git rev-parse HEAD`
-				return exec(command).then((ok) => {
+				try {
+					const ok = await commit(`Model update [${model_name}] by ${user_id}@${host}`)
 					const output = ok.stdout.split('\n')
-					const stashCommit = `<a href="https://stash.topicus.nl/projects/FF/repos/fesjs/commits/${output[output.length - 2]}"> DIFF </a>`
-
-					console.info(`<a href="http://${domain}#${name}&${userID}"> ${name} </a><span> Updated </span>${stashCommit}<span> By ${user_id}@${host}</span>`)
-				}).catch((err) => {
+					const stashCommit = `<a href="https://stash.topicus.nl/projects/FF/repos/financialmodel/commits/${output[output.length - 2]}"> DIFF </a>`
+					console.info(`<a href="http://${domain}#${model_name}&${userID}"> ${model_name} </a><span> Updated </span>${stashCommit}<span> By ${user_id}@${host}</span>`)
+				}
+				catch (err) {
 					const errorData = err.toString()
 					if (errorData.includes('No changes detected')) {
 						return 'No changes detected in file.'
 					} else {
 						throw Error(`GIT commit failed while pushing file to repository:[${errorData}]`)
 					}
-				})
-			}).catch((err) => {
+				}
+			}
+			catch (err) {
 				throw Error(`Failed to write or compile javascript. [${err.toString()}]`)
-			})
-		}).catch((err) => {
+			}
+		} catch (err) {
 			throw Error(`Failed to write file to resources folder. [${err.toString()}]`)
-		})
+		}
 	}
 
 	models(branch, path) {

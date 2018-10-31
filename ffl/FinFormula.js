@@ -173,5 +173,4 @@ FinFormula.prototype.fixCasing = function(buf) {
 		return $1.toUpperCase()
 	})
 }
-export { FinFormula }
 export default new FinFormula()
