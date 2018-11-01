@@ -1,5 +1,5 @@
 import * as esprima                              from 'esprima'
-import { debug, DEBUG, TRACE, trace }            from 'log6'
+import { debug, DEBUG, trace, TRACE, warn }      from 'log6'
 import { AST }                                   from 'ast-node-utils'
 import { RegisterToFFL }                         from './RegisterToFFL'
 import { RegisterFormulaBuilder }                from './RegisterFormulaBuilder'
@@ -262,7 +262,7 @@ RegisterToLMEParser.prototype.parseFFLFormula = function(indexer, formula, nodeN
 		formulaReturn = esprima.parse(fin_parse).body[0].expression
 	}
 	catch (e) {
-		if (DEBUG) debug(`unable to parse [${fin_parse}] returning it as String value [${nodeName}] : ${col}`, e)
+		if (DEBUG) warn(`unable to parse '${fin_parse}' returning it as String value. Variable: [${nodeName}]:${col} because ${e.toString()}`)
 		formulaReturn = AST.STRING(fin_parse)
 		if (global.IDE_DEBUGMODUS) context.audittrail.addRow(['MODEL', 'ERROR', nodeName, col, '', '', '', e.toString(), formula, null, fin_parse])
 	}

@@ -9,6 +9,9 @@ import {
 	writeJBehaveAsString,
 	writeModelAsString
 }                                          from '../../git-connect/ResourceManager'
+import { Contractor }                      from '../../financiallanguageconverter/DatastoreCluster/index'
+import { Register }                        from '../../lme-core/src/Register'
+import { FFLToRegister }                   from '../../ffl/FFLToRegister'
 
 const host = process.env.HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
@@ -81,6 +84,12 @@ class Stash {
 		let method_result = {}
 		try {
 			delta_result = ModelStorage.saveDelta(model_name, data)
+
+			const contract = new Contractor({ auth_id: model_name, data_id: model_name })
+			const modelRegister = new Register
+			new FFLToRegister(modelRegister, data).parseProperties()
+			await contract.applyContractChanges(modelRegister)
+
 		} catch (err) {
 			warn('Failed saving delta to DB', err)
 		}
@@ -124,7 +133,12 @@ class Stash {
 				method_result = { fail: true, message: `Failed to write or compile javascript. [${err.toString()}]` }
 			}
 		} catch (err) {
-			method_result = { fail: true, message: `Failed to write file to resources folder. [${err.toString()}]` }
+			if (DEBUG) debug(`Failed to connect to git-repo ${err.stack}`)
+			if (err.toString().includes('Connection timed out')) {
+				method_result = { fail: true, message: `Unable to connect to model repository` }
+			} else {
+				method_result = { fail: true, message: `Failed to write file to resources folder. [${err.toString()}]` }
+			}
 		}
 		return method_result
 	}

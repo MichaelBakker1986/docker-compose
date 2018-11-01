@@ -117,7 +117,6 @@ class Register {
 		const schema_index = this.schema.indexOf(key)
 		for (let i = (start || 0); i < this.i.length; i++) if (this.i[i][schema_index] === value) result.push(this.i[i])
 		return result
-		//return this.i.filter(row => row[schema_index] === value)
 	}
 
 	distinct(schema, start) {

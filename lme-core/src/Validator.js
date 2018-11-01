@@ -7,18 +7,22 @@ export class Validator {
 	}
 
 	validateRefersto() {
-		const names = this._register.getAllValuesForColumn('name')
-		const refers_to = this._register.getAllValuesForColumn(REFERS_TO_PROPERTY_NAME)
-		const missing_variables = [... refers_to].filter((refersto) => !names.has(refersto))
+		const register = this._register
+		const names = register.getAllValuesForColumn('name')
+		const refers_to = register.getAllValuesForColumn(REFERS_TO_PROPERTY_NAME)
+		const missing_variables =
+			      [... refers_to].filter(refers_to => refers_to)//filter nulls
+			      .filter((refersto) => !names.has(refersto)) //filter variables
 
-		const variable_errors = missing_variables.map(refers_to => this._register.find(REFERS_TO_PROPERTY_NAME, refers_to))
+		const variable_errors = missing_variables.map(refers_to =>// get missing ones
+			register.find(REFERS_TO_PROPERTY_NAME, refers_to))// multiply with occurrences,
+		.flat().map(n => register.humanNode(n))    // flatten, convert to Nodes
 
 		this._validate_result.refersto = {
 			fail                  : missing_variables.length > 0,
 			missing_variable_names: variable_errors,
 			toString() {
-				// noinspection JSCheckFunctionSignatures
-				return missing_variables.map(([name, referesto]) => `variable ${name} refers missing ${referesto}`).join('\n')
+				return variable_errors.map(n => `variable ${n.name} refers missing ${n[REFERS_TO_PROPERTY_NAME]}`).join('\n')
 			}
 		}
 	}

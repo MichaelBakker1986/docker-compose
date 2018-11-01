@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _lmeCore = require('lme-core');
+var _index = require('../lme-core/index');
 
 var _FFLToRegister = require('./FFLToRegister');
 
@@ -22,7 +22,7 @@ var RegisterPlainFFLDecorator = {
 		return new _RegisterToLMEParser2.default().deParse(data, workbook);
 	},
 	parseData: function parseData(data, workbook) {
-		var register = data.register || new _lmeCore.Register();
+		var register = data.register || new _index.Register();
 		var raw_model_data = data.raw || data;
 
 		var fflFormatter = new _FFLToRegister.FFLToRegister(register, raw_model_data);

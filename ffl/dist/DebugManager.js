@@ -81,7 +81,7 @@ DebugManager.prototype.validateImportedSolution = function (modelName) {
 				wb.get(name, property, 0, wb.resolveY(0));
 				validateResponse.succes.push(name);
 			} catch (err) {
-				(0, _log.error)('Error while trying:' + name + '.' + property + ' in model ' + modelName, err);
+				console.error('Error while trying:' + name + '.' + property + ' in model ' + modelName, err);
 			}
 		}
 	});

@@ -1,3 +1,6 @@
 [submodule "financialmodel"]
 	path = financialmodel
 	url = ssh://git@stash.topicus.nl:7999/ff/financialmodel.git
+[submodule "financiallanguageconverter"]
+	path = financiallanguageconverter
+	url = ssh://git@stash.topicus.nl:7999/ff/financiallanguageconverter.git

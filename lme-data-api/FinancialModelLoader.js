@@ -1,7 +1,7 @@
 /**
  * Load FFL models, update Dynamic Swagger docs
  */
-import { DEBUG, debug, error, warn }                                                  from 'log6'
+import { DEBUG, debug, error, TRACE, trace, warn }                                    from 'log6'
 import LMEFacade, { DISPLAY_TYPE, INPUT_NODE_TYPE, OUTPUT_NODE_TYPE, SolutionFacade } from '../lme-core/index'
 import fflMath                                                                        from '../math/ffl-math'
 import { RegisterPlainFFLDecorator }                                                  from '../ffl/index'
@@ -28,7 +28,7 @@ ModelLoader.addListener(async (fflModelData, path) => {
 		const matrix = await excelPlugin.loadExcelFile(pathModelName)
 
 		SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: matrix }])
-
+		if (DEBUG) debug(`Loading model: ${pathModelName} path:${path}`)
 		const lmeModel = LMEFacade.initializeFFlModelData(fflModelData, path)
 		const modelname = lmeModel.modelName
 		const model_version_postfix = lmeModel.model_version ? (`/v${lmeModel.model_version}`) : ''
@@ -40,10 +40,10 @@ ModelLoader.addListener(async (fflModelData, path) => {
 		 * Update API-definition with variable names
 		 */
 		const outputNodes = indexer.find(DISPLAY_TYPE, INPUT_NODE_TYPE).concat(indexer.find('data_options', OUTPUT_NODE_TYPE))
-		if (DEBUG) debug(`Found output nodes: ${JSON.stringify(outputNodes.map(n => indexer.humanNode(n).name))}`)
+		if (TRACE) trace(`Found output nodes: ${JSON.stringify(outputNodes.map(n => indexer.humanNode(n).name))}`)
 		if (outputNodes.length > 0) {
 			const inputNodes = indexer.find(DISPLAY_TYPE, INPUT_NODE_TYPE).concat(indexer.find('data_options', INPUT_NODE_TYPE))
-			if (DEBUG) debug(`Found inputNodes nodes: ${JSON.stringify(inputNodes.map(n => indexer.humanNode(n).name))}`)
+			if (TRACE) trace(`Found inputNodes nodes: ${JSON.stringify(inputNodes.map(n => indexer.humanNode(n).name))}`)
 			if (outputNodes.length !== inputNodes.length) {
 				warn('invalid in and output-nodes ')
 				return

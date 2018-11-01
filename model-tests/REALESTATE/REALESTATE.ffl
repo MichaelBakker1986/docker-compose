@@ -18,7 +18,7 @@ model REALESTATE uses BaseModel
   {
    datatype: number;
    frequency: document;
-   formula: not Visible(Q_STEP01) or (Q_STEP01_ACCEPTED and (Q_STEP01_OPENVALIDATION=0) and (Q_STEP01_PROGRESS>99%));
+   formula: not Visible(Q_STEP01) or (Q_STEP01_ACCEPTED and (Q_STEP01_OPENVALIDATION=0) and (Q_STEP01_PROGRESS>99));
    data_options: saveCalculatedValue,unscalable;
    displaytype: select;
    title: "Informatie over de rapportage en de rechtspersoon [titel]";
@@ -566,7 +566,7 @@ model REALESTATE uses BaseModel
    {
     datatype: string;
     frequency: document;
-    formula: String(If((Q_STEP01_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99%) and (Q_STEP01_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
+    formula: String(If((Q_STEP01_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP01_OPENVALIDATION[1]=0) and (Q_STEP01_PROGRESS[1]>99) and (Q_STEP01_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
     data_options: unscalable;
     title: "Waarschuwing bij stap 1";
     top_blanklines: 1;
@@ -621,7 +621,7 @@ model REALESTATE uses BaseModel
     data_options: unscalable;
     displaytype: select;
     title: "Akkoord";
-    locked: ((Q_STEP01_OPENVALIDATION=1) or (Q_STEP01_PROGRESS<100%));
+    locked: ((Q_STEP01_OPENVALIDATION=1) or (Q_STEP01_PROGRESS<100));
     visible: 1;
     choices: "0:Nee|1:Ja";
     options_title: locked;
@@ -683,7 +683,7 @@ model REALESTATE uses BaseModel
   {
    datatype: number;
    frequency: document;
-   formula: not Visible(Q_STEP02) or (Q_STEP02_ACCEPTED and (Q_STEP02_OPENVALIDATION=0) and (Q_STEP02_PROGRESS>99%));
+   formula: not Visible(Q_STEP02) or (Q_STEP02_ACCEPTED and (Q_STEP02_OPENVALIDATION=0) and (Q_STEP02_PROGRESS>99));
    data_options: saveCalculatedValue,unscalable;
    displaytype: select;
    title: "AQR informatie [titel]";
@@ -3893,7 +3893,7 @@ model REALESTATE uses BaseModel
    {
     datatype: string;
     frequency: document;
-    formula: String(If((Q_STEP02_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99%) and (Q_STEP02_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
+    formula: String(If((Q_STEP02_PROGRESS[1]<1) , "Nog niet alle verplichte gegevens zijn ingevoerd.\r\n","")&If((Q_STEP02_OPENVALIDATION[1]=0) and (Q_STEP02_PROGRESS[1]>99) and (Q_STEP02_ACCEPTED[1]=0) , "\r\nDeze stap moet nog worden geaccordeerd",""));
     data_options: unscalable;
     title: "Waarschuwing bij stap 2";
     top_blanklines: 1;
@@ -3948,7 +3948,7 @@ model REALESTATE uses BaseModel
     data_options: unscalable;
     displaytype: select;
     title: "Akkoord";
-    locked: ((Q_STEP02_OPENVALIDATION=1) or (Q_STEP02_PROGRESS<100%));
+    locked: ((Q_STEP02_OPENVALIDATION=1) or (Q_STEP02_PROGRESS<100));
     visible: 1;
     choices: "0:Nee|1:Ja";
     options_title: locked;

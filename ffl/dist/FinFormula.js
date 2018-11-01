@@ -139,5 +139,4 @@ FinFormula.prototype.fixCasing = function (buf) {
 		return $1.toUpperCase();
 	});
 };
-exports.FinFormula = FinFormula;
 exports.default = new FinFormula();

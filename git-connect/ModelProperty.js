@@ -1,11 +1,11 @@
-import orm from 'orm'
-import log from 'log6'
+import orm             from 'orm'
+import { error, info } from 'log6'
 
 const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@127.0.0.1:5432/lme'
 export const ORM = new Promise((accept, reject) => {
 
 	orm.connectAsync(dbConnectString).then(async (db) => {
-		console.info(`Connected with database ${db}`)
+		info(`Connected with database ${dbConnectString.split('@')[1]}`)
 		db.use(require('orm-timestamps'), {
 			createdProperty : 'created_at',
 			modifiedProperty: 'modified_at',
@@ -91,7 +91,7 @@ export const ORM = new Promise((accept, reject) => {
 		accept({ ModelProperty: modelProperty })
 
 	}).catch((err) => {
-		log.error(err)
+		error(err)
 		reject(err)
 	})
 })

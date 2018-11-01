@@ -19,7 +19,7 @@ import orm                     from 'orm'
 import { DEBUG, debug, error } from 'log6'
 
 const dbConnectString = process.env.FIGURE_DB_STRING || 'postgresql://postgres:postgres@127.0.0.1:5432/lme'
-if (DEBUG) debug(`connecting to ${dbConnectString}`)
+if (DEBUG) debug(`connecting to ${dbConnectString.split('@')[1]}`)
 
 const Figure = new Promise((accept, reject) => {
 	orm.connectAsync(dbConnectString).then(async (db) => {
