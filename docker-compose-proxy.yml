@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   traefik:
     image: traefik:1.7.4
@@ -34,7 +34,7 @@ services:
     labels:
       traefik.backend: "traefik"
       traefik.enable: true
-      traefik.frontend.rule: "Host:appmodel.org"
+      traefik.frontend.rule: "Host:www.appmodel.org"
       traefik.port: 8080
     networks:
     - proxy

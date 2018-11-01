@@ -1,11 +1,12 @@
-version: '3'
+version: '3.5'
 services:
   ide:
-    image: michaelbakker1986/lme_platform:0.1.22
+    image: michaelbakker1986/lme_platform:0.1.27
     container_name: lme_platform
     environment:
+      ENV: debug
       HOST: appmodel.org
-      FIGURE_DB_STRING: postgresql://postgres:postgres@127.0.0.1:5432/lme
+      FIGURE_DB_STRING: postgresql://postgres:postgres@database:5432/lme
     volumes:
     - '/var/run/docker.sock:/var/run/docker.sock'
     labels:
@@ -14,11 +15,15 @@ services:
       traefik.port: 7081
     networks:
     - proxy
+    - database
     - internal
 
 networks:
   proxy:
     external: true
   internal:
-    driver: bridge
     external: false
+  database:
+    name: database
+    driver: bridge
+    external: true

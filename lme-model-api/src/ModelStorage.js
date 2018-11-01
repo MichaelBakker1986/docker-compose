@@ -86,7 +86,7 @@ ModelStorage.prototype.saveDelta = function(model_name, data) {
 		}).catch(err => {
 			if (DEBUG) error(err)
 		})
-		return hash
+		return { hash, changes: dbEntries }
 	}
 }
 ModelStorage.prototype.doDeltaCompare = function(model_name, data) {
