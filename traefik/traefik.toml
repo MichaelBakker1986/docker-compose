@@ -27,7 +27,7 @@
   #onHostRule = true
   #onDemand = false
   [[acme.domains]]
-    main = "appmodel.org"
+    main = "www.appmodel.org"
 
 [api]
   entryPoint="api"
