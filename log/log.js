@@ -1,7 +1,7 @@
 import { colorConsole } from 'michaelbakker-tracer'
 
 const format = process.env.TIME_FORMAT || 'HH.MM.ssl'
-const logLevel = process.env.ENV || 'info'
+const logLevel = process.env.ENV || 'debug'
 const levels = {
 	debug: {
 		DEBUG: true,

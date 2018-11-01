@@ -12,6 +12,7 @@ const DOCUMENT                  = 'document',
       OUTPUT_NODE_TYPE          = 'Output',
       INPUT_NODE_TYPE           = 'Input',
       DISPLAY_TYPE              = 'displaytype',
+      REFERS_TO_PROPERTY_NAME   = 'refersto',
       FFL_VERSION_PROPERTY_NAME = 'ffl_version',
       ENCODING                  = 'utf8'
 
@@ -19,6 +20,7 @@ export {
 	DOCUMENT,
 	VALUE,
 	VISIBLE,
+	REFERS_TO_PROPERTY_NAME,
 	FFL_VERSION_PROPERTY_NAME,
 	DISPLAY_TYPE,
 	LOCKED,

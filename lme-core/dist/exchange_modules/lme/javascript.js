@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1i3u3hmnky = function () {
-    var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\lme\\javascript.js',
-        hash = '8d05136e138ffceb0cc68a2d96b6090527619509',
+var cov_2qcfzki5n8 = function () {
+    var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\lme\\javascript.js',
+        hash = 'fc0b0b8ff17def91c580f0b1c4190caf51baa9d3',
         Function = function () {}.constructor,
         global = new Function('return this')(),
         gcv = '__coverage__',
         coverageData = {
-        path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\lme\\javascript.js',
+        path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\lme\\javascript.js',
         statementMap: {
             '0': {
                 start: {
@@ -1197,75 +1197,75 @@ var cov_1i3u3hmnky = function () {
     return coverage[path] = coverageData;
 }();
 
-var SolutionFacade = (cov_1i3u3hmnky.s[0]++, require('../../src/SolutionFacade'));
-var FormulaService = (cov_1i3u3hmnky.s[1]++, require('../../src/FormulaService'));
-var PropertiesAssembler = (cov_1i3u3hmnky.s[2]++, require('../../src/PropertiesAssembler'));
+var SolutionFacade = (cov_2qcfzki5n8.s[0]++, require('../../src/SolutionFacade'));
+var FormulaService = (cov_2qcfzki5n8.s[1]++, require('../../src/FormulaService'));
+var PropertiesAssembler = (cov_2qcfzki5n8.s[2]++, require('../../src/PropertiesAssembler'));
 
 function FormulaInfo(data, schema, modelName) {
-    cov_1i3u3hmnky.f[0]++;
-    cov_1i3u3hmnky.s[3]++;
+    cov_2qcfzki5n8.f[0]++;
+    cov_2qcfzki5n8.s[3]++;
 
     this.formulas = [];
-    var self = (cov_1i3u3hmnky.s[4]++, this);
-    var data = (cov_1i3u3hmnky.s[5]++, []);
-    cov_1i3u3hmnky.s[6]++;
+    var self = (cov_2qcfzki5n8.s[4]++, this);
+    var data = (cov_2qcfzki5n8.s[5]++, []);
+    cov_2qcfzki5n8.s[6]++;
     this.data = data;
-    cov_1i3u3hmnky.s[7]++;
+    cov_2qcfzki5n8.s[7]++;
     this.nodes = [];
-    var forms = (cov_1i3u3hmnky.s[8]++, {});
-    cov_1i3u3hmnky.s[9]++;
+    var forms = (cov_2qcfzki5n8.s[8]++, {});
+    cov_2qcfzki5n8.s[9]++;
     FormulaService.visitFormulas(function (formula) {
-        cov_1i3u3hmnky.f[1]++;
-        cov_1i3u3hmnky.s[10]++;
+        cov_2qcfzki5n8.f[1]++;
+        cov_2qcfzki5n8.s[10]++;
 
-        formula.id = (cov_1i3u3hmnky.b[0][0]++, formula.id) || (cov_1i3u3hmnky.b[0][1]++, formula.index);
-        cov_1i3u3hmnky.s[11]++;
+        formula.id = (cov_2qcfzki5n8.b[0][0]++, formula.id) || (cov_2qcfzki5n8.b[0][1]++, formula.index);
+        cov_2qcfzki5n8.s[11]++;
         forms[formula.name] = formula;
-        cov_1i3u3hmnky.s[12]++;
+        cov_2qcfzki5n8.s[12]++;
         self.addFormula(formula);
     });
-    var names = (cov_1i3u3hmnky.s[13]++, {});
-    var modelNamePrefix = (cov_1i3u3hmnky.s[14]++, modelName + '_');
-    cov_1i3u3hmnky.s[15]++;
+    var names = (cov_2qcfzki5n8.s[13]++, {});
+    var modelNamePrefix = (cov_2qcfzki5n8.s[14]++, modelName + '_');
+    cov_2qcfzki5n8.s[15]++;
     this.formulas.forEach(function (formula) {
-        cov_1i3u3hmnky.f[2]++;
+        cov_2qcfzki5n8.f[2]++;
 
-        var name = (cov_1i3u3hmnky.s[16]++, correctFileName(formula.name));
-        cov_1i3u3hmnky.s[17]++;
+        var name = (cov_2qcfzki5n8.s[16]++, correctFileName(formula.name));
+        cov_2qcfzki5n8.s[17]++;
         if (names[name] === undefined) {
-            cov_1i3u3hmnky.b[1][0]++;
-            cov_1i3u3hmnky.s[18]++;
+            cov_2qcfzki5n8.b[1][0]++;
+            cov_2qcfzki5n8.s[18]++;
 
             names[name] = true;
-            var title = (cov_1i3u3hmnky.s[19]++, (cov_1i3u3hmnky.b[2][0]++, forms[modelNamePrefix + name + '_title']) || (cov_1i3u3hmnky.b[2][1]++, { original: null }));
-            var visible = (cov_1i3u3hmnky.s[20]++, (cov_1i3u3hmnky.b[3][0]++, forms[modelNamePrefix + name + '_visible']) || (cov_1i3u3hmnky.b[3][1]++, { original: false }));
-            var value = (cov_1i3u3hmnky.s[21]++, (cov_1i3u3hmnky.b[4][0]++, forms[modelNamePrefix + name + '_value']) || (cov_1i3u3hmnky.b[4][1]++, { original: '' }));
-            var formula_trend = (cov_1i3u3hmnky.s[22]++, (cov_1i3u3hmnky.b[5][0]++, forms[modelNamePrefix + name + '_trend']) || (cov_1i3u3hmnky.b[5][1]++, { original: '' }));
-            var formula_notrend = (cov_1i3u3hmnky.s[23]++, (cov_1i3u3hmnky.b[6][0]++, forms[modelNamePrefix + name + '_notrend']) || (cov_1i3u3hmnky.b[6][1]++, { original: '' }));
-            var locked = (cov_1i3u3hmnky.s[24]++, (cov_1i3u3hmnky.b[7][0]++, forms[modelNamePrefix + name + '_locked']) || (cov_1i3u3hmnky.b[7][1]++, { original: false }));
-            var choices = (cov_1i3u3hmnky.s[25]++, (cov_1i3u3hmnky.b[8][0]++, forms[modelNamePrefix + name + '_choices']) || (cov_1i3u3hmnky.b[8][1]++, { original: null }));
-            cov_1i3u3hmnky.s[26]++;
+            var title = (cov_2qcfzki5n8.s[19]++, (cov_2qcfzki5n8.b[2][0]++, forms[modelNamePrefix + name + '_title']) || (cov_2qcfzki5n8.b[2][1]++, { original: null }));
+            var visible = (cov_2qcfzki5n8.s[20]++, (cov_2qcfzki5n8.b[3][0]++, forms[modelNamePrefix + name + '_visible']) || (cov_2qcfzki5n8.b[3][1]++, { original: false }));
+            var value = (cov_2qcfzki5n8.s[21]++, (cov_2qcfzki5n8.b[4][0]++, forms[modelNamePrefix + name + '_value']) || (cov_2qcfzki5n8.b[4][1]++, { original: '' }));
+            var formula_trend = (cov_2qcfzki5n8.s[22]++, (cov_2qcfzki5n8.b[5][0]++, forms[modelNamePrefix + name + '_trend']) || (cov_2qcfzki5n8.b[5][1]++, { original: '' }));
+            var formula_notrend = (cov_2qcfzki5n8.s[23]++, (cov_2qcfzki5n8.b[6][0]++, forms[modelNamePrefix + name + '_notrend']) || (cov_2qcfzki5n8.b[6][1]++, { original: '' }));
+            var locked = (cov_2qcfzki5n8.s[24]++, (cov_2qcfzki5n8.b[7][0]++, forms[modelNamePrefix + name + '_locked']) || (cov_2qcfzki5n8.b[7][1]++, { original: false }));
+            var choices = (cov_2qcfzki5n8.s[25]++, (cov_2qcfzki5n8.b[8][0]++, forms[modelNamePrefix + name + '_choices']) || (cov_2qcfzki5n8.b[8][1]++, { original: null }));
+            cov_2qcfzki5n8.s[26]++;
             data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original]);
         } else {
-            cov_1i3u3hmnky.b[1][1]++;
+            cov_2qcfzki5n8.b[1][1]++;
         }
     });
-    var types = (cov_1i3u3hmnky.s[27]++, ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices']);
+    var types = (cov_2qcfzki5n8.s[27]++, ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices']);
     //this.formulas = undefined;
-    cov_1i3u3hmnky.s[28]++;
+    cov_2qcfzki5n8.s[28]++;
     this.meta = {
         view: {
             columns: []
         }
     };
-    var counter = (cov_1i3u3hmnky.s[29]++, 0);
-    cov_1i3u3hmnky.s[30]++;
+    var counter = (cov_2qcfzki5n8.s[29]++, 0);
+    cov_2qcfzki5n8.s[30]++;
     types.forEach(function (type) {
-        cov_1i3u3hmnky.f[3]++;
-        cov_1i3u3hmnky.s[31]++;
+        cov_2qcfzki5n8.f[3]++;
+        cov_2qcfzki5n8.s[31]++;
 
         self.meta.view.columns.push({
-            "width": ['locked', 'visible', 'entered'].indexOf(type) == -1 ? (cov_1i3u3hmnky.b[9][0]++, 50) : (cov_1i3u3hmnky.b[9][1]++, undefined),
+            "width": ['locked', 'visible', 'entered'].indexOf(type) == -1 ? (cov_2qcfzki5n8.b[9][0]++, 50) : (cov_2qcfzki5n8.b[9][1]++, undefined),
             "name": type,
             "dataTypeName": "text",
             "fieldName": type,
@@ -1275,67 +1275,67 @@ function FormulaInfo(data, schema, modelName) {
     });
 }
 
-cov_1i3u3hmnky.s[32]++;
+cov_2qcfzki5n8.s[32]++;
 FormulaInfo.prototype.setSchema = function (schema) {
-    cov_1i3u3hmnky.f[4]++;
-    cov_1i3u3hmnky.s[33]++;
+    cov_2qcfzki5n8.f[4]++;
+    cov_2qcfzki5n8.s[33]++;
 
     this.schema = schema;
 };
-cov_1i3u3hmnky.s[34]++;
+cov_2qcfzki5n8.s[34]++;
 FormulaInfo.prototype.addFormula = function (formula) {
-    cov_1i3u3hmnky.f[5]++;
-    cov_1i3u3hmnky.s[35]++;
+    cov_2qcfzki5n8.f[5]++;
+    cov_2qcfzki5n8.s[35]++;
 
     this.formulas.push(formula);
 };
 
 function correctFileName(name) {
-    cov_1i3u3hmnky.f[6]++;
-    cov_1i3u3hmnky.s[36]++;
+    cov_2qcfzki5n8.f[6]++;
+    cov_2qcfzki5n8.s[36]++;
 
     return name.replace(/^[^_]+_([\w]*)_\w+$/gmi, '$1');
 }
 
 function JavaScriptParser() {
-    cov_1i3u3hmnky.f[7]++;
+    cov_2qcfzki5n8.f[7]++;
 }
 
-cov_1i3u3hmnky.s[37]++;
+cov_2qcfzki5n8.s[37]++;
 JavaScriptParser.prototype.name = 'js';
-cov_1i3u3hmnky.s[38]++;
+cov_2qcfzki5n8.s[38]++;
 JavaScriptParser.prototype.parseData = function (data, workbook) {
-    cov_1i3u3hmnky.f[8]++;
-    cov_1i3u3hmnky.s[39]++;
+    cov_2qcfzki5n8.f[8]++;
+    cov_2qcfzki5n8.s[39]++;
 
     throw Error();
 };
-var unwantedKeys = (cov_1i3u3hmnky.s[40]++, {
+var unwantedKeys = (cov_2qcfzki5n8.s[40]++, {
     delegate: true,
     ast: true,
     body: true
 });
-cov_1i3u3hmnky.s[41]++;
+cov_2qcfzki5n8.s[41]++;
 JavaScriptParser.prototype.deParse = function (rowId, workbook) {
-    cov_1i3u3hmnky.f[9]++;
+    cov_2qcfzki5n8.f[9]++;
 
-    var modelName = (cov_1i3u3hmnky.s[42]++, workbook.getSolutionName());
-    var formulaInfo = (cov_1i3u3hmnky.s[43]++, {});
-    var info = (cov_1i3u3hmnky.s[44]++, new FormulaInfo(formulaInfo, {}, modelName));
-    cov_1i3u3hmnky.s[45]++;
+    var modelName = (cov_2qcfzki5n8.s[42]++, workbook.getSolutionName());
+    var formulaInfo = (cov_2qcfzki5n8.s[43]++, {});
+    var info = (cov_2qcfzki5n8.s[44]++, new FormulaInfo(formulaInfo, {}, modelName));
+    cov_2qcfzki5n8.s[45]++;
     info.name = modelName;
-    cov_1i3u3hmnky.s[46]++;
+    cov_2qcfzki5n8.s[46]++;
     PropertiesAssembler.findAllInSolution(modelName, function (property) {
-        cov_1i3u3hmnky.f[10]++;
-        cov_1i3u3hmnky.s[47]++;
+        cov_2qcfzki5n8.f[10]++;
+        cov_2qcfzki5n8.s[47]++;
 
         info.nodes.push(property);
     });
-    cov_1i3u3hmnky.s[48]++;
+    cov_2qcfzki5n8.s[48]++;
     return info;
     /*return JSON.stringify(info, function(key, value) {
         return unwantedKeys[key] ? undefined : value;
     }, 2);*/
 };
-cov_1i3u3hmnky.s[49]++;
+cov_2qcfzki5n8.s[49]++;
 SolutionFacade.addParser(JavaScriptParser.prototype);

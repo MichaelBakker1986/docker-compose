@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_3thnldfmr = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\lme\\lmeparser.js',
-	    hash = '50c3dfafb2a98897e6018baf52daa73e7a8a0893',
+var cov_17lgn8mwx = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\lme\\lmeparser.js',
+	    hash = '5bceee1a681c50309be13532f07fc1de54c96d99',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\exchange_modules\\lme\\lmeparser.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\exchange_modules\\lme\\lmeparser.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1805,102 +1805,102 @@ var _FormulaService2 = _interopRequireDefault(_FormulaService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var known_widths = (cov_3thnldfmr.s[0]++, new Set(['locked', 'visible', 'entered']));
-var unwantedKeys = (cov_3thnldfmr.s[1]++, new Set(['delegate', 'ast', 'body']));
-var hidden_keys = (cov_3thnldfmr.s[2]++, new Set(['original', 'parsed']));
-cov_3thnldfmr.s[3]++;
+var known_widths = (cov_17lgn8mwx.s[0]++, new Set(['locked', 'visible', 'entered']));
+var unwantedKeys = (cov_17lgn8mwx.s[1]++, new Set(['delegate', 'ast', 'body']));
+var hidden_keys = (cov_17lgn8mwx.s[2]++, new Set(['original', 'parsed']));
+cov_17lgn8mwx.s[3]++;
 var correctFileName = function correctFileName(name) {
-	cov_3thnldfmr.f[0]++;
-	cov_3thnldfmr.s[4]++;
+	cov_17lgn8mwx.f[0]++;
+	cov_17lgn8mwx.s[4]++;
 	return name.split('_').slice(1, -1).join('_');
 };
-cov_3thnldfmr.s[5]++;
+cov_17lgn8mwx.s[5]++;
 var variableName = function variableName(name) {
-	cov_3thnldfmr.f[1]++;
-	cov_3thnldfmr.s[6]++;
+	cov_17lgn8mwx.f[1]++;
+	cov_17lgn8mwx.s[6]++;
 	return name.split('_').slice(1).join('_');
 };
 
 function FormulaInfo(dataArg, schema, modelName) {
-	cov_3thnldfmr.f[2]++;
+	cov_17lgn8mwx.f[2]++;
 
 	var i = void 0;
-	cov_3thnldfmr.s[7]++;
+	cov_17lgn8mwx.s[7]++;
 	this.name = modelName;
-	cov_3thnldfmr.s[8]++;
+	cov_17lgn8mwx.s[8]++;
 	this.formulas = [];
-	cov_3thnldfmr.s[9]++;
+	cov_17lgn8mwx.s[9]++;
 	this.variables = [];
-	var self = (cov_3thnldfmr.s[10]++, this);
-	cov_3thnldfmr.s[11]++;
+	var self = (cov_17lgn8mwx.s[10]++, this);
+	cov_17lgn8mwx.s[11]++;
 	this.data = dataArg;
-	var data = (cov_3thnldfmr.s[12]++, []);
-	cov_3thnldfmr.s[13]++;
+	var data = (cov_17lgn8mwx.s[12]++, []);
+	cov_17lgn8mwx.s[13]++;
 	this.nodes = [];
-	var forms = (cov_3thnldfmr.s[14]++, {});
-	cov_3thnldfmr.s[15]++;
+	var forms = (cov_17lgn8mwx.s[14]++, {});
+	cov_17lgn8mwx.s[15]++;
 	_FormulaService2.default.visitFormulas(function (formula) {
-		cov_3thnldfmr.f[3]++;
-		cov_3thnldfmr.s[16]++;
+		cov_17lgn8mwx.f[3]++;
+		cov_17lgn8mwx.s[16]++;
 
-		formula.id = (cov_3thnldfmr.b[0][0]++, formula.id) || (cov_3thnldfmr.b[0][1]++, formula.index);
-		cov_3thnldfmr.s[17]++;
+		formula.id = (cov_17lgn8mwx.b[0][0]++, formula.id) || (cov_17lgn8mwx.b[0][1]++, formula.index);
+		cov_17lgn8mwx.s[17]++;
 		forms[formula.name] = formula;
-		cov_3thnldfmr.s[18]++;
+		cov_17lgn8mwx.s[18]++;
 		self.addFormula(formula);
 	});
-	var names = (cov_3thnldfmr.s[19]++, {});
+	var names = (cov_17lgn8mwx.s[19]++, {});
 
-	var modelNamePrefix = (cov_3thnldfmr.s[20]++, modelName + '_');
-	cov_3thnldfmr.s[21]++;
+	var modelNamePrefix = (cov_17lgn8mwx.s[20]++, modelName + '_');
+	cov_17lgn8mwx.s[21]++;
 	for (i = 0; i < this.formulas.length; i++) {
-		var formula = (cov_3thnldfmr.s[22]++, this.formulas[i]);
-		var name = (cov_3thnldfmr.s[23]++, correctFileName(formula.name));
-		cov_3thnldfmr.s[24]++;
+		var formula = (cov_17lgn8mwx.s[22]++, this.formulas[i]);
+		var name = (cov_17lgn8mwx.s[23]++, correctFileName(formula.name));
+		cov_17lgn8mwx.s[24]++;
 		if (names[name] === undefined) {
-			cov_3thnldfmr.b[1][0]++;
-			cov_3thnldfmr.s[25]++;
+			cov_17lgn8mwx.b[1][0]++;
+			cov_17lgn8mwx.s[25]++;
 
 			names[name] = true;
-			cov_3thnldfmr.s[26]++;
+			cov_17lgn8mwx.s[26]++;
 			if (formula.ipprotected) {
-				cov_3thnldfmr.b[2][0]++;
-				cov_3thnldfmr.s[27]++;
+				cov_17lgn8mwx.b[2][0]++;
+				cov_17lgn8mwx.s[27]++;
 
 				(0, _log.info)('formula is ipProtected' + JSON.stringify(formula));
-				cov_3thnldfmr.s[28]++;
-				data.push([name, ((cov_3thnldfmr.b[3][0]++, forms[modelNamePrefix + name + '_title']) || (cov_3thnldfmr.b[3][1]++, { original: null })).original, null, null, null, null, null, null, null, null]);
+				cov_17lgn8mwx.s[28]++;
+				data.push([name, ((cov_17lgn8mwx.b[3][0]++, forms[modelNamePrefix + name + '_title']) || (cov_17lgn8mwx.b[3][1]++, { original: null })).original, null, null, null, null, null, null, null, null]);
 			} else {
-				cov_3thnldfmr.b[2][1]++;
+				cov_17lgn8mwx.b[2][1]++;
 
-				var title = (cov_3thnldfmr.s[29]++, (cov_3thnldfmr.b[4][0]++, forms[modelNamePrefix + name + '_title']) || (cov_3thnldfmr.b[4][1]++, { original: null }));
-				var hint = (cov_3thnldfmr.s[30]++, (cov_3thnldfmr.b[5][0]++, forms[modelNamePrefix + name + '_hint']) || (cov_3thnldfmr.b[5][1]++, { original: '' }));
-				var visible = (cov_3thnldfmr.s[31]++, (cov_3thnldfmr.b[6][0]++, forms[modelNamePrefix + name + '_visible']) || (cov_3thnldfmr.b[6][1]++, { original: false }));
-				var valid = (cov_3thnldfmr.s[32]++, (cov_3thnldfmr.b[7][0]++, forms[modelNamePrefix + name + '_valid']) || (cov_3thnldfmr.b[7][1]++, { original: false }));
-				var value = (cov_3thnldfmr.s[33]++, (cov_3thnldfmr.b[8][0]++, forms[modelNamePrefix + name + '_value']) || (cov_3thnldfmr.b[8][1]++, { original: '' }));
-				var formula_trend = (cov_3thnldfmr.s[34]++, (cov_3thnldfmr.b[9][0]++, forms[modelNamePrefix + name + '_trend']) || (cov_3thnldfmr.b[9][1]++, { original: '' }));
-				var formula_notrend = (cov_3thnldfmr.s[35]++, (cov_3thnldfmr.b[10][0]++, forms[modelNamePrefix + name + '_notrend']) || (cov_3thnldfmr.b[10][1]++, { original: '' }));
-				var locked = (cov_3thnldfmr.s[36]++, (cov_3thnldfmr.b[11][0]++, forms[modelNamePrefix + name + '_locked']) || (cov_3thnldfmr.b[11][1]++, { original: false }));
-				var choices = (cov_3thnldfmr.s[37]++, (cov_3thnldfmr.b[12][0]++, forms[modelNamePrefix + name + '_choices']) || (cov_3thnldfmr.b[12][1]++, { original: null
+				var title = (cov_17lgn8mwx.s[29]++, (cov_17lgn8mwx.b[4][0]++, forms[modelNamePrefix + name + '_title']) || (cov_17lgn8mwx.b[4][1]++, { original: null }));
+				var hint = (cov_17lgn8mwx.s[30]++, (cov_17lgn8mwx.b[5][0]++, forms[modelNamePrefix + name + '_hint']) || (cov_17lgn8mwx.b[5][1]++, { original: '' }));
+				var visible = (cov_17lgn8mwx.s[31]++, (cov_17lgn8mwx.b[6][0]++, forms[modelNamePrefix + name + '_visible']) || (cov_17lgn8mwx.b[6][1]++, { original: false }));
+				var valid = (cov_17lgn8mwx.s[32]++, (cov_17lgn8mwx.b[7][0]++, forms[modelNamePrefix + name + '_valid']) || (cov_17lgn8mwx.b[7][1]++, { original: false }));
+				var value = (cov_17lgn8mwx.s[33]++, (cov_17lgn8mwx.b[8][0]++, forms[modelNamePrefix + name + '_value']) || (cov_17lgn8mwx.b[8][1]++, { original: '' }));
+				var formula_trend = (cov_17lgn8mwx.s[34]++, (cov_17lgn8mwx.b[9][0]++, forms[modelNamePrefix + name + '_trend']) || (cov_17lgn8mwx.b[9][1]++, { original: '' }));
+				var formula_notrend = (cov_17lgn8mwx.s[35]++, (cov_17lgn8mwx.b[10][0]++, forms[modelNamePrefix + name + '_notrend']) || (cov_17lgn8mwx.b[10][1]++, { original: '' }));
+				var locked = (cov_17lgn8mwx.s[36]++, (cov_17lgn8mwx.b[11][0]++, forms[modelNamePrefix + name + '_locked']) || (cov_17lgn8mwx.b[11][1]++, { original: false }));
+				var choices = (cov_17lgn8mwx.s[37]++, (cov_17lgn8mwx.b[12][0]++, forms[modelNamePrefix + name + '_choices']) || (cov_17lgn8mwx.b[12][1]++, { original: null
 					//looks a lot like the Register.js functionality
-				}));cov_3thnldfmr.s[38]++;
+				}));cov_17lgn8mwx.s[38]++;
 				data.push([name, title.original, value.original, formula_trend.original, formula_notrend.original, visible.original, locked.original, choices.original, hint.original, valid.original]);
 			}
 		} else {
-			cov_3thnldfmr.b[1][1]++;
+			cov_17lgn8mwx.b[1][1]++;
 		}
 	}
-	var types = (cov_3thnldfmr.s[39]++, ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid']);
+	var types = (cov_17lgn8mwx.s[39]++, ['name', 'title', 'value', 'notrend', 'trend', 'visible', 'locked', 'choices', 'hint', 'valid']);
 	//this.formulas = undefined;
-	cov_3thnldfmr.s[40]++;
+	cov_17lgn8mwx.s[40]++;
 	this.meta = { view: { columns: [] } };
-	var counter = (cov_3thnldfmr.s[41]++, 0);
-	cov_3thnldfmr.s[42]++;
+	var counter = (cov_17lgn8mwx.s[41]++, 0);
+	cov_17lgn8mwx.s[42]++;
 	for (i = 0; i < types.length; i++) {
-		var type = (cov_3thnldfmr.s[43]++, types[i]);
-		cov_3thnldfmr.s[44]++;
+		var type = (cov_17lgn8mwx.s[43]++, types[i]);
+		cov_17lgn8mwx.s[44]++;
 		self.meta.view.columns.push({
-			'width': known_widths.has(type) ? (cov_3thnldfmr.b[13][0]++, undefined) : (cov_3thnldfmr.b[13][1]++, 50),
+			'width': known_widths.has(type) ? (cov_17lgn8mwx.b[13][0]++, undefined) : (cov_17lgn8mwx.b[13][1]++, 50),
 			'name': type,
 			'dataTypeName': 'text',
 			'fieldName': type,
@@ -1910,93 +1910,93 @@ function FormulaInfo(dataArg, schema, modelName) {
 	}
 }
 
-cov_3thnldfmr.s[45]++;
+cov_17lgn8mwx.s[45]++;
 FormulaInfo.prototype.setSchema = function (schema) {
-	cov_3thnldfmr.f[4]++;
-	cov_3thnldfmr.s[46]++;
+	cov_17lgn8mwx.f[4]++;
+	cov_17lgn8mwx.s[46]++;
 	this.schema = schema;
 };
-cov_3thnldfmr.s[47]++;
+cov_17lgn8mwx.s[47]++;
 FormulaInfo.prototype.addFormula = function (formula) {
-	cov_3thnldfmr.f[5]++;
-	cov_3thnldfmr.s[48]++;
+	cov_17lgn8mwx.f[5]++;
+	cov_17lgn8mwx.s[48]++;
 
 	formula.fflname = variableName(formula.name);
-	cov_3thnldfmr.s[49]++;
+	cov_17lgn8mwx.s[49]++;
 	if (!formula.ipprotected) {
-			cov_3thnldfmr.b[14][0]++;
-			cov_3thnldfmr.s[50]++;
+			cov_17lgn8mwx.b[14][0]++;
+			cov_17lgn8mwx.s[50]++;
 
 			this.formulas.push(formula);
 		} else {
-		cov_3thnldfmr.b[14][1]++;
-		cov_3thnldfmr.s[51]++;
+		cov_17lgn8mwx.b[14][1]++;
+		cov_17lgn8mwx.s[51]++;
 
 		this.formulas.push(JSON.parse(JSON.stringify(formula, function (k, v) {
-			cov_3thnldfmr.f[6]++;
-			cov_3thnldfmr.s[52]++;
-			return hidden_keys.has(k) ? (cov_3thnldfmr.b[15][0]++, undefined) : (cov_3thnldfmr.b[15][1]++, v);
+			cov_17lgn8mwx.f[6]++;
+			cov_17lgn8mwx.s[52]++;
+			return hidden_keys.has(k) ? (cov_17lgn8mwx.b[15][0]++, undefined) : (cov_17lgn8mwx.b[15][1]++, v);
 		})));
 	}
 };
 
-var LMEParser = (cov_3thnldfmr.s[53]++, {
+var LMEParser = (cov_17lgn8mwx.s[53]++, {
 	name: 'lme',
 	headername: '.finance lme',
 	parseData: function parseData(data, workbook) {
-		cov_3thnldfmr.f[7]++;
+		cov_17lgn8mwx.f[7]++;
 
-		var solution = (cov_3thnldfmr.s[54]++, _SolutionFacade2.default.createSolution(data.name));
-		cov_3thnldfmr.s[55]++;
+		var solution = (cov_17lgn8mwx.s[54]++, _SolutionFacade2.default.createSolution(data.name));
+		cov_17lgn8mwx.s[55]++;
 		solution.nodes = data.nodes;
-		cov_3thnldfmr.s[56]++;
+		cov_17lgn8mwx.s[56]++;
 		if (data.variables) {
-				cov_3thnldfmr.b[16][0]++;
-				cov_3thnldfmr.s[57]++;
+				cov_17lgn8mwx.b[16][0]++;
+				cov_17lgn8mwx.s[57]++;
 				_FormulaService2.default.initVariables(data.variables);
 			} else {
-			cov_3thnldfmr.b[16][1]++;
-		}cov_3thnldfmr.s[58]++;
+			cov_17lgn8mwx.b[16][1]++;
+		}cov_17lgn8mwx.s[58]++;
 		_PropertiesAssembler2.default.bulkInsert(solution);
 		//Probably for formula-information
-		cov_3thnldfmr.s[59]++;
+		cov_17lgn8mwx.s[59]++;
 		_FormulaService2.default.bulkInsertFormula(data.formulas);
-		cov_3thnldfmr.s[60]++;
+		cov_17lgn8mwx.s[60]++;
 		for (var i = 0; i < data.formulas.length; i++) {
-			cov_3thnldfmr.s[61]++;
+			cov_17lgn8mwx.s[61]++;
 			_FunctionMap2.default.initializeFormula(data.formulas[i], workbook.context.ma, workbook.context.audittrail);
-		}cov_3thnldfmr.s[62]++;
+		}cov_17lgn8mwx.s[62]++;
 		if (_log.DEBUG) {
-				cov_3thnldfmr.b[17][0]++;
-				cov_3thnldfmr.s[63]++;
+				cov_17lgn8mwx.b[17][0]++;
+				cov_17lgn8mwx.s[63]++;
 				(0, _log.info)('Done import ' + data.name);
 			} else {
-			cov_3thnldfmr.b[17][1]++;
-		}cov_3thnldfmr.s[64]++;
+			cov_17lgn8mwx.b[17][1]++;
+		}cov_17lgn8mwx.s[64]++;
 		return solution;
 	},
 	deParse: function deParse(rowId, workbook) {
-		cov_3thnldfmr.f[8]++;
+		cov_17lgn8mwx.f[8]++;
 
-		var modelName = (cov_3thnldfmr.s[65]++, workbook.getSolutionName());
-		var info = (cov_3thnldfmr.s[66]++, new FormulaInfo({}, {}, modelName));
-		cov_3thnldfmr.s[67]++;
+		var modelName = (cov_17lgn8mwx.s[65]++, workbook.getSolutionName());
+		var info = (cov_17lgn8mwx.s[66]++, new FormulaInfo({}, {}, modelName));
+		cov_17lgn8mwx.s[67]++;
 		_PropertiesAssembler2.default.findAllInSolution(modelName, function (property) {
-			cov_3thnldfmr.f[9]++;
-			cov_3thnldfmr.s[68]++;
+			cov_17lgn8mwx.f[9]++;
+			cov_17lgn8mwx.s[68]++;
 			return info.nodes.push(property);
 		});
-		cov_3thnldfmr.s[69]++;
+		cov_17lgn8mwx.s[69]++;
 		_FormulaService2.default.getVariables(function (variable) {
-			cov_3thnldfmr.f[10]++;
-			cov_3thnldfmr.s[70]++;
+			cov_17lgn8mwx.f[10]++;
+			cov_17lgn8mwx.s[70]++;
 			return info.variables.push(variable);
 		});
-		cov_3thnldfmr.s[71]++;
+		cov_17lgn8mwx.s[71]++;
 		return JSON.stringify(info, function (key, value) {
-			cov_3thnldfmr.f[11]++;
-			cov_3thnldfmr.s[72]++;
-			return unwantedKeys.has(key) ? (cov_3thnldfmr.b[18][0]++, undefined) : (cov_3thnldfmr.b[18][1]++, value);
+			cov_17lgn8mwx.f[11]++;
+			cov_17lgn8mwx.s[72]++;
+			return unwantedKeys.has(key) ? (cov_17lgn8mwx.b[18][0]++, undefined) : (cov_17lgn8mwx.b[18][1]++, value);
 		}, 0);
 	}
 });

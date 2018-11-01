@@ -1,8 +1,9 @@
 //just an dummy-template to quickly create a model
-import { EconomicEditorView }                           from '../../lme-model-api/index'
-import { Context, FFL_VERSION_PROPERTY_NAME, Register } from '../../lme-core/index'
-import $                                                from 'jquery'
-import { DebugManager, FFLToRegister, ScorecardTool }   from '../../ffl/index'
+import { EconomicEditorView }           from '../../lme-model-api/index'
+import { FFL_VERSION_PROPERTY_NAME }    from '../../lme-core/index'
+import $                                from 'jquery'
+import { FFLToRegister, ScorecardTool } from '../../ffl/index'
+import { Validator }                    from '../../lme-core/src/Validator'
 
 const economicEditorView = new EconomicEditorView()
 const newModelTemplate =
@@ -163,36 +164,43 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 }
 
 FFLController.prototype.saveFFLModel = function($scope, session) {
+
+	$scope.saveFeedback = `Validating ${$scope.session.fflModelPath}… `
+
 	const type = '.ffl'
-	const data = this.fflEditor.getValue()
+	const register = this.register
+	const validator = new Validator(register)
+	validator.validateIntegrity()
+	const feedback = validator.feedBack()
 
-	const register = new Register()
-	const formatter = new FFLToRegister(register, data)
-	formatter.parseProperties()
-	const context = new Context()
-	const debugManager = new DebugManager(register, context.audittrail)
-	const feedback = debugManager.validateImportedSolution(session.fflModelPath)
-	console.info(feedback)
+	if (feedback.fail) {
+		console.info(feedback)
+		$scope.saveFeedbackTitle = 'Validation failed'
+		$scope.saveFeedbackTitle = feedback.toString()
+		session.disablePreviewButton = true
+	} else {
+		console.info('Success ' + feedback)
+		const data = this.fflEditor.getValue()
+		Pace.track(function() {
+			$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
+			$scope.saveFeedbackTitle = 'Working on it... '
 
-	Pace.track(function() {
-		$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
-		$scope.saveFeedbackTitle = 'Working on it... '
-
-		$.post(`saveFFLModel/${$scope.session.fflModelPath}`, {
-			data, type
-		}, function(data) {
-			$scope.$apply(function() {
-				$scope.saveFeedbackTitle = 'Finished'
-				$scope.saveFeedback = data.status === 'fail' ? `Failed compiling model:${data.reason}` : 'Done work.'
-				$scope.downloadJsLink = `resources/${session.fflModelPath}.js`
-				session.disablePreviewButton = false
-				if (data.status === 'success') {
-					window.open(`${session.page}.html#${session.fflModelPath}&${session.userID}`)
-					$('#modal-success').modal('hide')
-				}
+			$.post(`saveFFLModel/${$scope.session.fflModelPath}`, {
+				data, type
+			}, function(data) {
+				$scope.$apply(function() {
+					$scope.saveFeedbackTitle = 'Finished'
+					$scope.saveFeedback = data.status === 'fail' ? `Failed compiling model:${data.reason}` : 'Done work.'
+					$scope.downloadJsLink = `resources/${session.fflModelPath}.js`
+					session.disablePreviewButton = false
+					if (data.status === 'success') {
+						window.open(`${session.page}.html#${session.fflModelPath}&${session.userID}`)
+						$('#modal-success').modal('hide')
+					}
+				})
 			})
 		})
-	})
+	}
 }
 FFLController.prototype.updateFFLModel = function(model_name) {
 	const self = this

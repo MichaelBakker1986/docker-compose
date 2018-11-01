@@ -1,6 +1,6 @@
 {
   "name": "log6",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "The lme logger",
   "main": "dist/log.js",
   "author": "michael.bakker1986@gmail.com",

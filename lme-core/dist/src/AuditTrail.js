@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_n50yh62kg = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\AuditTrail.js',
-	    hash = '744140769be443936b3a46bca85c218083fcbadc',
+var cov_2fjos5q4a0 = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\AuditTrail.js',
+	    hash = '4abbcdb54f47bce13dcb944288ec67865061e2bd',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\AuditTrail.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\AuditTrail.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -520,76 +520,76 @@ var _Constants = require('./Constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-cov_n50yh62kg.s[0]++;
+cov_2fjos5q4a0.s[0]++;
 
 
 var AuditTrail = function AuditTrail() {
-	cov_n50yh62kg.f[0]++;
+	cov_2fjos5q4a0.f[0]++;
 
-	var schemaDefaults = (cov_n50yh62kg.s[1]++, [['category', 10], ['level', 10], ['name', 30], ['property', 10], ['yax', 10], ['xas', 10], [_Constants.VALUE, 20], ['message', 20], ['formula', 100], ['refId', 10], ['parsed', 860], ['data-type', 100]]);
-	var register = (cov_n50yh62kg.s[2]++, new _Register.Register(schemaDefaults.map(function (_ref) {
+	var schemaDefaults = (cov_2fjos5q4a0.s[1]++, [['category', 10], ['level', 10], ['name', 30], ['property', 10], ['yax', 10], ['xas', 10], [_Constants.VALUE, 20], ['message', 20], ['formula', 100], ['refId', 10], ['parsed', 860], ['data-type', 100]]);
+	var register = (cov_2fjos5q4a0.s[2]++, new _Register.Register(schemaDefaults.map(function (_ref) {
 		var _ref2 = (0, _slicedToArray3.default)(_ref, 1),
 		    schemaDefault_name = _ref2[0];
 
-		cov_n50yh62kg.f[1]++;
-		cov_n50yh62kg.s[3]++;
+		cov_2fjos5q4a0.f[1]++;
+		cov_2fjos5q4a0.s[3]++;
 		return schemaDefault_name;
 	})));
-	cov_n50yh62kg.s[4]++;
+	cov_2fjos5q4a0.s[4]++;
 	register.auditcols = schemaDefaults.map(function (_ref3) {
 		var _ref4 = (0, _slicedToArray3.default)(_ref3, 2),
 		    schemaDefault_name = _ref4[0],
 		    schemaDefault_column_size = _ref4[1];
 
-		cov_n50yh62kg.f[2]++;
-		cov_n50yh62kg.s[5]++;
+		cov_2fjos5q4a0.f[2]++;
+		cov_2fjos5q4a0.s[5]++;
 		return schemaDefault_column_size;
 	});
-	cov_n50yh62kg.s[6]++;
+	cov_2fjos5q4a0.s[6]++;
 	return register;
 };
-cov_n50yh62kg.s[7]++;
+cov_2fjos5q4a0.s[7]++;
 _Register.Register.prototype.doAudit = function () {
-	cov_n50yh62kg.f[3]++;
-	cov_n50yh62kg.s[8]++;
+	cov_2fjos5q4a0.f[3]++;
+	cov_2fjos5q4a0.s[8]++;
 	this.clean();
 };
 
-cov_n50yh62kg.s[9]++;
+cov_2fjos5q4a0.s[9]++;
 _Register.Register.prototype.getErrors = function () {
-	cov_n50yh62kg.f[4]++;
-	cov_n50yh62kg.s[10]++;
+	cov_2fjos5q4a0.f[4]++;
+	cov_2fjos5q4a0.s[10]++;
 
 	return this.distinctArr(this.find('level', 'ERROR', this.mark), ['name', 'property']);
 };
-cov_n50yh62kg.s[11]++;
+cov_2fjos5q4a0.s[11]++;
 _Register.Register.prototype.printErrors = function () {
-	cov_n50yh62kg.f[5]++;
+	cov_2fjos5q4a0.f[5]++;
 
-	var errors = (cov_n50yh62kg.s[12]++, this.getErrors());
-	cov_n50yh62kg.s[13]++;
+	var errors = (cov_2fjos5q4a0.s[12]++, this.getErrors());
+	cov_2fjos5q4a0.s[13]++;
 	if (errors.length > 0) {
-			cov_n50yh62kg.b[0][0]++;
-			cov_n50yh62kg.s[14]++;
+			cov_2fjos5q4a0.b[0][0]++;
+			cov_2fjos5q4a0.s[14]++;
 			console.info(this.printArr(errors, this.auditcols).join('\n'));
 		} else {
-		cov_n50yh62kg.b[0][1]++;
+		cov_2fjos5q4a0.b[0][1]++;
 	}
 };
-cov_n50yh62kg.s[15]++;
+cov_2fjos5q4a0.s[15]++;
 _Register.Register.prototype.printAuditTrailDelta = function () {
-	cov_n50yh62kg.f[6]++;
+	cov_2fjos5q4a0.f[6]++;
 
-	var result = (cov_n50yh62kg.s[16]++, this.print(this.auditcols, this.mark).join('\n'));
-	cov_n50yh62kg.s[17]++;
+	var result = (cov_2fjos5q4a0.s[16]++, this.print(this.auditcols, this.mark).join('\n'));
+	cov_2fjos5q4a0.s[17]++;
 	this.markNow();
-	cov_n50yh62kg.s[18]++;
+	cov_2fjos5q4a0.s[18]++;
 	return result;
 };
-cov_n50yh62kg.s[19]++;
+cov_2fjos5q4a0.s[19]++;
 _Register.Register.prototype.printAuditTrail = function () {
-	cov_n50yh62kg.f[7]++;
-	cov_n50yh62kg.s[20]++;
+	cov_2fjos5q4a0.f[7]++;
+	cov_2fjos5q4a0.s[20]++;
 
 	return this.print(this.auditcols).join('\n');
 };

@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_65wsgxcox = function () {
-	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\JSVisitor.js',
-	    hash = 'ae15802d045579ae27c9654eb5c3f4535e2c79c2',
+var cov_1pk88mqhba = function () {
+	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\JSVisitor.js',
+	    hash = '3b773fb36c9c8e7ff3c8da380992a6da4a019f66',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\JSVisitor.js',
+		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\JSVisitor.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -1416,211 +1416,211 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * TODO: all the visitors are about to do the same. Maybe if look more abstract they can be merged.
  */
 function visit(node, keyArg, func) {
-	cov_65wsgxcox.f[0]++;
-	cov_65wsgxcox.s[0]++;
+	cov_1pk88mqhba.f[0]++;
+	cov_1pk88mqhba.s[0]++;
 
 	for (var key in node) {
-		cov_65wsgxcox.s[1]++;
+		cov_1pk88mqhba.s[1]++;
 
-		if ((cov_65wsgxcox.b[1][0]++, node[key] !== undefined) && (cov_65wsgxcox.b[1][1]++, key !== '_parent') && (cov_65wsgxcox.b[1][2]++, key !== '_parentKey')) {
-			cov_65wsgxcox.b[0][0]++;
+		if ((cov_1pk88mqhba.b[1][0]++, node[key] !== undefined) && (cov_1pk88mqhba.b[1][1]++, key !== '_parent') && (cov_1pk88mqhba.b[1][2]++, key !== '_parentKey')) {
+			cov_1pk88mqhba.b[0][0]++;
 
-			var child = (cov_65wsgxcox.s[2]++, node[key]);
-			cov_65wsgxcox.s[3]++;
+			var child = (cov_1pk88mqhba.s[2]++, node[key]);
+			cov_1pk88mqhba.s[3]++;
 			if ((typeof child === 'undefined' ? 'undefined' : (0, _typeof3.default)(child)) === 'object') {
-				cov_65wsgxcox.b[2][0]++;
-				cov_65wsgxcox.s[4]++;
+				cov_1pk88mqhba.b[2][0]++;
+				cov_1pk88mqhba.s[4]++;
 
 				if (Array.isArray(child)) {
-					cov_65wsgxcox.b[3][0]++;
+					cov_1pk88mqhba.b[3][0]++;
 
-					var i = (cov_65wsgxcox.s[5]++, 0),
-					    len = (cov_65wsgxcox.s[6]++, child.length);
-					cov_65wsgxcox.s[7]++;
+					var i = (cov_1pk88mqhba.s[5]++, 0),
+					    len = (cov_1pk88mqhba.s[6]++, child.length);
+					cov_1pk88mqhba.s[7]++;
 					for (; i < len; i++) {
-						var arrayChild = (cov_65wsgxcox.s[8]++, child[i]);
-						cov_65wsgxcox.s[9]++;
+						var arrayChild = (cov_1pk88mqhba.s[8]++, child[i]);
+						cov_1pk88mqhba.s[9]++;
 						arrayChild._parent = node;
-						cov_65wsgxcox.s[10]++;
+						cov_1pk88mqhba.s[10]++;
 						arrayChild._parentKey = keyArg;
-						cov_65wsgxcox.s[11]++;
+						cov_1pk88mqhba.s[11]++;
 						visit(arrayChild, key, func);
-						cov_65wsgxcox.s[12]++;
+						cov_1pk88mqhba.s[12]++;
 						arrayChild._parentKey = undefined;
-						cov_65wsgxcox.s[13]++;
+						cov_1pk88mqhba.s[13]++;
 						arrayChild._parent = undefined;
 					}
 				} else {
-					cov_65wsgxcox.b[3][1]++;
-					cov_65wsgxcox.s[14]++;
+					cov_1pk88mqhba.b[3][1]++;
+					cov_1pk88mqhba.s[14]++;
 
 					child._parent = node;
-					cov_65wsgxcox.s[15]++;
+					cov_1pk88mqhba.s[15]++;
 					child._parentKey = keyArg;
-					cov_65wsgxcox.s[16]++;
+					cov_1pk88mqhba.s[16]++;
 					visit(child, key, func);
 
-					cov_65wsgxcox.s[17]++;
+					cov_1pk88mqhba.s[17]++;
 					child._parentKey = undefined;
-					cov_65wsgxcox.s[18]++;
+					cov_1pk88mqhba.s[18]++;
 					child._parent = undefined;
 				}
 			} else {
-				cov_65wsgxcox.b[2][1]++;
-				cov_65wsgxcox.s[19]++;
+				cov_1pk88mqhba.b[2][1]++;
+				cov_1pk88mqhba.s[19]++;
 
 				if (func[key] !== undefined) {
-					cov_65wsgxcox.b[4][0]++;
-					cov_65wsgxcox.s[20]++;
+					cov_1pk88mqhba.b[4][0]++;
+					cov_1pk88mqhba.s[20]++;
 
 					func[key](node);
 				} else {
-					cov_65wsgxcox.b[4][1]++;
+					cov_1pk88mqhba.b[4][1]++;
 				}
 			}
 		} else {
-			cov_65wsgxcox.b[0][1]++;
+			cov_1pk88mqhba.b[0][1]++;
 		}
 	}
-	cov_65wsgxcox.s[21]++;
+	cov_1pk88mqhba.s[21]++;
 	if (func[keyArg] !== undefined) {
-		cov_65wsgxcox.b[5][0]++;
-		cov_65wsgxcox.s[22]++;
+		cov_1pk88mqhba.b[5][0]++;
+		cov_1pk88mqhba.s[22]++;
 
 		func[keyArg](node);
 	} else {
-		cov_65wsgxcox.b[5][1]++;
+		cov_1pk88mqhba.b[5][1]++;
 	}
 }
 
 function travel(node, keyArg, func) {
-	cov_65wsgxcox.f[1]++;
+	cov_1pk88mqhba.f[1]++;
 
-	var traveller = (cov_65wsgxcox.s[23]++, func(keyArg, node));
-	cov_65wsgxcox.s[24]++;
+	var traveller = (cov_1pk88mqhba.s[23]++, func(keyArg, node));
+	cov_1pk88mqhba.s[24]++;
 	if (traveller) {
-			cov_65wsgxcox.b[6][0]++;
-			cov_65wsgxcox.s[25]++;
+			cov_1pk88mqhba.b[6][0]++;
+			cov_1pk88mqhba.s[25]++;
 			return;
 		} else {
-		cov_65wsgxcox.b[6][1]++;
-	}cov_65wsgxcox.s[26]++;
+		cov_1pk88mqhba.b[6][1]++;
+	}cov_1pk88mqhba.s[26]++;
 	for (var key in node) {
-		cov_65wsgxcox.s[27]++;
+		cov_1pk88mqhba.s[27]++;
 
 		if (node[key] !== undefined) {
-			cov_65wsgxcox.b[7][0]++;
+			cov_1pk88mqhba.b[7][0]++;
 
-			var child = (cov_65wsgxcox.s[28]++, node[key]);
-			cov_65wsgxcox.s[29]++;
+			var child = (cov_1pk88mqhba.s[28]++, node[key]);
+			cov_1pk88mqhba.s[29]++;
 			if ((typeof child === 'undefined' ? 'undefined' : (0, _typeof3.default)(child)) === 'object') {
-				cov_65wsgxcox.b[8][0]++;
-				cov_65wsgxcox.s[30]++;
+				cov_1pk88mqhba.b[8][0]++;
+				cov_1pk88mqhba.s[30]++;
 
 				if (Array.isArray(child)) {
-					cov_65wsgxcox.b[9][0]++;
-					cov_65wsgxcox.s[31]++;
+					cov_1pk88mqhba.b[9][0]++;
+					cov_1pk88mqhba.s[31]++;
 
 					traveller = func(key, child);
-					cov_65wsgxcox.s[32]++;
+					cov_1pk88mqhba.s[32]++;
 					if (traveller) {
-							cov_65wsgxcox.b[10][0]++;
-							cov_65wsgxcox.s[33]++;
+							cov_1pk88mqhba.b[10][0]++;
+							cov_1pk88mqhba.s[33]++;
 							return;
 						} else {
-						cov_65wsgxcox.b[10][1]++;
-					}var i = (cov_65wsgxcox.s[34]++, 0),
-					    len = (cov_65wsgxcox.s[35]++, child.length);
-					cov_65wsgxcox.s[36]++;
+						cov_1pk88mqhba.b[10][1]++;
+					}var i = (cov_1pk88mqhba.s[34]++, 0),
+					    len = (cov_1pk88mqhba.s[35]++, child.length);
+					cov_1pk88mqhba.s[36]++;
 					for (; i < len; i++) {
-						var arrayChild = (cov_65wsgxcox.s[37]++, child[i]);
-						cov_65wsgxcox.s[38]++;
+						var arrayChild = (cov_1pk88mqhba.s[37]++, child[i]);
+						cov_1pk88mqhba.s[38]++;
 						travel(arrayChild, key, func);
 					}
 				} else {
-					cov_65wsgxcox.b[9][1]++;
-					cov_65wsgxcox.s[39]++;
+					cov_1pk88mqhba.b[9][1]++;
+					cov_1pk88mqhba.s[39]++;
 
 					travel(child, key, func);
 				}
 			} else {
-				cov_65wsgxcox.b[8][1]++;
-				cov_65wsgxcox.s[40]++;
+				cov_1pk88mqhba.b[8][1]++;
+				cov_1pk88mqhba.s[40]++;
 
 				func(key, node);
 			}
 		} else {
-			cov_65wsgxcox.b[7][1]++;
+			cov_1pk88mqhba.b[7][1]++;
 		}
 	}
 }
 
 function VisitContext() {
-	cov_65wsgxcox.f[2]++;
+	cov_1pk88mqhba.f[2]++;
 }
 
 function travelOne(node, keyArg, func, contextArg) {
-	cov_65wsgxcox.f[3]++;
-	cov_65wsgxcox.s[41]++;
+	cov_1pk88mqhba.f[3]++;
+	cov_1pk88mqhba.s[41]++;
 
-	contextArg = (cov_65wsgxcox.b[11][0]++, contextArg) || (cov_65wsgxcox.b[11][1]++, {});
-	var newContext = (cov_65wsgxcox.s[42]++, new VisitContext());
-	cov_65wsgxcox.s[43]++;
+	contextArg = (cov_1pk88mqhba.b[11][0]++, contextArg) || (cov_1pk88mqhba.b[11][1]++, {});
+	var newContext = (cov_1pk88mqhba.s[42]++, new VisitContext());
+	cov_1pk88mqhba.s[43]++;
 	newContext.__proto__ = contextArg;
-	cov_65wsgxcox.s[44]++;
+	cov_1pk88mqhba.s[44]++;
 	func(keyArg, node, newContext);
 
-	cov_65wsgxcox.s[45]++;
+	cov_1pk88mqhba.s[45]++;
 	for (var key in node) {
-		cov_65wsgxcox.s[46]++;
+		cov_1pk88mqhba.s[46]++;
 
-		if ((cov_65wsgxcox.b[13][0]++, node[key] !== undefined) && (cov_65wsgxcox.b[13][1]++, key !== '_parent') && (cov_65wsgxcox.b[13][2]++, key !== '_parentKey')) {
-			cov_65wsgxcox.b[12][0]++;
+		if ((cov_1pk88mqhba.b[13][0]++, node[key] !== undefined) && (cov_1pk88mqhba.b[13][1]++, key !== '_parent') && (cov_1pk88mqhba.b[13][2]++, key !== '_parentKey')) {
+			cov_1pk88mqhba.b[12][0]++;
 
-			var child = (cov_65wsgxcox.s[47]++, node[key]);
-			cov_65wsgxcox.s[48]++;
+			var child = (cov_1pk88mqhba.s[47]++, node[key]);
+			cov_1pk88mqhba.s[48]++;
 			if ((typeof child === 'undefined' ? 'undefined' : (0, _typeof3.default)(child)) === 'object') {
-				cov_65wsgxcox.b[14][0]++;
-				cov_65wsgxcox.s[49]++;
+				cov_1pk88mqhba.b[14][0]++;
+				cov_1pk88mqhba.s[49]++;
 
 				if (Array.isArray(child)) {
-					cov_65wsgxcox.b[15][0]++;
+					cov_1pk88mqhba.b[15][0]++;
 
-					var i = (cov_65wsgxcox.s[50]++, 0),
-					    len = (cov_65wsgxcox.s[51]++, child.length);
-					cov_65wsgxcox.s[52]++;
+					var i = (cov_1pk88mqhba.s[50]++, 0),
+					    len = (cov_1pk88mqhba.s[51]++, child.length);
+					cov_1pk88mqhba.s[52]++;
 					for (; i < len; i++) {
-						var arrayChild = (cov_65wsgxcox.s[53]++, child[i]);
-						cov_65wsgxcox.s[54]++;
+						var arrayChild = (cov_1pk88mqhba.s[53]++, child[i]);
+						cov_1pk88mqhba.s[54]++;
 						arrayChild._parent = node;
-						cov_65wsgxcox.s[55]++;
+						cov_1pk88mqhba.s[55]++;
 						arrayChild._parentKey = keyArg;
-						cov_65wsgxcox.s[56]++;
+						cov_1pk88mqhba.s[56]++;
 						travelOne(arrayChild, key, func, newContext);
-						cov_65wsgxcox.s[57]++;
+						cov_1pk88mqhba.s[57]++;
 						delete arrayChild._parentKey;
-						cov_65wsgxcox.s[58]++;
+						cov_1pk88mqhba.s[58]++;
 						delete arrayChild._parent;
 					}
 				} else {
-					cov_65wsgxcox.b[15][1]++;
-					cov_65wsgxcox.s[59]++;
+					cov_1pk88mqhba.b[15][1]++;
+					cov_1pk88mqhba.s[59]++;
 
 					child._parent = node;
-					cov_65wsgxcox.s[60]++;
+					cov_1pk88mqhba.s[60]++;
 					child._parentKey = keyArg;
-					cov_65wsgxcox.s[61]++;
+					cov_1pk88mqhba.s[61]++;
 					travelOne(child, key, func, newContext);
-					cov_65wsgxcox.s[62]++;
+					cov_1pk88mqhba.s[62]++;
 					delete child._parentKey;
-					cov_65wsgxcox.s[63]++;
+					cov_1pk88mqhba.s[63]++;
 					delete child._parent;
 				}
 			} else {
-				cov_65wsgxcox.b[14][1]++;
+				cov_1pk88mqhba.b[14][1]++;
 			}
 		} else {
-			cov_65wsgxcox.b[12][1]++;
+			cov_1pk88mqhba.b[12][1]++;
 		}
 	}
 }

@@ -114,8 +114,10 @@ class Register {
 
 	find(key, value, start) {
 		const result = []
-		for (let i = (start || 0); i < this.i.length; i++) if (this.i[i][this.schemaIndexes[key]] === value) result.push(this.i[i])
+		const schema_index = this.schema.indexOf(key)
+		for (let i = (start || 0); i < this.i.length; i++) if (this.i[i][schema_index] === value) result.push(this.i[i])
 		return result
+		//return this.i.filter(row => row[schema_index] === value)
 	}
 
 	distinct(schema, start) {
@@ -143,6 +145,17 @@ class Register {
 	addIndex(name) {
 		this.createIndex(name)
 		return this[name]
+	}
+
+	getAllValuesForColumns(names) {
+		const column_indexes = names.map(name => this.schema.indexOf(name))
+		return this.i.map(r => column_indexes.map(column_index => r[column_index]))
+	}
+
+	getAllValuesForColumn(name) {
+		const column_index = this.schema.indexOf(name)
+		if (column_index < 0) return []
+		return new Set(this.i.map(r => r[column_index]))
 	}
 
 //can only be unique indexes, string based.

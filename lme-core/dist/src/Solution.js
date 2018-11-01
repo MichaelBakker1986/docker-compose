@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1yig12ilst = function () {
-    var path = 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Solution.js',
-        hash = '427a095e7ef27c8b83e2b49ee73ab056436803dc',
+var cov_2ot1kaesy3 = function () {
+    var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Solution.js',
+        hash = '9e547633328315f2fdaf6a7e8e7cd645fcac4d95',
         Function = function () {}.constructor,
         global = new Function('return this')(),
         gcv = '__coverage__',
         coverageData = {
-        path: 'C:\\Users\\michael\\Documents\\lme\\lme-core\\src\\Solution.js',
+        path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-core\\src\\Solution.js',
         statementMap: {
             '0': {
                 start: {
@@ -358,47 +358,47 @@ var cov_1yig12ilst = function () {
  * @Deprecated, use Register.js
  */
 function Solution(solutionName) {
-    cov_1yig12ilst.f[0]++;
-    cov_1yig12ilst.s[0]++;
+    cov_2ot1kaesy3.f[0]++;
+    cov_2ot1kaesy3.s[0]++;
 
     this.name = solutionName;
-    cov_1yig12ilst.s[1]++;
+    cov_2ot1kaesy3.s[1]++;
     this.nodes = [];
-    cov_1yig12ilst.s[2]++;
+    cov_2ot1kaesy3.s[2]++;
     this.formulas = new Set();
 }
 
-cov_1yig12ilst.s[3]++;
+cov_2ot1kaesy3.s[3]++;
 Solution.prototype.getFormulaKeys = function () {
-    cov_1yig12ilst.f[1]++;
+    cov_2ot1kaesy3.f[1]++;
 
-    var temp_array = (cov_1yig12ilst.s[4]++, []);
-    cov_1yig12ilst.s[5]++;
+    var temp_array = (cov_2ot1kaesy3.s[4]++, []);
+    cov_2ot1kaesy3.s[5]++;
     this.formulas.forEach(function (v) {
-        cov_1yig12ilst.f[2]++;
-        cov_1yig12ilst.s[6]++;
+        cov_2ot1kaesy3.f[2]++;
+        cov_2ot1kaesy3.s[6]++;
 
         temp_array.push(v);
     });
-    cov_1yig12ilst.s[7]++;
+    cov_2ot1kaesy3.s[7]++;
     return temp_array;
 };
-cov_1yig12ilst.s[8]++;
+cov_2ot1kaesy3.s[8]++;
 Solution.prototype.createNode = function (formulaId, displaytype, n) {
-    cov_1yig12ilst.f[3]++;
-    cov_1yig12ilst.s[9]++;
+    cov_2ot1kaesy3.f[3]++;
+    cov_2ot1kaesy3.s[9]++;
 
-    n.displaytype = (cov_1yig12ilst.b[0][0]++, displaytype) || (cov_1yig12ilst.b[0][1]++, 'string');
-    cov_1yig12ilst.s[10]++;
+    n.displaytype = (cov_2ot1kaesy3.b[0][0]++, displaytype) || (cov_2ot1kaesy3.b[0][1]++, 'string');
+    cov_2ot1kaesy3.s[10]++;
     if (formulaId !== undefined) {
-            cov_1yig12ilst.b[1][0]++;
-            cov_1yig12ilst.s[11]++;
+            cov_2ot1kaesy3.b[1][0]++;
+            cov_2ot1kaesy3.s[11]++;
             this.formulas.add(formulaId);
         } else {
-        cov_1yig12ilst.b[1][1]++;
-    }cov_1yig12ilst.s[12]++;
+        cov_2ot1kaesy3.b[1][1]++;
+    }cov_2ot1kaesy3.s[12]++;
     this.nodes.push(n);
 };
 
-cov_1yig12ilst.s[13]++;
+cov_2ot1kaesy3.s[13]++;
 module.exports = Solution;

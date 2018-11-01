@@ -8,7 +8,7 @@ exports.WARN = exports.TRACE = exports.INFO = exports.DEBUG = exports.debug = ex
 var _michaelbakkerTracer = require('michaelbakker-tracer');
 
 var format = process.env.TIME_FORMAT || 'HH.MM.ssl';
-var logLevel = process.env.ENV || 'info';
+var logLevel = process.env.ENV || 'debug';
 var levels = {
 	debug: {
 		DEBUG: true,

@@ -95,7 +95,7 @@ angular.module('lmeapp', ['angular.filter'])
 	$scope.fflmode = true
 	$scope.currentView = 'FFLModelEditorView'
 	$scope.fflType = '.ffl'
-	var currentIndexer = new RegisterToFFL(register)//current modelindexer
+	let currentIndexer = new RegisterToFFL(register)
 	const fflEditor = new AceEditor('editor')
 	fflEditor.initResize()
 	const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
