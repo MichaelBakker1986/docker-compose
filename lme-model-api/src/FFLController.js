@@ -1,8 +1,8 @@
 //just an dummy-template to quickly create a model
-import { EconomicEditorView }           from '../../lme-model-api/index'
-import { FFL_VERSION_PROPERTY_NAME }    from '../../lme-core/index'
-import $                                from 'jquery'
-import { FFLToRegister, ScorecardTool } from '../../ffl/index'
+import { EconomicEditorView }                           from '../../lme-model-api/index'
+import { Context, FFL_VERSION_PROPERTY_NAME, Register } from '../../lme-core/index'
+import $                                                from 'jquery'
+import { DebugManager, FFLToRegister, ScorecardTool }   from '../../ffl/index'
 
 const economicEditorView = new EconomicEditorView()
 const newModelTemplate =
@@ -19,7 +19,7 @@ const newModelTemplate =
 	      '   hint: "Informatie over de stap";\n' +
 	      '   variable Q_MAP01_VRAAG0\n' +
 	      '   {\n' +
-	      '    title: "TestVraag";\n' +                         
+	      '    title: "TestVraag";\n' +
 	      '    frequency: document;\n' +
 	      '    datatype: number;\n' +
 	      '    formula: 100+100;\n' +
@@ -60,29 +60,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 		modelEngine.loadData(() => $scope.$digest())
 	}
 	$('.data-toggle-ide').on('click', () => $scope.changeView('FFLModelEditorView'))
-	$scope.saveFFLModel = function() {
-		const type = '.ffl'
-		Pace.track(function() {
-			$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
-			$scope.saveFeedbackTitle = 'Working on it... '
-			const data = fflEditor.getValue()
-			$.post(`saveFFLModel/${$scope.session.fflModelPath}`, {
-				data, type
-			}, function(data) {
-				$scope.$apply(function() {
-					const { session } = $scope
-					$scope.saveFeedbackTitle = 'Finished'
-					$scope.saveFeedback = data.status === 'fail' ? `Failed compiling model:${data.reason}` : 'Done work.'
-					$scope.downloadJsLink = `resources/${session.fflModelPath}.js`
-					session.disablePreviewButton = false
-					if (data.status === 'success') {
-						window.open(`${session.page}.html#${session.fflModelPath}&${session.userID}`)
-						$('#modal-success').modal('hide')
-					}
-				})
-			})
-		})
-	}
+
 	$scope.toggleFormatter = function() {
 		const cursor = fflEditor.getCursor()
 		user_session.fflModel = new FFLToRegister(register, fflEditor.getValue()).toString()
@@ -184,6 +162,38 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	})
 }
 
+FFLController.prototype.saveFFLModel = function($scope, session) {
+	const type = '.ffl'
+	const data = this.fflEditor.getValue()
+
+	const register = new Register()
+	const formatter = new FFLToRegister(register, data)
+	formatter.parseProperties()
+	const context = new Context()
+	const debugManager = new DebugManager(register, context.audittrail)
+	const feedback = debugManager.validateImportedSolution(session.fflModelPath)
+	console.info(feedback)
+
+	Pace.track(function() {
+		$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
+		$scope.saveFeedbackTitle = 'Working on it... '
+
+		$.post(`saveFFLModel/${$scope.session.fflModelPath}`, {
+			data, type
+		}, function(data) {
+			$scope.$apply(function() {
+				$scope.saveFeedbackTitle = 'Finished'
+				$scope.saveFeedback = data.status === 'fail' ? `Failed compiling model:${data.reason}` : 'Done work.'
+				$scope.downloadJsLink = `resources/${session.fflModelPath}.js`
+				session.disablePreviewButton = false
+				if (data.status === 'success') {
+					window.open(`${session.page}.html#${session.fflModelPath}&${session.userID}`)
+					$('#modal-success').modal('hide')
+				}
+			})
+		})
+	})
+}
 FFLController.prototype.updateFFLModel = function(model_name) {
 	const self = this
 	const { register, user_session } = this
@@ -192,7 +202,6 @@ FFLController.prototype.updateFFLModel = function(model_name) {
 		const xhr = new XMLHttpRequest()
 		xhr.addEventListener('progress', function(e) {
 			const load_data_information = `Loading data: ${e.loaded} of ` + (e.total || 'unknown') + ' bytes...'
-			console.info(load_data_information)
 			self.fflEditor.setValue(load_data_information)
 		})
 		xhr.addEventListener('load', function() {

@@ -72,9 +72,8 @@ DebugManager.prototype.validateImportedSolution = function(modelName) {
 			try {
 				wb.get(name, property, 0, wb.resolveY(0))
 				validateResponse.succes.push(name)
-
 			} catch (err) {
-				error(`Error while trying:${name}.${property} in model ${modelName}`, err)
+				console.error(`Error while trying:${name}.${property} in model ${modelName}`, err)
 			}
 		}
 	})

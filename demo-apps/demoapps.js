@@ -22,12 +22,11 @@ app.get('/id/:id/OptionViewer.js', browserify(`${__dirname}/angular-demo/OptionV
 	debug: false
 }))
 
-app.use('/id/:id/', expressStaticGzip(__dirname + '/angular-demo/'))
-app.use('/id/:id/', expressStaticGzip(__dirname + '/data-graph/'))
-app.use('/id/:id/', expressStaticGzip(__dirname + '/showcase/'))
-app.use('/id/:id/', expressStaticGzip(__dirname + '/monli/'))
-app.use('*/font-awesome', expressStaticGzip(__dirname + '/node_modules/font-awesome'))
-/*app.use('/id/:id/', expressStaticGzip(__dirname + '/'))*/
+app.use('/id/:id/', expressStaticGzip(`${__dirname}/angular-demo/`))
+app.use('/id/:id/', expressStaticGzip(`${__dirname}/data-graph/`))
+app.use('/id/:id/', expressStaticGzip(`${__dirname}/showcase/`))
+app.use('/id/:id/', expressStaticGzip(`${__dirname}/monli/`))
+app.use('*/font-awesome', expressStaticGzip(`${__dirname}/node_modules/font-awesome`))
 
 //showcase proxies
 app.use('/id/:id/', expressStaticGzip(__dirname + '/showcase/'))
@@ -106,16 +105,17 @@ app.listen(port, () => {
 	}).catch(err => log.error('Failed to register ', err))
 	const proxy_domain = `${host}:${internal_proxy_port}`
 	console.info(
-		'<span>DEMO apps: </span>\n' +
-		'<a href="http://' + domain + '/scorecard.html">Bootstrap Grid example</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/OptionViewer.html">Option viewer</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/basic_example.html">Most Basic Angular example</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/showcase/showcase.html">Showcase example</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/uishowcase.html">UI Showcase example</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>\n' +
-		'<a href="http://' + domain + '/basic_example.html">Extended controller Angular example</a><span> | </span>\n' +
-		'<br><span>IDE apps: </span>\n' +
-		'<a href="http://' + domain + '/ide.html">IDE DEMO Application</a><span> | </span>\n'
+		`<span>DEMO apps: </span>
+<a href="http://${domain}/scorecard.html">Bootstrap Grid example</a><span> | </span>
+<a href="http://${domain}/OptionViewer.html">Option viewer</a><span> | </span>
+<a href="http://${domain}/basic_example.html">Most Basic Angular example</a><span> | </span>
+<a href="http://${domain}/showcase/showcase.html">Showcase example</a><span> | </span>
+<a href="http://${domain}/uishowcase.html">UI Showcase example</a><span> | </span>
+<a href="http://${domain}/HoeveelKostEenStudie.html">Monli Hoeveel kost een studie?</a><span> | </span>
+<a href="http://${domain}/WatKostEenKind.html">Monli Wat kost een kind</a><span> | </span>
+<a href="http://${domain}/basic_example.html">Extended controller Angular example</a><span> | </span>
+<br><span>IDE apps: </span>
+<a href="http://${domain}/ide.html">IDE DEMO Application</a><span> | </span>
+`
 	)
 })

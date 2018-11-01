@@ -1,6 +1,5 @@
 {
   "name": "angular-demo",
-  "private": true,
   "version": "0.0.1",
   "description": "angular-demo",
   "dependencies": {

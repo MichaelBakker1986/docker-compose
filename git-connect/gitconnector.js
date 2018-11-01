@@ -1,8 +1,9 @@
-import glob from 'glob'
-import log  from 'log6'
-import fs   from 'fs'
+import glob                                 from 'glob'
+import { DEBUG, error, TRACE, trace, warn } from 'log6'
+import { readFile }                         from 'fs'
+import { FILE_SYSTEM_RESOURCES_PATH }       from './ResourceManager'
 
-const fileSystemFFLModelsSearchPath = __dirname + '/resources/**'
+const fileSystemFFLModelsSearchPath = `${FILE_SYSTEM_RESOURCES_PATH}/**`
 const enabledModels = (process.env.ENABLED_MODELS || '.*').split(',')
 
 /**
@@ -27,40 +28,42 @@ ModelListener.prototype.loadModel = function(file) {
 	const self = this
 	return function(err, data) {
 		if (err) throw err
-		var modelData = data
+		let modelData = data
 		/**
 		 * Windows client is case insensitive.
 		 * To load the models directly into linux some case-fixes are required.
 		 */
-		modelData = modelData.replace(/amount/gmi, 'Amount')
-		modelData = modelData.replace(/GoodWill/gmi, 'GoodWill')
-		modelData = modelData.replace(/MatrixLookup/gmi, 'MatrixLookup')
-		modelData = modelData.replace(/Startdate/gmi, 'StartDate')
-		modelData = modelData.replace(/Bookvalue/gmi, 'BookValue')
-		modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
-		modelData = modelData.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
-		modelData = modelData.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
-		modelData = modelData.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
-		modelData = modelData.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
+		modelData = modelData
+		.replace(/amount/gmi, 'Amount')
+		.replace(/GoodWill/gmi, 'GoodWill')
+		.replace(/MatrixLookup/gmi, 'MatrixLookup')
+		.replace(/Startdate/gmi, 'StartDate')
+		.replace(/Bookvalue/gmi, 'BookValue')
+		.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
+		.replace(/DiscountRateTaxShieldBasis/gmi, 'DiscountRateTaxShieldBasis')
+		.replace(/krWirtschaftlichesEigenKapitalRating/gmi, 'krWirtschaftlichesEigenKapitalRating')
+		.replace(/OtherTransitionalAssets/gmi, 'OtherTransitionalAssets')
+		.replace(/LiquidVATonCashExpenses/gmi, 'LiquidVATOnCashExpenses')
+
 		try {
 			self.onNewModel(modelData, file.toString())
 		} catch (err) {
 			log.warn('Failed to load model on path [%s] \nSee DEBUG logging to see why it has failed to load the model.', file.toString())
-			if (log.DEBUG) log.error(err)
+			if (DEBUG) error(err)
 		}
 	}
 }
 ModelListener.prototype.initializeModels = function() {
 	const self = this
-	const fileLookupCallback = function(err, files) {
-		if (err) log.warn('Error', err)
+	const fileLookupCallback = (err, files) => {
+		if (err) warn('Error', err)
 		else {
-			files.forEach(function(file) {
+			files.forEach(file => {
 				const caseInsensitiveFileName = file.toLowerCase()
 				//filter files other than *.ffl or containing _tmp_
 				if (caseInsensitiveFileName.endsWith('.ffl') && caseInsensitiveFileName.indexOf('_tmp_') === -1) {
 					if (enabledModel(caseInsensitiveFileName)) {
-						fs.readFile(file, 'utf8', self.loadModel(file))
+						readFile(file, 'utf8', self.loadModel(file))
 					}
 				}
 			})
@@ -71,10 +74,10 @@ ModelListener.prototype.initializeModels = function() {
 ModelListener.prototype.addListener = function(listener) {
 	this.listeners.push(listener)
 }
-ModelListener.prototype.onNewModel = function(modeldata, path) {
-	if (log.TRACE) log.trace(modeldata)
+ModelListener.prototype.onNewModel = function(model_data, path) {
+	if (TRACE) trace(model_data)
 	for (let i = 0; i < this.listeners.length; i++) {
-		this.listeners[i](modeldata, path)
+		this.listeners[i](model_data, path)
 	}
 }
 export { ModelListener }

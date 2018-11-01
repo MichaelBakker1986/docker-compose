@@ -155,7 +155,7 @@ angular.module('lmeapp', ['angular.filter'])
 		})
 	}
 	$scope.saveFileInView = function() {
-		if ($scope.currentView === 'FFLModelEditorView') $scope.saveFFLModel()
+		if ($scope.currentView === 'FFLModelEditorView') fflController.saveFFLModel($scope, $scope.session)
 		else if ($scope.currentView === 'jbehaveView') $scope.saveJBehaveStory()
 	}
 	$scope.goToPreviewPage = function() {
@@ -166,7 +166,7 @@ angular.module('lmeapp', ['angular.filter'])
 	}
 
 	$scope.sneakPreviewModel = function() {
-		Pace.track(function() {
+		Pace.track(() => {
 			$.post('preview/' + $scope.session.fflModelPath, {
 				data: fflEditor.getValue()
 			}, (data) => window.open(`${$scope.session.page}.html#${data.link}&${user_session.user.name}&${user_session.column_size}`))

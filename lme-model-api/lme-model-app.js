@@ -78,7 +78,7 @@ app.post('*/:user_id/saveFFLModel/:model_name', async ({ body, params }, res) =>
 	stash.commit(user_id, model_name, body.data, body.type).then(() => {
 		res.json({ status: 'ok' })
 	}).catch((err) => {
-		debug('Failed to write ' + model_name + '.ffl file.', err)
+		debug(`Failed to write ${model_name}.ffl file.`, err)
 		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: err.toString() })
 	})
 })

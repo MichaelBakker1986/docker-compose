@@ -54,7 +54,7 @@ const resolveCompiler = (memory_fs, filename, json_data) => {
 				/*new webpack.IgnorePlugin(/escodegen/),*/
 				/*new webpack.IgnorePlugin(/log6/)*/
 			],
-			devtool: 'inline-source-map'
+			devtool: 'none'
 		})
 		compiler.outputFileSystem = memory_fs
 		compilers[filename] = compiler
@@ -113,8 +113,12 @@ ExcelApi.loadExcelFile(xlsx_name).then(async (matrix) => {
 		createJavascriptWriteStream({ model_name }).write(source)
 		info(`Done writing executable file to ${model_name} size: ${source.length} `)
 	} catch (err) {
+		error('Problems while combining ffl into executable with frontend wrapper')
 		error(err.stack)
 	}
+}).catch(err => {
+	error('Problems while converting ffl into executable')
+	error(err.stack)
 })
 
 

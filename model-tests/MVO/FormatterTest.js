@@ -1,8 +1,8 @@
 /**
  * test consitency and speed of the formatter
  */
-import { FFLToRegister } from '../../lme-core/exchange_modules/ffl/FFLToRegister'
-import { Register }      from '../../lme-core/exchange_modules/ffl/Register'
+import { FFLToRegister } from '../../ffl/index'
+import { Register }      from '../../lme-core/index'
 import assert            from 'assert'
 import now               from 'performance-now'
 import { readFileSync }  from 'fs'
