@@ -1,4 +1,4 @@
-FROM node:10.11.0
+FROM node:11.0.0
 
 MAINTAINER Michael Bakker "michaelbakker1986@gmail.com"
 USER root
