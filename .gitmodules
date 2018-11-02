@@ -4,3 +4,12 @@
 [submodule "financiallanguageconverter"]
 	path = financiallanguageconverter
 	url = ssh://git@stash.topicus.nl:7999/ff/financiallanguageconverter.git
+[submodule "@michael.bakker/xsd2jsonschema"]
+	path = @michael.bakker/xsd2jsonschema
+	url = https://github.com/MichaelBakker1986/xsd2jsonschema.git
+[submodule "tracer"]
+	path = tracer
+	url = https://github.com/MichaelBakker1986/tracer.git
+[submodule "traefik/docker-compose"]
+	path = traefik/docker-compose
+	url = https://github.com/MichaelBakker1986/docker-compose.git
