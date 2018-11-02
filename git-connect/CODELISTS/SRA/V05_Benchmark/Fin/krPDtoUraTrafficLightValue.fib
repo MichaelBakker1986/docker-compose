@@ -1,6 +1,0 @@
-; file krPDtoUraTrafficLightValue.fib
-; PD to URA Traffic Light value
-
-<=0.01: 2    ; Grün
-<=0.03: 1    ; Gelb
->0.03:  0    ; Rot

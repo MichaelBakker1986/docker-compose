@@ -1,8 +1,0 @@
-{&&Language=English}
-
-<=0:   $>The EBITDA interest coverage can not be calculated.<$                                       
-<2.5:  $>The financial expenses are too high to be sufficiently covered by the EBITDA.<$              
-<3.5:  $>The financial expenses are very high compared to the EBITDA.<$                              
-<5.5:  $>The financial expenses are high compared to the EBITDA.<$                                    
-<7.5:  $>The EBITDA is sufficient to cover financial expenses.<$                                      
->=7.5: $>The EBITDA interest coverage is highly satisfactory in order to cover financial expenses.<$ 

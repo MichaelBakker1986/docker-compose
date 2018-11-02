@@ -1,8 +1,0 @@
-{
-	"name":"projectfinance-scorecard",
-	"viewType":"SCORECARD",
-	"variableName":"Q_ROOT_PROJECTFINANCE",
-	"metaData":{
-		"noLastStepCompensation": true
-	}
-}

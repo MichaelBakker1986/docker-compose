@@ -1,6 +1,0 @@
-:: E.J.Stokking, september 2017
-
-Set "Fmt4Table_Folder=%~dp0"
-
-Call %MOORepo%\Cmds\Generic_Open_in_MappingTool
-

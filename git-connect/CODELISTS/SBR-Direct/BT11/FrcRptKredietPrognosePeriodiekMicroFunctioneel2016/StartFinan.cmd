@@ -1,1 +1,0 @@
-%MOORepo%\apps\Finan\finan.exe /UserFolder=%tmp% /ModelFolder=%~dp0\FIN

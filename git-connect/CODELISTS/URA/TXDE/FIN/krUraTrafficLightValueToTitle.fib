@@ -1,7 +1,0 @@
-; file krUraTrafficLightValueToTitle
-; URA Traffic Light Value to Title
-{&&Language=Deutsch}
-
-0: "$>Rot<$"        ; java generator kan hier nog geen negatieve getallen! T.z.t. hier -1, 0 en 1 !
-1:  "$>Gelb<$"
-2:  "$>Grün<$"

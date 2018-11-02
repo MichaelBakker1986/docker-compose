@@ -1,9 +1,0 @@
-; file krIfdRatingToTitle.fib
-; IFD Rating to Title (Initiative Finanzstandort Deutschland)
-
-1: "1"  ; "I"
-2: "2"  ; "II"
-3: "3"  ; "III"
-4: "4"  ; "IV"
-5: "5"  ; "V"
-6: "6"  ; "VI"

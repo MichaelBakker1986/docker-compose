@@ -1,9 +1,0 @@
-{&&Language=English}
-
-<=0:   $>The solvency ratio can not be calculated.<$ 
-<=1:   $>The owners' equity has a negative value.<$
-<3.5:  $>The percentage of owners' equity is too low.<$
-<4.5:  $>The percentage of owners' equity is very low.<$
-<5.5:  $>The percentage of owners' equity is low.<$
-<7.5:  $>The percentage of owners' equity is (very) satisfactory.<$
->=7.5: $>The percentage of owners' equity is very high.<$

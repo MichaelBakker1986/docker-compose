@@ -1,3 +1,0 @@
-Maak een tekstfile met daarin een verwijzing naar Confluence. Liever zo min mogelijk Word- en Excelfiles (binaryfiles) in GIT.
-
-Dit bestand niet verwijderen als dit het enige bestand in de directory is.

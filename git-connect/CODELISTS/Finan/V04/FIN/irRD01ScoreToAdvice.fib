@@ -1,7 +1,0 @@
-{&&Language=English}
-
-<=0:    $>The solvency ratio can not be calculated.<$
-<=1:    $>The owners' equity is at a critical level. Attracting new owners'equity is essential.<$
-<3.5:   $>Attracting additional owners' equity could strongly improve the financial position.<$
-<5.5:   $>Attracting additional owners' equity could improve the financial position.<$
->=7.5:  $>Financially it appears to go well.<$ $>However, financial leverage migth not be optimal.<$  

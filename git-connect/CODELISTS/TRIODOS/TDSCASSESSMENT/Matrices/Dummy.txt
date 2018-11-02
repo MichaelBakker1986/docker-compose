@@ -1,1 +1,0 @@
-Dummy bestand zodat de map in GIT bewaard wordt.

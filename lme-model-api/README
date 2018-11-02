@@ -1,8 +1,0 @@
-#LME - model -app
-#/models
-#/branches
-#/getJs
-#/saveFfl
-
-#install:
-npm start

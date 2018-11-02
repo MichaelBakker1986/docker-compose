@@ -1,5 +1,0 @@
-import './proxy/SecurityPortal'
-//import './lme-model-api/lme-model-app'
-import './proxy'
-import './demo-apps'
-//import './lme-data-api/lme-model-data-app'

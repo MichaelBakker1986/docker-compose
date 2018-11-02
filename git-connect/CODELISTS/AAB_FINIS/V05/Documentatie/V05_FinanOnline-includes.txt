@@ -1,3 +1,0 @@
-Inc_URA.FIN
-Inc_V05-URA.fin
-inc_valuationV05.fin

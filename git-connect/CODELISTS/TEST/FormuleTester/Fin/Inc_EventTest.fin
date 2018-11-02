@@ -1,8 +1,0 @@
-{&&Language=English};Inc_EventTest.fin
-
-.Variables
-PPPP     X     1               Event Test model                 \EventTest 
-
-PIII    BN   1 2               "EndPoint"             			\EventEndPoint
-PIII    BN   1 2               "Intermediate OnChanged" 		\EventIntermediateOnEntered
-PIII    BN   1 2               "Start OnEntered"             	\EventStartOnEntered

@@ -1,4 +1,0 @@
-{&&Language=English}
-; FINAN-EuroCurrencies.fsf
-.AddCurrency "EUR",Rate=1,Symbol="€",Title="Euro",Default,OnShortList
-

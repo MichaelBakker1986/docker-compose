@@ -1,4 +1,0 @@
-Files in root are generic modules
-A model can have a separate folder to make more specific unit-tests
-Plugin / formatter can be used in the lme-IDE
-ModelFacade can be used to obtain generic functions.
