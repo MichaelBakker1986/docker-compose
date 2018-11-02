@@ -22,6 +22,7 @@ ADD /.gitignore /.gitignore
 ADD /install_script.js /install_script.js
 ADD /Production_Run.js /Production_Run.js
 
+ADD /financiallanguageconverter/DatastoreCluster /financiallanguageconverter/DatastoreCluster
 ADD /demo-apps /demo-apps
 ADD /docker-connect /docker-connect
 ADD /excel-connect /excel-connect

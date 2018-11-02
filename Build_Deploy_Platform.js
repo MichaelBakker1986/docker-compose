@@ -29,7 +29,7 @@ const run_prom = async (name, command) => {
 }
 
 async function startPlatform_build() {
-	const version = 'michaelbakker1986/lme_platform:0.1.28'
+	const version = 'michaelbakker1986/lme_platform:0.1.30'
 	await run_prom('docker build', `docker build . -t=${version}`)
 }
 

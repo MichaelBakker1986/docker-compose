@@ -1,4 +1,4 @@
-FROM node:10.11.0-alpine
+FROM node:11.0.0-alpine
 
 USER root
 ENV PORT 80

@@ -21,3 +21,4 @@ git-connect/CODELISTS/*.pom
 git-connect/CODELISTS/*
 git-connect/resources/Trader.ffl
 lme-model-api/dist/
+excel-connect/dist/

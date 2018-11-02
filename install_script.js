@@ -12,7 +12,7 @@ const path_info = __dirname
 
 async function getModules() {
 	return new Promise((accept) => {
-		const files = []
+		const files = [path.join(__dirname, '/financiallanguageconverter/DatastoreCluster')]
 		const items = readdirSync(path_info)
 		items.forEach(item => {
 			const module_directory = path.join(path_info, item)

@@ -154,12 +154,12 @@ FFLToRegister.prototype.prettyFormatFFL = function(depth, index) {
 		parts.length--
 		temp.replace(/((?!( variable | tuple )).)+/gm, function($1) {
 			const refId = $1.indexOf('___')
-			varparts.push(indent + $1.substring(0, refId - 1) + '\n' + indent + '{\n' + self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3))) + '\n' + indent + '}')
+			varparts.push(`${indent + $1.substring(0, refId - 1)}\n${indent}{\n${self.prettyFormatFFL(depth + 1, parseInt($1.substring(refId + 3)))}\n${indent}}`)
 			return ''
 		})
 	}
-	var lb = ';\n'
-	var r
+	const lb = ';\n'
+	let r
 	if (parts.length === 0) {
 		if (varparts.length === 0) {
 			r = ''
@@ -168,9 +168,9 @@ FFLToRegister.prototype.prettyFormatFFL = function(depth, index) {
 		}
 	} else {
 		if (varparts.length === 0) {
-			r = indent + parts.join(lb + indent) + ';'
+			r = `${indent + parts.join(lb + indent)};`
 		} else {
-			r = indent + parts.join(lb + indent) + ';\n' + (varparts.length > 0 ? varparts.join('\n') : ';')
+			r = `${indent + parts.join(lb + indent)};\n${varparts.length > 0 ? varparts.join('\n') : ';'}`
 		}
 	}
 	return r
@@ -184,11 +184,11 @@ FFLToRegister.prototype.parseProperties = function(resolve_parent_name = this.re
 	this.walk((v, raw_properties) => {
 			for (let i = 0; i < raw_properties.length; i++) {
 				const p = raw_properties[i]
-				const p_seperator_index = p.indexOf(':')//can't use split. some properties use multiple :
-				let key = p.substring(0, p_seperator_index).trim()
+				const p_separator_index = p.indexOf(':')//can't use split. some properties use multiple :
+				let key = p.substring(0, p_separator_index).trim()
 				key = formulaMapping[key] || key
 				register.addColumn(key)
-				let value = p.substring(p_seperator_index + 1).trim()
+				let value = p.substring(p_separator_index + 1).trim()
 				/**
 				 *  (!! doesn't work with multiple translations in a value) e.g. entirely string
 				 * ffl.replace(/__(\d+)/gm, ($1) => constants[parseInt($1.substring(2))])
