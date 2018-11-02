@@ -145,3 +145,4 @@ async function onProxyRes(proxyRes, req, res) {
 }
 
 app.listen(internal_proxy_port, () => info(`<a href="http://${host}"> Kibana logstash</a><span> deployed.</span>`))
+export default app

@@ -7,7 +7,7 @@
  */
 
 import './totalyearlycostTest'
-import { Context, FormulaService, LMEFacade, WorkBook } from 'lme-core'
+import LMEFacade, { Context, FormulaService, WorkBook } from '../../lme-core/index'
 import excelPlugin                                      from 'excel-connect'
 import * as formulaJs                                   from 'formulajs-connect'
 import { readFileSync }                                 from 'fs'

@@ -5,7 +5,6 @@ import expressStaticGzip                                                   from 
 import { createReadStream }                                                from 'fs'
 import ExcelConnect                                                        from '../excel-connect/excel-connect'
 import fileUpload                                                          from 'express-fileupload'
-import assembler                                                           from '../git-connect/ModelAssembler'
 import { existsExcelSheet, FILE_SYSTEM_RESOURCES_PATH, getExcelSheetPath } from '../git-connect/index'
 import stash                                                               from './src/stash'
 import { DockerImageBuilder }                                              from '../docker-connect/DockerImageBuilder'
@@ -20,8 +19,8 @@ import request                                                             from 
 import { FFLToRegister }                                                   from '../ffl/FFLToRegister'
 import { FFL_VERSION_PROPERTY_NAME, Register }                             from '../lme-core/index'
 import { RegisterToFFL }                                                   from '../ffl/RegisterToFFL'
+import { Contractor }                                                      from '../financiallanguageconverter/DatastoreCluster/index'
 
-const DBModel = {}
 const host = process.env.INTERNAL_HOST || '127.0.0.1'
 const internal_proxy_port = process.env.INTERNAL_PROXY_PORT || 7081
 const port = 8080
@@ -51,40 +50,42 @@ app.post('*/:user_id/preview/:model_name', async ({ body, params }, res) => {
 		res.json({ status: 'ok', link: hash })
 	}
 })
-assembler.then(db_methods => {
-	Object.assign(DBModel, db_methods)
-}).catch(err => {
-	DBModel.getModel = () => {}
-	DBModel.getFFLModelPropertyChanges = () => {}
-	error(err.stack)
-})
 app.get('*/model', async (req, res) => {
 	const name = req.query.model
-	DBModel.getModel(name).then((data) => {
-		res.json({ status: 'success', data: data })
-	}).catch(err => {
+	try {
+		let contractor = new Contractor({ auth_id: name, contract_id: name })
+		let [history, document] = await contractor.resolveDocument()
+		res.json({ status: 'success', data: document, history, document })
+	} catch (err) {
 		debug('Failed to fetch model from database', err)
 		res.json({ status: 'fail', reason: err.toString() })
-	})
+	}
 })
-app.get('*/modelChanges/:model_name', async ({ params }, res) => {
-	const model_name = params.model_name
+app.get('*/modelChanges/:model_name', async function({ params }, res) {
+	const { model_name, user_id } = params
 	try {
-		const data = DBModel.getFFLModelPropertyChanges(model_name)
-		res.json({ status: 'success', data: data })
+		let contractor = new Contractor({ auth_id: model_name, contract_id: model_name })
+		let [history, document] = await contractor.resolveDocument()
+		let ffl = new RegisterToFFL(document).toGeneratedFFL({
+			rootVariableName: 'root',
+			translate_keys  : true,
+			auto_join       : true
+		})
+		res.json({ history, ffl })
 	} catch (err) {
-		debug('Failed to fetch model changes from database', err)
+		debug('Failed to fetch model from database', err)
 		res.json({ status: 'fail', reason: err.toString() })
 	}
+	//res.json(await new ContractGraph({ auth_id: params.model_name, data_ids: [params.model_name] }).graph())
 })
 app.post('*/:user_id/saveFFLModel/:model_name', async ({ body, params }, res) => {
 	const { model_name, user_id } = params
 	const { ffl, version } = bumbVersion(body.data)
 	const { fail, changes, message } = await stash.commit(user_id, model_name, ffl, body.type)
 	if (fail) {
+		if (DEBUG) debug(`Failed to write ${model_name}.ffl file.`, message)
 		res.json({ status: 'fail', message: `Failed to write ${model_name}.ffl`, reason: message })
 	} else {
-		if (DEBUG) debug('Failed to write ' + model_name + '.ffl file.', message)
 		res.json({ status: 'ok', version, changes })
 	}
 })
@@ -119,9 +120,9 @@ app.get('*/tmp_model/:model', async ({ params }, res) => {
 // default options
 app.use(fileUpload())
 app.get('*/excel/:model.xlsx', async ({ params }, res) => {
-	const { model_name } = params
-	const result = await existsExcelSheet({ model_name })
-	const excelSheetPath = getExcelSheetPath({ model_name: result ? model_name : 'SAMPLE' })
+	const { model } = params
+	const result = await existsExcelSheet({ model_name: model })
+	const excelSheetPath = getExcelSheetPath({ model_name: result ? model : 'SAMPLE' })
 	res.sendFile(excelSheetPath)
 })
 app.post('*/upload', async (req, res) => {
@@ -219,6 +220,16 @@ app.post('*/excel/:model', async (req, res) => {
 	})
 })
 setup(app)
+
+app.use((err, req, res, next) => {
+	if (err) error(err.stack)
+	next(err)
+})
+app.use((err, req, res, next) => {
+	if (req.xhr) res.status(500).send({ error: 'Something failed!' })
+	else next(err)
+})
+
 app.listen(port, () => {
 	//talk with the proxy
 	const routes = ['*/model-docs*', '*/src/ide.js']
@@ -231,3 +242,4 @@ app.listen(port, () => {
 		if (DEBUG) debug(`${JSON.stringify(routes)} ${data}`)
 	}).catch(err => error('Failed to register ', err))
 })
+export default app

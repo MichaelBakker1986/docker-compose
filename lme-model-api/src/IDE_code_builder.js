@@ -7,7 +7,7 @@ const IDECodeBuilder = express_promise_router()
 async function go() {
 	new HotDeploy(IDECodeBuilder, '/ide.js')
 	new HotDeploy(IDECodeBuilder, '/excelide.js')
-	new HotDeploy(IDECodeBuilder, '/uishowcase.js')
+	//new HotDeploy(IDECodeBuilder, '/uishowcase.js')
 }
 
 go().catch(err => console.error(err))

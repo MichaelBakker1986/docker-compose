@@ -12,6 +12,8 @@ import api, { FFL_VERSION_PROPERTY_NAME, Register, WebExportParser } from '../..
 import fflMath                                                       from '../../math/ffl-math'
 import formulaJs                                                     from '../../formulajs-connect/formulajs'
 
+import { VersionController } from './versionController'
+
 api.addFunctions(fflMath, formulaJs)
 api.registerParser(RegisterPlainFFLDecorator, WebExportParser)
 let params = window.location.href.split('#')
@@ -27,6 +29,7 @@ const user_session = {
 	version             : '0.0.8',
 	model_version       : '0.1',
 	author              : 'topicus.nl',
+	model_history       : [],
 	user                : {
 		name: params[1] || 'DEMO'
 	},
@@ -42,50 +45,15 @@ global['session'] = new LocalStorage(user_session)
 
 angular.module('lmeapp', ['angular.filter'])
 .controller('ideController', function($scope, $http) {
-
 	const modelEngine = new LmeAPI(undefined, undefined, undefined, { user_session: user_session })
 	$scope.LMEMETA = modelEngine
 	global.LME = modelEngine
 	modelEngine.loadData((response) => {})
 	const matrixManager = new MatrixManager()
 	const matrixController = new MatrixController($scope, $http, matrixManager, { halfHeight: true })
-	const debugController = new DebugController($scope, $http)
-	/*	$http.get('whoami').then(function(response) {
-	 user_session.user.name = response.data.split(',')[0]
-	 }).catch(function(err) {
-	 user_session.user.name = 'DEMO'
-	 })*/
+	new DebugController($scope, $http)
+
 	$scope.session = user_session
-	$scope.model_history = []
-
-	$scope.updateModelChanges = function() {
-		$.get(`modelChanges/${user_session.fflModelPath}`, (data) => {
-			const history = []
-			const hashes = {}
-			if (data.data) {
-				for (let i = 0; i < data.data.length; i++) {
-					const obj = data.data[i]
-					obj.create_time = moment.utc(obj.create_time).add(1, 'hours').local().fromNow()
-
-					if (hashes[obj.uuid]) {
-						hashes[obj.uuid].push(JSON.stringify(obj, null, 2))
-						continue
-					}
-					hashes[obj.uuid] = [JSON.stringify(obj, null, 2)]
-					history.push({
-						create_time: obj.create_time,
-						data       : hashes[obj.uuid]
-					})
-				}
-				history.reverse()
-				$scope.$apply(function() {
-					$scope.model_history = history
-				})
-			}
-		}).fail((err) => {
-			console.error(`Error while reading model changes. ${err}`)
-		})
-	}
 	const register = new Register()
 	$scope.register = register
 
@@ -99,6 +67,8 @@ angular.module('lmeapp', ['angular.filter'])
 	const fflEditor = new AceEditor('editor')
 	fflEditor.initResize()
 	const fflController = new FFLController($scope, $http, fflEditor, user_session, changeManager, register, modelEngine)
+	new VersionController($scope, user_session, fflController)
+
 	const workbook = modelEngine.lme
 	right_editor.registerEditorToClickNames(right_editor, fflEditor, user_session, register, workbook)
 	right_editor.initResize()

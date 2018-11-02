@@ -1,4 +1,4 @@
-import { Register } from 'lme-core'
+import { Register } from '../lme-core/index'
 
 export class RegisterToJSON {
 

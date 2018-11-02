@@ -3,7 +3,6 @@ import log                            from 'log6'
 import compression                    from 'compression'
 import expressStaticGzip              from 'express-static-gzip'
 import express                        from 'express'
-import browserify                     from 'browserify-middleware'
 import express_no_favIcons            from 'express-no-favicons'
 import cors                           from 'cors'
 import { FILE_SYSTEM_RESOURCES_PATH } from '../git-connect/index'
@@ -16,11 +15,6 @@ const app = express()
 app.use(express_no_favIcons())
 app.use(cors())
 app.use(compression())
-
-app.get('/id/:id/OptionViewer.js', browserify(`${__dirname}/angular-demo/OptionViewer.js`, {
-	gzip : true,
-	debug: false
-}))
 
 app.use('/id/:id/', expressStaticGzip(`${__dirname}/angular-demo/`))
 app.use('/id/:id/', expressStaticGzip(`${__dirname}/data-graph/`))
@@ -53,7 +47,6 @@ app.listen(port, () => {
 	routes.push('*/WatKostEenKind.html')
 	routes.push('*/showcase.html')
 	routes.push('*/basic_example.html')
-	routes.push('*/OptionViewer.html')
 	routes.push('*/uishowcase.html')
 	routes.push('*/extended_controller.html')
 	routes.push('*/Promotion.html')
@@ -99,6 +92,7 @@ app.listen(port, () => {
 	routes.push('*.jpg')
 	routes.push('*.story')
 	routes.push('*.xlsx')
+	
 	const route = routes.join(',')
 	request.get(`http://${host}:${internal_proxy_port}/register/service/fs-api/${host}/${port}/${route}`).then(data => {
 		if (log.DEBUG) log.debug(data)

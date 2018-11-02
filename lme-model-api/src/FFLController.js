@@ -5,7 +5,6 @@ import $                                from 'jquery'
 import { FFLToRegister, ScorecardTool } from '../../ffl/index'
 import { Validator }                    from '../../lme-core/src/Validator'
 
-const economicEditorView = new EconomicEditorView()
 const newModelTemplate =
 	      'model $1 uses BaseModel\n' +
 	      '{\n' +
@@ -35,14 +34,11 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	this.$http = $http
 	this.fflEditor = fflEditor
 	this.user_session = user_session
+	this.modelEngine = modelEngine
 	this.changeManager = changeManager
 
-	$.get(`resources/${user_session.fflModelPath}.ffl`, data => {
-		console.info(`Loaded engine ${data.length}bytes`)
-		fflEditor.setValue(data)
-		$scope.reloadFFL()
-		//Also tell the auto-complete manager to initiate
-		changeManager.updateCursor(fflEditor.getValue(), 0)
+	$.get(`resources/${user_session.fflModelPath}.ffl`, ffl => {
+		this.updateInternalModel(ffl)
 	}).fail((err, ev, message) => {
 		if (err.readyState === 0) {
 			console.info('Failed to load')
@@ -51,15 +47,6 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 		}
 	})
 	fflEditor.aceEditor.on('mousedown', () => $scope.changeView('FFLModelEditorView'))
-	$scope.reloadFFL = function() {
-		//Hello engine-only
-		modelEngine.importFFL(fflEditor.getValue())
-		const LME = modelEngine.exportWebModel()
-		$scope.LME_MODEL = LME.nodes
-		$scope.name = LME.name
-
-		modelEngine.loadData(() => $scope.$digest())
-	}
 	$('.data-toggle-ide').on('click', () => $scope.changeView('FFLModelEditorView'))
 
 	$scope.toggleFormatter = function() {
@@ -70,7 +57,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	}
 	$scope.toggleWrapLines = () => $scope.toggleFormatter()
 	$scope.toggleProperties = function() {
-		economicEditorView.properties = !economicEditorView.properties
+		EconomicEditorView.properties = !EconomicEditorView.properties
 		fflEditor.setParsedValue(user_session.fflModel)
 		fflEditor.scrollTop()
 	}
@@ -82,7 +69,7 @@ function FFLController($scope, $http, fflEditor, user_session, changeManager, re
 	}
 	$scope.toggleAceEditorMode = function() {
 		$scope.fflmode = !$scope.fflmode
-		economicEditorView.on = !economicEditorView.on
+		EconomicEditorView.on = !EconomicEditorView.on
 		fflEditor.setParsedValue(user_session.fflModel)
 	}
 	fflEditor.aceEditor.on('change', function(e) {
@@ -176,10 +163,9 @@ FFLController.prototype.saveFFLModel = function($scope, session) {
 	if (feedback.fail) {
 		console.info(feedback)
 		$scope.saveFeedbackTitle = 'Validation failed'
-		$scope.saveFeedbackTitle = feedback.toString()
+		$scope.saveFeedback = feedback.toString()
 		session.disablePreviewButton = true
 	} else {
-		console.info('Success ' + feedback)
 		const data = this.fflEditor.getValue()
 		Pace.track(function() {
 			$scope.saveFeedback = `Customizing ${$scope.session.fflModelPath}… `
@@ -201,6 +187,19 @@ FFLController.prototype.saveFFLModel = function($scope, session) {
 			})
 		})
 	}
+}
+FFLController.prototype.updateInternalModel = function(ffl) {
+	console.info(`Loaded engine ${ffl.length}bytes`)
+	this.fflEditor.setValue(ffl)
+	//Hello engine-only
+	this.modelEngine.importFFL(this.fflEditor.getValue())
+	const LME = this.modelEngine.exportWebModel()
+	this.$scope.LME_MODEL = LME.nodes
+	this.$scope.name = LME.name
+
+	this.modelEngine.loadData(() => this.$scope.$digest())
+	//Also tell the auto-complete manager to initiate
+	this.changeManager.updateCursor(this.fflEditor.getValue(), 0)
 }
 FFLController.prototype.updateFFLModel = function(model_name) {
 	const self = this

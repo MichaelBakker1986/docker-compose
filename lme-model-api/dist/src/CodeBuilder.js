@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_111isxeps2 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\CodeBuilder.js',
-	    hash = '1e5de8acba760b94792ba36d4c8e23d1111754d0',
+var cov_1i7kk4cmky = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\CodeBuilder.js',
+	    hash = '1e27b20c94db86cfe891180494c75e9aa1f8bcf4',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\CodeBuilder.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\CodeBuilder.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -425,7 +425,7 @@ var cov_111isxeps2 = function () {
 			'0': [0, 0],
 			'1': [0, 0]
 		},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -472,13 +472,13 @@ var _webpack2 = _interopRequireDefault(_webpack);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var memory_fs = (cov_111isxeps2.s[0]++, new _memoryFs2.default());
-var compilers = (cov_111isxeps2.s[1]++, {});
+var memory_fs = (cov_1i7kk4cmky.s[0]++, new _memoryFs2.default());
+var compilers = (cov_1i7kk4cmky.s[1]++, {});
 
 var CodeBuilder = exports.CodeBuilder = function () {
 	function CodeBuilder() {
 		(0, _classCallCheck3.default)(this, CodeBuilder);
-		cov_111isxeps2.f[0]++;
+		cov_1i7kk4cmky.f[0]++;
 	}
 
 	(0, _createClass3.default)(CodeBuilder, [{
@@ -490,25 +490,25 @@ var CodeBuilder = exports.CodeBuilder = function () {
 					while (1) {
 						switch (_context.prev = _context.next) {
 							case 0:
-								cov_111isxeps2.f[1]++;
-								basename = (cov_111isxeps2.s[2]++, _path2.default.basename(filename));
-								compiler = (cov_111isxeps2.s[3]++, this.resolveCompiler(filename));
-								cov_111isxeps2.s[4]++;
+								cov_1i7kk4cmky.f[1]++;
+								basename = (cov_1i7kk4cmky.s[2]++, _path2.default.basename(filename));
+								compiler = (cov_1i7kk4cmky.s[3]++, this.resolveCompiler(filename));
+								cov_1i7kk4cmky.s[4]++;
 								return _context.abrupt('return', new Promise(function (accept, reject) {
-									cov_111isxeps2.f[2]++;
-									cov_111isxeps2.s[5]++;
+									cov_1i7kk4cmky.f[2]++;
+									cov_1i7kk4cmky.s[5]++;
 
 									compiler.run(function (err, stats) {
-										cov_111isxeps2.f[3]++;
-										cov_111isxeps2.s[6]++;
+										cov_1i7kk4cmky.f[3]++;
+										cov_1i7kk4cmky.s[6]++;
 
 										if (err) {
-												cov_111isxeps2.b[0][0]++;
-												cov_111isxeps2.s[7]++;
+												cov_1i7kk4cmky.b[0][0]++;
+												cov_1i7kk4cmky.s[7]++;
 												reject(err);
 											} else {
-												cov_111isxeps2.b[0][1]++;
-												cov_111isxeps2.s[8]++;
+												cov_1i7kk4cmky.b[0][1]++;
+												cov_1i7kk4cmky.s[8]++;
 												accept(memory_fs.readFileSync(__dirname + '/dist/' + basename, 'utf8'));
 											}
 									});
@@ -531,14 +531,14 @@ var CodeBuilder = exports.CodeBuilder = function () {
 	}, {
 		key: 'resolveCompiler',
 		value: function resolveCompiler(filename) {
-			cov_111isxeps2.f[4]++;
+			cov_1i7kk4cmky.f[4]++;
 
-			var basename = (cov_111isxeps2.s[9]++, _path2.default.basename(filename));
-			var compiler = (cov_111isxeps2.s[10]++, compilers[filename]);
-			cov_111isxeps2.s[11]++;
+			var basename = (cov_1i7kk4cmky.s[9]++, _path2.default.basename(filename));
+			var compiler = (cov_1i7kk4cmky.s[10]++, compilers[filename]);
+			cov_1i7kk4cmky.s[11]++;
 			if (!compiler) {
-				cov_111isxeps2.b[1][0]++;
-				cov_111isxeps2.s[12]++;
+				cov_1i7kk4cmky.b[1][0]++;
+				cov_1i7kk4cmky.s[12]++;
 
 				compiler = (0, _webpack2.default)({
 					context: __dirname + './',
@@ -563,21 +563,21 @@ var CodeBuilder = exports.CodeBuilder = function () {
 					},
 					plugins: [new _webpack2.default.NamedModulesPlugin(), new _webpack2.default.NoEmitOnErrorsPlugin()]
 				});
-				cov_111isxeps2.s[13]++;
+				cov_1i7kk4cmky.s[13]++;
 				compiler.outputFileSystem = memory_fs;
-				cov_111isxeps2.s[14]++;
+				cov_1i7kk4cmky.s[14]++;
 				compilers[filename] = compiler;
 			} else {
-				cov_111isxeps2.b[1][1]++;
+				cov_1i7kk4cmky.b[1][1]++;
 			}
-			cov_111isxeps2.s[15]++;
+			cov_1i7kk4cmky.s[15]++;
 			return compilers[filename];
 		}
 	}, {
 		key: 'getCompiler',
 		value: function getCompiler(filename) {
-			cov_111isxeps2.f[5]++;
-			cov_111isxeps2.s[16]++;
+			cov_1i7kk4cmky.f[5]++;
+			cov_1i7kk4cmky.s[16]++;
 
 			return this.resolveCompiler(filename);
 		}

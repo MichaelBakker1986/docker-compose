@@ -2,7 +2,7 @@
  * find displaytype = scorecard
  */
 import { FFLToRegister } from './FFLToRegister'
-import { Register }      from 'lme-core'
+import { Register }      from '../lme-core/index'
 
 function ScorecardTool() {
 	this.on = false

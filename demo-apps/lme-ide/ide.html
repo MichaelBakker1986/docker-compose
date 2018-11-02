@@ -200,13 +200,17 @@
                         <i class="fa fa-history"></i>
                         <span>History</span>
                     </a>
-                    <ul class="treeview-menu" style="display: block;">
-                        <li ng-repeat="model_history_item in model_history" title="{{model_history_item.data.join(';')}}">
-                            <a href="">
-                                <i class="fa fa-pencil-square-o"></i> {{model_history_item.create_time}}
-                            </a>
-                        </li>
-                    </ul>
+                    <a class="col-md-2">
+                        <canvas id="gitGraph"></canvas>
+                    </a>
+                    
+                    <!--  <ul class="treeview-menu" style="display: block;">
+                          <li ng-repeat="model_history_item in model_history" title="{{model_history_item.data.join(';')}}">
+                              <a href="">
+                                  <i class="fa fa-pencil-square-o"></i> {{model_history_item.create_time}}
+                              </a>
+                          </li>
+                      </ul>-->
                 </li>
                 <li>
                     <!-- <a ng-click="changeView('Settings')" data-toggle="tooltip" title="Configuration" href="" class="{{currentView == 'Settings' ? 'active' : ''}}">

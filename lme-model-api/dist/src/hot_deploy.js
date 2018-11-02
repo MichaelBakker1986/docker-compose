@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2nw4xmuz6j = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\hot_deploy.js',
-	    hash = '5a16273683deda7bda96c72e066835c32bbf21dc',
+var cov_2h9066oeac = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\hot_deploy.js',
+	    hash = '39d5cf7b22dfd9e53cdc2b53f9c61d585ef9e73b',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\hot_deploy.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\hot_deploy.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -156,7 +156,7 @@ var cov_2nw4xmuz6j = function () {
 			'1': 0
 		},
 		b: {},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -193,26 +193,26 @@ var _webpackHotClient2 = _interopRequireDefault(_webpackHotClient);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var codeBuilder = (cov_2nw4xmuz6j.s[0]++, new _CodeBuilder.CodeBuilder());
+var codeBuilder = (cov_2h9066oeac.s[0]++, new _CodeBuilder.CodeBuilder());
 
 var HotDeploy = exports.HotDeploy = function HotDeploy(server, hot_path) {
 	(0, _classCallCheck3.default)(this, HotDeploy);
-	cov_2nw4xmuz6j.f[0]++;
+	cov_2h9066oeac.f[0]++;
 
-	var filename = (cov_2nw4xmuz6j.s[1]++, _path2.default.basename(hot_path));
+	var filename = (cov_2h9066oeac.s[1]++, _path2.default.basename(hot_path));
 
-	var _ref = (cov_2nw4xmuz6j.s[2]++, 'http://localhost:10500/' + filename),
+	var _ref = (cov_2h9066oeac.s[2]++, 'http://localhost:10500/' + filename),
 	    publicPath = _ref.publicPath;
 
-	var file_path = (cov_2nw4xmuz6j.s[3]++, _path2.default.join(__dirname, hot_path));
+	var file_path = (cov_2h9066oeac.s[3]++, _path2.default.join(__dirname, hot_path));
 
-	var compiler = (cov_2nw4xmuz6j.s[4]++, codeBuilder.getCompiler(file_path));
-	var client = (cov_2nw4xmuz6j.s[5]++, (0, _webpackHotClient2.default)(compiler, { reload: false }));
+	var compiler = (cov_2h9066oeac.s[4]++, codeBuilder.getCompiler(file_path));
+	var client = (cov_2h9066oeac.s[5]++, (0, _webpackHotClient2.default)(compiler, { reload: false }));
 
-	cov_2nw4xmuz6j.s[6]++;
+	cov_2h9066oeac.s[6]++;
 	client.server.on('listening', function () {
-		cov_2nw4xmuz6j.f[1]++;
-		cov_2nw4xmuz6j.s[7]++;
+		cov_2h9066oeac.f[1]++;
+		cov_2h9066oeac.s[7]++;
 
 		server.use((0, _webpackDevMiddleware2.default)(compiler, { name: filename, publicPath: publicPath, dynamicPublicPath: true }));
 	});

@@ -116,7 +116,7 @@ RegisterToFFL.prototype.validate = function(line) {
  *  Convert Register to FFL.
  *    -- internationalization happens here, 'constants'
  */
-RegisterToFFL.prototype.toGeneratedFFL = function({ rootVariableName = 'root', noChildren = false, auto_join = false }) {
+RegisterToFFL.prototype.toGeneratedFFL = function({ rootVariableName = 'root', noChildren = false, auto_join = false, translate_keys = true }) {
 	const formattedFFL = []
 	const traverse = !noChildren
 	const { modifierIndex, nameIndex, indents, constants, relevant, schema, shiftindent, tupleIndex } = this
@@ -153,7 +153,7 @@ RegisterToFFL.prototype.toGeneratedFFL = function({ rootVariableName = 'root', n
 		formattedFFL.push(shiftindent[curr_depth][curr_depth - 1])
 		if (!rootVariableName) formattedFFL.shift()
 	}
-	const translated = formattedFFL.map(ffl => ffl.replace(/__(\d+)/gm, $1 => constants[parseInt($1.substring(2))]))
+	const translated = translate_keys ? formattedFFL.map(ffl => ffl.replace(/__(\d+)/gm, $1 => constants[parseInt($1.substring(2))])) : formattedFFL
 	return auto_join ? translated.join('\n') : translated
 }
 export { RegisterToFFL }

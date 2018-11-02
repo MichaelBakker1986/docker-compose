@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_1i69rfk2fl = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\lme.js',
-	    hash = '6bdf9db3075b9d137b89ff02cbe058df13d6a73a',
+var cov_p96pzm2dd = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\lme.js',
+	    hash = 'c61f1bf7ef6f09ed5fdcb655df5148a82d13092f',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\lme.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\lme.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -496,7 +496,7 @@ var cov_1i69rfk2fl = function () {
 				},
 				end: {
 					line: 86,
-					column: 71
+					column: 86
 				}
 			},
 			'49': {
@@ -786,7 +786,7 @@ var cov_1i69rfk2fl = function () {
 				},
 				end: {
 					line: 123,
-					column: 102
+					column: 115
 				}
 			},
 			'78': {
@@ -1769,31 +1769,31 @@ var cov_1i69rfk2fl = function () {
 				loc: {
 					start: {
 						line: 86,
-						column: 57
+						column: 72
 					},
 					end: {
 						line: 86,
-						column: 69
+						column: 84
 					}
 				},
 				type: 'binary-expr',
 				locations: [{
 					start: {
 						line: 86,
-						column: 57
+						column: 72
 					},
 					end: {
 						line: 86,
-						column: 59
+						column: 74
 					}
 				}, {
 					start: {
 						line: 86,
-						column: 63
+						column: 78
 					},
 					end: {
 						line: 86,
-						column: 69
+						column: 84
 					}
 				}],
 				line: 86
@@ -2403,7 +2403,7 @@ var cov_1i69rfk2fl = function () {
 			'25': [0, 0],
 			'26': [0, 0]
 		},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -2436,128 +2436,128 @@ var _fflMath2 = _interopRequireDefault(_fflMath);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DEFAULT_MODELNAME = (cov_1i69rfk2fl.s[0]++, 'SCORECARDTESTMODEL');
-cov_1i69rfk2fl.s[1]++;
+var DEFAULT_MODELNAME = (cov_p96pzm2dd.s[0]++, 'SCORECARDTESTMODEL');
+cov_p96pzm2dd.s[1]++;
 _index3.default.registerParser(_index.RegisterPlainFFLDecorator, _index2.JSONParser, _index2.LMEParser, _index2.WebExportParser);
-cov_1i69rfk2fl.s[2]++;
+cov_p96pzm2dd.s[2]++;
 _index3.default.addFunctions(_formulajs2.default, _fflMath2.default);
 
 function LmeAPI(TimeModel, Ctx, interval, options) {
-	cov_1i69rfk2fl.f[0]++;
-	cov_1i69rfk2fl.s[3]++;
+	cov_p96pzm2dd.f[0]++;
+	cov_p96pzm2dd.s[3]++;
 
 	//TODO: the TimeModel is part of the Context object.
 
 	if (TimeModel) {
-			cov_1i69rfk2fl.b[0][0]++;
-			cov_1i69rfk2fl.s[4]++;
-			this.lme = new _index2.WorkBook((cov_1i69rfk2fl.b[1][0]++, Ctx) || (cov_1i69rfk2fl.b[1][1]++, new _index2.Context()), new _index2.TimeAxis(TimeModel), interval);
+			cov_p96pzm2dd.b[0][0]++;
+			cov_p96pzm2dd.s[4]++;
+			this.lme = new _index2.WorkBook((cov_p96pzm2dd.b[1][0]++, Ctx) || (cov_p96pzm2dd.b[1][1]++, new _index2.Context()), new _index2.TimeAxis(TimeModel), interval);
 		} else {
-			cov_1i69rfk2fl.b[0][1]++;
-			cov_1i69rfk2fl.s[5]++;
-			this.lme = new _index2.WorkBook((cov_1i69rfk2fl.b[2][0]++, Ctx) || (cov_1i69rfk2fl.b[2][1]++, new _index2.Context()), new _index2.XAxis(), interval);
-		}cov_1i69rfk2fl.s[6]++;
+			cov_p96pzm2dd.b[0][1]++;
+			cov_p96pzm2dd.s[5]++;
+			this.lme = new _index2.WorkBook((cov_p96pzm2dd.b[2][0]++, Ctx) || (cov_p96pzm2dd.b[2][1]++, new _index2.Context()), new _index2.XAxis(), interval);
+		}cov_p96pzm2dd.s[6]++;
 	this.modelName = undefined;
-	cov_1i69rfk2fl.s[7]++;
+	cov_p96pzm2dd.s[7]++;
 	this.urlPrefix = '';
-	cov_1i69rfk2fl.s[8]++;
+	cov_p96pzm2dd.s[8]++;
 	Object.assign(this, options);
-	cov_1i69rfk2fl.s[9]++;
-	if ((cov_1i69rfk2fl.b[4][0]++, options) && (cov_1i69rfk2fl.b[4][1]++, options.ffl)) {
-			cov_1i69rfk2fl.b[3][0]++;
-			cov_1i69rfk2fl.s[10]++;
+	cov_p96pzm2dd.s[9]++;
+	if ((cov_p96pzm2dd.b[4][0]++, options) && (cov_p96pzm2dd.b[4][1]++, options.ffl)) {
+			cov_p96pzm2dd.b[3][0]++;
+			cov_p96pzm2dd.s[10]++;
 			this.importFFL(options.ffl);
 		} else {
-		cov_1i69rfk2fl.b[3][1]++;
+		cov_p96pzm2dd.b[3][1]++;
 	}
 }
 
-cov_1i69rfk2fl.s[11]++;
+cov_p96pzm2dd.s[11]++;
 LmeAPI.prototype.hasChanges = function () {
-	cov_1i69rfk2fl.f[1]++;
-	cov_1i69rfk2fl.s[12]++;
+	cov_p96pzm2dd.f[1]++;
+	cov_p96pzm2dd.s[12]++;
 
 	return this.lme.context.hasChanges();
 };
-cov_1i69rfk2fl.s[13]++;
+cov_p96pzm2dd.s[13]++;
 LmeAPI.prototype.getTimeViews = function () {
-	cov_1i69rfk2fl.f[2]++;
-	cov_1i69rfk2fl.s[14]++;
+	cov_p96pzm2dd.f[2]++;
+	cov_p96pzm2dd.s[14]++;
 
 	return this.lme.getTimeViews();
 };
-cov_1i69rfk2fl.s[15]++;
+cov_p96pzm2dd.s[15]++;
 LmeAPI.prototype.addFunctions = _index3.default.addFunctions;
-cov_1i69rfk2fl.s[16]++;
+cov_p96pzm2dd.s[16]++;
 LmeAPI.prototype.exportLME = function () {
-	cov_1i69rfk2fl.f[3]++;
-	cov_1i69rfk2fl.s[17]++;
+	cov_p96pzm2dd.f[3]++;
+	cov_p96pzm2dd.s[17]++;
 
 	return this.lme.export('lme');
 };
-cov_1i69rfk2fl.s[18]++;
+cov_p96pzm2dd.s[18]++;
 LmeAPI.prototype.importLME = function (json) {
-	cov_1i69rfk2fl.f[4]++;
-	cov_1i69rfk2fl.s[19]++;
+	cov_p96pzm2dd.f[4]++;
+	cov_p96pzm2dd.s[19]++;
 
 	this.lme.importSolution(json, 'lme');
 };
-cov_1i69rfk2fl.s[20]++;
+cov_p96pzm2dd.s[20]++;
 LmeAPI.prototype.exportJavaScript = function () {
-	cov_1i69rfk2fl.f[5]++;
-	cov_1i69rfk2fl.s[21]++;
+	cov_p96pzm2dd.f[5]++;
+	cov_p96pzm2dd.s[21]++;
 
 	return this.lme.export('js');
 };
 /**
  * Not used in Client UI input rendering
  */
-cov_1i69rfk2fl.s[22]++;
+cov_p96pzm2dd.s[22]++;
 LmeAPI.prototype.importFFL = function (ffl) {
-	cov_1i69rfk2fl.f[6]++;
-	cov_1i69rfk2fl.s[23]++;
+	cov_p96pzm2dd.f[6]++;
+	cov_p96pzm2dd.s[23]++;
 
 	this.lme.importFFL(ffl);
 };
-cov_1i69rfk2fl.s[24]++;
+cov_p96pzm2dd.s[24]++;
 LmeAPI.prototype.setColumnOffset = function (delta) {
-	cov_1i69rfk2fl.f[7]++;
-	cov_1i69rfk2fl.s[25]++;
+	cov_p96pzm2dd.f[7]++;
+	cov_p96pzm2dd.s[25]++;
 
 	this.lme.setColumnOffset(delta);
 };
-cov_1i69rfk2fl.s[26]++;
+cov_p96pzm2dd.s[26]++;
 LmeAPI.prototype.exportFFL = function () {
-	cov_1i69rfk2fl.f[8]++;
-	cov_1i69rfk2fl.s[27]++;
+	cov_p96pzm2dd.f[8]++;
+	cov_p96pzm2dd.s[27]++;
 
 	return this.lme.export('ffl');
 };
-cov_1i69rfk2fl.s[28]++;
+cov_p96pzm2dd.s[28]++;
 LmeAPI.prototype.exportWebModel = function (rootNode) {
-	cov_1i69rfk2fl.f[9]++;
-	cov_1i69rfk2fl.s[29]++;
+	cov_p96pzm2dd.f[9]++;
+	cov_p96pzm2dd.s[29]++;
 
 	return this.lme.export('webexport', rootNode);
 };
-cov_1i69rfk2fl.s[30]++;
+cov_p96pzm2dd.s[30]++;
 LmeAPI.prototype.importWebModel = function (webDesign) {
-	cov_1i69rfk2fl.f[10]++;
-	cov_1i69rfk2fl.s[31]++;
+	cov_p96pzm2dd.f[10]++;
+	cov_p96pzm2dd.s[31]++;
 
 	return this.lme.importSolution(webDesign, 'webexport');
 };
-cov_1i69rfk2fl.s[32]++;
+cov_p96pzm2dd.s[32]++;
 LmeAPI.prototype.exportData = function () {
-	cov_1i69rfk2fl.f[11]++;
-	cov_1i69rfk2fl.s[33]++;
+	cov_p96pzm2dd.f[11]++;
+	cov_p96pzm2dd.s[33]++;
 
 	return this.lme.export('jsonvalues');
 };
-cov_1i69rfk2fl.s[34]++;
+cov_p96pzm2dd.s[34]++;
 LmeAPI.prototype.importData = function (valueAsJSON) {
-	cov_1i69rfk2fl.f[12]++;
-	cov_1i69rfk2fl.s[35]++;
+	cov_p96pzm2dd.f[12]++;
+	cov_p96pzm2dd.s[35]++;
 
 	this.lme.importSolution(valueAsJSON, 'jsonvalues');
 };
@@ -2565,138 +2565,138 @@ LmeAPI.prototype.importData = function (valueAsJSON) {
  * use modelName from this.lme.modelName
  * use token form this.lme.context.uuid
  */
-cov_1i69rfk2fl.s[36]++;
+cov_p96pzm2dd.s[36]++;
 LmeAPI.prototype.loadData = function (callBack, id) {
-	cov_1i69rfk2fl.f[13]++;
+	cov_p96pzm2dd.f[13]++;
 
-	var self = (cov_1i69rfk2fl.s[37]++, this);
-	var params = (cov_1i69rfk2fl.s[38]++, window.location.href.split('#'));
-	cov_1i69rfk2fl.s[39]++;
+	var self = (cov_p96pzm2dd.s[37]++, this);
+	var params = (cov_p96pzm2dd.s[38]++, window.location.href.split('#'));
+	cov_p96pzm2dd.s[39]++;
 	if (params.length === 1) {
-			cov_1i69rfk2fl.b[5][0]++;
-			cov_1i69rfk2fl.s[40]++;
+			cov_p96pzm2dd.b[5][0]++;
+			cov_p96pzm2dd.s[40]++;
 			window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO&6';
 		} else {
-		cov_1i69rfk2fl.b[5][1]++;
-	}cov_1i69rfk2fl.s[41]++;
+		cov_p96pzm2dd.b[5][1]++;
+	}cov_p96pzm2dd.s[41]++;
 	params = window.location.href.split('#')[1].split('&');
-	var columnSize = (cov_1i69rfk2fl.s[42]++, parseInt(params.length > 2 ? (cov_1i69rfk2fl.b[6][0]++, (cov_1i69rfk2fl.b[7][0]++, params[2]) || (cov_1i69rfk2fl.b[7][1]++, '6')) : (cov_1i69rfk2fl.b[6][1]++, '6')));
-	cov_1i69rfk2fl.s[43]++;
-	self.modelName = (cov_1i69rfk2fl.b[8][0]++, params[0]) || (cov_1i69rfk2fl.b[8][1]++, DEFAULT_MODELNAME);
-	var userID = (cov_1i69rfk2fl.s[44]++, (cov_1i69rfk2fl.b[9][0]++, params[1]) || (cov_1i69rfk2fl.b[9][1]++, 'DEMO'));
-	var model_version = (cov_1i69rfk2fl.s[45]++, this.user_session ? (cov_1i69rfk2fl.b[10][0]++, (cov_1i69rfk2fl.b[11][0]++, this.user_session.model_version) || (cov_1i69rfk2fl.b[11][1]++, '0.20')) : (cov_1i69rfk2fl.b[10][1]++, '0.20'));
-	cov_1i69rfk2fl.s[46]++;
+	var columnSize = (cov_p96pzm2dd.s[42]++, parseInt(params.length > 2 ? (cov_p96pzm2dd.b[6][0]++, (cov_p96pzm2dd.b[7][0]++, params[2]) || (cov_p96pzm2dd.b[7][1]++, '6')) : (cov_p96pzm2dd.b[6][1]++, '6')));
+	cov_p96pzm2dd.s[43]++;
+	self.modelName = (cov_p96pzm2dd.b[8][0]++, params[0]) || (cov_p96pzm2dd.b[8][1]++, DEFAULT_MODELNAME);
+	var userID = (cov_p96pzm2dd.s[44]++, (cov_p96pzm2dd.b[9][0]++, params[1]) || (cov_p96pzm2dd.b[9][1]++, 'DEMO'));
+	var model_version = (cov_p96pzm2dd.s[45]++, this.user_session ? (cov_p96pzm2dd.b[10][0]++, (cov_p96pzm2dd.b[11][0]++, this.user_session.model_version) || (cov_p96pzm2dd.b[11][1]++, '0.20')) : (cov_p96pzm2dd.b[10][1]++, '0.20'));
+	cov_p96pzm2dd.s[46]++;
 	self.lme.context.saveToken = userID;
-	var http = (cov_1i69rfk2fl.s[47]++, new XMLHttpRequest());
-	var url = (cov_1i69rfk2fl.s[48]++, '/' + self.modelName + '/' + model_version + '/data/' + ((cov_1i69rfk2fl.b[12][0]++, id) || (cov_1i69rfk2fl.b[12][1]++, userID)));
-	cov_1i69rfk2fl.s[49]++;
+	var http = (cov_p96pzm2dd.s[47]++, new XMLHttpRequest());
+	var url = (cov_p96pzm2dd.s[48]++, '/' + self.modelName + '/0.' + model_version + '/id/' + userID + '/data/' + ((cov_p96pzm2dd.b[12][0]++, id) || (cov_p96pzm2dd.b[12][1]++, userID)));
+	cov_p96pzm2dd.s[49]++;
 	http.open('GET', url, true);
-	cov_1i69rfk2fl.s[50]++;
+	cov_p96pzm2dd.s[50]++;
 	http.setRequestHeader('Content-type', 'application/json');
-	cov_1i69rfk2fl.s[51]++;
+	cov_p96pzm2dd.s[51]++;
 	http.onreadystatechange = function () {
-		cov_1i69rfk2fl.f[14]++;
-		cov_1i69rfk2fl.s[52]++;
+		cov_p96pzm2dd.f[14]++;
+		cov_p96pzm2dd.s[52]++;
 		//Call a function when the state changes.
-		if ((cov_1i69rfk2fl.b[14][0]++, http.readyState === 4) && (cov_1i69rfk2fl.b[14][1]++, http.status === 200)) {
-			cov_1i69rfk2fl.b[13][0]++;
+		if ((cov_p96pzm2dd.b[14][0]++, http.readyState === 4) && (cov_p96pzm2dd.b[14][1]++, http.status === 200)) {
+			cov_p96pzm2dd.b[13][0]++;
 
-			var returnData = (cov_1i69rfk2fl.s[53]++, JSON.parse(http.responseText));
-			cov_1i69rfk2fl.s[54]++;
-			self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? (cov_1i69rfk2fl.b[15][0]++, userID) : (cov_1i69rfk2fl.b[15][1]++, returnData.id);
-			cov_1i69rfk2fl.s[55]++;
+			var returnData = (cov_p96pzm2dd.s[53]++, JSON.parse(http.responseText));
+			cov_p96pzm2dd.s[54]++;
+			self.lme.context.saveToken = returnData.id.indexOf(',') > 0 ? (cov_p96pzm2dd.b[15][0]++, userID) : (cov_p96pzm2dd.b[15][1]++, returnData.id);
+			cov_p96pzm2dd.s[55]++;
 			self.importData(returnData);
-			cov_1i69rfk2fl.s[56]++;
+			cov_p96pzm2dd.s[56]++;
 			window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken + '&' + columnSize;
 		} else {
-			cov_1i69rfk2fl.b[13][1]++;
+			cov_p96pzm2dd.b[13][1]++;
 		}
 	};
 	// noinspection JSCheckFunctionSignatures
-	cov_1i69rfk2fl.s[57]++;
+	cov_p96pzm2dd.s[57]++;
 	http.onload = function () {
-		cov_1i69rfk2fl.f[15]++;
-		cov_1i69rfk2fl.s[58]++;
+		cov_p96pzm2dd.f[15]++;
+		cov_p96pzm2dd.s[58]++;
 
 		self.lme.context.audit = [];
-		cov_1i69rfk2fl.s[59]++;
+		cov_p96pzm2dd.s[59]++;
 		self.lme.context.calc_count++;
-		cov_1i69rfk2fl.s[60]++;
+		cov_p96pzm2dd.s[60]++;
 		callBack(http.responseText);
 	};
-	cov_1i69rfk2fl.s[61]++;
+	cov_p96pzm2dd.s[61]++;
 	try {
-		cov_1i69rfk2fl.s[62]++;
+		cov_p96pzm2dd.s[62]++;
 
 		http.send();
 	} catch (err) {
-		cov_1i69rfk2fl.s[63]++;
+		cov_p96pzm2dd.s[63]++;
 
 		console.error(err);
 	}
-	cov_1i69rfk2fl.s[64]++;
+	cov_p96pzm2dd.s[64]++;
 	return http;
 };
 
-cov_1i69rfk2fl.s[65]++;
+cov_p96pzm2dd.s[65]++;
 LmeAPI.prototype.persistData = function (callBack) {
-	cov_1i69rfk2fl.f[16]++;
+	cov_p96pzm2dd.f[16]++;
 
-	var params = (cov_1i69rfk2fl.s[66]++, window.location.href.split('#')[1].split('&'));
-	var self = (cov_1i69rfk2fl.s[67]++, this);
+	var params = (cov_p96pzm2dd.s[66]++, window.location.href.split('#')[1].split('&'));
+	var self = (cov_p96pzm2dd.s[67]++, this);
 	//send data to server to store
-	cov_1i69rfk2fl.s[68]++;
+	cov_p96pzm2dd.s[68]++;
 	if (params.length === 1) {
-			cov_1i69rfk2fl.b[16][0]++;
-			cov_1i69rfk2fl.s[69]++;
+			cov_p96pzm2dd.b[16][0]++;
+			cov_p96pzm2dd.s[69]++;
 			window.location.href = '#' + DEFAULT_MODELNAME + '&DEMO&6';
 		} else {
-		cov_1i69rfk2fl.b[16][1]++;
-	}cov_1i69rfk2fl.s[70]++;
-	self.modelName = (cov_1i69rfk2fl.b[17][0]++, params[0]) || (cov_1i69rfk2fl.b[17][1]++, DEFAULT_MODELNAME);
-	var userID = (cov_1i69rfk2fl.s[71]++, (cov_1i69rfk2fl.b[18][0]++, params[1]) || (cov_1i69rfk2fl.b[18][1]++, 'DEMO'));
-	var columnSize = (cov_1i69rfk2fl.s[72]++, parseInt(params.length > 1 ? (cov_1i69rfk2fl.b[19][0]++, (cov_1i69rfk2fl.b[20][0]++, params[2]) || (cov_1i69rfk2fl.b[20][1]++, '6')) : (cov_1i69rfk2fl.b[19][1]++, '6')));
-	cov_1i69rfk2fl.s[73]++;
+		cov_p96pzm2dd.b[16][1]++;
+	}cov_p96pzm2dd.s[70]++;
+	self.modelName = (cov_p96pzm2dd.b[17][0]++, params[0]) || (cov_p96pzm2dd.b[17][1]++, DEFAULT_MODELNAME);
+	var userID = (cov_p96pzm2dd.s[71]++, (cov_p96pzm2dd.b[18][0]++, params[1]) || (cov_p96pzm2dd.b[18][1]++, 'DEMO'));
+	var columnSize = (cov_p96pzm2dd.s[72]++, parseInt(params.length > 1 ? (cov_p96pzm2dd.b[19][0]++, (cov_p96pzm2dd.b[20][0]++, params[2]) || (cov_p96pzm2dd.b[20][1]++, '6')) : (cov_p96pzm2dd.b[19][1]++, '6')));
+	cov_p96pzm2dd.s[73]++;
 	self.lme.context.saveToken = userID;
-	var model_version = (cov_1i69rfk2fl.s[74]++, this.user_session ? (cov_1i69rfk2fl.b[21][0]++, (cov_1i69rfk2fl.b[22][0]++, this.user_session.model_version) || (cov_1i69rfk2fl.b[22][1]++, '0.20')) : (cov_1i69rfk2fl.b[21][1]++, '0.20'));
-	var model_name = (cov_1i69rfk2fl.s[75]++, this.user_session ? (cov_1i69rfk2fl.b[23][0]++, (cov_1i69rfk2fl.b[24][0]++, this.user_session.fflModelPath) || (cov_1i69rfk2fl.b[24][1]++, 'KSP2')) : (cov_1i69rfk2fl.b[23][1]++, 'KSP2'));
-	var http = (cov_1i69rfk2fl.s[76]++, new XMLHttpRequest());
-	cov_1i69rfk2fl.s[77]++;
-	http.open('POST', '/' + model_name + '/' + model_version + '/saveUserData/' + self.lme.context.saveToken, true);
-	cov_1i69rfk2fl.s[78]++;
+	var model_version = (cov_p96pzm2dd.s[74]++, this.user_session ? (cov_p96pzm2dd.b[21][0]++, (cov_p96pzm2dd.b[22][0]++, this.user_session.model_version) || (cov_p96pzm2dd.b[22][1]++, '0.20')) : (cov_p96pzm2dd.b[21][1]++, '0.20'));
+	var model_name = (cov_p96pzm2dd.s[75]++, this.user_session ? (cov_p96pzm2dd.b[23][0]++, (cov_p96pzm2dd.b[24][0]++, this.user_session.fflModelPath) || (cov_p96pzm2dd.b[24][1]++, 'KSP2')) : (cov_p96pzm2dd.b[23][1]++, 'KSP2'));
+	var http = (cov_p96pzm2dd.s[76]++, new XMLHttpRequest());
+	cov_p96pzm2dd.s[77]++;
+	http.open('POST', '/' + model_name + '/' + model_version + '/id/' + userID + '/saveUserData/' + self.lme.context.saveToken, true);
+	cov_p96pzm2dd.s[78]++;
 	http.setRequestHeader('Content-Type', 'application/json');
-	cov_1i69rfk2fl.s[79]++;
+	cov_p96pzm2dd.s[79]++;
 	http.onreadystatechange = function () {
-		cov_1i69rfk2fl.f[17]++;
-		cov_1i69rfk2fl.s[80]++;
+		cov_p96pzm2dd.f[17]++;
+		cov_p96pzm2dd.s[80]++;
 		//Call a function when the state changes.
-		if ((cov_1i69rfk2fl.b[26][0]++, http.readyState === 4) && (cov_1i69rfk2fl.b[26][1]++, http.status === 200)) {
-			cov_1i69rfk2fl.b[25][0]++;
+		if ((cov_p96pzm2dd.b[26][0]++, http.readyState === 4) && (cov_p96pzm2dd.b[26][1]++, http.status === 200)) {
+			cov_p96pzm2dd.b[25][0]++;
 
-			var returnData = (cov_1i69rfk2fl.s[81]++, JSON.parse(http.responseText));
-			cov_1i69rfk2fl.s[82]++;
+			var returnData = (cov_p96pzm2dd.s[81]++, JSON.parse(http.responseText));
+			cov_p96pzm2dd.s[82]++;
 			self.lme.context.saveToken = returnData.saveToken;
-			cov_1i69rfk2fl.s[83]++;
+			cov_p96pzm2dd.s[83]++;
 			window.location.href = '#' + self.modelName + '&' + self.lme.context.saveToken + '&' + columnSize;
 		} else {
-			cov_1i69rfk2fl.b[25][1]++;
+			cov_p96pzm2dd.b[25][1]++;
 		}
 	};
 	// noinspection JSCheckFunctionSignatures
-	cov_1i69rfk2fl.s[84]++;
+	cov_p96pzm2dd.s[84]++;
 	http.onload = function () {
-		cov_1i69rfk2fl.f[18]++;
-		cov_1i69rfk2fl.s[85]++;
+		cov_p96pzm2dd.f[18]++;
+		cov_p96pzm2dd.s[85]++;
 
 		self.lme.context.audit = [];
-		cov_1i69rfk2fl.s[86]++;
+		cov_p96pzm2dd.s[86]++;
 		self.lme.context.calc_count++;
-		cov_1i69rfk2fl.s[87]++;
+		cov_p96pzm2dd.s[87]++;
 		callBack(http.responseText);
 	};
-	cov_1i69rfk2fl.s[88]++;
+	cov_p96pzm2dd.s[88]++;
 	http.send(JSON.stringify({ data: self.exportData() }));
-	cov_1i69rfk2fl.s[89]++;
+	cov_p96pzm2dd.s[89]++;
 	return http;
 };
 exports.LmeAPI = LmeAPI;

@@ -1,18 +1,18 @@
 'use strict';
 
-var cov_sf1gudccs = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\api-def.js',
-	    hash = 'a3b3feae2dc0098b366e44f0b7a0d7d73a1c67e1',
+var cov_14y7u6djkv = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\api-def.js',
+	    hash = 'fd078c31a52f6d832fc5532b0a2b504c360b5b3b',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\api-def.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\api-def.js',
 		statementMap: {
 			'0': {
 				start: {
 					line: 1,
-					column: 0
+					column: 21
 				},
 				end: {
 					line: 10,
@@ -86,17 +86,17 @@ var cov_sf1gudccs = function () {
 				decl: {
 					start: {
 						line: 1,
-						column: 23
+						column: 21
 					},
 					end: {
 						line: 1,
-						column: 24
+						column: 22
 					}
 				},
 				loc: {
 					start: {
 						line: 1,
-						column: 37
+						column: 35
 					},
 					end: {
 						line: 10,
@@ -120,7 +120,7 @@ var cov_sf1gudccs = function () {
 				loc: {
 					start: {
 						line: 3,
-						column: 48
+						column: 43
 					},
 					end: {
 						line: 9,
@@ -145,7 +145,7 @@ var cov_sf1gudccs = function () {
 			'1': 0
 		},
 		b: {},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -157,21 +157,24 @@ var cov_sf1gudccs = function () {
 	return coverage[path] = coverageData;
 }();
 
-cov_sf1gudccs.s[0]++;
-module.exports.setup = function (app) {
-	cov_sf1gudccs.f[0]++;
-	cov_sf1gudccs.s[1]++;
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+cov_14y7u6djkv.s[0]++;
+var setup = exports.setup = function setup(app) {
+	cov_14y7u6djkv.f[0]++;
+	cov_14y7u6djkv.s[1]++;
 
 	// swagger definition
 	app.get('*/model-api-docs', function (req, res) {
-		cov_sf1gudccs.f[1]++;
+		cov_14y7u6djkv.f[1]++;
 
-		var port = (cov_sf1gudccs.s[2]++, app.get('port'));
-		var host = (cov_sf1gudccs.s[3]++, app.get('host'));
-		var swaggerData = (cov_sf1gudccs.s[4]++, require(__dirname + '/apidef.json'));
-		cov_sf1gudccs.s[5]++;
+		var port = (cov_14y7u6djkv.s[2]++, app.get('port'));
+		var host = (cov_14y7u6djkv.s[3]++, app.get('host'));
+		var swaggerData = (cov_14y7u6djkv.s[4]++, require(__dirname + '/apidef.json'));
+		cov_14y7u6djkv.s[5]++;
 		swaggerData.host = host + ':' + port;
-		cov_sf1gudccs.s[6]++;
+		cov_14y7u6djkv.s[6]++;
 		res.json(swaggerData);
 	});
 };

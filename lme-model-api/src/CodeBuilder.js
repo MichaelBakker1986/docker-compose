@@ -22,12 +22,25 @@ export class CodeBuilder {
 	}
 
 	resolveCompiler(filename) {
-		const basename = path.basename(filename)
-		let compiler = compilers[filename]
+		let compiler_name = 'main'
+		const entries = {}
+		if (Array.isArray(filename)) {
+			filename.forEach(fn => {
+				const basename = path.basename(fn)
+				entries[basename] = [fn]
+				compiler_name = basename
+			})
+		} else {
+			const basename = path.basename(filename)
+			entries[basename] = [filename]
+			compiler_name = basename
+		}
+		let compiler = compilers[compiler_name]
+
 		if (!compiler) {
 			compiler = webpack({
 				context: __dirname + './',
-				entry  : [filename],
+				entry  : entries,
 				mode   : 'development',
 				node   : {
 					fs           : 'empty',
@@ -36,7 +49,7 @@ export class CodeBuilder {
 				output : {
 					publicPath: 'http://localhost:10500/',
 					path      : path.resolve(__dirname, './dist'),
-					filename  : basename
+					filename  : () => '[id]'
 				},
 				module : {
 					rules: [{
@@ -52,9 +65,9 @@ export class CodeBuilder {
 				]
 			})
 			compiler.outputFileSystem = memory_fs
-			compilers[filename] = compiler
+			compilers[compiler_name] = compiler
 		}
-		return compilers[filename]
+		return compilers[compiler_name]
 	}
 
 	getCompiler(filename) {

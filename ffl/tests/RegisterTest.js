@@ -1,5 +1,5 @@
 import { RegisterToFFL, RegisterToJSON } from '../index'
-import { Register }                      from 'lme-core'
+import { Register }                      from '../../lme-core/index'
 import { debug }                         from 'log6'
 import { equal }                         from 'assert'
 

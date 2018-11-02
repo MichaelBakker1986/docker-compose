@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_scfqsqi10 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\ExcelApi.js',
-	    hash = '2f50f701c8bf2017f2b091b4c92b1779ff0d12a1',
+var cov_1ydlql9yx2 = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\ExcelApi.js',
+	    hash = 'e807bda1048139bf1a32c00ed73ab43c312c1de9',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\ExcelApi.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\ExcelApi.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -123,7 +123,7 @@ var cov_scfqsqi10 = function () {
 			'1': 0
 		},
 		b: {},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -171,8 +171,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ExcelApi = function () {
 	function ExcelApi() {
 		(0, _classCallCheck3.default)(this, ExcelApi);
-		cov_scfqsqi10.f[0]++;
-		cov_scfqsqi10.s[0]++;
+		cov_1ydlql9yx2.f[0]++;
+		cov_1ydlql9yx2.s[0]++;
 		throw Error('Singleton');
 	}
 
@@ -185,17 +185,17 @@ var ExcelApi = function () {
 					while (1) {
 						switch (_context.prev = _context.next) {
 							case 0:
-								cov_scfqsqi10.f[1]++;
-								cov_scfqsqi10.s[1]++;
+								cov_1ydlql9yx2.f[1]++;
+								cov_1ydlql9yx2.s[1]++;
 								_context.next = 4;
 								return _excelConnect2.default.loadExcelFile(excelFileName, fullPath);
 
 							case 4:
 								expression = _context.sent;
-								cov_scfqsqi10.s[2]++;
+								cov_1ydlql9yx2.s[2]++;
 
 								_index.SolutionFacade.initVariables([{ name: 'MATRIX_VALUES', expression: expression }]);
-								cov_scfqsqi10.s[3]++;
+								cov_1ydlql9yx2.s[3]++;
 								return _context.abrupt('return', expression);
 
 							case 9:
@@ -216,7 +216,7 @@ var ExcelApi = function () {
 	return ExcelApi;
 }();
 
-cov_scfqsqi10.s[4]++;
+cov_1ydlql9yx2.s[4]++;
 
 
 _index2.default.addFunctions(_excelConnect2.default);

@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_fdbwryh1q = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\update.js',
-	    hash = '5dc6d24d9e4aa194b72a119dc1445e64325ff898',
+var cov_28fr2f4niq = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\update.js',
+	    hash = '4b7859bc7d4b244cb34ab2a4c17ae6c5841df26f',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\update.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\update.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -2349,7 +2349,7 @@ var cov_fdbwryh1q = function () {
 			'11': [0, 0],
 			'12': [0, 0]
 		},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -2400,138 +2400,138 @@ var _fs = require('fs');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var port = (cov_fdbwryh1q.s[0]++, 8081);
-var host = (cov_fdbwryh1q.s[1]++, (cov_fdbwryh1q.b[0][0]++, process.env.HOST) || (cov_fdbwryh1q.b[0][1]++, '127.0.0.1'));
-var internal_proxy_port = (cov_fdbwryh1q.s[2]++, (cov_fdbwryh1q.b[1][0]++, process.env.INTERNAL_PROXY_PORT) || (cov_fdbwryh1q.b[1][1]++, 7081));
-var developer = (cov_fdbwryh1q.s[3]++, process.env.DOMAIN == null);
-var domain = (cov_fdbwryh1q.s[4]++, (cov_fdbwryh1q.b[2][0]++, process.env.DOMAIN) || (cov_fdbwryh1q.b[2][1]++, 'http://' + host + ':' + internal_proxy_port + '/id/guest'));
-var app = (cov_fdbwryh1q.s[5]++, (0, _express2.default)());
-var busyRedeploying = (cov_fdbwryh1q.s[6]++, false);
-var childProcesses = (cov_fdbwryh1q.s[7]++, {});
-cov_fdbwryh1q.s[8]++;
+var port = (cov_28fr2f4niq.s[0]++, 8081);
+var host = (cov_28fr2f4niq.s[1]++, (cov_28fr2f4niq.b[0][0]++, process.env.HOST) || (cov_28fr2f4niq.b[0][1]++, '127.0.0.1'));
+var internal_proxy_port = (cov_28fr2f4niq.s[2]++, (cov_28fr2f4niq.b[1][0]++, process.env.INTERNAL_PROXY_PORT) || (cov_28fr2f4niq.b[1][1]++, 7081));
+var developer = (cov_28fr2f4niq.s[3]++, process.env.DOMAIN == null);
+var domain = (cov_28fr2f4niq.s[4]++, (cov_28fr2f4niq.b[2][0]++, process.env.DOMAIN) || (cov_28fr2f4niq.b[2][1]++, 'http://' + host + ':' + internal_proxy_port + '/id/guest'));
+var app = (cov_28fr2f4niq.s[5]++, (0, _express2.default)());
+var busyRedeploying = (cov_28fr2f4niq.s[6]++, false);
+var childProcesses = (cov_28fr2f4niq.s[7]++, {});
+cov_28fr2f4niq.s[8]++;
 var log = function log(message, level) {
-	cov_fdbwryh1q.f[0]++;
-	cov_fdbwryh1q.s[9]++;
+	cov_28fr2f4niq.f[0]++;
+	cov_28fr2f4niq.s[9]++;
 	return _HipchatConnect2.default.log(message, level);
 };
 
 //const debug = process.env.NODE_ENV !== 'production'
 
 function spawnChildProcess(app_name) {
-	cov_fdbwryh1q.f[1]++;
+	cov_28fr2f4niq.f[1]++;
 
-	var exists = (cov_fdbwryh1q.s[10]++, (0, _fs.existsSync)(app_name + '.js'));
+	var exists = (cov_28fr2f4niq.s[10]++, (0, _fs.existsSync)(app_name + '.js'));
 	//	if (!exists) throw Error(`File does not exist ${app_name}.js`)
-	var promise = (cov_fdbwryh1q.s[11]++, (0, _childProcessPromise.spawn)('node', ['-r', 'babel-register', '' + app_name], {
+	var promise = (cov_28fr2f4niq.s[11]++, (0, _childProcessPromise.spawn)('node', ['-r', 'babel-register', '' + app_name], {
 		maxBuffer: 1024 * 500,
 		capture: ['stdout', 'stderr']
 	}));
-	var childProcess = (cov_fdbwryh1q.s[12]++, promise.childProcess);
-	cov_fdbwryh1q.s[13]++;
+	var childProcess = (cov_28fr2f4niq.s[12]++, promise.childProcess);
+	cov_28fr2f4niq.s[13]++;
 	childProcesses[app_name] = childProcess;
-	cov_fdbwryh1q.s[14]++;
+	cov_28fr2f4niq.s[14]++;
 	childProcess.stdout.on('data', function (data) {
-		cov_fdbwryh1q.f[2]++;
-		cov_fdbwryh1q.s[15]++;
+		cov_28fr2f4niq.f[2]++;
+		cov_28fr2f4niq.s[15]++;
 
 		log(data.toString(), 'green');
 	});
-	cov_fdbwryh1q.s[16]++;
+	cov_28fr2f4niq.s[16]++;
 	childProcess.stderr.on('data', function (data) {
-		cov_fdbwryh1q.f[3]++;
-		cov_fdbwryh1q.s[17]++;
+		cov_28fr2f4niq.f[3]++;
+		cov_28fr2f4niq.s[17]++;
 
 		log(data.toString(), 'red');
 	});
-	cov_fdbwryh1q.s[18]++;
+	cov_28fr2f4niq.s[18]++;
 	childProcess.on('close', function (code) {
-		cov_fdbwryh1q.f[4]++;
-		cov_fdbwryh1q.s[19]++;
+		cov_28fr2f4niq.f[4]++;
+		cov_28fr2f4niq.s[19]++;
 
 		console.log('child process exited with code ' + code + ' ' + app_name);
 	});
-	cov_fdbwryh1q.s[20]++;
+	cov_28fr2f4niq.s[20]++;
 	promise.then(function () {
-		cov_fdbwryh1q.f[5]++;
-		cov_fdbwryh1q.s[21]++;
+		cov_28fr2f4niq.f[5]++;
+		cov_28fr2f4niq.s[21]++;
 
 		console.log('[spawn] done! ' + app_name);
 	}).catch(function (err) {
-		cov_fdbwryh1q.f[6]++;
-		cov_fdbwryh1q.s[22]++;
+		cov_28fr2f4niq.f[6]++;
+		cov_28fr2f4niq.s[22]++;
 
 		console.error('[spawn] ERROR: ', err);
 	});
 }
 
 function redeploy() {
-	cov_fdbwryh1q.f[7]++;
-	cov_fdbwryh1q.s[23]++;
+	cov_28fr2f4niq.f[7]++;
+	cov_28fr2f4niq.s[23]++;
 
 	log('Tests passed deploying stack ');
-	cov_fdbwryh1q.s[24]++;
+	cov_28fr2f4niq.s[24]++;
 	Object.keys(childProcesses).forEach(function (key) {
-		cov_fdbwryh1q.f[8]++;
-		cov_fdbwryh1q.s[25]++;
+		cov_28fr2f4niq.f[8]++;
+		cov_28fr2f4niq.s[25]++;
 
 		childProcesses[key].kill('SIGKILL');
-		cov_fdbwryh1q.s[26]++;
+		cov_28fr2f4niq.s[26]++;
 		spawnChildProcess(key);
 	});
-	cov_fdbwryh1q.s[27]++;
+	cov_28fr2f4niq.s[27]++;
 	busyRedeploying = false;
 }
 
 function pullBranchAndRedeploy() {
-	cov_fdbwryh1q.f[9]++;
-	cov_fdbwryh1q.s[28]++;
+	cov_28fr2f4niq.f[9]++;
+	cov_28fr2f4niq.s[28]++;
 
 	return new Promise(function (fulfill, reject) {
-		cov_fdbwryh1q.f[10]++;
-		cov_fdbwryh1q.s[29]++;
+		cov_28fr2f4niq.f[10]++;
+		cov_28fr2f4niq.s[29]++;
 
 		if (busyRedeploying) {
-			cov_fdbwryh1q.b[3][0]++;
-			cov_fdbwryh1q.s[30]++;
+			cov_28fr2f4niq.b[3][0]++;
+			cov_28fr2f4niq.s[30]++;
 
 			reject('Busy restarting.');
 		} else {
-			cov_fdbwryh1q.b[3][1]++;
+			cov_28fr2f4niq.b[3][1]++;
 
-			var start = (cov_fdbwryh1q.s[31]++, (0, _performanceNow2.default)());
-			cov_fdbwryh1q.s[32]++;
+			var start = (cov_28fr2f4niq.s[31]++, (0, _performanceNow2.default)());
+			cov_28fr2f4niq.s[32]++;
 			busyRedeploying = true;
 			//npm install && bower install
-			var command = (cov_fdbwryh1q.s[33]++, developer ? (cov_fdbwryh1q.b[4][0]++, 'echo developer test message') : (cov_fdbwryh1q.b[4][1]++, 'git clean -f -x && git stash save --keep-index && git pull && cd .. && npm install && npm test'));
-			cov_fdbwryh1q.s[34]++;
+			var command = (cov_28fr2f4niq.s[33]++, developer ? (cov_28fr2f4niq.b[4][0]++, 'echo developer test message') : (cov_28fr2f4niq.b[4][1]++, 'git clean -f -x && git stash save --keep-index && git pull && cd .. && npm install && npm test'));
+			cov_28fr2f4niq.s[34]++;
 			(0, _childProcessPromise.exec)(command).then(function () {
-				cov_fdbwryh1q.f[11]++;
-				cov_fdbwryh1q.s[35]++;
+				cov_28fr2f4niq.f[11]++;
+				cov_28fr2f4niq.s[35]++;
 
 				redeploy();
-				cov_fdbwryh1q.s[36]++;
+				cov_28fr2f4niq.s[36]++;
 				fulfill('Successful redeploy stack in [' + ((0, _performanceNow2.default)() - start).toFixed(3) + ']ms');
 			}).catch(function () {
-				cov_fdbwryh1q.f[12]++;
-				cov_fdbwryh1q.s[37]++;
+				cov_28fr2f4niq.f[12]++;
+				cov_28fr2f4niq.s[37]++;
 
 				log('Tests failed, reinstalling modules and try again.', 'green');
-				cov_fdbwryh1q.s[38]++;
+				cov_28fr2f4niq.s[38]++;
 				(0, _childProcessPromise.exec)('cd .. && npm install && npm test').then(function () {
-					cov_fdbwryh1q.f[13]++;
-					cov_fdbwryh1q.s[39]++;
+					cov_28fr2f4niq.f[13]++;
+					cov_28fr2f4niq.s[39]++;
 
 					redeploy();
-					cov_fdbwryh1q.s[40]++;
+					cov_28fr2f4niq.s[40]++;
 					fulfill('Successful redeploy stack in [' + ((0, _performanceNow2.default)() - start).toFixed(3) + ']ms');
 				}).catch(function (err) {
-					cov_fdbwryh1q.f[14]++;
-					cov_fdbwryh1q.s[41]++;
+					cov_28fr2f4niq.f[14]++;
+					cov_28fr2f4niq.s[41]++;
 
 					busyRedeploying = false;
-					cov_fdbwryh1q.s[42]++;
+					cov_28fr2f4niq.s[42]++;
 					log(err.toString(), 'red');
-					cov_fdbwryh1q.s[43]++;
+					cov_28fr2f4niq.s[43]++;
 					reject('Fail restarting because\n: ' + err.stack.toString());
 				});
 			});
@@ -2539,24 +2539,24 @@ function pullBranchAndRedeploy() {
 	});
 }
 
-cov_fdbwryh1q.s[44]++;
+cov_28fr2f4niq.s[44]++;
 app.get('*/update/git/notifyCommit', function () {
 	var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(req, res) {
 		return _regenerator2.default.wrap(function _callee$(_context) {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
-						cov_fdbwryh1q.f[15]++;
-						cov_fdbwryh1q.s[45]++;
+						cov_28fr2f4niq.f[15]++;
+						cov_28fr2f4niq.s[45]++;
 
 						pullBranchAndRedeploy().then(function (result) {
-							cov_fdbwryh1q.f[16]++;
-							cov_fdbwryh1q.s[46]++;
+							cov_28fr2f4niq.f[16]++;
+							cov_28fr2f4niq.s[46]++;
 
 							res.end(result.toString());
 						}).catch(function (err) {
-							cov_fdbwryh1q.f[17]++;
-							cov_fdbwryh1q.s[47]++;
+							cov_28fr2f4niq.f[17]++;
+							cov_28fr2f4niq.s[47]++;
 							return res.end(err.toString());
 						});
 
@@ -2573,24 +2573,24 @@ app.get('*/update/git/notifyCommit', function () {
 	};
 }());
 
-cov_fdbwryh1q.s[48]++;
+cov_28fr2f4niq.s[48]++;
 app.get('*/hasUpdates', function () {
 	var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(req, res) {
 		return _regenerator2.default.wrap(function _callee2$(_context2) {
 			while (1) {
 				switch (_context2.prev = _context2.next) {
 					case 0:
-						cov_fdbwryh1q.f[18]++;
-						cov_fdbwryh1q.s[49]++;
+						cov_28fr2f4niq.f[18]++;
+						cov_28fr2f4niq.s[49]++;
 
 						checkForUpdates().then(function (result) {
-							cov_fdbwryh1q.f[19]++;
-							cov_fdbwryh1q.s[50]++;
+							cov_28fr2f4niq.f[19]++;
+							cov_28fr2f4niq.s[50]++;
 
 							res.end(result.toString());
 						}).catch(function (err) {
-							cov_fdbwryh1q.f[20]++;
-							cov_fdbwryh1q.s[51]++;
+							cov_28fr2f4niq.f[20]++;
+							cov_28fr2f4niq.s[51]++;
 							return res.end(err.toString());
 						});
 
@@ -2608,34 +2608,34 @@ app.get('*/hasUpdates', function () {
 }());
 
 function checkForUpdates() {
-	cov_fdbwryh1q.f[21]++;
-	cov_fdbwryh1q.s[52]++;
+	cov_28fr2f4niq.f[21]++;
+	cov_28fr2f4niq.s[52]++;
 
 	return new Promise(function (fulfill, reject) {
-		cov_fdbwryh1q.f[22]++;
-		cov_fdbwryh1q.s[53]++;
+		cov_28fr2f4niq.f[22]++;
+		cov_28fr2f4niq.s[53]++;
 
 		if (developer) {
-				cov_fdbwryh1q.b[5][0]++;
-				cov_fdbwryh1q.s[54]++;
+				cov_28fr2f4niq.b[5][0]++;
+				cov_28fr2f4niq.s[54]++;
 				return fulfill({ hasChanges: false });
 			} else {
-			cov_fdbwryh1q.b[5][1]++;
-		}var command = (cov_fdbwryh1q.s[55]++, 'git remote update && git status -uno');
+			cov_28fr2f4niq.b[5][1]++;
+		}var command = (cov_28fr2f4niq.s[55]++, 'git remote update && git status -uno');
 		//'git diff --stat origin/master';
-		cov_fdbwryh1q.s[56]++;
+		cov_28fr2f4niq.s[56]++;
 		(0, _childProcessPromise.exec)(command).then(function (result) {
-			cov_fdbwryh1q.f[23]++;
+			cov_28fr2f4niq.f[23]++;
 
-			var hasChanges = (cov_fdbwryh1q.s[57]++, result.stdout.includes('Your branch is behind'));
-			cov_fdbwryh1q.s[58]++;
+			var hasChanges = (cov_28fr2f4niq.s[57]++, result.stdout.includes('Your branch is behind'));
+			cov_28fr2f4niq.s[58]++;
 			if (hasChanges) {
-				cov_fdbwryh1q.b[6][0]++;
-				cov_fdbwryh1q.s[59]++;
+				cov_28fr2f4niq.b[6][0]++;
+				cov_28fr2f4niq.s[59]++;
 
 				(0, _childProcessPromise.exec)('git diff --stat origin/master').then(function (result) {
-					cov_fdbwryh1q.f[24]++;
-					cov_fdbwryh1q.s[60]++;
+					cov_28fr2f4niq.f[24]++;
+					cov_28fr2f4niq.s[60]++;
 
 					fulfill(JSON.stringify({
 						hasChanges: hasChanges,
@@ -2643,8 +2643,8 @@ function checkForUpdates() {
 					}));
 				});
 			} else {
-				cov_fdbwryh1q.b[6][1]++;
-				cov_fdbwryh1q.s[61]++;
+				cov_28fr2f4niq.b[6][1]++;
+				cov_28fr2f4niq.s[61]++;
 
 				fulfill(JSON.stringify({
 					hasChanges: hasChanges,
@@ -2652,113 +2652,113 @@ function checkForUpdates() {
 				}));
 			}
 		}).catch(function (err) {
-			cov_fdbwryh1q.f[25]++;
-			cov_fdbwryh1q.s[62]++;
+			cov_28fr2f4niq.f[25]++;
+			cov_28fr2f4niq.s[62]++;
 
 			log(err.toString(), 'red');
-			cov_fdbwryh1q.s[63]++;
+			cov_28fr2f4niq.s[63]++;
 			reject('Fail restarting ' + err.toString());
 		});
 	});
 }
 
 function testAndDeploy() {
-	cov_fdbwryh1q.f[26]++;
-	cov_fdbwryh1q.s[64]++;
+	cov_28fr2f4niq.f[26]++;
+	cov_28fr2f4niq.s[64]++;
 
 	if (!developer) {
-			cov_fdbwryh1q.b[7][0]++;
-			cov_fdbwryh1q.s[65]++;
+			cov_28fr2f4niq.b[7][0]++;
+			cov_28fr2f4niq.s[65]++;
 			log('Running integration tests on server ' + host, 'info');
 		} else {
-		cov_fdbwryh1q.b[7][1]++;
-	}var start = (cov_fdbwryh1q.s[66]++, (0, _performanceNow2.default)());
-	var command = (cov_fdbwryh1q.s[67]++, developer ? (cov_fdbwryh1q.b[8][0]++, 'echo test message') : (cov_fdbwryh1q.b[8][1]++, 'cd .. && npm install && npm test'));
-	cov_fdbwryh1q.s[68]++;
+		cov_28fr2f4niq.b[7][1]++;
+	}var start = (cov_28fr2f4niq.s[66]++, (0, _performanceNow2.default)());
+	var command = (cov_28fr2f4niq.s[67]++, developer ? (cov_28fr2f4niq.b[8][0]++, 'echo test message') : (cov_28fr2f4niq.b[8][1]++, 'cd .. && npm install && npm test'));
+	cov_28fr2f4niq.s[68]++;
 	(0, _childProcessPromise.exec)(command).then(function () {
-		cov_fdbwryh1q.f[27]++;
-		cov_fdbwryh1q.s[69]++;
+		cov_28fr2f4niq.f[27]++;
+		cov_28fr2f4niq.s[69]++;
 
 		spawnChildProcess(_path2.default.resolve(__dirname + '/../proxy'));
-		cov_fdbwryh1q.s[70]++;
+		cov_28fr2f4niq.s[70]++;
 		spawnChildProcess(_path2.default.resolve(__dirname + '/../proxy/SecurityPortal'));
-		cov_fdbwryh1q.s[71]++;
+		cov_28fr2f4niq.s[71]++;
 		spawnChildProcess(_path2.default.resolve(__dirname + '/../lme-model-api'));
-		cov_fdbwryh1q.s[72]++;
+		cov_28fr2f4niq.s[72]++;
 		spawnChildProcess(_path2.default.resolve(__dirname + '/../demo-apps'));
-		cov_fdbwryh1q.s[73]++;
+		cov_28fr2f4niq.s[73]++;
 		spawnChildProcess(_path2.default.resolve(__dirname + '/../lme-data-api'));
-		cov_fdbwryh1q.s[74]++;
+		cov_28fr2f4niq.s[74]++;
 		registerToProxy();
-		cov_fdbwryh1q.s[75]++;
+		cov_28fr2f4niq.s[75]++;
 		log('Successful deploy application ' + domain + ' in ' + (((0, _performanceNow2.default)() - start) / 1000).toFixed(3) + 's');
 	}).catch(function (error) {
-		cov_fdbwryh1q.f[28]++;
-		cov_fdbwryh1q.s[76]++;
+		cov_28fr2f4niq.f[28]++;
+		cov_28fr2f4niq.s[76]++;
 
 		log('Tests failed after reinstalling modules. NOT deploying stack..', 'red');
-		cov_fdbwryh1q.s[77]++;
+		cov_28fr2f4niq.s[77]++;
 		log(error.toString(), 'red');
 	});
 }
 
 function registerToProxy() {
-	cov_fdbwryh1q.f[29]++;
-	cov_fdbwryh1q.s[78]++;
+	cov_28fr2f4niq.f[29]++;
+	cov_28fr2f4niq.s[78]++;
 
 	//just delay the action...
 	setTimeout(function () {
-		cov_fdbwryh1q.f[30]++;
+		cov_28fr2f4niq.f[30]++;
 
-		var routes = (cov_fdbwryh1q.s[79]++, ['*/hasUpdates']);
-		cov_fdbwryh1q.s[80]++;
+		var routes = (cov_28fr2f4niq.s[79]++, ['*/hasUpdates']);
+		cov_28fr2f4niq.s[80]++;
 		app._router.stack.forEach(function (route_information) {
-			cov_fdbwryh1q.f[31]++;
-			cov_fdbwryh1q.s[81]++;
+			cov_28fr2f4niq.f[31]++;
+			cov_28fr2f4niq.s[81]++;
 
-			if ((cov_fdbwryh1q.b[10][0]++, route_information.route) && (cov_fdbwryh1q.b[10][1]++, route_information.route.path)) {
-				cov_fdbwryh1q.b[9][0]++;
-				cov_fdbwryh1q.s[82]++;
+			if ((cov_28fr2f4niq.b[10][0]++, route_information.route) && (cov_28fr2f4niq.b[10][1]++, route_information.route.path)) {
+				cov_28fr2f4niq.b[9][0]++;
+				cov_28fr2f4niq.s[82]++;
 
 				routes.push(route_information.route.path);
 			} else {
-				cov_fdbwryh1q.b[9][1]++;
+				cov_28fr2f4niq.b[9][1]++;
 			}
 		});
-		cov_fdbwryh1q.s[83]++;
+		cov_28fr2f4niq.s[83]++;
 		_requestPromiseJson2.default.get('http://' + host + ':' + internal_proxy_port + '/register/service/update-api/' + host + '/' + port + '/' + routes.join(',')).then(function (data) {
-			cov_fdbwryh1q.f[32]++;
-			cov_fdbwryh1q.s[84]++;
+			cov_28fr2f4niq.f[32]++;
+			cov_28fr2f4niq.s[84]++;
 
 			if (log.DEBUG) {
-					cov_fdbwryh1q.b[11][0]++;
-					cov_fdbwryh1q.s[85]++;
+					cov_28fr2f4niq.b[11][0]++;
+					cov_28fr2f4niq.s[85]++;
 					log.debug(data);
 				} else {
-				cov_fdbwryh1q.b[11][1]++;
+				cov_28fr2f4niq.b[11][1]++;
 			}
 		}).catch(function (err) {
-			cov_fdbwryh1q.f[33]++;
-			cov_fdbwryh1q.s[86]++;
+			cov_28fr2f4niq.f[33]++;
+			cov_28fr2f4niq.s[86]++;
 			return log.error('Failed to register ', err);
 		});
 	}, 60000);
 }
 
-cov_fdbwryh1q.s[87]++;
+cov_28fr2f4niq.s[87]++;
 app.listen(port, function () {
-	cov_fdbwryh1q.f[34]++;
-	cov_fdbwryh1q.s[88]++;
+	cov_28fr2f4niq.f[34]++;
+	cov_28fr2f4niq.s[88]++;
 
 	if (developer) {
-			cov_fdbwryh1q.b[12][0]++;
-			cov_fdbwryh1q.s[89]++;
+			cov_28fr2f4niq.b[12][0]++;
+			cov_28fr2f4niq.s[89]++;
 			registerToProxy();
 		} else {
-		cov_fdbwryh1q.b[12][1]++;
-	}cov_fdbwryh1q.s[90]++;
+		cov_28fr2f4niq.b[12][1]++;
+	}cov_28fr2f4niq.s[90]++;
 	log('<span>Auto update </span><a href="http://' + domain + '/update/git/notifyCommit">server</a><span> deployed</span>');
 });
 
-cov_fdbwryh1q.s[91]++;
+cov_28fr2f4niq.s[91]++;
 testAndDeploy();

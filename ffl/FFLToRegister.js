@@ -178,7 +178,7 @@ FFLToRegister.prototype.prettyFormatFFL = function(depth, index) {
 FFLToRegister.prototype.lookupConstant = (index, constants) => {
 	return constants[parseInt(index.substring(2))].replace(/'/g, '\\\'').replace(/(?:\\r\\n|\\r|\\n)/g, '[br]')
 }
-FFLToRegister.prototype.parseProperties = function(resolve_parent_name = this.resolve_parent_name) {
+FFLToRegister.prototype.parseProperties = function(resolve_parent_name = this.resolve_parent_name, translate_keys = false) {
 	const { lookupConstant, constants, register } = this
 	const formulaMapping = { inputRequired: 'required' }
 	this.walk((v, raw_properties) => {
@@ -194,7 +194,9 @@ FFLToRegister.prototype.parseProperties = function(resolve_parent_name = this.re
 				 * ffl.replace(/__(\d+)/gm, ($1) => constants[parseInt($1.substring(2))])
 				 * ... this does cover too little... title="Hoi" + VAR01 + "Bye" is nog covered.
 				 */
-				if (value.startsWith('__')) value = lookupConstant(value, constants)
+				//if (value.startsWith('__')) value = lookupConstant(value, constants)
+				//else
+				if (translate_keys) value = register.translateKeys(value).replace(/'/g, '\\\'').replace(/(?:\\r\\n|\\r|\\n)/g, '[br]')
 				register.value(v, key, value)
 			}
 			if (resolve_parent_name) {

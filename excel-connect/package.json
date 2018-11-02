@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "exceljs": "^1.6.2",
-    "log6": "^2.0.15",
+    "log6": "^2.0.17",
     "promise": "^8.0.2",
     "tracer": "^0.8.15"
   }

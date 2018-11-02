@@ -37,4 +37,4 @@ class Authentication {
 	}
 }
 
-module.exports = Authentication
+export default Authentication

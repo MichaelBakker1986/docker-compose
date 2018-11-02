@@ -106,9 +106,9 @@ class EconomicEditorView {
 				output.push(prefix.join(' ') + total2 + spaces.join(' ') + '=' + locked)
 			}
 		})
-		return output.join('\n')
+		return indexer.translateKeys(output.join('\n'))
 	}
 }
 
-export default EconomicEditorView
+export default new EconomicEditorView()
 

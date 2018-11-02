@@ -1,13 +1,13 @@
 'use strict';
 
-var cov_2h8jpvr6q2 = function () {
-	var path = 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\IDE_code_builder.js',
-	    hash = '39ed4df587b0b9f0a32f423af14d559ff8e7d765',
+var cov_1y22nyy50i = function () {
+	var path = 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\IDE_code_builder.js',
+	    hash = 'bb0b7c7fe9c3fdbe196b36c9634f0ab5e381b62b',
 	    Function = function () {}.constructor,
 	    global = new Function('return this')(),
 	    gcv = '__coverage__',
 	    coverageData = {
-		path: 'C:\\Users\\mbakk\\Documents\\fesjs\\lme-model-api\\src\\IDE_code_builder.js',
+		path: 'C:\\Users\\michael\\Documents\\lme\\lme-model-api\\src\\IDE_code_builder.js',
 		statementMap: {
 			'0': {
 				start: {
@@ -134,7 +134,7 @@ var cov_2h8jpvr6q2 = function () {
 			'1': 0
 		},
 		b: {},
-		_coverageSchema: 'd34fc3e6b8297bcde183f5492bcb8fcb36775295'
+		_coverageSchema: '43e27e138ebf9cfc5966b082cf9a028302ed4184'
 	},
 	    coverage = global[gcv] || (global[gcv] = {});
 
@@ -165,13 +165,13 @@ var go = function () {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
-						cov_2h8jpvr6q2.f[0]++;
-						cov_2h8jpvr6q2.s[1]++;
+						cov_1y22nyy50i.f[0]++;
+						cov_1y22nyy50i.s[1]++;
 
 						new _hot_deploy.HotDeploy(IDECodeBuilder, '/ide.js');
-						cov_2h8jpvr6q2.s[2]++;
+						cov_1y22nyy50i.s[2]++;
 						new _hot_deploy.HotDeploy(IDECodeBuilder, '/excelide.js');
-						cov_2h8jpvr6q2.s[3]++;
+						cov_1y22nyy50i.s[3]++;
 						new _hot_deploy.HotDeploy(IDECodeBuilder, '/uishowcase.js');
 
 					case 7:
@@ -195,12 +195,12 @@ var _expressPromiseRouter2 = _interopRequireDefault(_expressPromiseRouter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var IDECodeBuilder = (cov_2h8jpvr6q2.s[0]++, (0, _expressPromiseRouter2.default)());cov_2h8jpvr6q2.s[4]++;
+var IDECodeBuilder = (cov_1y22nyy50i.s[0]++, (0, _expressPromiseRouter2.default)());cov_1y22nyy50i.s[4]++;
 
 
 go().catch(function (err) {
-	cov_2h8jpvr6q2.f[1]++;
-	cov_2h8jpvr6q2.s[5]++;
+	cov_1y22nyy50i.f[1]++;
+	cov_1y22nyy50i.s[5]++;
 	return console.error(err);
 });
 exports.default = IDECodeBuilder;

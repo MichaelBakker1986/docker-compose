@@ -1,4 +1,4 @@
-import { Register } from 'lme-core'
+import { Register } from '../../lme-core/index'
 import log          from 'log6'
 
 export const groupBy = (xs, key) => xs.reduce((rv, x) => {

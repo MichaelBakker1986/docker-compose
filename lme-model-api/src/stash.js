@@ -73,7 +73,6 @@ class Stash {
 		})
 	}
 
-	//TODO: backup file, on fail restore old file
 	async commit(user_id, model_name, data, type = '.ffl') {
 		/*
 		 * Save delta's to the DB to keep track of history.
@@ -87,7 +86,7 @@ class Stash {
 
 			const contract = new Contractor({ auth_id: model_name, data_id: model_name })
 			const modelRegister = new Register
-			new FFLToRegister(modelRegister, data).parseProperties()
+			new FFLToRegister(modelRegister, data).parseProperties(true, true)
 			await contract.applyContractChanges(modelRegister)
 
 		} catch (err) {
