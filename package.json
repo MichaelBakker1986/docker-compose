@@ -31,7 +31,7 @@
     "jquery": "^3.3.1",
     "js-solver": "0.0.2",
     "jstat": "^1.7.1",
-    "log6": "^2.0.16",
+    "log6": "^2.0.20",
     "logstash-client": "^1.1.1",
     "michaelbakker196_concurrently": "^3.6.2",
     "npm-recursive": "^1.0.1",
