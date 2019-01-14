@@ -24,14 +24,14 @@
     "concurrently": "^3.6.1",
     "escodegen": "^1.11.0",
     "esprima": "^4.0.1",
-    "exceljs": "^1.6.2",
+    "exceljs": "^1.7.0",
     "express": "^4.16.4",
     "formulajs-connect": "^1.0.6",
     "glob": "^7.1.3",
     "jquery": "^3.3.1",
     "js-solver": "0.0.2",
     "jstat": "^1.7.1",
-    "log6": "^2.0.16",
+    "log6": "^2.0.21",
     "logstash-client": "^1.1.1",
     "michaelbakker196_concurrently": "^3.6.2",
     "npm-recursive": "^1.0.1",
@@ -48,11 +48,7 @@
   },
   "pre-commit": [],
   "scripts": {
-    "babel-version": "babel --version",
-    "install": "node -r babel-register install_script.js",
-    "old_install": "concurrently \"cd log && npm install --no-optional \" \"cd lme-data-api && npm install no-optionald excel-connect && npm install --no-optional \" \"cd lme-core && npm install --no-optional \" \"cd lme-model-api && npm install --no-optional\" \"cd formulajs-connect && npm install --no-optional\" \"cd demo-apps && npm install --no-optional --allow-root\" \"cd git-connect && npm install --no-optional\" \"cd math && npm install --no-optional\" \"cd model-tests && npm install --no-optional\" \"cd proxy && npm install --no-optional\" \"cd ffl && npm install --no-optional \"  \"cd excel-connect && npm install --no-optional \"",
-    "test": "node -r babel-register ./Test_Run.js",
-    "start": "concurrently \"cd lme-model-api && node update.js\""
+    "babel-version": "babel --version"
   },
   "config": {
     "unsafe-perm": true
