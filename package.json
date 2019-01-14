@@ -24,7 +24,7 @@
     "concurrently": "^3.6.1",
     "escodegen": "^1.11.0",
     "esprima": "^4.0.1",
-    "exceljs": "^1.6.2",
+    "exceljs": "^1.7.0",
     "express": "^4.16.4",
     "formulajs-connect": "^1.0.6",
     "glob": "^7.1.3",
